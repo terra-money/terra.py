@@ -32,7 +32,6 @@ setup(
     author_email=about["__author_email__"],
     python_requires=">=3.7",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
@@ -46,7 +45,7 @@ setup(
     long_description=readme + "\n\n" + history,
     long_description_content_type="text/markdown",
     include_package_data=True,
-    keywords="terra terra_sdk sdk blockchain defi finance",
+    keywords="jigu terra terra_sdk sdk blockchain defi finance",
     name=about["__title__"],
     packages=find_packages(include=["terra_sdk", "terra_sdk.*"]),
     setup_requires=setup_requirements,

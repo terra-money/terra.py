@@ -33,24 +33,14 @@ def create_session():
     return session
 
 
-def create_futures_session():
-    session = FuturesSession()
-    session.headers.update(CLIENT_HEADERS)
-    return session
-
-
 class LcdClient(object):
     """Manages the connection to a Terra LCD node, helps with procesing requests."""
 
     def __init__(self, terra, url: str = "", timeout: int = 30, threads: int = 1):
         self.url = url
         self.timeout = timeout
-        self._nthreads = threads
         self.executor = ThreadPoolExecutor(max_workers=self._nthreads)
         self.session = create_session()
-        self.futures_session = create_futures_session()
-        self.request_middlewares = [set_timeout, set_query]
-        self.response_middlewares = [handle_codespace_errors, handle_general_errors]
 
     @property
     def threads(self) -> int:
@@ -91,19 +81,6 @@ class LcdClient(object):
         if build:  # builds a GET request, but does not send.
             return self._build_request("get", path, kwargs)
         return self._request("get", path, **kwargs)
-
-    def get_threaded(self, paths, **kwargs):
-        reqs: List[LcdRequest] = [
-            self.get(path, build=True, **kwargs) for path in paths
-        ]
-        futures = {}
-        for i, req in enumerate(reqs):
-            futures[self._send_request(req, use_future=True)] = i
-        responses = [None] * len(futures)
-        resp = concurrent.futures.as_completed(futures)
-        for r in resp:
-            responses[futures[r]] = self.handle_response(r.result())
-        return responses
 
     def post(self, path, build=False, **kwargs):
         if build:
