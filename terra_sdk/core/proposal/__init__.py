@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import abc
-from dataclasses import dataclass
+import attr
 from typing import Any, Dict, Type
 
 from terra_sdk.core import Coin, Coins, Timestamp
@@ -22,18 +22,7 @@ __all__ = [
 ]
 
 
-class ProposalStatus(str):
-    NIL = ""
-    DEPOSIT_PERIOD = "DepositPeriod"
-    VOTING_PERIOD = "VotingPeriod"
-    PASSED = "Passed"
-    REJECTED = "Rejected"
-    FAILED = "Failed"
-
-
-class Content(JsonSerializable, JsonDeserializable, metaclass=abc.ABCMeta):
-
-
+class Content(JsonSerializable, JsonDeserializable):
 
     @property
     @abc.abstractmethod
@@ -62,19 +51,19 @@ PROPOSAL_TYPES = {
 }
 
 
-@dataclass
+@attr.s
 class Proposal(JsonSerializable, JsonDeserializable):
 
 
-    content: Type[Content]
-    id: int
-    proposal_status: str
-    final_tally_result: terra_sdkBox[str, Coin]
-    submit_time: Timestamp
-    deposit_end_time: Timestamp
-    total_deposit: Coins
-    voting_start_time: Timestamp
-    voting_end_time: Timestamp
+    content: Type[Content]      = attr.ib()
+    id: int                     = attr.ib()
+    proposal_status: str        = attr.ib()
+    final_tally_result: terra_sdkBox[str, Coin] = attr.ib()
+    submit_time: Timestamp      = attr.ib()
+    deposit_end_time: Timestamp = attr.ib()
+    total_deposit: Coins        = attr.ib()
+    voting_start_time: Timestamp = attr.ib()
+    voting_end_time: Timestamp  = attr.ib()
 
     def to_data(self) -> dict:
         d = terra_sdkBox(self.__dict__)

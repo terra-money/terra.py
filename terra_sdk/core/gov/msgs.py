@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass
+import attr
 
 import attr
 from terra_sdk.util.base import BaseTerraData
@@ -49,7 +49,7 @@ class MsgDeposit(BaseTerraData):
         )
 
 
-@dataclass
+@attr.s
 class MsgVote(BaseTerraData):
 
     type = "gov/MsgVote"

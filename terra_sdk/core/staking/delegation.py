@@ -1,12 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Any, Dict, List
-
-from terra_sdk.core import AccAddress, Coin, Dec, Timestamp, ValAddress
-from terra_sdk.core.denoms import uLuna
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
-from terra_sdk.util.validation import Schemas as S
+import attr
 
 __all__ = [
     "Delegation",
@@ -17,13 +11,13 @@ __all__ = [
 ]
 
 
-@dataclass
+@attr.s
 class Delegation(JsonSerializable, JsonDeserializable):
 
-    delegator_address: AccAddress
-    validator_address: ValAddress
-    shares: Coin
-    balance: Coin
+    delegator_address: AccAddress = attr.ib()
+    validator_address: ValAddress = attr.ib()
+    shares: Coin = attr.ib()
+    balance: Coin = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -43,13 +37,13 @@ class Delegation(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class UnbondingEntry(JsonSerializable, JsonDeserializable):
 
-    initial_balance: Coin
-    balance: Coin
-    creation_height: int
-    completion_time: Timestamp
+    initial_balance: Coin = attr.ib()
+    balance: Coin = attr.ib()
+    creation_height: int = attr.ib()
+    completion_time: Timestamp = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -69,12 +63,12 @@ class UnbondingEntry(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class UnbondingDelegation(JsonSerializable, JsonDeserializable):
 
-    delegator_address: AccAddress
-    validator_address: ValAddress
-    entries: List[UnbondingEntry]
+    delegator_address: AccAddress = attr.ib()
+    validator_address: ValAddress = attr.ib()
+    entries: List[UnbondingEntry] = attr.ib()
 
     @classmethod
     def from_data(cls, data: Dict[str, Any]) -> UnbondingDelegation:
@@ -86,14 +80,14 @@ class UnbondingDelegation(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class RedelegationEntry(JsonSerializable, JsonDeserializable):
 
-    initial_balance: Coin
-    balance: Coin
-    shares_dst: Coin
-    creation_height: int
-    completion_time: Timestamp
+    initial_balance: Coin  = attr.ib()
+    balance: Coin          = attr.ib()
+    shares_dst: Coin       = attr.ib()
+    creation_height: int   = attr.ib()
+    completion_time: Timestamp = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -115,13 +109,13 @@ class RedelegationEntry(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class Redelegation(JsonSerializable, JsonDeserializable):
 
-    delegator_address: AccAddress
-    validator_src_address: ValAddress
-    validator_dst_address: ValAddress
-    entries: List[RedelegationEntry]
+    delegator_address: AccAddress = attr.ib()
+    validator_src_address: ValAddress = attr.ib()
+    validator_dst_address: ValAddress = attr.ib()
+    entries: List[RedelegationEntry] = attr.ib()
 
     @classmethod
     def from_data(cls, data: Dict[str, Any]) -> Redelegation:

@@ -1,12 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Dict, Union
-
-from terra_sdk.core import Coin, Dec, Timestamp, ValAddress
-from terra_sdk.core.denoms import uLuna
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
-from terra_sdk.util.validation import Schemas as S
+import attr
 
 __all__ = [
     "CommissionRates",
@@ -17,12 +11,12 @@ __all__ = [
 ]
 
 
-@dataclass
+@attr.s
 class CommissionRates(JsonSerializable, JsonDeserializable):
 
-    rate: Dec
-    max_rate: Dec
-    max_change_rate: Dec
+    rate: Dec = attr.ib()
+    max_rate: Dec = attr.ib()
+    max_change_rate: Dec = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> CommissionRates:
@@ -33,11 +27,11 @@ class CommissionRates(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class Commission(JsonSerializable, JsonDeserializable):
 
-    rates: CommissionRates
-    update_time: Timestamp
+    rates: CommissionRates = attr.ib()
+    update_time: Timestamp = attr.ib()
 
     def to_data(self) -> Dict[str, Union[CommissionRates, Timestamp]]:
         return {"commission_rates": self.rates, "update_time": self.update_time}
@@ -53,14 +47,14 @@ class Commission(JsonSerializable, JsonDeserializable):
 DoNotModifyDesc = "[do-not-modify]"  # from cosmos
 
 
-@dataclass
+@attr.s
 class Description(JsonSerializable, JsonDeserializable):
 
 
-    moniker: str = ""
-    identity: str = ""
-    website: str = ""
-    details: str = ""
+    moniker: str = attr.ib()
+    identity: str = attr.ib()
+    website: str = attr.ib()
+    details: str = attr.ib()
 
     @classmethod
     def do_not_modify(cls):
@@ -71,22 +65,22 @@ class Description(JsonSerializable, JsonDeserializable):
         return cls(data["moniker"], data["identity"], data["website"], data["details"])
 
 
-@dataclass
+@attr.s
 class Validator(JsonSerializable, JsonDeserializable):
 
 
 
-    operator_address: ValAddress
-    consensus_pubkey: str
-    jailed: bool
-    status_code: int
-    tokens: Coin
-    delegator_shares: Coin
-    description: Description
-    unbonding_height: int
-    unbonding_time: Timestamp
-    commission: Commission
-    min_self_delegation: int
+    operator_address: ValAddress = attr.ib()
+    consensus_pubkey: str = attr.ib()
+    jailed: bool = attr.ib()
+    status_code: int = attr.ib()
+    tokens: Coin = attr.ib()
+    delegator_shares: Coin = attr.ib()
+    description: Description = attr.ib()
+    unbonding_height: int = attr.ib()
+    unbonding_time: Timestamp = attr.ib()
+    commission: Commission = attr.ib()
+    min_self_delegation: int = attr.ib()
 
     @property
     def status(self) -> str:

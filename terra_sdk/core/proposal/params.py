@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass, field
+import attr, field
 
 from bidict import bidict
 
@@ -214,10 +214,6 @@ class ParamChanges(JsonSerializable, JsonDeserializable):
                 return DES_LOOKUP_TABLE[subspace][key](value)
         return value
 
-    @property
-    def pretty_data(self):
-        return self.changes.items()
-
     def to_data(self) -> list:
         param_changes = []
         for subspace, v in self.changes.items():
@@ -244,20 +240,15 @@ class ParamChanges(JsonSerializable, JsonDeserializable):
         return cls(changes)
 
 
-@dataclass
+@attr.s
 class ParameterChangeProposal(Content):
 
     type = "params/ParameterChangeProposal"
     ParamChanges = ParamChanges  # alias for easy access
 
-    title: str
-    description: str
-    changes: ParamChanges = field(default_factory=ParamChanges)
-
-    def __post_init__(self):
-        # validation checks for key
-        if isinstance(self.changes, dict):
-            self.changes = ParamChanges(self.changes)
+    title: str                     = attr.ib()
+    description: str               = attr.ib()
+    changes: ParamChanges  = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> ParameterChangeProposal:

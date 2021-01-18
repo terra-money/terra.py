@@ -1,22 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Any
-
-from bech32 import bech32_decode, bech32_encode
-
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
-from terra_sdk.util.validation import Schemas as S
-from terra_sdk.util.validation import (
-    validate_acc_pubkey,
-    validate_val_conspubkey,
-    validate_val_pubkey
-)
+import attr
 
 __all__ = ["PublicKey", "AccPubKey", "ValPubKey", "ValConsPubKey"]
 
 
-@dataclass
+@attr.s
 class PublicKey(JsonSerializable, JsonDeserializable):
 
     type: str = "tendermint/PubKeySecp256k1"

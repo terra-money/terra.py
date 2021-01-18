@@ -3,10 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
-from typing import List, Optional
-
-
+import attr
 
 __all__ = [
     "StdFee",
@@ -18,13 +15,11 @@ __all__ = [
 ]
 
 
-
-@dataclass
+@attr.s
 class StdSignature(JsonSerializable, JsonDeserializable):
 
-
-    signature: str
-    pub_key: PublicKey
+    signature: str = attr.ib()
+    pub_key: PublicKey = attr.ib()
 
     def __str__(self) -> str:
         return self.signature
@@ -39,15 +34,14 @@ class StdSignature(JsonSerializable, JsonDeserializable):
         )
 
 
-@dataclass
+@attr.s
 class StdTx(JsonSerializable, JsonDeserializable):
 
-
     # NOTE: msg is not plural, and is NOT a typo. This may change later for consistency.
-    fee: Optional[StdFee] = None
-    msg: List[StdMsg] = field(default_factory=list)
-    signatures: List[StdSignature] = field(default_factory=list)
-    memo: str = ""
+    fee: Optional[StdFee] = attr.ib()
+    msg: List[StdMsg] = attr.ib()
+    signatures: List[StdSignature] = attr.ib()
+    memo: str = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -68,17 +62,15 @@ class StdTx(JsonSerializable, JsonDeserializable):
         return cls(fee=fee, msg=msg, signatures=signatures, memo=data["memo"])
 
 
-@dataclass
+@attr.s
 class StdSignMsg(JsonSerializable):
 
-    # TODO: Add deserialization?
-
-    chain_id: Optional[str] = None
-    account_number: Optional[int] = None
-    sequence: Optional[int] = None
-    fee: Optional[StdFee] = None
-    msgs: List[StdMsg] = field(default_factory=list)
-    memo: str = ""
+    chain_id: Optional[str] = attr.ib()
+    account_number: Optional[int] = attr.ib()
+    sequence: Optional[int] = attr.ib()
+    fee: Optional[StdFee] = attr.ib()
+    msgs: List[StdMsg] = attr.ib()
+    memo: str = attr.ib()
 
     def to_tx(self) -> StdTx:
         """Get the associated `StdTx` value of the sign message, with the
@@ -94,17 +86,17 @@ class StdSignMsg(JsonSerializable):
 
 
 
-@dataclass
+@attr.s
 class TxInfo(JsonSerializable, JsonDeserializable):
     """Holds data about a transaction that has been broadcasted and included in a block."""
 
-    height: int
-    txhash: str
-    # logs: List[TxLogEntry] -- deprecated, log information uses MsgInfo right in msg now!
-    gas_wanted: int
-    gas_used: int
-    timestamp: Timestamp
+    height: int = attr.ib()
+    txhash: str = attr.ib()
+    gas_wanted: int = attr.ib()
+    gas_used: int = attr.ib()
+    timestamp: Timestamp = attr.ib()
 
+    # TODO: fix Vv
     # Merged with StdTx...
     # The rearrangement here from StdTx's arg list structure is
     # for better pretty-printing, and the fact that nobody will
@@ -114,25 +106,6 @@ class TxInfo(JsonSerializable, JsonDeserializable):
     signatures: List[StdSignature]
     msg: List[MsgInfo]
 
-    @property
-    def tx(self):
-        return StdTx(
-            fee=self.fee, msg=self.msg, signatures=self.signatures, memo=self.memo
-        )
-
-    @property
-    def msgs(self):
-        # TODO: make the querying more powerful and extend to events
-        """This is an alias because StdTx uses .msg whereas it makes more sense to use msgs."""
-        return MsgInfosQuery(self.msg)
-
-    @property
-    def pretty_data(self):
-        d = dict(self.__dict__)
-        d.pop("msg")
-        items = list(d.items())
-        items.append(("msgs", self.msgs))
-        return items
 
     def to_data(self) -> dict:
         logs = []
@@ -178,49 +151,19 @@ class TxInfo(JsonSerializable, JsonDeserializable):
             memo=tx.memo,
         )
 
-    @staticmethod
-    def merge_logs(data: dict, tx: StdTx) -> List[MsgInfo]:
-        """Joins logs and tx data together so that you can access log data straight
-        from the MsgInfo."""
-        temp_logs = data.get("logs")
-        if temp_logs is None:
-            logs = None
-        else:
-            logs = list()
-            for i, l in enumerate(temp_logs):
-                events = [Event.from_data(e) for e in l["events"]]
-                logs.append(
-                    MsgInfo(
-                        msg=tx.msg[i],
-                        success=l["success"],
-                        log=l["log"],
-                        events=EventsQuery(events),
-                    ),
-                )
-        return logs
 
 
-@dataclass
+@attr.s
 class TxBroadcastResult(JsonSerializable, JsonDeserializable):
 
-    height: int
-    txhash: str
-    raw_log: str
-    # logs: list
-    gas_wanted: int
-    gas_used: int
-    # events: list
-    msgs: MsgInfosQuery
-
-    @property
-    def pretty_data(self):
-        d = dict(self.__dict__)
-        d.pop("raw_log")
-        return d.items()
-
-    @property
-    def events(self):
-        return self.msgs.events
+    height: int         = attr.ib()
+    txhash: str         = attr.ib()
+    raw_log: str        = attr.ib()
+    # logs: list        = attr.ib()
+    gas_wanted: int     = attr.ib()
+    gas_used: int       = attr.ib()
+    # events: list      = attr.ib()
+    msgs: MsgInfosQuery = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict, tx) -> TxBroadcastResult:

@@ -1,10 +1,11 @@
-from dataclasses import dataclass
+import attr
 
 __all__ = ["LcdRequest"]
 
+import attr
 
-@dataclass
+@attr.s
 class LcdRequest:
-    method: str
-    url: str
-    kwargs: dict
+    method: str = attr.ib()
+    url: str = attr.ib()
+    kwargs: dict = attr.ib()

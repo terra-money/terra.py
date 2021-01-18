@@ -7,13 +7,13 @@ from terra_sdk.util.base import BaseTerraData
 __all__ = ["MsgUnjail"]
 
 
-@dataclass
+@attr.s
 class MsgUnjail(BaseTerraData):
 
     type = "cosmos/MsgUnjail"
     action = "unjail"
 
-    address: ValAddress
+    address: ValAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUnjail:

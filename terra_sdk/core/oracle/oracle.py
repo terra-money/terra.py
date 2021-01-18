@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import attr
 from typing import Dict, Union
 
 from terra_sdk.core import Coin, Dec, ValAddress
@@ -11,13 +11,13 @@ from terra_sdk.util.validation import validate_val_address
 __all__ = ["ExchangeRatePrevote", "ExchangeRateVote"]
 
 
-@dataclass
+@attr.s
 class ExchangeRateVote(JsonSerializable, JsonDeserializable):
 
 
-    exchange_rate: Coin
-    denom: str
-    voter: ValAddress
+    exchange_rate: Coin= attr.ib()
+    denom: str        = attr.ib()
+    voter: ValAddress = attr.ib()
 
     def __post_init__(self):
         self.voter = validate_val_address(self.voter)
@@ -35,14 +35,14 @@ class ExchangeRateVote(JsonSerializable, JsonDeserializable):
         return cls(exchange_rate=xr, denom=xr.denom, voter=data["voter"])
 
 
-@dataclass
+@attr.s
 class ExchangeRatePrevote(JsonSerializable, JsonDeserializable):
 
 
-    hash: str
-    denom: str
-    voter: ValAddress
-    submit_block: int
+    hash: str         = attr.ib()
+    denom: str        = attr.ib()
+    voter: ValAddress = attr.ib()
+    submit_block: int = attr.ib()
 
     def __post_init__(self):
         self.voter = validate_val_address(self.voter)

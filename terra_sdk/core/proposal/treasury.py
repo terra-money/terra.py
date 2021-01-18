@@ -1,23 +1,18 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-
-from terra_sdk.core import Dec
-from terra_sdk.core.proposal import Content
-from terra_sdk.util.validation import Schemas as S
+import attr
 
 __all__ = ["TaxRateUpdateProposal"]
 
 
-@dataclass
+@attr.s
 class TaxRateUpdateProposal(Content):
 
     type = "treasury/TaxRateUpdateProposal"
 
-
-    title: str
-    description: str
-    tax_rate: Dec
+    title: str    = attr.ib()
+    description: str = attr.ib()
+    tax_rate: Dec = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> TaxRateUpdateProposal:
@@ -29,14 +24,14 @@ class TaxRateUpdateProposal(Content):
         )
 
 
-@dataclass
+@attr.s
 class RewardWeightUpdateProposal(Content):
 
     type = "treasury/RewardWeightUpdateProposal"
 
-    title: str
-    description: str
-    reward_weight: Dec
+    title: str         = attr.ib()
+    description: str   = attr.ib()
+    reward_weight: Dec = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> RewardWeightUpdateProposal:
