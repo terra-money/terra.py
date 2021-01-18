@@ -5,7 +5,7 @@
 </a>
 </p>
 
-<h1 align="center">terra_sdk (지구)</h1>
+<h1 align="center">Terra Python SDK</h1>
 <p align="center">
 The Python SDK for Terra.</p>
 

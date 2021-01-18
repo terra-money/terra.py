@@ -1,4 +1,4 @@
-"""terra_sdk 지구, the Python SDK for Terra."""
+"""The Python SDK for Terra."""
 
 # Set default logging to avoid NoHandler warnings
 import logging
