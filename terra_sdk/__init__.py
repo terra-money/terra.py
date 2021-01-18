@@ -4,6 +4,5 @@
 import logging
 
 from .__version__ import *
-from .client.terra import Terra
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())

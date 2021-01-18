@@ -10,13 +10,13 @@ def to_data(x: Any) -> Any:
         x
 
 
-class BaseMsg(object):
+class BaseTerraData(object):
 
     type: str
 
     def to_data(self) -> dict:
-        if "msg_value" in dir(self):
-            value = self.msg_value()
+        if "object_value" in dir(self):
+            value = self.object_value()
         else:
             value = to_data(self.__dict__)
         return {

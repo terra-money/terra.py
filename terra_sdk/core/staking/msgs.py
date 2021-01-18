@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 
 @attr.s
-class MsgBeginRedelegate(BaseMsg):
+class MsgBeginRedelegate(BaseTerraData):
 
     type = "staking/MsgBeginRedelegate"
     action = "begin_redelegate"
@@ -28,7 +28,7 @@ class MsgBeginRedelegate(BaseMsg):
 
 
 @attr.s
-class MsgDelegate(BaseMsg):
+class MsgDelegate(BaseTerraData):
 
     type = "staking/MsgDelegate"
     action = "delegate"
@@ -48,7 +48,7 @@ class MsgDelegate(BaseMsg):
 
 
 @attr.s
-class MsgUndelegate(BaseMsg):
+class MsgUndelegate(BaseTerraData):
 
     type = "staking/MsgUndelegate"
     action = "begin_unbonding"
@@ -68,7 +68,7 @@ class MsgUndelegate(BaseMsg):
 
 
 @attr.s
-class MsgEditValidator(BaseMsg):
+class MsgEditValidator(BaseTerraData):
 
     type = "staking/MsgEditValidator"
     action = "edit_validator"
@@ -92,7 +92,7 @@ class MsgEditValidator(BaseMsg):
 
 
 @attr.s
-class MsgCreateValidator(BaseMsg):
+class MsgCreateValidator(BaseTerraData):
 
     type = "staking/MsgCreateValidator"
     action = "create_validator"

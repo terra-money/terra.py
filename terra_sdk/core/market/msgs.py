@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 
 __all__ = ["MsgSwap", "MsgSwapSend"]
 
 
 @attr.s
-class MsgSwap(BaseMsg):
+class MsgSwap(BaseTerraData):
 
     type = "market/MsgSwap"
     action = "swap"

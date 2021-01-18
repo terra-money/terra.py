@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from terra_sdk.core import AccAddress, Coin, Coins
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 __all__ = ["MsgSend", "MsgMultiSend"]
 
 
 @attr.s
-class MsgSend(BaseMsg):
+class MsgSend(BaseTerraData):
 
     type = "bank/MsgSend"
     action = "send"

@@ -2,14 +2,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import attr
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 
 @attr.s
-class MsgSubmitProposal(BaseMsg):
+class MsgSubmitProposal(BaseTerraData):
 
     type = "gov/MsgSubmitProposal"
     action = "submit_proposal"
@@ -30,7 +30,7 @@ class MsgSubmitProposal(BaseMsg):
 
 
 @attr.s
-class MsgDeposit(BaseMsg):
+class MsgDeposit(BaseTerraData):
 
     type = "gov/MsgDeposit"
     action = "deposit"
@@ -50,7 +50,7 @@ class MsgDeposit(BaseMsg):
 
 
 @dataclass
-class MsgVote(BaseMsg):
+class MsgVote(BaseTerraData):
 
     type = "gov/MsgVote"
     action = "vote"

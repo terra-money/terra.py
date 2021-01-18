@@ -6,13 +6,6 @@ import json
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from terra_sdk.core.event import Event
-from terra_sdk.core.msg import MSG_TYPES, StdMsg
-from terra_sdk.core.sdk import Coin, Coins, PublicKey, Timestamp
-from terra_sdk.query.event import EventsQuery
-from terra_sdk.query.msginfo import MsgInfo, MsgInfosQuery
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
-from terra_sdk.util.validation import Schemas as S
 
 
 __all__ = [
@@ -24,35 +17,6 @@ __all__ = [
     "TxBroadcastResult",
 ]
 
-
-@dataclass
-class StdFee(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(gas=S.STRING_INTEGER, amount=Coins.__schema__)
-
-    gas: int = 0
-    amount: Coins = field(default_factory=Coins)
-
-    def __post_init__(self):
-        self.amount = Coins(self.amount)
-
-    def to_data(self) -> dict:
-        return {"gas": str(self.gas), "amount": self.amount}
-
-    @property
-    def min_gas_prices(self) -> Coins:
-        return self.amount.dec_coins / self.gas
-
-    @classmethod
-    def make(cls, gas: int = 0, **denoms):
-        amount = Coins()
-        for denom in denoms:
-            amount += Coin(denom, denoms[denom])
-        return cls(gas=gas, amount=amount)
-
-    @classmethod
-    def from_data(cls, data: dict) -> StdFee:
-        return cls(gas=int(data["gas"]), amount=Coins.from_data(data["amount"]))
 
 
 @dataclass

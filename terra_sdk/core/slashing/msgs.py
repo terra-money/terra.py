@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 __all__ = ["MsgUnjail"]
 
 
 @dataclass
-class MsgUnjail(BaseMsg):
+class MsgUnjail(BaseTerraData):
 
     type = "cosmos/MsgUnjail"
     action = "unjail"

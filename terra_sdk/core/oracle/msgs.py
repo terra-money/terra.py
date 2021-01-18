@@ -4,7 +4,7 @@ import hashlib
 
 import attr
 
-from terra_sdk.util.base import BaseMsg
+from terra_sdk.util.base import BaseTerraData
 
 
 __all__ = [
@@ -22,7 +22,7 @@ def vote_hash(salt: str, exchange_rate: Dec, denom: str, validator: str) -> str:
 
 
 @attr.s
-class MsgExchangeRatePrevote(BaseMsg):
+class MsgExchangeRatePrevote(BaseTerraData):
 
     type = "oracle/MsgExchangeRatePrevote"
     action = "exchangerateprevote"
@@ -44,7 +44,7 @@ class MsgExchangeRatePrevote(BaseMsg):
 
 
 @attr.s
-class MsgExchangeRateVote(BaseMsg):
+class MsgExchangeRateVote(BaseTerraData):
 
     type = "oracle/MsgExchangeRateVote"
     action = "exchangeratevote"
@@ -69,7 +69,7 @@ class MsgExchangeRateVote(BaseMsg):
 
 
 @attr.s
-class MsgDelegateFeedConsent(BaseMsg):
+class MsgDelegateFeedConsent(BaseTerraData):
 
     type = "oracle/MsgDelegateFeedConsent"
     action = "delegatefeeder"

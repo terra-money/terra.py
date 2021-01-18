@@ -1,29 +1,17 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Any, Dict, Union
-
-from terra_sdk.core import Coin, Dec
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
-from terra_sdk.util.validation import Schemas as S
+from terra_sdk.util.base import BaseTerraData
 
 __all__ = ["PolicyConstraints"]
 
 
-@dataclass
-class PolicyConstraints(JsonSerializable[dict], JsonDeserializable[dict]):
+@attr.s
+class PolicyConstraints(BaseTerraData):
 
-    __schema__ = S.OBJECT(
-        rate_min=Dec.__schema__,
-        rate_max=Dec.__schema__,
-        cap=Coin.__schema__,
-        change_max=Dec.__schema__,
-    )
-
-    rate_min: Dec
-    rate_max: Dec
-    cap: Coin
-    change_max: Dec
+    rate_min: Dec = attr.ib()
+    rate_max: Dec = attr.ib()
+    cap: Coin = attr.ib()
+    change_max: Dec = attr.ib()
 
     def clamp(self, prev_rate: Dec, new_rate: Dec):
         prev_rate = Dec(prev_rate)
