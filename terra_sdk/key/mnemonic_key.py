@@ -10,8 +10,6 @@ from terra_sdk.key import Key, derive_child, derive_root, LUNA_COIN_TYPE
 
 __all__ = ["MnemonicKey"]
 
-# TODO: add test for coin_type
-
 
 class MnemonicKey(Key):
     """Implements Key interface with 24-word mnemonic. This implementation exposes the private

@@ -1,34 +1,22 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import attr
 
-from terra_sdk.core import AccAddress, Coin
-from terra_sdk.core.msg import StdMsg
-from terra_sdk.util.validation import Schemas as S
-from terra_sdk.util.validation import validate_acc_address
-
-__all__ = ["MsgSwap"]
+from terra_sdk.util.base import BaseMsg
 
 
-@dataclass
-class MsgSwap(StdMsg):
+__all__ = ["MsgSwap", "MsgSwapSend"]
+
+
+@attr.s
+class MsgSwap(BaseMsg):
 
     type = "market/MsgSwap"
     action = "swap"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^market/MsgSwap\Z"),
-        value=S.OBJECT(
-            trader=S.ACC_ADDRESS, offer_coin=Coin.__schema__, ask_denom=S.STRING
-        ),
-    )
-
-    trader: AccAddress
-    offer_coin: Coin
-    ask_denom: str
-
-    def __post_init__(self):
-        self.trader = validate_acc_address(self.trader)
+    trader: AccAddress = attr.ib()
+    offer_coin: Coin = attr.ib()
+    ask_denom: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:

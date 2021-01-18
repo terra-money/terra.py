@@ -11,12 +11,9 @@ from terra_sdk.key import Key
 __all__ = ["Wallet"]
 
 
-class Wallet(AccountQuery):
-    """A Wallet is an augmented AccountQuery, and provides `chain_id`, `account_number`,
-    and `sequence` information for signing transactions, which is performed by a Key."""
+class Wallet():
 
     def __init__(self, terra: terra_sdk.client.terra.Terra, key: Key):
-        AccountQuery.__init__(self, terra, key.acc_address)
         self.key = key
         self.terra = terra
         self._account_number = 0

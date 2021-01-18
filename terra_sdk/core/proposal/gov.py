@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from terra_sdk.core.proposal import Content
-from terra_sdk.util.validation import Schemas as S
 
 __all__ = ["TextProposal"]
 

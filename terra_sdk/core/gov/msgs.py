@@ -1,44 +1,26 @@
 from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import Type
 
-from terra_sdk.core import AccAddress, Coins
-from terra_sdk.core.msg import StdMsg
-from terra_sdk.core.proposal import PROPOSAL_TYPES, Content
-from terra_sdk.util.validation import Schemas as S
-from terra_sdk.util.validation import validate_acc_address
+import attr
+from terra_sdk.util.base import BaseMsg
+
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 
-@dataclass
-class MsgSubmitProposal(StdMsg):
+@attr.s
+class MsgSubmitProposal(BaseMsg):
 
     type = "gov/MsgSubmitProposal"
     action = "submit_proposal"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^gov/MsgSubmitProposal\Z"),
-        value=S.OBJECT(
-            content=S.ANY(*(pt.__schema__ for pt in PROPOSAL_TYPES.values())),
-            initial_deposit=Coins.__schema__,
-            proposer=S.ACC_ADDRESS,
-        ),
-    )
-
-    content: Type[Content]
-    initial_deposit: Coins
-    proposer: AccAddress
-
-    def __post_init__(self):
-        self.proposer = validate_acc_address(self.proposer)
-        self.initial_deposit = Coins(self.initial_deposit)
+    content: str = attr.ib()
+    initial_deposit: Coins = attr.ib()
+    proposer: AccAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
         data = data["value"]
-        p_type = PROPOSAL_TYPES[data["content"]["type"]]
         content = p_type.from_data(data["content"])
         return cls(
             content=content,
@@ -47,33 +29,15 @@ class MsgSubmitProposal(StdMsg):
         )
 
 
-@dataclass
-class MsgDeposit(StdMsg):
+@attr.s
+class MsgDeposit(BaseMsg):
 
     type = "gov/MsgDeposit"
     action = "deposit"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^gov/MsgDeposit\Z"),
-        value=S.OBJECT(
-            proposal_id=S.STRING_INTEGER,
-            depositor=S.ACC_ADDRESS,
-            amount=Coins.__schema__,
-        ),
-    )
-
-    proposal_id: int
-    depositor: AccAddress
-    amount: Coins
-
-    def __post_init__(self):
-        self.depositor = validate_acc_address(self.depositor)
-        self.amount = Coins(self.amount)
-
-    def msg_value(self) -> dict:
-        d = dict(self.__dict__)
-        d["proposal_id"] = str(self.proposal_id)
-        return d
+    proposal_id: int = attr.ib()
+    depositor: AccAddress = attr.ib()
+    amount: Coins = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDeposit:
@@ -86,19 +50,10 @@ class MsgDeposit(StdMsg):
 
 
 @dataclass
-class MsgVote(StdMsg):
+class MsgVote(BaseMsg):
 
     type = "gov/MsgVote"
     action = "vote"
-
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^gov/MsgVote\Z"),
-        value=S.OBJECT(
-            proposal_id=S.STRING_INTEGER,
-            voter=S.ACC_ADDRESS,
-            option=S.ONE(S.STRING, S.INTEGER),  # signing is different
-        ),
-    )
 
     EMPTY = "Empty"
     YES = "Yes"
@@ -106,17 +61,9 @@ class MsgVote(StdMsg):
     NO = "No"
     NO_WITH_VETO = "NoWithVeto"
 
-    proposal_id: int
-    voter: AccAddress
-    option: str
-
-    def __post_init__(self):
-        self.voter = validate_acc_address(self.voter)
-
-    def msg_value(self) -> dict:
-        d = dict(self.__dict__)
-        d["proposal_id"] = str(self.proposal_id)
-        return d
+    proposal_id: int = attr.ib()
+    voter: AccAddress = attr.ib()
+    option: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgVote:

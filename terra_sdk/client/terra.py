@@ -209,7 +209,7 @@ class Terra(object):
             }
         )
 
-    ## WebSockets
+    # WebSockets
 
     def tx_listener(self, query: dict = None):
         def decorator(f):
