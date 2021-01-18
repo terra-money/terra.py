@@ -1,0 +1,1376 @@
+[{
+        "operator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65",
+        "consensus_pubkey": "terravalconspub1zcjduepqtcng29gnnhs8sv6dvv7cc0szyg3mu3tzzzjsw5x3x6pwgd2uqkkqes8fs5",
+        "jailed": false,
+        "status": 2,
+        "tokens": "111401100001",
+        "delegator_shares": "111401100001.000000000000000000",
+        "description": {
+            "moniker": "WeStaking",
+            "identity": "DA9C5AD3E308E426",
+            "website": "https://www.westaking.io",
+            "details": "Delegate your luna to us for the staking rewards. We will do our best as secure and stable validator."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.250000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-12-01T03:28:34.024363013Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
+        "consensus_pubkey": "terravalconspub1zcjduepqqhddjnl8uyudw6qkdtqachp9eexgxuexk0g7y86swg6mhxx8fklqmruxaj",
+        "jailed": false,
+        "status": 2,
+        "tokens": "37582657228837",
+        "delegator_shares": "37586415870305.967808598931274834",
+        "description": {
+            "moniker": "hashed",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-06-02T22:23:38.291408591Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7",
+        "consensus_pubkey": "terravalconspub1zcjduepq7kkh2wca50xy65yqd7a5szrsm7pk4uwdvnz9yp0nyzns4zqha22svnszkr",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1002372407527",
+        "delegator_shares": "1002372407527.000000000000000000",
+        "description": {
+            "moniker": "Staker Space",
+            "identity": "59850BC3A3C5F039",
+            "website": "https://staker.space",
+            "details": "Hello Space"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-12-26T18:00:01.5175833Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1rgu3qmm6rllfxlrfk94pgxa0jm37902dynqehm",
+        "consensus_pubkey": "terravalconspub1zcjduepqxv4ymcx0s3gyy66rqr3n0uy8hsyrjy22damfnp3tvhkd7eu2xurq4qlfej",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10010000511302",
+        "delegator_shares": "10010000511302.000000000000000000",
+        "description": {
+            "moniker": "Ghost",
+            "identity": "B53747DFA9B95E67",
+            "website": "https://terra.money",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5",
+        "consensus_pubkey": "terravalconspub1zcjduepqs5s0vddx5m65h5ntjzwd0x8g3245rgrytpds4ds7vdtlwx06mcesmnkzly",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1061562495433",
+        "delegator_shares": "1061562495433.000000000000000000",
+        "description": {
+            "moniker": "gazua",
+            "identity": "0C2F68B61146BC62",
+            "website": "",
+            "details": "to the moon"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-10-11T08:15:08.163768562Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1ya23p5cxtxwcfdrq4dmd2h0p5nc0vcl96yhjra",
+        "consensus_pubkey": "terravalconspub1zcjduepqztg3k7ldh5n0g4k4c8wv369d06ey2jrdcu6qdm5dna7sq4x9wt8ss085j9",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1000100000001",
+        "delegator_shares": "1000100000001.000000000000000000",
+        "description": {
+            "moniker": "BTC.Secure",
+            "identity": "912665BA4FB23667",
+            "website": "https://tg.btcsecure.io",
+            "details": "Validator in Minter, Cosmos, IRIS and Terra networks with infrastructure in EU based on dedicated servers with priority in speed, security and reliability. More about us in Telegram @BTCSecure."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1yad8pjqp93gvwkxa2aa5mh4vctzfs37ekjxr4s",
+        "consensus_pubkey": "terravalconspub1zcjduepq54tz8ulc8llx5azc9jlaz9kw8fc4lkdcupxn73pt0vs5g562ppss7q8tus",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1100111000001",
+        "delegator_shares": "1100111000001.000000000000000000",
+        "description": {
+            "moniker": "healings",
+            "identity": "E7F8ED750677386E",
+            "website": "https://steemit.com/@healings",
+            "details": "드림랜드를 꿈꾸는 힐링스입니다 +_+"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-12-13T05:51:27.715525629Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper18825kzx0zmdntpucvd2gjezau57vdyua6frdnh",
+        "consensus_pubkey": "terravalconspub1zcjduepqjtfpqypaaa48a34m0x8ppgy37q0w8klamdkvpu0hagy6aka68lgsepjvju",
+        "jailed": false,
+        "status": 2,
+        "tokens": "200069800203",
+        "delegator_shares": "200109820004.920320863510471114",
+        "description": {
+            "moniker": "Ubik.Capital",
+            "identity": "8265DEAF50B61DF7",
+            "website": "ubik.capital",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-08-02T05:24:38.032093363Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.150000000000000000",
+                "max_rate": "0.150000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-10-04T08:50:46.978338401Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper18fk2ye6m5wnnfrarpwycunnw0ls8564zw37myg",
+        "consensus_pubkey": "terravalconspub1zcjduepqd3k4uy7qq9w4qxmpdwr7alyfejavcwrflrj8maw299qrygvsua8qhav6f4",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1205099891001",
+        "delegator_shares": "1205099891001.000000000000000000",
+        "description": {
+            "moniker": "stake.zone",
+            "identity": "0A888728046018EC",
+            "website": "http://stake.zone",
+            "details": "operated by nuevax"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.080000000000000000",
+                "max_rate": "0.150000000000000000",
+                "max_change_rate": "0.030000000000000000"
+            },
+            "update_time": "2019-04-24T07:15:17.583764913Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03x2mfyu7",
+        "consensus_pubkey": "terravalconspub1zcjduepq95p2cy93uplldcalxl40fpz45v5gu6a3wp85dsuym50epm0ts7as5j2yzk",
+        "jailed": false,
+        "status": 2,
+        "tokens": "2203316466792",
+        "delegator_shares": "2203316466792.000000000000000000",
+        "description": {
+            "moniker": "iqlusion",
+            "identity": "7843656AA22520BC",
+            "website": "https://iqlusion.io",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.250000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "50000000"
+    },
+    {
+        "operator_address": "terravaloper1gkumn82kkj3cww28yp53agy7aluxv06fsuynvd",
+        "consensus_pubkey": "terravalconspub1zcjduepqee6hsg07ck405czl7ew2qprn0xr63pql9njqudwdxwt0j579jxqsww28v6",
+        "jailed": false,
+        "status": 2,
+        "tokens": "11224525352",
+        "delegator_shares": "11226713994.509537159086308468",
+        "description": {
+            "moniker": "stefanski",
+            "identity": "878AB3284CD8CBED",
+            "website": "http://stefancondurachi.com/",
+            "details": "Software Architect"
+        },
+        "unbonding_height": "10001",
+        "unbonding_time": "2020-01-04T12:11:34.159060631Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-24T12:40:26.309518339Z"
+        },
+        "min_self_delegation": "1000000"
+    },
+    {
+        "operator_address": "terravaloper1gh7wpfpsjrqnash5uc84z4njt95y9g5nh3uqzx",
+        "consensus_pubkey": "terravalconspub1zcjduepqu3g3lj44f7hx78x9kd78yjhc4qzvecut60ww7asg5es4ak53dqgqnvh2dw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1000879600001",
+        "delegator_shares": "1000879600001.000000000000000000",
+        "description": {
+            "moniker": "Genesis Lab",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.070000000000000000",
+                "max_rate": "0.250000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1fjuvyccn8hfmn5r7wc2t3kwqy09zzp6tyjcf50",
+        "consensus_pubkey": "terravalconspub1zcjduepqg3gze85m0n3q6kysqjfe7239qm0wczw9jxkev579k4ejqqdp4jqs6u66dn",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1205960013876",
+        "delegator_shares": "1205960013876.000000000000000000",
+        "description": {
+            "moniker": "DE-LIGHT",
+            "identity": "D236520E6D3B1599",
+            "website": "https://de-light.io",
+            "details": "Support Terra and earn rewards by delegating to the DE-LIGHT validator. By delegating with DE-LIGHT, you acknowledge that your are doing so at your own risk, and waive any claims of liability. DE-LIGHT is not liable for any potential damage to your investment from slashing risk."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.020000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1fuj047hmvk2m3m4gjejnmmse3v47rzj572gzku",
+        "consensus_pubkey": "terravalconspub1zcjduepq84purdc6svyk5eqz8prwm4zh0vp840y87wy3arumyrs26frhe2psfwnadw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "104800028556",
+        "delegator_shares": "104800028556.000000000000000000",
+        "description": {
+            "moniker": "onenode",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.050000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2020-02-04T07:40:56.63586786Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper123gn6j23lmexu0qx5qhmgxgunmjcqsx8gmsyse",
+        "consensus_pubkey": "terravalconspub1zcjduepqlxwft8d4869kwqdhk4nlrr0u4wx7yveqy8zhta6ky0tn7xgw2d4q9yv8hs",
+        "jailed": false,
+        "status": 2,
+        "tokens": "6150854554194",
+        "delegator_shares": "6150854554194.000000000000000000",
+        "description": {
+            "moniker": "Staking Fund",
+            "identity": "805F39B20E881861",
+            "website": "https://staking.fund",
+            "details": "Staking Fund has been participating in the validating role since early 2018 and is a proud member of the Never Jailed Crew of Game of Stakes."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.140000000000000000",
+                "max_rate": "0.334000000000000000",
+                "max_change_rate": "0.012019042300000000"
+            },
+            "update_time": "2020-02-05T01:58:47.51222738Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper12jpzzmwthrljcvm48adncspxtchazkl8vah7u4",
+        "consensus_pubkey": "terravalconspub1zcjduepq8sy6vs9g653wv6fnmwunjze0k2dz2chr76xhsegjvz65v3huc8ns272mv6",
+        "jailed": false,
+        "status": 2,
+        "tokens": "202395996984",
+        "delegator_shares": "202395996984.000000000000000000",
+        "description": {
+            "moniker": "Synergy Nodes - Glory",
+            "identity": "AF9D7EF7CC70CE24",
+            "website": "https://www.synergynodes.com",
+            "details": "We are operating a highly secure and stable Validator Node for Terra Blockchain. We provide core infrastructure support for Blockchains Protocols by operating Nodes on dedicated servers managed by experienced professionals. Contact Us: Telegram @SynergyNodesTerra"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-09-30T04:39:35.173986051Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.080000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-06T01:03:03.548163538Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1t0z9y2p26qzsh06f2l2kn2v8hqtkyd33s409ey",
+        "consensus_pubkey": "terravalconspub1zcjduepqmx3305wgxxqu7nrcpy7ga2mhfpfltyvw8a8ah538750lajwsjxrsmnmclw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "203273122219",
+        "delegator_shares": "203273122219.000000000000000000",
+        "description": {
+            "moniker": "Stake5 Labs",
+            "identity": "C7595F18CC5D4FA6",
+            "website": "https://www.stake5labs.com",
+            "details": "Professional POS node contributor"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.020000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-12T06:53:57.238090512Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1tusfpgvjrplqg2fm7wacy4slzjmnzswcfufuvp",
+        "consensus_pubkey": "terravalconspub1zcjduepqxwldt5hvylqaggs8nthxwepc0jxe85rvsrrcufgzfnu6fxtg2vlqmp66wp",
+        "jailed": false,
+        "status": 2,
+        "tokens": "4731776000001",
+        "delegator_shares": "4731776000001.000000000000000000",
+        "description": {
+            "moniker": "ATEAM",
+            "identity": "0CB9A4E7643FF992",
+            "website": "nodeateam.com",
+            "details": "[GOS Never Jailed crew & Top-Tier] Node A-Team promises to provide validator node operation services at the highest quality"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-12-13T05:23:51.070430429Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1vqnhgc6d0jyggtytzqrnsc40r4zez6tx99382w",
+        "consensus_pubkey": "terravalconspub1zcjduepqlad879uryujgn05p7xqpfx9hveyhw9zgx3wkvjcmeaureqn9na9svhxfc4",
+        "jailed": false,
+        "status": 2,
+        "tokens": "301026856325",
+        "delegator_shares": "301056962021.202120212021201771",
+        "description": {
+            "moniker": "🌐 KysenPool.io",
+            "identity": "2474A8FCC4426BC5",
+            "website": "https://www.kysenpool.io",
+            "details": "Based in Silicon Valley. Help secure Terra by delegating to Kysen. Validators are backed by HSMs in Tier 3 enterprise-grade Data Centers."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-10-24T02:18:56.021102826Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.025000000000000000"
+            },
+            "update_time": "2019-10-11T05:44:11.229065198Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdur03x",
+        "consensus_pubkey": "terravalconspub1zcjduepqhjdhfh8mqy6ljakyw3ma9nls0jza6c8z530nxl0c3jpqmdvrsq9s3d9ll3",
+        "jailed": false,
+        "status": 2,
+        "tokens": "6414087806573",
+        "delegator_shares": "6414087806573.000000000000000000",
+        "description": {
+            "moniker": "DokiaCapital",
+            "identity": "25422F4ADF3F6765",
+            "website": "https://staking.dokia.cloud",
+            "details": "Downtime is not an option for Dokia Capital. We operate an enterprise-grade infrastructure that is robust and secure."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1d0vfj9zvxfgcm4yt4ze4u35mvhj57eg2ku2ekv",
+        "consensus_pubkey": "terravalconspub1zcjduepqhjw2s376eweeyq3awxexaeyn5p0ckd7k8tkam0zwlgzffkcssr6qht0nks",
+        "jailed": false,
+        "status": 2,
+        "tokens": "2007946498206",
+        "delegator_shares": "2007946498206.000000000000000000",
+        "description": {
+            "moniker": "Easy 2 Stake",
+            "identity": "2C877AC873132C91",
+            "website": "www.easy2stake.com",
+            "details": "Easy.Stake.Trust. as easy and as simple as you would click next. Complete transparency and trust with a secure and stable validator."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.090000000000000000",
+                "max_rate": "0.400000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2019-05-18T10:58:30.629093051Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1d3hatwcsvkktgwp3elglw9glca0h42yg6xy4lp",
+        "consensus_pubkey": "terravalconspub1zcjduepqrgj3nhusdamsnp3389nvu7w2tehx3g95mm3ckerw9w7up0wd8wqqvurnmv",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10010001010003",
+        "delegator_shares": "10010001010003.000000000000000000",
+        "description": {
+            "moniker": "Marine",
+            "identity": "137B3D99A9C50A43",
+            "website": "https://terra.money",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-08-09T03:55:26.748355525Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1dcrq2xwuhea9hm5xfuydjuwgz6gm7vdjz7e4uf",
+        "consensus_pubkey": "terravalconspub1zcjduepqex7zrdp2jcv8we3f0r9zfva356geczxaj5u2p09ygrfvckyzzw7qtf0e54",
+        "jailed": false,
+        "status": 2,
+        "tokens": "392324625249",
+        "delegator_shares": "392324625249.000000000000000000",
+        "description": {
+            "moniker": "Mr.K",
+            "identity": "74D3AF53635231D9",
+            "website": "",
+            "details": "The first step is to establish taht something is possible; then probability will occur"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.010000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-12-17T07:19:24.845241072Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx",
+        "consensus_pubkey": "terravalconspub1zcjduepqvr4naxtjep5w63mjj5wtmyf8593gkevp0x30rrnfzsdj3n6vners39fryw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1002500100001",
+        "delegator_shares": "1002500100001.000000000000000000",
+        "description": {
+            "moniker": "syncnode",
+            "identity": "F422F328C14AFBFA",
+            "website": "wallet.syncnode.ro",
+            "details": "https://www.linkedin.com/in/gbunea/"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.400000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2020-01-14T15:48:14.950766904Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper13g7z3qq6f00qww3u4mpcs3xw5jhqwraswraapc",
+        "consensus_pubkey": "terravalconspub1zcjduepqh8fxek94thkpjjwngdhjv9ln0wedxrt963e0a88ku4jxv2ek9hpqdahcn7",
+        "jailed": false,
+        "status": 2,
+        "tokens": "101020996800",
+        "delegator_shares": "101060932685.434968856940559531",
+        "description": {
+            "moniker": "everstakeone",
+            "identity": "",
+            "website": "https://everstake.one",
+            "details": "Reliable and experienced staking service provider from Ukraine. Visit our website for more details."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-12-06T09:24:32.016345735Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-11-08T16:47:05.763848396Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper13ww603e55suhavpuyjft3htxca6g4tldt92pgf",
+        "consensus_pubkey": "terravalconspub1zcjduepq9enalth9d9g7kgr7xrmyxpv6vm0s6mrwg28hd2ua9w5ytykuvr9qfannlv",
+        "jailed": false,
+        "status": 2,
+        "tokens": "2057147000001",
+        "delegator_shares": "2057147000001.000000000000000000",
+        "description": {
+            "moniker": "HashQuark",
+            "identity": "",
+            "website": "www.hashquark.io",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "1.000000000000000000"
+            },
+            "update_time": "2019-10-30T09:30:34.089195036Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper13kcwnlafvu4xvy2jr3vhdte9aq9tadwds3lx2d",
+        "consensus_pubkey": "terravalconspub1zcjduepqfahllg7jxppvu5mv5tmceytkfxc5fn6mqpzjnp4stkcg250d8zrsgt6e23",
+        "jailed": false,
+        "status": 2,
+        "tokens": "5301507230408",
+        "delegator_shares": "5302037434119.064226666633728090",
+        "description": {
+            "moniker": "Castlenode",
+            "identity": "DC34426544119615",
+            "website": "https://www.castlenode.com/terra",
+            "details": "Castlenode is a validator operator focused on security and run by experienced professionals. Please read our Terms and Conditions on our website before delegating"
+        },
+        "unbonding_height": "214439",
+        "unbonding_time": "2020-01-19T22:16:54.29522999Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.500000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt",
+        "consensus_pubkey": "terravalconspub1zcjduepq3qhrae9csagmpnztlugt6g6m7mn7d62wvcfs2pd6czjjekfwx24srmv8zv",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1001500000001",
+        "delegator_shares": "1001500000001.000000000000000000",
+        "description": {
+            "moniker": "kytzu",
+            "identity": "909A480D5643CCC5",
+            "website": "https://www.linkedin.com/in/calinchitu",
+            "details": "Blockchain consultant, running on IPSX infrastructure (calin@ip.sx)"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.190000000000000000",
+                "max_rate": "0.400000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2020-01-05T20:50:13.828306576Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1jsdfyz8uhw2nd7cl45709w40r268phmvxam8eh",
+        "consensus_pubkey": "terravalconspub1zcjduepqxjhwsm8wlm78zdmtxcn6ndsa4948y55q09qymrxevxxhl50wgl0ss0mqf9",
+        "jailed": false,
+        "status": 2,
+        "tokens": "103154596675",
+        "delegator_shares": "103175221504.272381795082848223",
+        "description": {
+            "moniker": "terra.bi23",
+            "identity": "EB3470949B3E89E2",
+            "website": "https://terra.bi23.com",
+            "details": "Bi23 focuses on the Crypto-Assets, providing customers with Staking and DeFi services."
+        },
+        "unbonding_height": "10001",
+        "unbonding_time": "2020-01-04T12:11:34.159060631Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.000000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2019-10-21T04:59:04.181664447Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g",
+        "consensus_pubkey": "terravalconspub1zcjduepqhruxlqscaeyf7w0umtgs0s7h5z0g9wtjktvw5p4k9lmr6agr9suqpvmfk6",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1014887240987",
+        "delegator_shares": "1014887240987.000000000000000000",
+        "description": {
+            "moniker": "Forbole",
+            "identity": "2861F5EE06627224",
+            "website": "https://www.forbole.com",
+            "details": "Forbole is a Genesis Validator on Terra. We are a named winner in Game of Stakes and HackAtom3 by Cosmos. We are a very helpful contributor in both the English and Chinese community."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.250000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2020-01-18T11:23:45.457937735Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1nwrksgv2vuadma8ygs8rhwffu2ygk4j24w2mku",
+        "consensus_pubkey": "terravalconspub1zcjduepq9xfnrdw76da9ryflzx888xn6f7f5wsnyu5g3nntypzlhzqn39dzskghdre",
+        "jailed": false,
+        "status": 2,
+        "tokens": "201841097001",
+        "delegator_shares": "201841097001.000000000000000000",
+        "description": {
+            "moniker": "POS Bakerz",
+            "identity": "3AFAE7268F4DFD10",
+            "website": "https://posbakerz.com/",
+            "details": "Secure, Reliable and Efficient Staking-as-a-Service"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.180000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-11-27T19:10:19.200215868Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
+        "consensus_pubkey": "terravalconspub1zcjduepq0p6stylupjtry0m9e0wks706yswe7t4p5z5yvas0pkhng64u5mrqx5zw8c",
+        "jailed": false,
+        "status": 2,
+        "tokens": "29073143116451",
+        "delegator_shares": "29073143116451.000000000000000000",
+        "description": {
+            "moniker": "B-Harvest",
+            "identity": "8957C5091FBF4192",
+            "website": "bharvest.io",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.000000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-12-19T05:43:44.217003975Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper15cupwhpnxhgylxa8n4ufyvux05xu864jcv0tsw",
+        "consensus_pubkey": "terravalconspub1zcjduepqtdqjzapdtwtqra2k42542fnenxruxq8uyvkrpfymwj6h3s7hfz4sg4kwsc",
+        "jailed": false,
+        "status": 2,
+        "tokens": "8028731083850",
+        "delegator_shares": "8028731083850.000000000000000000",
+        "description": {
+            "moniker": "Figment Networks",
+            "identity": "E5F274B870BDA01D",
+            "website": "https://figment.network",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.120000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-16T19:51:56.330551043Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper15urq2dtp9qce4fyc85m6upwm9xul30496sgk37",
+        "consensus_pubkey": "terravalconspub1zcjduepqsglrgfudcqw4la7e54lfdu2va9z5gd4r8z6wrwe8m5rtz3d2vtsq90fals",
+        "jailed": false,
+        "status": 2,
+        "tokens": "6018598359017",
+        "delegator_shares": "6018598359017.000000000000000000",
+        "description": {
+            "moniker": "Chorus One",
+            "identity": "00B79D689B7DC1CE",
+            "website": "https://chorus.one",
+            "details": "Secure Terra and shape its future by delegating to Chorus One, a highly secure and stable validator. By delegating, you agree to the terms of service at: https://chorus.one/cosmos/tos"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.150000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper144l7c3uph5a7h62xd8u5et3rqvj3dqtvvka2fu",
+        "consensus_pubkey": "terravalconspub1zcjduepqe8090872ugd6k8w6qd6tlcl2u3j95yy540ca0l942mlhed9hkkus8xjrvw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1020848404324",
+        "delegator_shares": "1020848404324.000000000000000000",
+        "description": {
+            "moniker": "P2P.ORG - P2P Validator",
+            "identity": "E12F4695036D8072",
+            "website": "p2p.org",
+            "details": "Stake blockchain assets and get rewarded"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.080000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-26T07:52:28.643057385Z"
+        },
+        "min_self_delegation": "5"
+    },
+    {
+        "operator_address": "terravaloper1kprce6kc08a6l03gzzh99hfpazfjeczfpzkkau",
+        "consensus_pubkey": "terravalconspub1zcjduepqj9df650cl97huhgumrke9tjhf50yrxpwdywhyhl9540fjh9tf5yqyf29m6",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10892385055197",
+        "delegator_shares": "10892385055197.000000000000000000",
+        "description": {
+            "moniker": "Certus One",
+            "identity": "ABD51DF68C0D1ECF",
+            "website": "https://certus.one",
+            "details": "Stake and earn rewards with the most secure and stable validator. Winner of the Game of Stakes. Operated by Certus One Inc. By delegating, you confirm that you are aware of the risk of slashing and that Certus One Inc is not liable for any potential damages to your investment."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.300000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-02T08:49:06.142759253Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e",
+        "consensus_pubkey": "terravalconspub1zcjduepq5n9a65swj6htw63dhlqky3mfqfzwa0v0gx3vufte07nylqu67z3qqlr3ue",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1215834230001",
+        "delegator_shares": "1215834230001.000000000000000000",
+        "description": {
+            "moniker": "ChainLayer",
+            "identity": "AD3CDBC91802F94A",
+            "website": "https://www.chainlayer.io",
+            "details": "Secure and reliable validator. TG: https://t.me/chainlayer"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T18:11:46.93160261Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1k4ef8m95t7eq522evmmuzvfkpla04pezmu4j7k",
+        "consensus_pubkey": "terravalconspub1zcjduepqzm293w8hmrvemlae8qqt78mjh7es5a8mzjuqygtsdtlnhgy8pfesk6zwzh",
+        "jailed": false,
+        "status": 2,
+        "tokens": "250001000001",
+        "delegator_shares": "250001000001.000000000000000000",
+        "description": {
+            "moniker": "Bit Cat",
+            "identity": "1A221528C4EE864E",
+            "website": "https://www.bitcat365.com",
+            "details": "Secure and stable Terra validator service from China team"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.080000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-10-07T02:31:14.687504051Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1khfcg09plqw84jxy5e7fj6ag4s2r9wqsgm7k94",
+        "consensus_pubkey": "terravalconspub1zcjduepq7fv9xvyak6eq3txdsc35jt7umtmn0hetgckysd80r9cd6cjaq89skpah5r",
+        "jailed": false,
+        "status": 2,
+        "tokens": "2037140633332",
+        "delegator_shares": "2037140633332.000000000000000000",
+        "description": {
+            "moniker": "01node.com",
+            "identity": "552A83BA62F9B1F8",
+            "website": "https://01node.com",
+            "details": "01node Staking Services"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.150000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1hz754zdldnrrhp3qpfan3l2dxkcv5cgkuzqq9v",
+        "consensus_pubkey": "terravalconspub1zcjduepqnas7uqj8qm47h8pwr7upcnu6caw438sxy4uhgzuus95a2yu97ffqm7fpdw",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1000100000001",
+        "delegator_shares": "1000100000001.000000000000000000",
+        "description": {
+            "moniker": "consensus-networks",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.100000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
+        "consensus_pubkey": "terravalconspub1zcjduepqdmz2fuu674znyn7yxchad9cc4ntajgt64rzm79tewy2e3sscvswsj3gj2t",
+        "jailed": false,
+        "status": 2,
+        "tokens": "2755845115532",
+        "delegator_shares": "2755845115532.000000000000000000",
+        "description": {
+            "moniker": "Terraforming",
+            "identity": "CF172959AC3A8BB2",
+            "website": "http://terraforming.money",
+            "details": "테라가 혁신할 미래를 기다립니다. Korean Terra Community : https://open.kakao.com/o/gMVLQFhb (pwd : luna0424) 루나 트레이딩/잡담 : https://open.kakao.com/o/gQRCPkob (no pwd)"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2020-01-11T13:48:31.127063236Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1h6rf7y2ar5vz64q8rchz5443s3tqnswrpf4846",
+        "consensus_pubkey": "terravalconspub1zcjduepqxx9uexrd9ndq8d7wcw2hxxg0yf6dtuxdwx0mts07yfnau30tus5qxdnesj",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1044408014994",
+        "delegator_shares": "1044512466232.824500023504820573",
+        "description": {
+            "moniker": "Staked",
+            "identity": "E7BFA6515FB02B3B",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-07-14T18:30:11.854775172Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-05-04T20:01:31.48390788Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1c9ye54e3pzwm3e0zpdlel6pnavrj9qqvq89r3r",
+        "consensus_pubkey": "terravalconspub1zcjduepqwfqpxmlsmuvgtzve4s24qgcmr79f279ce5xlv09u5eanruzaafhs537795",
+        "jailed": false,
+        "status": 2,
+        "tokens": "3214166612023",
+        "delegator_shares": "3214166612023.000000000000000000",
+        "description": {
+            "moniker": "StakeWith.Us",
+            "identity": "",
+            "website": "https://stakewith.us",
+            "details": "Secured Staking Made Easy. Put Your Crypto to Work - Hassle Free. Disclaimer: Delegators should understand that delegation comes with slashing risk. By delegating to StakeWithUs Pte Ltd, you acknowledge that StakeWithUs Pte Ltd is not liable for any losses on your investment."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.250000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2019-06-06T07:27:31.730175337Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1c6gve6zhye5690563wxmvns7mugz6plu4aj7d3",
+        "consensus_pubkey": "terravalconspub1zcjduepq9yg0eyeh7530ecyz9jh6sda3v5tfmehnfpppnxz4txavlmklp7eqq6hqct",
+        "jailed": false,
+        "status": 2,
+        "tokens": "6901804842238",
+        "delegator_shares": "6901804842238.000000000000000000",
+        "description": {
+            "moniker": "Arrington XRP Capital",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1cac2mcf2eszn9ln3fx4heym6kd363zqfelxrmr",
+        "consensus_pubkey": "terravalconspub1zcjduepqx2d8wk7ffzf2fz0ur9h5yx8gkf6yyp089nyjwy207j8vjyufvzvquh8w5k",
+        "jailed": false,
+        "status": 2,
+        "tokens": "100401199901",
+        "delegator_shares": "100410328112.646604236748772951",
+        "description": {
+            "moniker": "Fair Square Lab",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-07-20T11:07:47.10973584Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.080000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-12-26T08:03:17.321407473Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1eutun6vh83lmyq0wmyf9vgghvurze2xanl9sq6",
+        "consensus_pubkey": "terravalconspub1zcjduepqf7wt6sqf7ywg47kvq8q8alpx40lf8dnvfagdhq4cdxtsj30vnm7q7dvf4l",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10010000000002",
+        "delegator_shares": "10010000000002.000000000000000000",
+        "description": {
+            "moniker": "Wraith",
+            "identity": "B82DD60788A99E74",
+            "website": "https://terra.money",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper163phlen6dn7sp9khhjar2gqqx6kga0ly8d7h9g",
+        "consensus_pubkey": "terravalconspub1zcjduepq4el7eval99ma4e76x7ye9vw5s6dghelkuqtaf3jphpjsa08f4fjqap4css",
+        "jailed": false,
+        "status": 2,
+        "tokens": "20021344805394",
+        "delegator_shares": "20021344805394.000000000000000000",
+        "description": {
+            "moniker": "Goliath",
+            "identity": "B173BD76D84675B0",
+            "website": "https://terra.money",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-08-09T03:53:49.713825146Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper16jsypha5lv6e3mc24veqzfw3rznfqu92d58yfg",
+        "consensus_pubkey": "terravalconspub1zcjduepqaxfam4vqzmqah9294qkjpalm6sk3yhjg7pcmnar76dm0ag02ls2sfauu4r",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1800020000000",
+        "delegator_shares": "1800020000000.000000000000000000",
+        "description": {
+            "moniker": "SGTerra",
+            "identity": "",
+            "website": "https://terra.money",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-11-14T11:32:14.889999981Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-11-04T02:09:28.925031012Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1uhjx34pfsxk9xh34yn8p2w4469uqdz067rqu5g",
+        "consensus_pubkey": "terravalconspub1zcjduepqxktc8umng94383l48ea6ydcuc7l4ly72h5tmw7ukw77zgdg3r98sfuszck",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1614082814310",
+        "delegator_shares": "1614082814310.000000000000000000",
+        "description": {
+            "moniker": "Umbrella",
+            "identity": "A530AC4D75991FE2",
+            "website": "https://umbrellavalidator.com",
+            "details": "For a transparent and fair financial system. Power to the people."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.050000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.100000000000000000"
+            },
+            "update_time": "2019-04-25T17:56:09.77701748Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
+        "consensus_pubkey": "terravalconspub1zcjduepq5ay5ukydr4hcpvpz0mjy7dc0c8rufwcsnv0e0xjy40wnj89uqvsq3n04tq",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10481259134140",
+        "delegator_shares": "10481259134140.000000000000000000",
+        "description": {
+            "moniker": "RockX",
+            "identity": "",
+            "website": "",
+            "details": "RockX aims at providing professional POS digital assets services for institutional investors and token holders"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.050000000000000000",
+                "max_rate": "0.200000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-11-02T14:56:15.208081361Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1a0l55c3tzxel6fg927qftkfaxfa0he80q9djgj",
+        "consensus_pubkey": "terravalconspub1zcjduepquhpz4v4ngp6wq2gqww4m6e76rnwe7qlv7k3gpm3hvrkajd4ycg6swdqfdh",
+        "jailed": false,
+        "status": 2,
+        "tokens": "1000398880401",
+        "delegator_shares": "1000699059906.990699069906990699",
+        "description": {
+            "moniker": "Chainflow",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "2019-12-11T13:27:03.593008868Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.100000000000000000",
+                "max_rate": "0.500000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2019-04-27T10:41:23.890132172Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1audgfvmgt0js54p3s8kj3r40uwej6vy2tv6rrw",
+        "consensus_pubkey": "terravalconspub1zcjduepqhmmca7s2868xypc05r7mvedd7jckpn837vf85ulw9ksrgfv5rx2s7csdhk",
+        "jailed": false,
+        "status": 2,
+        "tokens": "852997893470",
+        "delegator_shares": "852997893470.000000000000000000",
+        "description": {
+            "moniker": "FRESHLUNA",
+            "identity": "63575EE3F0F9FAFC",
+            "website": "https://freshluna.com",
+            "details": "FreshLuna runs on bare metal in a SSAE16 SOC2 certified Tier 3 datacenter with geographically distributed private sentry nodes, YubiHSM2 hardware protected keys, with 24/7 monitoring, alerting, and analytics."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2020-01-09T19:21:48.383779071Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper175hhkyxmkp8hf2zrzka7cnn7lk6mudtv4uuu64",
+        "consensus_pubkey": "terravalconspub1zcjduepqjjvjgpt6qumnxp30cl9vkkew90gggjn04ckjmd9vex79v2ul6njszslh8j",
+        "jailed": false,
+        "status": 2,
+        "tokens": "3020618615104",
+        "delegator_shares": "3020618615104.000000000000000000",
+        "description": {
+            "moniker": "nonce - LunaWhale.com",
+            "identity": "7D6B64B7371870D9",
+            "website": "https://lunawhale.com/",
+            "details": "We are the lab of nonce-community. Visit to LunaWhale.com"
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "1.000000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "1.000000000000000000"
+            },
+            "update_time": "2019-08-23T09:20:48.800541356Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1ltwln4yqytkfzn6868xazlhg7vlzdcf96ly9zs",
+        "consensus_pubkey": "terravalconspub1zcjduepq2q5tuy506pavfjncnvs2ehkc9eq498ehvlyp8u6qshpunfrv8kjs7c2dwv",
+        "jailed": false,
+        "status": 2,
+        "tokens": "202010000001",
+        "delegator_shares": "202010000001.000000000000000000",
+        "description": {
+            "moniker": "BasBlock",
+            "identity": "",
+            "website": "",
+            "details": ""
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.450000000000000000",
+                "max_rate": "0.500000000000000000",
+                "max_change_rate": "0.050000000000000000"
+            },
+            "update_time": "2020-02-01T11:23:45.194894253Z"
+        },
+        "min_self_delegation": "1"
+    },
+    {
+        "operator_address": "terravaloper1lda78gzrjx0rsadtdk0zn4v7awtz6m9lrd5ez9",
+        "consensus_pubkey": "terravalconspub1zcjduepq7sav4ru3szht422d8ytunersg7ahq6q7crkm3aulqnklpw9veqasgfjy38",
+        "jailed": false,
+        "status": 2,
+        "tokens": "10483614091658",
+        "delegator_shares": "10483614091658.000000000000000000",
+        "description": {
+            "moniker": "Polychain Labs",
+            "identity": "A51CE3B9CD649C3F",
+            "website": "",
+            "details": "Secure staking with Polychain Labs, the most experienced institutional grade staking team."
+        },
+        "unbonding_height": "0",
+        "unbonding_time": "1970-01-01T00:00:00Z",
+        "commission": {
+            "commission_rates": {
+                "rate": "0.200000000000000000",
+                "max_rate": "1.000000000000000000",
+                "max_change_rate": "0.010000000000000000"
+            },
+            "update_time": "2019-04-24T06:00:00Z"
+        },
+        "min_self_delegation": "1"
+    }
+]

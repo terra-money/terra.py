@@ -1,0 +1,16 @@
+bip32utils~=0.3.0
+mnemonic~=0.18.0
+bech32~=1.1
+ecdsa~=0.13.2
+requests~=2.22
+requests_futures~=1.0.0
+wrapt~=1.11.2
+python-dateutil~=2.8.1
+pygments~=2.5.2
+cached-property~=1.5.1
+fastjsonschema~=2.14.2
+tabulate~=0.8.6
+python-box~=4.0.4
+websockets~=8.1
+toolz~=0.10.0
+bidict~=0.19.0
