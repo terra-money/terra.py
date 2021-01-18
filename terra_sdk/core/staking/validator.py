@@ -20,10 +20,6 @@ __all__ = [
 @dataclass
 class CommissionRates(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        rate=Dec.__schema__, max_rate=Dec.__schema__, max_change_rate=Dec.__schema__
-    )
-
     rate: Dec
     max_rate: Dec
     max_change_rate: Dec
@@ -39,10 +35,6 @@ class CommissionRates(JsonSerializable, JsonDeserializable):
 
 @dataclass
 class Commission(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(
-        commission_rates=CommissionRates.__schema__, update_time=Timestamp.__schema__
-    )
 
     rates: CommissionRates
     update_time: Timestamp
@@ -63,9 +55,7 @@ DoNotModifyDesc = "[do-not-modify]"  # from cosmos
 
 @dataclass
 class Description(JsonSerializable, JsonDeserializable):
-    __schema__ = S.OBJECT(
-        moniker=S.STRING, identity=S.STRING, website=S.STRING, details=S.STRING
-    )
+
 
     moniker: str = ""
     identity: str = ""
@@ -84,19 +74,7 @@ class Description(JsonSerializable, JsonDeserializable):
 @dataclass
 class Validator(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        operator_address=S.VAL_ADDRESS,
-        consensus_pubkey=S.STRING,
-        tokens=S.STRING_INTEGER,
-        jailed=S.BOOLEAN,
-        status=S.INTEGER,  # this is converted to string
-        delegator_shares=Dec.__schema__,
-        description=Description.__schema__,
-        unbonding_height=S.STRING_INTEGER,
-        unbonding_time=Timestamp.__schema__,
-        commission=Commission.__schema__,
-        min_self_delegation=S.STRING_INTEGER,
-    )
+
 
     operator_address: ValAddress
     consensus_pubkey: str

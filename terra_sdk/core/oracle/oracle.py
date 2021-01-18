@@ -14,9 +14,6 @@ __all__ = ["ExchangeRatePrevote", "ExchangeRateVote"]
 @dataclass
 class ExchangeRateVote(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        denom=S.STRING, voter=S.VAL_ADDRESS, exchange_rate=Dec.__schema__
-    )
 
     exchange_rate: Coin
     denom: str
@@ -41,12 +38,6 @@ class ExchangeRateVote(JsonSerializable, JsonDeserializable):
 @dataclass
 class ExchangeRatePrevote(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        hash=S.STRING,
-        denom=S.STRING,
-        voter=S.VAL_ADDRESS,
-        submit_block=S.STRING_INTEGER,
-    )
 
     hash: str
     denom: str

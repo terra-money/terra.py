@@ -22,7 +22,6 @@ __all__ = [
 @dataclass
 class StdSignature(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(signature=S.STRING, pub_key=PublicKey.__schema__)
 
     signature: str
     pub_key: PublicKey
@@ -43,15 +42,6 @@ class StdSignature(JsonSerializable, JsonDeserializable):
 @dataclass
 class StdTx(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^core/StdTx\Z"),
-        value=S.OBJECT(
-            fee=StdFee.__schema__,
-            msg=S.ARRAY(S.ANY(*(mt.__schema__ for mt in MSG_TYPES.values()))),
-            signatures=S.ARRAY(StdSignature.__schema__),
-            memo=S.STRING,
-        ),
-    )
 
     # NOTE: msg is not plural, and is NOT a typo. This may change later for consistency.
     fee: Optional[StdFee] = None
@@ -103,41 +93,10 @@ class StdSignMsg(JsonSerializable):
         return d
 
 
-# Deprecated -- see MsgInfo
-# @dataclass
-# class TxLogEntry(JsonSerializable):
-# __schema__ = S.OBJECT(
-#     msg_index=S.INTEGER,
-#     success=S.BOOLEAN,
-#     log=S.STRING,
-#     events=S.ARRAY(
-#         S.OBJECT(
-#             type=S.STRING,
-#             attributes=S.ARRAY(S.OBJECT(key=S.STRING, value=S.STRING)),
-#         )
-#     ),
-# )
-
-# msg: StdMsg
-# success: bool
-# log: str
-# events: dict
-
-# def __post_init__(self):
-#     try:
-#         log = json.loads(self.log)
-#         if type(log) == dict:
-#             self.log = terra_sdkBox(log)
-#     except:
-#         log = None
-
 
 @dataclass
 class TxInfo(JsonSerializable, JsonDeserializable):
     """Holds data about a transaction that has been broadcasted and included in a block."""
-
-    # TODO: Add Schema
-    __schema__ = {}
 
     height: int
     txhash: str
@@ -243,16 +202,6 @@ class TxInfo(JsonSerializable, JsonDeserializable):
 
 @dataclass
 class TxBroadcastResult(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(
-        height=S.STRING_INTEGER,
-        txhash=S.STRING,
-        raw_log=S.STRING,
-        logs=S.ARRAY(MsgInfo.__schema__),
-        gas_wanted=S.STRING_INTEGER,
-        gas_used=S.STRING_INTEGER,
-        events=S.ARRAY({}),
-    )
 
     height: int
     txhash: str

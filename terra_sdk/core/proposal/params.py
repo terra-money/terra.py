@@ -146,8 +146,6 @@ for subspace, keys in PARAM_DEFNS.items():
 
 class ParamChanges(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.ARRAY(ParamChangeSchema)
-
     def __init__(self, changes: dict):
         for k, v in changes.items():
             m = symbol.match(k)
@@ -251,13 +249,6 @@ class ParameterChangeProposal(Content):
 
     type = "params/ParameterChangeProposal"
     ParamChanges = ParamChanges  # alias for easy access
-
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^params/ParameterChangeProposal\Z"),
-        value=S.OBJECT(
-            title=S.STRING, description=S.STRING, changes=ParamChanges.__schema__,
-        ),
-    )
 
     title: str
     description: str

@@ -19,17 +19,6 @@ __all__ = ["PublicKey", "AccPubKey", "ValPubKey", "ValConsPubKey"]
 @dataclass
 class PublicKey(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        type=S.STRING,
-        value=S.ANY(
-            S.STRING,
-            S.OBJECT(
-                threshold=S.STRING_INTEGER,
-                pubkeys=S.ARRAY(S.OBJECT(type=S.STRING, value=S.STRING)),
-            ),
-        ),
-    )
-
     type: str = "tendermint/PubKeySecp256k1"
     value: Any = None
 

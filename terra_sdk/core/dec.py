@@ -16,8 +16,6 @@ __all__ = ["SDK_DEC_PREC", "Dec"]
 
 class Dec(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.STRING_WITH_PATTERN(SDK_DEC_REGEX_PATTERN)
-
     def __init__(self, arg):
         """BigInt-based Decimal representation with basic arithmetic operations with
         compatible Python numeric types (int, float, Decimal). Does not work with

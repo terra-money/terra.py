@@ -93,27 +93,27 @@ class Coin:
             cast = Dec
         return Coin(denom=self.denom, amount=cast(self.amount - other.amount))
 
-    def __mul__(self, other) -> Coin[T]:
+    def __mul__(self, other) -> Coin:
         return Coin(denom=self.denom, amount=(self.amount * other))
 
-    def __rmul__(self, other) -> Coin[T]:
+    def __rmul__(self, other) -> Coin:
         return self * other
 
-    def __truediv__(self, other) -> Coin[T]:
+    def __truediv__(self, other) -> Coin:
         cast = type(self.amount)
         return Coin(denom=self.denom, amount=cast(self.amount / other))
 
-    def __floordiv__(self, other) -> Coin[T]:
+    def __floordiv__(self, other) -> Coin:
         cast = type(self.amount)
         return Coin(denom=self.denom, amount=cast(self.amount // other))
 
-    def __neg__(self) -> Coin[T]:
+    def __neg__(self) -> Coin:
         return Coin(denom=self.denom, amount=(-self.amount))
 
-    def __abs__(self) -> Coin[T]:
+    def __abs__(self) -> Coin:
         return Coin(denom=self.denom, amount=abs(self.amount))
 
-    def __pos__(self) -> Coin[T]:
+    def __pos__(self) -> Coin:
         return abs(self)
 
     def __lt__(self, other: Coin) -> bool:
@@ -149,7 +149,6 @@ class Coin:
 
 class Coins(JsonSerializable, JsonDeserializable, Generic[T]):
 
-    __schema__ = S.ARRAY(Coin.__schema__)
 
     def __init__(self, coins: Iterable[Coin] = None, **denoms):
         if coins is None:

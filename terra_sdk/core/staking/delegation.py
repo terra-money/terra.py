@@ -20,13 +20,6 @@ __all__ = [
 @dataclass
 class Delegation(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        delegator_address=S.ACC_ADDRESS,
-        validator_address=S.VAL_ADDRESS,
-        shares=Dec.__schema__,
-        balance=S.STRING_INTEGER,
-    )
-
     delegator_address: AccAddress
     validator_address: ValAddress
     shares: Coin
@@ -52,13 +45,6 @@ class Delegation(JsonSerializable, JsonDeserializable):
 
 @dataclass
 class UnbondingEntry(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(
-        initial_balance=S.STRING_INTEGER,
-        balance=S.STRING_INTEGER,
-        creation_height=S.STRING_INTEGER,
-        completion_time=Timestamp.__schema__,
-    )
 
     initial_balance: Coin
     balance: Coin
@@ -86,12 +72,6 @@ class UnbondingEntry(JsonSerializable, JsonDeserializable):
 @dataclass
 class UnbondingDelegation(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        delegator_address=S.ACC_ADDRESS,
-        validator_address=S.VAL_ADDRESS,
-        entries=S.ARRAY(UnbondingEntry.__schema__),
-    )
-
     delegator_address: AccAddress
     validator_address: ValAddress
     entries: List[UnbondingEntry]
@@ -108,14 +88,6 @@ class UnbondingDelegation(JsonSerializable, JsonDeserializable):
 
 @dataclass
 class RedelegationEntry(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(
-        initial_balance=S.STRING_INTEGER,
-        balance=S.STRING_INTEGER,
-        shares_dst=Dec.__schema__,
-        creation_height=S.INTEGER,
-        completion_time=Timestamp.__schema__,
-    )
 
     initial_balance: Coin
     balance: Coin
@@ -145,13 +117,6 @@ class RedelegationEntry(JsonSerializable, JsonDeserializable):
 
 @dataclass
 class Redelegation(JsonSerializable, JsonDeserializable):
-
-    __schema__ = S.OBJECT(
-        delegator_address=S.ACC_ADDRESS,
-        validator_src_address=S.VAL_ADDRESS,
-        validator_dst_address=S.VAL_ADDRESS,
-        entries=S.ARRAY(RedelegationEntry.__schema__),
-    )
 
     delegator_address: AccAddress
     validator_src_address: ValAddress

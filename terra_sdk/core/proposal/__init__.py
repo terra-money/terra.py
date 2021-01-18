@@ -33,9 +33,7 @@ class ProposalStatus(str):
 
 class Content(JsonSerializable, JsonDeserializable, metaclass=abc.ABCMeta):
 
-    __schema__ = S.OBJECT(
-        type=S.STRING, value=S.OBJECT(title=S.STRING, description=S.STRING)
-    )
+
 
     @property
     @abc.abstractmethod
@@ -67,24 +65,6 @@ PROPOSAL_TYPES = {
 @dataclass
 class Proposal(JsonSerializable, JsonDeserializable):
 
-    __schema__ = S.OBJECT(
-        content=Content.__schema__,
-        id=S.STRING_INTEGER,
-        proposal_status=S.STRING,
-        final_tally_result=S.OPTIONAL(
-            S.OBJECT(  # this gets marshalled into Coin
-                yes=S.STRING_INTEGER,
-                abstain=S.STRING_INTEGER,
-                no=S.STRING_INTEGER,
-                no_with_veto=S.STRING_INTEGER,
-            )
-        ),
-        submit_time=Timestamp.__schema__,
-        deposit_end_time=Timestamp.__schema__,
-        total_deposit=Coins.__schema__,
-        voting_start_time=Timestamp.__schema__,
-        voting_end_time=Timestamp.__schema__,
-    )
 
     content: Type[Content]
     id: int

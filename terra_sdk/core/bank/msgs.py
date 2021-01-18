@@ -36,7 +36,7 @@ class MsgMultiSend():
     inputs = attr.ib()
     outputs = attr.ib()
 
-    @ classmethod
+    @classmethod
     def from_data(cls, data: dict) -> MsgMultiSend:
         data = data["value"]
         return cls(

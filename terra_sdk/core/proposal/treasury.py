@@ -14,10 +14,6 @@ class TaxRateUpdateProposal(Content):
 
     type = "treasury/TaxRateUpdateProposal"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^treasury/TaxRateUpdateProposal\Z"),
-        value=S.OBJECT(title=S.STRING, description=S.STRING, tax_rate=Dec.__schema__),
-    )
 
     title: str
     description: str
@@ -37,13 +33,6 @@ class TaxRateUpdateProposal(Content):
 class RewardWeightUpdateProposal(Content):
 
     type = "treasury/RewardWeightUpdateProposal"
-
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^treasury/RewardWeightUpdateProposal\Z"),
-        value=S.OBJECT(
-            title=S.STRING, description=S.STRING, reward_weight=Dec.__schema__
-        ),
-    )
 
     title: str
     description: str

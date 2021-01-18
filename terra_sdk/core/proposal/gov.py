@@ -11,10 +11,6 @@ class TextProposal(Content):
 
     type = "gov/TextProposal"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^gov/TextProposal\Z"),
-        value=S.OBJECT(title=S.STRING, description=S.STRING),
-    )
 
     title: str
     description: str
