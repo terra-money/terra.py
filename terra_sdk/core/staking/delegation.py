@@ -12,7 +12,7 @@ __all__ = [
 
 
 @attr.s
-class Delegation(JsonSerializable, JsonDeserializable):
+class Delegation:
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -28,7 +28,7 @@ class Delegation(JsonSerializable, JsonDeserializable):
         }
 
     @classmethod
-    def from_data(cls, data: Dict[str, str]) -> Delegation:
+    def from_data(cls, data: dict) -> Delegation:
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
@@ -38,7 +38,7 @@ class Delegation(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class UnbondingEntry(JsonSerializable, JsonDeserializable):
+class UnbondingEntry:
 
     initial_balance: Coin = attr.ib()
     balance: Coin = attr.ib()
@@ -54,7 +54,7 @@ class UnbondingEntry(JsonSerializable, JsonDeserializable):
         }
 
     @classmethod
-    def from_data(cls, data: Dict[str, str]) -> UnbondingEntry:
+    def from_data(cls, data: dict) -> UnbondingEntry:
         return cls(
             initial_balance=Coin(uLuna, data["initial_balance"]),
             balance=Coin(uLuna, data["balance"]),
@@ -64,14 +64,14 @@ class UnbondingEntry(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class UnbondingDelegation(JsonSerializable, JsonDeserializable):
+class UnbondingDelegation:
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     entries: List[UnbondingEntry] = attr.ib()
 
     @classmethod
-    def from_data(cls, data: Dict[str, Any]) -> UnbondingDelegation:
+    def from_data(cls, data) -> UnbondingDelegation:
         entries = [UnbondingEntry.from_data(entry) for entry in data["entries"]]
         return cls(
             delegator_address=data["delegator_address"],
@@ -81,12 +81,12 @@ class UnbondingDelegation(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class RedelegationEntry(JsonSerializable, JsonDeserializable):
+class RedelegationEntry:
 
-    initial_balance: Coin  = attr.ib()
-    balance: Coin          = attr.ib()
-    shares_dst: Coin       = attr.ib()
-    creation_height: int   = attr.ib()
+    initial_balance: Coin = attr.ib()
+    balance: Coin = attr.ib()
+    shares_dst: Coin = attr.ib()
+    creation_height: int = attr.ib()
     completion_time: Timestamp = attr.ib()
 
     def to_data(self) -> dict:
@@ -110,7 +110,7 @@ class RedelegationEntry(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class Redelegation(JsonSerializable, JsonDeserializable):
+class Redelegation:
 
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
@@ -118,7 +118,7 @@ class Redelegation(JsonSerializable, JsonDeserializable):
     entries: List[RedelegationEntry] = attr.ib()
 
     @classmethod
-    def from_data(cls, data: Dict[str, Any]) -> Redelegation:
+    def from_data(cls, data: dict) -> Redelegation:
         entries = [RedelegationEntry.from_data(re) for re in data["entries"]]
         return cls(
             delegator_address=data["delegator_address"],

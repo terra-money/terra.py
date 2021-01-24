@@ -1,6 +1,7 @@
 from ._base import BaseAPI
 
 from terra_sdk.core.coin import Coin
+from terra_sdk.core.coins import Coins
 from terra_sdk.core.dec import Dec
 
 

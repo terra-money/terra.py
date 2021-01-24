@@ -59,7 +59,9 @@ class LCDClient:
         self.wasm = WasmAPI(self)
         self.tx = TxAPI(self)
 
-    async def _get(self, endpoint: str, params: Optional[dict] = None, *raw: bool = False):
+    async def _get(
+        self, endpoint: str, params: Optional[dict] = None, raw: bool = False
+    ):
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
         ) as response:
@@ -68,7 +70,7 @@ class LCDClient:
             self._last_request_height = result.get("height")
         except AttributeError:
             self._last_request_height = None
-        return result if raw else result['result']
+        return result if raw else result["result"]
 
     async def __aenter__(self):
         return self

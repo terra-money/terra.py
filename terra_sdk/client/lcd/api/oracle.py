@@ -1,5 +1,16 @@
 from ._base import BaseAPI
 
+from typing import Optional, List
+
+from terra_sdk.core.coin import Coin
+from terra_sdk.core.coins import Coins
+from terra_sdk.core.oracle import (
+    ExchangeRatePrevote,
+    ExchangeRateVote,
+    AggregateExchangeRatePrevote,
+    AggregateExchangeRateVote,
+)
+
 
 class OracleAPI(BaseAPI):
     async def votes(
@@ -7,7 +18,7 @@ class OracleAPI(BaseAPI):
     ) -> ExchangeRateVote:
         if denom is not None and validator is not None:
             res = self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
-            return [ExchangeRateVote(res)]
+            return [ExchangeRateVote.from_data(res)]
         elif validator is not None:
             res = self._c._get(f"/oracle/voters/{validator}/votes")
             return list(map(ExchangeRateVote.from_data, res))

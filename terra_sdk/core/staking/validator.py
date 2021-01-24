@@ -12,7 +12,7 @@ __all__ = [
 
 
 @attr.s
-class CommissionRates(JsonSerializable, JsonDeserializable):
+class CommissionRates:
 
     rate: Dec = attr.ib()
     max_rate: Dec = attr.ib()
@@ -28,7 +28,7 @@ class CommissionRates(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class Commission(JsonSerializable, JsonDeserializable):
+class Commission:
 
     rates: CommissionRates = attr.ib()
     update_time: Timestamp = attr.ib()
@@ -48,8 +48,7 @@ DoNotModifyDesc = "[do-not-modify]"  # from cosmos
 
 
 @attr.s
-class Description(JsonSerializable, JsonDeserializable):
-
+class Description:
 
     moniker: str = attr.ib()
     identity: str = attr.ib()
@@ -66,9 +65,7 @@ class Description(JsonSerializable, JsonDeserializable):
 
 
 @attr.s
-class Validator(JsonSerializable, JsonDeserializable):
-
-
+class Validator:
 
     operator_address: ValAddress = attr.ib()
     consensus_pubkey: str = attr.ib()
