@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import attr
 
 __all__ = ["CommunityPoolSpendProposal"]
 
 
 @attr.s
-class CommunityPoolSpendProposal(BaseTerraData):
+class CommunityPoolSpendProposal:
 
     type = "distribution/CommunityPoolSpendProposal"
 

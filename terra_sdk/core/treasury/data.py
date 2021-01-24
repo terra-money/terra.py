@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-from terra_sdk.util.base import BaseTerraData
-
 __all__ = ["PolicyConstraints"]
 
 
 @attr.s
-class PolicyConstraints(BaseTerraData):
+class PolicyConstraints:
 
     rate_min: Dec = attr.ib()
     rate_max: Dec = attr.ib()

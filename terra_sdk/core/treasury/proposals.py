@@ -10,7 +10,7 @@ class TaxRateUpdateProposal(Content):
 
     type = "treasury/TaxRateUpdateProposal"
 
-    title: str    = attr.ib()
+    title: str = attr.ib()
     description: str = attr.ib()
     tax_rate: Dec = attr.ib()
 
@@ -29,8 +29,8 @@ class RewardWeightUpdateProposal(Content):
 
     type = "treasury/RewardWeightUpdateProposal"
 
-    title: str         = attr.ib()
-    description: str   = attr.ib()
+    title: str = attr.ib()
+    description: str = attr.ib()
     reward_weight: Dec = attr.ib()
 
     @classmethod
