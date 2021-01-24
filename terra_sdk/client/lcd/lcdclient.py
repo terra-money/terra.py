@@ -59,6 +59,9 @@ class LCDClient:
         self.wasm = WasmAPI(self)
         self.tx = TxAPI(self)
 
+    def wallet(self, key: Key) -> Wallet:
+        return Wallet(this, key)
+
     async def _get(
         self, endpoint: str, params: Optional[dict] = None, raw: bool = False
     ):

@@ -21,9 +21,10 @@ class AggregateExchangeRateVote:
 
     def to_data(self) -> dict:
         return {
-            "exchange_rate_tuples": list(
-                map(lambda x: dict(denom=x.denom, exchange_rate=str(x.amount)))
-            ),
+            "exchange_rate_tuples": [
+                {"denom": x.denom, "exchange_rate": str(x.amount)}
+                for x in self.exchange_rate_tuples
+            ],
             "voter": self.voter,
         }
 
@@ -31,10 +32,9 @@ class AggregateExchangeRateVote:
     def from_data(cls, data) -> AggregateExchangeRateVote:
         return cls(
             exchange_rate_tuples=Coins(
-                map(lambda x: Coin(x.denom, x.exchange_rate)),
-                data["exchange_rate_tuples"],
-            ),
-            voter=data["voter"],
+                [Coin(d.denom, d.exchange_rate) for d in data["exchange_rate_tuples"]],
+                voter=data["voter"],
+            )
         )
 
 

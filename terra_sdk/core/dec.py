@@ -3,7 +3,6 @@ from __future__ import annotations
 import re
 from decimal import Decimal
 
-from terra_sdk.util.validation import Schemas as S
 
 SDK_DEC_PREC = 18
 SDK_DEC_UNIT = 10 ** SDK_DEC_PREC

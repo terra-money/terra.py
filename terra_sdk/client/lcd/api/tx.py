@@ -21,7 +21,7 @@ class TxAPI(BaseAPI):
         if fee is None:
             # create the fake fee
             balance = await self._c.bank.balance(source_address)
-            balance_one = balance.map(lambda c: Coin(c.denom, 1))
+            balance_one = [Coin(c.denom, 1) for c in balance]
 
             # estimate the fee
             gas_prices = gas_prices or self._c.gas_prices
