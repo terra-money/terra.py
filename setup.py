@@ -12,9 +12,6 @@ with open(os.path.join(here, "terra_sdk", "__version__.py"), "r") as f:
 with open("README.md") as readme_file:
     readme = readme_file.read()
 
-with open("HISTORY.md") as history_file:
-    history = history_file.read()
-
 requirements = list()
 with open("requirements.txt") as f:
     requirements = f.read().splitlines()
@@ -30,19 +27,22 @@ test_requirements = [
 setup(
     author=about["__author__"],
     author_email=about["__author_email__"],
-    python_requires=">=3.7",
+    python_requires=">=3.5",
     classifiers=[
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     description=about["__description__"],
     install_requires=requirements,
     license=about["__license__"],
-    long_description=readme + "\n\n" + history,
+    long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,
     keywords="jigu terra terra_sdk sdk blockchain defi finance",
