@@ -1,7 +1,7 @@
 from .key import Key
 
 from ecdsa import SECP256k1, SigningKey
-from ecdsa.util import sigencode_string_canoniz
+from ecdsa.util import sigencode_string_canonize
 import ecdsa
 
 
@@ -11,10 +11,9 @@ class RawKey(Key):
 
     def __init__(self, private_key: bytes):
         public_key = (
-            SigningKey.from_string(private_key.decode("hex"), curve=SECP256k1)
+            SigningKey.from_string(private_key, curve=SECP256k1)
             .get_verifying_key()
-            .to_string()
-            .encode("hex")
+            .to_string("compressed")
         )
         super().__init__(public_key)
         self.private_key = private_key

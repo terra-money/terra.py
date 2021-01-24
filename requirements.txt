@@ -1,7 +1,7 @@
 bip32utils~=0.3.0
+ecdsa~=0.16.1
 mnemonic~=0.18.0
 bech32~=1.1
-ecdsa~=0.13.2
 requests~=2.22
 requests_futures~=1.0.0
 wrapt~=1.11.2

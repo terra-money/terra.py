@@ -1,9 +1,11 @@
 import abc
 import base64
 import hashlib
+from typing import Optional
 
 from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx, PublicKey
-from terra_sdk.util import get_bech
+from terra_sdk.util.strings import get_bech
+import codecs
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
@@ -13,16 +15,16 @@ sha = hashlib.sha256()
 rip = hashlib.new("ripemd160")
 
 
-def address_from_public_key(public_key: bytes) -> str:
-    sha.update(self.public_key)
+def address_from_public_key(public_key: bytes) -> bytes:
+    sha.update(public_key)
     rip.update(sha.digest())
     return rip.digest()
 
 
-def pubkey_from_public_key(public_key: bytes) -> str:
-    prefix = bytearray(BECH32_PUBKEY_DATA_PREFIX, "hex")
-    prefix.append(public_key)
-    return prefix
+def pubkey_from_public_key(public_key: bytes) -> bytes:
+    arr = bytearray.fromhex(BECH32_PUBKEY_DATA_PREFIX)
+    arr += bytearray(public_key)
+    return bytes(arr)
 
 
 class Key:
@@ -41,21 +43,25 @@ class Key:
     async def sign(self, payload: bytes) -> bytes:
         raise NotImplementedError("an instance of Key must implement Key.sign")
 
+    @property
     def acc_address(self) -> str:
         if not self.raw_address:
             raise ValueError("could not compute acc_address: missing raw_address")
         return get_bech("terra", self.raw_address.hex())
 
+    @property
     def val_address(self) -> str:
         if not self.raw_address:
             raise ValueError("could not compute val_address: missing raw_address")
         return get_bech("terravaloper", self.raw_address.hex())
 
+    @property
     def acc_pubkey(self) -> str:
         if not self.raw_pubkey:
             raise ValueError("could not compute acc_pubkey: missing raw_pubkey")
         return get_bech("terrapub", self.raw_pubkey.hex())
 
+    @property
     def val_pubkey(self) -> str:
         if not self.raw_pubkey:
             raise ValueError("could not compute val_pubkey: missing raw_pubkey")

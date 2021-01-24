@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import hashlib
-from bip32utils import BIP32Key
+from bip32utils import BIP32Key, BIP32_HARDEN
 from mnemonic import Mnemonic
 
-from .key import RawKey
+from .raw import RawKey
 
 __all__ = ["MnemonicKey", "LUNA_COIN_TYPE"]
 
@@ -27,7 +27,7 @@ class MnemonicKey(RawKey):
     ):
         if mnemonic is None:
             mnemonic = Mnemonic("english").generate(256)
-        seed = Mnemonic("english").to_seed(self.mnemonic)
+        seed = Mnemonic("english").to_seed(mnemonic)
         root = BIP32Key.fromEntropy(seed)
         # derive from hdpath
         child = (
@@ -38,7 +38,7 @@ class MnemonicKey(RawKey):
             .ChildKey(index)
         )
 
-        super().__init__(child.PrivateKey().encode("hex"))
+        super().__init__(child.PrivateKey())
         self.mnemonic = mnemonic
         self.account = account
         self.index = index

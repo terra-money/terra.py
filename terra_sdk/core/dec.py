@@ -16,7 +16,7 @@ class Dec:
     def __init__(self, arg):
         """BigInt-based Decimal representation with basic arithmetic operations with
         compatible Python numeric types (int, float, Decimal). Does not work with
-        NaN, Infinity, +0, -0, etc. Serializes as a string with 18 points of decimal
+        NaN, Infinity, +0, -0, etc. Serializes as a string wi4th 18 points of decimal
         precision.
         """
         if isinstance(arg, float):

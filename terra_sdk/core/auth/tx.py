@@ -1,4 +1,8 @@
+from __future__ import annotations
 from terra_sdk.core.public_key import PublicKey
+from terra_sdk.core.coins import Coins
+
+import attr
 
 
 @attr.s
@@ -19,7 +23,25 @@ class StdSignature:
 
 
 @attr.s
-class StdSignMsg(JsonSerializable):
+class StdFee:
+
+    gas: int = attr.ib()
+    amount: Coins = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> StdFee:
+        return cls(int(data["gas"]), Coins.from_data(data["amount"]))
+
+    def to_data(self) -> dict:
+        return {"gas": str(self.gas), "amount": self.amount.to_data()}
+
+    @property
+    def gas_prices(self) -> Coins:
+        return self.amount.to_dec_coins().div(self.gas)
+
+
+@attr.s
+class StdSignMsg:
 
     chain_id: str = attr.ib()
     account_number: int = attr.ib()
