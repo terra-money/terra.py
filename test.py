@@ -1,10 +1,11 @@
 import asyncio
 from terra_sdk.client.lcd import LCDClient
+from terra_sdk.core.coin import Coin
 
 
 async def main():
     async with LCDClient("https://lcd.terra.dev") as terra:
-        item = await terra.gov.proposer(2)
+        item = await terra.wasm.parameters()
         print(item)
 
 

@@ -59,8 +59,14 @@ class LCDClient:
         self.tx = TxAPI(self)
 
     async def _get(self, endpoint: str, params: Optional[dict] = None):
-        async with self.session.get(urljoin(self.lcd.url, endpoint)) as response:
+        async with self.session.get(
+            urljoin(self.url, endpoint), params=params
+        ) as response:
             result = await response.json()
+        try:
+            self._last_request_height = result.get("height")
+        except AttributeError:
+            self._last_request_height = None
         return result
 
     async def __aenter__(self):

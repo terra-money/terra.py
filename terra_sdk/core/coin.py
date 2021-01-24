@@ -7,29 +7,8 @@ from .dec import Dec
 @attr.s(frozen=True)
 class Coin:
 
-    denom: str
-    amount: T  # all get converted to int or Dec
-
-    def __post_init__(self):
-        s = self
-        if (
-            isinstance(s.amount, Dec)
-            or isinstance(s.amount, Decimal)
-            or isinstance(s.amount, float)
-            or (
-                isinstance(s.amount, str)
-                and "." in str(s.amount)
-                or "E" in str(s.amount)
-            )
-        ):
-            object.__setattr__(
-                s, "amount", Dec(s.amount)
-            )  # must do this due to immutability
-        else:
-            try:
-                object.__setattr__(s, "amount", int(s.amount))
-            except ValueError:
-                raise ValueError(f"unacceptable value for Coin amount: {s.amount}")
+    denom: str = attr.ib()
+    amount: int = attr.ib()
 
     def __repr__(self) -> str:
         return f"Coin('{self.denom}', {self.amount!r})"

@@ -1,4 +1,4 @@
-from .base_api import BaseAPI
+from ._base import BaseAPI
 
 __all__ = ["TxAPI"]
 
