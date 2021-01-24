@@ -13,3 +13,6 @@ class MarketAPI(BaseAPI):
     async def terra_pool_delta(self) -> Dec:
         res = await self._c._get(f"/market/terra_pool_delta")
         return Dec(res.get("result"))
+
+    async def parameters(self) -> dict:
+        return await self._c._get("/market/parameters")

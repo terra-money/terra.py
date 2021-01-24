@@ -1,7 +1,15 @@
 from ._base import BaseAPI
 
+from typing import List
+
 
 class SlashingAPI(BaseAPI):
-    async def proposals(self):
-        res = await self._c._get(f"/gov/proposals")
-        return res
+    async def signing_infos(self, val_cons_pub_key: Optional[str] = None) -> List[dict]:
+        if val_cons_pub_key is None:
+            url = f"/slashing/signing_infos"
+        else:
+            url = f"/slashing/validators/{val_cons_pub_key}/signing_info"
+        return await self._c._get(url)
+
+    async def parameters(self) -> dict:
+        return await self._c._get("/slashing/parameters")
