@@ -12,7 +12,7 @@ class TendermintAPI(BaseAPI):
 
     async def validator_set(self, height: Optional[int] = None) -> dict:
         x = "latest" if height is None else height
-        return (await self._c._get(f"/validatorsets/{x}"))["result"]
+        return await self._c._get(f"/validatorsets/{x}")
 
     async def block_info(self, height: Optional[int] = None) -> dict:
         x = "latest" if height is None else height

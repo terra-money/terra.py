@@ -41,6 +41,7 @@ class LCDClient:
         self.url = url
         self.gas_adjustment = gas_adjustment
         self.gas_prices = gas_prices
+        self._last_request_height = None
 
         self.auth = AuthAPI(self)
         self.bank = BankAPI(self)
@@ -58,7 +59,7 @@ class LCDClient:
         self.wasm = WasmAPI(self)
         self.tx = TxAPI(self)
 
-    async def _get(self, endpoint: str, params: Optional[dict] = None):
+    async def _get(self, endpoint: str, params: Optional[dict] = None, *raw: bool = False):
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
         ) as response:
@@ -67,7 +68,7 @@ class LCDClient:
             self._last_request_height = result.get("height")
         except AttributeError:
             self._last_request_height = None
-        return result
+        return result if raw else result['result']
 
     async def __aenter__(self):
         return self
