@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import attr
 from .dec import Dec
+
 
 @attr.s(frozen=True)
 class Coin:
@@ -147,9 +149,7 @@ class Coin:
         return cls(denom=data["denom"], amount=data["amount"])
 
 
-class Coins(JsonSerializable, JsonDeserializable, Generic[T]):
-
-
+class Coins:
     def __init__(self, coins: Iterable[Coin] = None, **denoms):
         if coins is None:
             coins = []

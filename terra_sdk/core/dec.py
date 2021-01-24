@@ -3,7 +3,6 @@ from __future__ import annotations
 import re
 from decimal import Decimal
 
-from terra_sdk.util.serdes import JsonDeserializable, JsonSerializable
 from terra_sdk.util.validation import Schemas as S
 
 SDK_DEC_PREC = 18
@@ -14,8 +13,7 @@ PATTERN = re.compile(SDK_DEC_REGEX_PATTERN)
 __all__ = ["SDK_DEC_PREC", "Dec"]
 
 
-class Dec(JsonSerializable, JsonDeserializable):
-
+class Dec:
     def __init__(self, arg):
         """BigInt-based Decimal representation with basic arithmetic operations with
         compatible Python numeric types (int, float, Decimal). Does not work with

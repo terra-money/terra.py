@@ -5,7 +5,7 @@ from bech32 import bech32_decode, bech32_encode
 from terra_sdk.util.validation import (
     validate_acc_address,
     validate_val_address,
-    validate_val_consaddress
+    validate_val_consaddress,
 )
 
 __all__ = ["AccAddress", "ValAddress", "ValConsAddress"]
@@ -17,10 +17,6 @@ class AccAddress(str):
 
     :param arg: string-convertable object to convert.
     """
-
-    def __new__(cls, arg):
-        arg = validate_acc_address(arg)
-        return str.__new__(cls, arg)
 
     @property
     def val_address(self) -> ValAddress:

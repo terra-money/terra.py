@@ -11,8 +11,7 @@ from terra_sdk.key import Key
 __all__ = ["Wallet"]
 
 
-class Wallet():
-
+class Wallet:
     def __init__(self, terra: terra_sdk.client.terra.Terra, key: Key):
         self.key = key
         self.terra = terra
@@ -36,7 +35,10 @@ class Wallet():
         return self.info().sequence
 
     def create_tx(
-        self, *msgs: StdMsg, fee: Optional[StdFee] = None, memo: str = "",
+        self,
+        *msgs: StdMsg,
+        fee: Optional[StdFee] = None,
+        memo: str = "",
     ) -> StdSignMsg:
         """Creates a sign message (`StdSignMsg`), which contains the necessary info to
         sign the transaction. Helpful to think of it as "create unsigned tx".
@@ -64,23 +66,12 @@ class Wallet():
         return self.key.sign_tx(*args, **kwargs)
 
     def create_and_sign_tx(
-        self, *msgs: StdMsg, fee: Optional[StdFee] = None, memo: str = "",
+        self,
+        *msgs: StdMsg,
+        fee: Optional[StdFee] = None,
+        memo: str = "",
     ) -> StdTx:
         """Creates a sign message, signs it, and produces a transaction in one go.
         Outputs a ready-to-broadcast `StdTx`.
         """
         return self.sign_tx(self.create_tx(*msgs, fee=fee, memo=memo))
-
-    @contextmanager
-    def manual(self) -> Wallet:
-        """Manual mode is a context that creates sign messages (and transactions) with the
-        sequence number incremented on each TX generation rather than polling from the
-        blockchain every time, so they can be saved and broadcasted at a later time.
-        """
-        self._sequence = self.sequence
-        self._manual_sequence = True
-        yield self
-        self._manual_sequence = False
-
-    def broadcast(self, *args, **kwargs):
-        return self.terra.tx.broadcast(*args, **kwargs)
