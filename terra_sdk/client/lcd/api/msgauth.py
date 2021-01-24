@@ -14,7 +14,7 @@ class MsgAuthAPI(BaseAPI):
             return list(map(AuthorizationGrant.from_data, res))
         else:
             res = await self._c._get(
-                f"/msgauth/granters/{granter}/grantees/{grantee}/grants/{msgType}"
+                f"/msgauth/granters/{granter}/grantees/{grantee}/grants/{msg_type}"
             )
             if res is None:
                 return []
