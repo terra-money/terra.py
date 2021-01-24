@@ -1,6 +1,0 @@
-bip32utils~=0.3.post4
-ecdsa~=0.16.1
-mnemonic~=0.18
-bech32~=1.2.0
-aiohttp~=3.7.3
-attrs==20.3.0

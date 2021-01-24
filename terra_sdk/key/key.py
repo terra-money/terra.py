@@ -1,11 +1,10 @@
 import abc
 import base64
+from bech32 import bech32_encode, bech32_decode, convertbits
 import hashlib
 from typing import Optional
 
 from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx, PublicKey
-from terra_sdk.util.strings import get_bech
-import codecs
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
@@ -13,6 +12,12 @@ __all__ = ["Key"]
 
 sha = hashlib.sha256()
 rip = hashlib.new("ripemd160")
+
+
+def get_bech(prefix: str, payload: str) -> str:
+    return bech32_encode(
+        prefix, convertbits(bytes.fromhex(payload), 8, 5)
+    )  # base64 -> base32
 
 
 def address_from_public_key(public_key: bytes) -> bytes:

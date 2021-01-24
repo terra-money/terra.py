@@ -2,54 +2,94 @@ from __future__ import annotations
 
 from bech32 import bech32_decode, bech32_encode
 
-from terra_sdk.util.validation import (
-    validate_acc_address,
-    validate_val_address,
-    validate_val_consaddress,
-)
+__all__ = [
+    "AccAddress",
+    "ValAddress",
+    "ValConsAddress",
+    "AccPubKey",
+    "ValPubKey",
+    "ValConsPubKey",
+]
 
-__all__ = ["AccAddress", "ValAddress", "ValConsAddress"]
+
+def check_prefix_and_length(prefix: str, data: str, length: int):
+    vals = bech32_decode(data)
+    return vals[0] == prefix and len(data) == length
+
+
+def is_val_address(data: str) -> bool:
+    return (
+        is_bech32(data)
+        and data.startswith("terravaloper")
+        and not data.startswith("terravaloperpub")
+    )
+
+
+def is_val_consaddress(data: str) -> bool:
+    return (
+        is_bech32(data)
+        and data.startswith("terravalcons")
+        and not data.startswith("terravalconspub")
+    )
+
+
+def is_acc_pubkey(data: str) -> bool:
+    return is_bech32(data) and data.startswith("terrapub")
+
+
+def is_val_pubkey(data: str) -> bool:
+    return is_bech32(data) and data.startswith("terravalpub")
+
+
+def is_val_conspubkey(data: str) -> bool:
+    return is_bech32(data) and data.startswith("terravalconspub")
 
 
 class AccAddress(str):
-    """`terra-` prefixed Bech32-enconded account address, works anywhere a `str` is
-    accepted but will perform verification on the checksum.
+    @staticmethod
+    def validate(data: str) -> bool:
+        return check_prefix_and_length("terra", data, 44)
 
-    :param arg: string-convertable object to convert.
-    """
-
-    @property
-    def val_address(self) -> ValAddress:
-        """The associated validator operator address."""
-        decoded = bech32_decode(self)
-        return ValAddress(bech32_encode("terravaloper", decoded[1]))
+    @staticmethod
+    def from_val_address(data: str) -> str:
+        vals = bech32_decode(data)
+        return bech32_encode("terra", vals[1])
 
 
 class ValAddress(str):
-    """`terravaloper-` prefixed Bech32-enconded account address, works anywhere a `str`
-    is accepted but will perform verification on the checksum.
+    @staticmethod
+    def validate(data: str) -> bool:
+        return check_prefix_and_length("terravaloper", data, 51)
 
-    :param arg: string-convertable object to convert.
-    """
-
-    def __new__(cls, arg):
-        arg = validate_val_address(arg)
-        return str.__new__(cls, arg)
-
-    @property
-    def acc_address(self) -> AccAddress:
-        """The associated account address."""
-        decoded = bech32_decode(self)
-        return AccAddress(bech32_encode("terra", decoded[1]))
+    @staticmethod
+    def from_val_address(data: str) -> str:
+        vals = bech32_decode(data)
+        return bech32_encode("terravaloper", vals[1])
 
 
-class ValConsAddress(str):
-    """`terravalcons-` prefixed Bech32-enconded consensus address, works anywhere a `str`
-    is accepted but will perform verification on the checksum.
+class AccPubKey(str):
+    @staticmethod
+    def validate(data: str) -> bool:
+        return check_prefix_and_length("terrapub", 76)
 
-    :param arg: string-convertable object to convert.
-    """
+    @staticmethod
+    def from_val_pubkey(data: str) -> str:
+        vals = bech32_decode(data)
+        return bech32_encode("terrapub", vals[1])
 
-    def __new__(cls, arg):
-        validate_val_consaddress(arg)
-        return str.__new__(cls, arg)
+
+class ValPubKey(str):
+    @staticmethod
+    def validate(data: str) -> bool:
+        return check_prefix_and_length("terravaloperpub", data, 83)
+
+    @staticmethod
+    def from_val_address(data: str) -> str:
+        vals = bech32_decode(data)
+        return bech32_encode("terravaloperpub", vals[1])
+
+
+class ValConsPubKey(str):
+    @staticmethod
+    def validate(data: str) -> bool:
+        return check_prefix_and_length("terravalconspub", data, 83)
