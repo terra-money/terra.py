@@ -17,6 +17,7 @@ class Coins:
     @classmethod
     def from_str(cls, s: str) -> Coins:
         coin_strings = s.split(r",\s")
+        return Coins([Coin.from_str(cs) for cs in coin_strings])
 
     def __init__(self, arg: Coins.Input = {}, **denoms):
         if isinstance(args, Coins):
