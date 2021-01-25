@@ -17,34 +17,6 @@ def check_prefix_and_length(prefix: str, data: str, length: int):
     return vals[0] == prefix and len(data) == length
 
 
-def is_val_address(data: str) -> bool:
-    return (
-        is_bech32(data)
-        and data.startswith("terravaloper")
-        and not data.startswith("terravaloperpub")
-    )
-
-
-def is_val_consaddress(data: str) -> bool:
-    return (
-        is_bech32(data)
-        and data.startswith("terravalcons")
-        and not data.startswith("terravalconspub")
-    )
-
-
-def is_acc_pubkey(data: str) -> bool:
-    return is_bech32(data) and data.startswith("terrapub")
-
-
-def is_val_pubkey(data: str) -> bool:
-    return is_bech32(data) and data.startswith("terravalpub")
-
-
-def is_val_conspubkey(data: str) -> bool:
-    return is_bech32(data) and data.startswith("terravalconspub")
-
-
 class AccAddress(str):
     @staticmethod
     def validate(data: str) -> bool:

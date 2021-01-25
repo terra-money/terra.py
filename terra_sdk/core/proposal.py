@@ -5,7 +5,6 @@ from .coins import Coins
 
 __all__ = ["Proposal"]
 
-
 @attr.s
 class Proposal:
 

@@ -1,51 +1,71 @@
-
 from __future__ import annotations
 
 from .coin import Coin
+import copy
+from typing import Dict
 
 import attr
 
+
 class Coins:
 
-    def __init__(self, coins: Iterable[Coin] = None, **denoms):
-        if coins is None:
-            coins = []
-        coins = list(coins) + [Coin(d, a) for d, a in denoms.items()]
-        self._cd = dict()
-        for coin in list(coins):
-            if self._cd.get(coin.denom, None) is None:
-                self._cd[coin.denom] = Coin(coin.denom, coin.amount)
-            else:
-                self._cd[coin.denom] = coin + self._cd[coin.denom]
-
-    def __repr__(self) -> str:
-        rstr = ", ".join(f"{c.denom}={c.amount!r}" for c in self.coins)
-        return f"Coins({rstr})"
+    _coins: Dict[str, Coin]
 
     def __str__(self) -> str:
-        return ", ".join(str(coin) for coin in self.coins)
+        return ",".join(str(coin) for coin in self.coins)
+
+    @classmethod
+    def from_str(cls, s: str) -> Coins:
+        coin_strings = s.split(r",\s")
+
+    def __init__(self, arg: Coins.Input = {}, **denoms):
+        if isinstance(args, Coins):
+            self._coins = copy.deepcopy(arg._coins)
+        elif isinstance(args, str):
+            self._coins = Coins.from_string(arg)._coins
+        elif isinstance(args, dict) or isinstance(args, set):
+            coins = [Coin(denom, arg[denom]) for denom in args]
+        else:
+            try:
+                iter(arg)
+            except TypeError:
+                raise TypeError(f"could not create Coins object with argument: {arg}")
+            coins = arg  # expect args to be Iterable[Coin]
+        self._coins = Coins(denoms)._coins
+        for coin in coins:
+            x = _coins.get(coin.denom)
+            if x is not None:
+                self._coins[coin.denom] = x + coin
+            else:
+                self._coins[coin.denom] = coin
+
+        # check the
+        if not all([c.is_dec_coin() for c in self]) and not all(
+            [c.is_int_coin() for c in self]
+        ):
+            raise TypeError(
+                f"non-homogenous instantiation of Coins not supported: {self:s}"
+            )
+
+    def __getitem__(self, denom: str) -> Coin:
+        return self._cd[denom]
+
+    @classmethod
+    def from_data(cls, data: List[Dict[str, str]]) -> Coins:
+        coins = map(Coin.from_data, data)
+        return cls(coins)
 
     def to_data(self) -> List[Dict[str, str]]:
         return [coin.to_data() for coin in self.coins]
 
-    def _pretty_repr_(self, path: str = "") -> str:
-        d = terra_sdkBox({coin.denom: coin.amount for coin in self.coins})
-        return d._pretty_repr_()
+    def denoms(self) -> str:
+        return [c.denom for c in self]
 
-    def __add__(self, other: Union[Coin, Coins]) -> Coins:
-        if other == 0:
-            return Coins(self.coins)
-        elif isinstance(other, Coins):
-            return Coins(self.coins + other.coins)
-        elif isinstance(other, Coin):
-            return Coins(self.coins + [other])
-        else:
-            raise TypeError(
-                f"unsupported operand types for +: 'Coins' and '{type(other)}'"
-            )
+    def to_dec_coins(self) -> Coins:
+        return Coins([c.to_dec_coin() for c in self])
 
-    def __radd__(self, other):
-        return self + other
+    def to_int_coins(self) -> Coins:
+        return Coins([c.to_int_coin() for c in self])
 
     def __mul__(self, other: Union[int, float, Decimal, Dec]) -> Coins:
         return Coins([coin * other for coin in self.coins])
@@ -70,26 +90,9 @@ class Coins:
         else:
             return False
 
-    @classmethod
-    def from_data(cls, data: List[Dict[str, str]]) -> Coins:
-        coins = map(Coin.from_data, data)
-        return cls(coins)
-
-    @property
-    def denoms(self) -> List[str]:
-        return sorted(self._cd.keys())
-
     @property
     def coins(self) -> List[Coin]:
         return sorted(self._cd.values(), key=lambda c: c.denom)
-
-    @property
-    def dec_coins(self) -> Coins:
-        return Coins(c.dec_coin for c in self.coins)
-
-    @property
-    def int_coins(self) -> Coins:
-        return Coins(c.int_coin for c in self.coins)
 
     def filter(self, predicate: Callable[[Coin], bool]) -> Coins:
         return Coins(c for c in self.coins if predicate(c))
@@ -99,11 +102,3 @@ class Coins:
 
     def __contains__(self, denom: str) -> bool:
         return denom in self._cd
-
-    def __getitem__(self, denom: str) -> Coin:
-        return self._cd[denom]
-
-    def __getattr__(self, name: str) -> Coin:
-        if name in self.denoms:
-            return self[name]
-        return self.__getattribute__(name)
