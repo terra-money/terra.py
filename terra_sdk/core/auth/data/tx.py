@@ -1,6 +1,7 @@
 from __future__ import annotations
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core.coins import Coins
+from terra_sdk.util.json import JSONSerializable
 
 import attr
 
@@ -41,7 +42,7 @@ class StdFee:
 
 
 @attr.s
-class StdSignMsg:
+class StdSignMsg(JSONSerializable):
 
     chain_id: str = attr.ib()
     account_number: int = attr.ib()
