@@ -1,14 +1,16 @@
 from __future__ import annotations
 
 import attr
-from .dec import Dec
+import re
+
+from .numeric import Dec, Numeric
 
 
 @attr.s(frozen=True)
 class Coin:
 
     denom: str = attr.ib()
-    amount: int = attr.ib()
+    amount: int = attr.ib(converter=Numeric.parse)
 
     def is_int_coin(self) -> bool:
         return isinstance(self.amount, int)
@@ -24,10 +26,9 @@ class Coin:
 
     def __str__(self) -> str:
         return f"{self.amount}{self.denom}"
-    
+
     def to_data(self) -> dict:
         return {"denom": self.denom, "amount": str(self.amount)}
-    
 
     @classmethod
     def from_str(cls, string: str) -> Coin:
@@ -44,44 +45,48 @@ class Coin:
         else:
             return False
 
-    def __add__(self, other: Union[Numeric.Input, Coin]) -> Coin:
+    def add(self, other: Union[Numeric.Input, Coin]) -> Coin:
         if isinstance(other, Coin):
-            if other.denom !== self.denom:
-                raise ArithmeticError(f"cannot add two Coin objects of different denoms: {self.denom} and {other.denom}")
+            if other.denom != self.denom:
+                raise ArithmeticError(
+                    f"cannot add two Coin objects of different denoms: {self.denom} and {other.denom}"
+                )
             other_amount = other.amount
         else:
             other_amount = other
-        
+
         other_amount = Numeric.parse(other_amount)
         return Coin(self.denom, self.amount + other_amount)
-        
-    def __sub__(self, other: Union[Numeric.Input, Coin]) -> Coin:
+
+    def sub(self, other: Union[Numeric.Input, Coin]) -> Coin:
         if isinstance(other, Coin):
-            if other.denom !== self.denom:
-                raise ArithmeticError(f"cannot subtract two Coin objects of different denoms: {self.denom} and {other.denom}")
+            if other.denom != self.denom:
+                raise ArithmeticError(
+                    f"cannot subtract two Coin objects of different denoms: {self.denom} and {other.denom}"
+                )
             other_amount = other.amount
         else:
             other_amount = other
-        
+
         other_amount = Numeric.parse(other_amount)
         return Coin(self.denom, self.amount - other_amount)
 
-    def __mul__(self, other: Numeric.Input) -> Coin:
+    def mul(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, self.amount * other)
 
     def __rmul__(self, other) -> Coin:
         return self * other
 
-    def __truediv__(self, other) -> Coin:
+    def div(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, (self.amount / other))
-    
+
     def __floordiv__(self, other) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, (self.amount // other))
-    
-    def __mod__(self, other) -> Coin:
+
+    def mod(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, self.amount % other)
 

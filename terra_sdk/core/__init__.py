@@ -1,6 +1,6 @@
 from .coin import Coin
 from .coins import Coins
-from .dec import Dec
+from .numeric import Dec, Numeric
 from .public_key import PublicKey
 from .strings import (
     AccAddress,

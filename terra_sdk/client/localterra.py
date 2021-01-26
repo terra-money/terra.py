@@ -18,6 +18,7 @@ LOCALTERRA_MNEMONICS = {
     "test10": "prefer forget visit mistake mixture feel eyebrow autumn shop pair address airport diesel street pass vague innocent poem method awful require hurry unhappy shoulder",
 }
 
+# TODO: add gas estimation
 LOCALTERRA_DEFAULTS = {"url": "http://localterra:1317", "chain_id": "localterra"}
 
 
@@ -25,8 +26,9 @@ class LocalTerra(LCDClient):
 
     wallets: Dict[str, Wallet]
 
-    def __init__(self, **kwargs):
-        super().__init__(**LOCALTERRA_DEFAULTS, **kwargs)
+    def __init__(self, *args, **kwargs):
+        options = {**LOCALTERRA_DEFAULTS, **kwargs}
+        super().__init__(*args, **options)
         self.wallets = {
             wallet_name: self.wallet(
                 MnemonicKey(mnemonic=LOCALTERRA_MNEMONICS[wallet_name])
