@@ -34,7 +34,7 @@ class ValAddress(str):
         return check_prefix_and_length("terravaloper", data, 51)
 
     @staticmethod
-    def from_val_address(data: str) -> str:
+    def from_acc_address(data: str) -> str:
         vals = bech32_decode(data)
         return bech32_encode("terravaloper", vals[1])
 
@@ -42,7 +42,7 @@ class ValAddress(str):
 class AccPubKey(str):
     @staticmethod
     def validate(data: str) -> bool:
-        return check_prefix_and_length("terrapub", 76)
+        return check_prefix_and_length("terrapub", data, 76)
 
     @staticmethod
     def from_val_pubkey(data: str) -> str:
@@ -56,7 +56,7 @@ class ValPubKey(str):
         return check_prefix_and_length("terravaloperpub", data, 83)
 
     @staticmethod
-    def from_val_address(data: str) -> str:
+    def from_acc_pubkey(data: str) -> str:
         vals = bech32_decode(data)
         return bech32_encode("terravaloperpub", vals[1])
 
