@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core import Coin, Dec
+from terra_sdk.core import Coin, Dec, Coins, AccAddress, ValAddress
 
 __all__ = [
     "ExchangeRatePrevote",
@@ -16,7 +16,7 @@ __all__ = [
 class AggregateExchangeRateVote:
 
     exchange_rate_tuples: Coins = attr.ib(converter=Coins)
-    voter: str = attr.ib()
+    voter: ValAddress = attr.ib()
 
     def to_data(self) -> dict:
         return {

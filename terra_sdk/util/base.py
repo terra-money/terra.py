@@ -2,12 +2,7 @@
 
 from typing import Any
 
-
-def to_data(x: Any) -> Any:
-    if "to_data" in dir(x):
-        return x.to_data()
-    else:
-        return x
+from .json import dict_to_data
 
 
 class BaseTerraData(object):
@@ -18,14 +13,5 @@ class BaseTerraData(object):
         if "object_value" in dir(self):
             value = self.object_value()
         else:
-            value = {
-                key: to_data(self.__dict__[key])
-                for key in self.__dict__
-            }
-        return {
-            "type": self.type,
-            "value": {
-                key: to_data(self.__dict__[key])
-                for key in self.__dict__
-            }
-        }
+            value = dict_to_data(self.__dict__)
+        return {"type": self.type, "value": dict_to_data(self.__dict__)}

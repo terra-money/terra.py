@@ -4,6 +4,7 @@ import hashlib
 
 import attr
 
+from terra_sdk.core import Dec, Coin
 from terra_sdk.core.msg import Msg
 
 
@@ -58,11 +59,10 @@ class MsgExchangeRateVote(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgExchangeRateVote:
         data = data["value"]
-        xr = Coin(data["denom"], data["exchange_rate"])
         return cls(
-            exchange_rate=xr,
+            exchange_rate=data["exchange_rate"],
             salt=data["salt"],
-            denom=xr.denom,
+            denom=data["denom"],
             feeder=data["feeder"],
             validator=data["validator"],
         )

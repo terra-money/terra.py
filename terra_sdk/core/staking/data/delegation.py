@@ -3,6 +3,7 @@ from __future__ import annotations
 import attr
 
 from terra_sdk.core import Dec, Coin, AccAddress, ValAddress
+from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
     "Delegation",
@@ -14,20 +15,12 @@ __all__ = [
 
 
 @attr.s
-class Delegation:
+class Delegation(JSONSerializable):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     shares: Dec = attr.ib(converter=Dec)
     balance: Coin = attr.ib(converter=Coin.parse)
-
-    def to_data(self) -> dict:
-        return {
-            "delegator_address": self.delegator_address,
-            "validator_address": self.validator_address,
-            "shares": str(self.shares),
-            "balance": self.balance.to_data(),
-        }
 
     @classmethod
     def from_data(cls, data: dict) -> Delegation:
@@ -40,7 +33,7 @@ class Delegation:
 
 
 @attr.s
-class UnbondingEntry:
+class UnbondingEntry(JSONSerializable):
 
     initial_balance: int = attr.ib(converter=int)
     balance: int = attr.ib(converter=int)
@@ -66,18 +59,11 @@ class UnbondingEntry:
 
 
 @attr.s
-class UnbondingDelegation:
+class UnbondingDelegation(JSONSerializable):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     entries: List[UnbondingEntry] = attr.ib()
-
-    def to_data(self) -> dict:
-        return {
-            "delegator_address": self.delegator_address,
-            "validator_address": self.validator_address,
-            "entries": [ue.to_data() for ue in self.entries],
-        }
 
     @classmethod
     def from_data(cls, data) -> UnbondingDelegation:
@@ -90,7 +76,7 @@ class UnbondingDelegation:
 
 
 @attr.s
-class RedelegationEntry:
+class RedelegationEntry(JSONSerializable):
 
     initial_balance: int = attr.ib(converter=int)
     balance: int = attr.ib(converter=int)
@@ -119,20 +105,12 @@ class RedelegationEntry:
 
 
 @attr.s
-class Redelegation:
+class Redelegation(JSONSerializable):
 
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
     validator_dst_address: ValAddress = attr.ib()
     entries: List[RedelegationEntry] = attr.ib()
-
-    def to_data(self) -> dict:
-        return {
-            "delegator_address": self.delegator_address,
-            "validator_src_address": self.validator_src_address,
-            "validator_dst_address": self.validator_dst_address,
-            "entries": [re.to_data() for re in self.entries],
-        }
 
     @classmethod
     def from_data(cls, data: dict) -> Redelegation:

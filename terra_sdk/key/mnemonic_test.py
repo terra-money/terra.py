@@ -34,10 +34,10 @@ def test_signature():
     send = MsgSend(
         mk.acc_address,
         "terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv",
-        Coins(uluna="100000000"),
+        dict(uluna="100000000"),
     )
 
-    fee = StdFee(46467, Coins(uluna="698"))
+    fee = StdFee(46467, dict(uluna=698))
 
     stdsignmsg = StdSignMsg("columbus-3-testnet", 45, 0, fee, [send], "")
     signature = mk.create_signature(stdsignmsg).signature

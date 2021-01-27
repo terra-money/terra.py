@@ -4,13 +4,13 @@ from pathlib import Path
 import json
 
 
-def _load(pathlocal, file):
-    return json.load(open(Path(pathlocal).parent / file))
+def _load(file):
+    return json.load(open(Path(__file__).parent / "data" / file))
 
 
-def _load_msg_examples(msgtype, pathlocal, file):
+def _load_msg_examples(msgtype, file):
     examples = []
-    data = _load(pathlocal, file)
+    data = _load(file)
     for tx_info in data["txs"]:
         for msg in tx_info["tx"]["value"]["msg"]:
             if msg["type"] == msgtype:
