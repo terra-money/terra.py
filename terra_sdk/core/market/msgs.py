@@ -26,3 +26,25 @@ class MsgSwap(Msg):
             offer_coin=Coin.from_data(data["offer_coin"]),
             ask_denom=data["ask_denom"],
         )
+
+
+@attr.s
+class MsgSwap(Msg):
+
+    type = "market/MsgSwapSend"
+    action = "swapsend"
+
+    from_address: AccAddress = attr.ib()
+    to_address: AccAddress = attr.ib()
+    offer_coin: Coin = attr.ib(converter=Coin.parse)
+    ask_denom: str = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgSwapSend:
+        data = data["value"]
+        return cls(
+            from_address=data["from_address"],
+            to_address=data["to_address"],
+            offer_coin=Coin.from_data(data["offer_coin"]),
+            ask_denom=data["ask_denom"],
+        )

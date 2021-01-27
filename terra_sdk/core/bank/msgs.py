@@ -21,11 +21,10 @@ class MsgSend(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgSend:
         data = data["value"]
-        amount = Coins.from_data(data["amount"])
         return cls(
             from_address=data["from_address"],
             to_address=data["to_address"],
-            amount=amount,
+            amount=Coins.from_data(data["amount"]),
         )
 
 

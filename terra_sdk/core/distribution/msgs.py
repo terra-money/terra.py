@@ -9,6 +9,7 @@ __all__ = [
     "MsgModifyWithdrawAddress",
     "MsgWithdrawDelegationReward",
     "MsgWithdrawValidatorCommission",
+    "MsgFundCommunityPool",
 ]
 
 
@@ -60,3 +61,17 @@ class MsgWithdrawValidatorCommission(Msg):
     def from_data(cls, data: dict) -> MsgWithdrawValidatorCommission:
         data = data["value"]
         return cls(validator_address=data["validator_address"])
+
+
+@attr.s
+class MsgFundCommunityPool(Msg):
+
+    type = "distribution/MsgFundCommunityPool"
+
+    depositor: AccAddress = attr.ib()
+    amount: Coins = attr.ib(converter=Coins)
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgFundCommunityPool:
+        data = data["value"]
+        return cls(depositor=data["depositor"], amount=Coins.from_data(data["amount"]))
