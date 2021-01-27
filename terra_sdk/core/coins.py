@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from .coin import Coin
+from typing import Dict, Iterable, Union
 import copy
-from typing import Dict, Iterable
+
+from .coin import Coin
+from .numeric import Numeric
 
 import attr
 
 
 class Coins:
 
-    Input = Union[Iterable[Coin], str, Dict[str, Coin.Input]]
+    Input = Union[Iterable[Coin], str, Dict[str, Numeric.Input], Dict[str, Coin]]
 
     _coins: Dict[str, Coin]
 

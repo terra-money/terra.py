@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core import Coins
+
 __all__ = ["Account"]
 
 
@@ -28,11 +30,12 @@ class Account:
         }
 
     @classmethod
-    def from_data(cls, data: dict) -> "Account":
+    def from_data(cls, data: dict) -> Account:
+        data = data["value"]
         return cls(
             address=data["address"],
             coins=Coins.from_data(data["coins"]),
-            public_key=pk,
+            public_key=PublicKey.from_data(data["public_key"]),
             account_number=data["account_number"],
             sequence=data["sequence"],
         )
