@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core import Coins
+
 __all__ = ["CommunityPoolSpendProposal"]
 
 
@@ -10,10 +12,10 @@ class CommunityPoolSpendProposal:
 
     type = "distribution/CommunityPoolSpendProposal"
 
-    title: str
-    description: str
-    recipient: AccAddress
-    amount: Coins
+    title: str = attr.ib()
+    description: str = attr.ib()
+    recipient: AccAddress = attr.ib()
+    amount: Coins = attr.ib(converter=Coins)
 
     @classmethod
     def from_data(cls, data: dict) -> CommunityPoolSpendProposal:

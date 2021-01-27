@@ -2,15 +2,14 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.core.msg import Msg
 
 __all__ = ["MsgUnjail"]
 
-
 @attr.s
-class MsgUnjail(BaseTerraData):
+class MsgUnjail(Msg):
 
-    type = "cosmos/MsgUnjail"
+    type = "slashing/MsgUnjail"
     action = "unjail"
 
     address: ValAddress = attr.ib()

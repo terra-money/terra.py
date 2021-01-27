@@ -12,6 +12,15 @@ class Coin:
     denom: str = attr.ib()
     amount: int = attr.ib(converter=Numeric.parse)
 
+    @staticmethod
+    def parse(arg: Union[Coin, str, dict]) -> Coin:
+        if isinstance(arg, Coin):
+            return arg
+        elif isinstance(arg, str):
+            return Coin.from_str(arg)
+        else:
+            return Coin.from_data(arg)
+
     def is_int_coin(self) -> bool:
         return isinstance(self.amount, int)
 

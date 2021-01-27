@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.core import Coin
+from terra_sdk.core.msg import Msg
 
 
 @attr.s
-class MsgBeginRedelegate(BaseTerraData):
+class MsgBeginRedelegate(Msg):
 
     type = "staking/MsgBeginRedelegate"
     action = "begin_redelegate"
@@ -14,7 +15,7 @@ class MsgBeginRedelegate(BaseTerraData):
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
     validator_dst_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib()
+    amount: Coin = attr.ib(converter=Coin.parse)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgBeginRedelegate:
@@ -28,14 +29,14 @@ class MsgBeginRedelegate(BaseTerraData):
 
 
 @attr.s
-class MsgDelegate(BaseTerraData):
+class MsgDelegate(Msg):
 
     type = "staking/MsgDelegate"
     action = "delegate"
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.lib()
+    amount: Coin = attr.ib(converter=Coin.parse)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegate:
@@ -48,14 +49,14 @@ class MsgDelegate(BaseTerraData):
 
 
 @attr.s
-class MsgUndelegate(BaseTerraData):
+class MsgUndelegate(Msg):
 
     type = "staking/MsgUndelegate"
     action = "begin_unbonding"
 
-    delegator_address: AccAddress
-    validator_address: ValAddress
-    amount: Coin
+    delegator_address: AccAddress = attr.ib()
+    validator_address: ValAddress = attr.ib()
+    amount: Coin = attr.ib(converter=Coin.parse)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUndelegate:
@@ -68,15 +69,15 @@ class MsgUndelegate(BaseTerraData):
 
 
 @attr.s
-class MsgEditValidator(BaseTerraData):
+class MsgEditValidator(Msg):
 
     type = "staking/MsgEditValidator"
     action = "edit_validator"
 
     Description: Description = attr.ib()
     address: ValAddress = attr.ib()
-    commission_rate: Optional[Dec] = attr.ib()
-    min_self_delegation: Optional[int] = attr.ib()
+    commission_rate: Optional[Dec] = attr.ib(default=None)
+    min_self_delegation: Optional[int] = attr.ib(default=None)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgEditValidator:
@@ -92,7 +93,7 @@ class MsgEditValidator(BaseTerraData):
 
 
 @attr.s
-class MsgCreateValidator(BaseTerraData):
+class MsgCreateValidator(Msg):
 
     type = "staking/MsgCreateValidator"
     action = "create_validator"
@@ -103,7 +104,7 @@ class MsgCreateValidator(BaseTerraData):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     pubkey: ValConsPubKey = attr.ib()
-    value: Coin = attr.ib()
+    value: Coin = attr.ib(converter=Coin.parse)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgCreateValidator:

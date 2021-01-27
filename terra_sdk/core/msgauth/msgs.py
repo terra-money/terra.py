@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from terra_sdk.util.base import BaseTerraData
-
+from terra_sdk.core.msg import Msg
 import attr
 
 __all__ = ["MsgExecAuthorized", "MsgGrantAuthorization", "MsgRevokeAuthorization"]
 
 
 @attr.s
-class MsgExecAuthorized(BaseTerraData):
+class MsgExecAuthorized(Msg):
     type = "msgauth/MsgExecAuthorized"
 
     grantee: AccAddress = attr.ib()
@@ -16,7 +15,7 @@ class MsgExecAuthorized(BaseTerraData):
 
 
 @attr.s
-class MsgGrantAuthorization(BaseTerraData):
+class MsgGrantAuthorization(Msg):
     type = "msgauth/MsgGrantAuthorization"
 
     granter: AccAddress = attr.ib()
@@ -26,7 +25,7 @@ class MsgGrantAuthorization(BaseTerraData):
 
 
 @attr.s
-class MsgRevokeAuthorization(BaseTerraData):
+class MsgRevokeAuthorization(Msg):
     type = "msgauth/MsgRevokeAuthorization"
 
     granter: AccAddress = attr.ib()

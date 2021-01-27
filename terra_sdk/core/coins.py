@@ -2,12 +2,14 @@ from __future__ import annotations
 
 from .coin import Coin
 import copy
-from typing import Dict
+from typing import Dict, Iterable
 
 import attr
 
 
 class Coins:
+
+    Input = Union[Iterable[Coin], str, Dict[str, Coin.Input]]
 
     _coins: Dict[str, Coin]
 
@@ -47,7 +49,7 @@ class Coins:
             else:
                 self._coins[coin.denom] = coin
 
-        # check the
+        # check homogeneous
         if not all([c.is_dec_coin() for c in self]) and not all(
             [c.is_int_coin() for c in self]
         ):

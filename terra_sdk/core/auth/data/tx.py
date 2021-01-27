@@ -26,8 +26,8 @@ class StdSignature:
 @attr.s
 class StdFee:
 
-    gas: int = attr.ib()
-    amount: Coins = attr.ib()
+    gas: int = attr.ib(converter=int)
+    amount: Coins = attr.ib(converter=Coins)
 
     @classmethod
     def from_data(cls, data: dict) -> StdFee:
@@ -45,8 +45,8 @@ class StdFee:
 class StdSignMsg(JSONSerializable):
 
     chain_id: str = attr.ib()
-    account_number: int = attr.ib()
-    sequence: int = attr.ib()
+    account_number: int = attr.ib(converter=int)
+    sequence: int = attr.ib(converter=int)
     fee: StdFee = attr.ib()
     msgs: List[Msg] = attr.ib()
     memo: str = attr.ib()
@@ -79,7 +79,7 @@ class StdSignMsg(JSONSerializable):
 @attr.s
 class StdTx:
 
-    msg: List[StdMsg] = attr.ib()
+    msg: List[Msg] = attr.ib()
     fee: StdFee = attr.ib()
     signatures: List[StdSignature] = attr.ib()
     memo: str = attr.ib()
@@ -109,15 +109,15 @@ class StdTx:
 @attr.s
 class TxInfo:
 
-    height: int = attr.ib()
+    height: int = attr.ib(converter=int)
     txhash: str = attr.ib()
-    rawlog: string = attr.ib()
+    rawlog: str = attr.ib()
     logs: Optional[List[TxLog]] = attr.ib()
-    gas_wanted: int = attr.ib()
-    gas_used: int = attr.ib()
+    gas_wanted: int = attr.ib(converter=int)
+    gas_used: int = attr.ib(converter=int)
     timestamp: str = attr.ib()
-    code: Optional[int] = attr.ib()
-    codespace: Optional[int] = attr.ib()
+    code: Optional[int] = attr.ib(default=None)
+    codespace: Optional[str] = attr.ib(default=None)
 
     def to_data(self) -> dict:
         data = {
@@ -144,12 +144,12 @@ class TxInfo:
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
         return cls(
-            int(data["height"]),
+            data["height"],
             data["txhash"],
             data["raw_log"],
             [TxLog.from_data(l) for l in data.get("logs")],
-            int(data["gas_wanted"]),
-            int(data["gas_used"]),
+            data["gas_wanted"],
+            data["gas_used"],
             StdTx.from_data(data["tx"]),
             data["timestamp"],
             data.get("code"),

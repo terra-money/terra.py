@@ -2,20 +2,20 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.core.msg import Msg
 
 
 __all__ = ["MsgSwap", "MsgSwapSend"]
 
 
 @attr.s
-class MsgSwap(BaseTerraData):
+class MsgSwap(Msg):
 
     type = "market/MsgSwap"
     action = "swap"
 
     trader: AccAddress = attr.ib()
-    offer_coin: Coin = attr.ib()
+    offer_coin: Coin = attr.ib(converter=Coin.parse)
     ask_denom: str = attr.ib()
 
     @classmethod

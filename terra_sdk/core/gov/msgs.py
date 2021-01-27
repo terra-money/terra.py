@@ -2,26 +2,28 @@ from __future__ import annotations
 import attr
 
 import attr
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.core.content import Content
+from terra_sdk.core.msg import Msg
+from terra_sdk.util.parse_content import parse_content
 
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 
 @attr.s
-class MsgSubmitProposal(BaseTerraData):
+class MsgSubmitProposal(Msg):
 
     type = "gov/MsgSubmitProposal"
     action = "submit_proposal"
 
-    content: str = attr.ib()
-    initial_deposit: Coins = attr.ib()
+    content: Content = attr.ib()
+    initial_deposit: Coins = attr.ib(converter=Coins)
     proposer: AccAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
         data = data["value"]
-        content = p_type.from_data(data["content"])
+        content = parse_content(data["content"])
         return cls(
             content=content,
             initial_deposit=Coins.from_data(data["initial_deposit"]),
@@ -30,27 +32,27 @@ class MsgSubmitProposal(BaseTerraData):
 
 
 @attr.s
-class MsgDeposit(BaseTerraData):
+class MsgDeposit(Msg):
 
     type = "gov/MsgDeposit"
     action = "deposit"
 
-    proposal_id: int = attr.ib()
+    proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
-    amount: Coins = attr.ib()
+    amount: Coins = attr.ib(converter=Coins)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDeposit:
         data = data["value"]
         return cls(
-            proposal_id=int(data["proposal_id"]),
+            proposal_id=data["proposal_id"],
             depositor=data["depositor"],
             amount=Coins.from_data(data["amount"]),
         )
 
 
 @attr.s
-class MsgVote(BaseTerraData):
+class MsgVote(Msg):
 
     type = "gov/MsgVote"
     action = "vote"
@@ -61,15 +63,29 @@ class MsgVote(BaseTerraData):
     NO = "No"
     NO_WITH_VETO = "NoWithVeto"
 
-    proposal_id: int = attr.ib()
+    proposal_id: int = attr.ib(converter=int)
     voter: AccAddress = attr.ib()
     option: str = attr.ib()
+
+    @option.validator
+    def _check_option(self, attribute, value):
+        possible_options = [
+            self.EMPTY,
+            self.YES,
+            self.ABSTAIN,
+            self.NO,
+            self.NO_WITH_VETO,
+        ]
+        if value not in possible_options:
+            raise TypeError(
+                f"incorrect value for option: {value}, must be one of: {possible_options}"
+            )
 
     @classmethod
     def from_data(cls, data: dict) -> MsgVote:
         data = data["value"]
         return cls(
-            proposal_id=int(data["proposal_id"]),
+            proposal_id=data["proposal_id"],
             voter=data["voter"],
             option=data["option"],
         )

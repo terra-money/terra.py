@@ -6,14 +6,14 @@ __all__ = ["Account"]
 
 
 @attr.s
-class Account():
+class Account:
     """Stores information about an account fetched from the blockchain."""
 
     address: str = attr.ib()
-    coins: Coins = attr.ib()
+    coins: Coins = attr.ib(converter=Coins)
     public_key: PublicKey = attr.ib()
-    account_number: int = attr.ib()
-    sequence: int = attr.ib()
+    account_number: int = attr.ib(converter=int)
+    sequence: int = attr.ib(converter=int)
 
     def to_data(self) -> dict:
         return {
@@ -23,8 +23,8 @@ class Account():
                 "coins": self.coins.to_data(),
                 "public_key": self.public_key.to_data(),
                 "account_number": str(self.account_number),
-                "sequence": str(self.sequence)
-            }
+                "sequence": str(self.sequence),
+            },
         }
 
     @classmethod

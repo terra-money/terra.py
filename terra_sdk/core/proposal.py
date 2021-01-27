@@ -5,6 +5,7 @@ from .coins import Coins
 
 __all__ = ["Proposal"]
 
+
 @attr.s
 class Proposal:
 
@@ -14,7 +15,7 @@ class Proposal:
     final_tally_result: dict = attr.ib()
     submit_time: Date = attr.ib()
     deposit_end_time: Date = attr.ib()
-    total_deposit: Coins = attr.ib()
+    total_deposit: Coins = attr.ib(converter=Coins)
     voting_start_time: Date = attr.ib()
     voting_end_time: Date = attr.ib()
 

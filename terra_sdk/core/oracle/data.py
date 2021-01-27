@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core.coin import Coin
-from terra_sdk.core.dec import Dec
+from terra_sdk.core import Coin, Dec
 
 __all__ = [
     "ExchangeRatePrevote",
@@ -16,7 +15,7 @@ __all__ = [
 @attr.s
 class AggregateExchangeRateVote:
 
-    exchange_rate_tuples: Coins = attr.ib()
+    exchange_rate_tuples: Coins = attr.ib(converter=Coins)
     voter: str = attr.ib()
 
     def to_data(self) -> dict:
@@ -42,8 +41,8 @@ class AggregateExchangeRateVote:
 class AggregateExchangeRatePrevote:
 
     hash: str = attr.ib()
-    voter: str = attr.ib()
-    submit_block: int = attr.ib()
+    voter: ValAddress = attr.ib()
+    submit_block: int = attr.ib(converter=int)
 
     def to_data(self) -> dict:
         return {
@@ -64,9 +63,9 @@ class AggregateExchangeRatePrevote:
 @attr.s
 class ExchangeRateVote:
 
-    exchange_rate: Coin = attr.ib()
+    exchange_rate: Coin = attr.ib(converter=Coin.parse)
     denom: str = attr.ib()
-    voter: str = attr.ib()
+    voter: ValAddress = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -84,9 +83,9 @@ class ExchangeRateVote:
 @attr.s
 class ExchangeRateVote:
 
-    exchange_rate: Coin = attr.ib()
+    exchange_rate: Coin = attr.ib(converter=Coin.parse)
     denom: str = attr.ib()
-    voter: str = attr.ib()
+    voter: ValAddress = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -106,8 +105,8 @@ class ExchangeRatePrevote:
 
     hash: str = attr.ib()
     denom: str = attr.ib()
-    voter: str = attr.ib()
-    submit_block: int = attr.ib()
+    voter: ValAddress = attr.ib()
+    submit_block: int = attr.ib(converter=int)
 
     def to_data(self) -> Dict[str, str]:
         return {

@@ -3,7 +3,7 @@ from __future__ import annotations
 import attr
 
 from terra_sdk.core.strings import AccAddress, ValAddress
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.msg import Msg
 
 __all__ = [
     "MsgModifyWithdrawAddress",
@@ -13,7 +13,7 @@ __all__ = [
 
 
 @attr.s
-class MsgModifyWithdrawAddress(BaseTerraData):
+class MsgModifyWithdrawAddress(Msg):
 
     type = "distribution/MsgModifyWithdrawAddress"
     action = "set_withdraw_address"
@@ -31,7 +31,7 @@ class MsgModifyWithdrawAddress(BaseTerraData):
 
 
 @attr.s
-class MsgWithdrawDelegationReward(BaseTerraData):
+class MsgWithdrawDelegationReward(Msg):
 
     type = "distribution/MsgWithdrawDelegationReward"
     action = "withdraw_delegation_reward"
@@ -49,7 +49,7 @@ class MsgWithdrawDelegationReward(BaseTerraData):
 
 
 @attr.s
-class MsgWithdrawValidatorCommission(BaseTerraData):
+class MsgWithdrawValidatorCommission(Msg):
 
     type = "distribution/MsgWithdrawValidatorCommission"
     action = "withdraw_validator_commission"

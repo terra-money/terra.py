@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from terra_sdk.core.coin import Coin
-from terra_sdk.core.coins import Coins
-from terra_sdk.util.base import BaseTerraData
+from terra_sdk.core import Coin, Coins
+from terra_sdk.util.base import Msg
 
 __all__ = ["MsgSend", "MsgMultiSend"]
 
@@ -10,14 +9,14 @@ import attr
 
 
 @attr.s
-class MsgSend(BaseTerraData):
+class MsgSend(Msg):
 
     type = "bank/MsgSend"
     action = "send"
 
-    from_address: str = attr.ib()
-    to_address: str = attr.ib()
-    amount: Coins = attr.ib()
+    from_address: AccAddress = attr.ib()
+    to_address: AccAddress = attr.ib()
+    amount: Coins = attr.ib(converter=Coins)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSend:
@@ -31,7 +30,7 @@ class MsgSend(BaseTerraData):
 
 
 @attr.s
-class MsgMultiSend:
+class MsgMultiSend(Msg):
 
     type = "bank/MsgMultiSend"
     action = "multisend"
