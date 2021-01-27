@@ -1,8 +1,0 @@
-__title__ = "terra-sdk"
-__description__ = "Python SDK for Terra"
-__url__ = "https://docs.terra.money/sdk"
-__version__ = "1.0.0"
-__author__ = "Terraform Labs, PTE. LTD"
-__author_email__ = "engineering@terra.money"
-__license__ = "MIT"
-__copyright__ = "Copyright 2021 Terraform Labs, PTE. LTD"

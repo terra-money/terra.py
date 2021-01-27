@@ -1,2 +1,2 @@
 from .msgs import *
-from .proposals import *
+from .data import *

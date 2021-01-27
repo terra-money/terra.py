@@ -3,7 +3,7 @@ from __future__ import annotations
 import attr
 
 from terra_sdk.core.strings import AccAddress, ValAddress
-from terra_sdk.msg import Msg
+from terra_sdk.core.msg import Msg
 
 __all__ = [
     "MsgModifyWithdrawAddress",

@@ -35,6 +35,7 @@ class MsgMultiSend(Msg):
     type = "bank/MsgMultiSend"
     action = "multisend"
 
+    # TODO: improve interface - match terra.js
     inputs = attr.ib()
     outputs = attr.ib()
 
@@ -42,6 +43,6 @@ class MsgMultiSend(Msg):
     def from_data(cls, data: dict) -> MsgMultiSend:
         data = data["value"]
         return cls(
-            inputs=[Input.from_data(i) for i in data["inputs"]],
-            outputs=[Output.from_data(o) for o in data["outputs"]],
+            inputs=data["inputs"],
+            outputs=data["outputs"],
         )

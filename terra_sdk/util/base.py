@@ -2,10 +2,10 @@
 
 from typing import Any
 
-from .json import dict_to_data
+from .json import dict_to_data, JSONSerializable
 
 
-class BaseTerraData(object):
+class BaseTerraData(JSONSerializable):
 
     type: str
 

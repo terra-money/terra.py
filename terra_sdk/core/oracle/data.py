@@ -3,6 +3,7 @@ from __future__ import annotations
 import attr
 
 from terra_sdk.core import Coin, Dec, Coins, AccAddress, ValAddress
+from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
     "ExchangeRatePrevote",
@@ -13,7 +14,7 @@ __all__ = [
 
 
 @attr.s
-class AggregateExchangeRateVote:
+class AggregateExchangeRateVote(JSONSerializable):
 
     exchange_rate_tuples: Coins = attr.ib(converter=Coins)
     voter: ValAddress = attr.ib()
@@ -38,7 +39,7 @@ class AggregateExchangeRateVote:
 
 
 @attr.s
-class AggregateExchangeRatePrevote:
+class AggregateExchangeRatePrevote(JSONSerializable):
 
     hash: str = attr.ib()
     voter: ValAddress = attr.ib()
@@ -61,7 +62,7 @@ class AggregateExchangeRatePrevote:
 
 
 @attr.s
-class ExchangeRateVote:
+class ExchangeRateVote(JSONSerializable):
 
     exchange_rate: Coin = attr.ib(converter=Coin.parse)
     denom: str = attr.ib()
@@ -81,7 +82,7 @@ class ExchangeRateVote:
 
 
 @attr.s
-class ExchangeRateVote:
+class ExchangeRateVote(JSONSerializable):
 
     exchange_rate: Coin = attr.ib(converter=Coin.parse)
     denom: str = attr.ib()
@@ -101,7 +102,7 @@ class ExchangeRateVote:
 
 
 @attr.s
-class ExchangeRatePrevote:
+class ExchangeRatePrevote(JSONSerializable):
 
     hash: str = attr.ib()
     denom: str = attr.ib()

@@ -2,9 +2,8 @@ from __future__ import annotations
 import attr
 
 import attr
-from terra_sdk.core.content import Content
+from .data import Content
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.parse_content import parse_content
 
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
