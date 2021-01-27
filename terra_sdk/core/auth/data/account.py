@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core import Coins
+from terra_sdk.core import Coins, PublicKey
 
 __all__ = ["Account"]
 

@@ -40,7 +40,7 @@ class Coins:
             return
 
         self._coins = Coins(denoms)._coins if denoms else {}
-        if isinstance(arg, dict) or isinstance(args, set):
+        if isinstance(arg, dict) or isinstance(arg, set):
             coins = [Coin(denom, arg[denom]) for denom in arg]
         else:
             coins = arg
