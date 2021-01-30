@@ -29,8 +29,6 @@ class TxAPI(BaseAPI):
             balance_one = [Coin(c.denom, 1) for c in balance]
 
             # estimate the fee
-            gas_prices = gas_prices or self._c.gas_prices
-            gas_adjustment = gas_adjustment or self._c.gas_prices
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
             fee = await self.estimate_fee(tx, gas_prices, gas_adjustment)
 
@@ -39,7 +37,7 @@ class TxAPI(BaseAPI):
             if account_number is None:
                 account_number = account.account_number
             if sequence is None:
-                sequnce = account.sequence
+                sequence = account.sequence
 
         return StdSignMsg(
             self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
@@ -52,7 +50,7 @@ class TxAPI(BaseAPI):
         gas_adjustment: Optional[Numeric.Input] = None,
     ) -> StdTx:
         gas_prices = gas_prices or self._c.gas_prices
-        gas_adjustment = gas_adjustment or self._c.gas_prices
+        gas_adjustment = gas_adjustment or self._c.gas_adjustment
 
         if isinstance(tx, StdSignMsg):
             tx_value = tx.to_stdtx().to_data()["value"]

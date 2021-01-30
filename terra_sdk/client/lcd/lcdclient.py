@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import json
 from typing import Dict, Optional, Union
 
 from terra_sdk.core import Coins, Numeric
@@ -33,8 +33,8 @@ class LCDClient:
         self,
         url: str,
         chain_id: str = None,
-        gas_adjustment: Numeric.Input = None,
         gas_prices: Coins.Input = None,
+        gas_adjustment: Numeric.Input = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
 
@@ -44,8 +44,8 @@ class LCDClient:
         self.session = ClientSession(headers={"Accept": "application/json"}, loop=loop)
         self.chain_id = chain_id
         self.url = url
-        self.gas_adjustment = gas_adjustment
         self.gas_prices = Coins(gas_prices)
+        self.gas_adjustment = gas_adjustment
         self._last_request_height = None
 
         self.auth = AuthAPI(self)
@@ -91,7 +91,6 @@ class LCDClient:
             self._last_request_height = result["height"]
         except KeyError:
             self._last_request_height = None
-        print(result)
         return result if raw else result["result"]
 
     async def __aenter__(self):
