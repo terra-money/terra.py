@@ -1,7 +1,9 @@
+from __future__ import annotations
 import attr
 import copy
 
 from terra_sdk.core import Coin, Coins
+from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 
 __all__ = ["Proposal"]
