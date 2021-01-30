@@ -46,6 +46,7 @@ pytest-sugar = "^0.9.4"
 pytest-mock = "^3.5.1"
 black = "^20.8b1"
 isort = "^5.7.0"
+pytest-cov = "^2.11.1"
 
 
 [tool.tox]

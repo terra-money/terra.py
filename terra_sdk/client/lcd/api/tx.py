@@ -4,6 +4,7 @@ from typing import List, Optional, Union
 __all__ = ["TxAPI"]
 
 from terra_sdk.core.auth import *
+from terra_sdk.core.broadcast import *
 from terra_sdk.core import Numeric, Coins, Coin
 from terra_sdk.core.msg import Msg
 
@@ -82,15 +83,33 @@ class TxAPI(BaseAPI):
 
     async def broadcast_sync(self, tx: StdTx):
         res = await self._broadcast(tx, "sync")
-        return res
+        return SyncTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+            raw_log=res["raw_log"],
+            code=res.get("code"),
+            codespace=res.get("codespace"),
+        )
 
     async def broadcast_async(self, tx: StdTx):
         res = await self._broadcast(tx, "async")
-        return res
+        return AsyncTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+        )
 
     async def broadcast(self, tx: StdTx):
         res = await self._broadcast(tx, "block")
-        return res
+        return BlockTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+            raw_log=res["raw_log"],
+            gas_wanted=res["gas_wanted"],
+            gas_used=res["gas_used"],
+            logs=res.get("logs"),
+            code=res.get("code"),
+            codespace=res.get("codespace"),
+        )
 
     async def search(self, options: dict = {}) -> dict:
         res = await self._c._get("/txs", options, raw=True)

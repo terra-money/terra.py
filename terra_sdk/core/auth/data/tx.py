@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+from collections import defaultdict
+
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core.coins import Coins
 from terra_sdk.util.json import JSONSerializable
@@ -103,6 +106,30 @@ class StdTx(JSONSerializable):
         )
 
 
+def parse_events_by_type(event_data: List[dict]) -> Dict[str, Dict[str, List[str]]]:
+    events = {}
+    for ev in event_data:
+        for att in ev["attributes"]:
+            if ev["type"] not in events:
+                events[ev["type"]] = {}
+            if att["key"] not in events[ev["type"]]:
+                events[ev["type"]][att["key"]] = []
+            events[ev["type"]][att["key"]].append(att["value"])
+    return events
+
+
+@attr.s
+class TxLog(JSONSerializable):
+
+    msg_index: int = attr.ib(converter=int)
+    log: str = attr.ib()
+    events: List[dict] = attr.ib()
+    events_by_type: Dict[str, Dict[str, List[str]]] = attr.ib(init=False)
+
+    def __attrs_post_init__(self):
+        self.events_by_type = parse_events_by_type(self.events)
+
+
 @attr.s
 class TxInfo(JSONSerializable):
 
@@ -144,7 +171,7 @@ class TxInfo(JSONSerializable):
             data["height"],
             data["txhash"],
             data["raw_log"],
-            [TxLog.from_data(l) for l in data.get("logs")],
+            [TxLog(**l) for l in data.get("logs")],
             data["gas_wanted"],
             data["gas_used"],
             StdTx.from_data(data["tx"]),

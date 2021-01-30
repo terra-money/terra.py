@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import attr
+import copy
+import json
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
@@ -27,7 +29,7 @@ def b64_to_dict(data: str) -> dict:
 
 def dict_to_b64(data: dict) -> str:
     """Converts dict to ASCII-encoded base64 encoded string."""
-    return b64encode(json.dumps(data)).decode("ascii")
+    return b64encode(bytes(json.dumps(data), "ascii")).decode()
 
 
 @attr.s
