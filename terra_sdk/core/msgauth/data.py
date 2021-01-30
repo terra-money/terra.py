@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-import attrs
+import attr
+from terra_sdk.core import Coins
+from terra_sdk.util.base import BaseTerraData, create_demux
 from terra_sdk.util.json import JSONSerializable
 
 
@@ -8,12 +10,32 @@ class Authorization(BaseTerraData):
     pass
 
 
+@attr.s
 class SendAuthorization(Authorization):
     type = "msgauth/SendAuthorization"
 
+    spend_limit: Coins = attr.ib(converter=Coins)
 
+    @classmethod
+    def from_data(cls, data: dict) -> SendAuthorization:
+        data = data["value"]
+        return cls(spend_limit=Coins.from_data(data["spend_limit"]))
+
+
+@attr.s
 class GenericAuthorization(Authorization):
-    type = "msgauth/SendAuthorization"
+    type = "msgauth/GenericAuthorization"
+
+    grant_msg_type: str = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> GenericAuthorization:
+        data = data["value"]
+        return cls(grant_msg_type=data["grant_msg_type"])
+
+
+authorization_types = [SendAuthorization, GenericAuthorization]
+parse_authorization = create_demux(authorization_types)
 
 
 @attr.s
@@ -25,6 +47,6 @@ class AuthorizationGrant(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> AuthorizationGrant:
         return cls(
-            authorization=Authorization.from_data(data["authorization"]),
+            authorization=parse_authorization(data["authorization"]),
             expiration=data["expiration"],
         )

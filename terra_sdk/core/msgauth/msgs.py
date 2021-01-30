@@ -1,6 +1,9 @@
 from __future__ import annotations
-
+import copy
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.json import dict_to_data
+from .data import parse_authorization
+
 import attr
 
 __all__ = ["MsgExecAuthorized", "MsgGrantAuthorization", "MsgRevokeAuthorization"]
@@ -15,6 +18,8 @@ class MsgExecAuthorized(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
+        from terra_sdk.util.parse_msg import parse_msg
+
         data = data["value"]
         return cls(grantee=data["grantee"], msgs=[parse_msg(md) for md in data["msgs"]])
 
@@ -26,7 +31,12 @@ class MsgGrantAuthorization(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     authorization: Authorization = attr.ib()
-    period: int = attr.ib(conveter=int)
+    period: int = attr.ib(converter=int)
+
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["period"] = str(d["period"])
+        return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
@@ -34,7 +44,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            authorization=Authorization.from_data(data["authorization"]),
+            authorization=parse_authorization(data["authorization"]),
             period=data["period"],
         )
 

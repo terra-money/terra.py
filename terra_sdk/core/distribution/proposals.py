@@ -3,12 +3,13 @@ from __future__ import annotations
 import attr
 
 from terra_sdk.core import Coins
+from terra_sdk.core.gov.content import Content
 
 __all__ = ["CommunityPoolSpendProposal"]
 
 
 @attr.s
-class CommunityPoolSpendProposal:
+class CommunityPoolSpendProposal(Content):
 
     type = "distribution/CommunityPoolSpendProposal"
 

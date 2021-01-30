@@ -1,9 +1,8 @@
 from __future__ import annotations
 import attr
 
-import attr
-from .data import Content
 from terra_sdk.core.msg import Msg
+from terra_sdk.core import Coins
 
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
@@ -21,6 +20,8 @@ class MsgSubmitProposal(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
+        from terra_sdk.util.parse_content import parse_content
+
         data = data["value"]
         content = parse_content(data["content"])
         return cls(

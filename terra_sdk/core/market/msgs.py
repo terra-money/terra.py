@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core import Coin, AccAddress
 from terra_sdk.core.msg import Msg
 
 
@@ -29,7 +30,7 @@ class MsgSwap(Msg):
 
 
 @attr.s
-class MsgSwap(Msg):
+class MsgSwapSend(Msg):
 
     type = "market/MsgSwapSend"
     action = "swapsend"

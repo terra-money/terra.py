@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core.gov.content import Content
+
 __all__ = ["TaxRateUpdateProposal"]
 
 
@@ -12,7 +14,7 @@ class TaxRateUpdateProposal(Content):
 
     title: str = attr.ib()
     description: str = attr.ib()
-    tax_rate: Dec = attr.ib()
+    tax_rate: Dec = attr.ib(converter=Dec)
 
     @classmethod
     def from_data(cls, data: dict) -> TaxRateUpdateProposal:
@@ -20,7 +22,7 @@ class TaxRateUpdateProposal(Content):
         return cls(
             title=data["title"],
             description=data["description"],
-            tax_rate=Dec(data["tax_rate"]),
+            tax_rate=data["tax_rate"],
         )
 
 
@@ -31,7 +33,7 @@ class RewardWeightUpdateProposal(Content):
 
     title: str = attr.ib()
     description: str = attr.ib()
-    reward_weight: Dec = attr.ib()
+    reward_weight: Dec = attr.ib(converter=Dec)
 
     @classmethod
     def from_data(cls, data: dict) -> RewardWeightUpdateProposal:
@@ -39,5 +41,5 @@ class RewardWeightUpdateProposal(Content):
         return cls(
             title=data["title"],
             description=data["description"],
-            reward_weight=Dec(data["reward_weight"]),
+            reward_weight=data["reward_weight"],
         )

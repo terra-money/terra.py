@@ -2,14 +2,32 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.json import dict_to_data
+from base64 import b64encode, b64decode
 
 __all__ = [
+    "b64_to_dict",
+    "dict_to_b64",
     "MsgStoreCode",
     "MsgInstantiateContract",
     "MsgExecuteContract",
+    "MsgMigrateContract",
     "MsgUpdateContractOwner",
 ]
+
+
+def b64_to_dict(data: str) -> dict:
+    """Converts ASCII-encoded base64 encoded string to dict."""
+    b64_bytes = data.encode("ascii")
+    msg_bytes = b64decode(b64_bytes)
+    return json.loads(msg_bytes)
+
+
+def dict_to_b64(data: dict) -> str:
+    """Converts dict to ASCII-encoded base64 encoded string."""
+    return b64encode(json.dumps(data)).decode("ascii")
 
 
 @attr.s
@@ -35,10 +53,11 @@ class MsgInstantiateContract(Msg):
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
     migratable: bool = attr.ib(default=False)
 
-    def object_value(self):
-        c = copy.deepcopy(self.__dict__)
-        c["code_id"] = str(c["code_id"])
-        return c
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["code_id"] = str(d["code_id"])
+        d["init_msg"] = dict_to_b64(d["init_msg"])
+        return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgInstantiateContract:
@@ -46,7 +65,7 @@ class MsgInstantiateContract(Msg):
         return cls(
             owner=data["owner"],
             code_id=data["code_id"],
-            init_msg=data["init_msg"],
+            init_msg=b64_to_dict(data["init_msg"]),
             init_coins=Coins.from_data(data["init_coins"]),
             migratable=data["migratable"],
         )
@@ -61,13 +80,18 @@ class MsgExecuteContract(Msg):
     execute_msg: dict = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["execute_msg"] = dict_to_b64(d["execute_msg"])
+        return {"type": self.type, "value": dict_to_data(d)}
+
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
         data = data["value"]
         return cls(
             sender=data["sender"],
             contract=data["contract"],
-            execute_msg=data["execute_msg"],
+            execute_msg=b64_to_dict(data["execute_msg"]),
             coins=Coins.from_data(data["coins"]),
         )
 
@@ -81,6 +105,12 @@ class MsgMigrateContract(Msg):
     new_code_id: int = attr.ib(converter=int)
     migrate_msg: dict = attr.ib()
 
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["new_code_id"] = str(d["new_code_id"])
+        d["migrate_msg"] = dict_to_b64(data["migrate_msg"])
+        return {"type": self.type, "value": dict_to_data(d)}
+
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
         data = data["value"]
@@ -88,7 +118,7 @@ class MsgMigrateContract(Msg):
             owner=data["owner"],
             contract=data["contract"],
             new_code_id=data["new_code_id"],
-            migrate_msg=data["migrate_msg"],
+            migrate_msg=b64_to_dict(data["migrate_msg"]),
         )
 
 

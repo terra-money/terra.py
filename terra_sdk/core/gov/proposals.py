@@ -1,17 +1,14 @@
 from __future__ import annotations
 
 import attr
+from .data import Content
 
 __all__ = ["TextProposal"]
 
 
-@attr.s
 class TextProposal(Content):
 
     type = "gov/TextProposal"
-
-    title: str = attr.ib()
-    description: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:
