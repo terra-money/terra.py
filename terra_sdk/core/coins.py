@@ -36,7 +36,7 @@ class Coins:
             return
 
         if isinstance(arg, str):
-            self._coins = Coins.from_string(arg)._coins
+            self._coins = Coins.from_str(arg)._coins
             return
 
         self._coins = Coins(denoms)._coins if denoms else {}

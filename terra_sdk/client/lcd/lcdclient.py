@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, Optional, Union
 
-from terra_sdk.core import Coins
+from terra_sdk.core import Coins, Numeric
 from terra_sdk.util.json import dict_to_data
 
 from asyncio import AbstractEventLoop, get_event_loop
@@ -33,8 +33,8 @@ class LCDClient:
         self,
         url: str,
         chain_id: str = None,
-        gas_adjustment=None,
-        gas_prices=None,
+        gas_adjustment: Numeric.Input = None,
+        gas_prices: Coins.Input = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
     ):
 
