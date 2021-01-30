@@ -1,10 +1,15 @@
 from ._base import BaseAPI
+from typing import List, Optional, Union
 
 __all__ = ["TxAPI"]
 
+from terra_sdk.core.auth import *
+from terra_sdk.core import Numeric, Coins, Coin
+from terra_sdk.core.msg import Msg
+
 
 class TxAPI(BaseAPI):
-    async def tx_info(self, tx_hash: string) -> TxInfo:
+    async def tx_info(self, tx_hash: str) -> TxInfo:
         return TxInfo.from_data(await self._c._get(f"/txs/{tx_hash}", raw=True))
 
     async def create(
@@ -37,14 +42,14 @@ class TxAPI(BaseAPI):
                 sequnce = account.sequence
 
         return StdSignMsg(
-            self._c.config.chain_id, account_number, sequence, fee, msgs, memo
+            self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
         )
 
     async def estimate_fee(
         self,
         tx: Union[StdSignMsg, StdTx],
-        gas_prices: Option[Coins.Input] = None,
-        gas_adjustment: Option[Numeric.Input] = None,
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
     ) -> StdTx:
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_prices
@@ -58,12 +63,12 @@ class TxAPI(BaseAPI):
 
         data = {
             "tx": tx_value,
-            "gas_prices": gas_prices and Coins(gasPrices).to_data(),
+            "gas_prices": gas_prices and Coins(gas_prices).to_data(),
             "gas_adjustment": gas_adjustment and str(gas_adjustment),
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
-        return StdFee(int(d["gas"]), Coins.from_data(d["fees"]))
+        return StdFee(int(res["gas"]), Coins.from_data(res["fees"]))
 
     async def encode(self, tx: StdTx) -> str:
         res = await self._c._post("/txs/encode", tx.to_data())
@@ -74,18 +79,18 @@ class TxAPI(BaseAPI):
         return hash_amino(amino)
 
     async def _broadcast(self, tx: StdTx, mode: str) -> dict:
-        data = {"tx": tx.to_data().value, "mode": mode}
-        return await self._c._post("/txs", data)
+        data = {"tx": tx.to_data()["value"], "mode": mode}
+        return await self._c._post("/txs", data, raw=True)
 
-    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+    async def broadcast_sync(self, tx: StdTx):
         res = await self._broadcast(tx, "sync")
         return res
 
-    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+    async def broadcast_async(self, tx: StdTx):
         res = await self._broadcast(tx, "async")
         return res
 
-    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+    async def broadcast(self, tx: StdTx):
         res = await self._broadcast(tx, "block")
         return res
 

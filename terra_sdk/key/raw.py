@@ -26,8 +26,6 @@ class RawKey(Key):
 
     def sign(self, payload: bytes) -> bytes:
         sk = SigningKey.from_string(self.private_key, curve=SECP256k1)
-        print(self.private_key)
-        print(payload)
         return sk.sign_deterministic(
             payload,
             hashfunc=hashlib.sha256,

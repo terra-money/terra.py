@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from typing import Dict, Optional, Union
 
+from terra_sdk.core import Coins
+from terra_sdk.util.json import dict_to_data
+
 from asyncio import AbstractEventLoop, get_event_loop
 from aiohttp import ClientSession
 from urllib.parse import urljoin
@@ -22,6 +25,8 @@ from .api.treasury import TreasuryAPI
 from .api.wasm import WasmAPI
 from .api.tx import TxAPI
 
+from .wallet import Wallet
+
 
 class LCDClient:
     def __init__(
@@ -40,7 +45,7 @@ class LCDClient:
         self.chain_id = chain_id
         self.url = url
         self.gas_adjustment = gas_adjustment
-        self.gas_prices = gas_prices
+        self.gas_prices = Coins(gas_prices)
         self._last_request_height = None
 
         self.auth = AuthAPI(self)
@@ -60,7 +65,7 @@ class LCDClient:
         self.tx = TxAPI(self)
 
     def wallet(self, key: Key) -> Wallet:
-        return Wallet(this, key)
+        return Wallet(self, key)
 
     async def _get(
         self, endpoint: str, params: Optional[dict] = None, raw: bool = False
@@ -70,9 +75,23 @@ class LCDClient:
         ) as response:
             result = await response.json()
         try:
-            self._last_request_height = result.get("height")
-        except AttributeError:
+            self._last_request_height = result["height"]
+        except KeyError:
             self._last_request_height = None
+        return result if raw else result["result"]
+
+    async def _post(
+        self, endpoint: str, data: Optional[dict] = None, raw: bool = False
+    ):
+        async with self.session.post(
+            urljoin(self.url, endpoint), json=dict_to_data(data)
+        ) as response:
+            result = await response.json()
+        try:
+            self._last_request_height = result["height"]
+        except KeyError:
+            self._last_request_height = None
+        print(result)
         return result if raw else result["result"]
 
     async def __aenter__(self):

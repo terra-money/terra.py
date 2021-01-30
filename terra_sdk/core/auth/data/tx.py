@@ -7,13 +7,10 @@ import attr
 
 
 @attr.s
-class StdSignature:
+class StdSignature(JSONSerializable):
 
     signature: str = attr.ib()
     pub_key: PublicKey = attr.ib()
-
-    def to_data(self) -> dict:
-        return {"signature": self.signature, "pub_key": self.pub_key}
 
     @classmethod
     def from_data(cls, data: dict) -> StdSignature:
@@ -24,7 +21,7 @@ class StdSignature:
 
 
 @attr.s
-class StdFee:
+class StdFee(JSONSerializable):
 
     gas: int = attr.ib(converter=int)
     amount: Coins = attr.ib(converter=Coins)
@@ -77,7 +74,7 @@ class StdSignMsg(JSONSerializable):
 
 
 @attr.s
-class StdTx:
+class StdTx(JSONSerializable):
 
     msg: List[Msg] = attr.ib()
     fee: StdFee = attr.ib()
@@ -107,7 +104,7 @@ class StdTx:
 
 
 @attr.s
-class TxInfo:
+class TxInfo(JSONSerializable):
 
     height: int = attr.ib(converter=int)
     txhash: str = attr.ib()

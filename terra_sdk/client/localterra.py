@@ -1,5 +1,7 @@
 from terra_sdk.key.mnemonic import MnemonicKey
 
+from typing import Dict
+
 from .lcd import LCDClient, Wallet
 
 __all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra"]
@@ -18,8 +20,12 @@ LOCALTERRA_MNEMONICS = {
     "test10": "prefer forget visit mistake mixture feel eyebrow autumn shop pair address airport diesel street pass vague innocent poem method awful require hurry unhappy shoulder",
 }
 
-# TODO: add gas estimation
-LOCALTERRA_DEFAULTS = {"url": "http://localterra:1317", "chain_id": "localterra"}
+LOCALTERRA_DEFAULTS = {
+    "url": "http://localhost:1317",
+    "chain_id": "localterra",
+    "gas_prices": {"uluna": 0.00506},
+    "gas_adjustment": 1.4,
+}
 
 
 class LocalTerra(LCDClient):

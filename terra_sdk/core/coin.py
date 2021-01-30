@@ -4,10 +4,11 @@ import attr
 import re
 
 from .numeric import Dec, Numeric
+from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s(frozen=True)
-class Coin:
+class Coin(JSONSerializable):
 
     denom: str = attr.ib()
     amount: int = attr.ib(converter=Numeric.parse)

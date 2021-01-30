@@ -1,5 +1,7 @@
 from ._base import BaseAPI
 
+from terra_sdk.core.auth import Account
+
 
 class AuthAPI(BaseAPI):
     async def account_info(self, address: str) -> None:

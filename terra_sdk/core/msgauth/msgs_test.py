@@ -14,8 +14,6 @@ def test_deserializes_msg_exec_authorized_examples(load_json_examples):
 def test_deserializes_msg_grant_authorization_examples(load_json_examples):
     examples = load_json_examples("./MsgGrantAuthorization.data.json")
     for example in examples:
-        print(example)
-        print(MsgGrantAuthorization.from_data(example).to_data())
         assert MsgGrantAuthorization.from_data(example).to_data() == example
 
 

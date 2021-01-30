@@ -10,6 +10,8 @@ def to_data(x: Any) -> Any:
         return x.to_data()
     if isinstance(x, list):
         return [to_data(g) for g in x]
+    if isinstance(x, dict):
+        return dict_to_data(x)
     return x
 
 
@@ -19,7 +21,6 @@ def dict_to_data(d: dict) -> Any:
 
 
 class JSONSerializable:
-    @abc.abstractmethod
     def to_data(self) -> dict:
         return dict_to_data(copy.deepcopy(self.__dict__))
 

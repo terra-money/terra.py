@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.util.json import JSONSerializable
+
 __all__ = ["PublicKey"]
 
 
 @attr.s
-class PublicKey:
+class PublicKey(JSONSerializable):
 
     SIMPLE = "tendermint/PubKeySecp256k1"
     MULTISIG = "tendermint/PubKeyMultisigThreshold"
@@ -26,4 +28,6 @@ class PublicKey:
 
     @classmethod
     def from_data(cls, data: dict) -> PublicKey:
+        if data is None:
+            return data
         return cls(data.get("type"), data.get("value"))

@@ -1,6 +1,6 @@
 from ._base import BaseAPI
 
-from terra_sdk.core.dec import Dec
+from terra_sdk.core import Dec
 
 
 class MintAPI(BaseAPI):

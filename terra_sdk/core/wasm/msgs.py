@@ -35,7 +35,7 @@ class MsgStoreCode(Msg):
     type = "wasm/MsgStoreCode"
 
     sender: AccAddress = attr.ib()
-    wasm_byte_code: str = attr.ib()
+    wasm_byte_code: str = attr.ib(converter=str)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
