@@ -7,7 +7,11 @@ from terra_sdk.util.json import JSONSerializable
 
 
 class Authorization(BaseTerraData):
-    pass
+    @staticmethod
+    def from_data(data: dict) -> Authorization:
+        from terra_sdk.util.parse_authorization import parse_authorization
+
+        return parse_authorization(data)
 
 
 @attr.s
@@ -32,10 +36,6 @@ class GenericAuthorization(Authorization):
     def from_data(cls, data: dict) -> GenericAuthorization:
         data = data["value"]
         return cls(grant_msg_type=data["grant_msg_type"])
-
-
-authorization_types = [SendAuthorization, GenericAuthorization]
-parse_authorization = create_demux(authorization_types)
 
 
 @attr.s

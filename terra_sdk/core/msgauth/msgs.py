@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
-from .data import parse_authorization
+from .data import Authorization
 
 import attr
 
@@ -18,10 +18,10 @@ class MsgExecAuthorized(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
-        from terra_sdk.util.parse_msg import parse_msg
-
         data = data["value"]
-        return cls(grantee=data["grantee"], msgs=[parse_msg(md) for md in data["msgs"]])
+        return cls(
+            grantee=data["grantee"], msgs=[Msg.from_data(md) for md in data["msgs"]]
+        )
 
 
 @attr.s
@@ -44,7 +44,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            authorization=parse_authorization(data["authorization"]),
+            authorization=Authorization.from_data(data["authorization"]),
             period=data["period"],
         )
 

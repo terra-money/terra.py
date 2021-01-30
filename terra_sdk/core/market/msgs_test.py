@@ -10,4 +10,6 @@ def test_deserializes_msg_swap_examples(load_msg_examples):
 def test_deserializes_msg_swap_send_examples(load_msg_examples):
     examples = load_msg_examples(MsgSwapSend.type, "./MsgSwapSend.data.json")
     for example in examples:
-        assert MsgSwapSend.from_data(example).to_data() == example
+        data = MsgSwapSend.from_data(example).to_data()
+        for key in data["value"]:
+            assert data["value"][key] == example["value"][key]

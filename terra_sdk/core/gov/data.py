@@ -3,9 +3,21 @@ import copy
 
 from terra_sdk.core import Coin, Coins
 from terra_sdk.util.json import JSONSerializable, dict_to_data
-from .content import Content
 
 __all__ = ["Proposal"]
+
+
+@attr.s
+class Content(BaseTerraData):
+
+    title: str = attr.ib()
+    description: str = attr.ib()
+
+    @staticmethod
+    def from_data(data: dict) -> Content:
+        from terra_sdk.util.parse_content import parse_content
+
+        return parse_content(data)
 
 
 @attr.s
@@ -28,11 +40,10 @@ class Proposal(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
-        from terra_sdk.util.parse_content import parse_content
 
         return cls(
             id=data["id"],
-            content=parse_content(data["content"]),
+            content=Content.from_data(data["content"]),
             proposal_status=data["proposal_status"],
             final_tally_result=data["final_tally_result"],
             submit_time=data["submit_time"],

@@ -46,8 +46,7 @@ class Dec:
         # guarantee int
         self.i = int(self.i)
 
-    @property
-    def short_str(self):
+    def to_short_str(self):
         parity = "-" if self.i < 0 else ""
         frac = self.frac.rstrip("0")
         dot = "." if len(frac) > 0 else ""

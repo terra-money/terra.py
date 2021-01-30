@@ -34,6 +34,11 @@ class Coin:
         return Coin(self.denom, Dec(self.amount))
 
     def __str__(self) -> str:
+        if self.is_dec_coin():
+            amount_str = str(self.amount).rstrip("0")
+            if amount_str.endswith("."):
+                amount_str += "0"
+            return f"{amount_str}{self.denom}"
         return f"{self.amount}{self.denom}"
 
     def to_data(self) -> dict:

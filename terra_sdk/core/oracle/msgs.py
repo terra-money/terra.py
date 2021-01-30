@@ -20,8 +20,8 @@ __all__ = [
 ]
 
 
-def vote_hash(salt: str, exchange_rate: Dec, denom: str, validator: str) -> str:
-    payload = f"{salt}:{exchange_rate!s}:{denom}:{validator}"
+def vote_hash(denom: str, exchange_rate: Dec, salt: str, validator: str) -> str:
+    payload = f"{denom}:{exchange_rate!s}:{salt}:{validator}"
     sha_hash = hashlib.sha256(payload.encode())
     return sha_hash.hexdigest()[:40]
 
@@ -78,7 +78,7 @@ class MsgExchangeRateVote(Msg):
         )
 
     def get_vote_hash(self) -> str:
-        return vote_hash(self.salt, self.exchange_rate, self.denom, self.validator)
+        return vote_hash(self.denom, self.exchange_rate, self.salt, self.validator)
 
     def get_prevote(self) -> MsgExchangeRatePrevote:
         return MsgExchangeRatePrevote(
@@ -149,9 +149,7 @@ class MsgAggregateExchangeRateVote(Msg):
         )
 
     def get_aggregate_vote_hash(self) -> str:
-        return aggregate_vote_hash(
-            self.salt, self.exchange_rate, self.denom, self.validator
-        )
+        return aggregate_vote_hash(self.salt, self.exchange_rates, self.validator)
 
     def get_aggregate_prevote(self) -> MsgAggregateExchangeRatePrevote:
         return MsgAggregateExchangeRatePrevote(
