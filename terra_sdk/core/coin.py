@@ -11,7 +11,7 @@ from terra_sdk.util.json import JSONSerializable
 class Coin(JSONSerializable):
 
     denom: str = attr.ib()
-    amount: int = attr.ib(converter=Numeric.parse)
+    amount: Numeric.Output = attr.ib(converter=Numeric.parse)
 
     @staticmethod
     def parse(arg: Union[Coin, str, dict]) -> Coin:
@@ -54,12 +54,6 @@ class Coin(JSONSerializable):
         else:
             return cls(match.group(3), match.group(1))
 
-    def __eq__(self, other: object) -> bool:
-        if isinstance(other, Coin):
-            return self.denom == other.denom and self.amount == other.amount
-        else:
-            return False
-
     def add(self, other: Union[Numeric.Input, Coin]) -> Coin:
         if isinstance(other, Coin):
             if other.denom != self.denom:
@@ -89,24 +83,38 @@ class Coin(JSONSerializable):
         other_amount = Numeric.parse(other_amount)
         return Coin(self.denom, self.amount - other_amount)
 
+    def __sub__(self, other: Union[Numeric.Input, Coin]) -> Coin:
+        return self.sub(other)
+
     def mul(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, self.amount * other)
 
-    def __rmul__(self, other) -> Coin:
-        return self * other
+    def __mul__(self, other: Numeric.Input) -> Coin:
+        return self.mul(other)
+
+    def __rmul__(self, other: Numeric.Input) -> Coin:
+        return self.mul(other)
 
     def div(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
-        return Coin(self.denom, (self.amount / other))
+        if isinstance(other_amount, int):
+            return Coin(self.denom, (self.amount // other))
+        else:
+            return Coin(self.denom, (self.amount / other))
 
-    def __floordiv__(self, other) -> Coin:
-        other_amount = Numeric.parse(other)
-        return Coin(self.denom, (self.amount // other))
+    def __truediv__(self, other: Numeric.Input) -> Coin:
+        return self.div(other)
+
+    def __floordiv__(self, other: Numeric.Input) -> Coin:
+        return self.div(int(Numeric.parse(other)))
 
     def mod(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         return Coin(self.denom, self.amount % other)
+
+    def __mod__(self, other: Numeric.Input) -> Coin:
+        return self.mod(other)
 
     def __neg__(self) -> Coin:
         return Coin(denom=self.denom, amount=(-self.amount))
