@@ -20,7 +20,7 @@ class Coins:
 
     @classmethod
     def from_str(cls, s: str) -> Coins:
-        coin_strings = s.split(r",\s")
+        coin_strings = s.split(r",")
         return Coins(Coin.from_str(cs) for cs in coin_strings)
 
     def __init__(self, arg: Coins.Input = {}, **denoms):
@@ -93,6 +93,9 @@ class Coins:
 
     def map(self, fn: Callable[[Coin], bool]) -> Map[Coin]:
         return map(fn, self)
+
+    def __eq__(self, other: Coins) -> bool:
+        return self.to_list() == other.to_list()
 
     def __iter__(self):
         return iter(self.to_list())

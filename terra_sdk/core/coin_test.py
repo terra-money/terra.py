@@ -1,4 +1,4 @@
-from terra_sdk.core.coin import Coin
+from terra_sdk.core import Coin
 
 
 def test_eq():

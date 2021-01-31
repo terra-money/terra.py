@@ -73,6 +73,9 @@ class Coin(JSONSerializable):
         other_amount = Numeric.parse(other_amount)
         return Coin(self.denom, self.amount + other_amount)
 
+    def __add__(self, other: Union[Numeric.Input, Coin]) -> Coin:
+        return self.add(other)
+
     def sub(self, other: Union[Numeric.Input, Coin]) -> Coin:
         if isinstance(other, Coin):
             if other.denom != self.denom:
