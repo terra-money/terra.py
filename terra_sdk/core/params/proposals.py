@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core.gov import Content
+
 
 @attr.s
 class ParameterChangeProposal(Content):

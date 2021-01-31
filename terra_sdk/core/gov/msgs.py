@@ -41,6 +41,16 @@ class MsgDeposit(Msg):
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
 
+    def to_data(self) -> dict:
+        return {
+            "type": self.type,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "depositor": self.depositor,
+                "amount": self.amount.to_data(),
+            },
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgDeposit:
         data = data["value"]
@@ -80,6 +90,16 @@ class MsgVote(Msg):
             raise TypeError(
                 f"incorrect value for option: {value}, must be one of: {possible_options}"
             )
+
+    def to_data(self) -> dict:
+        return {
+            "type": self.type,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "voter": self.voter,
+                "option": self.option,
+            },
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgVote:
