@@ -14,7 +14,12 @@ class BlockTxBroadcastResult(JSONSerializable):
     gas_wanted: int = attr.ib(converter=int)
     gas_used: int = attr.ib(converter=int)
     logs: Optional[List[TxLog]] = attr.ib(
-        converter=lambda logs: [TxLog(**l) for l in logs] if logs else None
+        converter=lambda logs: [
+            TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
+            for l in logs
+        ]
+        if logs
+        else None
     )
     code: Optional[int] = attr.ib(default=None)
     codespace: Optional[str] = attr.ib(default=None)

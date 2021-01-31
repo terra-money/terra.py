@@ -5,6 +5,7 @@ from collections import defaultdict
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core.coins import Coins
 from terra_sdk.util.json import JSONSerializable
+from terra_sdk.core.msg import Msg
 
 import attr
 
@@ -171,7 +172,10 @@ class TxInfo(JSONSerializable):
             data["height"],
             data["txhash"],
             data["raw_log"],
-            [TxLog(**l) for l in data.get("logs")],
+            [
+                TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
+                for l in data.get("logs")
+            ],
             data["gas_wanted"],
             data["gas_used"],
             StdTx.from_data(data["tx"]),

@@ -53,7 +53,7 @@ class Dec:
         return f"{parity}{self.whole}{dot}{frac}"
 
     def __repr__(self):
-        return f"Dec({self.short_str!r})"  # short representation
+        return f"Dec({self.to_short_str()})"  # short representation
 
     def __str__(self) -> str:
         if self.i == 0:
