@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List
+
 import attr
 
 from terra_sdk.core import Dec, Coin, AccAddress, ValAddress

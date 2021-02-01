@@ -2,7 +2,7 @@ from ._base import BaseAPI
 
 from typing import Optional, List
 
-from terra_sdk.core import Coin, AccAddress
+from terra_sdk.core import Coin, AccAddress, Coins, ValAddress
 from terra_sdk.core.oracle import (
     ExchangeRatePrevote,
     ExchangeRateVote,
@@ -14,7 +14,7 @@ from terra_sdk.core.oracle import (
 class OracleAPI(BaseAPI):
     async def votes(
         self, denom: Optional[str] = None, validator: Optional[str] = None
-    ) -> ExchangeRateVote:
+    ) -> List[ExchangeRateVote]:
         if denom is not None and validator is not None:
             res = self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
             return [ExchangeRateVote.from_data(res)]
@@ -35,13 +35,13 @@ class OracleAPI(BaseAPI):
             return Coins({})
 
     async def exchange_rate(self, denom: str) -> Coin:
-        rates = await self.exchange_rates
+        rates = await self.exchange_rates()
         return rates.get(denom)
 
     async def active_denoms(self) -> List[str]:
         return await self._c._get(f"/oracle/denoms/exchange_rates")
 
-    async def feeder_address(self) -> AccAddress:
+    async def feeder_address(self, validator: ValAddress) -> AccAddress:
         return await self._c._get(f"/oracle/voters/{validator}/feeder")
 
     async def misses(self, validator: str) -> int:

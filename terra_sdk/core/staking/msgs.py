@@ -1,9 +1,12 @@
 from __future__ import annotations
+from typing import Optional
 
 import attr
 
-from terra_sdk.core import Coin
+from terra_sdk.core import Coin, ValConsPubKey, AccAddress, ValAddress, Dec
 from terra_sdk.core.msg import Msg
+
+from .data import Description, Commission, CommissionRates
 
 
 @attr.s

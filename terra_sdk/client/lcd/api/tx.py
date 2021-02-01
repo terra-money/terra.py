@@ -7,6 +7,7 @@ from terra_sdk.core.auth import *
 from terra_sdk.core.broadcast import *
 from terra_sdk.core import Numeric, Coins, Coin
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.hash import hash_amino
 
 
 class TxAPI(BaseAPI):
@@ -18,7 +19,7 @@ class TxAPI(BaseAPI):
         source_address: str,
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
-        memo: Optional[str] = "",
+        memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         account_number: Optional[int] = None,
@@ -49,7 +50,7 @@ class TxAPI(BaseAPI):
         tx: Union[StdSignMsg, StdTx],
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-    ) -> StdTx:
+    ) -> StdFee:
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
 

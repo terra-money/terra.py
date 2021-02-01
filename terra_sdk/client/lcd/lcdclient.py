@@ -27,6 +27,8 @@ from .api.tx import TxAPI
 
 from .wallet import Wallet
 
+from terra_sdk.key.key import Key
+
 
 class LCDClient:
     def __init__(
@@ -35,7 +37,7 @@ class LCDClient:
         chain_id: str = None,
         gas_prices: Coins.Input = None,
         gas_adjustment: Numeric.Input = None,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None,
     ):
 
         if loop is None:
@@ -84,7 +86,7 @@ class LCDClient:
         self, endpoint: str, data: Optional[dict] = None, raw: bool = False
     ):
         async with self.session.post(
-            urljoin(self.url, endpoint), json=dict_to_data(data)
+            urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
             result = await response.json()
         try:

@@ -25,6 +25,8 @@ class AccAddress(str):
     @staticmethod
     def from_val_address(data: str) -> str:
         vals = bech32_decode(data)
+        if vals[1] is None:
+            raise ValueError(f"invalid bech32: {data}")
         return bech32_encode("terra", vals[1])
 
 
@@ -36,6 +38,8 @@ class ValAddress(str):
     @staticmethod
     def from_acc_address(data: str) -> str:
         vals = bech32_decode(data)
+        if vals[1] is None:
+            raise ValueError(f"invalid bech32: {data}")
         return bech32_encode("terravaloper", vals[1])
 
 
@@ -47,6 +51,8 @@ class AccPubKey(str):
     @staticmethod
     def from_val_pubkey(data: str) -> str:
         vals = bech32_decode(data)
+        if vals[1] is None:
+            raise ValueError(f"invalid bech32: {data}")
         return bech32_encode("terrapub", vals[1])
 
 
@@ -58,6 +64,8 @@ class ValPubKey(str):
     @staticmethod
     def from_acc_pubkey(data: str) -> str:
         vals = bech32_decode(data)
+        if vals[1] is None:
+            raise ValueError(f"invalid bech32: {data}")
         return bech32_encode("terravaloperpub", vals[1])
 
 

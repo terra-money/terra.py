@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import Optional, List
+
 import attr
-from terra_sdk.core.auth import TxLog
+from terra_sdk.core.auth import TxLog, parse_tx_logs
 from terra_sdk.util.json import JSONSerializable
 
 
@@ -13,14 +15,7 @@ class BlockTxBroadcastResult(JSONSerializable):
     raw_log: str = attr.ib()
     gas_wanted: int = attr.ib(converter=int)
     gas_used: int = attr.ib(converter=int)
-    logs: Optional[List[TxLog]] = attr.ib(
-        converter=lambda logs: [
-            TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
-            for l in logs
-        ]
-        if logs
-        else None
-    )
+    logs: Optional[List[TxLog]] = attr.ib(converter=parse_tx_logs)
     code: Optional[int] = attr.ib(default=None)
     codespace: Optional[str] = attr.ib(default=None)
 

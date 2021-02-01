@@ -17,7 +17,7 @@ def compute_public_key(private_key: bytes) -> bytes:
 
 class RawKey(Key):
 
-    private_key: bytes = None
+    private_key: bytes
 
     def __init__(self, private_key: bytes):
         public_key = compute_public_key(private_key)

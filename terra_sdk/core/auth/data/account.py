@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List
+
 import attr
 
 from terra_sdk.core import Coins, PublicKey
@@ -43,7 +45,7 @@ class Account(JSONSerializable):
 
 
 @attr.s
-class LazyGradedVestingAccount(JSONSerializable):
+class LazyGradedVestingAccount(Account):
 
     address: str = attr.ib()
     coins: Coins = attr.ib(converter=Coins)
@@ -74,7 +76,7 @@ class LazyGradedVestingAccount(JSONSerializable):
         }
 
     @classmethod
-    def from_data(cls, data: dict) -> Account:
+    def from_data(cls, data: dict) -> LazyGradedVestingAccount:
         data = data["value"]
         return cls(
             address=data["address"],

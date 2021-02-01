@@ -110,11 +110,11 @@ class MsgMigrateContract(Msg):
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
         d["new_code_id"] = str(d["new_code_id"])
-        d["migrate_msg"] = dict_to_b64(data["migrate_msg"])
+        d["migrate_msg"] = dict_to_b64(d["migrate_msg"])
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgExecuteContract:
+    def from_data(cls, data: dict) -> MsgMigrateContract:
         data = data["value"]
         return cls(
             owner=data["owner"],
@@ -133,25 +133,7 @@ class MsgUpdateContractOwner(Msg):
     contract: AccAddress = attr.ib()
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgExecuteContract:
-        data = data["value"]
-        return cls(
-            owner=data["owner"],
-            new_owner=data["new_owner"],
-            contract=data["contract"],
-        )
-
-
-@attr.s
-class MsgUpdateContractOwner(Msg):
-    type = "wasm/MsgUpdateContractOwner"
-
-    owner: AccAddress = attr.ib()
-    new_owner: AccAddress = attr.ib()
-    contract: AccAddress = attr.ib()
-
-    @classmethod
-    def from_data(cls, data: dict) -> MsgExecuteContract:
+    def from_data(cls, data: dict) -> MsgUpdateContractOwner:
         data = data["value"]
         return cls(
             owner=data["owner"],

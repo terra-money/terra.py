@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Iterable, Union
+from typing import Dict, Iterable, Union, Iterator, Callable, Any, List, Optional
 import copy
 
 from .coin import Coin
@@ -23,7 +23,11 @@ class Coins:
         coin_strings = s.split(r",")
         return Coins(Coin.from_str(cs) for cs in coin_strings)
 
-    def __init__(self, arg: Coins.Input = {}, **denoms):
+    def __init__(self, arg: Optional[Coins.Input] = {}, **denoms):
+
+        if arg is None:
+            self._coins = {}
+            return
 
         # arg should be an iterable
         try:
@@ -40,7 +44,7 @@ class Coins:
             return
 
         self._coins = Coins(denoms)._coins if denoms else {}
-        if isinstance(arg, dict) or isinstance(arg, set):
+        if isinstance(arg, dict):
             coins = [Coin(denom, arg[denom]) for denom in arg]
         else:
             coins = arg
@@ -62,15 +66,18 @@ class Coins:
     def __getitem__(self, denom: str) -> Coin:
         return self._coins[denom]
 
+    def get(self, denom: str) -> Optional[Coin]:
+        return self._coins.get(denom)
+
     @classmethod
     def from_data(cls, data: list) -> Coins:
         coins = map(Coin.from_data, data)
         return cls(coins)
 
-    def to_data(self) -> list:
+    def to_data(self) -> List[dict]:
         return [coin.to_data() for coin in self]
 
-    def denoms(self) -> str:
+    def denoms(self) -> List[str]:
         return [c.denom for c in self]
 
     def to_dec_coins(self) -> Coins:
@@ -79,11 +86,35 @@ class Coins:
     def to_int_coins(self) -> Coins:
         return Coins(c.to_int_coin() for c in self)
 
+    def add(self, other: Union[Coin, Coins]) -> Coins:
+        if isinstance(other, Coin):
+            return Coins([other, *self.to_list()])
+        else:
+            return Coins([*other.to_list(), *self.to_list()])
+
+    def __add__(self, other: Union[Coin, Coins]) -> Coins:
+        return self.add(other)
+
+    def sub(self, other: Union[Coin, Coins]) -> Coins:
+        return self.add(self.mul(-1))
+
+    def __sub__(self, other: Union[Coin, Coins]) -> Coins:
+        return self.sub(other)
+
     def mul(self, other: Numeric.Input) -> Coins:
         return Coins(coin.mul(other) for coin in self)
 
-    def __truediv__(self, other: Numeric.Input) -> Coins:
+    def __mul__(self, other: Numeric.Input) -> Coins:
+        return self.mul(other)
+
+    def div(self, other: Numeric.Input) -> Coins:
         return Coins(coin.div(other) for coin in self)
+
+    def __truediv__(self, other: Numeric.Input) -> Coins:
+        return Coins(coin / other for coin in self)
+
+    def __floordiv__(self, other: Numeric.Input) -> Coins:
+        return Coins(coin // other for coin in self)
 
     def to_list(self) -> List[Coin]:
         return sorted(self._coins.values(), key=lambda c: c.denom)
@@ -91,11 +122,14 @@ class Coins:
     def filter(self, predicate: Callable[[Coin], bool]) -> Coins:
         return Coins(c for c in self if predicate(c))
 
-    def map(self, fn: Callable[[Coin], bool]) -> Map[Coin]:
+    def map(self, fn: Callable[[Coin], Any]) -> Iterator[Any]:
         return map(fn, self)
 
-    def __eq__(self, other: Coins) -> bool:
-        return self.to_list() == other.to_list()
+    def __eq__(self, other) -> bool:
+        try:
+            return self.to_list() == other.to_list()
+        except AttributeError:
+            return False
 
     def __iter__(self):
         return iter(self.to_list())

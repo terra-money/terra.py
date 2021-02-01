@@ -30,7 +30,7 @@ def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
         return result
     elif isinstance(arg, Decimal):
         whole = int(arg)
-        fraction = arg % 1
+        fraction = int(arg % 1)
         return int((whole * DEC_ONE) + (fraction * DEC_ONE))
     else:
         raise TypeError(
@@ -60,7 +60,7 @@ def chop_precision_and_round(d: int) -> int:
 
 class Dec:
 
-    _i: int = None
+    _i: int = 0
 
     def __init__(self, arg: Union[str, int, float, Decimal, Dec]):
         """BigInt-based Decimal representation with basic arithmetic operations with
@@ -216,7 +216,7 @@ class Dec:
 
     def __abs__(self) -> Dec:
         x = Dec(self)
-        x._i = abs(x.i)
+        x._i = abs(x._i)
         return x
 
     def __pos__(self) -> Dec:
@@ -227,7 +227,7 @@ class Dec:
         return cls(data)
 
     @classmethod
-    def with_prec(cls, i: int, prec: int) -> Dec:
+    def with_prec(cls, i: Union[int, str], prec: int) -> Dec:
         """Replicates Cosmos-SDK's Dec.with_prec(i, prec)"""
         d = cls(0)
         i = int(i)

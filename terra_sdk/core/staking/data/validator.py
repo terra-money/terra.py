@@ -1,7 +1,7 @@
 from __future__ import annotations
 import copy
 from terra_sdk.util.json import JSONSerializable, dict_to_data
-from terra_sdk.core import Coin, Dec, Coins
+from terra_sdk.core import Coin, Dec, Coins, ValConsPubKey, ValAddress
 
 import attr
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 import hashlib
 from bip32utils import BIP32Key, BIP32_HARDEN
 from mnemonic import Mnemonic
@@ -20,10 +22,10 @@ class MnemonicKey(RawKey):
 
     def __init__(
         self,
-        mnemonic: Optional[str] = None,
-        account: Optional[int] = 0,
-        index: Optional[int] = 0,
-        coin_type: Optional[int] = LUNA_COIN_TYPE,
+        mnemonic: str = None,
+        account: int = 0,
+        index: int = 0,
+        coin_type: int = LUNA_COIN_TYPE,
     ):
         if mnemonic is None:
             mnemonic = Mnemonic("english").generate(256)

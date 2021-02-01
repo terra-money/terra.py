@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Union
+
 import attr
 
 from terra_sdk.util.json import JSONSerializable
@@ -14,7 +16,7 @@ class PublicKey(JSONSerializable):
     MULTISIG = "tendermint/PubKeyMultisigThreshold"
 
     type: str = attr.ib()
-    value: Union[str, dict] = attr.ib()
+    value: Optional[Union[str, dict]] = attr.ib()
 
     def to_data(self) -> dict:
         if self.type == self.SIMPLE and isinstance(self.value, str):
@@ -29,5 +31,5 @@ class PublicKey(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> PublicKey:
         if data is None:
-            return data
+            return None
         return cls(data.get("type"), data.get("value"))

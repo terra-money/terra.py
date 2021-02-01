@@ -12,9 +12,10 @@ __all__ = ["Key"]
 
 
 def get_bech(prefix: str, payload: str) -> str:
-    return bech32_encode(
-        prefix, convertbits(bytes.fromhex(payload), 8, 5)
-    )  # base64 -> base32
+    data = convertbits(bytes.fromhex(payload), 8, 5)
+    if data is None:
+        raise ValueError(f"could not parse data: prefix {prefix}, payload {payload}")
+    return bech32_encode(prefix, data)  # base64 -> base32
 
 
 def address_from_public_key(public_key: bytes) -> bytes:
@@ -33,9 +34,9 @@ def pubkey_from_public_key(public_key: bytes) -> bytes:
 
 class Key:
 
-    public_key: bytes = None
-    raw_address: bytes = None
-    raw_pubkey: bytes = None
+    public_key: Optional[bytes]
+    raw_address: Optional[bytes]
+    raw_pubkey: Optional[bytes]
 
     def __init__(self, public_key: Optional[bytes] = None):
         self.public_key = public_key
@@ -44,7 +45,7 @@ class Key:
             self.raw_pubkey = pubkey_from_public_key(public_key)
 
     @abc.abstractmethod
-    async def sign(self, payload: bytes) -> bytes:
+    def sign(self, payload: bytes) -> bytes:
         raise NotImplementedError("an instance of Key must implement Key.sign")
 
     @property

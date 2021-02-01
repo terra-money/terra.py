@@ -15,7 +15,7 @@ def to_data(x: Any) -> Any:
     return x
 
 
-def dict_to_data(d: dict) -> Any:
+def dict_to_data(d: dict) -> dict:
     """Recursively calls to_data on dict"""
     return {key: to_data(d[key]) for key in d}
 

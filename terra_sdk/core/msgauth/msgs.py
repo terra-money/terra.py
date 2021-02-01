@@ -1,5 +1,7 @@
 from __future__ import annotations
+from typing import List
 import copy
+from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 from .data import Authorization
@@ -39,7 +41,7 @@ class MsgGrantAuthorization(Msg):
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgExecAuthorized:
+    def from_data(cls, data: dict) -> MsgGrantAuthorization:
         data = data["value"]
         return cls(
             granter=data["granter"],
@@ -58,7 +60,7 @@ class MsgRevokeAuthorization(Msg):
     authorization_msg_type: str = attr.ib()
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgExecAuthorized:
+    def from_data(cls, data: dict) -> MsgRevokeAuthorization:
         data = data["value"]
         return cls(
             granter=data["granter"],

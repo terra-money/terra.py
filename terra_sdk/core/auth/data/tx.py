@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from collections import defaultdict
+from typing import Optional, List, Dict
+
 
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core.coins import Coins
@@ -14,13 +15,13 @@ import attr
 class StdSignature(JSONSerializable):
 
     signature: str = attr.ib()
-    pub_key: PublicKey = attr.ib()
+    pub_key: Optional[PublicKey] = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> StdSignature:
         return cls(
-            signature=data.get("signature"),
-            pub_key=PublicKey.from_data(data.get("pub_key")),
+            signature=data["signature"],
+            pub_key=data.get("pub_key") and PublicKey.from_data(data["pub_key"]),
         )
 
 
@@ -108,7 +109,7 @@ class StdTx(JSONSerializable):
 
 
 def parse_events_by_type(event_data: List[dict]) -> Dict[str, Dict[str, List[str]]]:
-    events = {}
+    events: Dict[str, Dict[str, List[str]]] = {}
     for ev in event_data:
         for att in ev["attributes"]:
             if ev["type"] not in events:
@@ -131,6 +132,17 @@ class TxLog(JSONSerializable):
         self.events_by_type = parse_events_by_type(self.events)
 
 
+def parse_tx_logs(logs) -> Optional[List[TxLog]]:
+    return (
+        [
+            TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
+            for l in logs
+        ]
+        if logs
+        else None
+    )
+
+
 @attr.s
 class TxInfo(JSONSerializable):
 
@@ -140,6 +152,7 @@ class TxInfo(JSONSerializable):
     logs: Optional[List[TxLog]] = attr.ib()
     gas_wanted: int = attr.ib(converter=int)
     gas_used: int = attr.ib(converter=int)
+    tx: StdTx = attr.ib()
     timestamp: str = attr.ib()
     code: Optional[int] = attr.ib(default=None)
     codespace: Optional[str] = attr.ib(default=None)
@@ -156,7 +169,7 @@ class TxInfo(JSONSerializable):
         }
 
         if self.logs:
-            data["logs"] = [l.to_data() for l in log]
+            data["logs"] = [l.to_data() for l in self.logs]
 
         if self.code:
             data["code"] = self.code
@@ -172,10 +185,7 @@ class TxInfo(JSONSerializable):
             data["height"],
             data["txhash"],
             data["raw_log"],
-            [
-                TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
-                for l in data.get("logs")
-            ],
+            parse_tx_logs(data["logs"]),
             data["gas_wanted"],
             data["gas_used"],
             StdTx.from_data(data["tx"]),

@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import attr
 
+from terra_sdk.core import ValAddress
 from terra_sdk.core.msg import Msg
 
 __all__ = ["MsgUnjail"]
+
 
 @attr.s
 class MsgUnjail(Msg):

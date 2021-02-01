@@ -42,7 +42,6 @@ class Proposal(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
-
         return cls(
             id=data["id"],
             content=Content.from_data(data["content"]),

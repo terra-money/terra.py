@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Union
+
 import attr
 import re
 

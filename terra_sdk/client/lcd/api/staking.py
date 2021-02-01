@@ -2,6 +2,7 @@ from ._base import BaseAPI
 
 from typing import List, Optional
 
+from terra_sdk.core import Coin
 from terra_sdk.core.staking import (
     Delegation,
     UnbondingDelegation,

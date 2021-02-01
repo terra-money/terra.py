@@ -9,7 +9,7 @@ __all__ = ["Wallet"]
 
 
 class Wallet:
-    def __init__(self, lcd: "LCDClient", key: Key):
+    def __init__(self, lcd, key: Key):
         self.lcd = lcd
         self.key = key
 

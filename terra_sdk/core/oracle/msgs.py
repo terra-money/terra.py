@@ -4,7 +4,7 @@ import hashlib
 import copy
 import attr
 
-from terra_sdk.core import Dec, Coin, Coins
+from terra_sdk.core import Dec, Coin, Coins, AccAddress, ValAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 
@@ -114,7 +114,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
     validator: ValAddress = attr.ib()
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgAggregateExchangeRateVote:
+    def from_data(cls, data: dict) -> MsgAggregateExchangeRatePrevote:
         data = data["value"]
         return cls(
             hash=data["hash"],
