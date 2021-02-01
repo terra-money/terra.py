@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 
 import attr
 
@@ -32,4 +32,4 @@ class PublicKey(JSONSerializable):
     def from_data(cls, data: dict) -> PublicKey:
         if data is None:
             return None
-        return cls(data.get("type"), data.get("value"))
+        return cls(data["type"], data.get("value"))

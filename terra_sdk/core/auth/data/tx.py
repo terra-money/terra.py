@@ -162,20 +162,23 @@ class TxInfo(JSONSerializable):
             "height": str(self.height),
             "txhash": self.txhash,
             "raw_log": self.rawlog,
+            "logs": [l.to_data() for l in self.logs] if self.logs else None,
             "gas_wanted": str(self.gas_wanted),
             "gas_used": str(self.gas_used),
             "timestamp": self.timestamp,
             "tx": self.tx.to_data(),
+            "code": self.code,
+            "codespace": self.codespace,
         }
 
-        if self.logs:
-            data["logs"] = [l.to_data() for l in self.logs]
+        if not self.logs:
+            del data["logs"]
 
-        if self.code:
-            data["code"] = self.code
+        if not self.code:
+            del data["code"]
 
-        if self.codespace:
-            data["codespace"] = self.codespace
+        if not self.codespace:
+            del data["codespace"]
 
         return data
 

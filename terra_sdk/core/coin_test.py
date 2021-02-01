@@ -61,11 +61,9 @@ def test_arithmetic():
     # multiplication
     product = coin.mul(3.1233)
     product2 = coin * 3.1233
-    product3 = 3.1233 * coin
     assert product.denom == "uluna"
     assert product.amount == 3123.3
     assert product2.amount == 3123.3
-    assert product3.amount == 3123.3
 
     # division
     quotient = coin.div(5)

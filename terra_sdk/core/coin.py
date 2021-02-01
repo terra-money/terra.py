@@ -60,30 +60,20 @@ class Coin(JSONSerializable):
         if isinstance(other, Coin):
             if other.denom != self.denom:
                 raise ArithmeticError(
-                    f"cannot add two Coin objects of different denoms: {self.denom} and {other.denom}"
+                    f"cannot add/subtract two Coin objects of different denoms: {self.denom} and {other.denom}"
                 )
-            other_amount = other.amount
+            return Coin(self.denom, self.amount + other.amount)
         else:
-            other_amount = other
-
-        other_amount = Numeric.parse(other_amount)
-        return Coin(self.denom, self.amount + other_amount)
+            return Coin(self.denom, self.amount + Numeric.parse(other))
 
     def __add__(self, other: Union[Numeric.Input, Coin]) -> Coin:
         return self.add(other)
 
     def sub(self, other: Union[Numeric.Input, Coin]) -> Coin:
         if isinstance(other, Coin):
-            if other.denom != self.denom:
-                raise ArithmeticError(
-                    f"cannot subtract two Coin objects of different denoms: {self.denom} and {other.denom}"
-                )
-            other_amount = other.amount
+            return self.add(other.mul(-1))
         else:
-            other_amount = other
-
-        other_amount = Numeric.parse(other_amount)
-        return Coin(self.denom, self.amount - other_amount)
+            return self.add(Numeric.parse(other) * -1)
 
     def __sub__(self, other: Union[Numeric.Input, Coin]) -> Coin:
         return self.sub(other)
@@ -95,15 +85,12 @@ class Coin(JSONSerializable):
     def __mul__(self, other: Numeric.Input) -> Coin:
         return self.mul(other)
 
-    def __rmul__(self, other: Numeric.Input) -> Coin:
-        return self.mul(other)
-
     def div(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
         if isinstance(other_amount, int):
-            return Coin(self.denom, (self.amount // other))
+            return Coin(self.denom, (self.amount // other_amount))
         else:
-            return Coin(self.denom, (self.amount / other))
+            return Coin(self.denom, (self.amount / other_amount))
 
     def __truediv__(self, other: Numeric.Input) -> Coin:
         return self.div(other)
@@ -113,7 +100,10 @@ class Coin(JSONSerializable):
 
     def mod(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
-        return Coin(self.denom, self.amount % other)
+        if isinstance(other_amount, Dec):
+            return Coin(self.denom, Dec(self.amount).mod(other_amount))
+        else:
+            return Coin(self.denom, self.amount % other_amount)
 
     def __mod__(self, other: Numeric.Input) -> Coin:
         return self.mod(other)

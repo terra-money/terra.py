@@ -36,7 +36,7 @@ class OracleAPI(BaseAPI):
 
     async def exchange_rate(self, denom: str) -> Coin:
         rates = await self.exchange_rates()
-        return rates.get(denom)
+        return rates[denom]
 
     async def active_denoms(self) -> List[str]:
         return await self._c._get(f"/oracle/denoms/exchange_rates")

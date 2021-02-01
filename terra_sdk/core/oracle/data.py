@@ -100,7 +100,7 @@ class ExchangeRatePrevote(JSONSerializable):
         }
 
     @classmethod
-    def from_data(cls, data: Dict[str, str]) -> ExchangeRatePrevote:
+    def from_data(cls, data: dict) -> ExchangeRatePrevote:
         return cls(
             hash=data["hash"],
             denom=data["denom"],

@@ -209,6 +209,12 @@ class Dec:
     def __floordiv__(self, other):
         return self.div(int(other))
 
+    def mod(self, other) -> Dec:
+        return self.sub(self.div(other).mul(self))
+
+    def __mod__(self, other) -> Dec:
+        return self.mod(other)
+
     def __neg__(self) -> Dec:
         x = Dec(self)
         x._i *= -1

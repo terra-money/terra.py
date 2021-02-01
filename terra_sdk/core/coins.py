@@ -44,6 +44,8 @@ class Coins:
             return
 
         self._coins = Coins(denoms)._coins if denoms else {}
+
+        coins: Iterable[Coin]
         if isinstance(arg, dict):
             coins = [Coin(denom, arg[denom]) for denom in arg]
         else:
