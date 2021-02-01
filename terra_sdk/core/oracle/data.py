@@ -66,7 +66,7 @@ class AggregateExchangeRatePrevote(JSONSerializable):
 @attr.s
 class ExchangeRateVote(JSONSerializable):
 
-    exchange_rate: Coin = attr.ib(converter=Coin.parse)
+    exchange_rate: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     denom: str = attr.ib()
     voter: ValAddress = attr.ib()
 

@@ -22,7 +22,7 @@ class Delegation(JSONSerializable):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     shares: Dec = attr.ib(converter=Dec)
-    balance: Coin = attr.ib(converter=Coin.parse)
+    balance: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
     @classmethod
     def from_data(cls, data: dict) -> Delegation:
@@ -30,7 +30,7 @@ class Delegation(JSONSerializable):
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
             shares=data["shares"],
-            balance=data["balance"],
+            balance=Coin.from_data(data["balance"]),
         )
 
 

@@ -18,7 +18,7 @@ class MsgBeginRedelegate(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
     validator_dst_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)
+    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
     @classmethod
     def from_data(cls, data: dict) -> MsgBeginRedelegate:
@@ -39,7 +39,7 @@ class MsgDelegate(Msg):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)
+    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegate:
@@ -59,7 +59,7 @@ class MsgUndelegate(Msg):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)
+    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUndelegate:
@@ -107,7 +107,7 @@ class MsgCreateValidator(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     pubkey: ValConsPubKey = attr.ib()
-    value: Coin = attr.ib(converter=Coin.parse)
+    value: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
     @classmethod
     def from_data(cls, data: dict) -> MsgCreateValidator:

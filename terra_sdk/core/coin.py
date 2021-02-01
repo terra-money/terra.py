@@ -13,7 +13,7 @@ from terra_sdk.util.json import JSONSerializable
 class Coin(JSONSerializable):
 
     denom: str = attr.ib()
-    amount: Numeric.Output = attr.ib(converter=Numeric.parse)
+    amount: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore
 
     @staticmethod
     def parse(arg: Union[Coin, str, dict]) -> Coin:

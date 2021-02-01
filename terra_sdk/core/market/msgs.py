@@ -16,7 +16,7 @@ class MsgSwap(Msg):
     action = "swap"
 
     trader: AccAddress = attr.ib()
-    offer_coin: Coin = attr.ib(converter=Coin.parse)
+    offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
     @classmethod
@@ -37,7 +37,7 @@ class MsgSwapSend(Msg):
 
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()
-    offer_coin: Coin = attr.ib(converter=Coin.parse)
+    offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
     @classmethod
