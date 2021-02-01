@@ -22,6 +22,7 @@ class TxAPI(BaseAPI):
         memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdSignMsg:
@@ -32,7 +33,7 @@ class TxAPI(BaseAPI):
 
             # estimate the fee
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
-            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment)
+            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
 
         if account_number is None or sequence is None:
             account = await self._c.auth.account_info(source_address)
@@ -50,6 +51,7 @@ class TxAPI(BaseAPI):
         tx: Union[StdSignMsg, StdTx],
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
     ) -> StdFee:
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
@@ -68,7 +70,11 @@ class TxAPI(BaseAPI):
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
-        return StdFee(int(res["gas"]), Coins.from_data(res["fees"]))
+        fees = Coins.from_data(res["fees"])
+        # only pick the denoms we are interested in?
+        if denoms:
+            fees = fees.filter(lambda c: c.denom in denoms)
+        return StdFee(int(res["gas"]), fees)
 
     async def encode(self, tx: StdTx) -> str:
         res = await self._c._post("/txs/encode", tx.to_data())
@@ -82,7 +88,7 @@ class TxAPI(BaseAPI):
         data = {"tx": tx.to_data()["value"], "mode": mode}
         return await self._c._post("/txs", data, raw=True)
 
-    async def broadcast_sync(self, tx: StdTx):
+    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
         res = await self._broadcast(tx, "sync")
         return SyncTxBroadcastResult(
             height=res["height"],
@@ -92,14 +98,14 @@ class TxAPI(BaseAPI):
             codespace=res.get("codespace"),
         )
 
-    async def broadcast_async(self, tx: StdTx):
+    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
         res = await self._broadcast(tx, "async")
         return AsyncTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
         )
 
-    async def broadcast(self, tx: StdTx):
+    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
         res = await self._broadcast(tx, "block")
         return BlockTxBroadcastResult(
             height=res["height"],

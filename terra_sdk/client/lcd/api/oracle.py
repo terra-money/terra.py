@@ -13,7 +13,7 @@ from terra_sdk.core.oracle import (
 
 class OracleAPI(BaseAPI):
     async def votes(
-        self, denom: Optional[str] = None, validator: Optional[str] = None
+        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
     ) -> List[ExchangeRateVote]:
         if denom is not None and validator is not None:
             res = self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
@@ -44,14 +44,16 @@ class OracleAPI(BaseAPI):
     async def feeder_address(self, validator: ValAddress) -> AccAddress:
         return await self._c._get(f"/oracle/voters/{validator}/feeder")
 
-    async def misses(self, validator: str) -> int:
+    async def misses(self, validator: ValAddress) -> int:
         return int(await self._c._get(f"/oracle/voters/{validator}/miss"))
 
-    async def aggregate_prevote(self, validator: str) -> AggregateExchangeRatePrevote:
+    async def aggregate_prevote(
+        self, validator: ValAddress
+    ) -> AggregateExchangeRatePrevote:
         res = await self._c._get(f"/oracle/voters/{validator}/aggregate_prevote")
         return AggregateExchangeRatePrevote.from_data(res)
 
-    async def aggregate_vote(self, validator: str) -> AggregateExchangeRateVote:
+    async def aggregate_vote(self, validator: ValAddress) -> AggregateExchangeRateVote:
         res = await self._c._get(f"/oracle/voters/{validator}/aggregate_vote")
         return AggregateExchangeRateVote.from_data(res)
 

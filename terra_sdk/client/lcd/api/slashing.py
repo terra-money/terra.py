@@ -2,9 +2,13 @@ from ._base import BaseAPI
 
 from typing import List, Optional
 
+from terra_sdk.core import ValConsPubKey
+
 
 class SlashingAPI(BaseAPI):
-    async def signing_infos(self, val_cons_pub_key: Optional[str] = None) -> List[dict]:
+    async def signing_infos(
+        self, val_cons_pub_key: Optional[ValConsPubKey] = None
+    ) -> List[dict]:
         if val_cons_pub_key is None:
             url = f"/slashing/signing_infos"
         else:

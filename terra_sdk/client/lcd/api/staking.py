@@ -2,7 +2,7 @@ from ._base import BaseAPI
 
 from typing import List, Optional
 
-from terra_sdk.core import Coin
+from terra_sdk.core import Coin, AccAddress, ValAddress
 from terra_sdk.core.staking import (
     Delegation,
     UnbondingDelegation,
@@ -13,7 +13,9 @@ from terra_sdk.core.staking import (
 
 class StakingAPI(BaseAPI):
     async def delegations(
-        self, delegator: Optional[str] = None, validator: Optional[str] = None
+        self,
+        delegator: Optional[AccAddress] = None,
+        validator: Optional[ValAddress] = None,
     ) -> List[Delegation]:
         if delegator is not None and validator is not None:
             res = await self._c._get(
@@ -29,14 +31,18 @@ class StakingAPI(BaseAPI):
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
-    async def delegation(self, delegator: str, validator: str) -> Delegation:
+    async def delegation(
+        self, delegator: AccAddress, validator: ValAddress
+    ) -> Delegation:
         res = await self._c._get(
             f"/staking/delegators/{delegator}/delegations/{validator}"
         )
         return res
 
     async def unbonding_delegations(
-        self, delegator: Optional[str] = None, validator: Optional[str] = None
+        self,
+        delegator: Optional[AccAddress] = None,
+        validator: Optional[ValAddress] = None,
     ) -> List[UnbondingDelegation]:
         if delegator is not None and validator is not None:
             res = await self._c._get(
@@ -47,17 +53,17 @@ class StakingAPI(BaseAPI):
             res = await self._c._get(
                 f"/staking/delegators/{delegator}/unbonding_delegations"
             )
-            return list(map(UnbondingDelegation.from_data, res))
+            return [UnbondingDelegation.from_data(x) for x in res]
         elif validator is None:
             res = await self._c._get(
                 f"/staking/validators/{validator}/unbonding_delegations"
             )
-            return list(map(UnbondingDelegation.from_data, res))
+            return [UnbondingDelegation.from_data(x) for x in res]
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
     async def unbonding_delegation(
-        self, delegator: str, validator: str
+        self, delegator: AccAddress, validator: ValAddress
     ) -> UnbondingDelegation:
         res = await self._c._get(
             f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
@@ -66,9 +72,9 @@ class StakingAPI(BaseAPI):
 
     async def redelegations(
         self,
-        delegator: Optional[str] = None,
-        validator_src: Optional[str] = None,
-        validator_dst: Optional[str] = None,
+        delegator: Optional[AccAddress] = None,
+        validator_src: Optional[ValAddress] = None,
+        validator_dst: Optional[ValAddress] = None,
     ) -> List[Redelegation]:
         params = {
             "delegator": delegator,
@@ -78,7 +84,7 @@ class StakingAPI(BaseAPI):
         res = await self._c._get(f"/staking/redelegations", params)
         return list(map(Redelegation.from_data, res))
 
-    async def bonded_validators(self, delegator: str) -> List[Validator]:
+    async def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
         res = await self._c._get(f"/staking/delegators/{delegator}/validators")
         return list(map(Validator.from_data, res))
 
@@ -86,7 +92,7 @@ class StakingAPI(BaseAPI):
         res = await self._c._get(f"/staking/validators")
         return list(map(Validator.from_data, res))
 
-    async def validator(self, validator: str) -> Validator:
+    async def validator(self, validator: ValAddress) -> Validator:
         res = await self._c._get(f"/staking/validators/{validator}")
         return Validator.from_data(res)
 

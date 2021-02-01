@@ -1,4 +1,5 @@
 [tool.poetry]
+name = "terra-sdk"
 authors = ["Terraform Labs, PTE. <engineering@terra.money>"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -15,7 +16,6 @@ documentation = "https://docs.terra.money/sdk"
 homepage = "https://docs.terra.money/sdk"
 keywords = ["jigu", "blockchain", "terra", "defi", "crypto"]
 license = "MIT"
-name = "terra-sdk-python"
 packages = [
   {include = "terra_sdk"},
 ]

@@ -2,12 +2,13 @@ from ._base import BaseAPI
 
 from typing import Optional, List
 
+from terra_sdk.core import AccAddress
 from terra_sdk.core.msgauth import AuthorizationGrant
 
 
 class MsgAuthAPI(BaseAPI):
     async def grants(
-        self, granter: str, grantee: str, msg_type: Optional[str] = None
+        self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
     ) -> List[AuthorizationGrant]:
         if msg_type is None:
             res = await self._c._get(
