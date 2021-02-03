@@ -1,148 +1,124 @@
-"""Low-level transaction API"""
-import json
-from typing import Union
+from typing import List, Optional, Union
 
-from terra_sdk.client.lcd.api import ApiResponse, BaseApi, project
-from terra_sdk.core import Coin, Coins, StdFee, StdSignMsg, StdTx, TxBroadcastResult, TxInfo
-from terra_sdk.error import RpcError, TxError, get_codespace_error
-from terra_sdk.util import hash_amino
+from ._base import BaseAPI
 
-# TODO: add tx transformer like blocks.transformer() to accomodate for custom messages
-# ideal usage: terra.tx.transformer = my_transformer
+__all__ = ["TxAPI"]
 
-__all__ = ["TxApi"]
+from terra_sdk.core import Coin, Coins, Numeric
+from terra_sdk.core.auth import *
+from terra_sdk.core.broadcast import *
+from terra_sdk.core.msg import Msg
+from terra_sdk.util.hash import hash_amino
 
 
-class TxApi(BaseApi):
-    """Low-level transactions API that interacts directly with the Tendermint logic of
-    the node. Handles things that require on-chain connection such as hashing, amino-encoding,
-    broadcasting, and transaction lookups.
-    """
+class TxAPI(BaseAPI):
+    async def tx_info(self, tx_hash: str) -> TxInfo:
+        return TxInfo.from_data(await self._c._get(f"/txs/{tx_hash}", raw=True))
 
-    def tx_info(self, txhash: Union[str]) -> Union[ApiResponse, TxInfo]:
-        """Get the information for a transaction by its hash.
+    async def create(
+        self,
+        source_address: str,
+        msgs: List[Msg],
+        fee: Optional[StdFee] = None,
+        memo: str = "",
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
+        account_number: Optional[int] = None,
+        sequence: Optional[int] = None,
+    ) -> StdSignMsg:
+        if fee is None:
+            # create the fake fee
+            balance = await self._c.bank.balance(source_address)
+            balance_one = [Coin(c.denom, 1) for c in balance]
 
-        :param txhash: transaction hash to lookup
-        :type txhash: str
+            # estimate the fee
+            tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
+            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
 
-        Returns:
-            Transaction info if found, otherwise `None`.
-        """
-        # TODO: add tx schema checking / error handling?
-        res = self._api_get(f"/txs/{txhash}", unwrap=False)
-        return project(res, TxInfo.deserialize(res))
+        if account_number is None or sequence is None:
+            account = await self._c.auth.account_info(source_address)
+            if account_number is None:
+                account_number = account.account_number
+            if sequence is None:
+                sequence = account.sequence
 
-    def _tx_info_threaded(self, txhashes):
-        """Threaded version of tx_info, takes in a list of transaction hashes instead of
-        just one transaction hash."""
-        paths = [f"/txs/{txhash}" for txhash in txhashes]
-        responses = self.lcd.get_threaded(paths)
-        api_responses = [  # turn into API responses
-            self._handle_response(resp, unwrap=False) for resp in responses
-        ]
-        return [project(res, TxInfo.deserialize(res)) for res in api_responses]
+        return StdSignMsg(
+            self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
+        )
 
-    def estimate_fee(
+    async def estimate_fee(
         self,
         tx: Union[StdSignMsg, StdTx],
-        gas_prices: Coins = None,
-        gas_adjustment: Union[float, str] = None,
-    ) -> Union[ApiResponse, StdFee]:
-        """Estimate a transaction's fee by simulating it in the node.
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
+    ) -> StdFee:
+        gas_prices = gas_prices or self._c.gas_prices
+        gas_adjustment = gas_adjustment or self._c.gas_adjustment
 
-        Args:
-            tx (Union[StdSignMsg, StdTx]): Transaction to calculate fee for.
-            gas_prices (Coins, optional): Gas prices to use for estimation.
-            gas_adjustment (Union[float, str], optional, default=1.0): Multiplicative
-                factor to adjust for potential error.
-
-        Returns:
-            Estimated fee for the transaction.
-        """
-        if gas_prices is None:
-            gas_prices = self.terra.gas_prices
-        if gas_adjustment is None:
-            gas_adjustment = self.terra.gas_adjustment
         if isinstance(tx, StdSignMsg):
-            tx = tx.to_tx()
-        tx.fee = StdFee(
-            gas=0,  # simulation mode
-            amount=Coins(
-                Coin(d, 1) for d in gas_prices.denoms
-            ),  # set 1 per denom we are including
-        )
+            tx_value = tx.to_stdtx().to_data()["value"]
+        else:
+            tx_value = tx.to_data()["value"]
+
+        tx_value["fee"]["gas"] = "0"
+
         data = {
-            "tx": tx,
-            "gas_adjustment": str(gas_adjustment),
-            "gas_prices": gas_prices,
+            "tx": tx_value,
+            "gas_prices": gas_prices and Coins(gas_prices).to_data(),
+            "gas_adjustment": gas_adjustment and str(gas_adjustment),
         }
-        res = self._api_post("/txs/estimate_fee", data=data)
-        gas = int(res["gas"])
-        fees = Coins.deserialize(res["fees"])
-        return project(res, StdFee(gas=gas, amount=fees))
 
-    def encode(self, tx: StdTx) -> Union[ApiResponse, str]:
-        """Generate the transaction's Amino enconding.
+        res = await self._c._post("/txs/estimate_fee", data)
+        fees = Coins.from_data(res["fees"])
+        # only pick the denoms we are interested in?
+        if denoms:
+            fees = fees.filter(lambda c: c.denom in denoms)
+        return StdFee(int(res["gas"]), fees)
 
-        Args:
-            tx (StdTx): The transaction to encode.
+    async def encode(self, tx: StdTx) -> str:
+        res = await self._c._post("/txs/encode", tx.to_data())
+        return res["tx"]
 
-        Returns:
-            Base64-encoded string.
-        """
-        res = self._api_post("/txs/encode", data=tx, unwrap=False)
-        return project(res, res["tx"])
+    async def hash(self, tx: StdTx) -> str:
+        amino = await self.encode(tx)
+        return hash_amino(amino)
 
-    def hash(self, tx: StdTx) -> Union[ApiResponse, str]:
-        """Gets the hash of a StdTx. This is in the Tx API due to the fact that terra_sdk
-        must contact the server first, as Amino is not yet available on Python."""
-        res = self.encode(tx)
-        return project(res, hash_amino(res))
-
-    def broadcast(
-        self, tx: StdTx, mode: str = "block"
-    ) -> Union[ApiResponse, TxBroadcastResult]:
-        """Broadcast a signed transaction.
-
-        :param tx: The signed transaction to broadcast.
-        :param mode: One of "block", "sync", "async"
-        """
-        if mode not in ["block", "sync", "async"]:
-            raise ValueError(
-                f"mode '{mode}' is not legal; mode can only be 'block', 'sync', or 'async'."
-            )
+    async def _broadcast(self, tx: StdTx, mode: str) -> dict:
         data = {"tx": tx.to_data()["value"], "mode": mode}
-        try:
-            res = self._api_post("/txs", data=data, unwrap=False)
-        except RpcError as e:
-            raise TxError(e.message, tx)
-        if "code" in res:  # status code 200, but TxError
-            err = json.loads(res["raw_log"])
-            # There are 2 types of Codespace errors that will be caught here:
-            # 1) Message error : originating from a message
-            # 2) Transaction : stuff like out of gas, insufficient fee, etc.
-            #
-            # If message error, `err` will be a list with the following structure:
-            #
-            # {'msg_index': 0, 'success': False, 'log': '{"codespace":"market","code":2,
-            # "message":"No price registered with the oracle for asset: usdr"}', 'events':
-            # [{'type': 'message', 'attributes': [{'key': 'action', 'value': 'swap'}]}]}
-            #
-            # Otherwise, `err` will be like (example).
-            #
-            # {"codespace":"market","code":2,
-            # "message":"No price registered with the oracle for asset: usdr"}
-            if isinstance(
-                err, list
-            ):  # encountered a msg-error; find the offending msg (there will only be 1)
-                err = json.loads(err[-1]["log"])  # last one was the one responsible
-            raise get_codespace_error(
-                err["codespace"],
-                err["code"],
-                err["message"],
-                was_from_tx=True,
-                tx=tx,
-                broadcast_result=TxBroadcastResult.from_data(res, tx),
-            )
-        retval = TxBroadcastResult.from_data(res, tx)
-        return project(res, retval)
+        return await self._c._post("/txs", data, raw=True)
+
+    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+        res = await self._broadcast(tx, "sync")
+        return SyncTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+            raw_log=res["raw_log"],
+            code=res.get("code"),
+            codespace=res.get("codespace"),
+        )
+
+    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+        res = await self._broadcast(tx, "async")
+        return AsyncTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+        )
+
+    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+        res = await self._broadcast(tx, "block")
+        return BlockTxBroadcastResult(
+            height=res["height"],
+            txhash=res["txhash"],
+            raw_log=res["raw_log"],
+            gas_wanted=res["gas_wanted"],
+            gas_used=res["gas_used"],
+            logs=res.get("logs"),
+            code=res.get("code"),
+            codespace=res.get("codespace"),
+        )
+
+    async def search(self, options: dict = {}) -> dict:
+        res = await self._c._get("/txs", options, raw=True)
+        return res

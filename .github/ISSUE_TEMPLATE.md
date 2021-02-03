@@ -1,6 +1,6 @@
--   terra_sdk version:
--   Python version:
--   Operating System:
+- terra_sdk version:
+- Python version:
+- Operating System:
 
 ### Description
 

@@ -1,36 +1,26 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import attr
 
-from terra_sdk.core import AccAddress, ValAddress
-from terra_sdk.core.msg import StdMsg
-from terra_sdk.util.validation import Schemas as S
-from terra_sdk.util.validation import validate_acc_address, validate_val_address
+from terra_sdk.core import AccAddress, Coins, ValAddress
+from terra_sdk.core.msg import Msg
 
 __all__ = [
     "MsgModifyWithdrawAddress",
     "MsgWithdrawDelegationReward",
     "MsgWithdrawValidatorCommission",
+    "MsgFundCommunityPool",
 ]
 
 
-@dataclass
-class MsgModifyWithdrawAddress(StdMsg):
+@attr.s
+class MsgModifyWithdrawAddress(Msg):
 
     type = "distribution/MsgModifyWithdrawAddress"
     action = "set_withdraw_address"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^distribution/MsgModifyWithdrawAddress\Z"),
-        value=S.OBJECT(delegator_address=S.ACC_ADDRESS, withdraw_address=S.ACC_ADDRESS),
-    )
-
-    delegator_address: AccAddress
-    withdraw_address: AccAddress
-
-    def __post_init__(self):
-        self.delegator_address = validate_acc_address(self.delegator_address)
-        self.withdraw_address = validate_acc_address(self.withdraw_address)
+    delegator_address: AccAddress = attr.ib()
+    withdraw_address: AccAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgModifyWithdrawAddress:
@@ -41,25 +31,14 @@ class MsgModifyWithdrawAddress(StdMsg):
         )
 
 
-@dataclass
-class MsgWithdrawDelegationReward(StdMsg):
+@attr.s
+class MsgWithdrawDelegationReward(Msg):
 
     type = "distribution/MsgWithdrawDelegationReward"
     action = "withdraw_delegation_reward"
 
-    schema = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^distribution/MsgWithdrawDelegationReward\Z"),
-        value=S.OBJECT(
-            delegator_address=S.ACC_ADDRESS, validator_address=S.VAL_ADDRESS
-        ),
-    )
-
-    delegator_address: AccAddress
-    validator_address: ValAddress
-
-    def __post_init__(self):
-        self.delegator_address = validate_acc_address(self.delegator_address)
-        self.validator_address = validate_val_address(self.validator_address)
+    delegator_address: AccAddress = attr.ib()
+    validator_address: ValAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
@@ -70,23 +49,29 @@ class MsgWithdrawDelegationReward(StdMsg):
         )
 
 
-@dataclass
-class MsgWithdrawValidatorCommission(StdMsg):
+@attr.s
+class MsgWithdrawValidatorCommission(Msg):
 
     type = "distribution/MsgWithdrawValidatorCommission"
     action = "withdraw_validator_commission"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^distribution/MsgWithdrawValidatorCommission\Z"),
-        value=S.OBJECT(validator_address=S.VAL_ADDRESS),
-    )
-
-    validator_address: ValAddress
-
-    def __post_init__(self):
-        self.validator_address = validate_val_address(self.validator_address)
+    validator_address: ValAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawValidatorCommission:
         data = data["value"]
         return cls(validator_address=data["validator_address"])
+
+
+@attr.s
+class MsgFundCommunityPool(Msg):
+
+    type = "distribution/MsgFundCommunityPool"
+
+    depositor: AccAddress = attr.ib()
+    amount: Coins = attr.ib(converter=Coins)
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgFundCommunityPool:
+        data = data["value"]
+        return cls(depositor=data["depositor"], amount=Coins.from_data(data["amount"]))

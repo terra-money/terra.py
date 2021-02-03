@@ -1,57 +1,47 @@
 from __future__ import annotations
 
+import copy
 import hashlib
-from dataclasses import dataclass
-from decimal import Decimal
-from typing import Type, Union
 
-from terra_sdk.core import AccAddress, Coin, Dec, ValAddress
-from terra_sdk.core.msg import StdMsg
-from terra_sdk.util.validation import Schemas as S
-from terra_sdk.util.validation import (
-    validate_acc_address,
-    validate_same_denom,
-    validate_val_address,
-)
+import attr
+
+from terra_sdk.core import AccAddress, Coin, Coins, Dec, ValAddress
+from terra_sdk.core.msg import Msg
+from terra_sdk.util.json import dict_to_data
 
 __all__ = [
     "vote_hash",
+    "aggregate_vote_hash",
     "MsgExchangeRatePrevote",
     "MsgExchangeRateVote",
     "MsgDelegateFeedConsent",
+    "MsgAggregateExchangeRatePrevote",
+    "MsgAggregateExchangeRateVote",
 ]
 
 
-def vote_hash(salt: str, exchange_rate: Dec, denom: str, validator: str) -> str:
-    payload = f"{salt}:{exchange_rate}:{denom}:{validator}"
+def vote_hash(denom: str, exchange_rate: Dec, salt: str, validator: str) -> str:
+    payload = f"{denom}:{exchange_rate!s}:{salt}:{validator}"
     sha_hash = hashlib.sha256(payload.encode())
     return sha_hash.hexdigest()[:40]
 
 
-@dataclass
-class MsgExchangeRatePrevote(StdMsg):
+def aggregate_vote_hash(salt: str, exchange_rates: Coins, validator: str) -> str:
+    payload = f"{salt}:{exchange_rates!s}:{validator}"
+    sha_hash = hashlib.sha256(payload.encode())
+    return sha_hash.hexdigest()[:40]
+
+
+@attr.s
+class MsgExchangeRatePrevote(Msg):
 
     type = "oracle/MsgExchangeRatePrevote"
     action = "exchangerateprevote"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^oracle/MsgExchangeRatePrevote\Z"),
-        value=S.OBJECT(
-            hash=S.STRING,
-            denom=S.STRING,
-            feeder=S.ACC_ADDRESS,
-            validator=S.VAL_ADDRESS,
-        ),
-    )
-
-    hash: str
-    denom: str
-    feeder: AccAddress
-    validator: ValAddress
-
-    def __post_init__(self):
-        self.feeder = AccAddress(self.feeder)
-        self.validator = ValAddress(self.validator)
+    hash: str = attr.ib()
+    denom: str = attr.ib()
+    feeder: AccAddress = attr.ib()
+    validator: ValAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExchangeRatePrevote:
@@ -64,89 +54,106 @@ class MsgExchangeRatePrevote(StdMsg):
         )
 
 
-@dataclass
-class MsgExchangeRateVote(StdMsg):
+@attr.s
+class MsgExchangeRateVote(Msg):
 
     type = "oracle/MsgExchangeRateVote"
     action = "exchangeratevote"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^oracle/MsgExchangeRateVote\Z"),
-        value=S.OBJECT(
-            exchange_rate=Dec.__schema__,
-            salt=S.STRING,
-            denom=S.STRING,
-            feeder=S.ACC_ADDRESS,
-            validator=S.VAL_ADDRESS,
-        ),
-    )
+    exchange_rate: Dec = attr.ib(converter=Dec)
+    salt: str = attr.ib()
+    denom: str = attr.ib()
+    feeder: AccAddress = attr.ib()
+    validator: ValAddress = attr.ib()
 
-    exchange_rate: Union[str, Type[Decimal], Coin, int]
-    salt: str
-    denom: str
-    feeder: AccAddress
-    validator: ValAddress
-
-    def __post_init__(self):
-        self.feeder = validate_acc_address(self.feeder)
-        self.validator = validate_val_address(self.validator)
-        if not isinstance(self.exchange_rate, Coin):
-            self.exchange_rate = Coin(self.denom, self.exchange_rate)
-        else:
-            validate_same_denom(self.exchange_rate.denom, self.denom)
-
-    def msg_value(self) -> dict:
-        d = dict(self.__dict__)
-        d["exchange_rate"] = str(self.exchange_rate.amount)
-        return d
-
-    @property
-    def vote_hash(self):
-        return vote_hash(
-            self.salt, self.exchange_rate.amount, self.denom, self.validator
+    @classmethod
+    def from_data(cls, data: dict) -> MsgExchangeRateVote:
+        data = data["value"]
+        return cls(
+            exchange_rate=data["exchange_rate"],
+            salt=data["salt"],
+            denom=data["denom"],
+            feeder=data["feeder"],
+            validator=data["validator"],
         )
 
-    @property
-    def prevote(self):
+    def get_vote_hash(self) -> str:
+        return vote_hash(self.denom, self.exchange_rate, self.salt, self.validator)
+
+    def get_prevote(self) -> MsgExchangeRatePrevote:
         return MsgExchangeRatePrevote(
-            hash=self.vote_hash,
+            hash=self.get_vote_hash(),
             denom=self.denom,
             feeder=self.feeder,
             validator=self.validator,
         )
 
-    @classmethod
-    def from_data(cls, data: dict) -> MsgExchangeRateVote:
-        data = data["value"]
-        xr = Coin(data["denom"], data["exchange_rate"])
-        return cls(
-            exchange_rate=xr,
-            salt=data["salt"],
-            denom=xr.denom,
-            feeder=data["feeder"],
-            validator=data["validator"],
-        )
 
-
-@dataclass
-class MsgDelegateFeedConsent(StdMsg):
+@attr.s
+class MsgDelegateFeedConsent(Msg):
 
     type = "oracle/MsgDelegateFeedConsent"
     action = "delegatefeeder"
 
-    __schema__ = S.OBJECT(
-        type=S.STRING_WITH_PATTERN(r"^oracle/MsgDelegateFeedConsent\Z"),
-        value=S.OBJECT(operator=S.VAL_ADDRESS, delegate=S.ACC_ADDRESS),
-    )
-
-    operator: ValAddress
-    delegate: AccAddress
-
-    def __post_init__(self):
-        self.operator = validate_val_address(self.operator)
-        self.delegate = validate_acc_address(self.delegate)
+    operator: ValAddress = attr.ib()
+    delegate: AccAddress = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegateFeedConsent:
         data = data["value"]
         return cls(operator=data["operator"], delegate=data["delegate"])
+
+
+@attr.s
+class MsgAggregateExchangeRatePrevote(Msg):
+
+    type = "oracle/MsgAggregateExchangeRatePrevote"
+
+    hash: str = attr.ib()
+    feeder: AccAddress = attr.ib()
+    validator: ValAddress = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgAggregateExchangeRatePrevote:
+        data = data["value"]
+        return cls(
+            hash=data["hash"],
+            feeder=data["feeder"],
+            validator=data["validator"],
+        )
+
+
+@attr.s
+class MsgAggregateExchangeRateVote(Msg):
+
+    type = "oracle/MsgAggregateExchangeRateVote"
+
+    exchange_rates: Coins = attr.ib(converter=Coins)
+    salt: str = attr.ib()
+    feeder: AccAddress = attr.ib()
+    validator: ValAddress = attr.ib()
+
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["exchange_rates"] = str(self.exchange_rates)
+        return {"type": self.type, "value": dict_to_data(d)}
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgAggregateExchangeRateVote:
+        data = data["value"]
+        return cls(
+            exchange_rates=Coins.from_str(data["exchange_rates"]),
+            salt=data["salt"],
+            feeder=data["feeder"],
+            validator=data["validator"],
+        )
+
+    def get_aggregate_vote_hash(self) -> str:
+        return aggregate_vote_hash(self.salt, self.exchange_rates, self.validator)
+
+    def get_aggregate_prevote(self) -> MsgAggregateExchangeRatePrevote:
+        return MsgAggregateExchangeRatePrevote(
+            hash=self.get_aggregate_vote_hash(),
+            feeder=self.feeder,
+            validator=self.validator,
+        )

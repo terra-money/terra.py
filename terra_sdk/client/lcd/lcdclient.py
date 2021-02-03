@@ -1,88 +1,101 @@
 from __future__ import annotations
 
-import concurrent.futures
-import sys
-from concurrent.futures.thread import ThreadPoolExecutor
-from typing import List
+import json
+from asyncio import AbstractEventLoop, get_event_loop
+from typing import Dict, Optional, Union
 from urllib.parse import urljoin
 
-import requests
-from requests_futures.sessions import FuturesSession
+from aiohttp import ClientSession
 
-from terra_sdk.__version__ import __version__
+from terra_sdk.core import Coins, Numeric
+from terra_sdk.key.key import Key
+from terra_sdk.util.json import dict_to_data
 
-from .lcdrequest import LcdRequest
-from .middlewares import (
-    handle_codespace_errors,
-    handle_general_errors,
-    set_query,
-    set_timeout,
-)
-
-pv = sys.version_info
-
-CLIENT_HEADERS = {
-    "Accept": "application/json",
-    "User-Agent": f"terra_sdk v{__version__} (Python {pv[0]}.{pv[1]}.{pv[2]})",
-}
-
-
-def create_session():
-    session = requests.session()
-    session.headers.update(CLIENT_HEADERS)
-    return session
+from .api.auth import AuthAPI
+from .api.bank import BankAPI
+from .api.distribution import DistributionAPI
+from .api.gov import GovAPI
+from .api.market import MarketAPI
+from .api.mint import MintAPI
+from .api.msgauth import MsgAuthAPI
+from .api.oracle import OracleAPI
+from .api.slashing import SlashingAPI
+from .api.staking import StakingAPI
+from .api.supply import SupplyAPI
+from .api.tendermint import TendermintAPI
+from .api.treasury import TreasuryAPI
+from .api.tx import TxAPI
+from .api.wasm import WasmAPI
+from .wallet import Wallet
 
 
-class LcdClient(object):
-    """Manages the connection to a Terra LCD node, helps with procesing requests."""
+class LCDClient:
+    def __init__(
+        self,
+        url: str,
+        chain_id: str = None,
+        gas_prices: Coins.Input = None,
+        gas_adjustment: Numeric.Input = None,
+        loop: Optional[AbstractEventLoop] = None,
+    ):
 
-    def __init__(self, terra, url: str = "", timeout: int = 30, threads: int = 1):
+        if loop is None:
+            loop = get_event_loop()
+
+        self.session = ClientSession(headers={"Accept": "application/json"}, loop=loop)
+        self.chain_id = chain_id
         self.url = url
-        self.timeout = timeout
-        self.executor = ThreadPoolExecutor(max_workers=self._nthreads)
-        self.session = create_session()
+        self.gas_prices = Coins(gas_prices)
+        self.gas_adjustment = gas_adjustment
+        self._last_request_height = None
 
-    @property
-    def threads(self) -> int:
-        return self._nthreads
+        self.auth = AuthAPI(self)
+        self.bank = BankAPI(self)
+        self.distribution = DistributionAPI(self)
+        self.gov = GovAPI(self)
+        self.market = MarketAPI(self)
+        self.mint = MintAPI(self)
+        self.msgauth = MsgAuthAPI(self)
+        self.oracle = OracleAPI(self)
+        self.slashing = SlashingAPI(self)
+        self.staking = StakingAPI(self)
+        self.supply = SupplyAPI(self)
+        self.tendermint = TendermintAPI(self)
+        self.treasury = TreasuryAPI(self)
+        self.wasm = WasmAPI(self)
+        self.tx = TxAPI(self)
 
-    @threads.setter
-    def threads(self, other: int):
-        self._nthreads = other
-        self.executor = ThreadPoolExecutor(max_workers=self._nthreads)
+    def wallet(self, key: Key) -> Wallet:
+        return Wallet(self, key)
 
-    def _create_url(self, path):
-        return urljoin(self.url, path)
+    async def _get(
+        self, endpoint: str, params: Optional[dict] = None, raw: bool = False
+    ):
+        async with self.session.get(
+            urljoin(self.url, endpoint), params=params
+        ) as response:
+            result = await response.json()
+        try:
+            self._last_request_height = result["height"]
+        except KeyError:
+            self._last_request_height = None
+        return result if raw else result["result"]
 
-    def _build_request(self, method, path, kwargs):
-        """Applies middlewares to request."""
-        request = LcdRequest(method=method, url=self._create_url(path), kwargs=kwargs)
-        for req_m in self.request_middlewares:
-            request = req_m(self, request)  # TODO: use reduce()
-        return request
+    async def _post(
+        self, endpoint: str, data: Optional[dict] = None, raw: bool = False
+    ):
+        async with self.session.post(
+            urljoin(self.url, endpoint), json=data and dict_to_data(data)
+        ) as response:
+            result = await response.json()
+        try:
+            self._last_request_height = result["height"]
+        except KeyError:
+            self._last_request_height = None
+        return result if raw else result["result"]
 
-    def _send_request(self, request, use_future=False):
-        session = self.futures_session if use_future else self.session
-        return getattr(session, request.method)(request.url, **request.kwargs)
+    async def __aenter__(self):
+        return self
 
-    def handle_response(self, response):
-        """Applies middlewares to response."""
-        r = response
-        for resp_m in self.response_middlewares:
-            r = resp_m(self, r)
-        return r
-
-    def _request(self, method, path, **kwargs):
-        request = self._build_request(method, path, kwargs)
-        response = self._send_request(request)
-        return self.handle_response(response)
-
-    def get(self, path, build=False, **kwargs):
-        if build:  # builds a GET request, but does not send.
-            return self._build_request("get", path, kwargs)
-        return self._request("get", path, **kwargs)
-
-    def post(self, path, build=False, **kwargs):
-        if build:
-            return self._build_request("post", path, kwargs)
-        return self._request("post", path, **kwargs)
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.session.close()
