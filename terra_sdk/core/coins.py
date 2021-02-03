@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Dict, Iterable, Union, Iterator, Callable, Any, List, Optional
 import copy
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
+
+import attr
 
 from .coin import Coin
 from .numeric import Numeric
-
-import attr
 
 
 class Coins:

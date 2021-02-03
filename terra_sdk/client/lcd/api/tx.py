@@ -74,7 +74,7 @@ class TxAPI(BaseAPI):
         fees = Coins.from_data(res["fees"])
         # only pick the denoms we are interested in?
         if denoms:
-            fees = fees.filter(lambda c: c.denom in denoms)
+            fees = fees.filter(lambda c: c.denom in denoms)  # type: ignore
         return StdFee(int(res["gas"]), fees)
 
     async def encode(self, tx: StdTx) -> str:

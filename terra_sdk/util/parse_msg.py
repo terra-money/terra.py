@@ -39,10 +39,10 @@ from .base import create_demux
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
+    MsgFundCommunityPool,
+    MsgModifyWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
-    MsgModifyWithdrawAddress,
-    MsgFundCommunityPool,
 ]
 gov_msgs = [MsgDeposit, MsgSubmitProposal, MsgVote]
 market_msgs = [MsgSwap, MsgSwapSend]
@@ -52,11 +52,11 @@ msgauth_msgs = [
     MsgRevokeAuthorization,
 ]
 oracle_msgs = [
+    MsgAggregateExchangeRatePrevote,
+    MsgAggregateExchangeRateVote,
+    MsgDelegateFeedConsent,
     MsgExchangeRatePrevote,
     MsgExchangeRateVote,
-    MsgDelegateFeedConsent,
-    MsgAggregateExchangeRateVote,
-    MsgAggregateExchangeRatePrevote,
 ]
 slashing_msgs = [MsgUnjail]
 staking_msgs = [
@@ -67,10 +67,10 @@ staking_msgs = [
     MsgUndelegate,
 ]
 wasm_msgs = [
-    MsgStoreCode,
-    MsgInstantiateContract,
     MsgExecuteContract,
+    MsgInstantiateContract,
     MsgMigrateContract,
+    MsgStoreCode,
     MsgUpdateContractOwner,
 ]
 

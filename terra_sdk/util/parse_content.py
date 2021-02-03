@@ -10,10 +10,10 @@ from .base import create_demux
 
 parse_content = create_demux(
     [
-        TextProposal,
         CommunityPoolSpendProposal,
-        TaxRateUpdateProposal,
-        RewardWeightUpdateProposal,
+        TextProposal,
         ParameterChangeProposal,
+        RewardWeightUpdateProposal,
+        TaxRateUpdateProposal,
     ]
 )
