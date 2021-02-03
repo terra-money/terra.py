@@ -21,7 +21,7 @@ packages = [
 ]
 readme = "README.md"
 repository = "https://github.com/terra-project/terra-sdk-python"
-version = "1.0.0"
+version = "0.5.0"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.7.3"
