@@ -1,6 +1,6 @@
-from ._base import BaseAPI
-
 from terra_sdk.core import AccAddress, ValAddress
+
+from ._base import BaseAPI
 
 
 class DistributionAPI(BaseAPI):

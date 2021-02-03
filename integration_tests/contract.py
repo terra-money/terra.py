@@ -1,12 +1,11 @@
 import asyncio
 import base64
-
 from pathlib import Path
 
-from terra_sdk.core import Coins
 from terra_sdk.client.localterra import LocalTerra
+from terra_sdk.core import Coins
 from terra_sdk.core.auth import StdFee
-from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract
+from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
 
 
 async def main():

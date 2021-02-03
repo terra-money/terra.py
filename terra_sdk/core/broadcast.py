@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Optional, List
+from typing import List, Optional
 
 import attr
+
 from terra_sdk.core.auth import TxLog, parse_tx_logs
 from terra_sdk.util.json import JSONSerializable
 

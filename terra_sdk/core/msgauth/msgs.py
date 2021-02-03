@@ -1,12 +1,15 @@
 from __future__ import annotations
-from typing import List
+
 import copy
+from typing import List
+
+import attr
+
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
-from .data import Authorization
 
-import attr
+from .data import Authorization
 
 __all__ = ["MsgExecAuthorized", "MsgGrantAuthorization", "MsgRevokeAuthorization"]
 

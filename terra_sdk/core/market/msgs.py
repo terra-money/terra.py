@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core import Coin, AccAddress
+from terra_sdk.core import AccAddress, Coin
 from terra_sdk.core.msg import Msg
-
 
 __all__ = ["MsgSwap", "MsgSwapSend"]
 

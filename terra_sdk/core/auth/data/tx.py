@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from typing import Optional, List, Dict
-
-
-from terra_sdk.core.public_key import PublicKey
-from terra_sdk.core.coins import Coins
-from terra_sdk.util.json import JSONSerializable
-from terra_sdk.core.msg import Msg
+from typing import Dict, List, Optional
 
 import attr
+
+from terra_sdk.core.coins import Coins
+from terra_sdk.core.msg import Msg
+from terra_sdk.core.public_key import PublicKey
+from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s

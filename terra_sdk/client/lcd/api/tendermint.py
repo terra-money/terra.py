@@ -1,6 +1,6 @@
-from ._base import BaseAPI
-
 from typing import Optional
+
+from ._base import BaseAPI
 
 
 class TendermintAPI(BaseAPI):

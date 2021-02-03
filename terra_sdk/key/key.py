@@ -1,10 +1,11 @@
 import abc
 import base64
-from bech32 import bech32_encode, bech32_decode, convertbits
 import hashlib
 from typing import Optional
 
-from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx, PublicKey
+from bech32 import bech32_decode, bech32_encode, convertbits
+
+from terra_sdk.core.auth import PublicKey, StdSignature, StdSignMsg, StdTx
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 

@@ -1,9 +1,9 @@
-from terra_sdk.core.bank import MsgSend, MsgMultiSend
+from terra_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_sdk.core.distribution import (
+    MsgFundCommunityPool,
+    MsgModifyWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
-    MsgModifyWithdrawAddress,
-    MsgFundCommunityPool,
 )
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.market import MsgSwap, MsgSwapSend
@@ -11,6 +11,13 @@ from terra_sdk.core.msgauth import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,
+)
+from terra_sdk.core.oracle import (
+    MsgAggregateExchangeRatePrevote,
+    MsgAggregateExchangeRateVote,
+    MsgDelegateFeedConsent,
+    MsgExchangeRatePrevote,
+    MsgExchangeRateVote,
 )
 from terra_sdk.core.slashing import MsgUnjail
 from terra_sdk.core.staking import (
@@ -20,18 +27,11 @@ from terra_sdk.core.staking import (
     MsgEditValidator,
     MsgUndelegate,
 )
-from terra_sdk.core.oracle import (
-    MsgExchangeRatePrevote,
-    MsgExchangeRateVote,
-    MsgDelegateFeedConsent,
-    MsgAggregateExchangeRateVote,
-    MsgAggregateExchangeRatePrevote,
-)
 from terra_sdk.core.wasm import (
-    MsgStoreCode,
-    MsgInstantiateContract,
     MsgExecuteContract,
+    MsgInstantiateContract,
     MsgMigrateContract,
+    MsgStoreCode,
     MsgUpdateContractOwner,
 )
 

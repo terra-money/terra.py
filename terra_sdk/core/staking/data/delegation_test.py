@@ -1,4 +1,4 @@
-from terra_sdk.core.staking import UnbondingDelegation, Delegation, Redelegation
+from terra_sdk.core.staking import Delegation, Redelegation, UnbondingDelegation
 
 
 def test_deserialize_unbonding_delegation_examples(load_json_examples):

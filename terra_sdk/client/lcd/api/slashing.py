@@ -1,8 +1,8 @@
-from ._base import BaseAPI
-
 from typing import List, Optional
 
 from terra_sdk.core import ValConsPubKey
+
+from ._base import BaseAPI
 
 
 class SlashingAPI(BaseAPI):

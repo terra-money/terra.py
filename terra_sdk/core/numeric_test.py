@@ -1,4 +1,5 @@
 import pytest
+
 from terra_sdk.core import Dec
 
 

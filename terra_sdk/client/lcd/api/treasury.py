@@ -1,6 +1,6 @@
-from ._base import BaseAPI
+from terra_sdk.core import Coin, Coins, Dec
 
-from terra_sdk.core import Dec, Coin, Coins
+from ._base import BaseAPI
 
 
 class TreasuryAPI(BaseAPI):

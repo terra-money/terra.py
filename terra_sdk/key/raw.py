@@ -1,8 +1,9 @@
-from .key import Key
+import hashlib
 
 from ecdsa import SECP256k1, SigningKey
 from ecdsa.util import sigencode_string_canonize
-import hashlib
+
+from .key import Key
 
 __all__ = ["RawKey"]
 

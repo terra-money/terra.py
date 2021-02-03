@@ -1,6 +1,6 @@
-from ._base import BaseAPI
-
 from terra_sdk.core.coins import Coins
+
+from ._base import BaseAPI
 
 
 class SupplyAPI(BaseAPI):

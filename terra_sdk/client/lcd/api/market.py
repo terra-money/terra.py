@@ -1,6 +1,6 @@
-from ._base import BaseAPI
+from terra_sdk.core import Coin, Dec
 
-from terra_sdk.core import Dec, Coin
+from ._base import BaseAPI
 
 
 class MarketAPI(BaseAPI):

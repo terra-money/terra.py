@@ -1,7 +1,7 @@
-from terra_sdk.key.mnemonic import MnemonicKey
 from terra_sdk.core import Coins
-from terra_sdk.core.auth import StdSignMsg, StdFee
+from terra_sdk.core.auth import StdFee, StdSignMsg
 from terra_sdk.core.bank import MsgSend
+from terra_sdk.key.mnemonic import MnemonicKey
 
 
 def test_derivation():

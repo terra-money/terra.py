@@ -1,4 +1,4 @@
-from terra_sdk.core.strings import AccAddress, ValAddress, AccPubKey, ValPubKey
+from terra_sdk.core.strings import AccAddress, AccPubKey, ValAddress, ValPubKey
 
 
 def test_validates_account_address():

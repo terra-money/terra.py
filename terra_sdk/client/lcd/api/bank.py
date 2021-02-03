@@ -1,6 +1,6 @@
-from ._base import BaseAPI
+from terra_sdk.core import AccAddress, Coins
 
-from terra_sdk.core import Coins, AccAddress
+from ._base import BaseAPI
 
 
 class BankAPI(BaseAPI):

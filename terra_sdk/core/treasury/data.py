@@ -3,7 +3,8 @@ from __future__ import annotations
 __all__ = ["PolicyConstraints"]
 
 import attr
-from terra_sdk.core import Dec, Coin
+
+from terra_sdk.core import Coin, Dec
 
 
 @attr.s

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from terra_sdk.util.base import BaseTerraData
 
 

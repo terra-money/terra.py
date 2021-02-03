@@ -1,6 +1,6 @@
-from terra_sdk.key.mnemonic import MnemonicKey
-
 from typing import Dict
+
+from terra_sdk.key.mnemonic import MnemonicKey
 
 from .lcd import LCDClient, Wallet
 

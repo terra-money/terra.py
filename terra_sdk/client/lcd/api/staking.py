@@ -1,14 +1,14 @@
-from ._base import BaseAPI
-
 from typing import List, Optional
 
-from terra_sdk.core import Coin, AccAddress, ValAddress
+from terra_sdk.core import AccAddress, Coin, ValAddress
 from terra_sdk.core.staking import (
     Delegation,
-    UnbondingDelegation,
     Redelegation,
+    UnbondingDelegation,
     Validator,
 )
+
+from ._base import BaseAPI
 
 
 class StakingAPI(BaseAPI):

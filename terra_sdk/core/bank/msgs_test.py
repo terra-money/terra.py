@@ -1,4 +1,4 @@
-from terra_sdk.core.bank import MsgSend, MsgMultiSend
+from terra_sdk.core.bank import MsgMultiSend, MsgSend
 
 
 def test_deserializes_msg_send(load_msg_examples):

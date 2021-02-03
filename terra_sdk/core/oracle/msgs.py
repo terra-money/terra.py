@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import hashlib
 import copy
+import hashlib
+
 import attr
 
-from terra_sdk.core import Dec, Coin, Coins, AccAddress, ValAddress
+from terra_sdk.core import AccAddress, Coin, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
-
 
 __all__ = [
     "vote_hash",

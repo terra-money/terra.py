@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import re
 from typing import Union
 
 import attr
-import re
+
+from terra_sdk.util.json import JSONSerializable
 
 from .numeric import Dec, Numeric
-from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s(frozen=True)

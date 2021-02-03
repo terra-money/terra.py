@@ -1,2 +1,2 @@
-from .msgs import *
 from .data import *
+from .msgs import *

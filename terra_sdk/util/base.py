@@ -1,8 +1,8 @@
 """Some useful base classes to inherit from."""
 
-from typing import List, Dict, Any, Callable
+from typing import Any, Callable, Dict, List
 
-from .json import dict_to_data, JSONSerializable
+from .json import JSONSerializable, dict_to_data
 
 
 class BaseTerraData(JSONSerializable):

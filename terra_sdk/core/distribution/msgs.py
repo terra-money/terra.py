@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core import Coins, AccAddress, ValAddress
+from terra_sdk.core import AccAddress, Coins, ValAddress
 from terra_sdk.core.msg import Msg
 
 __all__ = [

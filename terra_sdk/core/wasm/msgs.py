@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-import attr
 import copy
 import json
+from base64 import b64decode, b64encode
+
+import attr
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
-from base64 import b64encode, b64decode
 
 __all__ = [
     "b64_to_dict",

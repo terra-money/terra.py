@@ -1,6 +1,8 @@
 from __future__ import annotations
-import attr
+
 import copy
+
+import attr
 
 from terra_sdk.core import Coin, Coins
 from terra_sdk.util.base import BaseTerraData

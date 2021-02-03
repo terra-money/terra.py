@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import attr
 
-from terra_sdk.core import Coins, AccAddress
+from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.gov import Content
 
 __all__ = ["CommunityPoolSpendProposal"]

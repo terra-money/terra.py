@@ -1,14 +1,14 @@
-from ._base import BaseAPI
+from typing import List, Optional
 
-from typing import Optional, List
-
-from terra_sdk.core import Coin, AccAddress, Coins, ValAddress
+from terra_sdk.core import AccAddress, Coin, Coins, ValAddress
 from terra_sdk.core.oracle import (
-    ExchangeRatePrevote,
-    ExchangeRateVote,
     AggregateExchangeRatePrevote,
     AggregateExchangeRateVote,
+    ExchangeRatePrevote,
+    ExchangeRateVote,
 )
+
+from ._base import BaseAPI
 
 
 class OracleAPI(BaseAPI):

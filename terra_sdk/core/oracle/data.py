@@ -4,7 +4,7 @@ from typing import Dict
 
 import attr
 
-from terra_sdk.core import Coin, Dec, Coins, AccAddress, ValAddress
+from terra_sdk.core import AccAddress, Coin, Coins, Dec, ValAddress
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = [

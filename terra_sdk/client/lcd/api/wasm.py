@@ -1,7 +1,7 @@
-from ._base import BaseAPI
-
-from typing import Any
 import json
+from typing import Any
+
+from ._base import BaseAPI
 
 
 class WasmAPI(BaseAPI):

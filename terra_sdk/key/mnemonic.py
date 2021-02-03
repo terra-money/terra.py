@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 from typing import Optional
 
-import hashlib
-from bip32utils import BIP32Key, BIP32_HARDEN
+from bip32utils import BIP32_HARDEN, BIP32Key
 from mnemonic import Mnemonic
 
 from .raw import RawKey
