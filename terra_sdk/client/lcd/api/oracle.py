@@ -7,6 +7,7 @@ from terra_sdk.core.oracle import (
     ExchangeRatePrevote,
     ExchangeRateVote,
 )
+from terra_sdk.exceptions import LCDResponseError
 
 from ._base import BaseAPI
 
@@ -64,12 +65,26 @@ class OracleAPI(BaseAPI):
 
     async def aggregate_prevote(
         self, validator: ValAddress
-    ) -> AggregateExchangeRatePrevote:
-        res = await self._c._get(f"/oracle/voters/{validator}/aggregate_prevote")
+    ) -> Optional[AggregateExchangeRatePrevote]:
+        try:
+            res = await self._c._get(f"/oracle/voters/{validator}/aggregate_prevote")
+        except LCDResponseError as e:
+            if e.response.status == 404:
+                return None
+            else:
+                raise e
         return AggregateExchangeRatePrevote.from_data(res)
 
-    async def aggregate_vote(self, validator: ValAddress) -> AggregateExchangeRateVote:
-        res = await self._c._get(f"/oracle/voters/{validator}/aggregate_vote")
+    async def aggregate_vote(
+        self, validator: ValAddress
+    ) -> Optional[AggregateExchangeRateVote]:
+        try:
+            res = await self._c._get(f"/oracle/voters/{validator}/aggregate_vote")
+        except LCDResponseError as e:
+            if e.response.status == 404:
+                return None
+            else:
+                raise e
         return AggregateExchangeRateVote.from_data(res)
 
     async def parameters(self) -> dict:

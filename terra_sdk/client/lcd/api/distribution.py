@@ -1,6 +1,9 @@
-from terra_sdk.core import AccAddress, Coins, ValAddress
 from typing import Dict
+
 import attr
+
+from terra_sdk.core import AccAddress, Coins, ValAddress
+
 from ._base import BaseAPI
 
 

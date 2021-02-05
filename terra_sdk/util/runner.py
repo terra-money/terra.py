@@ -1,5 +1,5 @@
 import asyncio
-from typing import Callable, Any
+from typing import Any, Callable
 
 from terra_sdk.client.lcd import LCDClient
 
