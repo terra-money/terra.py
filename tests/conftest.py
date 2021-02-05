@@ -5,7 +5,7 @@ import pytest
 
 
 def _load(file):
-    return json.load(open(Path(__file__).parent / "data" / file))
+    return json.load(open(Path(__file__).parent / "json_examples" / file))
 
 
 def _load_msg_examples(msgtype, file):

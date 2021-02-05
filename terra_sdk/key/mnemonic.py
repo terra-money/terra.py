@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import hashlib
-from typing import Optional
-
 from bip32utils import BIP32_HARDEN, BIP32Key
 from mnemonic import Mnemonic
 
@@ -14,11 +11,16 @@ LUNA_COIN_TYPE = 330
 
 
 class MnemonicKey(RawKey):
+    """Key implementation based on BIP39 mnemonic."""
 
     mnemonic: str
     account: int
     index: int
-    coin_type = int
+    coin_type: int
+
+    @property
+    def hd_path(self):
+        return f"m/44'/{self.coin_type}'/{self.account}'/0/{self.index}"
 
     def __init__(
         self,

@@ -3,8 +3,6 @@ from __future__ import annotations
 import copy
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
-import attr
-
 from .coin import Coin
 from .numeric import Numeric
 
@@ -14,6 +12,12 @@ class Coins:
     Input = Union[Iterable[Coin], str, Dict[str, Numeric.Input], Dict[str, Coin]]
 
     _coins: Dict[str, Coin]
+
+    def __repr__(self) -> str:
+        if len(self) == 0:
+            return "Coins()"
+        else:
+            return f'Coins("{self!s}")'
 
     def __str__(self) -> str:
         return ",".join(str(coin) for coin in self)
@@ -135,6 +139,9 @@ class Coins:
 
     def __iter__(self):
         return iter(self.to_list())
+
+    def __len__(self):
+        return len(self.to_list())
 
     def __contains__(self, denom: str) -> bool:
         return denom in self._coins

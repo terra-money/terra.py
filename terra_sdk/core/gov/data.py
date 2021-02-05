@@ -4,7 +4,7 @@ import copy
 
 import attr
 
-from terra_sdk.core import Coin, Coins
+from terra_sdk.core import Coins
 from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 

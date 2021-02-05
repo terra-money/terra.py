@@ -3,9 +3,9 @@ import base64
 import hashlib
 from typing import Optional
 
-from bech32 import bech32_decode, bech32_encode, convertbits
+from bech32 import bech32_encode, convertbits
 
-from terra_sdk.core.auth import PublicKey, StdSignature, StdSignMsg, StdTx
+from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 

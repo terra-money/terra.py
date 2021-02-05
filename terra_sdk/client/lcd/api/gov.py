@@ -1,17 +1,22 @@
 from typing import List
 
+from terra_sdk.core.gov import Proposal
+
 from ._base import BaseAPI
 
 
 class GovAPI(BaseAPI):
-    async def proposals(self) -> List[dict]:
-        return await self._c._get(f"/gov/proposals")
+    async def proposals(self) -> List[Proposal]:
+        res = await self._c._get("/gov/proposals")
+        return [Proposal.from_data(d) for d in res]
 
-    async def proposal(self, proposal_id: int) -> dict:
-        return await self._c._get(f"/gov/proposals/{proposal_id}")
+    async def proposal(self, proposal_id: int) -> Proposal:
+        res = await self._c._get("/gov/proposals/{proposal_id}")
+        return Proposal.from_data(res)
 
     async def proposer(self, proposal_id: int) -> str:
-        return await self._c._get(f"/gov/proposals/{proposal_id}/proposer")
+        res = await self._c._get(f"/gov/proposals/{proposal_id}/proposer")
+        return res["proposer"]
 
     async def deposits(self, proposal_id: int):
         return await self._c._get(f"/gov/proposals/{proposal_id}/deposits")
@@ -23,13 +28,13 @@ class GovAPI(BaseAPI):
         return await self._c._get(f"/gov/proposals/{proposal_id}/tally")
 
     async def deposit_parameters(self) -> dict:
-        return await self._c._get(f"/gov/parameters/deposit")
+        return await self._c._get("/gov/parameters/deposit")
 
     async def voting_parameters(self) -> dict:
-        return await self._c._get(f"/gov/parameters/voting")
+        return await self._c._get("/gov/parameters/voting")
 
     async def tally_parameters(self) -> dict:
-        return await self._c._get(f"/gov/parameters/tally")
+        return await self._c._get("/gov/parameters/tallying")
 
     async def parameters(self) -> dict:
         return {

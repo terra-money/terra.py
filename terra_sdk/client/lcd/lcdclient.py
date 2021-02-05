@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import json
 from asyncio import AbstractEventLoop, get_event_loop
-from typing import Dict, Optional, Union
+from typing import Optional
 from urllib.parse import urljoin
 
 from aiohttp import ClientSession
 
 from terra_sdk.core import Coins, Numeric
+from terra_sdk.exceptions import LCDResponseError
 from terra_sdk.key.key import Key
 from terra_sdk.util.json import dict_to_data
 
@@ -75,6 +75,8 @@ class LCDClient:
             urljoin(self.url, endpoint), params=params
         ) as response:
             result = await response.json()
+            if not str(response.status).startswith("2"):
+                raise LCDResponseError(message=result.get("error"), response=response)
         try:
             self._last_request_height = result["height"]
         except KeyError:
@@ -88,6 +90,8 @@ class LCDClient:
             urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
             result = await response.json()
+            if not str(response.status).startswith("2"):
+                raise LCDResponseError(message=result.get("error"), response=response)
         try:
             self._last_request_height = result["height"]
         except KeyError:

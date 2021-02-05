@@ -9,6 +9,16 @@ from terra_sdk.core.msg import Msg
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.util.json import JSONSerializable
 
+__all__ = [
+    "StdSignature",
+    "StdFee",
+    "StdSignMsg",
+    "StdTx",
+    "TxLog",
+    "TxInfo",
+    "parse_tx_logs",
+]
+
 
 @attr.s
 class StdSignature(JSONSerializable):
@@ -134,8 +144,8 @@ class TxLog(JSONSerializable):
 def parse_tx_logs(logs) -> Optional[List[TxLog]]:
     return (
         [
-            TxLog(msg_index=l["msg_index"], log=l["log"], events=l["events"])
-            for l in logs
+            TxLog(msg_index=log["msg_index"], log=log["log"], events=log["events"])
+            for log in logs
         ]
         if logs
         else None
@@ -161,7 +171,7 @@ class TxInfo(JSONSerializable):
             "height": str(self.height),
             "txhash": self.txhash,
             "raw_log": self.rawlog,
-            "logs": [l.to_data() for l in self.logs] if self.logs else None,
+            "logs": [log.to_data() for log in self.logs] if self.logs else None,
             "gas_wanted": str(self.gas_wanted),
             "gas_used": str(self.gas_used),
             "timestamp": self.timestamp,

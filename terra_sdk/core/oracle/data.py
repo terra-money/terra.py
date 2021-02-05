@@ -4,7 +4,7 @@ from typing import Dict
 
 import attr
 
-from terra_sdk.core import AccAddress, Coin, Coins, Dec, ValAddress
+from terra_sdk.core import Coin, Coins, ValAddress
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
@@ -34,7 +34,10 @@ class AggregateExchangeRateVote(JSONSerializable):
     def from_data(cls, data) -> AggregateExchangeRateVote:
         return cls(
             exchange_rate_tuples=Coins(
-                [Coin(d.denom, d.exchange_rate) for d in data["exchange_rate_tuples"]],
+                [
+                    Coin(d["denom"], d["exchange_rate"])
+                    for d in data["exchange_rate_tuples"]
+                ],
             ),
             voter=data["voter"],
         )

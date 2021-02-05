@@ -38,7 +38,9 @@ def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
 
 
 def chop_precision_and_round(d: int) -> int:
-    """Cosmos-SDK's banker's rounding: https://github.com/cosmos/cosmos-sdk/blob/1d75e0e984e7132efd54c3526e36b3585e2d91c0/types/decimal.go#L491"""
+    """Cosmos-SDK's banker's rounding:
+    https://github.com/cosmos/cosmos-sdk/blob/1d75e0e984e7132efd54c3526e36b3585e2d91c0/types/decimal.go#L491
+    """
     if d < 0:
         return -1 * chop_precision_and_round(d * -1)
 
@@ -104,7 +106,7 @@ class Dec:
         return int_part
 
     def __float__(self) -> float:
-        # NOTE: This is not robust enough for: float(Dec(float)) to give the same output,
+        # NOTE: This is not robust enough for: float(Dec(float)) to give the same output
         # and should mainly be used as getting a rough value from the Dec object.
         return float(self._i) / DEC_ONE
 

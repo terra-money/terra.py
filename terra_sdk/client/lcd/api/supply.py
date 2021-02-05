@@ -5,5 +5,5 @@ from ._base import BaseAPI
 
 class SupplyAPI(BaseAPI):
     async def total(self) -> Coins:
-        res = await self._c._get(f"/supply/total")
+        res = await self._c._get("/supply/total")
         return Coins.from_data(res)

@@ -5,7 +5,7 @@ import hashlib
 
 import attr
 
-from terra_sdk.core import AccAddress, Coin, Coins, Dec, ValAddress
+from terra_sdk.core import AccAddress, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 

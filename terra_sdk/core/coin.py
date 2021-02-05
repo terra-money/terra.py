@@ -81,7 +81,7 @@ class Coin(JSONSerializable):
 
     def mul(self, other: Numeric.Input) -> Coin:
         other_amount = Numeric.parse(other)
-        return Coin(self.denom, self.amount * other)
+        return Coin(self.denom, self.amount * other_amount)
 
     def __mul__(self, other: Numeric.Input) -> Coin:
         return self.mul(other)

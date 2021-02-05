@@ -4,6 +4,8 @@ import attr
 
 from terra_sdk.core.gov import Content
 
+__all__ = ["ParameterChangeProposal"]
+
 
 @attr.s
 class ParameterChangeProposal(Content):
