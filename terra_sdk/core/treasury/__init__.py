@@ -1,2 +1,4 @@
-from .data import *
-from .proposals import *
+from .data import PolicyConstraints
+from .proposals import RewardWeightUpdateProposal, TaxRateUpdateProposal
+
+__all__ = ["PolicyConstraints", "TaxRateUpdateProposal", "RewardWeightUpdateProposal"]

@@ -12,6 +12,21 @@ from ._base import BaseAPI
 
 
 class OracleAPI(BaseAPI):
+    async def prevotes(
+        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
+    ) -> List[ExchangeRatePrevote]:
+        if denom is not None and validator is not None:
+            res = await self._c._get(f"/oracle/denoms/{denom}/prevotes/{validator}")
+            return [ExchangeRatePrevote.from_data(res)]
+        elif validator is not None:
+            res = await self._c._get(f"/oracle/voters/{validator}/prevotes")
+            return [ExchangeRatePrevote.from_data(d) for d in res]
+        elif denom is not None:
+            res = await self._c._get(f"/oracle/denoms/{denom}/prevotes")
+            return [ExchangeRatePrevote.from_data(d) for d in res]
+        else:
+            raise TypeError("both denom and validator cannot both be None")
+
     async def votes(
         self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
     ) -> List[ExchangeRateVote]:
@@ -20,15 +35,15 @@ class OracleAPI(BaseAPI):
             return [ExchangeRateVote.from_data(res)]
         elif validator is not None:
             res = await self._c._get(f"/oracle/voters/{validator}/votes")
-            return list(map(ExchangeRateVote.from_data, res))
+            return [ExchangeRateVote.from_data(d) for d in res]
         elif denom is not None:
             res = await self._c._get(f"/oracle/denoms/{denom}/votes")
-            return list(map(ExchangeRateVote.from_data, res))
+            return [ExchangeRateVote.from_data(d) for d in res]
         else:
             raise TypeError("both denom and validator cannot both be None")
 
     async def exchange_rates(self) -> Coins:
-        res = await self._c._get(f"/oracle/denoms/exchange_rates")
+        res = await self._c._get("/oracle/denoms/exchange_rates")
         if res:
             return Coins.from_data(res)
         else:
@@ -39,7 +54,7 @@ class OracleAPI(BaseAPI):
         return rates[denom]
 
     async def active_denoms(self) -> List[str]:
-        return await self._c._get(f"/oracle/denoms/actives")
+        return await self._c._get("/oracle/denoms/actives")
 
     async def feeder_address(self, validator: ValAddress) -> AccAddress:
         return await self._c._get(f"/oracle/voters/{validator}/feeder")
@@ -58,4 +73,4 @@ class OracleAPI(BaseAPI):
         return AggregateExchangeRateVote.from_data(res)
 
     async def parameters(self) -> dict:
-        return await self._c._get(f"/oracle/parameters")
+        return await self._c._get("/oracle/parameters")

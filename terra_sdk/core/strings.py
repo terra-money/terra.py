@@ -5,7 +5,6 @@ from bech32 import bech32_decode, bech32_encode
 __all__ = [
     "AccAddress",
     "ValAddress",
-    "ValConsAddress",
     "AccPubKey",
     "ValPubKey",
     "ValConsPubKey",

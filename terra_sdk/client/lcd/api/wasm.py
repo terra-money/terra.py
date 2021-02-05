@@ -17,4 +17,4 @@ class WasmAPI(BaseAPI):
         return await self._c._get(f"/wasm/contracts/{contract_address}/store", params)
 
     async def parameters(self) -> dict:
-        return await self._c._get(f"/wasm/parameters")
+        return await self._c._get("/wasm/parameters")

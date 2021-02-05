@@ -5,7 +5,7 @@ import attr
 from terra_sdk.core import Dec
 from terra_sdk.core.gov import Content
 
-__all__ = ["TaxRateUpdateProposal"]
+__all__ = ["TaxRateUpdateProposal", "RewardWeightUpdateProposal"]
 
 
 @attr.s

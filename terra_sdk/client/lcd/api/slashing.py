@@ -10,7 +10,7 @@ class SlashingAPI(BaseAPI):
         self, val_cons_pub_key: Optional[ValConsPubKey] = None
     ) -> List[dict]:
         if val_cons_pub_key is None:
-            url = f"/slashing/signing_infos"
+            url = "/slashing/signing_infos"
         else:
             url = f"/slashing/validators/{val_cons_pub_key}/signing_info"
         return await self._c._get(url)

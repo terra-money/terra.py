@@ -53,9 +53,10 @@ test:
 	poetry run pytest
 
 format:
+	poetry run flake8 terra_sdk
 	poetry run isort .
 	poetry run black .
 
 release: test format
-	poetry run build
-	poetry run publish
+	poetry build
+	poetry publish

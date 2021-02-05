@@ -86,7 +86,7 @@ class StakingAPI(BaseAPI):
             if params[x] is None:
                 del params[x]
 
-        res = await self._c._get(f"/staking/redelegations", params)
+        res = await self._c._get("/staking/redelegations", params)
         return [Redelegation.from_data(d) for d in res]
 
     async def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
@@ -94,7 +94,7 @@ class StakingAPI(BaseAPI):
         return [Validator.from_data(d) for d in res]
 
     async def validators(self) -> List[Validator]:
-        res = await self._c._get(f"/staking/validators")
+        res = await self._c._get("/staking/validators")
         return [Validator.from_data(d) for d in res]
 
     async def validator(self, validator: ValAddress) -> Validator:
@@ -102,12 +102,12 @@ class StakingAPI(BaseAPI):
         return Validator.from_data(res)
 
     async def pool(self) -> dict:
-        res = await self._c._get(f"/staking/pool")
+        res = await self._c._get("/staking/pool")
         return {
             "bonded_tokens": Coin("uluna", res["bonded_tokens"]),
             "not_bonded_tokens": Coin("uluna", res["not_bonded_tokens"]),
         }
 
     async def parameters(self) -> dict:
-        res = await self._c._get(f"/staking/parameters")
+        res = await self._c._get("/staking/parameters")
         return res

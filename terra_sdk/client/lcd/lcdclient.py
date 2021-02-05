@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import json
 from asyncio import AbstractEventLoop, get_event_loop
-from typing import Dict, Optional, Union
+from typing import Optional
 from urllib.parse import urljoin
 
 from aiohttp import ClientSession

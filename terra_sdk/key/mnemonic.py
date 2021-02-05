@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import hashlib
-from typing import Optional
-
 from bip32utils import BIP32_HARDEN, BIP32Key
 from mnemonic import Mnemonic
 

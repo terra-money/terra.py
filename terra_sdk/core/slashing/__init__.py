@@ -1,1 +1,3 @@
-from .msgs import *
+from .msgs import MsgUnjail
+
+__all__ = ["MsgUnjail"]

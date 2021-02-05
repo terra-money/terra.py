@@ -1,4 +1,4 @@
-from terra_sdk.core import AccAddress, ValAddress, Coins
+from terra_sdk.core import AccAddress, Coins, ValAddress
 
 from ._base import BaseAPI
 
@@ -27,8 +27,8 @@ class DistributionAPI(BaseAPI):
         )
 
     async def community_pool(self) -> Coins:
-        res = await self._c._get(f"/distribution/community_pool")
+        res = await self._c._get("/distribution/community_pool")
         return Coins.from_data(res)
 
     async def parameters(self) -> dict:
-        return await self._c._get(f"/distribution/parameters")
+        return await self._c._get("/distribution/parameters")

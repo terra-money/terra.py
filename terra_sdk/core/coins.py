@@ -3,8 +3,6 @@ from __future__ import annotations
 import copy
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
-import attr
-
 from .coin import Coin
 from .numeric import Numeric
 

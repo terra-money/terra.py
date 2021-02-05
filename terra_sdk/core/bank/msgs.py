@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from terra_sdk.core import AccAddress, Coin, Coins
+from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 
 __all__ = ["MsgSend", "MsgMultiSend"]

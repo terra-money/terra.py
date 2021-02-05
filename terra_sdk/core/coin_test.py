@@ -45,7 +45,7 @@ def test_arithmetic():
     assert dec_sum.is_dec_coin()
     assert not dec_sum.is_int_coin()
     assert dec_sum.amount == Dec(1000.1)
-    with pytest.raises(ArithmeticError) as e:
+    with pytest.raises(ArithmeticError):
         coin.add(coin3)
 
     # subtraction
@@ -56,7 +56,7 @@ def test_arithmetic():
     assert diff.amount == 1000
     assert diff2.amount == 1000
     assert diff3.amount == 1000
-    with pytest.raises(ArithmeticError) as e:
+    with pytest.raises(ArithmeticError):
         coin2.sub(coin3)
 
     # multiplication
@@ -109,3 +109,4 @@ def test_from_str_parse_dec_coin():
 
     coin3 = Coin("uluna", "-1.0")
     coin2 = Coin.from_str("-1.000000000000000000uluna")
+    assert coin2 == coin3

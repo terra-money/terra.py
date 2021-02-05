@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import attr
-
 from .data import Content
 
 __all__ = ["TextProposal"]

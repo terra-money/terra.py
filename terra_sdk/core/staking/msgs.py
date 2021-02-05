@@ -7,7 +7,15 @@ import attr
 from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey
 from terra_sdk.core.msg import Msg
 
-from .data import Commission, CommissionRates, Description
+from .data import CommissionRates, Description
+
+__all__ = [
+    "MsgBeginRedelegate",
+    "MsgDelegate",
+    "MsgUndelegate",
+    "MsgEditValidator",
+    "MsgCreateValidator",
+]
 
 
 @attr.s

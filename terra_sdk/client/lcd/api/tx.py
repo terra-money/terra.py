@@ -5,7 +5,7 @@ from ._base import BaseAPI
 __all__ = ["TxAPI"]
 
 from terra_sdk.core import Coin, Coins, Numeric
-from terra_sdk.core.auth import StdFee, StdSignature, StdSignMsg, StdTx, TxInfo
+from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
     BlockTxBroadcastResult,

@@ -16,7 +16,7 @@ class BlockTxBroadcastResult(JSONSerializable):
     raw_log: str = attr.ib()
     gas_wanted: int = attr.ib(converter=int)
     gas_used: int = attr.ib(converter=int)
-    logs: Optional[List[TxLog]] = attr.ib(converter=parse_tx_logs)
+    logs: Optional[List[TxLog]] = attr.ib(converter=parse_tx_logs)  # type: ignore
     code: Optional[int] = attr.ib(default=None)
     codespace: Optional[str] = attr.ib(default=None)
 
