@@ -20,7 +20,7 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
-BROWSER := python -c "$$BROWSER_PYSCRIPT"
+BROWSER := poetry run python -c "$$BROWSER_PYSCRIPT"
 
 coverage:
 	poetry run coverage run --source terra_sdk -m pytest
