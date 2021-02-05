@@ -10,6 +10,8 @@ Welcome to Terra SDK's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. autoclass:: terra_sdk.key.mnemonic.MnemonicKey
+   :members: __init__
 
 
 Indices and tables

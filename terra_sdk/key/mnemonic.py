@@ -29,6 +29,14 @@ class MnemonicKey(RawKey):
         index: int = 0,
         coin_type: int = LUNA_COIN_TYPE,
     ):
+        """Creates a new MnemonicKey.
+
+        Args:
+            mnemonic (str, optional): [description]. Defaults to None.
+            account (int, optional): [description]. Defaults to 0.
+            index (int, optional): [description]. Defaults to 0.
+            coin_type (int, optional): [description]. Defaults to LUNA_COIN_TYPE.
+        """
         if mnemonic is None:
             mnemonic = Mnemonic("english").generate(256)
         seed = Mnemonic("english").to_seed(mnemonic)
