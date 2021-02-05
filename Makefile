@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build format test help
+.PHONY: clean clean-test clean-pyc clean-build format test help docs
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -63,6 +63,10 @@ qa: ## runs static analysis with mypy and flake8
 format: ## runs code style and formatter
 	poetry run isort .
 	poetry run black .
+
+docs: ## build the documentation
+	cd docs && make html
+	$(BROWSER) docs/_build/html/index.html
 
 release: clean qa test format ## build dist version and release to pypi
 	poetry build

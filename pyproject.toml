@@ -44,6 +44,8 @@ pytest-runner = "^5.2"
 pytest-sugar = "^0.9.4"
 watchdog = "^1.0.2"
 wheel = "^0.36.2"
+Sphinx = "^3.4.3"
+sphinx-rtd-theme = "^0.5.1"
 
 
 [tool.pytest.ini_options]
