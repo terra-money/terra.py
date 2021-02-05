@@ -1,6 +1,6 @@
 from typing import Union
 
-from terra_sdk.core import AccAdress
+from terra_sdk.core import AccAddress
 from terra_sdk.core.auth import Account, LazyGradedVestingAccount
 
 from ._base import BaseAPI

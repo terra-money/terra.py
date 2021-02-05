@@ -34,7 +34,10 @@ class AggregateExchangeRateVote(JSONSerializable):
     def from_data(cls, data) -> AggregateExchangeRateVote:
         return cls(
             exchange_rate_tuples=Coins(
-                [Coin(d.denom, d.exchange_rate) for d in data["exchange_rate_tuples"]],
+                [
+                    Coin(d["denom"], d["exchange_rate"])
+                    for d in data["exchange_rate_tuples"]
+                ],
             ),
             voter=data["voter"],
         )

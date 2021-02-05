@@ -16,20 +16,20 @@ class OracleAPI(BaseAPI):
         self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
     ) -> List[ExchangeRateVote]:
         if denom is not None and validator is not None:
-            res = self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
+            res = await self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
             return [ExchangeRateVote.from_data(res)]
         elif validator is not None:
-            res = self._c._get(f"/oracle/voters/{validator}/votes")
+            res = await self._c._get(f"/oracle/voters/{validator}/votes")
             return list(map(ExchangeRateVote.from_data, res))
         elif denom is not None:
-            res = self._c._get(f"/oracle/denoms/{denom}/votes")
+            res = await self._c._get(f"/oracle/denoms/{denom}/votes")
             return list(map(ExchangeRateVote.from_data, res))
         else:
             raise TypeError("both denom and validator cannot both be None")
 
     async def exchange_rates(self) -> Coins:
-        res = self._c._get(f"/oracle/denoms/exchange_rates", raw=True)
-        if res.get("result"):
+        res = await self._c._get(f"/oracle/denoms/exchange_rates")
+        if res:
             return Coins.from_data(res)
         else:
             return Coins({})
@@ -39,7 +39,7 @@ class OracleAPI(BaseAPI):
         return rates[denom]
 
     async def active_denoms(self) -> List[str]:
-        return await self._c._get(f"/oracle/denoms/exchange_rates")
+        return await self._c._get(f"/oracle/denoms/actives")
 
     async def feeder_address(self, validator: ValAddress) -> AccAddress:
         return await self._c._get(f"/oracle/voters/{validator}/feeder")

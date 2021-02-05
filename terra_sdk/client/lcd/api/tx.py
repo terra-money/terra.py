@@ -5,8 +5,12 @@ from ._base import BaseAPI
 __all__ = ["TxAPI"]
 
 from terra_sdk.core import Coin, Coins, Numeric
-from terra_sdk.core.auth import *
-from terra_sdk.core.broadcast import *
+from terra_sdk.core.auth import StdFee, StdSignature, StdSignMsg, StdTx, TxInfo
+from terra_sdk.core.broadcast import (
+    AsyncTxBroadcastResult,
+    BlockTxBroadcastResult,
+    SyncTxBroadcastResult,
+)
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.hash import hash_amino
 
@@ -74,7 +78,7 @@ class TxAPI(BaseAPI):
         fees = Coins.from_data(res["fees"])
         # only pick the denoms we are interested in?
         if denoms:
-            fees = fees.filter(lambda c: c.denom in denoms)
+            fees = fees.filter(lambda c: c.denom in denoms)  # type: ignore
         return StdFee(int(res["gas"]), fees)
 
     async def encode(self, tx: StdTx) -> str:

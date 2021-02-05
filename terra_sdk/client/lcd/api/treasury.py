@@ -25,5 +25,5 @@ class TreasuryAPI(BaseAPI):
         return Coin("uluna", res)
 
     async def parameters(self) -> Coin:
-        res = await self._c._get(f"/treasury/paramters")
+        res = await self._c._get(f"/treasury/parameters")
         return res
