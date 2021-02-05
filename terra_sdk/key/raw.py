@@ -20,6 +20,10 @@ class RawKey(Key):
 
     private_key: bytes
 
+    @classmethod
+    def from_hex(cls, private_key_hex: str):
+        return cls(bytes.fromhex(private_key_hex))
+
     def __init__(self, private_key: bytes):
         public_key = compute_public_key(private_key)
         super().__init__(public_key)

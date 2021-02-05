@@ -10,8 +10,6 @@ Welcome to Terra SDK's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. autoclass:: terra_sdk.client.lcd.LCDClient
-   :members:
 
 
 Indices and tables
