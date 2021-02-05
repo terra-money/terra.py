@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import NewType
+
 from bech32 import bech32_decode, bech32_encode
 
 __all__ = [

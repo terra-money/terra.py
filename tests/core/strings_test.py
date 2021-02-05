@@ -1,13 +1,13 @@
 from terra_sdk.core.strings import (
-    to_acc_address,
-    to_acc_pubkey,
-    to_val_address,
-    to_val_pubkey,
     is_acc_address,
     is_acc_pubkey,
     is_val_address,
     is_val_pubkey,
     is_valcons_pubkey,
+    to_acc_address,
+    to_acc_pubkey,
+    to_val_address,
+    to_val_pubkey,
 )
 
 
