@@ -78,7 +78,6 @@ class LCDClient:
             self._last_request_height = result["height"]
         except KeyError:
             self._last_request_height = None
-        print(result)
         return result if raw else result["result"]
 
     async def _post(
