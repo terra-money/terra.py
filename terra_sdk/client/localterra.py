@@ -2,9 +2,9 @@ from typing import Dict
 
 from terra_sdk.key.mnemonic import MnemonicKey
 
-from .lcd import LCDClient, Wallet
+from .lcd import AsyncLCDClient, LCDClient, Wallet
 
-__all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra"]
+__all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra", "AsyncLocalTerra"]
 
 LOCALTERRA_MNEMONICS = {
     "validator": "satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn",
@@ -30,6 +30,20 @@ LOCALTERRA_DEFAULTS = {
 
 class LocalTerra(LCDClient):
 
+    wallets: Dict[str, Wallet]
+
+    def __init__(self, *args, **kwargs):
+        options = {**LOCALTERRA_DEFAULTS, **kwargs}
+        super().__init__(*args, **options)
+        self.wallets = {
+            wallet_name: self.wallet(
+                MnemonicKey(mnemonic=LOCALTERRA_MNEMONICS[wallet_name])
+            )
+            for wallet_name in LOCALTERRA_MNEMONICS
+        }
+
+
+class AsyncLocalTerra(AsyncLCDClient):
     wallets: Dict[str, Wallet]
 
     def __init__(self, *args, **kwargs):

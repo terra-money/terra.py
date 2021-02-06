@@ -3,15 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Terra SDK's documentation!
-=====================================
+Introduction
+============
+
+The Terra SDK is a Python toolkit for writing software that interact with the Terra
+blockchain.
+
+Getting Started
+---------------
+
+Your next steps depend on where you're standing:
+
+- Unfamiliar with Ethereum? → `terra_docs`_
+- Ready to code? → :ref:`quickstart`
+- Interested in a quick tour? → :ref:`overview`
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-.. autoclass:: terra_sdk.key.mnemonic.MnemonicKey
-   :members: __init__
 
 
 Indices and tables
@@ -20,3 +29,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. _terra_docs: https://docs.terra.money

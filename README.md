@@ -1,1 +1,1 @@
-# terra python sdk
+# Terra SDK for Python

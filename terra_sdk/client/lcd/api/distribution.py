@@ -19,7 +19,7 @@ class ValidatorRewards:
     val_commission: Coins = attr.ib()
 
 
-class DistributionAPI(BaseAPI):
+class AsyncDistributionAPI(BaseAPI):
     async def rewards(self, delegator: AccAddress) -> Rewards:
         res = await self._c._get(f"/distribution/delegators/{delegator}/rewards")
         return Rewards(
@@ -48,3 +48,32 @@ class DistributionAPI(BaseAPI):
 
     async def parameters(self) -> dict:
         return await self._c._get("/distribution/parameters")
+
+
+class DistributionAPI(BaseAPI):
+    def rewards(self, delegator: AccAddress) -> Rewards:
+        res = self._c._get(f"/distribution/delegators/{delegator}/rewards")
+        return Rewards(
+            rewards={
+                item["validator_address"]: Coins.from_data(item["reward"] or [])
+                for item in res["rewards"]
+            },
+            total=Coins.from_data(res["total"]),
+        )
+
+    def validator_rewards(self, validator: ValAddress) -> ValidatorRewards:
+        res = self._c._get(f"/distribution/validators/{validator}")
+        return ValidatorRewards(
+            self_bond_rewards=Coins.from_data(res["self_bond_rewards"]),
+            val_commission=Coins.from_data(res["val_commission"]),
+        )
+
+    def withdraw_address(self, delegator: AccAddress) -> AccAddress:
+        return self._c._get(f"/distribution/delegators/{delegator}/withdraw_address")
+
+    def community_pool(self) -> Coins:
+        res = self._c._get("/distribution/community_pool")
+        return Coins.from_data(res)
+
+    def parameters(self) -> dict:
+        return self._c._get("/distribution/parameters")

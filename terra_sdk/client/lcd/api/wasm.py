@@ -4,7 +4,7 @@ from typing import Any
 from ._base import BaseAPI
 
 
-class WasmAPI(BaseAPI):
+class AsyncWasmAPI(BaseAPI):
     async def code_info(self, code_id: int) -> dict:
         return await self._c._get(f"/wasm/codes/{code_id}")
 
@@ -18,3 +18,19 @@ class WasmAPI(BaseAPI):
 
     async def parameters(self) -> dict:
         return await self._c._get("/wasm/parameters")
+
+
+class WasmAPI(BaseAPI):
+    def code_info(self, code_id: int) -> dict:
+        return self._c._get(f"/wasm/codes/{code_id}")
+
+    def contract_info(self, contract_address: str) -> dict:
+        res = self._c._get(f"/wasm/contracts/{contract_address}")
+        return res
+
+    def contract_query(self, contract_address: str, query: dict) -> Any:
+        params = {"query_msg": json.dumps(query)}
+        return self._c._get(f"/wasm/contracts/{contract_address}/store", params)
+
+    def parameters(self) -> dict:
+        return self._c._get("/wasm/parameters")

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from asyncio import AbstractEventLoop, get_event_loop
 from typing import Optional
 from urllib.parse import urljoin
 
-from aiohttp import ClientSession
+import requests
 
 from terra_sdk.core import Coins, Numeric
 from terra_sdk.exceptions import LCDResponseError
@@ -36,13 +35,9 @@ class LCDClient:
         chain_id: str = None,
         gas_prices: Coins.Input = None,
         gas_adjustment: Numeric.Input = None,
-        loop: Optional[AbstractEventLoop] = None,
     ):
-
-        if loop is None:
-            loop = get_event_loop()
-
-        self.session = ClientSession(headers={"Accept": "application/json"}, loop=loop)
+        self.session = requests.session()
+        self.session.headers = {"Accept": "application/json"}  # type: ignore
         self.chain_id = chain_id
         self.url = url
         self.gas_prices = Coins(gas_prices)
@@ -68,38 +63,26 @@ class LCDClient:
     def wallet(self, key: Key) -> Wallet:
         return Wallet(self, key)
 
-    async def _get(
-        self, endpoint: str, params: Optional[dict] = None, raw: bool = False
-    ):
-        async with self.session.get(
-            urljoin(self.url, endpoint), params=params
-        ) as response:
-            result = await response.json()
-            if not str(response.status).startswith("2"):
-                raise LCDResponseError(message=result.get("error"), response=response)
+    def _get(self, endpoint: str, params: Optional[dict] = None, raw: bool = False):
+        response = self.session.get(urljoin(self.url, endpoint), params=params)
+        result = response.json()
+        if not str(response.status_code).startswith("2"):
+            raise LCDResponseError(message=result.get("error"), response=response)
         try:
             self._last_request_height = result["height"]
         except KeyError:
             self._last_request_height = None
         return result if raw else result["result"]
 
-    async def _post(
-        self, endpoint: str, data: Optional[dict] = None, raw: bool = False
-    ):
-        async with self.session.post(
+    def _post(self, endpoint: str, data: Optional[dict] = None, raw: bool = False):
+        response = self.session.post(
             urljoin(self.url, endpoint), json=data and dict_to_data(data)
-        ) as response:
-            result = await response.json()
-            if not str(response.status).startswith("2"):
-                raise LCDResponseError(message=result.get("error"), response=response)
+        )
+        result = response.json()
+        if not str(response.status_code).startswith("2"):
+            raise LCDResponseError(message=result.get("error"), response=response)
         try:
             self._last_request_height = result["height"]
         except KeyError:
             self._last_request_height = None
         return result if raw else result["result"]
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, exc_type, exc, tb):
-        await self.session.close()
