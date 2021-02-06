@@ -65,7 +65,7 @@ format: ## runs code style and formatter
 	poetry run black .
 
 docs: ## build the documentation
-	cd docs && make html
+	poetry run sphinx-build docs/ docs/_build/html
 	$(BROWSER) docs/_build/html/index.html
 
 release: clean qa test format ## build dist version and release to pypi
