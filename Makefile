@@ -30,7 +30,7 @@ coverage: ## check code coverage
 	poetry run coverage run --source terra_sdk -m pytest
 	poetry run coverage report -m
 	poetry run coverage html
-	$(BROWSER) htmlcov/index.html
+	# $(BROWSER) htmlcov/index.html
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -66,7 +66,7 @@ format: ## runs code style and formatter
 
 docs: ## build the documentation
 	poetry run sphinx-build docs/ docs/_build/html
-	$(BROWSER) docs/_build/html/index.html
+	# $(BROWSER) docs/_build/html/index.html
 
 dev-docs:
 	poetry run sphinx-autobuild docs/ docs/_build/html
