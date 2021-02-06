@@ -43,22 +43,23 @@ This can be done through setting up an LCDClient:
 Getting Blockchain Info
 -----------------------
 
-It's time to start using Web3.py! Once properly configured, the ``w3`` instance will allow you
-to interact with the Ethereum blockchain. Try getting all the information about the latest block:
+It's time to start using Terra SDK! Once properly configured, the ``LCDClient`` instance will allow you
+to interact with the Terra blockchain. Try getting the latest block height:
 
 .. code-block:: python
 
-    >>> terra.tendermint.block_info()
+    >>> terra.tendermint.block_info()['block']['header']['height']
+    '1687543'
 
-Web3.py can help you read block data, sign and send transactions, deploy and interact with contracts,
+Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts,
 and a number of other features.
 
-Many of the typical things you'll want to do will be in the :class:`w3.eth <web3.eth.Eth>` API,
+Many of the typical things you'll want to do will be in the :class:`terra_sdk.client.lcd.LCDClient <web3.eth.Eth>` API,
 so that is a good place to start.
 
 If you want to dive straight into contracts, check out the section on :ref:`contracts`,
 including a :ref:`contract_example`, and how to create a contract instance using
-:meth:`w3.eth.contract() <web3.eth.Eth.contract>`.
+:class:`terra_sdk.core.MsgStoreCode <web3.eth.Eth.contract>`.
 
 .. NOTE:: It is recommended that your development environment have the ``PYTHONWARNINGS=default``
     environment variable set. Some deprecation warnings will not show up
