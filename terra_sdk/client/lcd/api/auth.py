@@ -21,6 +21,14 @@ class AuthAPI(BaseAPI):
     def account_info(
         self, address: AccAddress
     ) -> Union[Account, LazyGradedVestingAccount]:
+        """Fetches the account information.
+
+        Args:
+            address (AccAddress): account address
+
+        Returns:
+            Union[Account, LazyGradedVestingAccount]: account information
+        """
         result = self._c._get(f"/auth/accounts/{address}")
         if result["type"] == "core/Account":
             return Account.from_data(result)

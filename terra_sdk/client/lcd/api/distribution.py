@@ -52,6 +52,14 @@ class AsyncDistributionAPI(BaseAPI):
 
 class DistributionAPI(BaseAPI):
     def rewards(self, delegator: AccAddress) -> Rewards:
+        """Fetches the staking reward data for a delegator.
+
+        Args:
+            delegator (AccAddress): delegator account address
+
+        Returns:
+            Rewards: delegator rewards
+        """
         res = self._c._get(f"/distribution/delegators/{delegator}/rewards")
         return Rewards(
             rewards={
@@ -62,6 +70,14 @@ class DistributionAPI(BaseAPI):
         )
 
     def validator_rewards(self, validator: ValAddress) -> ValidatorRewards:
+        """Fetches the commission reward data for a validator.
+
+        Args:
+            validator (ValAddress): validator operator address
+
+        Returns:
+            ValidatorRewards: validator rewards
+        """
         res = self._c._get(f"/distribution/validators/{validator}")
         return ValidatorRewards(
             self_bond_rewards=Coins.from_data(res["self_bond_rewards"]),
@@ -69,11 +85,29 @@ class DistributionAPI(BaseAPI):
         )
 
     def withdraw_address(self, delegator: AccAddress) -> AccAddress:
+        """Fetches the withdraw address associated with a delegator.
+
+        Args:
+            delegator (AccAddress): delegator account address
+
+        Returns:
+            AccAddress: withdraw address
+        """
         return self._c._get(f"/distribution/delegators/{delegator}/withdraw_address")
 
     def community_pool(self) -> Coins:
+        """Fetches the community pool.
+
+        Returns:
+            Coins: community pool
+        """
         res = self._c._get("/distribution/community_pool")
         return Coins.from_data(res)
 
     def parameters(self) -> dict:
+        """Fetches the Distribution module parameters.
+
+        Returns:
+            dict: Distribution module parameters
+        """
         return self._c._get("/distribution/parameters")

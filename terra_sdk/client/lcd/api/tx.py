@@ -4,7 +4,7 @@ from ._base import BaseAPI
 
 __all__ = ["TxAPI"]
 
-from terra_sdk.core import Coin, Coins, Numeric
+from terra_sdk.core import AccAddress, Coin, Coins, Numeric
 from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
@@ -21,7 +21,7 @@ class AsyncTxAPI(BaseAPI):
 
     async def create(
         self,
-        source_address: str,
+        source_address: AccAddress,
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
         memo: str = "",
@@ -130,11 +130,19 @@ class AsyncTxAPI(BaseAPI):
 
 class TxAPI(BaseAPI):
     def tx_info(self, tx_hash: str) -> TxInfo:
+        """Fetches information for an included transaction given a tx hash.
+
+        Args:
+            tx_hash (str): hash of transaction to lookup
+
+        Returns:
+            TxInfo: transaction info
+        """
         return TxInfo.from_data(self._c._get(f"/txs/{tx_hash}", raw=True))
 
     def create(
         self,
-        source_address: str,
+        source_address: AccAddress,
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
         memo: str = "",
@@ -144,6 +152,23 @@ class TxAPI(BaseAPI):
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdSignMsg:
+        """Create a new unsigned transaction, with helpful utilities such as lookup of
+        chain ID, account number, sequence and fee estimation.
+
+        Args:
+            source_address (AccAddress): transaction sender's account address
+            msgs (List[Msg]): list of messages to include
+            fee (Optional[StdFee], optional): fee to use (estimates if empty). Defaults to None.
+            memo (str, optional): memo to use. Defaults to "".
+            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation. Defaults to None.
+            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation. Defaults to None.
+            denoms (Optional[List[str]], optional): list of denoms to use for gas fee. Defaults to None.
+            account_number (Optional[int], optional): account number to use. Defaults to None.
+            sequence (Optional[int], optional): sequence number to use. Defaults to None.
+
+        Returns:
+            StdSignMsg: unsigned tx
+        """
         if fee is None:
             # create the fake fee
             balance = self._c.bank.balance(source_address)
@@ -171,6 +196,17 @@ class TxAPI(BaseAPI):
         gas_adjustment: Optional[Numeric.Input] = None,
         denoms: Optional[List[str]] = None,
     ) -> StdFee:
+        """Estimates the proper fee to apply by simulating it within the node.
+
+        Args:
+            tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for
+            gas_prices (Optional[Coins.Input], optional): gas prices to use. Defaults to None.
+            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use. Defaults to None.
+            denoms (Optional[List[str]], optional): list of denoms to use to pay for gas. Defaults to None.
+
+        Returns:
+            StdFee: estimated fee
+        """
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
 
@@ -195,10 +231,26 @@ class TxAPI(BaseAPI):
         return StdFee(int(res["gas"]), fees)
 
     def encode(self, tx: StdTx) -> str:
+        """Fetches a transaction's amino encoding.
+
+        Args:
+            tx (StdTx): transaction to encode
+
+        Returns:
+            str: base64 string containing amino-encoded tx
+        """
         res = self._c._post("/txs/encode", tx.to_data())
         return res["tx"]
 
     def hash(self, tx: StdTx) -> str:
+        """Compute hash for a transaction.
+
+        Args:
+            tx (StdTx): transaction to hash
+
+        Returns:
+            str: transaction hash
+        """
         amino = self.encode(tx)
         return hash_amino(amino)
 
@@ -207,6 +259,14 @@ class TxAPI(BaseAPI):
         return self._c._post("/txs", data, raw=True)
 
     def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+        """Broadcasts a transaction using the ``sync`` broadcast mode.
+
+        Args:
+            tx (StdTx): transaction to broadcast
+
+        Returns:
+            SyncTxBroadcastResult: result
+        """
         res = self._broadcast(tx, "sync")
         return SyncTxBroadcastResult(
             height=res["height"],
@@ -217,6 +277,14 @@ class TxAPI(BaseAPI):
         )
 
     def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+        """Broadcasts a transaction using the ``async`` broadcast mode.
+
+        Args:
+            tx (StdTx): transaction to broadcast
+
+        Returns:
+            AsyncTxBroadcastResult: result
+        """
         res = self._broadcast(tx, "async")
         return AsyncTxBroadcastResult(
             height=res["height"],
@@ -224,6 +292,14 @@ class TxAPI(BaseAPI):
         )
 
     def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+        """Broadcasts a transaction using the ``block`` broadcast mode.
+
+        Args:
+            tx (StdTx): transaction to broadcast
+
+        Returns:
+            BlockTxBroadcastResult: result
+        """
         res = self._broadcast(tx, "block")
         return BlockTxBroadcastResult(
             height=res["height"],
@@ -237,5 +313,13 @@ class TxAPI(BaseAPI):
         )
 
     def search(self, options: dict = {}) -> dict:
+        """Searches for transactions given critera.
+
+        Args:
+            options (dict, optional): dictionary containing options. Defaults to {}.
+
+        Returns:
+            dict: transaction search results
+        """
         res = self._c._get("/txs", options, raw=True)
         return res

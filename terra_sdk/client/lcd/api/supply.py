@@ -11,5 +11,10 @@ class AsyncSupplyAPI(BaseAPI):
 
 class SupplyAPI(BaseAPI):
     def total(self) -> Coins:
+        """Fetches the current total supply of all tokens.
+
+        Returns:
+            Coins: total supply
+        """
         res = self._c._get("/supply/total")
         return Coins.from_data(res)

@@ -48,6 +48,7 @@ wheel = "^0.36.2"
 Sphinx = "^3.4.3"
 sphinx-rtd-theme = "^0.5.1"
 sphinx-autodoc-typehints = "^1.11.1"
+sphinx-autobuild = "^2020.9.1"
 
 [tool.pytest.ini_options]
 addopts = "-ra -q"

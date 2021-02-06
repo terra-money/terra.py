@@ -11,5 +11,13 @@ class AsyncBankAPI(BaseAPI):
 
 class BankAPI(BaseAPI):
     def balance(self, address: AccAddress) -> Coins:
+        """Fetches the current balance of an account.
+
+        Args:
+            address (AccAddress): account address
+
+        Returns:
+            Coins: balance
+        """
         res = self._c._get(f"/bank/balances/{address}")
         return Coins.from_data(res)

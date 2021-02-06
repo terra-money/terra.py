@@ -1,9 +1,8 @@
-.. _quickstart:
+.. quickstart:
 
 Quickstart
 ==========
 
-.. contents:: :local:
 
 .. NOTE:: All code starting with a ``$`` is meant to run on your terminal.
     All code starting with a ``>>>`` is meant to run in a python interpreter,
@@ -53,14 +52,3 @@ to interact with the Terra blockchain. Try getting the latest block height:
 
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts,
 and a number of other features.
-
-Many of the typical things you'll want to do will be in the :class:`terra_sdk.client.lcd.LCDClient <web3.eth.Eth>` API,
-so that is a good place to start.
-
-If you want to dive straight into contracts, check out the section on :ref:`contracts`,
-including a :ref:`contract_example`, and how to create a contract instance using
-:class:`terra_sdk.core.MsgStoreCode <web3.eth.Eth.contract>`.
-
-.. NOTE:: It is recommended that your development environment have the ``PYTHONWARNINGS=default``
-    environment variable set. Some deprecation warnings will not show up
-    without this variable being set.

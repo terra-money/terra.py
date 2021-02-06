@@ -68,6 +68,9 @@ docs: ## build the documentation
 	poetry run sphinx-build docs/ docs/_build/html
 	$(BROWSER) docs/_build/html/index.html
 
+dev-docs:
+	poetry run sphinx-autobuild docs/ docs/_build/html
+
 release: clean qa test format ## build dist version and release to pypi
 	poetry build
 	poetry publish

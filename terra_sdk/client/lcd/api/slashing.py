@@ -23,6 +23,14 @@ class SlashingAPI(BaseAPI):
     def signing_infos(
         self, val_cons_pub_key: Optional[ValConsPubKey] = None
     ) -> List[dict]:
+        """Fetches signing infos, optionally filtering by validator consensus public key.
+
+        Args:
+            val_cons_pub_key (Optional[ValConsPubKey], optional): validator consensus public key. Defaults to None.
+
+        Returns:
+            List[dict]: signing infos
+        """
         if val_cons_pub_key is None:
             url = "/slashing/signing_infos"
         else:
@@ -30,4 +38,9 @@ class SlashingAPI(BaseAPI):
         return self._c._get(url)
 
     def parameters(self) -> dict:
+        """Fetches Slashing module parameters.
+
+        Returns:
+            dict: Slashing module parameters
+        """
         return self._c._get("/slashing/parameters")

@@ -14,13 +14,28 @@ Getting Started
 
 Your next steps depend on where you're standing:
 
-- Unfamiliar with Ethereum? → `terra_docs`_
+- Unfamiliar with Terra? → `terra_docs`_
 - Ready to code? → :ref:`quickstart`
 - Interested in a quick tour? → :ref:`overview`
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 1
+    :caption: Intro
+
+    quickstart
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Guides
+
+    smart_contracts
+    keys
+
+.. toctree::
+    :maxdepth: 2 
+    :caption: LCDClient
+
+    lcd_modules
 
 
 Indices and tables

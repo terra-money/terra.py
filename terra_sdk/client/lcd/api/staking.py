@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+import attr
+
 from terra_sdk.core import AccAddress, Coin, ValAddress
 from terra_sdk.core.staking import (
     Delegation,
@@ -9,6 +11,12 @@ from terra_sdk.core.staking import (
 )
 
 from ._base import BaseAPI
+
+
+@attr.s
+class StakingPool:
+    bonded_tokens: Coin = attr.ib()
+    not_bonded_tokens: Coin = attr.ib()
 
 
 class AsyncStakingAPI(BaseAPI):
@@ -101,12 +109,12 @@ class AsyncStakingAPI(BaseAPI):
         res = await self._c._get(f"/staking/validators/{validator}")
         return Validator.from_data(res)
 
-    async def pool(self) -> dict:
+    async def pool(self) -> StakingPool:
         res = await self._c._get("/staking/pool")
-        return {
-            "bonded_tokens": Coin("uluna", res["bonded_tokens"]),
-            "not_bonded_tokens": Coin("uluna", res["not_bonded_tokens"]),
-        }
+        return StakingPool(
+            bonded_tokens=Coin("uluna", res["bonded_tokens"]),
+            not_bonded_tokens=Coin("uluna", res["not_bonded_tokens"]),
+        )
 
     async def parameters(self) -> dict:
         res = await self._c._get("/staking/parameters")
@@ -119,6 +127,18 @@ class StakingAPI(BaseAPI):
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
     ) -> List[Delegation]:
+        """Fetches current delegations, filtering by delegator, validator, or both.
+
+        Args:
+            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
+            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+
+        Raises:
+            TypeError: if both ``delegator`` and ``validator`` are ``None``.
+
+        Returns:
+            List[Delegation]: delegations
+        """
         if delegator is not None and validator is not None:
             res = self._c._get(
                 f"/staking/delegators/{delegator}/delegations/{validator}"
@@ -134,6 +154,15 @@ class StakingAPI(BaseAPI):
             raise TypeError("arguments delegator and validator cannot both be None")
 
     def delegation(self, delegator: AccAddress, validator: ValAddress) -> Delegation:
+        """Fetch a single delegation via a delegator, validator pair.
+
+        Args:
+            delegator (AccAddress): delegator account address
+            validator (ValAddress): validator operator address
+
+        Returns:
+            Delegation: delegation
+        """
         res = self._c._get(f"/staking/delegators/{delegator}/delegations/{validator}")
         return res
 
@@ -142,6 +171,18 @@ class StakingAPI(BaseAPI):
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
     ) -> List[UnbondingDelegation]:
+        """Fetches current undelegations, filtering by delegator, validator, or both.
+
+        Args:
+            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
+            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+
+        Raises:
+            TypeError: if both ``delegator`` and ``validator`` are ``None``.
+
+        Returns:
+            List[UnbondingDelegation]: undelegations
+        """
         if delegator is not None and validator is not None:
             res = self._c._get(
                 f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
@@ -159,6 +200,15 @@ class StakingAPI(BaseAPI):
     def unbonding_delegation(
         self, delegator: AccAddress, validator: ValAddress
     ) -> UnbondingDelegation:
+        """Fetch a single undelegation via a delegator, validator pair.
+
+        Args:
+            delegator (AccAddress): delegator account address
+            validator (ValAddress): validator operator address
+
+        Returns:
+            UnbondingDelegation: undelegation
+        """
         res = self._c._get(
             f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
         )
@@ -170,6 +220,16 @@ class StakingAPI(BaseAPI):
         validator_src: Optional[ValAddress] = None,
         validator_dst: Optional[ValAddress] = None,
     ) -> List[Redelegation]:
+        """Fetch redelgations.
+
+        Args:
+            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
+            validator_src (Optional[ValAddress], optional): source validator operator address (from). Defaults to None.
+            validator_dst (Optional[ValAddress], optional): dest. validator operator address (to). Defaults to None.
+
+        Returns:
+            List[Redelegation]: redelegations
+        """
         params = {
             "delegator": delegator,
             "validator_from": validator_src,
@@ -184,24 +244,55 @@ class StakingAPI(BaseAPI):
         return [Redelegation.from_data(d) for d in res]
 
     def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
+        """Fetches the list of validators a delegator is currently delegating to.
+
+        Args:
+            delegator (AccAddress): delegator account address
+
+        Returns:
+            List[Validator]: currently bonded validators
+        """
         res = self._c._get(f"/staking/delegators/{delegator}/validators")
         return [Validator.from_data(d) for d in res]
 
     def validators(self) -> List[Validator]:
+        """Fetch information of all validators.
+
+        Returns:
+            List[Validator]: validator informations
+        """
         res = self._c._get("/staking/validators")
         return [Validator.from_data(d) for d in res]
 
     def validator(self, validator: ValAddress) -> Validator:
+        """Fetch information about a single validator.
+
+        Args:
+            validator (ValAddress): validator operator address
+
+        Returns:
+            Validator: validator information
+        """
         res = self._c._get(f"/staking/validators/{validator}")
         return Validator.from_data(res)
 
-    def pool(self) -> dict:
+    def pool(self) -> StakingPool:
+        """Fetch current staking pool information.
+
+        Returns:
+            StakingPool: information about current staking pool
+        """
         res = self._c._get("/staking/pool")
-        return {
-            "bonded_tokens": Coin("uluna", res["bonded_tokens"]),
-            "not_bonded_tokens": Coin("uluna", res["not_bonded_tokens"]),
-        }
+        return StakingPool(
+            bonded_tokens=Coin("uluna", res["bonded_tokens"]),
+            not_bonded_tokens=Coin("uluna", res["not_bonded_tokens"]),
+        )
 
     def parameters(self) -> dict:
+        """Fetch Staking module parameters.
+
+        Returns:
+            dict: Staking module parameters
+        """
         res = self._c._get("/staking/parameters")
         return res
