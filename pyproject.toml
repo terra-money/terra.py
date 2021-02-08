@@ -29,7 +29,8 @@ bip32utils = "^0.3.post4"
 ecdsa = "^0.16.1"
 mnemonic = "^0.19"
 python = "^3.6"
-requests = "^2.25.1"
+wrapt = "^1.12.1"
+nest-asyncio = "^1.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"

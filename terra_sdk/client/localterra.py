@@ -28,8 +28,7 @@ LOCALTERRA_DEFAULTS = {
 }
 
 
-class LocalTerra(LCDClient):
-
+class AsyncLocalTerra(AsyncLCDClient):
     wallets: Dict[str, Wallet]
 
     def __init__(self, *args, **kwargs):
@@ -43,7 +42,8 @@ class LocalTerra(LCDClient):
         }
 
 
-class AsyncLocalTerra(AsyncLCDClient):
+class LocalTerra(LCDClient):
+
     wallets: Dict[str, Wallet]
 
     def __init__(self, *args, **kwargs):

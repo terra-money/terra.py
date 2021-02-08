@@ -1,9 +1,5 @@
 from typing import List, Optional, Union
 
-from ._base import BaseAPI
-
-__all__ = ["TxAPI"]
-
 from terra_sdk.core import AccAddress, Coin, Coins, Numeric
 from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
@@ -14,122 +10,13 @@ from terra_sdk.core.broadcast import (
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.hash import hash_amino
 
+from ._base import BaseAsyncAPI, sync_bind
 
-class AsyncTxAPI(BaseAPI):
+__all__ = ["AsyncTxAPI", "TxAPI"]
+
+
+class AsyncTxAPI(BaseAsyncAPI):
     async def tx_info(self, tx_hash: str) -> TxInfo:
-        return TxInfo.from_data(await self._c._get(f"/txs/{tx_hash}", raw=True))
-
-    async def create(
-        self,
-        source_address: AccAddress,
-        msgs: List[Msg],
-        fee: Optional[StdFee] = None,
-        memo: str = "",
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
-        account_number: Optional[int] = None,
-        sequence: Optional[int] = None,
-    ) -> StdSignMsg:
-        if fee is None:
-            # create the fake fee
-            balance = await self._c.bank.balance(source_address)
-            balance_one = [Coin(c.denom, 1) for c in balance]
-
-            # estimate the fee
-            tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
-            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
-
-        if account_number is None or sequence is None:
-            account = await self._c.auth.account_info(source_address)
-            if account_number is None:
-                account_number = account.account_number
-            if sequence is None:
-                sequence = account.sequence
-
-        return StdSignMsg(
-            self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
-        )
-
-    async def estimate_fee(
-        self,
-        tx: Union[StdSignMsg, StdTx],
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
-    ) -> StdFee:
-        gas_prices = gas_prices or self._c.gas_prices
-        gas_adjustment = gas_adjustment or self._c.gas_adjustment
-
-        if isinstance(tx, StdSignMsg):
-            tx_value = tx.to_stdtx().to_data()["value"]
-        else:
-            tx_value = tx.to_data()["value"]
-
-        tx_value["fee"]["gas"] = "0"
-
-        data = {
-            "tx": tx_value,
-            "gas_prices": gas_prices and Coins(gas_prices).to_data(),
-            "gas_adjustment": gas_adjustment and str(gas_adjustment),
-        }
-
-        res = await self._c._post("/txs/estimate_fee", data)
-        fees = Coins.from_data(res["fees"])
-        # only pick the denoms we are interested in?
-        if denoms:
-            fees = fees.filter(lambda c: c.denom in denoms)  # type: ignore
-        return StdFee(int(res["gas"]), fees)
-
-    async def encode(self, tx: StdTx) -> str:
-        res = await self._c._post("/txs/encode", tx.to_data())
-        return res["tx"]
-
-    async def hash(self, tx: StdTx) -> str:
-        amino = await self.encode(tx)
-        return hash_amino(amino)
-
-    async def _broadcast(self, tx: StdTx, mode: str) -> dict:
-        data = {"tx": tx.to_data()["value"], "mode": mode}
-        return await self._c._post("/txs", data, raw=True)
-
-    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
-        res = await self._broadcast(tx, "sync")
-        return SyncTxBroadcastResult(
-            height=res["height"],
-            txhash=res["txhash"],
-            raw_log=res["raw_log"],
-            code=res.get("code"),
-            codespace=res.get("codespace"),
-        )
-
-    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
-        res = await self._broadcast(tx, "async")
-        return AsyncTxBroadcastResult(
-            height=res["height"],
-            txhash=res["txhash"],
-        )
-
-    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
-        res = await self._broadcast(tx, "block")
-        return BlockTxBroadcastResult(
-            height=res["height"],
-            txhash=res["txhash"],
-            raw_log=res["raw_log"],
-            gas_wanted=res["gas_wanted"],
-            gas_used=res["gas_used"],
-            logs=res.get("logs"),
-            code=res.get("code"),
-            codespace=res.get("codespace"),
-        )
-
-    async def search(self, options: dict = {}) -> dict:
-        res = await self._c._get("/txs", options, raw=True)
-        return res
-
-
-class TxAPI(BaseAPI):
-    def tx_info(self, tx_hash: str) -> TxInfo:
         """Fetches information for an included transaction given a tx hash.
 
         Args:
@@ -138,9 +25,9 @@ class TxAPI(BaseAPI):
         Returns:
             TxInfo: transaction info
         """
-        return TxInfo.from_data(self._c._get(f"/txs/{tx_hash}", raw=True))
+        return TxInfo.from_data(await self._c._get(f"/txs/{tx_hash}", raw=True))
 
-    def create(
+    async def create(
         self,
         source_address: AccAddress,
         msgs: List[Msg],
@@ -171,15 +58,15 @@ class TxAPI(BaseAPI):
         """
         if fee is None:
             # create the fake fee
-            balance = self._c.bank.balance(source_address)
+            balance = await self._c.bank.balance(source_address)
             balance_one = [Coin(c.denom, 1) for c in balance]
 
             # estimate the fee
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
-            fee = self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
+            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
 
         if account_number is None or sequence is None:
-            account = self._c.auth.account_info(source_address)
+            account = await self._c.auth.account_info(source_address)
             if account_number is None:
                 account_number = account.account_number
             if sequence is None:
@@ -189,7 +76,7 @@ class TxAPI(BaseAPI):
             self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
         )
 
-    def estimate_fee(
+    async def estimate_fee(
         self,
         tx: Union[StdSignMsg, StdTx],
         gas_prices: Optional[Coins.Input] = None,
@@ -223,14 +110,14 @@ class TxAPI(BaseAPI):
             "gas_adjustment": gas_adjustment and str(gas_adjustment),
         }
 
-        res = self._c._post("/txs/estimate_fee", data)
+        res = await self._c._post("/txs/estimate_fee", data)
         fees = Coins.from_data(res["fees"])
         # only pick the denoms we are interested in?
         if denoms:
             fees = fees.filter(lambda c: c.denom in denoms)  # type: ignore
         return StdFee(int(res["gas"]), fees)
 
-    def encode(self, tx: StdTx) -> str:
+    async def encode(self, tx: StdTx) -> str:
         """Fetches a transaction's amino encoding.
 
         Args:
@@ -239,10 +126,10 @@ class TxAPI(BaseAPI):
         Returns:
             str: base64 string containing amino-encoded tx
         """
-        res = self._c._post("/txs/encode", tx.to_data())
+        res = await self._c._post("/txs/encode", tx.to_data())
         return res["tx"]
 
-    def hash(self, tx: StdTx) -> str:
+    async def hash(self, tx: StdTx) -> str:
         """Compute hash for a transaction.
 
         Args:
@@ -251,14 +138,14 @@ class TxAPI(BaseAPI):
         Returns:
             str: transaction hash
         """
-        amino = self.encode(tx)
+        amino = await self.encode(tx)
         return hash_amino(amino)
 
-    def _broadcast(self, tx: StdTx, mode: str) -> dict:
+    async def _broadcast(self, tx: StdTx, mode: str) -> dict:
         data = {"tx": tx.to_data()["value"], "mode": mode}
-        return self._c._post("/txs", data, raw=True)
+        return await self._c._post("/txs", data, raw=True)
 
-    def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
         """Broadcasts a transaction using the ``sync`` broadcast mode.
 
         Args:
@@ -267,7 +154,7 @@ class TxAPI(BaseAPI):
         Returns:
             SyncTxBroadcastResult: result
         """
-        res = self._broadcast(tx, "sync")
+        res = await self._broadcast(tx, "sync")
         return SyncTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
@@ -276,7 +163,7 @@ class TxAPI(BaseAPI):
             codespace=res.get("codespace"),
         )
 
-    def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
         """Broadcasts a transaction using the ``async`` broadcast mode.
 
         Args:
@@ -285,13 +172,13 @@ class TxAPI(BaseAPI):
         Returns:
             AsyncTxBroadcastResult: result
         """
-        res = self._broadcast(tx, "async")
+        res = await self._broadcast(tx, "async")
         return AsyncTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
         )
 
-    def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
         """Broadcasts a transaction using the ``block`` broadcast mode.
 
         Args:
@@ -300,7 +187,7 @@ class TxAPI(BaseAPI):
         Returns:
             BlockTxBroadcastResult: result
         """
-        res = self._broadcast(tx, "block")
+        res = await self._broadcast(tx, "block")
         return BlockTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
@@ -312,7 +199,7 @@ class TxAPI(BaseAPI):
             codespace=res.get("codespace"),
         )
 
-    def search(self, options: dict = {}) -> dict:
+    async def search(self, options: dict = {}) -> dict:
         """Searches for transactions given critera.
 
         Args:
@@ -321,5 +208,60 @@ class TxAPI(BaseAPI):
         Returns:
             dict: transaction search results
         """
-        res = self._c._get("/txs", options, raw=True)
+        res = await self._c._get("/txs", options, raw=True)
         return res
+
+
+class TxAPI(AsyncTxAPI):
+    @sync_bind(AsyncTxAPI.tx_info)
+    def tx_info(self, tx_hash: str) -> TxInfo:
+        pass
+
+    @sync_bind(AsyncTxAPI.create)
+    def create(
+        self,
+        source_address: AccAddress,
+        msgs: List[Msg],
+        fee: Optional[StdFee] = None,
+        memo: str = "",
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
+        account_number: Optional[int] = None,
+        sequence: Optional[int] = None,
+    ) -> StdSignMsg:
+        pass
+
+    @sync_bind(AsyncTxAPI.estimate_fee)
+    def estimate_fee(
+        self,
+        tx: Union[StdSignMsg, StdTx],
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+        denoms: Optional[List[str]] = None,
+    ) -> StdFee:
+        pass
+
+    @sync_bind(AsyncTxAPI.encode)
+    def encode(self, tx: StdTx) -> str:
+        pass
+
+    @sync_bind(AsyncTxAPI.hash)
+    def hash(self, tx: StdTx) -> str:
+        pass
+
+    @sync_bind(AsyncTxAPI.broadcast_sync)
+    def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+        pass
+
+    @sync_bind(AsyncTxAPI.broadcast_async)
+    def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+        pass
+
+    @sync_bind(AsyncTxAPI.broadcast)
+    def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+        pass
+
+    @sync_bind(AsyncTxAPI.search)
+    def search(self, options: dict = {}) -> dict:
+        pass

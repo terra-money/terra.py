@@ -1,10 +1,12 @@
 import json
 from typing import Any
 
-from ._base import BaseAPI
+from ._base import BaseAsyncAPI
+
+__all__ = ["AsyncWasmAPI", "WasmAPI"]
 
 
-class AsyncWasmAPI(BaseAPI):
+class AsyncWasmAPI(BaseAsyncAPI):
     async def code_info(self, code_id: int) -> dict:
         return await self._c._get(f"/wasm/codes/{code_id}")
 
@@ -20,7 +22,7 @@ class AsyncWasmAPI(BaseAPI):
         return await self._c._get("/wasm/parameters")
 
 
-class WasmAPI(BaseAPI):
+class WasmAPI(BaseAsyncAPI):
     def code_info(self, code_id: int) -> dict:
         """Fetches information about an uploaded code.
 

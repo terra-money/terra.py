@@ -1,23 +1,17 @@
 from terra_sdk.core import AccAddress, Coins
 
-from ._base import BaseAPI
+from ._base import BaseAsyncAPI, sync_bind
+
+__all__ = ["AsyncBankAPI", "BankAPI"]
 
 
-class AsyncBankAPI(BaseAPI):
+class AsyncBankAPI(BaseAsyncAPI):
     async def balance(self, address: AccAddress) -> Coins:
         res = await self._c._get(f"/bank/balances/{address}")
         return Coins.from_data(res)
 
 
-class BankAPI(BaseAPI):
+class BankAPI(AsyncBankAPI):
+    @sync_bind(AsyncBankAPI.balance)
     def balance(self, address: AccAddress) -> Coins:
-        """Fetches the current balance of an account.
-
-        Args:
-            address (AccAddress): account address
-
-        Returns:
-            Coins: balance
-        """
-        res = self._c._get(f"/bank/balances/{address}")
-        return Coins.from_data(res)
+        pass

@@ -1,42 +1,28 @@
 from typing import Optional
 
-from ._base import BaseAPI
+from ._base import BaseAsyncAPI, sync_bind
+
+__all__ = ["AsyncTendermintAPI", "TendermintAPI"]
 
 
-class AsyncTendermintAPI(BaseAPI):
+class AsyncTendermintAPI(BaseAsyncAPI):
     async def node_info(self) -> dict:
-        return await self._c._get("/node_info", raw=True)
-
-    async def syncing(self) -> bool:
-        return (await self._c._get("/syncing", raw=True))["syncing"]
-
-    async def validator_set(self, height: Optional[int] = None) -> dict:
-        x = "latest" if height is None else height
-        return await self._c._get(f"/validatorsets/{x}")
-
-    async def block_info(self, height: Optional[int] = None) -> dict:
-        x = "latest" if height is None else height
-        return await self._c._get(f"/blocks/{x}", raw=True)
-
-
-class TendermintAPI(BaseAPI):
-    def node_info(self) -> dict:
         """Fetches the curent connected node's information.
 
         Returns:
             dict: node information
         """
-        return self._c._get("/node_info", raw=True)
+        return await self._c._get("/node_info", raw=True)
 
-    def syncing(self) -> bool:
+    async def syncing(self) -> bool:
         """Fetches whether the curent connect node is syncing with the network.
 
         Returns:
             bool: syncing status
         """
-        return (self._c._get("/syncing", raw=True))["syncing"]
+        return (await self._c._get("/syncing", raw=True))["syncing"]
 
-    def validator_set(self, height: Optional[int] = None) -> dict:
+    async def validator_set(self, height: Optional[int] = None) -> dict:
         """Fetches the validator set for a height. If no height is given, defaults to latest.
 
         Args:
@@ -46,9 +32,9 @@ class TendermintAPI(BaseAPI):
             dict: validator set
         """
         x = "latest" if height is None else height
-        return self._c._get(f"/validatorsets/{x}")
+        return await self._c._get(f"/validatorsets/{x}")
 
-    def block_info(self, height: Optional[int] = None) -> dict:
+    async def block_info(self, height: Optional[int] = None) -> dict:
         """Fetches the block information for a given height. If no height is given, defaults to latest block.
 
         Args:
@@ -58,4 +44,22 @@ class TendermintAPI(BaseAPI):
             dict: block info
         """
         x = "latest" if height is None else height
-        return self._c._get(f"/blocks/{x}", raw=True)
+        return await self._c._get(f"/blocks/{x}", raw=True)
+
+
+class TendermintAPI(AsyncTendermintAPI):
+    @sync_bind(AsyncTendermintAPI.node_info)
+    def node_info(self) -> dict:
+        pass
+
+    @sync_bind(AsyncTendermintAPI.syncing)
+    def syncing(self) -> bool:
+        pass
+
+    @sync_bind(AsyncTendermintAPI.validator_set)
+    def validator_set(self, height: Optional[int] = None) -> dict:
+        pass
+
+    @sync_bind(AsyncTendermintAPI.block_info)
+    def block_info(self, height: Optional[int] = None) -> dict:
+        pass
