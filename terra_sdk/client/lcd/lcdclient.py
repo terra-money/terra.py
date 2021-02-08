@@ -4,6 +4,7 @@ from asyncio import AbstractEventLoop, get_event_loop
 from typing import Optional
 from urllib.parse import urljoin
 
+import nest_asyncio
 from aiohttp import ClientSession
 
 from terra_sdk.core import Coins, Numeric
@@ -28,8 +29,6 @@ from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
 from .wallet import AsyncWallet, Wallet
 
-import nest_asyncio
-
 
 class AsyncLCDClient:
     def __init__(
@@ -49,8 +48,6 @@ class AsyncLCDClient:
             self.session = ClientSession(
                 headers={"Accept": "application/json"}, loop=self.loop
             )
-        else:
-            self.session = None
 
         self.chain_id = chain_id
         self.url = url
@@ -145,14 +142,13 @@ class LCDClient(AsyncLCDClient):
             "async context manager not implemented - you probably want AsyncLCDClient"
         )
 
-    def wallet(self, key: Key) -> Wallet:
+    def wallet(self, key: Key) -> Wallet:  # type: ignore
         return Wallet(self, key)
 
     async def _get(self, *args, **kwargs):
-        if self.session is None or self.session.closed:
-            self.session = ClientSession(
-                headers={"Accept": "application/json"}, loop=self.loop
-            )
+        self.session = ClientSession(
+            headers={"Accept": "application/json"}, loop=self.loop
+        )
         try:
             result = await super()._get(*args, **kwargs)
         finally:
@@ -160,10 +156,9 @@ class LCDClient(AsyncLCDClient):
         return result
 
     async def _post(self, *args, **kwargs):
-        if self.session is None or self.session.closed:
-            self.session = ClientSession(
-                headers={"Accept": "application/json"}, loop=self.loop
-            )
+        self.session = ClientSession(
+            headers={"Accept": "application/json"}, loop=self.loop
+        )
         try:
             result = await super()._post(*args, **kwargs)
         finally:

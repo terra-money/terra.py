@@ -70,7 +70,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             try:
                 fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
             except TypeError:
-                fee = self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
+                fee = self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)  # type: ignore
 
         if account_number is None or sequence is None:
             try:
@@ -83,7 +83,7 @@ class AsyncTxAPI(BaseAsyncAPI):
                 sequence = account.sequence
 
         return StdSignMsg(
-            self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo
+            self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo  # type: ignore
         )
 
     async def estimate_fee(
