@@ -227,6 +227,8 @@ class TxAPI(AsyncTxAPI):
     def tx_info(self, tx_hash: str) -> TxInfo:
         pass
 
+    tx_info.__doc__ = AsyncTxAPI.tx_info.__doc__
+
     @sync_bind(AsyncTxAPI.create)
     def create(
         self,
@@ -242,6 +244,8 @@ class TxAPI(AsyncTxAPI):
     ) -> StdSignMsg:
         pass
 
+    create.__doc__ = AsyncTxAPI.create.__doc__
+
     @sync_bind(AsyncTxAPI.estimate_fee)
     def estimate_fee(
         self,
@@ -252,26 +256,40 @@ class TxAPI(AsyncTxAPI):
     ) -> StdFee:
         pass
 
+    estimate_fee.__doc__ = AsyncTxAPI.estimate_fee.__doc__
+
     @sync_bind(AsyncTxAPI.encode)
     def encode(self, tx: StdTx) -> str:
         pass
+
+    encode.__doc__ = AsyncTxAPI.encode.__doc__
 
     @sync_bind(AsyncTxAPI.hash)
     def hash(self, tx: StdTx) -> str:
         pass
 
+    hash.__doc__ = AsyncTxAPI.hash.__doc__
+
     @sync_bind(AsyncTxAPI.broadcast_sync)
     def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
         pass
+
+    broadcast_sync.__doc__ = AsyncTxAPI.broadcast_sync.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_async)
     def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
         pass
 
+    broadcast_async.__doc__ = AsyncTxAPI.broadcast_async.__doc__
+
     @sync_bind(AsyncTxAPI.broadcast)
     def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
         pass
 
+    broadcast.__doc__ = AsyncTxAPI.broadcast.__doc__
+
     @sync_bind(AsyncTxAPI.search)
     def search(self, options: dict = {}) -> dict:
         pass
+
+    search.__doc__ = AsyncTxAPI.search.__doc__

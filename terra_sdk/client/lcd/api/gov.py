@@ -107,38 +107,58 @@ class GovAPI(AsyncGovAPI):
     def proposals(self) -> List[Proposal]:
         pass
 
+    proposals.__doc__ = AsyncGovAPI.proposals.__doc__
+
     @sync_bind(AsyncGovAPI.proposal)
     def proposal(self, proposal_id: int) -> Proposal:
         pass
+
+    proposal.__doc__ = AsyncGovAPI.proposal.__doc__
 
     @sync_bind(AsyncGovAPI.proposer)
     def proposer(self, proposal_id: int) -> str:
         pass
 
+    proposer.__doc__ = AsyncGovAPI.proposer.__doc__
+
     @sync_bind(AsyncGovAPI.deposits)
     def deposits(self, proposal_id: int):
         pass
+
+    deposits.__doc__ = AsyncGovAPI.deposits.__doc__
 
     @sync_bind(AsyncGovAPI.votes)
     def votes(self, proposal_id: int):
         pass
 
+    votes.__doc__ = AsyncGovAPI.votes.__doc__
+
     @sync_bind(AsyncGovAPI.tally)
     def tally(self, proposal_id: int):
         pass
+
+    tally.__doc__ = AsyncGovAPI.tally.__doc__
 
     @sync_bind(AsyncGovAPI.deposit_parameters)
     def deposit_parameters(self) -> dict:
         pass
 
+    deposits.__doc__ = AsyncGovAPI.deposit_parameters.__doc__
+
     @sync_bind(AsyncGovAPI.voting_parameters)
     def voting_parameters(self) -> dict:
         pass
+
+    voting_parameters.__doc__ = AsyncGovAPI.voting_parameters.__doc__
 
     @sync_bind(AsyncGovAPI.tally_parameters)
     def tally_parameters(self) -> dict:
         pass
 
+    tally_parameters.__doc__ = AsyncGovAPI.tally_parameters.__doc__
+
     @sync_bind(AsyncGovAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncGovAPI.parameters.__doc__

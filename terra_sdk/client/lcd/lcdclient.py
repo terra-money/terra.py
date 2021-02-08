@@ -37,14 +37,13 @@ class AsyncLCDClient:
         chain_id: str = None,
         gas_prices: Coins.Input = None,
         gas_adjustment: Numeric.Input = None,
-        asynchronous: bool = True,  # don't create a session (used for sync LCDClient)
         loop: Optional[AbstractEventLoop] = None,
+        _create_session: bool = True,  # don't create a session (used for sync LCDClient)
     ):
         if loop is None:
             loop = get_event_loop()
         self.loop = loop
-        nest_asyncio.apply(self.loop)
-        if asynchronous:
+        if _create_session:
             self.session = ClientSession(
                 headers={"Accept": "application/json"}, loop=self.loop
             )
@@ -113,7 +112,11 @@ class AsyncLCDClient:
 
 class LCDClient(AsyncLCDClient):
     def __init__(self, *args, **kwargs):
-        options = {**kwargs, "asynchronous": False}
+        options = {
+            **kwargs,
+            "_create_session": False,
+            "loop": nest_asyncio.apply(get_event_loop()),
+        }
         super().__init__(*args, **options)
 
         self.auth = AuthAPI(self)

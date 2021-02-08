@@ -43,3 +43,5 @@ class MsgAuthAPI(AsyncMsgAuthAPI):
         self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
     ) -> List[AuthorizationGrant]:
         pass
+
+    grants.__doc__ = AsyncMsgAuthAPI.grants.__doc__

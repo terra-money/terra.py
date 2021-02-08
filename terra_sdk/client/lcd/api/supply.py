@@ -20,3 +20,5 @@ class SupplyAPI(AsyncSupplyAPI):
     @sync_bind(AsyncSupplyAPI.total)
     def total(self) -> Coins:
         pass
+
+    total.__doc__ = AsyncSupplyAPI.total.__doc__

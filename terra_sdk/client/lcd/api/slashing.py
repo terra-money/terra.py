@@ -41,6 +41,10 @@ class SlashingAPI(AsyncSlashingAPI):
     ) -> List[dict]:
         pass
 
+    signing_infos.__doc__ = AsyncSlashingAPI.signing_infos.__doc__
+
     @sync_bind(AsyncSlashingAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncSlashingAPI.parameters.__doc__

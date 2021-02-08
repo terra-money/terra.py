@@ -15,3 +15,5 @@ class BankAPI(AsyncBankAPI):
     @sync_bind(AsyncBankAPI.balance)
     def balance(self, address: AccAddress) -> Coins:
         pass
+
+    balance.__doc__ = AsyncBankAPI.balance.__doc__

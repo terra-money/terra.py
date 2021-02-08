@@ -33,3 +33,5 @@ class AuthAPI(AsyncAuthAPI):
         self, address: AccAddress
     ) -> Union[Account, LazyGradedVestingAccount]:
         pass
+
+    account_info.__doc__ = AsyncAuthAPI.account_info.__doc__

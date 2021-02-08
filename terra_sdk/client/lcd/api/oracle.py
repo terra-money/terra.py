@@ -179,31 +179,45 @@ class OracleAPI(AsyncOracleAPI):
     ) -> List[ExchangeRatePrevote]:
         pass
 
+    prevotes.__doc__ = AsyncOracleAPI.prevotes.__doc__
+
     @sync_bind(AsyncOracleAPI.votes)
     def votes(
         self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
     ) -> List[ExchangeRateVote]:
         pass
 
+    votes.__doc__ = AsyncOracleAPI.votes.__doc__
+
     @sync_bind(AsyncOracleAPI.exchange_rates)
     def exchange_rates(self) -> Coins:
         pass
+
+    exchange_rates.__doc__ = AsyncOracleAPI.exchange_rates.__doc__
 
     @sync_bind(AsyncOracleAPI.exchange_rate)
     def exchange_rate(self, denom: str) -> Coin:
         pass
 
+    exchange_rate.__doc__ = AsyncOracleAPI.exchange_rate.__doc__
+
     @sync_bind(AsyncOracleAPI.active_denoms)
     def active_denoms(self) -> List[str]:
         pass
+
+    active_denoms.__doc__ = AsyncOracleAPI.active_denoms.__doc__
 
     @sync_bind(AsyncOracleAPI.feeder_address)
     def feeder_address(self, validator: ValAddress) -> AccAddress:
         pass
 
+    feeder_address.__doc__ = AsyncOracleAPI.active_denoms.__doc__
+
     @sync_bind(AsyncOracleAPI.misses)
     def misses(self, validator: ValAddress) -> int:
         pass
+
+    misses.__doc__ = AsyncOracleAPI.misses.__doc__
 
     @sync_bind(AsyncOracleAPI.aggregate_prevote)
     def aggregate_prevote(
@@ -211,12 +225,18 @@ class OracleAPI(AsyncOracleAPI):
     ) -> Optional[AggregateExchangeRatePrevote]:
         pass
 
+    aggregate_prevote.__doc__ = AsyncOracleAPI.aggregate_prevote.__doc__
+
     @sync_bind(AsyncOracleAPI.aggregate_vote)
     def aggregate_vote(
         self, validator: ValAddress
     ) -> Optional[AggregateExchangeRateVote]:
         pass
 
+    aggregate_vote.__doc__ = AsyncOracleAPI.aggregate_vote.__doc__
+
     @sync_bind(AsyncOracleAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncOracleAPI.parameters.__doc__

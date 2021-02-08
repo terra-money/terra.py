@@ -91,18 +91,28 @@ class DistributionAPI(AsyncDistributionAPI):
     def rewards(self, delegator: AccAddress) -> Rewards:
         pass
 
+    rewards.__doc__ = AsyncDistributionAPI.rewards.__doc__
+
     @sync_bind(AsyncDistributionAPI.validator_rewards)
     def validator_rewards(self, validator: ValAddress) -> ValidatorRewards:
         pass
+
+    validator_rewards.__doc__ = AsyncDistributionAPI.validator_rewards.__doc__
 
     @sync_bind(AsyncDistributionAPI.withdraw_address)
     def withdraw_address(self, delegator: AccAddress) -> AccAddress:
         pass
 
+    withdraw_address.__doc__ = AsyncDistributionAPI.withdraw_address.__doc__
+
     @sync_bind(AsyncDistributionAPI.community_pool)
     def community_pool(self) -> Coins:
         pass
 
+    community_pool.__doc__ = AsyncDistributionAPI.community_pool.__doc__
+
     @sync_bind(AsyncDistributionAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncDistributionAPI.parameters.__doc__

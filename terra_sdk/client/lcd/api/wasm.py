@@ -57,14 +57,22 @@ class WasmAPI(AsyncWasmAPI):
     def code_info(self, code_id: int) -> dict:
         pass
 
+    code_info.__doc__ = AsyncWasmAPI.code_info.__doc__
+
     @sync_bind(AsyncWasmAPI.contract_info)
     def contract_info(self, contract_address: str) -> dict:
         pass
+
+    contract_info.__doc__ = AsyncWasmAPI.code_info.__doc__
 
     @sync_bind(AsyncWasmAPI.contract_query)
     def contract_query(self, contract_address: str, query_msg: dict) -> Any:
         pass
 
+    contract_query.__doc__ = AsyncWasmAPI.contract_query.__doc__
+
     @sync_bind(AsyncWasmAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncWasmAPI.parameters.__doc__

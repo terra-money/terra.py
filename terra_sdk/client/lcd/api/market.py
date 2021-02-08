@@ -43,10 +43,16 @@ class MarketAPI(AsyncMarketAPI):
     def swap_rate(self, offer_coin: Coin, ask_denom: str) -> Coin:
         pass
 
+    swap_rate.__doc__ = AsyncMarketAPI.swap_rate.__doc__
+
     @sync_bind(AsyncMarketAPI.terra_pool_delta)
     def terra_pool_delta(self) -> Dec:
         pass
 
+    terra_pool_delta.__doc__ = AsyncMarketAPI.terra_pool_delta.__doc__
+
     @sync_bind(AsyncMarketAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncMarketAPI.parameters.__doc__

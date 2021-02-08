@@ -31,7 +31,6 @@ mnemonic = "^0.19"
 python = "^3.6"
 wrapt = "^1.12.1"
 nest-asyncio = "^1.5.1"
-requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
@@ -51,6 +50,7 @@ Sphinx = "^3.4.3"
 sphinx-rtd-theme = "^0.5.1"
 sphinx-autodoc-typehints = "^1.11.1"
 sphinx-autobuild = "^2020.9.1"
+uvloop = "^0.14.0"
 
 [tool.pytest.ini_options]
 addopts = "-ra -q"

@@ -12,9 +12,4 @@ class LCDResponseError(IOError):
         message = ""
         if self.message:
             message = " - " + self.message
-        status = ""
-        try:
-            status = self.response.status
-        except AttributeError:
-            status = self.response.status_code
-        return f"Status {status}{message}"
+        return f"Status {response.status}{message}"

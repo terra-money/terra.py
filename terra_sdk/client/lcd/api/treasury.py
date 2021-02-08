@@ -69,22 +69,34 @@ class TreasuryAPI(AsyncTreasuryAPI):
     def tax_cap(self, denom: str) -> Coin:
         pass
 
+    tax_cap.__doc__ = AsyncTreasuryAPI.tax_cap.__doc__
+
     @sync_bind(AsyncTreasuryAPI.tax_rate)
     def tax_rate(self) -> Dec:
         pass
+
+    tax_rate.__doc__ = AsyncTreasuryAPI.tax_rate.__doc__
 
     @sync_bind(AsyncTreasuryAPI.reward_weight)
     def reward_weight(self) -> Dec:
         pass
 
+    reward_weight.__doc__ = AsyncTreasuryAPI.reward_weight.__doc__
+
     @sync_bind(AsyncTreasuryAPI.tax_proceeds)
     def tax_proceeds(self) -> Coins:
         pass
+
+    tax_proceeds.__doc__ = AsyncTreasuryAPI.tax_proceeds.__doc__
 
     @sync_bind(AsyncTreasuryAPI.seigniorage_proceeds)
     def seigniorage_proceeds(self) -> Coin:
         pass
 
+    seigniorage_proceeds.__doc__ = AsyncTreasuryAPI.seigniorage_proceeds.__doc__
+
     @sync_bind(AsyncTreasuryAPI.parameters)
     def parameters(self) -> Coin:
         pass
+
+    parameters.__doc__ = AsyncTreasuryAPI.parameters.__doc__

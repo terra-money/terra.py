@@ -52,14 +52,22 @@ class TendermintAPI(AsyncTendermintAPI):
     def node_info(self) -> dict:
         pass
 
+    node_info.__doc__ = AsyncTendermintAPI.node_info.__doc__
+
     @sync_bind(AsyncTendermintAPI.syncing)
     def syncing(self) -> bool:
         pass
+
+    syncing.__doc__ = AsyncTendermintAPI.syncing.__doc__
 
     @sync_bind(AsyncTendermintAPI.validator_set)
     def validator_set(self, height: Optional[int] = None) -> dict:
         pass
 
+    validator_set.__doc__ = AsyncTendermintAPI.validator_set.__doc__
+
     @sync_bind(AsyncTendermintAPI.block_info)
     def block_info(self, height: Optional[int] = None) -> dict:
         pass
+
+    block_info.__doc__ = AsyncTendermintAPI.block_info.__doc__

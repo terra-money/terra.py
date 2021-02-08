@@ -215,9 +215,13 @@ class StakingAPI(AsyncStakingAPI):
     ) -> List[Delegation]:
         pass
 
+    delegations.__doc__ = AsyncStakingAPI.delegations.__doc__
+
     @sync_bind(AsyncStakingAPI.delegation)
     def delegation(self, delegator: AccAddress, validator: ValAddress) -> Delegation:
         pass
+
+    delegation.__doc__ = AsyncStakingAPI.delegation.__doc__
 
     @sync_bind(AsyncStakingAPI.unbonding_delegations)
     def unbonding_delegations(
@@ -227,11 +231,15 @@ class StakingAPI(AsyncStakingAPI):
     ) -> List[UnbondingDelegation]:
         pass
 
+    unbonding_delegations.__doc__ = AsyncStakingAPI.unbonding_delegations.__doc__
+
     @sync_bind(AsyncStakingAPI.unbonding_delegation)
     def unbonding_delegation(
         self, delegator: AccAddress, validator: ValAddress
     ) -> UnbondingDelegation:
         pass
+
+    unbonding_delegation.__doc__ = AsyncStakingAPI.unbonding_delegation.__doc__
 
     @sync_bind(AsyncStakingAPI.redelegations)
     def redelegations(
@@ -242,22 +250,34 @@ class StakingAPI(AsyncStakingAPI):
     ) -> List[Redelegation]:
         pass
 
+    redelegations.__doc__ = AsyncStakingAPI.redelegations.__doc__
+
     @sync_bind(AsyncStakingAPI.bonded_validators)
     def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
         pass
+
+    bonded_validators.__doc__ = AsyncStakingAPI.bonded_validators.__doc__
 
     @sync_bind(AsyncStakingAPI.validators)
     def validators(self) -> List[Validator]:
         pass
 
+    validators.__doc__ = AsyncStakingAPI.validators.__doc__
+
     @sync_bind(AsyncStakingAPI.validator)
     def validator(self, validator: ValAddress) -> Validator:
         pass
+
+    validator.__doc__ = AsyncStakingAPI.validator.__doc__
 
     @sync_bind(AsyncStakingAPI.pool)
     def pool(self) -> StakingPool:
         pass
 
+    pool.__doc__ = AsyncStakingAPI.pool.__doc__
+
     @sync_bind(AsyncStakingAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncStakingAPI.parameters.__doc__

@@ -36,10 +36,16 @@ class MintAPI(AsyncMintAPI):
     def inflation(self) -> Dec:
         pass
 
+    inflation.__doc__ = AsyncMintAPI.inflation.__doc__
+
     @sync_bind(AsyncMintAPI.annual_provisions)
     def annual_provisions(self) -> Dec:
         pass
 
+    annual_provisions.__doc__ = AsyncMintAPI.annual_provisions.__doc__
+
     @sync_bind(AsyncMintAPI.parameters)
     def parameters(self) -> dict:
         pass
+
+    parameters.__doc__ = AsyncMintAPI.parameters.__doc__
