@@ -12,4 +12,4 @@ class LCDResponseError(IOError):
         message = ""
         if self.message:
             message = " - " + self.message
-        return f"Status {response.status}{message}"
+        return f"Status {self.response.status}{message}"
