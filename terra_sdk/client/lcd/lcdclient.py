@@ -149,6 +149,7 @@ class LCDClient(AsyncLCDClient):
         return Wallet(self, key)
 
     async def _get(self, *args, **kwargs):
+        # session has to be manually created and torn down for each HTTP request
         self.session = ClientSession(
             headers={"Accept": "application/json"}, loop=self.loop
         )
