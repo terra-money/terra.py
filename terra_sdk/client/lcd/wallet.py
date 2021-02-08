@@ -52,7 +52,6 @@ class Wallet:
         return {"account_number": res.account_number, "sequence": res.sequence}
 
     def create_tx(self, *args, **kwargs) -> StdSignMsg:
-        print(kwargs.keys())
         return self.lcd.tx.create(self.key.acc_address, *args, **kwargs)
 
     def create_and_sign_tx(self, *args, **kwargs) -> StdTx:

@@ -14,6 +14,6 @@ class BaseAsyncAPI:
 def sync_bind(async_call):
     @wrapt.decorator
     def decorator(wrapped, instance, args, kwargs):
-        return instance._run_sync(async_call(instance, *args, *kwargs))
+        return instance._run_sync(async_call(instance, *args, **kwargs))
 
     return decorator

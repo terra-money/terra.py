@@ -1,29 +1,13 @@
 import json
 from typing import Any
 
-from ._base import BaseAsyncAPI
+from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncWasmAPI", "WasmAPI"]
 
 
 class AsyncWasmAPI(BaseAsyncAPI):
     async def code_info(self, code_id: int) -> dict:
-        return await self._c._get(f"/wasm/codes/{code_id}")
-
-    async def contract_info(self, contract_address: str) -> dict:
-        res = await self._c._get(f"/wasm/contracts/{contract_address}")
-        return res
-
-    async def contract_query(self, contract_address: str, query: dict) -> Any:
-        params = {"query_msg": json.dumps(query)}
-        return await self._c._get(f"/wasm/contracts/{contract_address}/store", params)
-
-    async def parameters(self) -> dict:
-        return await self._c._get("/wasm/parameters")
-
-
-class WasmAPI(BaseAsyncAPI):
-    def code_info(self, code_id: int) -> dict:
         """Fetches information about an uploaded code.
 
         Args:
@@ -32,9 +16,9 @@ class WasmAPI(BaseAsyncAPI):
         Returns:
             dict: code information
         """
-        return self._c._get(f"/wasm/codes/{code_id}")
+        return await self._c._get(f"/wasm/codes/{code_id}")
 
-    def contract_info(self, contract_address: str) -> dict:
+    async def contract_info(self, contract_address: str) -> dict:
         """Fetches information about an instantiated contract.
 
         Args:
@@ -43,10 +27,10 @@ class WasmAPI(BaseAsyncAPI):
         Returns:
             dict: contract information
         """
-        res = self._c._get(f"/wasm/contracts/{contract_address}")
+        res = await self._c._get(f"/wasm/contracts/{contract_address}")
         return res
 
-    def contract_query(self, contract_address: str, query_msg: dict) -> Any:
+    async def contract_query(self, contract_address: str, query: dict) -> Any:
         """Runs a QueryMsg on a contract.
 
         Args:
@@ -56,13 +40,31 @@ class WasmAPI(BaseAsyncAPI):
         Returns:
             Any: results of query
         """
-        params = {"query_msg": json.dumps(query_msg)}
-        return self._c._get(f"/wasm/contracts/{contract_address}/store", params)
+        params = {"query_msg": json.dumps(query)}
+        return await self._c._get(f"/wasm/contracts/{contract_address}/store", params)
 
-    def parameters(self) -> dict:
+    async def parameters(self) -> dict:
         """Fetches the Wasm module parameters.
 
         Returns:
             dict: Wasm module parameters
         """
-        return self._c._get("/wasm/parameters")
+        return await self._c._get("/wasm/parameters")
+
+
+class WasmAPI(AsyncWasmAPI):
+    @sync_bind(AsyncWasmAPI.code_info)
+    def code_info(self, code_id: int) -> dict:
+        pass
+
+    @sync_bind(AsyncWasmAPI.contract_info)
+    def contract_info(self, contract_address: str) -> dict:
+        pass
+
+    @sync_bind(AsyncWasmAPI.contract_query)
+    def contract_query(self, contract_address: str, query_msg: dict) -> Any:
+        pass
+
+    @sync_bind(AsyncWasmAPI.parameters)
+    def parameters(self) -> dict:
+        pass
