@@ -54,7 +54,7 @@ Oracle API
 Slashing API
 ------------
 
-.. autoclass:: terra_sdk.client.lcd.api.mint.SlashingAPI
+.. autoclass:: terra_sdk.client.lcd.api.slashing.SlashingAPI
     :members: 
 
 Staking API
@@ -85,7 +85,7 @@ Tx API
 ---------------
 
 .. autoclass:: terra_sdk.client.lcd.api.tx.TxAPI
-    :members: 
+    :members: tx_info
 
 Wasm API
 ----------------
