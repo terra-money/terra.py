@@ -57,16 +57,26 @@ class AsyncTxAPI(BaseAsyncAPI):
             StdSignMsg: unsigned tx
         """
         if fee is None:
+
             # create the fake fee
-            balance = await self._c.bank.balance(source_address)
+            try:
+                balance = await self._c.bank.balance(source_address)
+            except TypeError:
+                balance = self._c.bank.balance(source_address)
             balance_one = [Coin(c.denom, 1) for c in balance]
 
             # estimate the fee
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
-            fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
+            try:
+                fee = await self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
+            except TypeError:
+                fee = self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
 
         if account_number is None or sequence is None:
-            account = await self._c.auth.account_info(source_address)
+            try:
+                account = await self._c.auth.account_info(source_address)
+            except TypeError:
+                account = self._c.auth.account_info(source_address)
             if account_number is None:
                 account_number = account.account_number
             if sequence is None:

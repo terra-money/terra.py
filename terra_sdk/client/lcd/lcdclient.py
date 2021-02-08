@@ -38,17 +38,19 @@ class AsyncLCDClient:
         chain_id: str = None,
         gas_prices: Coins.Input = None,
         gas_adjustment: Numeric.Input = None,
+        asynchronous: bool = True,  # don't create a session (used for sync LCDClient)
         loop: Optional[AbstractEventLoop] = None,
-        _manual_session: bool = False,  # don't create a session (used for sync LCDClient)
     ):
         if loop is None:
             loop = get_event_loop()
         self.loop = loop
         nest_asyncio.apply(self.loop)
-        if not _manual_session:
+        if asynchronous:
             self.session = ClientSession(
                 headers={"Accept": "application/json"}, loop=self.loop
             )
+        else:
+            self.session = None
 
         self.chain_id = chain_id
         self.url = url
@@ -114,8 +116,9 @@ class AsyncLCDClient:
 
 class LCDClient(AsyncLCDClient):
     def __init__(self, *args, **kwargs):
-        options = {**kwargs, "_manual_session": True}
+        options = {**kwargs, "asynchronous": False}
         super().__init__(*args, **options)
+
         self.auth = AuthAPI(self)
         self.bank = BankAPI(self)
         self.distribution = DistributionAPI(self)
@@ -146,9 +149,10 @@ class LCDClient(AsyncLCDClient):
         return Wallet(self, key)
 
     async def _get(self, *args, **kwargs):
-        self.session = ClientSession(
-            headers={"Accept": "application/json"}, loop=self.loop
-        )
+        if self.session is None or self.session.closed:
+            self.session = ClientSession(
+                headers={"Accept": "application/json"}, loop=self.loop
+            )
         try:
             result = await super()._get(*args, **kwargs)
         finally:
@@ -156,9 +160,10 @@ class LCDClient(AsyncLCDClient):
         return result
 
     async def _post(self, *args, **kwargs):
-        self.session = ClientSession(
-            headers={"Accept": "application/json"}, loop=self.loop
-        )
+        if self.session is None or self.session.closed:
+            self.session = ClientSession(
+                headers={"Accept": "application/json"}, loop=self.loop
+            )
         try:
             result = await super()._post(*args, **kwargs)
         finally:
