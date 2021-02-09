@@ -4,7 +4,7 @@ MsgAuth
 API
 ---
 
-.. autoclass:: terra_sdk.client.lcd.api.msgauth.MsgauthAPI
+.. autoclass:: terra_sdk.client.lcd.api.msgauth.MsgAuthAPI
     :members: 
 
 Data
@@ -17,10 +17,4 @@ Messages
 --------
 
 .. automodule:: terra_sdk.core.msgauth.msgs
-    :members:
-
-Proposals
----------
-
-.. automodule:: terra_sdk.core.msgauth.proposals
     :members:

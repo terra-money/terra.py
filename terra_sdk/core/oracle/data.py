@@ -1,3 +1,5 @@
+"""Oracle module data objects."""
+
 from __future__ import annotations
 
 from typing import Dict
@@ -17,6 +19,7 @@ __all__ = [
 
 @attr.s
 class AggregateExchangeRateVote(JSONSerializable):
+    """Contains information about a validator's aggregate vote."""
 
     exchange_rate_tuples: Coins = attr.ib(converter=Coins)
     voter: ValAddress = attr.ib()
@@ -45,6 +48,7 @@ class AggregateExchangeRateVote(JSONSerializable):
 
 @attr.s
 class AggregateExchangeRatePrevote(JSONSerializable):
+    """Contains information about a validator's aggregate prevote."""
 
     hash: str = attr.ib()
     voter: ValAddress = attr.ib()
@@ -68,6 +72,7 @@ class AggregateExchangeRatePrevote(JSONSerializable):
 
 @attr.s
 class ExchangeRateVote(JSONSerializable):
+    """Contains information about a validator's vote for price of LUNA."""
 
     exchange_rate: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     denom: str = attr.ib()
@@ -88,6 +93,7 @@ class ExchangeRateVote(JSONSerializable):
 
 @attr.s
 class ExchangeRatePrevote(JSONSerializable):
+    """Contains information about a validator's prevote."""
 
     hash: str = attr.ib()
     denom: str = attr.ib()

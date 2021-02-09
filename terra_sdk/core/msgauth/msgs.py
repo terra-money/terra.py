@@ -16,6 +16,8 @@ __all__ = ["MsgExecAuthorized", "MsgGrantAuthorization", "MsgRevokeAuthorization
 
 @attr.s
 class MsgExecAuthorized(Msg):
+    """Execute a set of messages, exercising an existing authorization."""
+
     type = "msgauth/MsgExecAuthorized"
 
     grantee: AccAddress = attr.ib()
@@ -31,6 +33,8 @@ class MsgExecAuthorized(Msg):
 
 @attr.s
 class MsgGrantAuthorization(Msg):
+    """Grant an authorization to ``grantee`` to call messages on behalf of ``granter``."""
+
     type = "msgauth/MsgGrantAuthorization"
 
     granter: AccAddress = attr.ib()
@@ -56,6 +60,8 @@ class MsgGrantAuthorization(Msg):
 
 @attr.s
 class MsgRevokeAuthorization(Msg):
+    """Remove existing authorization grant of the specified message type."""
+
     type = "msgauth/MsgRevokeAuthorization"
 
     granter: AccAddress = attr.ib()

@@ -1,3 +1,5 @@
+"""Oracle module messages."""
+
 from __future__ import annotations
 
 import copy
@@ -21,19 +23,41 @@ __all__ = [
 
 
 def vote_hash(denom: str, exchange_rate: Dec, salt: str, validator: str) -> str:
+    """Calculates vote hash for submitting :class:`MsgExchangeRatePrevote`s.
+
+    Args:
+        denom (str): denom to vote for
+        exchange_rate (Dec): exchange rate of LUNA
+        salt (str): salt
+        validator (str): validator operator address
+
+    Returns:
+        str: vote hash
+    """
     payload = f"{denom}:{exchange_rate!s}:{salt}:{validator}"
     sha_hash = hashlib.sha256(payload.encode())
     return sha_hash.hexdigest()[:40]
 
 
-def aggregate_vote_hash(salt: str, exchange_rates: Coins, validator: str) -> str:
-    payload = f"{salt}:{exchange_rates!s}:{validator}"
+def aggregate_vote_hash(salt: str, exchange_rates: Coins.Input, validator: str) -> str:
+    """Calculates aggregate vote hash for submitting :class:`MsgAggregateExchangeRatePrevote`s.
+
+    Args:
+        salt (str): salt
+        exchange_rates (Coins.Input): exchange rates in various denominations
+        validator (str): validator operator address
+
+    Returns:
+        str: aggregate vote hash
+    """
+    payload = f"{salt}:{str(Coins(exchange_rates))}:{validator}"
     sha_hash = hashlib.sha256(payload.encode())
     return sha_hash.hexdigest()[:40]
 
 
 @attr.s
 class MsgExchangeRatePrevote(Msg):
+    """Register a prevote for the current vote period with the Oracle module."""
 
     type = "oracle/MsgExchangeRatePrevote"
     action = "exchangerateprevote"

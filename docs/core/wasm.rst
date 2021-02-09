@@ -1,5 +1,5 @@
-Wasm
-====
+WebAssembly
+===========
 
 API
 ---

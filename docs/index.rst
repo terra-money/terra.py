@@ -55,6 +55,7 @@ Your next steps depend on where you're standing:
     core/slashing
     core/staking
     core/treasury
+    core/tx
     core/wasm
 
 
