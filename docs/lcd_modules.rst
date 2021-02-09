@@ -6,8 +6,6 @@ Module APIs
 Auth API
 --------
 
-.. autoclass:: terra_sdk.client.lcd.api.auth.AsyncAuthAPI
-    :members:
 .. autoclass:: terra_sdk.client.lcd.api.auth.AuthAPI
     :members:
 
