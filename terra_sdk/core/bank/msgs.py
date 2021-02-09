@@ -1,3 +1,5 @@
+"""Bank module message types."""
+
 from __future__ import annotations
 
 from terra_sdk.core import AccAddress, Coins
@@ -10,6 +12,9 @@ import attr
 
 @attr.s
 class MsgSend(Msg):
+    """Sends native Terra assets (Luna or Terra stablecoins) from ``from_address`` to
+    ``to_address``.
+    """
 
     type = "bank/MsgSend"
     action = "send"
@@ -30,6 +35,10 @@ class MsgSend(Msg):
 
 @attr.s
 class MsgMultiSend(Msg):
+    """Allows batch-sending between multiple source and destination addresses.
+    The total amount of coins in ``inputs`` must match ``outputs``. The :ref:``StdTx``
+    containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.
+    """
 
     type = "bank/MsgMultiSend"
     action = "multisend"

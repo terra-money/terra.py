@@ -1,3 +1,5 @@
+"""Data objects pertaining to accounts."""
+
 from __future__ import annotations
 
 from typing import List
@@ -12,7 +14,7 @@ __all__ = ["Account", "LazyGradedVestingAccount"]
 
 @attr.s
 class Account(JSONSerializable):
-    """Stores information about an account fetched from the blockchain."""
+    """Stores information about an account."""
 
     address: str = attr.ib()
     coins: Coins = attr.ib(converter=Coins)
@@ -46,6 +48,7 @@ class Account(JSONSerializable):
 
 @attr.s
 class LazyGradedVestingAccount(Account):
+    """Stores information about an account with vesting."""
 
     address: str = attr.ib()
     coins: Coins = attr.ib(converter=Coins)

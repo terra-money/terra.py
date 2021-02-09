@@ -10,6 +10,7 @@ __all__ = ["MsgSwap", "MsgSwapSend"]
 
 @attr.s
 class MsgSwap(Msg):
+    """Perform a native on-chain swap from ``offer_coin`` to ``ask_denom``."""
 
     type = "market/MsgSwap"
     action = "swap"
@@ -30,6 +31,7 @@ class MsgSwap(Msg):
 
 @attr.s
 class MsgSwapSend(Msg):
+    """Performs a swap and sends the resultant swapped amount to ``to_address``."""
 
     type = "market/MsgSwapSend"
     action = "swapsend"

@@ -1,3 +1,5 @@
+"""Gov module data types."""
+
 from __future__ import annotations
 
 import copy
@@ -13,6 +15,7 @@ __all__ = ["Proposal", "Content"]
 
 @attr.s
 class Content(BaseTerraData):
+    """Abstract proposal content type."""
 
     title: str = attr.ib()
     description: str = attr.ib()
@@ -26,6 +29,7 @@ class Content(BaseTerraData):
 
 @attr.s
 class Proposal(JSONSerializable):
+    """Contains information about a submitted proposal on the blockchain."""
 
     id: int = attr.ib(converter=int)
     content: Content = attr.ib()

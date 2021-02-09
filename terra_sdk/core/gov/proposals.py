@@ -1,3 +1,5 @@
+"""Gov module governance proposal types."""
+
 from __future__ import annotations
 
 from .data import Content
@@ -6,6 +8,9 @@ __all__ = ["TextProposal"]
 
 
 class TextProposal(Content):
+    """Generic proposal type with only title and description that does nothing if
+    passed. Primarily used for assessing the community sentiment around the proposal.
+    """
 
     type = "gov/TextProposal"
 

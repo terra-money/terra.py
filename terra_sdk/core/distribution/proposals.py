@@ -1,3 +1,5 @@
+"""Distribution module governance proposal types."""
+
 from __future__ import annotations
 
 import attr
@@ -10,6 +12,7 @@ __all__ = ["CommunityPoolSpendProposal"]
 
 @attr.s
 class CommunityPoolSpendProposal(Content):
+    """Proposal for allocating funds from the community pool to an address."""
 
     type = "distribution/CommunityPoolSpendProposal"
 

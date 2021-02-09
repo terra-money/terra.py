@@ -1,3 +1,5 @@
+"""Distribution module message types."""
+
 from __future__ import annotations
 
 import attr
@@ -15,11 +17,12 @@ __all__ = [
 
 @attr.s
 class MsgModifyWithdrawAddress(Msg):
+    """Modify the Withdraw Address of a delegator."""
 
     type = "distribution/MsgModifyWithdrawAddress"
     action = "set_withdraw_address"
 
-    delegator_address: AccAddress = attr.ib()
+    delegator_address: AccAddress = attr.ib()  # hello
     withdraw_address: AccAddress = attr.ib()
 
     @classmethod
@@ -33,6 +36,7 @@ class MsgModifyWithdrawAddress(Msg):
 
 @attr.s
 class MsgWithdrawDelegationReward(Msg):
+    """Withdraw rewards for a delegation specified by a (delegator, validator) pair."""
 
     type = "distribution/MsgWithdrawDelegationReward"
     action = "withdraw_delegation_reward"
@@ -51,6 +55,7 @@ class MsgWithdrawDelegationReward(Msg):
 
 @attr.s
 class MsgWithdrawValidatorCommission(Msg):
+    """Withdraw rewards accrued for a validator gained through commissions."""
 
     type = "distribution/MsgWithdrawValidatorCommission"
     action = "withdraw_validator_commission"
@@ -65,6 +70,7 @@ class MsgWithdrawValidatorCommission(Msg):
 
 @attr.s
 class MsgFundCommunityPool(Msg):
+    """Deposit assets to the Community Pool."""
 
     type = "distribution/MsgFundCommunityPool"
 

@@ -1,3 +1,5 @@
+"""Gov module message types."""
+
 from __future__ import annotations
 
 import attr
@@ -12,6 +14,7 @@ __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 @attr.s
 class MsgSubmitProposal(Msg):
+    """Submit the attached proposal with an initial deposit."""
 
     type = "gov/MsgSubmitProposal"
     action = "submit_proposal"
@@ -35,6 +38,7 @@ class MsgSubmitProposal(Msg):
 
 @attr.s
 class MsgDeposit(Msg):
+    """Deposit funds for an active deposit-stage proposal."""
 
     type = "gov/MsgDeposit"
     action = "deposit"
@@ -65,6 +69,7 @@ class MsgDeposit(Msg):
 
 @attr.s
 class MsgVote(Msg):
+    """Vote for an active voting-stage proposal."""
 
     type = "gov/MsgVote"
     action = "vote"

@@ -6,8 +6,10 @@
 Introduction
 ============
 
-The Terra SDK is a Python toolkit for writing software that interact with the Terra
-blockchain.
+This is the official documentation for the Python version of the Terra SDK.
+
+The Terra SDK is a library toolkit for writing software that interacts with the Terra
+blockchain. 
 
 Getting Started
 ---------------
@@ -32,10 +34,29 @@ Your next steps depend on where you're standing:
     keys
 
 .. toctree::
-    :maxdepth: 2 
-    :caption: LCDClient
+    :maxdepth: 1 
+    :caption: Terra LCD Reference
 
     lcd_modules
+
+.. toctree::
+    :maxdepth: 1 
+    :caption: Core Modules
+    
+    core/auth
+    core/bank
+    core/distribution
+    core/gov
+    core/market
+    core/mint
+    core/msgauth
+    core/oracle
+    core/params
+    core/slashing
+    core/staking
+    core/treasury
+    core/wasm
+
 
 
 Indices and tables

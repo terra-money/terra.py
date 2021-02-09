@@ -1,3 +1,5 @@
+"""Data objects pertaining to building, signing, and parsing Transactions."""
+
 from __future__ import annotations
 
 from typing import Dict, List, Optional
