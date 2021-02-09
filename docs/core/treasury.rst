@@ -13,11 +13,6 @@ Data
 .. automodule:: terra_sdk.core.treasury.data
     :members:
 
-Messages
---------
-
-.. automodule:: terra_sdk.core.treasury.msgs
-    :members:
 
 Proposals
 ---------

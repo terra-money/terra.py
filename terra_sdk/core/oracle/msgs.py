@@ -23,7 +23,7 @@ __all__ = [
 
 
 def vote_hash(denom: str, exchange_rate: Dec, salt: str, validator: str) -> str:
-    """Calculates vote hash for submitting :class:`MsgExchangeRatePrevote`s.
+    """Calculates vote hash for submitting :class:`MsgExchangeRatePrevote`.
 
     Args:
         denom (str): denom to vote for
@@ -40,7 +40,7 @@ def vote_hash(denom: str, exchange_rate: Dec, salt: str, validator: str) -> str:
 
 
 def aggregate_vote_hash(salt: str, exchange_rates: Coins.Input, validator: str) -> str:
-    """Calculates aggregate vote hash for submitting :class:`MsgAggregateExchangeRatePrevote`s.
+    """Calculates aggregate vote hash for submitting :class:`MsgAggregateExchangeRatePrevote`.
 
     Args:
         salt (str): salt
@@ -57,7 +57,7 @@ def aggregate_vote_hash(salt: str, exchange_rates: Coins.Input, validator: str) 
 
 @attr.s
 class MsgExchangeRatePrevote(Msg):
-    """Register a prevote for the current vote period with the Oracle module."""
+    """Register a prevote for the current vote period."""
 
     type = "oracle/MsgExchangeRatePrevote"
     action = "exchangerateprevote"
@@ -80,6 +80,7 @@ class MsgExchangeRatePrevote(Msg):
 
 @attr.s
 class MsgExchangeRateVote(Msg):
+    """Submit a vote for the current vote period."""
 
     type = "oracle/MsgExchangeRateVote"
     action = "exchangeratevote"
@@ -102,9 +103,20 @@ class MsgExchangeRateVote(Msg):
         )
 
     def get_vote_hash(self) -> str:
+        """Vote hash required for the associated prevote.
+
+        Returns:
+            str: vote hash
+        """
         return vote_hash(self.denom, self.exchange_rate, self.salt, self.validator)
 
     def get_prevote(self) -> MsgExchangeRatePrevote:
+        """Generates the associated :class:`MsgExchangeRatePrevote` object with the
+        correct prepopulated fields.
+
+        Returns:
+            MsgExchangeRatePrevote: associated prevote
+        """
         return MsgExchangeRatePrevote(
             hash=self.get_vote_hash(),
             denom=self.denom,
@@ -115,6 +127,7 @@ class MsgExchangeRateVote(Msg):
 
 @attr.s
 class MsgDelegateFeedConsent(Msg):
+    """Re-assign oracle feeder account for a validator."""
 
     type = "oracle/MsgDelegateFeedConsent"
     action = "delegatefeeder"
@@ -130,6 +143,7 @@ class MsgDelegateFeedConsent(Msg):
 
 @attr.s
 class MsgAggregateExchangeRatePrevote(Msg):
+    """Submit an aggregate vote for the current vote period."""
 
     type = "oracle/MsgAggregateExchangeRatePrevote"
 
@@ -149,6 +163,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
 
 @attr.s
 class MsgAggregateExchangeRateVote(Msg):
+    """Submit an aggregate prevote for the current vote."""
 
     type = "oracle/MsgAggregateExchangeRateVote"
 
@@ -173,9 +188,20 @@ class MsgAggregateExchangeRateVote(Msg):
         )
 
     def get_aggregate_vote_hash(self) -> str:
+        """Vote hash required for message's associated prevote.
+
+        Returns:
+            str: aggregate vote hash
+        """
         return aggregate_vote_hash(self.salt, self.exchange_rates, self.validator)
 
     def get_aggregate_prevote(self) -> MsgAggregateExchangeRatePrevote:
+        """Generates the associated :class:`MsgAggregateExchangeRatePrevote` object with
+        the correct prepopulated fields.
+
+        Returns:
+            MsgAggregateExchangeRatePrevote: associated aggregate prevote
+        """
         return MsgAggregateExchangeRatePrevote(
             hash=self.get_aggregate_vote_hash(),
             feeder=self.feeder,

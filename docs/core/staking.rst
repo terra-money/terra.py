@@ -10,17 +10,21 @@ API
 Data
 ----
 
-.. automodule:: terra_sdk.core.staking.data
+Delegation
+^^^^^^^^^^
+
+.. automodule:: terra_sdk.core.staking.data.delegation
     :members:
+
+Validator
+^^^^^^^^^
+
+.. automodule:: terra_sdk.core.staking.data.validator
+    :members:
+
 
 Messages
 --------
 
 .. automodule:: terra_sdk.core.staking.msgs
-    :members:
-
-Proposals
----------
-
-.. automodule:: terra_sdk.core.staking.proposals
     :members:

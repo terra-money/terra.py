@@ -17,6 +17,7 @@ __all__ = [
 
 @attr.s
 class CommissionRates(JSONSerializable):
+    """Data structure for validator's commission rates."""
 
     rate: Dec = attr.ib(converter=Dec)
     max_rate: Dec = attr.ib(converter=Dec)
@@ -33,6 +34,7 @@ class CommissionRates(JSONSerializable):
 
 @attr.s
 class Commission(JSONSerializable):
+    """Contains information about validator's commission rates."""
 
     commission_rates: CommissionRates = attr.ib()
     update_time: str = attr.ib()
@@ -50,6 +52,7 @@ class Commission(JSONSerializable):
 
 @attr.s
 class Description(JSONSerializable):
+    """Validator description entry."""
 
     DO_NOT_MODIFY = "[do-not-modify]"
 
@@ -65,6 +68,7 @@ class Description(JSONSerializable):
 
 @attr.s
 class Validator(JSONSerializable):
+    """Contains information about a registered validator."""
 
     operator_address: ValAddress = attr.ib()
     consensus_pubkey: ValConsPubKey = attr.ib()

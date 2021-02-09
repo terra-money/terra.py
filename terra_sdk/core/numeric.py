@@ -1,3 +1,5 @@
+"""Numeric types."""
+
 from __future__ import annotations
 
 import re
@@ -8,7 +10,7 @@ DEC_NUM_DIGITS = 18
 DEC_ONE = 10 ** DEC_NUM_DIGITS
 DEC_PATTERN = re.compile(r"^(\-)?(\d+)(\.(\d+))?\Z")
 
-__all__ = ["DEC_NUM_DIGITS", "Dec"]
+__all__ = ["DEC_NUM_DIGITS", "Dec", "Numeric"]
 
 
 def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
@@ -60,15 +62,16 @@ def chop_precision_and_round(d: int) -> int:
 
 
 class Dec:
+    """BigInt-based Decimal representation with basic arithmetic operations with
+    compatible Python numeric types (int, float, Decimal). Does not work with
+    NaN, Infinity, +0, -0, etc. Serializes as a string with 18 points of decimal
+    precision.
+    """
 
     _i: int = 0
 
     def __init__(self, arg: Union[str, int, float, Decimal, Dec]):
-        """BigInt-based Decimal representation with basic arithmetic operations with
-        compatible Python numeric types (int, float, Decimal). Does not work with
-        NaN, Infinity, +0, -0, etc. Serializes as a string with 18 points of decimal
-        DEC_NUM_DIGITS.
-        """
+        """hi"""
         if isinstance(arg, Dec):
             self._i = arg._i
             return

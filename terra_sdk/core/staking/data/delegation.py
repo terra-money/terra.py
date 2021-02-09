@@ -18,6 +18,7 @@ __all__ = [
 
 @attr.s
 class Delegation(JSONSerializable):
+    """Contains information about a current delegation pair (``delegator_address``, ``validator_address``)"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -36,6 +37,7 @@ class Delegation(JSONSerializable):
 
 @attr.s
 class UnbondingEntry(JSONSerializable):
+    """Contains information about an active unbonding lot of Luna."""
 
     initial_balance: int = attr.ib(converter=int)
     balance: int = attr.ib(converter=int)
@@ -62,6 +64,7 @@ class UnbondingEntry(JSONSerializable):
 
 @attr.s
 class UnbondingDelegation(JSONSerializable):
+    """Contains information about undelegations for a delegation pair (``delegator_address``, ``validator_address``)"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -79,6 +82,7 @@ class UnbondingDelegation(JSONSerializable):
 
 @attr.s
 class RedelegationEntry(JSONSerializable):
+    """Contains information about an active redelegated lot of Luna."""
 
     initial_balance: int = attr.ib(converter=int)
     balance: int = attr.ib(converter=int)
@@ -108,6 +112,7 @@ class RedelegationEntry(JSONSerializable):
 
 @attr.s
 class Redelegation(JSONSerializable):
+    """Contains informations about a redelgation for delegation tuple (``delegator_address``, ``validator_src_address``, ``validator_dst_address``)"""
 
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()

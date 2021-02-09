@@ -20,6 +20,7 @@ __all__ = [
 
 @attr.s
 class MsgBeginRedelegate(Msg):
+    """Redelegate staked Luna from ``validator_src_address`` to ``valdiator_dst_address``."""
 
     type = "staking/MsgBeginRedelegate"
     action = "begin_redelegate"
@@ -42,6 +43,7 @@ class MsgBeginRedelegate(Msg):
 
 @attr.s
 class MsgDelegate(Msg):
+    """Delegate Luna to validator at ``validator_address``."""
 
     type = "staking/MsgDelegate"
     action = "delegate"
@@ -62,6 +64,7 @@ class MsgDelegate(Msg):
 
 @attr.s
 class MsgUndelegate(Msg):
+    """Undelegate Luna from staking position with ``validator_address``."""
 
     type = "staking/MsgUndelegate"
     action = "begin_unbonding"
@@ -82,6 +85,7 @@ class MsgUndelegate(Msg):
 
 @attr.s
 class MsgEditValidator(Msg):
+    """Revise validator description and configuration."""
 
     type = "staking/MsgEditValidator"
     action = "edit_validator"
@@ -106,6 +110,7 @@ class MsgEditValidator(Msg):
 
 @attr.s
 class MsgCreateValidator(Msg):
+    """Register a new validator with the Terra protocol."""
 
     type = "staking/MsgCreateValidator"
     action = "create_validator"

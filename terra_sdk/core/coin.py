@@ -12,6 +12,9 @@ from .numeric import Dec, Numeric
 
 @attr.s(frozen=True)
 class Coin(JSONSerializable):
+    """Represents a (denom, amount) pairing, analagous to ``sdk.Coin`` and ``sdk.DecCoin``
+    in Cosmos SDK.
+    """
 
     denom: str = attr.ib()
     amount: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore

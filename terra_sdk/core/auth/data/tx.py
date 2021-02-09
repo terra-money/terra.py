@@ -24,6 +24,7 @@ __all__ = [
 
 @attr.s
 class StdSignature(JSONSerializable):
+    """Data structure holding information for a transaction signature."""
 
     signature: str = attr.ib()
     pub_key: Optional[PublicKey] = attr.ib()
@@ -38,6 +39,7 @@ class StdSignature(JSONSerializable):
 
 @attr.s
 class StdFee(JSONSerializable):
+    """Data structure holding information for a transaction fee."""
 
     gas: int = attr.ib(converter=int)
     amount: Coins = attr.ib(converter=Coins)
@@ -56,6 +58,7 @@ class StdFee(JSONSerializable):
 
 @attr.s
 class StdSignMsg(JSONSerializable):
+    """Data structure holding information which can be signed to create a :class:`StdTx`."""
 
     chain_id: str = attr.ib()
     account_number: int = attr.ib(converter=int)
@@ -91,6 +94,7 @@ class StdSignMsg(JSONSerializable):
 
 @attr.s
 class StdTx(JSONSerializable):
+    """Data structure for a transaction which can be broadcasted."""
 
     msg: List[Msg] = attr.ib()
     fee: StdFee = attr.ib()
@@ -156,6 +160,9 @@ def parse_tx_logs(logs) -> Optional[List[TxLog]]:
 
 @attr.s
 class TxInfo(JSONSerializable):
+    """Holds information pertaining to a transaction which has been included in a block
+    on the blockchain.
+    """
 
     height: int = attr.ib(converter=int)
     txhash: str = attr.ib()

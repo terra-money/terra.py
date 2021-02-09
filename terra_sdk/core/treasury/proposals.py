@@ -1,3 +1,5 @@
+"""Treasury module governance proposals."""
+
 from __future__ import annotations
 
 import attr
@@ -10,6 +12,7 @@ __all__ = ["TaxRateUpdateProposal", "RewardWeightUpdateProposal"]
 
 @attr.s
 class TaxRateUpdateProposal(Content):
+    """Proposal to adjust the protocol-level tax rate."""
 
     type = "treasury/TaxRateUpdateProposal"
 
@@ -29,6 +32,7 @@ class TaxRateUpdateProposal(Content):
 
 @attr.s
 class RewardWeightUpdateProposal(Content):
+    """Proposal to adjust the protocol-level reward weight."""
 
     type = "treasury/RewardWeightUpdateProposal"
 

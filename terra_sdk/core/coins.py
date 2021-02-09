@@ -8,6 +8,8 @@ from .numeric import Numeric
 
 
 class Coins:
+    """Represents an unordered collection of :class:`Coin` objects
+    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK."""
 
     Input = Union[Iterable[Coin], str, Dict[str, Numeric.Input], Dict[str, Coin]]
 

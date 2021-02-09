@@ -35,9 +35,10 @@ Your next steps depend on where you're standing:
 
 .. toctree::
     :maxdepth: 1 
-    :caption: Terra LCD Reference
+    :caption: Core SDK Types
 
-    lcd_modules
+    common_types
+    
 
 .. toctree::
     :maxdepth: 1 

@@ -1,3 +1,5 @@
+"""Treasury module data objects."""
+
 from __future__ import annotations
 
 __all__ = ["PolicyConstraints"]
@@ -9,6 +11,9 @@ from terra_sdk.core import Coin, Dec
 
 @attr.s
 class PolicyConstraints:
+    """Contains information about tax reward or reward weight
+    policy constraints.
+    """
 
     rate_min: Dec = attr.ib()
     rate_max: Dec = attr.ib()
