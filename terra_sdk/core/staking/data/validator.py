@@ -55,11 +55,19 @@ class Description(JSONSerializable):
     """Validator description entry."""
 
     DO_NOT_MODIFY = "[do-not-modify]"
+    """"""
 
     moniker: str = attr.ib()
+    """"""
+
     identity: str = attr.ib()
+    """"""
+
     website: str = attr.ib()
+    """"""
+
     details: str = attr.ib()
+    """"""
 
     @classmethod
     def from_data(cls, data) -> Description:
@@ -71,16 +79,37 @@ class Validator(JSONSerializable):
     """Contains information about a registered validator."""
 
     operator_address: ValAddress = attr.ib()
+    """"""
+
     consensus_pubkey: ValConsPubKey = attr.ib()
+    """"""
+
     jailed: bool = attr.ib()
+    """"""
+
     status: int = attr.ib(converter=int)
+    """"""
+
     tokens: int = attr.ib(converter=int)
+    """"""
+
     delegator_shares: Dec = attr.ib(converter=Dec)
+    """"""
+
     description: Description = attr.ib()
+    """"""
+
     unbonding_height: int = attr.ib(converter=int)
+    """"""
+
     unbonding_time: str = attr.ib()
+    """"""
+
     commission: Commission = attr.ib()
+    """"""
+
     min_self_delegation: int = attr.ib(converter=int)
+    """"""
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
