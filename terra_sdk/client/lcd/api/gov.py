@@ -96,9 +96,9 @@ class AsyncGovAPI(BaseAsyncAPI):
             dict: Gov module parameters
         """
         return {
-            "deposit_params": await self.deposit_parameters(),
-            "voting_params": await self.voting_parameters(),
-            "tally_params": await self.tally_parameters(),
+            "deposit_params": await BaseAsyncAPI._try_await(self.deposit_parameters()),
+            "voting_params": await BaseAsyncAPI._try_await(self.voting_parameters()),
+            "tally_params": await BaseAsyncAPI._try_await(self.tally_parameters()),
         }
 
 
