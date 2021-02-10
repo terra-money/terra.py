@@ -36,7 +36,7 @@ class MsgSend(Msg):
 @attr.s
 class MsgMultiSend(Msg):
     """Allows batch-sending between multiple source and destination addresses.
-    The total amount of coins in ``inputs`` must match ``outputs``. The :class:`terra_sdk.core.auth.data.tx.StdTx`
+    The total amount of coins in ``inputs`` must match ``outputs``. The transaction
     containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.
     """
 

@@ -35,10 +35,12 @@ Your next steps depend on where you're standing:
 
 .. toctree::
     :maxdepth: 1 
-    :caption: Core SDK Types
+    :caption: Common SDK Types
 
-    common_types
-    
+    common/numeric
+    common/coin
+    common/coins
+    common/bech32
 
 .. toctree::
     :maxdepth: 1 

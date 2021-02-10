@@ -1,3 +1,5 @@
+"Wasm module messages."
+
 from __future__ import annotations
 
 import copy
@@ -35,6 +37,8 @@ def dict_to_b64(data: dict) -> str:
 
 @attr.s
 class MsgStoreCode(Msg):
+    """Upload a new smart contract WASM binary to the blockchain."""
+
     type = "wasm/MsgStoreCode"
 
     sender: AccAddress = attr.ib()
@@ -48,6 +52,8 @@ class MsgStoreCode(Msg):
 
 @attr.s
 class MsgInstantiateContract(Msg):
+    """Creates a new instance of a smart contract from existing code on the blockchain."""
+
     type = "wasm/MsgInstantiateContract"
 
     owner: AccAddress = attr.ib()
@@ -76,6 +82,8 @@ class MsgInstantiateContract(Msg):
 
 @attr.s
 class MsgExecuteContract(Msg):
+    """Execute a state-mutating function on a smart contract."""
+
     type = "wasm/MsgExecuteContract"
 
     sender: AccAddress = attr.ib()
@@ -101,6 +109,8 @@ class MsgExecuteContract(Msg):
 
 @attr.s
 class MsgMigrateContract(Msg):
+    """Migrate the contract to a different code ID."""
+
     type = "wasm/MsgExecuteContract"
 
     owner: AccAddress = attr.ib()
@@ -127,6 +137,8 @@ class MsgMigrateContract(Msg):
 
 @attr.s
 class MsgUpdateContractOwner(Msg):
+    """Update a smart contract's owner."""
+
     type = "wasm/MsgUpdateContractOwner"
 
     owner: AccAddress = attr.ib()

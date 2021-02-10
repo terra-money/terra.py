@@ -35,10 +35,29 @@ ValConsPubKey = NewType("ValConsPubKey", str)
 
 
 def is_acc_address(data: str) -> bool:
+    """Checks whether the given string is a properly formatted Terra account address.
+
+    Args:
+        data (str): string to check
+
+    Returns:
+        bool: whether the string is a proper account address
+    """
     return check_prefix_and_length("terra", data, 44)
 
 
 def to_acc_address(data: ValAddress) -> AccAddress:
+    """Converts a validator operator address into an account address.
+
+    Args:
+        data (ValAddress): validator operator address
+
+    Raises:
+        ValueError: if provided string is not Bech32
+
+    Returns:
+        AccAddress: account address
+    """
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
@@ -46,10 +65,30 @@ def to_acc_address(data: ValAddress) -> AccAddress:
 
 
 def is_val_address(data: str) -> bool:
+    """Checks whether the given string is a properly formatted Terra validator operator
+    address.
+
+    Args:
+        data (str): string to check
+
+    Returns:
+        bool: whether the string is a proper validator address
+    """
     return check_prefix_and_length("terravaloper", data, 51)
 
 
 def to_val_address(data: AccAddress) -> ValAddress:
+    """Converts an account address into a validator operator address.
+
+    Args:
+        data (AccAddress): account address
+
+    Raises:
+        ValueError: if provided string is not Bech32
+
+    Returns:
+        ValAddress: validator operator address
+    """
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
@@ -57,10 +96,29 @@ def to_val_address(data: AccAddress) -> ValAddress:
 
 
 def is_acc_pubkey(data: str) -> bool:
+    """Checks whether the provided string is a properly formatted Terra account pubkey.
+
+    Args:
+        data (str): string to check
+
+    Returns:
+        bool: whether string is account pubkey
+    """
     return check_prefix_and_length("terrapub", data, 76)
 
 
 def to_acc_pubkey(data: ValPubKey) -> AccPubKey:
+    """Converts a validator pubkey into an account pubkey.
+
+    Args:
+        data (ValPubKey): validator pubkey
+
+    Raises:
+        ValueError: if provided string is not Bech32
+
+    Returns:
+        AccPubKey: account pubkey
+    """
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
@@ -68,10 +126,29 @@ def to_acc_pubkey(data: ValPubKey) -> AccPubKey:
 
 
 def is_val_pubkey(data: str) -> bool:
+    """Checks whether provided string is a properly formatted Terra validator pubkey.
+
+    Args:
+        data (str): string to check
+
+    Returns:
+        bool: whether string is validator pubkey
+    """
     return check_prefix_and_length("terravaloperpub", data, 83)
 
 
 def to_val_pubkey(data: AccPubKey) -> ValPubKey:
+    """Converts an account pubkey into a validator pubkey.
+
+    Args:
+        data (AccPubKey): account pubkey
+
+    Raises:
+        ValueError: if provided string is not Bech32
+
+    Returns:
+        ValPubKey: validator pubkey
+    """
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
@@ -79,4 +156,13 @@ def to_val_pubkey(data: AccPubKey) -> ValPubKey:
 
 
 def is_valcons_pubkey(data: str) -> ValConsPubKey:
+    """Checks whether provided string is a properly formatted Terra validator consensus
+    pubkey.
+
+    Args:
+        data (str): string to check
+
+    Returns:
+        ValConsPubKey: validator consensus pubkey
+    """
     return check_prefix_and_length("terravalconspub", data, 83)

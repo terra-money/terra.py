@@ -13,14 +13,22 @@ from .numeric import Dec, Numeric
 @attr.s(frozen=True)
 class Coin(JSONSerializable):
     """Represents a (denom, amount) pairing, analagous to ``sdk.Coin`` and ``sdk.DecCoin``
-    in Cosmos SDK.
+    in Cosmos SDK. Used for representing Terra native assets.
     """
 
     denom: str = attr.ib()
+    """Coin's denomination, ex ``uusd``, ``uluna``, etc."""
+
     amount: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore
+    """Coin's amount -- can be a ``int`` or :class:`Dec`"""
 
     @staticmethod
     def parse(arg: Union[Coin, str, dict]) -> Coin:
+        """Converts the argument into a coin.
+
+        Args:
+            arg (Union[Coin, str, dict]): value to be converted to coin
+        """
         if isinstance(arg, Coin):
             return arg
         elif isinstance(arg, str):

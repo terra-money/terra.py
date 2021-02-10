@@ -6,6 +6,8 @@ import re
 from decimal import Decimal
 from typing import Union
 
+from terra_sdk.util.json import JSONSerializable
+
 DEC_NUM_DIGITS = 18
 DEC_ONE = 10 ** DEC_NUM_DIGITS
 DEC_PATTERN = re.compile(r"^(\-)?(\d+)(\.(\d+))?\Z")
@@ -61,17 +63,16 @@ def chop_precision_and_round(d: int) -> int:
         return quo + 1
 
 
-class Dec:
+class Dec(JSONSerializable):
     """BigInt-based Decimal representation with basic arithmetic operations with
     compatible Python numeric types (int, float, Decimal). Does not work with
-    NaN, Infinity, +0, -0, etc. Serializes as a string with 18 points of decimal
-    precision.
+    ``NaN``, ``Infinity``, ``+0``, ``-0``, etc. Serializes as a string with 18 points of
+    decimal precision.
     """
 
     _i: int = 0
 
     def __init__(self, arg: Union[str, int, float, Decimal, Dec]):
-        """hi"""
         if isinstance(arg, Dec):
             self._i = arg._i
             return
@@ -79,22 +80,42 @@ class Dec:
             self._i = int(convert_to_dec_bignum(arg))
 
     @classmethod
-    def zero(cls):
+    def zero(cls) -> Dec:
+        """Dec representation of zero.
+
+        Returns:
+            Dec: zero
+        """
         return cls(0)
 
     @classmethod
     def one(cls):
+        """Dec representation of one.
+
+        Returns:
+            Dec: one
+        """
         nd = cls(0)
         nd._i = DEC_ONE
         return nd
 
     def __str__(self) -> str:
+        """Converts to a string using all 18 decimal precision points.
+
+        Returns:
+            str: string representation
+        """
         if self._i == 0:
             return "0." + DEC_NUM_DIGITS * "0"
         parity = "-" if self._i < 0 else ""
         return f"{parity}{self.whole}.{self.frac}"
 
-    def to_short_str(self):
+    def to_short_str(self) -> str:
+        """Converts to a string, but truncates all unnecessary zeros.
+
+        Returns:
+            str: string representation
+        """
         parity = "-" if self._i < 0 else ""
         frac = self.frac.rstrip("0")
         dot = "." if len(frac) > 0 else ""
@@ -115,14 +136,29 @@ class Dec:
 
     @property
     def parity(self) -> int:
+        """Get the parity of the Dec value. Returns -1 if value is below 0, and 1 otherwise.
+
+        Returns:
+            int: parity
+        """
         return -1 if self._i < 0 else 1
 
     @property
     def whole(self) -> str:
+        """Get the integral part of the Dec value.
+
+        Returns:
+            str: integer, as string
+        """
         return str(abs(self._i) // DEC_ONE)
 
     @property
     def frac(self) -> str:
+        """Get the fractional part of the Dec value.
+
+        Returns:
+            str: fraction, as string
+        """
         return str(abs(self._i) % DEC_ONE).rjust(DEC_NUM_DIGITS, "0")
 
     def to_data(self) -> str:
@@ -162,7 +198,15 @@ class Dec:
     def __ge__(self, other) -> bool:
         return self.ge(other)
 
-    def add(self, other) -> Dec:
+    def add(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs addition. Argument is first converted into Dec.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): addend
+
+        Returns:
+            Dec: sum
+        """
         nd = Dec.zero()
         nd._i = self._i + Dec(other)._i
         return nd
@@ -174,6 +218,14 @@ class Dec:
         return Dec(other).add(self)
 
     def sub(self, other) -> Dec:
+        """Performs subtraction. Argument is first converted into Dec.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): subtrahend
+
+        Returns:
+            Dec: difference
+        """
         nd = Dec.zero()
         nd._i = self._i - Dec(other)._i
         return nd
@@ -185,6 +237,14 @@ class Dec:
         return Dec(other).sub(self)
 
     def mul(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs multiplication. Argument is first converted into Dec.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): multiplier
+
+        Returns:
+            Dec: product
+        """
         x = self._i
         y = Dec(other)._i
         nd = Dec.zero()
@@ -197,7 +257,18 @@ class Dec:
     def __rmul__(self, other):
         return Dec(other).mul(self)
 
-    def div(self, other) -> Dec:
+    def div(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs division. Argument is first converted into Dec.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): divisor
+
+        Raises:
+            ZeroDivisionError: if argument is 0
+
+        Returns:
+            Dec: quotient
+        """
         if Dec(other)._i == 0:
             raise ZeroDivisionError(f"tried to divide by 0: {self!r} / {other!r}")
         nd = Dec.zero()
@@ -213,7 +284,15 @@ class Dec:
     def __floordiv__(self, other):
         return self.div(int(other))
 
-    def mod(self, other) -> Dec:
+    def mod(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs modulus. Argument is first converted into Dec.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): modulo
+
+        Returns:
+            Dec: modulus
+        """
         return self.sub(self.div(other).mul(self))
 
     def __mod__(self, other) -> Dec:
@@ -238,7 +317,15 @@ class Dec:
 
     @classmethod
     def with_prec(cls, i: Union[int, str], prec: int) -> Dec:
-        """Replicates Cosmos-SDK's Dec.with_prec(i, prec)"""
+        """Replicates Cosmos SDK's ``Dec.withPrec(i, prec)``.
+
+        Args:
+            i (Union[int, str]): numeric value
+            prec (int): precision
+
+        Returns:
+            Dec: decimal
+        """
         d = cls(0)
         i = int(i)
         d._i = i * 10 ** (DEC_NUM_DIGITS - int(prec))
@@ -248,10 +335,24 @@ class Dec:
 class Numeric:
 
     Input = Union[str, int, float, Decimal, Dec]
+    """"""
+
     Output = Union[int, Dec]
+    """"""
 
     @staticmethod
     def parse(value: Numeric.Input) -> Numeric.Output:
+        """Parses the value and coerces it into an ``int`` or :class:`Dec`.
+
+        Args:
+            value (Numeric.Input): value to be parsed
+
+        Raises:
+            TypeError: if supplied value could not be parsed
+
+        Returns:
+            Numeric.Output: coerced number
+        """
         if isinstance(value, int) or isinstance(value, Dec):
             return value
         elif isinstance(value, str):
