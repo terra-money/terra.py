@@ -6,8 +6,10 @@ from typing import List
 
 import attr
 
-from terra_sdk.core import AccAddress, Coins, PublicKey
+from terra_sdk.core import AccAddress, Coins
 from terra_sdk.util.json import JSONSerializable
+
+from .public_key import PublicKey
 
 __all__ = ["Account", "LazyGradedVestingAccount"]
 

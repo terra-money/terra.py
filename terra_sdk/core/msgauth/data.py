@@ -1,3 +1,5 @@
+"""MsgAuth module data types."""
+
 from __future__ import annotations
 
 import attr

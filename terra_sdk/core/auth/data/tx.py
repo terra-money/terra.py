@@ -8,8 +8,9 @@ import attr
 
 from terra_sdk.core.coins import Coins
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.public_key import PublicKey
 from terra_sdk.util.json import JSONSerializable
+
+from .public_key import PublicKey
 
 __all__ = [
     "StdSignature",

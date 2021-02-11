@@ -1,3 +1,5 @@
+"""Special Bech32 String Types"""
+
 from __future__ import annotations
 
 from typing import NewType

@@ -11,6 +11,8 @@ API
 Data
 ----
 
+The following objects are availalble also at ``terra_sdk.core.auth``
+
 Account
 ^^^^^^^
 

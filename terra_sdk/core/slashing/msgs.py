@@ -1,4 +1,4 @@
-"""Slashing module messages."""
+"""Slashing module messages types."""
 
 from __future__ import annotations
 
