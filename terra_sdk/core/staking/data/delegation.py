@@ -21,9 +21,13 @@ class Delegation(JSONSerializable):
     """Contains information about a current delegation pair (``delegator_address``, ``validator_address``)"""
 
     delegator_address: AccAddress = attr.ib()
+    """"""
     validator_address: ValAddress = attr.ib()
+    """"""
     shares: Dec = attr.ib(converter=Dec)
+    """"""
     balance: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    """"""
 
     @classmethod
     def from_data(cls, data: dict) -> Delegation:
@@ -40,9 +44,13 @@ class UnbondingEntry(JSONSerializable):
     """Contains information about an active unbonding lot of Luna."""
 
     initial_balance: int = attr.ib(converter=int)
+    """"""
     balance: int = attr.ib(converter=int)
+    """"""
     creation_height: int = attr.ib(converter=int)
+    """"""
     completion_time: str = attr.ib()
+    """"""
 
     def to_data(self) -> dict:
         return {
@@ -67,8 +75,11 @@ class UnbondingDelegation(JSONSerializable):
     """Contains information about undelegations for a delegation pair (``delegator_address``, ``validator_address``)"""
 
     delegator_address: AccAddress = attr.ib()
+    """"""
     validator_address: ValAddress = attr.ib()
+    """"""
     entries: List[UnbondingEntry] = attr.ib()
+    """"""
 
     @classmethod
     def from_data(cls, data) -> UnbondingDelegation:
@@ -85,10 +96,15 @@ class RedelegationEntry(JSONSerializable):
     """Contains information about an active redelegated lot of Luna."""
 
     initial_balance: int = attr.ib(converter=int)
+    """"""
     balance: int = attr.ib(converter=int)
+    """"""
     shares_dst: Dec = attr.ib(converter=Dec)
+    """"""
     creation_height: int = attr.ib(converter=int)
+    """"""
     completion_time: str = attr.ib()
+    """"""
 
     def to_data(self) -> dict:
         return {
@@ -115,9 +131,13 @@ class Redelegation(JSONSerializable):
     """Contains informations about a redelgation for delegation tuple (``delegator_address``, ``validator_src_address``, ``validator_dst_address``)"""
 
     delegator_address: AccAddress = attr.ib()
+    """"""
     validator_src_address: ValAddress = attr.ib()
+    """"""
     validator_dst_address: ValAddress = attr.ib()
+    """"""
     entries: List[RedelegationEntry] = attr.ib()
+    """"""
 
     @classmethod
     def from_data(cls, data: dict) -> Redelegation:

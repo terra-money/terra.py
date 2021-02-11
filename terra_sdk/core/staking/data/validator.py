@@ -17,11 +17,16 @@ __all__ = [
 
 @attr.s
 class CommissionRates(JSONSerializable):
-    """Data structure for validator's commission rates."""
+    """Data structure for validator's commission rates & policy."""
 
     rate: Dec = attr.ib(converter=Dec)
+    """Current % commission rate."""
+
     max_rate: Dec = attr.ib(converter=Dec)
+    """Maximum % commission rate permitted by policy."""
+
     max_change_rate: Dec = attr.ib(converter=Dec)
+    """Maximum % change of commission per day."""
 
     @classmethod
     def from_data(cls, data: dict) -> CommissionRates:
@@ -37,7 +42,10 @@ class Commission(JSONSerializable):
     """Contains information about validator's commission rates."""
 
     commission_rates: CommissionRates = attr.ib()
+    """Validator commission rates."""
+
     update_time: str = attr.ib()
+    """Last time commission rates were updated."""
 
     @classmethod
     def from_data(cls, data: dict) -> Commission:
@@ -52,22 +60,22 @@ class Commission(JSONSerializable):
 
 @attr.s
 class Description(JSONSerializable):
-    """Validator description entry."""
+    """Validator description entry.
+
+    Args:
+        moniker: validator name, aka: \"Terran One\"
+        identity: keybase.io identifier (used for setting logo)
+        website: validator website
+        details: longer description of validator
+    """
 
     DO_NOT_MODIFY = "[do-not-modify]"
     """"""
 
     moniker: str = attr.ib()
-    """"""
-
     identity: str = attr.ib()
-    """"""
-
     website: str = attr.ib()
-    """"""
-
     details: str = attr.ib()
-    """"""
 
     @classmethod
     def from_data(cls, data) -> Description:

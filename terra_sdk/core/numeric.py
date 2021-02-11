@@ -228,7 +228,7 @@ class Dec(JSONSerializable):
     def __ge__(self, other) -> bool:
         return self.ge(other)
 
-    def add(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
+    def add(self, addend: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs addition. ``addend`` is first converted into Dec.
 
         Args:
@@ -238,14 +238,14 @@ class Dec(JSONSerializable):
             Dec: sum
         """
         nd = Dec.zero()
-        nd._i = self._i + Dec(other)._i
+        nd._i = self._i + Dec(addend)._i
         return nd
 
     def __add__(self, addend: Union[str, int, float, Decimal, Dec]) -> Dec:
-        return self.add(other)
+        return self.add(addend)
 
     def __radd__(self, addend: Union[str, int, float, Decimal, Dec]):
-        return Dec(other).add(self)
+        return Dec(addend).add(self)
 
     def sub(self, subtrahend: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs subtraction. ``subtrahend`` is first converted into Dec.
@@ -257,7 +257,7 @@ class Dec(JSONSerializable):
             Dec: difference
         """
         nd = Dec.zero()
-        nd._i = self._i - Dec(other)._i
+        nd._i = self._i - Dec(subtrahend)._i
         return nd
 
     def __sub__(self, subtrahend: Union[str, int, float, Decimal, Dec]) -> Dec:
@@ -281,11 +281,11 @@ class Dec(JSONSerializable):
         nd._i = chop_precision_and_round(x * y)
         return nd
 
-    def __mul__(self, other) -> Dec:
-        return self.mul(other)
+    def __mul__(self, multiplier: Union[str, int, float, Decimal, Dec]) -> Dec:
+        return self.mul(multiplier)
 
-    def __rmul__(self, other):
-        return Dec(other).mul(self)
+    def __rmul__(self, multiplicand: Union[str, int, float, Decimal, Dec]):
+        return Dec(multiplicand).mul(self)
 
     def div(self, divisor: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs division. ``divisor`` is first converted into Dec.
@@ -323,10 +323,10 @@ class Dec(JSONSerializable):
         Returns:
             Dec: modulus
         """
-        return self.sub(self.div(modulus).mul(self))
+        return self.sub(self.div(modulo).mul(self))
 
-    def __mod__(self, other) -> Dec:
-        return self.mod(other)
+    def __mod__(self, modulo) -> Dec:
+        return self.mod(modulo)
 
     def __neg__(self) -> Dec:
         x = Dec(self)

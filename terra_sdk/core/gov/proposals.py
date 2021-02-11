@@ -10,9 +10,14 @@ __all__ = ["TextProposal"]
 class TextProposal(Content):
     """Generic proposal type with only title and description that does nothing if
     passed. Primarily used for assessing the community sentiment around the proposal.
+
+    Args:
+        title: proposal title
+        description: proposal description
     """
 
     type = "gov/TextProposal"
+    """"""
 
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:

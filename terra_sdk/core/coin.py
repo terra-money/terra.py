@@ -66,7 +66,7 @@ class Coin(JSONSerializable):
     @classmethod
     def from_str(cls, string: str) -> Coin:
         """Creates a new :class:`Coin` from a coin-format string. Must match the format:
-        ``^(\-?[0-9]+(\.[0-9]+)?)([a-zA-Z]+)$``.
+        ``283923uusd`` (``int``-Coin) or ``23920.23020uusd`` (:class:`Dec`-Coin).
 
         >>> int_coin = Coin.from_str("230920uusd")
         >>> int_coin.denom

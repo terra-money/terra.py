@@ -2,7 +2,7 @@ from typing import Dict
 
 from terra_sdk.key.mnemonic import MnemonicKey
 
-from .lcd import AsyncLCDClient, LCDClient, Wallet, AsyncWallet
+from .lcd import AsyncLCDClient, AsyncWallet, LCDClient, Wallet
 
 __all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra", "AsyncLocalTerra"]
 
@@ -58,7 +58,6 @@ class LocalTerra(LCDClient):
     >>> terra = LocalTerra()
     >>> terra.wallets['test1'].key.acc_address
     'terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v'
-    
     """
 
     def __init__(self, *args, **kwargs):

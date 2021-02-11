@@ -22,7 +22,10 @@ class AggregateExchangeRateVote(JSONSerializable):
     """Contains information about a validator's aggregate vote."""
 
     exchange_rate_tuples: Coins = attr.ib(converter=Coins)
+    """Reported exchange rates by validator."""
+
     voter: ValAddress = attr.ib()
+    """Validator that sent the aggregate vote."""
 
     def to_data(self) -> dict:
         return {
@@ -51,8 +54,13 @@ class AggregateExchangeRatePrevote(JSONSerializable):
     """Contains information about a validator's aggregate prevote."""
 
     hash: str = attr.ib()
+    """Aggregate vote hash for the upcoming aggregate vote."""
+
     voter: ValAddress = attr.ib()
+    """Validator that submitted the aggregate prevote."""
+
     submit_block: int = attr.ib(converter=int)
+    """Block height at which the aggregate prevote was submitted."""
 
     def to_data(self) -> dict:
         return {
@@ -75,8 +83,13 @@ class ExchangeRateVote(JSONSerializable):
     """Contains information about a validator's vote for price of LUNA."""
 
     exchange_rate: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    """Exchange rate of LUNA reported."""
+
     denom: str = attr.ib()
+    """Stablecoin variant in which reported exchange rate is denominated in."""
+
     voter: ValAddress = attr.ib()
+    """Validator that submitted vote."""
 
     def to_data(self) -> dict:
         return {
@@ -96,9 +109,16 @@ class ExchangeRatePrevote(JSONSerializable):
     """Contains information about a validator's prevote."""
 
     hash: str = attr.ib()
+    """Vote hash for the upcoming vote."""
+
     denom: str = attr.ib()
+    """Stablecoin variant for which the prevote corresponds to."""
+
     voter: ValAddress = attr.ib()
+    """Validator that submitted the prevote."""
+
     submit_block: int = attr.ib(converter=int)
+    """Block height at which the prevote was submitted."""
 
     def to_data(self) -> Dict[str, str]:
         return {

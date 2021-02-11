@@ -28,9 +28,13 @@ class Authorization(BaseTerraData):
 class SendAuthorization(Authorization):
     """Type of :class:`Authorization` for :class:`MsgSend<terra_sdk.core.bank.msgs.MsgSend>`,
     which can be parameterized by setting a ``spend_limit`` allowance for the grantee.
+
+    Args:
+        spend_limit (Coins.Input): coins representing allowance of grant
     """
 
     type = "msgauth/SendAuthorization"
+    """"""
 
     spend_limit: Coins = attr.ib(converter=Coins)
 
@@ -42,9 +46,13 @@ class SendAuthorization(Authorization):
 
 @attr.s
 class GenericAuthorization(Authorization):
-    """Generic type of :class:`Authorization`, specifying the type of message to allow."""
+    """Generic type of :class:`Authorization`, specifying the type of message to allow.
+
+    Args:
+        grant_msg_type: type of message allowed by authorization"""
 
     type = "msgauth/GenericAuthorization"
+    """"""
 
     grant_msg_type: str = attr.ib()
 
@@ -59,7 +67,10 @@ class AuthorizationGrant(JSONSerializable):
     """Contains information about an existing granted authorization between two users."""
 
     authorization: Authorization = attr.ib()
+    """Grant authorization details."""
+
     expiration: str = attr.ib()
+    """Grant expiration."""
 
     @classmethod
     def from_data(cls, data: dict) -> AuthorizationGrant:

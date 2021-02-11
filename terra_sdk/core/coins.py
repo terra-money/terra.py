@@ -3,15 +3,26 @@ from __future__ import annotations
 import copy
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
+from terra_sdk.util.json import JSONSerializable
+
 from .coin import Coin
 from .numeric import Numeric
 
 
-class Coins:
+class Coins(JSONSerializable):
     """Represents an unordered collection of :class:`Coin` objects
-    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK."""
+    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK.
+
+    Args:
+        arg (Optional[Coins.Input], optional): argument to convert. Defaults to ``{}``.
+
+    Raises:
+        TypeError: if ``arg`` is not an Iterable
+        ValueError: if set would have both Dec-amount and ``int``-amount coins (non-homogeneous).
+    """
 
     Input = Union[Iterable[Coin], str, Dict[str, Numeric.Input], Dict[str, Coin]]
+    """Types which can be converted into a :class:`Coins` object."""
 
     _coins: Dict[str, Coin]
 
@@ -26,10 +37,19 @@ class Coins:
 
     @classmethod
     def from_str(cls, s: str) -> Coins:
+        """Converts a comma-separated list of Coin-format strings to :class:`Coins`.
+
+        >>> Coins.from_str('1000uluna,1234ukrw')
+        Coins("1000uluna,1234ukrw")
+
+        Args:
+            s (str): string to convert
+        """
         coin_strings = s.split(r",")
         return Coins(Coin.from_str(cs) for cs in coin_strings)
 
     def __init__(self, arg: Optional[Coins.Input] = {}, **denoms):
+        """Converts the argument into a :class:`Coins` object."""
 
         if arg is None:
             self._coins = {}
@@ -67,7 +87,7 @@ class Coins:
         if not all([c.is_dec_coin() for c in self]) and not all(
             [c.is_int_coin() for c in self]
         ):
-            raise TypeError(
+            raise ValueError(
                 f"non-homogenous instantiation of Coins not supported: {self!s}"
             )
 
@@ -75,10 +95,23 @@ class Coins:
         return self._coins[denom]
 
     def get(self, denom: str) -> Optional[Coin]:
+        """Get the Coin with the denom contained in the Coins set.
+
+        Args:
+            denom (str): denom
+
+        Returns:
+            Optional[Coin]: result (can be ``None``)
+        """
         return self._coins.get(denom)
 
     @classmethod
     def from_data(cls, data: list) -> Coins:
+        """Converts list of Coin-data objects to :class:`Coins`.
+
+        Args:
+            data (list): list of Coin-data objects
+        """
         coins = map(Coin.from_data, data)
         return cls(coins)
 
@@ -86,51 +119,100 @@ class Coins:
         return [coin.to_data() for coin in self]
 
     def denoms(self) -> List[str]:
+        """Get the list of denoms for all Coin objects contained."""
         return [c.denom for c in self]
 
     def to_dec_coins(self) -> Coins:
+        """Creates new set of :class:`Coins` that have :class`Dec` amounts."""
         return Coins(c.to_dec_coin() for c in self)
 
     def to_int_coins(self) -> Coins:
+        """Creates new set of :class:`Coins` that have ``int`` amounts."""
         return Coins(c.to_int_coin() for c in self)
 
-    def add(self, other: Union[Coin, Coins]) -> Coins:
-        if isinstance(other, Coin):
-            return Coins([other, *self.to_list()])
+    def add(self, addend: Union[Coin, Coins]) -> Coins:
+        """Performs addition, which combines the sets of Coin objects. Coins of similar denoms
+        will be merged into one Coin representing the denom.
+
+        Args:
+            addend (Union[Coin, Coins]): addend
+        """
+        if isinstance(addend, Coin):
+            return Coins([addend, *self.to_list()])
         else:
-            return Coins([*other.to_list(), *self.to_list()])
+            return Coins([*addend.to_list(), *self.to_list()])
 
-    def __add__(self, other: Union[Coin, Coins]) -> Coins:
-        return self.add(other)
+    def __add__(self, addend: Union[Coin, Coins]) -> Coins:
+        return self.add(addend)
 
-    def sub(self, other: Union[Coin, Coins]) -> Coins:
-        return self.add(self.mul(-1))
+    def sub(self, subtrahend: Union[Coin, Coins]) -> Coins:
+        """Performs subtraction, which combines the sets of Coin objects. Coins of similar denoms
+        will be merged into one Coin representing the denom.
 
-    def __sub__(self, other: Union[Coin, Coins]) -> Coins:
-        return self.sub(other)
+        Args:
+            subtrahend (Union[Coin, Coins]): subtrahend
+        """
+        return self.sub(self.mul(-1))
 
-    def mul(self, other: Numeric.Input) -> Coins:
-        return Coins(coin.mul(other) for coin in self)
+    def __sub__(self, subtrahend: Union[Coin, Coins]) -> Coins:
+        return self.sub(subtrahend)
 
-    def __mul__(self, other: Numeric.Input) -> Coins:
-        return self.mul(other)
+    def mul(self, multiplier: Numeric.Input) -> Coins:
+        """Performs multiplicaiton, which multiplies all the Coin objects in the set by a
+        multiplier.
 
-    def div(self, other: Numeric.Input) -> Coins:
-        return Coins(coin.div(other) for coin in self)
+        Args:
+            multiplier (Numeric.Input): multiplier
+        """
+        return Coins(coin.mul(multiplier) for coin in self)
 
-    def __truediv__(self, other: Numeric.Input) -> Coins:
-        return Coins(coin / other for coin in self)
+    def __mul__(self, multiplier: Numeric.Input) -> Coins:
+        return self.mul(multiplier)
 
-    def __floordiv__(self, other: Numeric.Input) -> Coins:
-        return Coins(coin // other for coin in self)
+    def div(self, divisor: Numeric.Input) -> Coins:
+        """Performs division, which divides all the Coin objects in the set by a divisor.
+
+        Args:
+            divisor (Numeric.Input): divisor
+        """
+        return Coins(coin.div(divisor) for coin in self)
+
+    def __truediv__(self, divisor: Numeric.Input) -> Coins:
+        return Coins(coin / divisor for coin in self)
+
+    def __floordiv__(self, divisor: Numeric.Input) -> Coins:
+        return Coins(coin // divisor for coin in self)
 
     def to_list(self) -> List[Coin]:
+        """Converts the set of :class:`Coin` objects contained into a sorted list by denom.
+
+        Returns:
+            List[Coin]: list, sorted by denom
+        """
         return sorted(self._coins.values(), key=lambda c: c.denom)
 
     def filter(self, predicate: Callable[[Coin], bool]) -> Coins:
+        """Creates a new :class:`Coins` collection which filters out all Coin objects that
+        do not meet the predicate.
+
+        Args:
+            predicate (Callable[[Coin], bool]): predicate for filtering
+        """
         return Coins(c for c in self if predicate(c))
 
     def map(self, fn: Callable[[Coin], Any]) -> Iterator[Any]:
+        """Creates an iterable which applies the function to all coins in the set,
+        ordered by denomination.
+
+        Args:
+            fn (Callable[[Coin], Any]): function to apply
+
+        Returns:
+            Iterator[Any]: coin map
+
+        Yields:
+            Iterator[Any]: coin map
+        """
         return map(fn, self)
 
     def __eq__(self, other) -> bool:

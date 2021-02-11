@@ -1,8 +1,14 @@
 .. strings:
 
-Special Strings
-===============
+Bech32 Strings
+==============
 
+To provide some clarity for arguments, some functions in the SDK are documented that
+they take a type like :class:`AccAddress` where one may expect a ``str``. It is simply a
+type alias annotation (equivalent to ``str``) that serves only to remind the developer
+which format the string is expected to be in. 
+
+Terra SDK also provides useful functions for checking and converting **addresses** and **pubkeys**.
 
 Addresses
 ---------

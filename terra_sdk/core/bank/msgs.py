@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import List
+
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 
@@ -14,10 +16,17 @@ import attr
 class MsgSend(Msg):
     """Sends native Terra assets (Luna or Terra stablecoins) from ``from_address`` to
     ``to_address``.
+
+    Args:
+        from_address: sender
+        to_address: recipient
+        amount (Coins): coins to send
     """
 
     type = "bank/MsgSend"
+    """"""
     action = "send"
+    """"""
 
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()
@@ -38,14 +47,33 @@ class MsgMultiSend(Msg):
     """Allows batch-sending between multiple source and destination addresses.
     The total amount of coins in ``inputs`` must match ``outputs``. The transaction
     containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.
+
+    The ``inputs`` and ``output`` arguments should be of the form::
+
+        [{
+            "address": "terra1...",
+            "amount": "123456789"
+        },
+        {
+            "address": "terra12...",
+            "amount": "2983298"
+        }]
+
+    And so forth..
+
+    Args:
+        inputs: senders
+        outputs: recipients
     """
 
     type = "bank/MsgMultiSend"
+    """"""
     action = "multisend"
+    """"""
 
     # TODO: improve interface - match terra.js
-    inputs = attr.ib()
-    outputs = attr.ib()
+    inputs: List[dict] = attr.ib()
+    outputs: List[dict] = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMultiSend:

@@ -118,15 +118,14 @@ class LCDClient(AsyncLCDClient):
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
     ):
-        options = {
-            "url": url,
-            "chain_id": chain_id,
-            "gas_prices": gas_prices,
-            "gas_adjustment": gas_adjustment,
-            "_create_session": False,
-            "loop": nest_asyncio.apply(get_event_loop()),
-        }
-        super().__init__(**options)
+        super().__init__(
+            url,
+            chain_id,
+            gas_prices,
+            gas_adjustment,
+            _create_session=False,
+            loop=nest_asyncio.apply(get_event_loop()),
+        )
 
         self.auth = AuthAPI(self)
         self.bank = BankAPI(self)

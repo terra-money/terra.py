@@ -14,10 +14,18 @@ __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 @attr.s
 class MsgSubmitProposal(Msg):
-    """Submit the attached proposal with an initial deposit."""
+    """Submit the attached proposal with an initial deposit.
+
+    Arg:
+        content (Content): type of proposal
+        initial_deposit (Coins): initial deposit for proposal made by proposer
+        proposer: proposal submitter
+    """
 
     type = "gov/MsgSubmitProposal"
+    """"""
     action = "submit_proposal"
+    """"""
 
     content: Content = attr.ib()
     initial_deposit: Coins = attr.ib(converter=Coins)
@@ -38,10 +46,18 @@ class MsgSubmitProposal(Msg):
 
 @attr.s
 class MsgDeposit(Msg):
-    """Deposit funds for an active deposit-stage proposal."""
+    """Deposit funds for an active deposit-stage proposal.
+
+    Args:
+        proposal_id: proposal number to deposit for
+        depositor: account making deposit
+        amount (Coins): amount to deposit
+    """
 
     type = "gov/MsgDeposit"
+    """"""
     action = "deposit"
+    """"""
 
     proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
@@ -69,16 +85,31 @@ class MsgDeposit(Msg):
 
 @attr.s
 class MsgVote(Msg):
-    """Vote for an active voting-stage proposal."""
+    """Vote for an active voting-stage proposal.
+
+    Args:
+        proposal_id: proposal to vote for
+        voter: account casting vote
+        option: vote option (must be one of: :data:`MsgVote.ABSTAIN`,
+            :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`,
+    """
 
     type = "gov/MsgVote"
+    """"""
     action = "vote"
+    """"""
 
     EMPTY = "Empty"
+    """Encodes an empty vote option."""
+
     YES = "Yes"
+    """"""
     ABSTAIN = "Abstain"
+    """"""
     NO = "No"
+    """"""
     NO_WITH_VETO = "NoWithVeto"
+    """"""
 
     proposal_id: int = attr.ib(converter=int)
     voter: AccAddress = attr.ib()

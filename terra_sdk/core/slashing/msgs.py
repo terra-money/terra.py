@@ -12,10 +12,15 @@ __all__ = ["MsgUnjail"]
 
 @attr.s
 class MsgUnjail(Msg):
-    """Attempt to unjail a jailed validator."""
+    """Attempt to unjail a jailed validator (must be submitted by same validator).
+
+    Args:
+        address: validator address to unjail"""
 
     type = "slashing/MsgUnjail"
+    """"""
     action = "unjail"
+    """"""
 
     address: ValAddress = attr.ib()
 

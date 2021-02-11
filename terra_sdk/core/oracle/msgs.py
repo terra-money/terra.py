@@ -57,7 +57,14 @@ def aggregate_vote_hash(salt: str, exchange_rates: Coins.Input, validator: str) 
 
 @attr.s
 class MsgExchangeRatePrevote(Msg):
-    """Register a prevote for the current vote period."""
+    """Submit a prevote for the current vote period.
+
+    Args:
+        hash: vote hash
+        denom: denom for which the prevote is submitted
+        feeder: delegated feeder account submitting vote
+        validator: validator for which the prevote is submitted
+    """
 
     type = "oracle/MsgExchangeRatePrevote"
     action = "exchangerateprevote"
@@ -80,10 +87,20 @@ class MsgExchangeRatePrevote(Msg):
 
 @attr.s
 class MsgExchangeRateVote(Msg):
-    """Submit a vote for the current vote period."""
+    """Submit a vote for the current vote period.
+
+    Args:
+        exchange_rate (Dec): current exchange rate of LUNA
+        salt: salt for vote hash
+        denom: denom vote corresponds to
+        feeder: delegated feeder account submitting vote
+        validator: validator for which the vote is submitted
+    """
 
     type = "oracle/MsgExchangeRateVote"
+    """"""
     action = "exchangeratevote"
+    """"""
 
     exchange_rate: Dec = attr.ib(converter=Dec)
     salt: str = attr.ib()
@@ -127,10 +144,17 @@ class MsgExchangeRateVote(Msg):
 
 @attr.s
 class MsgDelegateFeedConsent(Msg):
-    """Re-assign oracle feeder account for a validator."""
+    """Re-assign oracle feeder account for a validator.
+
+    Args:
+        operator: validator to change feeder for
+        delegate: new feeder address
+    """
 
     type = "oracle/MsgDelegateFeedConsent"
+    """"""
     action = "delegatefeeder"
+    """"""
 
     operator: ValAddress = attr.ib()
     delegate: AccAddress = attr.ib()
@@ -143,9 +167,16 @@ class MsgDelegateFeedConsent(Msg):
 
 @attr.s
 class MsgAggregateExchangeRatePrevote(Msg):
-    """Submit an aggregate vote for the current vote period."""
+    """Submit an aggregate vote for the current vote period.
+
+    Args:
+        hash: aggregate vote hash
+        feeder: account submitting the aggregate prevote
+        validator: validator to which the aggregate prevote corresponds
+    """
 
     type = "oracle/MsgAggregateExchangeRatePrevote"
+    """"""
 
     hash: str = attr.ib()
     feeder: AccAddress = attr.ib()
@@ -163,9 +194,17 @@ class MsgAggregateExchangeRatePrevote(Msg):
 
 @attr.s
 class MsgAggregateExchangeRateVote(Msg):
-    """Submit an aggregate prevote for the current vote."""
+    """Submit an aggregate prevote for the current vote.
+
+    Args:
+        exchange_rates (Coins.Input): exchange rates to use
+        salt: aggregate vote salt
+        feeder: feeder account submitting aggregate prevote
+        validator: validator vote corresponds to
+    """
 
     type = "oracle/MsgAggregateExchangeRateVote"
+    """"""
 
     exchange_rates: Coins = attr.ib(converter=Coins)
     salt: str = attr.ib()

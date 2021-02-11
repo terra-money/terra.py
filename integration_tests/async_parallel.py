@@ -1,6 +1,6 @@
 import asyncio
-import uvloop
 
+import uvloop
 
 from terra_sdk.client.lcd import AsyncLCDClient
 

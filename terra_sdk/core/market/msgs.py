@@ -10,10 +10,18 @@ __all__ = ["MsgSwap", "MsgSwapSend"]
 
 @attr.s
 class MsgSwap(Msg):
-    """Perform a native on-chain swap from ``offer_coin`` to ``ask_denom``."""
+    """Perform a native on-chain swap from ``offer_coin`` to ``ask_denom``.
+
+    Args:
+        trader: account performing swap
+        offer_coin (Union[Coin, str, dict]): coin offered for swap
+        ask_denom: denom into which to swap
+    """
 
     type = "market/MsgSwap"
+    """"""
     action = "swap"
+    """"""
 
     trader: AccAddress = attr.ib()
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
@@ -31,10 +39,19 @@ class MsgSwap(Msg):
 
 @attr.s
 class MsgSwapSend(Msg):
-    """Performs a swap and sends the resultant swapped amount to ``to_address``."""
+    """Performs a swap and sends the resultant swapped amount to ``to_address``.
+
+    Args:
+        from_address: account performing swap
+        to_address: account which will received resultant funds from swap
+        offer_coin (Union[Coin, str, dict]): coin offered for swap
+        ask_denom: denom into which to swap
+    """
 
     type = "market/MsgSwapSend"
+    """"""
     action = "swapsend"
+    """"""
 
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()

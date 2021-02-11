@@ -12,13 +12,19 @@ __all__ = ["AsyncDistributionAPI", "DistributionAPI", "Rewards", "ValidatorRewar
 @attr.s
 class Rewards:
     rewards: Dict[ValAddress, Coins] = attr.ib()
+    """Delegator rewards, indexed by validator operator address."""
+
     total: Coins = attr.ib()
+    """Total sum of rewards."""
 
 
 @attr.s
 class ValidatorRewards:
     self_bond_rewards: Coins = attr.ib()
+    """Rewards for validator accrued from self-delegation."""
+
     val_commission: Coins = attr.ib()
+    """Rewards for validator accrued from delegation commissions."""
 
 
 class AsyncDistributionAPI(BaseAsyncAPI):

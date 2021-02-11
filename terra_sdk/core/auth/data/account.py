@@ -6,7 +6,7 @@ from typing import List
 
 import attr
 
-from terra_sdk.core import Coins, PublicKey
+from terra_sdk.core import Coins, AccAddress, PublicKey
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["Account", "LazyGradedVestingAccount"]
@@ -16,11 +16,20 @@ __all__ = ["Account", "LazyGradedVestingAccount"]
 class Account(JSONSerializable):
     """Stores information about an account."""
 
-    address: str = attr.ib()
+    address: AccAddress = attr.ib()
+    """"""
+
     coins: Coins = attr.ib(converter=Coins)
+    """"""
+
     public_key: PublicKey = attr.ib()
+    """"""
+
     account_number: int = attr.ib(converter=int)
+    """"""
+
     sequence: int = attr.ib(converter=int)
+    """"""
 
     def to_data(self) -> dict:
         return {
@@ -50,16 +59,35 @@ class Account(JSONSerializable):
 class LazyGradedVestingAccount(Account):
     """Stores information about an account with vesting."""
 
-    address: str = attr.ib()
+    address: AccAddress = attr.ib()
+    """"""
+
     coins: Coins = attr.ib(converter=Coins)
+    """"""
+
     public_key: PublicKey = attr.ib()
+    """"""
+
     account_number: int = attr.ib(converter=int)
+    """"""
+
     sequence: int = attr.ib(converter=int)
+    """"""
+
     original_vesting: Coins = attr.ib(converter=Coins)
+    """"""
+
     delegated_free: Coins = attr.ib(converter=Coins)
+    """"""
+
     delegated_vesting: Coins = attr.ib(converter=Coins)
+    """"""
+
     end_time: int = attr.ib(converter=int)
+    """"""
+
     vesting_schedules: List[dict] = attr.ib()
+    """"""
 
     def to_data(self) -> dict:
         return {

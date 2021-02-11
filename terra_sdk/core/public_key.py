@@ -11,12 +11,19 @@ __all__ = ["PublicKey"]
 
 @attr.s
 class PublicKey(JSONSerializable):
+    """Data object holding the public key component of an account or signature."""
 
-    SIMPLE = "tendermint/PubKeySecp256k1"
-    MULTISIG = "tendermint/PubKeyMultisigThreshold"
+    SIMPLE: str = "tendermint/PubKeySecp256k1"
+    """Normal signature public key type."""
+
+    MULTISIG: str = "tendermint/PubKeyMultisigThreshold"
+    """Multisig public key type."""
 
     type: str = attr.ib()
+    """Either :data:`PublicKey.SIMPLE` or :data:`PublicKey.MULTISIG`."""
+
     value: Optional[Union[str, dict]] = attr.ib()
+    """"""
 
     def to_data(self) -> dict:
         if self.type == self.SIMPLE and isinstance(self.value, str):

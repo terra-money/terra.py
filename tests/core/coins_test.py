@@ -14,7 +14,7 @@ def test_clobbers_similar_denom():
 
 
 def test_rejects_nonhomogenous_sets():
-    with pytest.raises(TypeError) as _:
+    with pytest.raises(ValueError) as _:
         Coins(uluna=1000, ukrw=1.234)
 
 
