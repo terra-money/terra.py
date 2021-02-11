@@ -52,7 +52,7 @@ class AsyncLCDClient:
         self.url = url
         self.gas_prices = Coins(gas_prices)
         self.gas_adjustment = gas_adjustment
-        self._last_request_height = None
+        self.last_request_height = None
 
         self.auth = AsyncAuthAPI(self)
         self.bank = AsyncBankAPI(self)
@@ -71,6 +71,11 @@ class AsyncLCDClient:
         self.tx = AsyncTxAPI(self)
 
     def wallet(self, key: Key) -> AsyncWallet:
+        """Creates a :class:`AsyncWallet` object from a key.
+
+        Args:
+            key (Key): key implementation
+        """
         return AsyncWallet(self, key)
 
     async def _get(
@@ -83,9 +88,9 @@ class AsyncLCDClient:
             if not str(response.status).startswith("2"):
                 raise LCDResponseError(message=result.get("error"), response=response)
         try:
-            self._last_request_height = result["height"]
+            self.last_request_height = result["height"]
         except KeyError:
-            self._last_request_height = None
+            self.last_request_height = None
         return result if raw else result["result"]
 
     async def _post(
@@ -98,9 +103,9 @@ class AsyncLCDClient:
             if not str(response.status).startswith("2"):
                 raise LCDResponseError(message=result.get("error"), response=response)
         try:
-            self._last_request_height = result["height"]
+            self.last_request_height = result["height"]
         except KeyError:
-            self._last_request_height = None
+            self.last_request_height = None
         return result if raw else result["result"]
 
     async def __aenter__(self):
@@ -111,6 +116,68 @@ class AsyncLCDClient:
 
 
 class LCDClient(AsyncLCDClient):
+    """An object representing a connection to a node running the Terra LCD server."""
+
+    url: str
+    """URL endpoint of LCD server."""
+
+    chain_id: str
+    """Chain ID of blockchain network connecting to."""
+
+    gas_prices: Coins
+    """Gas prices to use for automatic fee estimation."""
+
+    gas_adjustment: Union[str, float, int, Dec]
+    """Gas adjustment factor for automatic fee estimation."""
+
+    last_request_height: Optional[int]
+    """Height of response of last-made made LCD request."""
+
+    auth: AuthAPI
+    """:class:`AuthAPI<terra_sdk.client.lcd.api.auth.AuthAPI>`."""
+
+    bank: BankAPI
+    """:class:`BankAPI<terra_sdk.client.lcd.api.bank.BankAPI>`."""
+
+    distribution: DistributionAPI
+    """:class:`DistributionAPI<terra_sdk.client.lcd.api.distribution.DistributionAPI>`."""
+
+    gov: GovAPI
+    """:class:`GovAPI<terra_sdk.client.lcd.api.gov.GovAPI>`."""
+
+    market: MarketAPI
+    """:class:`MarketAPI<terra_sdk.client.lcd.api.market.MarketAPI>`."""
+
+    mint: MintAPI
+    """:class:`MintAPI<terra_sdk.client.lcd.api.mint.MintAPI>`."""
+
+    msgauth: MsgAuthAPI
+    """:class:`MsgAuthAPI<terra_sdk.client.lcd.api.msgauth.MsgAuthAPI>`."""
+
+    oracle: OracleAPI
+    """:class:`OracleAPI<terra_sdk.client.lcd.api.oracle.OracleAPI>`."""
+
+    slashing: SlashingAPI
+    """:class:`SlashingAPI<terra_sdk.client.lcd.api.slashing.SlashingAPI>`."""
+
+    staking: StakingAPI
+    """:class:`StakingAPI<terra_sdk.client.lcd.api.staking.StakingAPI>`."""
+
+    supply: SupplyAPI
+    """:class:`SupplyAPI<terra_sdk.client.lcd.api.supply.SupplyAPI>`."""
+
+    tendermint: TendermintAPI
+    """:class:`TendermintAPI<terra_sdk.client.lcd.api.tendermint.TendermintAPI>`."""
+
+    treasury: TreasuryAPI
+    """:class:`TreasuryAPI<terra_sdk.client.lcd.api.treasury.TreasuryAPI>`."""
+
+    wasm: WasmAPI
+    """:class:`WasmAPI<terra_sdk.client.lcd.api.wasm.WasmAPI>`."""
+
+    tx: TxAPI
+    """:class:`TxAPI<terra_sdk.client.lcd.api.tx.TxAPI>`."""
+
     def __init__(
         self,
         url: str,
@@ -154,6 +221,12 @@ class LCDClient(AsyncLCDClient):
         )
 
     def wallet(self, key: Key) -> Wallet:  # type: ignore
+        """Creates a :class:`Wallet` object from a key for easy transaction creating and
+        signing.
+
+        Args:
+            key (Key): key implementation
+        """
         return Wallet(self, key)
 
     async def _get(self, *args, **kwargs):

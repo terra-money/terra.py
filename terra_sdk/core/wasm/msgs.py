@@ -65,7 +65,7 @@ class MsgInstantiateContract(Msg):
         code_id (int): code ID to use for instantiation
         init_msg: ``InitMsg`` to initialize contract
         init_coins (Coins): initial amount of coins to be sent to contract
-        migratabe: whether the owner can change contract code IDs"""
+        migratable: whether the owner can change contract code IDs"""
 
     type = "wasm/MsgInstantiateContract"
     """"""

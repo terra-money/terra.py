@@ -6,6 +6,10 @@
 Introduction
 ============
 
+.. image:: img/logo.png
+    :align: center
+    
+
 This is the official documentation for the Python version of the Terra SDK.
 
 The Terra SDK is a library toolkit for writing software that interacts with the Terra
@@ -30,8 +34,11 @@ Your next steps depend on where you're standing:
     :maxdepth: 1
     :caption: Guides
 
-    smart_contracts
-    keys
+    guides/lcdclient
+    guides/async
+    guides/keys
+    guides/transactions
+    guides/smart_contracts
 
 .. toctree::
     :maxdepth: 1 
@@ -41,6 +48,7 @@ Your next steps depend on where you're standing:
     common/numeric
     common/coin
     common/coins
+    common/exceptions
 
 .. toctree::
     :maxdepth: 1 
@@ -57,6 +65,8 @@ Your next steps depend on where you're standing:
     core_modules/params
     core_modules/slashing
     core_modules/staking
+    core_modules/supply
+    core_modules/tendermint
     core_modules/treasury
     core_modules/tx
     core_modules/wasm

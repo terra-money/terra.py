@@ -154,7 +154,7 @@ class MsgCreateValidator(Msg):
         min_self_delegation: minimum self-delegation policy
         delegator_address: validator's account address
         validator_address: validator's operator address
-        pubkey: validator consensus (tendermint) public key
+        pubkey: validator consensus (Tendermint) public key
         value (Coin.Input): initial amount of Luna toi self-delegate
     """
 
