@@ -37,10 +37,10 @@ Your next steps depend on where you're standing:
     :maxdepth: 1 
     :caption: Common SDK Types
 
+    common/strings
     common/numeric
     common/coin
     common/coins
-    common/bech32
 
 .. toctree::
     :maxdepth: 1 

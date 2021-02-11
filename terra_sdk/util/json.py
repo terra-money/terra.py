@@ -19,8 +19,15 @@ def dict_to_data(d: dict) -> dict:
 
 
 class JSONSerializable:
-    def to_data(self) -> dict:
+    def to_data(self) -> Any:
+        """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))
 
     def to_json(self) -> str:
+        """Marshals the object into a stringified JSON serialization. Keys are first sorted
+        and the JSON rendered removes all unnecessary whitespace.
+
+        Returns:
+            str: JSON string representation
+        """
         return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))

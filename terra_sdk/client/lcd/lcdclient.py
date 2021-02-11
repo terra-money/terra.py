@@ -34,9 +34,9 @@ class AsyncLCDClient:
     def __init__(
         self,
         url: str,
-        chain_id: str = None,
-        gas_prices: Coins.Input = None,
-        gas_adjustment: Numeric.Input = None,
+        chain_id: Optional[str] = None,
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
         loop: Optional[AbstractEventLoop] = None,
         _create_session: bool = True,  # don't create a session (used for sync LCDClient)
     ):
@@ -79,7 +79,7 @@ class AsyncLCDClient:
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
         ) as response:
-            result = await response.json()
+            result = await response.json(content_type=None)
             if not str(response.status).startswith("2"):
                 raise LCDResponseError(message=result.get("error"), response=response)
         try:
@@ -94,7 +94,7 @@ class AsyncLCDClient:
         async with self.session.post(
             urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
-            result = await response.json()
+            result = await response.json(content_type=None)
             if not str(response.status).startswith("2"):
                 raise LCDResponseError(message=result.get("error"), response=response)
         try:
@@ -111,13 +111,22 @@ class AsyncLCDClient:
 
 
 class LCDClient(AsyncLCDClient):
-    def __init__(self, *args, **kwargs):
+    def __init__(
+        self,
+        url: str,
+        chain_id: str = None,
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+    ):
         options = {
-            **kwargs,
+            "url": url,
+            "chain_id": chain_id,
+            "gas_prices": gas_prices,
+            "gas_adjustment": gas_adjustment,
             "_create_session": False,
             "loop": nest_asyncio.apply(get_event_loop()),
         }
-        super().__init__(*args, **options)
+        super().__init__(**options)
 
         self.auth = AuthAPI(self)
         self.bank = BankAPI(self)

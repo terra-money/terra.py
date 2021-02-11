@@ -68,6 +68,16 @@ class Dec(JSONSerializable):
     compatible Python numeric types (int, float, Decimal). Does not work with
     ``NaN``, ``Infinity``, ``+0``, ``-0``, etc. Serializes as a string with 18 points of
     decimal precision.
+
+    >>> Dec(5)
+    Dec("5.0")
+    >>> Dec("121.1232")
+    Dec("121.1232")
+    >>> Dec(121.1232)
+    Dec("121.1232")
+
+    Args:
+        arg (Union[str, int, float, Decimal, Dec]): argument to coerce into Dec
     """
 
     _i: int = 0
@@ -170,21 +180,36 @@ class Dec(JSONSerializable):
         else:
             return self._i == Dec(other)._i
 
-    def lt(self, other) -> bool:
+    def lt(self, other: Union[str, int, float, Decimal, Dec]) -> bool:
+        """Check less than.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): compared object
+        """
         if isinstance(other, Dec):
             return self._i < other._i
         return (Decimal(self._i) / DEC_ONE) < other
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other: Union[str, int, float, Decimal, Dec]) -> bool:
         return self.lt(other)
 
-    def le(self, other) -> bool:
+    def le(self, other: Union[str, int, float, Decimal, Dec]) -> bool:
+        """Check less than or equal to.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): compared object
+        """
         return self < other or self.__eq__(other)
 
-    def __le__(self, other) -> bool:
+    def __le__(self, other: Union[str, int, float, Decimal, Dec]) -> bool:
         return self.le(other)
 
-    def gt(self, other) -> bool:
+    def gt(self, other: Union[str, int, float, Decimal, Dec]) -> bool:
+        """Check greater than.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): compared object
+        """
         if isinstance(other, Dec):
             return self._i > other._i
         return (Decimal(self._i) / DEC_ONE) > other
@@ -193,16 +218,21 @@ class Dec(JSONSerializable):
         return self.gt(other)
 
     def ge(self, other) -> bool:
+        """Check greater than or equal to.
+
+        Args:
+            other (Union[str, int, float, Decimal, Dec]): compared object
+        """
         return self.gt(other) or self.__eq__(other)
 
     def __ge__(self, other) -> bool:
         return self.ge(other)
 
     def add(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
-        """Performs addition. Argument is first converted into Dec.
+        """Performs addition. ``addend`` is first converted into Dec.
 
         Args:
-            other (Union[str, int, float, Decimal, Dec]): addend
+            addend (Union[str, int, float, Decimal, Dec]): addend
 
         Returns:
             Dec: sum
@@ -211,17 +241,17 @@ class Dec(JSONSerializable):
         nd._i = self._i + Dec(other)._i
         return nd
 
-    def __add__(self, other) -> Dec:
+    def __add__(self, addend: Union[str, int, float, Decimal, Dec]) -> Dec:
         return self.add(other)
 
-    def __radd__(self, other):
+    def __radd__(self, addend: Union[str, int, float, Decimal, Dec]):
         return Dec(other).add(self)
 
-    def sub(self, other) -> Dec:
-        """Performs subtraction. Argument is first converted into Dec.
+    def sub(self, subtrahend: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs subtraction. ``subtrahend`` is first converted into Dec.
 
         Args:
-            other (Union[str, int, float, Decimal, Dec]): subtrahend
+            subtrahend (Union[str, int, float, Decimal, Dec]): subtrahend
 
         Returns:
             Dec: difference
@@ -230,23 +260,23 @@ class Dec(JSONSerializable):
         nd._i = self._i - Dec(other)._i
         return nd
 
-    def __sub__(self, other) -> Dec:
-        return self.sub(other)
+    def __sub__(self, subtrahend: Union[str, int, float, Decimal, Dec]) -> Dec:
+        return self.sub(subtrahend)
 
-    def __rsub__(self, other):
-        return Dec(other).sub(self)
+    def __rsub__(self, minuend: Dec) -> Dec:
+        return Dec(minuend).sub(self)
 
-    def mul(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
-        """Performs multiplication. Argument is first converted into Dec.
+    def mul(self, multiplier: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs multiplication. ``multiplier`` is first converted into Dec.
 
         Args:
-            other (Union[str, int, float, Decimal, Dec]): multiplier
+            multiplier (Union[str, int, float, Decimal, Dec]): multiplier
 
         Returns:
             Dec: product
         """
         x = self._i
-        y = Dec(other)._i
+        y = Dec(multiplier)._i
         nd = Dec.zero()
         nd._i = chop_precision_and_round(x * y)
         return nd
@@ -257,43 +287,43 @@ class Dec(JSONSerializable):
     def __rmul__(self, other):
         return Dec(other).mul(self)
 
-    def div(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
-        """Performs division. Argument is first converted into Dec.
+    def div(self, divisor: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs division. ``divisor`` is first converted into Dec.
 
         Args:
-            other (Union[str, int, float, Decimal, Dec]): divisor
+            divisor (Union[str, int, float, Decimal, Dec]): divisor
 
         Raises:
-            ZeroDivisionError: if argument is 0
+            ZeroDivisionError: if ``divisor`` is 0
 
         Returns:
             Dec: quotient
         """
-        if Dec(other)._i == 0:
-            raise ZeroDivisionError(f"tried to divide by 0: {self!r} / {other!r}")
+        if Dec(divisor)._i == 0:
+            raise ZeroDivisionError(f"tried to divide by 0: {self!r} / {divisor!r}")
         nd = Dec.zero()
-        nd._i = chop_precision_and_round(self._i * DEC_ONE * DEC_ONE // Dec(other)._i)
+        nd._i = chop_precision_and_round(self._i * DEC_ONE * DEC_ONE // Dec(divisor)._i)
         return nd
 
-    def __truediv__(self, other) -> Dec:
-        return self.div(other)
+    def __truediv__(self, divisor) -> Dec:
+        return self.div(divisor)
 
-    def __rtruediv__(self, other) -> Dec:
-        return Dec(other).div(self)
+    def __rtruediv__(self, divisor) -> Dec:
+        return Dec(divisor).div(self)
 
-    def __floordiv__(self, other):
-        return self.div(int(other))
+    def __floordiv__(self, divisor):
+        return self.div(int(divisor))
 
-    def mod(self, other: Union[str, int, float, Decimal, Dec]) -> Dec:
-        """Performs modulus. Argument is first converted into Dec.
+    def mod(self, modulo: Union[str, int, float, Decimal, Dec]) -> Dec:
+        """Performs modulus. ``modulo`` is first converted into Dec.
 
         Args:
-            other (Union[str, int, float, Decimal, Dec]): modulo
+            modulo (Union[str, int, float, Decimal, Dec]): modulo
 
         Returns:
             Dec: modulus
         """
-        return self.sub(self.div(other).mul(self))
+        return self.sub(self.div(modulus).mul(self))
 
     def __mod__(self, other) -> Dec:
         return self.mod(other)
@@ -313,11 +343,12 @@ class Dec(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: str) -> Dec:
+        """Converts Dec-formatted string into proper :class:`Dec` object."""
         return cls(data)
 
     @classmethod
     def with_prec(cls, i: Union[int, str], prec: int) -> Dec:
-        """Replicates Cosmos SDK's ``Dec.withPrec(i, prec)``.
+        """Replicates Cosmos SDK's ``Dec.withPreic(i, prec)``.
 
         Args:
             i (Union[int, str]): numeric value

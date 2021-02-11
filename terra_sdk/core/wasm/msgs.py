@@ -111,7 +111,7 @@ class MsgExecuteContract(Msg):
 class MsgMigrateContract(Msg):
     """Migrate the contract to a different code ID."""
 
-    type = "wasm/MsgExecuteContract"
+    type = "wasm/MsgMigrateContract"
 
     owner: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()

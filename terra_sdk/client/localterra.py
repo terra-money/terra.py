@@ -2,7 +2,7 @@ from typing import Dict
 
 from terra_sdk.key.mnemonic import MnemonicKey
 
-from .lcd import AsyncLCDClient, LCDClient, Wallet
+from .lcd import AsyncLCDClient, LCDClient, Wallet, AsyncWallet
 
 __all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra", "AsyncLocalTerra"]
 
@@ -29,7 +29,12 @@ LOCALTERRA_DEFAULTS = {
 
 
 class AsyncLocalTerra(AsyncLCDClient):
-    wallets: Dict[str, Wallet]
+    """An :class:`AsyncLCDClient` that comes preconfigured with the default settings for
+    connecting to a LocalTerra node.
+    """
+
+    wallets: Dict[str, AsyncWallet]
+    """Ready-to use :class:`Wallet` objects with LocalTerra default accounts."""
 
     def __init__(self, *args, **kwargs):
         options = {**LOCALTERRA_DEFAULTS, **kwargs}
@@ -43,8 +48,18 @@ class AsyncLocalTerra(AsyncLCDClient):
 
 
 class LocalTerra(LCDClient):
+    """A :class:`LCDClient` that comes preconfigured with the default settings for
+    connecting to a LocalTerra node.
+    """
 
     wallets: Dict[str, Wallet]
+    """Ready-to use :class:`Wallet` objects with LocalTerra default accounts.
+
+    >>> terra = LocalTerra()
+    >>> terra.wallets['test1'].key.acc_address
+    'terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v'
+    
+    """
 
     def __init__(self, *args, **kwargs):
         options = {**LOCALTERRA_DEFAULTS, **kwargs}

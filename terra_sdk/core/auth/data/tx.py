@@ -206,7 +206,7 @@ class TxInfo(JSONSerializable):
             data["height"],
             data["txhash"],
             data["raw_log"],
-            parse_tx_logs(data["logs"]),
+            parse_tx_logs(data.get("logs")),
             data["gas_wanted"],
             data["gas_used"],
             StdTx.from_data(data["tx"]),
