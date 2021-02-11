@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import attr
 
+from typing import List
+
 from terra_sdk.core.gov import Content
 
 __all__ = ["ParameterChangeProposal"]
