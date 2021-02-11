@@ -16,11 +16,24 @@ class PolicyConstraints:
     """
 
     rate_min: Dec = attr.ib()
+    """"""
     rate_max: Dec = attr.ib()
+    """"""
     cap: Coin = attr.ib()
+    """"""
     change_max: Dec = attr.ib()
+    """"""
 
-    def clamp(self, prev_rate: Dec, new_rate: Dec):
+    def clamp(self, prev_rate: Dec, new_rate: Dec) -> Dec:
+        """Simulates the effect of the policy contraint.
+
+        Args:
+            prev_rate (Dec): previous rate
+            new_rate (Dec): new rate
+
+        Returns:
+            Dec: result of clamp (constrained change)
+        """
         prev_rate = Dec(prev_rate)
         new_rate = Dec(new_rate)
 

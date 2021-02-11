@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import attr
-
 from typing import List
+
+import attr
 
 from terra_sdk.core.gov import Content
 
