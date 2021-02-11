@@ -1,11 +1,13 @@
 Usage with asyncio
 ==================
 
-If you want to make asynchronous, non-blocking requests to Terra, you can use AsyncLCDClient.
-The usage is similar, except the LCDClient API functions must be awaited.
+If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient.
+The interface is similar to LCDClient, except the LCDClient API functions must be awaited.
 
 Async Module APIs
 -----------------
+
+You should use  inside a coroutine function:
 
 .. code-block:: python
     :emphasize-lines: 5,8
@@ -61,4 +63,25 @@ When creating a wallet with AsyncLCDClient, the wallet's methods must also be aw
                 msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
             )
     
+    asyncio.get_event_loop().run_until_complete(main())
+
+Alternative Event Loops
+-----------------------
+
+You can swap out the native ``asyncio`` event loop for something like ``uvloop`` if you
+need:
+
+.. code-block:: python
+    :emphasize-lines: 2, 10
+
+    import asyncio
+    import uvloop
+
+    from terra_sdk.client.lcd import AsyncLCDClient
+
+    async def main():
+        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-4") as terra:
+            total_supply = await wallet.supply.total()
+
+    uvloop.install() 
     asyncio.get_event_loop().run_until_complete(main())
