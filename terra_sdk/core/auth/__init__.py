@@ -7,6 +7,7 @@ from .data import (
     StdTx,
     TxInfo,
     TxLog,
+    PublicKey,
     parse_tx_logs,
 )
 
@@ -19,5 +20,6 @@ __all__ = [
     "StdTx",
     "TxLog",
     "TxInfo",
+    "PublicKey",
     "parse_tx_logs",
 ]

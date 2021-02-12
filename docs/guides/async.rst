@@ -2,12 +2,12 @@ Usage with asyncio
 ==================
 
 If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient.
-The interface is similar to LCDClient, except the LCDClient API functions must be awaited.
+The interface is similar to LCDClient, except the module and wallet API functions must be awaited.
 
 Async Module APIs
 -----------------
 
-You should use  inside a coroutine function:
+You can replace your LCDClient instance with AsyncLCDClient inside a coroutine function:
 
 .. code-block:: python
     :emphasize-lines: 5,8
@@ -24,7 +24,8 @@ You should use  inside a coroutine function:
     asyncio.get_event_loop().run_until_complete(main())
 
 
-Here's the same code, but using the async context manager to teardown the session:
+For convenience, you can use the async context manager to automatically teardown the
+session. Here's the same code as above, this time using the ``async with`` construct.
 
 .. code-block:: python
     :emphasize-lines: 5
@@ -42,7 +43,8 @@ Here's the same code, but using the async context manager to teardown the sessio
 Async Wallet API
 ----------------
 
-When creating a wallet with AsyncLCDClient, the wallet's methods must also be awaited.
+When creating a wallet with AsyncLCDClient, the wallet's methods that create LCD requests
+are also asychronous and therefore must be awaited.
 
 .. code-block:: python
     :emphasize-lines: 12-13
@@ -69,7 +71,7 @@ Alternative Event Loops
 -----------------------
 
 You can swap out the native ``asyncio`` event loop for something like ``uvloop`` if you
-need:
+want to squeeze out some improved performance.
 
 .. code-block:: python
     :emphasize-lines: 2, 10

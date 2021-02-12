@@ -1,6 +1,8 @@
 Auth
 ====
 
+.. note:: Data objects are also aliased under at ``terra_sdk.core.auth``.
+
 API
 --------
 
@@ -10,8 +12,6 @@ API
 
 Data
 ----
-
-The following objects are availalble also at ``terra_sdk.core.auth``
 
 Account
 ^^^^^^^

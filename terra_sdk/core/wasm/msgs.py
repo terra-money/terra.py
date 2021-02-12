@@ -63,7 +63,7 @@ class MsgInstantiateContract(Msg):
     Args:
         owner: address of contract owner
         code_id (int): code ID to use for instantiation
-        init_msg: ``InitMsg`` to initialize contract
+        init_msg: InitMsg to initialize contract
         init_coins (Coins): initial amount of coins to be sent to contract
         migratable: whether the owner can change contract code IDs"""
 
@@ -101,7 +101,7 @@ class MsgExecuteContract(Msg):
     Args:
         sender: address of sender
         contract: address of contract to execute function on
-        execute_msg: ``ExecuteMsg`` (``HandleMsg``) to pass
+        execute_msg: ExecuteMsg (aka. HandleMsg) to pass
         coins: coins to be sent, if needed by contract to execute.
             Defaults to empty ``Coins()``
     """
@@ -138,7 +138,7 @@ class MsgMigrateContract(Msg):
         owner: address of owner
         contract: address of contract to migrate
         new_code_id (int): new code ID to migrate to
-        migrate_msg (dict): ``MigrateMsg`` to execute
+        migrate_msg (dict): MigrateMsg to execute
     """
 
     type = "wasm/MsgMigrateContract"
