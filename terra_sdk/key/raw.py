@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import hashlib
 
 from ecdsa import SECP256k1, SigningKey
@@ -17,11 +19,23 @@ def compute_public_key(private_key: bytes) -> bytes:
 
 
 class RawKey(Key):
+    """RawKey directly uses a raw (plaintext) private key in memory, and provides
+    the implementation for signing with ECDSA on curve Secp256k1.
+
+    Args:
+        private_key (bytes): private key in bytes
+    """
 
     private_key: bytes
+    """Private key, in bytes."""
 
     @classmethod
-    def from_hex(cls, private_key_hex: str):
+    def from_hex(cls, private_key_hex: str) -> RawKey:
+        """Create a new RawKey from a hex-encoded private key string.
+
+        Args:
+            private_key_hex (str): hex-encoded private key
+        """
         return cls(bytes.fromhex(private_key_hex))
 
     def __init__(self, private_key: bytes):
@@ -30,6 +44,12 @@ class RawKey(Key):
         self.private_key = private_key
 
     def sign(self, payload: bytes) -> bytes:
+        """Signs the data payload using ECDSA and curve Secp256k1 with the private key as
+        the signing key.
+
+        Args:
+            payload (bytes): data to sign
+        """
         sk = SigningKey.from_string(self.private_key, curve=SECP256k1)
         return sk.sign_deterministic(
             payload,

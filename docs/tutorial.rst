@@ -4,7 +4,7 @@ Quickstart
 ==========
 
 
-.. NOTE:: All code starting with a ``$`` is meant to run on your terminal.
+.. note:: All code starting with a ``$`` is meant to run on your terminal.
     All code starting with a ``>>>`` is meant to run in a python interpreter,
     like `ipython <https://pypi.org/project/ipython/>`_.
 
@@ -19,7 +19,7 @@ using ``pip`` as follows:
    $ pip install terra_sdk 
 
 
-.. NOTE:: If you run into problems during installation, you might have a
+.. note:: If you run into problems during installation, you might have a
     broken environment. See the troubleshooting guide to :ref:`setting up a
     clean environment <setup_environment>`.
 

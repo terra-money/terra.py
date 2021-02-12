@@ -17,7 +17,7 @@ class AsyncMsgAuthAPI(BaseAsyncAPI):
         Args:
             granter (AccAddress): granter account address
             grantee (AccAddress): grantee account address
-            msg_type (Optional[str], optional): message type. Defaults to None.
+            msg_type (Optional[str], optional): message type.
 
         Returns:
             List[AuthorizationGrant]: message authorization grants matching criteria

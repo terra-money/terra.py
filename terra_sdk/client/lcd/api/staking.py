@@ -30,8 +30,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """Fetches current delegations, filtering by delegator, validator, or both.
 
         Args:
-            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
-            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+            delegator (Optional[AccAddress], optional): delegator account address.
+            validator (Optional[ValAddress], optional): validator operator address.
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
@@ -78,8 +78,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """Fetches current undelegations, filtering by delegator, validator, or both.
 
         Args:
-            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
-            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+            delegator (Optional[AccAddress], optional): delegator account address.
+            validator (Optional[ValAddress], optional): validator operator address.
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
@@ -131,9 +131,9 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """Fetch redelgations.
 
         Args:
-            delegator (Optional[AccAddress], optional): delegator account address. Defaults to None.
-            validator_src (Optional[ValAddress], optional): source validator operator address (from). Defaults to None.
-            validator_dst (Optional[ValAddress], optional): dest. validator operator address (to). Defaults to None.
+            delegator (Optional[AccAddress], optional): delegator account address.
+            validator_src (Optional[ValAddress], optional): source validator operator address (from).
+            validator_dst (Optional[ValAddress], optional): dest. validator operator address (to).
 
         Returns:
             List[Redelegation]: redelegations

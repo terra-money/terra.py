@@ -21,8 +21,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         """Fetches active oracle prevotes, filtering by denom, or validator, or both.
 
         Args:
-            denom (Optional[str], optional): denom. Defaults to None.
-            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+            denom (Optional[str], optional): denom.
+            validator (Optional[ValAddress], optional): validator operator address.
 
         Raises:
             TypeError: if both ``denom`` and ``validator`` are ``None``
@@ -48,8 +48,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         """Fetches active oracle votes, filtering by denom, or validator, or both.
 
         Args:
-            denom (Optional[str], optional): denom. Defaults to None.
-            validator (Optional[ValAddress], optional): validator operator address. Defaults to None.
+            denom (Optional[str], optional): denom.
+            validator (Optional[ValAddress], optional): validator operator address.
 
         Raises:
             TypeError: if both ``denom`` and ``validator`` are ``None``

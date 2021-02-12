@@ -14,7 +14,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
         """Fetches signing infos, optionally filtering by validator consensus public key.
 
         Args:
-            val_cons_pub_key (Optional[ValConsPubKey], optional): validator consensus public key. Defaults to None.
+            val_cons_pub_key (Optional[ValConsPubKey], optional): validator consensus public key.
 
         Returns:
             List[dict]: signing infos

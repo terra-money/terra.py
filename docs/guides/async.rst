@@ -4,7 +4,7 @@ Usage with asyncio
 If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient.
 The interface is similar to LCDClient, except the module and wallet API functions must be awaited.
 
-Async Module APIs
+Async module APIs
 -----------------
 
 You can replace your LCDClient instance with AsyncLCDClient inside a coroutine function:
@@ -40,7 +40,7 @@ session. Here's the same code as above, this time using the ``async with`` const
 
     asyncio.get_event_loop().run_until_complete(main())
 
-Async Wallet API
+Async wallet API
 ----------------
 
 When creating a wallet with AsyncLCDClient, the wallet's methods that create LCD requests
@@ -67,7 +67,7 @@ are also asychronous and therefore must be awaited.
     
     asyncio.get_event_loop().run_until_complete(main())
 
-Alternative Event Loops
+Alternative event loops
 -----------------------
 
 You can swap out the native ``asyncio`` event loop for something like ``uvloop`` if you

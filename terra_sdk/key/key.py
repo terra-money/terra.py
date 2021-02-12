@@ -6,6 +6,7 @@ from typing import Optional
 from bech32 import bech32_encode, convertbits
 
 from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
+from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
@@ -34,10 +35,24 @@ def pubkey_from_public_key(public_key: bytes) -> bytes:
 
 
 class Key:
+    """Abstract Key interface, representing an agent with transaction-signing capabilities.
+
+    Args:
+        public_key (Optional[bytes]): compressed public key bytes,
+    """
 
     public_key: Optional[bytes]
+    """Compressed public key bytes, used to derive :data:`raw_address` and :data:`raw_pubkey`."""
+
     raw_address: Optional[bytes]
+    """Raw Bech32 words of address, used to derive associated account and validator
+    operator addresses.
+    """
+
     raw_pubkey: Optional[bytes]
+    """Raw Bech32 words of pubkey, used to derive associated account and validator
+    pubkeys.
+    """
 
     def __init__(self, public_key: Optional[bytes] = None):
         self.public_key = public_key
@@ -47,33 +62,89 @@ class Key:
 
     @abc.abstractmethod
     def sign(self, payload: bytes) -> bytes:
+        """Signs the data payload. An implementation of Key is expected to override this method.
+
+        Args:
+            payload (bytes): arbitrary data payload
+
+        Raises:
+            NotImplementedError: if not implemented
+
+        Returns:
+            bytes: signed payload
+        """
         raise NotImplementedError("an instance of Key must implement Key.sign")
 
     @property
-    def acc_address(self) -> str:
+    def acc_address(self) -> AccAddress:
+        """Terra Bech32 account address. Default derivation via :data:`public_key` is provided.
+
+        Raises:
+            ValueError: if Key was not initialized with proper public key
+
+        Returns:
+            AccAddress: account address
+        """
         if not self.raw_address:
             raise ValueError("could not compute acc_address: missing raw_address")
-        return get_bech("terra", self.raw_address.hex())
+        return AccAddress(get_bech("terra", self.raw_address.hex()))
 
     @property
-    def val_address(self) -> str:
+    def val_address(self) -> ValAddress:
+        """Terra Bech32 validator operator address. Default derivation via :data:`public_key` is provided.
+
+        Raises:
+            ValueError: if Key was not initialized with proper public key
+
+        Returns:
+            ValAddress: validator operator address
+        """
         if not self.raw_address:
             raise ValueError("could not compute val_address: missing raw_address")
         return get_bech("terravaloper", self.raw_address.hex())
 
     @property
-    def acc_pubkey(self) -> str:
+    def acc_pubkey(self) -> AccPubKey:
+        """Terra Bech32 account pubkey. Default derivation via :data:`public_key` is provided.
+
+        Raises:
+            ValueError: if Key was not initialized with proper public key
+
+        Returns:
+            AccPubKey: account pubkey
+        """
         if not self.raw_pubkey:
             raise ValueError("could not compute acc_pubkey: missing raw_pubkey")
         return get_bech("terrapub", self.raw_pubkey.hex())
 
     @property
-    def val_pubkey(self) -> str:
+    def val_pubkey(self) -> ValPubKey:
+        """Terra Bech32 validator pubkey. Default derivation via ``public_key`` is provided.
+
+        Raises:
+            ValueError: if Key was not initialized with proper public key
+
+        Returns:
+            ValPubKey: validator pubkey
+        """
         if not self.raw_pubkey:
             raise ValueError("could not compute val_pubkey: missing raw_pubkey")
         return get_bech("terravaloperpub", self.raw_pubkey.hex())
 
     def create_signature(self, tx: StdSignMsg) -> StdSignature:
+        """Signs the transaction with the signing algorithm provided by this Key implementation,
+        and outputs the signature. The signature is only returned, and must be manually added to
+        the ``signatures`` field of an :class:`StdTx`.
+
+        Args:
+            tx (StdSignMsg): unsigned transaction
+
+        Raises:
+            ValueError: if missing ``public_key``
+
+        Returns:
+            StdSignature: signature object
+        """
         if self.public_key is None:
             raise ValueError(
                 "signature could not be created: Key instance missing public_key"
@@ -91,5 +162,14 @@ class Key:
         )
 
     def sign_tx(self, tx: StdSignMsg) -> StdTx:
+        """Signs the transaction with the signing algorithm provided by this Key implementation,
+        and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.
+
+        Args:
+            tx (StdSignMsg): unsigned transaction
+
+        Returns:
+            StdTx: ready-to-broadcast transaction object
+        """
         sig = self.create_signature(tx)
         return StdTx(tx.msgs, tx.fee, [sig], tx.memo)

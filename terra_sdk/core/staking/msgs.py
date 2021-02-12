@@ -117,8 +117,8 @@ class MsgEditValidator(Msg):
     Args:
         Description: updated validator description
         address: validator operator address
-        commission_rates: new validator commission rate, defaults to None.
-        min_self_delegation: new minimum self delegation, defaults to None.
+        commission_rates: new validator commission rate,
+        min_self_delegation: new minimum self delegation,
     """
 
     type = "staking/MsgEditValidator"

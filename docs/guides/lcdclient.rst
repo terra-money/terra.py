@@ -21,6 +21,7 @@ Create a new LCDClient instance by specifying the URL and chain ID of the node t
 You can also specify gas estimation parameters for your chain for building transactions.
 
 .. code-block:: python
+    :emphasize-lines: 8-9
 
     import requests
     from terra_sdk.core import Coins
@@ -34,11 +35,11 @@ You can also specify gas estimation parameters for your chain for building trans
     )    
 
 
-Querying the blockchain
------------------------
+Using the module APIs
+---------------------
 
-LCDClient includes query functions for each of the core modules (see sidebar). These functions are divided and
-and organized by module name (eg. :class:`terra.market<terra_sdk.client.lcd.api.market.MarketAPI>`), and handle
+LCDClient includes functions for interacting with each of the core modules (see sidebar). These functions are divided and
+and organized by module name (eg. :class:`terra.market<terra_sdk.client.lcd.api.market.MarketAPI>`), and handle 
 the tedium of building HTTP requests, parsing the results, and handling errors. 
 
 Each request fetches live data from the blockchain:
@@ -76,4 +77,3 @@ LCDClient Reference
 
 .. autoclass:: terra_sdk.client.lcd.LCDClient
     :members:
-

@@ -45,13 +45,13 @@ class AsyncTxAPI(BaseAsyncAPI):
         Args:
             source_address (AccAddress): transaction sender's account address
             msgs (List[Msg]): list of messages to include
-            fee (Optional[StdFee], optional): fee to use (estimates if empty). Defaults to None.
+            fee (Optional[StdFee], optional): fee to use (estimates if empty).
             memo (str, optional): memo to use. Defaults to "".
-            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation. Defaults to None.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation. Defaults to None.
-            denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating. Defaults to None.
-            account_number (Optional[int], optional): account number to use. Defaults to None.
-            sequence (Optional[int], optional): sequence number to use. Defaults to None.
+            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
+            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
+            denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating.
+            account_number (Optional[int], optional): account number to use.
+            sequence (Optional[int], optional): sequence number to use.
 
         Returns:
             StdSignMsg: unsigned tx
@@ -94,9 +94,9 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         Args:
             tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for
-            gas_prices (Optional[Coins.Input], optional): gas prices to use. Defaults to None.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use. Defaults to None.
-            denoms (Optional[List[str]], optional): list of denoms to use to pay for gas. Defaults to None.
+            gas_prices (Optional[Coins.Input], optional): gas prices to use.
+            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use.
+            denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.
 
         Returns:
             StdFee: estimated fee
