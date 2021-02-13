@@ -253,8 +253,8 @@ are also asychronous and therefore must be awaited.</p>
 </div>
 <div class="section" id="alternative-event-loops">
 <h2>Alternative event loops<a class="headerlink" href="#alternative-event-loops" title="Permalink to this headline">¶</a></h2>
-<p>You can swap out the native <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> event loop for something like <code class="docutils literal notranslate"><span class="pre">uvloop</span></code> if you
-want to squeeze out some improved performance.</p>
+<p>The native <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> event loop can be replaced with an alternative such as <code class="docutils literal notranslate"><span class="pre">uvloop</span></code>
+for more performance. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="hll"><span class="kn">import</span> <span class="nn">uvloop</span>
 </span>
