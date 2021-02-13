@@ -5,8 +5,8 @@ from typing import Optional
 
 from bech32 import bech32_encode, convertbits
 
-from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
 from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey
+from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
@@ -101,7 +101,7 @@ class Key:
         """
         if not self.raw_address:
             raise ValueError("could not compute val_address: missing raw_address")
-        return get_bech("terravaloper", self.raw_address.hex())
+        return ValAddress(get_bech("terravaloper", self.raw_address.hex()))
 
     @property
     def acc_pubkey(self) -> AccPubKey:
@@ -115,7 +115,7 @@ class Key:
         """
         if not self.raw_pubkey:
             raise ValueError("could not compute acc_pubkey: missing raw_pubkey")
-        return get_bech("terrapub", self.raw_pubkey.hex())
+        return AccPubKey(get_bech("terrapub", self.raw_pubkey.hex()))
 
     @property
     def val_pubkey(self) -> ValPubKey:
@@ -129,7 +129,7 @@ class Key:
         """
         if not self.raw_pubkey:
             raise ValueError("could not compute val_pubkey: missing raw_pubkey")
-        return get_bech("terravaloperpub", self.raw_pubkey.hex())
+        return ValPubKey(get_bech("terravaloperpub", self.raw_pubkey.hex()))
 
     def create_signature(self, tx: StdSignMsg) -> StdSignature:
         """Signs the transaction with the signing algorithm provided by this Key implementation,

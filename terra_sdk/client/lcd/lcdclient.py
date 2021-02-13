@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from asyncio import AbstractEventLoop, get_event_loop
-from typing import Optional
+from typing import Optional, Union
 from urllib.parse import urljoin
 
 import nest_asyncio
 from aiohttp import ClientSession
 
-from terra_sdk.core import Coins, Numeric
+from terra_sdk.core import Coins, Dec, Numeric
 from terra_sdk.exceptions import LCDResponseError
 from terra_sdk.key.key import Key
 from terra_sdk.util.json import dict_to_data
@@ -130,7 +130,7 @@ class LCDClient(AsyncLCDClient):
     gas_adjustment: Union[str, float, int, Dec]
     """Gas adjustment factor for automatic fee estimation."""
 
-    last_request_height: Optional[int]
+    last_request_height: Optional[int]  # type: ignore
     """Height of response of last-made made LCD request."""
 
     auth: AuthAPI
