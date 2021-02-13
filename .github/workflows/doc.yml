@@ -25,16 +25,22 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      
+          
       - name: Setup Python
-        uses: actions/setup-python@v2.2.1
+        uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      
+        
       - name: Setup Poetry
-        run: |
-          pip install poetry
-          poetry install
+        uses: Gr1N/setup-poetry@v4
+      
+      - name: Cache Dependencies
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
     
       - name: Build
         run: |
