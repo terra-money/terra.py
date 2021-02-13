@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>WebAssembly &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Transactions" href="tx.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">WebAssembly</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.wasm.msgs">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-0">Messages</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>WebAssembly</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/wasm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="webassembly">
+<h1>WebAssembly<a class="headerlink" href="#webassembly" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.wasm.WasmAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.wasm.</code><code class="sig-name descname">WasmAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/wasm.html#WasmAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.wasm.WasmAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.wasm.WasmAPI.code_info">
+<code class="sig-name descname">code_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/wasm.html#WasmAPI.code_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.wasm.WasmAPI.code_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches information about an uploaded code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>code_id</strong> (<em>int</em>) – code ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>code information</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.wasm.WasmAPI.contract_info">
+<code class="sig-name descname">contract_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contract_address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/wasm.html#WasmAPI.contract_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.wasm.WasmAPI.contract_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches information about an uploaded code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>code_id</strong> (<em>int</em>) – code ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>code information</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.wasm.WasmAPI.contract_query">
+<code class="sig-name descname">contract_query</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contract_address</span></em>, <em class="sig-param"><span class="n">query_msg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/wasm.html#WasmAPI.contract_query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.wasm.WasmAPI.contract_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a QueryMsg on a contract.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contract_address</strong> (<em>str</em>) – contract address</p></li>
+<li><p><strong>query_msg</strong> (<em>dict</em>) – QueryMsg to run</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>results of query</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.wasm.WasmAPI.parameters">
+<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/wasm.html#WasmAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.wasm.WasmAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the Wasm module parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Wasm module parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.wasm.msgs">
+<span id="functions"></span><h2>Functions<a class="headerlink" href="#module-terra_sdk.core.wasm.msgs" title="Permalink to this headline">¶</a></h2>
+<p>Wasm module messages.</p>
+<dl class="py function">
+<dt id="terra_sdk.core.wasm.msgs.b64_to_dict">
+<code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">b64_to_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#b64_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.b64_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts ASCII-encoded base64 encoded string to dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="terra_sdk.core.wasm.msgs.dict_to_b64">
+<code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">dict_to_b64</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#dict_to_b64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.dict_to_b64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts dict to ASCII-encoded base64 encoded string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-0">
+<span id="messages"></span><h2>Messages<a class="headerlink" href="#module-0" title="Permalink to this headline">¶</a></h2>
+<p>Wasm module messages.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.wasm.msgs.MsgExecuteContract">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">MsgExecuteContract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sender</span></em>, <em class="sig-param"><span class="n">contract</span></em>, <em class="sig-param"><span class="n">execute_msg</span></em>, <em class="sig-param"><span class="n">coins</span><span class="o">=</span><span class="default_value">NOTHING</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgExecuteContract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgExecuteContract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a state-mutating function on a smart contract.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sender</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of sender</p></li>
+<li><p><strong>contract</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of contract to execute function on</p></li>
+<li><p><strong>execute_msg</strong> (<em>dict</em>) – ExecuteMsg (aka. HandleMsg) to pass</p></li>
+<li><p><strong>coins</strong> – coins to be sent, if needed by contract to execute.
+Defaults to empty <code class="docutils literal notranslate"><span class="pre">Coins()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.wasm.msgs.MsgExecuteContract.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgExecuteContract.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgExecuteContract.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.wasm.msgs.MsgExecuteContract.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'wasm/MsgExecuteContract'</em><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgExecuteContract.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.wasm.msgs.MsgInstantiateContract">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">MsgInstantiateContract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span></em>, <em class="sig-param"><span class="n">code_id</span></em>, <em class="sig-param"><span class="n">init_msg</span></em>, <em class="sig-param"><span class="n">init_coins</span><span class="o">=</span><span class="default_value">NOTHING</span></em>, <em class="sig-param"><span class="n">migratable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgInstantiateContract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgInstantiateContract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new instance of a smart contract from existing code on the blockchain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of contract owner</p></li>
+<li><p><strong>code_id</strong> (<em>int</em>) – code ID to use for instantiation</p></li>
+<li><p><strong>init_msg</strong> (<em>dict</em>) – InitMsg to initialize contract</p></li>
+<li><p><strong>init_coins</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – initial amount of coins to be sent to contract</p></li>
+<li><p><strong>migratable</strong> (<em>bool</em>) – whether the owner can change contract code IDs</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.wasm.msgs.MsgInstantiateContract.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgInstantiateContract.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgInstantiateContract.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.wasm.msgs.MsgInstantiateContract.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'wasm/MsgInstantiateContract'</em><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgInstantiateContract.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.wasm.msgs.MsgMigrateContract">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">MsgMigrateContract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span></em>, <em class="sig-param"><span class="n">contract</span></em>, <em class="sig-param"><span class="n">new_code_id</span></em>, <em class="sig-param"><span class="n">migrate_msg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgMigrateContract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgMigrateContract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Migrate the contract to a different code ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of owner</p></li>
+<li><p><strong>contract</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of contract to migrate</p></li>
+<li><p><strong>new_code_id</strong> (<em>int</em>) – new code ID to migrate to</p></li>
+<li><p><strong>migrate_msg</strong> (<em>dict</em>) – MigrateMsg to execute</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.wasm.msgs.MsgMigrateContract.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgMigrateContract.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgMigrateContract.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.wasm.msgs.MsgMigrateContract.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'wasm/MsgMigrateContract'</em><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgMigrateContract.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.wasm.msgs.MsgStoreCode">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">MsgStoreCode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sender</span></em>, <em class="sig-param"><span class="n">wasm_byte_code</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgStoreCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgStoreCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload a new smart contract WASM binary to the blockchain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sender</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of sender</p></li>
+<li><p><strong>wasm_byte_code</strong> – base64-encoded string containing bytecode</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.wasm.msgs.MsgStoreCode.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'wasm/MsgStoreCode'</em><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgStoreCode.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.wasm.msgs.MsgUpdateContractOwner">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.wasm.msgs.</code><code class="sig-name descname">MsgUpdateContractOwner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span></em>, <em class="sig-param"><span class="n">new_owner</span></em>, <em class="sig-param"><span class="n">contract</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/wasm/msgs.html#MsgUpdateContractOwner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgUpdateContractOwner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a smart contract’s owner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of current owner (sender)</p></li>
+<li><p><strong>new_owner</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of new owner</p></li>
+<li><p><strong>contract</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of contract to change</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.wasm.msgs.MsgUpdateContractOwner.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'wasm/MsgUpdateContractOwner'</em><a class="headerlink" href="#terra_sdk.core.wasm.msgs.MsgUpdateContractOwner.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="tx.html" class="btn btn-neutral float-left" title="Transactions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

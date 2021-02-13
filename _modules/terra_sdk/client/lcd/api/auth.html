@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.client.lcd.api.auth &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.client.lcd.api.auth</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.client.lcd.api.auth</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">Account</span><span class="p">,</span> <span class="n">LazyGradedVestingAccount</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AsyncAuthAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;AuthAPI&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">AsyncAuthAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">account_info</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Account</span><span class="p">,</span> <span class="n">LazyGradedVestingAccount</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the account information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            address (AccAddress): account address</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Union[Account, LazyGradedVestingAccount]: account information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/auth/accounts/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;core/Account&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Account</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LazyGradedVestingAccount</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AuthAPI"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI">[docs]</a><span class="k">class</span> <span class="nc">AuthAPI</span><span class="p">(</span><span class="n">AsyncAuthAPI</span><span class="p">):</span>
+<div class="viewcode-block" id="AuthAPI.account_info"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI.account_info">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncAuthAPI</span><span class="o">.</span><span class="n">account_info</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">account_info</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Account</span><span class="p">,</span> <span class="n">LazyGradedVestingAccount</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">account_info</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncAuthAPI</span><span class="o">.</span><span class="n">account_info</span><span class="o">.</span><span class="vm">__doc__</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

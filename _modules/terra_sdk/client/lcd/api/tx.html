@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.client.lcd.api.tx &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.client.lcd.api.tx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.client.lcd.api.tx</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">Coin</span><span class="p">,</span> <span class="n">Coins</span><span class="p">,</span> <span class="n">Numeric</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdFee</span><span class="p">,</span> <span class="n">StdSignMsg</span><span class="p">,</span> <span class="n">StdTx</span><span class="p">,</span> <span class="n">TxInfo</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.broadcast</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AsyncTxBroadcastResult</span><span class="p">,</span>
+    <span class="n">BlockTxBroadcastResult</span><span class="p">,</span>
+    <span class="n">SyncTxBroadcastResult</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.hash</span> <span class="kn">import</span> <span class="n">hash_amino</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AsyncTxAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;TxAPI&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">AsyncTxAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tx_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxInfo</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches information for an included transaction given a tx hash.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx_hash (str): hash of transaction to lookup</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            TxInfo: transaction info</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TxInfo</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/txs/</span><span class="si">{</span><span class="n">tx_hash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source_address</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
+        <span class="n">msgs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Msg</span><span class="p">],</span>
+        <span class="n">fee</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StdFee</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignMsg</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a new unsigned transaction, with helpful utilities such as lookup of</span>
+<span class="sd">        chain ID, account number, sequence and fee estimation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            source_address (AccAddress): transaction sender&#39;s account address</span>
+<span class="sd">            msgs (List[Msg]): list of messages to include</span>
+<span class="sd">            fee (Optional[StdFee], optional): fee to use (estimates if empty).</span>
+<span class="sd">            memo (str, optional): memo to use. Defaults to &quot;&quot;.</span>
+<span class="sd">            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.</span>
+<span class="sd">            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.</span>
+<span class="sd">            denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating.</span>
+<span class="sd">            account_number (Optional[int], optional): account number to use.</span>
+<span class="sd">            sequence (Optional[int], optional): sequence number to use.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            StdSignMsg: unsigned tx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fee</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># create the fake fee</span>
+            <span class="n">balance</span> <span class="o">=</span> <span class="k">await</span> <span class="n">BaseAsyncAPI</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">bank</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">balance_one</span> <span class="o">=</span> <span class="p">[</span><span class="n">Coin</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">balance</span><span class="p">]</span>
+
+            <span class="c1"># estimate the fee</span>
+            <span class="n">tx</span> <span class="o">=</span> <span class="n">StdTx</span><span class="p">(</span><span class="n">msgs</span><span class="p">,</span> <span class="n">StdFee</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">balance_one</span><span class="p">),</span> <span class="p">[],</span> <span class="n">memo</span><span class="p">)</span>
+            <span class="n">fee</span> <span class="o">=</span> <span class="k">await</span> <span class="n">BaseAsyncAPI</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">estimate_fee</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">gas_prices</span><span class="p">,</span> <span class="n">gas_adjustment</span><span class="p">,</span> <span class="n">denoms</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">account</span> <span class="o">=</span> <span class="k">await</span> <span class="n">BaseAsyncAPI</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">account_info</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">account_number</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">account_number</span>
+            <span class="k">if</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sequence</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">sequence</span>
+
+        <span class="k">return</span> <span class="n">StdSignMsg</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span> <span class="n">account_number</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fee</span><span class="p">,</span> <span class="n">msgs</span><span class="p">,</span> <span class="n">memo</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">estimate_fee</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">StdSignMsg</span><span class="p">,</span> <span class="n">StdTx</span><span class="p">],</span>
+        <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdFee</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Estimates the proper fee to apply by simulating it within the node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for</span>
+<span class="sd">            gas_prices (Optional[Coins.Input], optional): gas prices to use.</span>
+<span class="sd">            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use.</span>
+<span class="sd">            denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            StdFee: estimated fee</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gas_prices</span> <span class="o">=</span> <span class="n">gas_prices</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">gas_prices</span>
+        <span class="n">gas_adjustment</span> <span class="o">=</span> <span class="n">gas_adjustment</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">gas_adjustment</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">StdSignMsg</span><span class="p">):</span>
+            <span class="n">tx_value</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">to_stdtx</span><span class="p">()</span><span class="o">.</span><span class="n">to_data</span><span class="p">()[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tx_value</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">to_data</span><span class="p">()[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+
+        <span class="n">tx_value</span><span class="p">[</span><span class="s2">&quot;fee&quot;</span><span class="p">][</span><span class="s2">&quot;gas&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="n">tx_value</span><span class="p">,</span>
+            <span class="s2">&quot;gas_prices&quot;</span><span class="p">:</span> <span class="n">gas_prices</span> <span class="ow">and</span> <span class="n">Coins</span><span class="p">(</span><span class="n">gas_prices</span><span class="p">)</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;gas_adjustment&quot;</span><span class="p">:</span> <span class="n">gas_adjustment</span> <span class="ow">and</span> <span class="nb">str</span><span class="p">(</span><span class="n">gas_adjustment</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span><span class="s2">&quot;/txs/estimate_fee&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">fees</span> <span class="o">=</span> <span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;fees&quot;</span><span class="p">])</span>
+        <span class="c1"># only pick the denoms we are interested in?</span>
+        <span class="k">if</span> <span class="n">denoms</span><span class="p">:</span>
+            <span class="n">fees</span> <span class="o">=</span> <span class="n">fees</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">denom</span> <span class="ow">in</span> <span class="n">denoms</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">StdFee</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">]),</span> <span class="n">fees</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches a transaction&#39;s amino encoding.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdTx): transaction to encode</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: base64 string containing amino-encoded tx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span><span class="s2">&quot;/txs/encode&quot;</span><span class="p">,</span> <span class="n">tx</span><span class="o">.</span><span class="n">to_data</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;tx&quot;</span><span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Compute hash for a transaction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdTx): transaction to hash</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: transaction hash</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">amino</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hash_amino</span><span class="p">(</span><span class="n">amino</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_broadcast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="n">tx</span><span class="o">.</span><span class="n">to_data</span><span class="p">()[</span><span class="s2">&quot;value&quot;</span><span class="p">],</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">mode</span><span class="p">}</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span><span class="s2">&quot;/txs&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">broadcast_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyncTxBroadcastResult</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Broadcasts a transaction using the ``sync`` broadcast mode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdTx): transaction to broadcast</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            SyncTxBroadcastResult: result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="s2">&quot;sync&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SyncTxBroadcastResult</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+            <span class="n">txhash</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
+            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
+            <span class="n">codespace</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">broadcast_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncTxBroadcastResult</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Broadcasts a transaction using the ``async`` broadcast mode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdTx): transaction to broadcast</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AsyncTxBroadcastResult: result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="s2">&quot;async&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AsyncTxBroadcastResult</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+            <span class="n">txhash</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">broadcast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlockTxBroadcastResult</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Broadcasts a transaction using the ``block`` broadcast mode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdTx): transaction to broadcast</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            BlockTxBroadcastResult: result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="s2">&quot;block&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BlockTxBroadcastResult</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+            <span class="n">txhash</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
+            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
+            <span class="n">gas_wanted</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;gas_wanted&quot;</span><span class="p">],</span>
+            <span class="n">gas_used</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;gas_used&quot;</span><span class="p">],</span>
+            <span class="n">logs</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logs&quot;</span><span class="p">),</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
+            <span class="n">codespace</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Searches for transactions given critera.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            options (dict, optional): dictionary containing options. Defaults to {}.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: transaction search results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/txs&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+
+<div class="viewcode-block" id="TxAPI"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI">[docs]</a><span class="k">class</span> <span class="nc">TxAPI</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="p">):</span>
+<div class="viewcode-block" id="TxAPI.tx_info"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.tx_info">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">tx_info</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">tx_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxInfo</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">tx_info</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">tx_info</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.create"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.create">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">create</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source_address</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
+        <span class="n">msgs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Msg</span><span class="p">],</span>
+        <span class="n">fee</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StdFee</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignMsg</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">create</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">create</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.estimate_fee"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.estimate_fee">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">estimate_fee</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">estimate_fee</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">StdSignMsg</span><span class="p">,</span> <span class="n">StdTx</span><span class="p">],</span>
+        <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdFee</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">estimate_fee</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">estimate_fee</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.encode"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.encode">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">encode</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">encode</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">encode</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.hash"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.hash">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">hash</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="nb">hash</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.broadcast_sync"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.broadcast_sync">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast_sync</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">broadcast_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyncTxBroadcastResult</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">broadcast_sync</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast_sync</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.broadcast_async"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.broadcast_async">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast_async</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">broadcast_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncTxBroadcastResult</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">broadcast_async</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast_async</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.broadcast"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.broadcast">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">broadcast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlockTxBroadcastResult</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">broadcast</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">broadcast</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="TxAPI.search"><a class="viewcode-back" href="../../../../../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.search">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">search</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">search</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="vm">__doc__</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

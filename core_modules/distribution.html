@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Distribution &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gov" href="gov.html" />
+    <link rel="prev" title="Bank" href="bank.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Distribution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.distribution.msgs">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.distribution.proposals">Proposals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Distribution</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/distribution.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="distribution">
+<h1>Distribution<a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.distribution.</code><code class="sig-name descname">DistributionAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI.community_pool">
+<code class="sig-name descname">community_pool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI.community_pool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI.community_pool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the community pool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>community pool</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI.parameters">
+<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the Distribution module parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Distribution module parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI.rewards">
+<code class="sig-name descname">rewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI.rewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI.rewards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the staking reward data for a delegator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delegator</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator account address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>delegator rewards</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.client.lcd.api.distribution.Rewards" title="terra_sdk.client.lcd.api.distribution.Rewards">Rewards</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI.validator_rewards">
+<code class="sig-name descname">validator_rewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">validator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI.validator_rewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI.validator_rewards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the commission reward data for a validator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>validator</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator operator address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator rewards</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards" title="terra_sdk.client.lcd.api.distribution.ValidatorRewards">ValidatorRewards</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.distribution.DistributionAPI.withdraw_address">
+<code class="sig-name descname">withdraw_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#DistributionAPI.withdraw_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.DistributionAPI.withdraw_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the withdraw address associated with a delegator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delegator</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator account address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>withdraw address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.distribution.Rewards">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.distribution.</code><code class="sig-name descname">Rewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rewards</span></em>, <em class="sig-param"><span class="n">total</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#Rewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="terra_sdk.client.lcd.api.distribution.Rewards.rewards">
+<code class="sig-name descname">rewards</code><em class="property">: Dict<span class="p">[</span>ValAddress<span class="p">, </span><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.rewards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegator rewards, indexed by validator operator address.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.client.lcd.api.distribution.Rewards.total">
+<code class="sig-name descname">total</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total sum of rewards.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.distribution.ValidatorRewards">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.distribution.</code><code class="sig-name descname">ValidatorRewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self_bond_rewards</span></em>, <em class="sig-param"><span class="n">val_commission</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#ValidatorRewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="terra_sdk.client.lcd.api.distribution.ValidatorRewards.self_bond_rewards">
+<code class="sig-name descname">self_bond_rewards</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.self_bond_rewards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewards for validator accrued from self-delegation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission">
+<code class="sig-name descname">val_commission</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewards for validator accrued from delegation commissions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.distribution.msgs">
+<span id="messages"></span><h2>Messages<a class="headerlink" href="#module-terra_sdk.core.distribution.msgs" title="Permalink to this headline">¶</a></h2>
+<p>Distribution module message types.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.distribution.msgs.MsgFundCommunityPool">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.distribution.msgs.</code><code class="sig-name descname">MsgFundCommunityPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depositor</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/distribution/msgs.html#MsgFundCommunityPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgFundCommunityPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deposit assets to the Community Pool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depositor</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – sender</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to fund community pool with</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgFundCommunityPool.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'distribution/MsgFundCommunityPool'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgFundCommunityPool.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.distribution.msgs.</code><code class="sig-name descname">MsgModifyWithdrawAddress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">withdraw_address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/distribution/msgs.html#MsgModifyWithdrawAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify the Withdraw Address of a delegator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delegator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator</p></li>
+<li><p><strong>withdraw_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – new withdraw address</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress.action">
+<code class="sig-name descname">action</code><em class="property"> = 'set_withdraw_address'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'distribution/MsgModifyWithdrawAddress'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgModifyWithdrawAddress.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.distribution.msgs.</code><code class="sig-name descname">MsgWithdrawDelegationReward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/distribution/msgs.html#MsgWithdrawDelegationReward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Withdraw rewards for a delegation specified by a (delegator, validator) pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delegator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator</p></li>
+<li><p><strong>validator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward.action">
+<code class="sig-name descname">action</code><em class="property"> = 'withdraw_delegation_reward'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'distribution/MsgWithdrawDelegationReward'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawDelegationReward.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.distribution.msgs.</code><code class="sig-name descname">MsgWithdrawValidatorCommission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">validator_address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/distribution/msgs.html#MsgWithdrawValidatorCommission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Withdraw rewards accrued for a validator gained through commissions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>validator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator operator address</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission.action">
+<code class="sig-name descname">action</code><em class="property"> = 'withdraw_validator_commission'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'distribution/MsgWithdrawValidatorCommission'</em><a class="headerlink" href="#terra_sdk.core.distribution.msgs.MsgWithdrawValidatorCommission.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.distribution.proposals">
+<span id="proposals"></span><h2>Proposals<a class="headerlink" href="#module-terra_sdk.core.distribution.proposals" title="Permalink to this headline">¶</a></h2>
+<p>Distribution module governance proposal types.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.distribution.proposals.CommunityPoolSpendProposal">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.distribution.proposals.</code><code class="sig-name descname">CommunityPoolSpendProposal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">recipient</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/distribution/proposals.html#CommunityPoolSpendProposal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.distribution.proposals.CommunityPoolSpendProposal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proposal for allocating funds from the community pool to an address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – proposal title</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – proposal description</p></li>
+<li><p><strong>recipient</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – designated recipient of funds if proposal passes</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to spend from community pool</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.distribution.proposals.CommunityPoolSpendProposal.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'distribution/CommunityPoolSpendProposal'</em><a class="headerlink" href="#terra_sdk.core.distribution.proposals.CommunityPoolSpendProposal.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="gov.html" class="btn btn-neutral float-right" title="Gov" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bank.html" class="btn btn-neutral float-left" title="Bank" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

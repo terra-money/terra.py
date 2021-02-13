@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.core.coin &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.core.coin</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.core.coin</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
+
+<span class="kn">from</span> <span class="nn">.numeric</span> <span class="kn">import</span> <span class="n">Dec</span><span class="p">,</span> <span class="n">Numeric</span>
+
+
+<div class="viewcode-block" id="Coin"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Coin</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a (denom, amount) pairing, analagous to ``sdk.Coin`` and ``sdk.DecCoin``</span>
+<span class="sd">    in Cosmos SDK. Used for representing Terra native assets.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Coin&#39;s denomination, ex ``uusd``, ``uluna``, etc.&quot;&quot;&quot;</span>
+
+    <span class="n">amount</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="sd">&quot;&quot;&quot;Coin&#39;s amount -- can be a ``int`` or :class:`Dec`&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Coin.parse"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.parse">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Coin</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Converts the argument into a coin.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            arg (Union[Coin, str, dict]): value to be converted to coin</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Coin</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">arg</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Coin.is_int_coin"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.is_int_coin">[docs]</a>    <span class="k">def</span> <span class="nf">is_int_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the coin&#39;s amount is of type ``int``.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Coin.is_dec_coin"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.is_dec_coin">[docs]</a>    <span class="k">def</span> <span class="nf">is_dec_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the coin&#39;s amount is of type :class:`Dec`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">Dec</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Coin.to_int_coin"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.to_int_coin">[docs]</a>    <span class="k">def</span> <span class="nf">to_int_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with an ``int`` amount.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Coin.to_dec_coin"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.to_dec_coin">[docs]</a>    <span class="k">def</span> <span class="nf">to_dec_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with a :class:`Dec` amount.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="n">Dec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_dec_coin</span><span class="p">():</span>
+            <span class="n">amount_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">amount_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+                <span class="n">amount_str</span> <span class="o">+=</span> <span class="s2">&quot;0&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">amount_str</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Coin.to_data"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;denom&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)}</span></div>
+
+<div class="viewcode-block" id="Coin.from_str"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.from_str">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` from a coin-format string. Must match the format:</span>
+<span class="sd">        ``283923uusd`` (``int``-Coin) or ``23920.23020uusd`` (:class:`Dec`-Coin).</span>
+
+<span class="sd">        &gt;&gt;&gt; int_coin = Coin.from_str(&quot;230920uusd&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; int_coin.denom</span>
+<span class="sd">        &#39;uusd&#39;</span>
+<span class="sd">        &gt;&gt;&gt; int_coin.amount</span>
+<span class="sd">        230920</span>
+<span class="sd">        &gt;&gt;&gt; dec_coin = Coin.from_str(&quot;203922.223uluna&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; dec_coin.denom</span>
+<span class="sd">        &#39;uluna&#39;</span>
+<span class="sd">        &gt;&gt;&gt; dec_coin.amount</span>
+<span class="sd">        Dec(&#39;203922.223&#39;)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string (str): string to convert</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if string is in wrong format</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: converted string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^(\-?[0-9]+(\.[0-9]+)?)([a-zA-Z]+)$&quot;</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;failed to parse Coin: </span><span class="si">{</span><span class="n">string</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Coin.add"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">Coin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with the sum as amount. If the ``addend`` is a</span>
+<span class="sd">        :class:`Coin`, its ``denom`` must match.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            addend (Union[Numeric.Input, Coin]): addend</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ArithmeticError: if addedend has different ``denom``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: sum</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">addend</span><span class="p">,</span> <span class="n">Coin</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">addend</span><span class="o">.</span><span class="n">denom</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ArithmeticError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;cannot add/subtract two Coin objects of different denoms: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">addend</span><span class="o">.</span><span class="n">denom</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">+</span> <span class="n">addend</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">+</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">addend</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">Coin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">addend</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coin.sub"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.sub">[docs]</a>    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtrahend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">Coin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with the difference as amount. If the ``subtrahend`` is a</span>
+<span class="sd">        :class:`Coin`, its ``denom`` must match.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            subtrahend (Union[Numeric.Input, Coin]): subtrahend</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: difference</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">,</span> <span class="n">Coin</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subtrahend</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtrahend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">,</span> <span class="n">Coin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coin.mul"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.mul">[docs]</a>    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with the product as amount. The ``multiplier``</span>
+<span class="sd">        argument is first coerced to either an ``int`` or :class:`Dec`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            multiplier (Numeric.Input): multiplier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: product</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">other_amount</span> <span class="o">=</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">*</span> <span class="n">other_amount</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coin.div"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with the quotient as amount. The ``divisor``</span>
+<span class="sd">        argument is first coerced to either an ``int`` or :class:`Dec`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            divisor (Numeric.Input): divisor</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: quotient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">other_amount</span> <span class="o">=</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other_amount</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">//</span> <span class="n">other_amount</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">/</span> <span class="n">other_amount</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">divisor</span><span class="p">)))</span>
+
+<div class="viewcode-block" id="Coin.mod"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.mod">[docs]</a>    <span class="k">def</span> <span class="nf">mod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulo</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new :class:`Coin` with the modulus as amount.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            modulo (Numeric.Input): modulo</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: modulo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">other_amount</span> <span class="o">=</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other_amount</span><span class="p">,</span> <span class="n">Dec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="n">Dec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">other_amount</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">%</span> <span class="n">other_amount</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulo</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="n">denom</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Coin</span><span class="p">(</span><span class="n">denom</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coin.from_data"><a class="viewcode-back" href="../../../common/coin.html#terra_sdk.core.coin.Coin.from_data">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Deserializes a :class:`Coin` object from its JSON data representation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (dict): data object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;denom&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;amount&quot;</span><span class="p">])</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

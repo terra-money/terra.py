@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Bank &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Distribution" href="distribution.html" />
+    <link rel="prev" title="Auth" href="auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bank</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.bank.msgs">Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bank</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/bank.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bank">
+<h1>Bank<a class="headerlink" href="#bank" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.bank.BankAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.bank.</code><code class="sig-name descname">BankAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.bank.BankAPI.balance">
+<code class="sig-name descname">balance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI.balance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI.balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches an account’s current balance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>balance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.bank.msgs">
+<span id="messages"></span><h2>Messages<a class="headerlink" href="#module-terra_sdk.core.bank.msgs" title="Permalink to this headline">¶</a></h2>
+<p>Bank module message types.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.bank.msgs.MsgMultiSend">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MsgMultiSend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span></em>, <em class="sig-param"><span class="n">outputs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgMultiSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows batch-sending between multiple source and destination addresses.
+The total amount of coins in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> must match <code class="docutils literal notranslate"><span class="pre">outputs</span></code>. The transaction
+containing <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code> must contain signatures from all addresses used as inputs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> arguments should be of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra12...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;2983298&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>And so forth..</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – senders</p></li>
+<li><p><strong>outputs</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – recipients</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.bank.msgs.MsgMultiSend.action">
+<code class="sig-name descname">action</code><em class="property"> = 'multisend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.bank.msgs.MsgMultiSend.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'bank/MsgMultiSend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.bank.msgs.MsgSend">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MsgSend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">from_address</span></em>, <em class="sig-param"><span class="n">to_address</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends native Terra assets (Luna or Terra stablecoins) from <code class="docutils literal notranslate"><span class="pre">from_address</span></code> to
+<code class="docutils literal notranslate"><span class="pre">to_address</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – sender</p></li>
+<li><p><strong>to_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – recipient</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – coins to send</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.bank.msgs.MsgSend.action">
+<code class="sig-name descname">action</code><em class="property"> = 'send'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.bank.msgs.MsgSend.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'bank/MsgSend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="distribution.html" class="btn btn-neutral float-right" title="Distribution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="auth.html" class="btn btn-neutral float-left" title="Auth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

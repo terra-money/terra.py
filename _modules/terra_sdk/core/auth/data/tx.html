@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.core.auth.data.tx &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.core.auth.data.tx</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.core.auth.data.tx</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data objects pertaining to building, signing, and parsing Transactions.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core.coins</span> <span class="kn">import</span> <span class="n">Coins</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
+
+<span class="kn">from</span> <span class="nn">.public_key</span> <span class="kn">import</span> <span class="n">PublicKey</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;StdSignature&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;StdFee&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;StdSignMsg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;StdTx&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TxLog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TxInfo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;parse_tx_logs&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="StdSignature"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignature">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">StdSignature</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data structure holding information for a transaction signature.&quot;&quot;&quot;</span>
+
+    <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Actual signature contents.&quot;&quot;&quot;</span>
+
+    <span class="n">pub_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Signature&#39;s public key information.&quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignature</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">signature</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;signature&quot;</span><span class="p">],</span>
+            <span class="n">pub_key</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pub_key&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">PublicKey</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;pub_key&quot;</span><span class="p">]),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StdFee"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">StdFee</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data structure holding information for a transaction fee.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gas (int): gas to use (&quot;gas requested&quot;)</span>
+<span class="sd">        amount (Coins.Input): fee amount</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">gas</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdFee</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gas&quot;</span><span class="p">]),</span> <span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;amount&quot;</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="StdFee.to_data"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;gas&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas</span><span class="p">),</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="o">.</span><span class="n">to_data</span><span class="p">()}</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gas_prices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="o">.</span><span class="n">to_dec_coins</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StdSignMsg"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">StdSignMsg</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data structure holding information which can be signed to create a :class:`StdTx`.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This object can be considered an &quot;unsigned transaction&quot;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        chain_id (str): chain ID</span>
+<span class="sd">        account_number (int): account number</span>
+<span class="sd">        sequence (int): sequence number</span>
+<span class="sd">        fee (StdFee): transaction fee</span>
+<span class="sd">        msgs (List[Msg]): list of messages to include</span>
+<span class="sd">        memo (str): transaction memo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">chain_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">account_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">fee</span><span class="p">:</span> <span class="n">StdFee</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">msgs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Msg</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">to_stdtx</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StdTx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msgs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fee</span><span class="p">,</span> <span class="p">[],</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StdSignMsg.to_data"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;chain_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
+            <span class="s2">&quot;account_number&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">account_number</span><span class="p">),</span>
+            <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">),</span>
+            <span class="s2">&quot;fee&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;msgs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">msgs</span><span class="p">],</span>
+            <span class="s2">&quot;memo&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignMsg</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;chain_id&quot;</span><span class="p">],</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;account_number&quot;</span><span class="p">]),</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">]),</span>
+            <span class="n">StdFee</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;fee&quot;</span><span class="p">]),</span>
+            <span class="p">[</span><span class="n">Msg</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;msgs&quot;</span><span class="p">]],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;memo&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StdTx"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">StdTx</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data structure for a transaction which can be broadcasted.</span>
+
+<span class="sd">    Arg:</span>
+<span class="sd">        msg: list of messages to include in transaction</span>
+<span class="sd">        fee: fee to use for transaction</span>
+<span class="sd">        signatures: list of signatures</span>
+<span class="sd">        memo: transaction memo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">msg</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Msg</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">fee</span><span class="p">:</span> <span class="n">StdFee</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">StdSignature</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+<div class="viewcode-block" id="StdTx.to_data"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;core/StdTx&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="p">],</span>
+                <span class="s2">&quot;fee&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+                <span class="s2">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="p">],</span>
+                <span class="s2">&quot;memo&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Msg</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;msg&quot;</span><span class="p">]],</span>
+            <span class="n">StdFee</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;fee&quot;</span><span class="p">]),</span>
+            <span class="p">[</span><span class="n">StdSignature</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;signatures&quot;</span><span class="p">]],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;memo&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">parse_events_by_type</span><span class="p">(</span><span class="n">event_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+    <span class="n">events</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">event_data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+                <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]:</span>
+                <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]][</span><span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]][</span><span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">att</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">events</span>
+
+
+<div class="viewcode-block" id="TxLog"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.TxLog">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">TxLog</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Object containing the events of a transaction that is automatically generated when</span>
+<span class="sd">    :class:`TxInfo` or :class:`BlockTxBroadcastResult` objects are read.&quot;&quot;&quot;</span>
+
+    <span class="n">msg_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Number of the message inside the transaction that it was included in.&quot;&quot;&quot;</span>
+
+    <span class="n">log</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;This field may be populated with details of the message&#39;s error, if any.&quot;&quot;&quot;</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Raw event log data&quot;&quot;&quot;</span>
+
+    <span class="n">events_by_type</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Event log data, re-indexed by event type name and attribute type.</span>
+
+<span class="sd">    For instance, the event type may be: ``store_code`` and an attribute key could be</span>
+<span class="sd">    ``code_id``.</span>
+
+<span class="sd">    &gt;&gt;&gt; logs[0].events_by_type[&quot;&lt;event-type&gt;&quot;][&quot;&lt;attribute-key&gt;&quot;]</span>
+<span class="sd">    [&#39;&lt;attribute-value&gt;&#39;, &#39;&lt;attribute-value2&gt;&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">events_by_type</span> <span class="o">=</span> <span class="n">parse_events_by_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">parse_tx_logs</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TxLog</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">TxLog</span><span class="p">(</span><span class="n">msg_index</span><span class="o">=</span><span class="n">log</span><span class="p">[</span><span class="s2">&quot;msg_index&quot;</span><span class="p">],</span> <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">],</span> <span class="n">events</span><span class="o">=</span><span class="n">log</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">logs</span>
+        <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="TxInfo"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.TxInfo">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">TxInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Holds information pertaining to a transaction which has been included in a block</span>
+<span class="sd">    on the blockchain.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Users are not expected to create this object directly. It is returned by</span>
+<span class="sd">        :meth:`TxAPI.tx_info()&lt;terra_sdk.client.lcd.api.tx.TxAPI.tx_info&gt;`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Block height at which transaction was included.&quot;&quot;&quot;</span>
+
+    <span class="n">txhash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Transaction hash.&quot;&quot;&quot;</span>
+
+    <span class="n">rawlog</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Event log information as a raw JSON-string.&quot;&quot;&quot;</span>
+
+    <span class="n">logs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TxLog</span><span class="p">]]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Event log information.&quot;&quot;&quot;</span>
+
+    <span class="n">gas_wanted</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Gas requested by transaction.&quot;&quot;&quot;</span>
+
+    <span class="n">gas_used</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Actual gas amount used.&quot;&quot;&quot;</span>
+
+    <span class="n">tx</span><span class="p">:</span> <span class="n">StdTx</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Transaction object.&quot;&quot;&quot;</span>
+
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Time at which transaction was included.&quot;&quot;&quot;</span>
+
+    <span class="n">code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;If this field is not ``None``, the transaction failed at ``DeliverTx`` stage.&quot;&quot;&quot;</span>
+
+    <span class="n">codespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Error subspace (used alongside ``code``).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TxInfo.to_data"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.auth.data.tx.TxInfo.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">),</span>
+            <span class="s2">&quot;txhash&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">txhash</span><span class="p">,</span>
+            <span class="s2">&quot;raw_log&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlog</span><span class="p">,</span>
+            <span class="s2">&quot;logs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">log</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;gas_wanted&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_wanted</span><span class="p">),</span>
+            <span class="s2">&quot;gas_used&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_used</span><span class="p">),</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span>
+            <span class="s2">&quot;codespace&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">codespace</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">codespace</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;codespace&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
+            <span class="n">parse_tx_logs</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logs&quot;</span><span class="p">)),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;gas_wanted&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;gas_used&quot;</span><span class="p">],</span>
+            <span class="n">StdTx</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;tx&quot;</span><span class="p">]),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

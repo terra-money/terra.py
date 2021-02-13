@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Usage with asyncio &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Guide to using Keys" href="keys.html" />
+    <link rel="prev" title="Using LCDClient" href="lcdclient.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage with asyncio</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#async-module-apis">Async module APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#async-wallet-api">Async wallet API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternative-event-loops">Alternative event loops</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Usage with asyncio</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/guides/async.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage-with-asyncio">
+<h1>Usage with asyncio<a class="headerlink" href="#usage-with-asyncio" title="Permalink to this headline">¶</a></h1>
+<p>If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient.
+The interface is similar to LCDClient, except the module and wallet API functions must be awaited.</p>
+<div class="section" id="async-module-apis">
+<h2>Async module APIs<a class="headerlink" href="#async-module-apis" title="Permalink to this headline">¶</a></h2>
+<p>You can replace your LCDClient instance with AsyncLCDClient inside a coroutine function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">AsyncLCDClient</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="hll">    <span class="n">terra</span> <span class="o">=</span> <span class="n">AsyncLCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span>
+</span>    <span class="n">total_supply</span> <span class="o">=</span> <span class="k">await</span> <span class="n">terra</span><span class="o">.</span><span class="n">supply</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total_supply</span><span class="p">)</span>
+<span class="hll">    <span class="k">await</span> <span class="n">terra</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># you must close the session</span>
+</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>For convenience, you can use the async context manager to automatically teardown the
+session. Here’s the same code as above, this time using the <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">with</span></code> construct.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">AsyncLCDClient</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="hll">    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncLCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">terra</span><span class="p">:</span>
+</span>        <span class="n">total_supply</span> <span class="o">=</span> <span class="k">await</span> <span class="n">terra</span><span class="o">.</span><span class="n">supply</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">total_supply</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="async-wallet-api">
+<h2>Async wallet API<a class="headerlink" href="#async-wallet-api" title="Permalink to this headline">¶</a></h2>
+<p>When creating a wallet with AsyncLCDClient, the wallet’s methods that create LCD requests
+are also asychronous and therefore must be awaited.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">AsyncLCDClient</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">Coins</span>
+
+<span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">()</span>
+<span class="n">recipient</span> <span class="o">=</span> <span class="s2">&quot;terra1...&quot;</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncLCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">terra</span><span class="p">:</span>
+        <span class="n">wallet</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
+<span class="hll">        <span class="n">account_number</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wallet</span><span class="o">.</span><span class="n">account_number</span><span class="p">()</span>
+</span><span class="hll">        <span class="n">tx</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+</span>            <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span><span class="n">wallet</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">10202</span><span class="p">))]</span>
+        <span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="alternative-event-loops">
+<h2>Alternative event loops<a class="headerlink" href="#alternative-event-loops" title="Permalink to this headline">¶</a></h2>
+<p>You can swap out the native <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> event loop for something like <code class="docutils literal notranslate"><span class="pre">uvloop</span></code> if you
+want to squeeze out some improved performance.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">uvloop</span>
+</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">AsyncLCDClient</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncLCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">terra</span><span class="p">:</span>
+        <span class="n">total_supply</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wallet</span><span class="o">.</span><span class="n">supply</span><span class="o">.</span><span class="n">total</span><span class="p">()</span>
+
+<span class="hll"><span class="n">uvloop</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+</span><span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="keys.html" class="btn btn-neutral float-right" title="Guide to using Keys" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="lcdclient.html" class="btn btn-neutral float-left" title="Using LCDClient" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

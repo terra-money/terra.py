@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.client.lcd.api.oracle &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.client.lcd.api.oracle</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.client.lcd.api.oracle</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">Coin</span><span class="p">,</span> <span class="n">Coins</span><span class="p">,</span> <span class="n">ValAddress</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.oracle</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AggregateExchangeRatePrevote</span><span class="p">,</span>
+    <span class="n">AggregateExchangeRateVote</span><span class="p">,</span>
+    <span class="n">ExchangeRatePrevote</span><span class="p">,</span>
+    <span class="n">ExchangeRateVote</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.exceptions</span> <span class="kn">import</span> <span class="n">LCDResponseError</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AsyncOracleAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;OracleAPI&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">AsyncOracleAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">prevotes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches active oracle prevotes, filtering by denom, or validator, or both.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            denom (Optional[str], optional): denom.</span>
+<span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: if both ``denom`` and ``validator`` are ``None``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[ExchangeRatePrevote]: prevotes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/prevotes/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/prevotes&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/prevotes&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;both denom and validator cannot both be None&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRateVote</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches active oracle votes, filtering by denom, or validator, or both.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            denom (Optional[str], optional): denom.</span>
+<span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: if both ``denom`` and ``validator`` are ``None``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[ExchangeRateVote]: votes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/votes/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;both denom and validator cannot both be None&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">exchange_rates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches registered exchange rates of Luna in all available denoms.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coins: exchange rates of Luna</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/oracle/denoms/exchange_rates&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Coins</span><span class="p">({})</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">exchange_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches registered exchange rate of Luna in a specific denom.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            denom (str): denom</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Coin: exchange rate of Luna</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rates</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">exchange_rates</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rates</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">active_denoms</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches current active denoms.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: active denoms</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/oracle/denoms/actives&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">feeder_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccAddress</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches associated feeder address for a validator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            validator (ValAddress): validator operator address</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccAddress: feeder address</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/feeder&quot;</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">misses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches current value of miss counter for a validator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            validator (ValAddress): validator operator address</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: current number of misses</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/miss&quot;</span><span class="p">))</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">aggregate_prevote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AggregateExchangeRatePrevote</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches active aggregate prevote for a validator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            validator (ValAddress): validator operator address</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[AggregateExchangeRatePrevote]: current aggegate prevote (if any).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/aggregate_prevote&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">LCDResponseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">return</span> <span class="n">AggregateExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">aggregate_vote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AggregateExchangeRateVote</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches active aggregate vote for a validator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            validator (ValAddress): validator operator address</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[AggregateExchangeRatePrevote]: current aggegate vote (if any).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/aggregate_vote&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">LCDResponseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">return</span> <span class="n">AggregateExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches Oracle module parameters.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Oracle module parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/oracle/parameters&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="OracleAPI"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI">[docs]</a><span class="k">class</span> <span class="nc">OracleAPI</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="p">):</span>
+<div class="viewcode-block" id="OracleAPI.prevotes"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.prevotes">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">prevotes</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">prevotes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">prevotes</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">prevotes</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.votes"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.votes">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">votes</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRateVote</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">votes</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">votes</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.exchange_rates"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.exchange_rates">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">exchange_rates</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">exchange_rates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">exchange_rates</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">exchange_rates</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.exchange_rate"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.exchange_rate">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">exchange_rate</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">exchange_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">exchange_rate</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">exchange_rate</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.active_denoms"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.active_denoms">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">active_denoms</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">active_denoms</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">active_denoms</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">active_denoms</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.feeder_address"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.feeder_address">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">feeder_address</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">feeder_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccAddress</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">feeder_address</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">active_denoms</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.misses"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.misses">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">misses</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">misses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">misses</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">misses</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.aggregate_prevote"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.aggregate_prevote">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">aggregate_prevote</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">aggregate_prevote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AggregateExchangeRatePrevote</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">aggregate_prevote</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">aggregate_prevote</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.aggregate_vote"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.aggregate_vote">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">aggregate_vote</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">aggregate_vote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AggregateExchangeRateVote</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">aggregate_vote</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">aggregate_vote</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<div class="viewcode-block" id="OracleAPI.parameters"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.parameters">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="n">parameters</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="vm">__doc__</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

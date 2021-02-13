@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Transactions &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="WebAssembly" href="wasm.html" />
+    <link rel="prev" title="Treasury" href="treasury.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.broadcast">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Transactions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/tx.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="transactions">
+<h1>Transactions<a class="headerlink" href="#transactions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.tx.</code><code class="sig-name descname">TxAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.broadcast">
+<code class="sig-name descname">broadcast</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.broadcast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.broadcast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Broadcasts a transaction using the <code class="docutils literal notranslate"><span class="pre">block</span></code> broadcast mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a>) – transaction to broadcast</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult" title="terra_sdk.core.broadcast.BlockTxBroadcastResult">BlockTxBroadcastResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.broadcast_async">
+<code class="sig-name descname">broadcast_async</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.broadcast_async"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.broadcast_async" title="Permalink to this definition">¶</a></dt>
+<dd><p>Broadcasts a transaction using the <code class="docutils literal notranslate"><span class="pre">async</span></code> broadcast mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a>) – transaction to broadcast</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.core.broadcast.AsyncTxBroadcastResult" title="terra_sdk.core.broadcast.AsyncTxBroadcastResult">AsyncTxBroadcastResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.broadcast_sync">
+<code class="sig-name descname">broadcast_sync</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.broadcast_sync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.broadcast_sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Broadcasts a transaction using the <code class="docutils literal notranslate"><span class="pre">sync</span></code> broadcast mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a>) – transaction to broadcast</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult" title="terra_sdk.core.broadcast.SyncTxBroadcastResult">SyncTxBroadcastResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source_address</span></em>, <em class="sig-param"><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">fee</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">memo</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">gas_prices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gas_adjustment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">denoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">account_number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new unsigned transaction, with helpful utilities such as lookup of
+chain ID, account number, sequence and fee estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – transaction sender’s account address</p></li>
+<li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
+<li><p><strong>fee</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a><em>]</em><em>, </em><em>optional</em>) – fee to use (estimates if empty).</p></li>
+<li><p><strong>memo</strong> (<em>str</em><em>, </em><em>optional</em>) – memo to use. Defaults to “”.</p></li>
+<li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices for fee estimation.</p></li>
+<li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment for fee estimation.</p></li>
+<li><p><strong>denoms</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – list of denoms to use for gas fee when estimating.</p></li>
+<li><p><strong>account_number</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – account number to use.</p></li>
+<li><p><strong>sequence</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – sequence number to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>unsigned tx</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg">StdSignMsg</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches a transaction’s amino encoding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a>) – transaction to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>base64 string containing amino-encoded tx</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.estimate_fee">
+<code class="sig-name descname">estimate_fee</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em>, <em class="sig-param"><span class="n">gas_prices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gas_adjustment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">denoms</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.estimate_fee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.estimate_fee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the proper fee to apply by simulating it within the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tx</strong> (<em>Union</em><em>[</em><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><em>StdSignMsg</em></a><em>, </em><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a><em>]</em>) – transaction to estimate fee for</p></li>
+<li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices to use.</p></li>
+<li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment to use.</p></li>
+<li><p><strong>denoms</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – list of denoms to use to pay for gas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>estimated fee</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee">StdFee</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.hash">
+<code class="sig-name descname">hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute hash for a transaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><em>StdTx</em></a>) – transaction to hash</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transaction hash</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for transactions given critera.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary containing options. Defaults to {}.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transaction search results</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.tx.TxAPI.tx_info">
+<code class="sig-name descname">tx_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx_hash</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/tx.html#TxAPI.tx_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.tx.TxAPI.tx_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches information for an included transaction given a tx hash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx_hash</strong> (<em>str</em>) – hash of transaction to lookup</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transaction info</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.TxInfo" title="terra_sdk.core.auth.data.tx.TxInfo">TxInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="terra_sdk.core.broadcast.is_tx_error">
+<code class="sig-prename descclassname">terra_sdk.core.broadcast.</code><code class="sig-name descname">is_tx_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/broadcast.html#is_tx_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.broadcast.is_tx_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the transaction failed.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.broadcast">
+<span id="data"></span><h2>Data<a class="headerlink" href="#module-terra_sdk.core.broadcast" title="Permalink to this headline">¶</a></h2>
+<p>Transaction broadcast result data types.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.broadcast.AsyncTxBroadcastResult">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.broadcast.</code><code class="sig-name descname">AsyncTxBroadcastResult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">height</span></em>, <em class="sig-param"><span class="n">txhash</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/broadcast.html#AsyncTxBroadcastResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.broadcast.AsyncTxBroadcastResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data object that contains the response result from node after transaction
+has been broadcasted with the <code class="docutils literal notranslate"><span class="pre">sync</span></code> broadcast mode.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.AsyncTxBroadcastResult.height">
+<code class="sig-name descname">height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.broadcast.AsyncTxBroadcastResult.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height at which transaction was included.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.AsyncTxBroadcastResult.txhash">
+<code class="sig-name descname">txhash</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.broadcast.AsyncTxBroadcastResult.txhash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction hash.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.broadcast.</code><code class="sig-name descname">BlockTxBroadcastResult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">height</span></em>, <em class="sig-param"><span class="n">txhash</span></em>, <em class="sig-param"><span class="n">raw_log</span></em>, <em class="sig-param"><span class="n">gas_wanted</span></em>, <em class="sig-param"><span class="n">gas_used</span></em>, <em class="sig-param"><span class="n">logs</span></em>, <em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">codespace</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/broadcast.html#BlockTxBroadcastResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data object that contains the response result from node after transaction
+has been broadcasted with the <code class="docutils literal notranslate"><span class="pre">block</span></code> broadcast mode.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.code">
+<code class="sig-name descname">code</code><em class="property">: Optional<span class="p">[</span>int<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.code" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this is present, the transaction failed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.codespace">
+<code class="sig-name descname">codespace</code><em class="property">: Optional<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.codespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>used alongside <code class="docutils literal notranslate"><span class="pre">code</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Error subspace name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.gas_used">
+<code class="sig-name descname">gas_used</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.gas_used" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actual amount of gas consumed by transaction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.gas_wanted">
+<code class="sig-name descname">gas_wanted</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.gas_wanted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas requested by the transaction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.height">
+<code class="sig-name descname">height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height at which transaction was included.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.logs">
+<code class="sig-name descname">logs</code><em class="property">: Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="auth.html#terra_sdk.core.auth.data.tx.TxLog" title="terra_sdk.core.auth.data.tx.TxLog">terra_sdk.core.auth.data.tx.TxLog</a><span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of transaction logs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.raw_log">
+<code class="sig-name descname">raw_log</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.raw_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw JSON of transaction events.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.BlockTxBroadcastResult.txhash">
+<code class="sig-name descname">txhash</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.broadcast.BlockTxBroadcastResult.txhash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction hash.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.broadcast.</code><code class="sig-name descname">SyncTxBroadcastResult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">height</span></em>, <em class="sig-param"><span class="n">txhash</span></em>, <em class="sig-param"><span class="n">raw_log</span></em>, <em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">codespace</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/broadcast.html#SyncTxBroadcastResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data object that contains the response result from node after transaction
+has been broadcasted with the <code class="docutils literal notranslate"><span class="pre">sync</span></code> broadcast mode.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult.code">
+<code class="sig-name descname">code</code><em class="property">: Optional<span class="p">[</span>int<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult.code" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this is present, the transaction failed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult.codespace">
+<code class="sig-name descname">codespace</code><em class="property">: Optional<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult.codespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>used alongside <code class="docutils literal notranslate"><span class="pre">code</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Error subspace name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult.height">
+<code class="sig-name descname">height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height at which transaction was included.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult.raw_log">
+<code class="sig-name descname">raw_log</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult.raw_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw JSON of transaction events.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.broadcast.SyncTxBroadcastResult.txhash">
+<code class="sig-name descname">txhash</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.broadcast.SyncTxBroadcastResult.txhash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction hash.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="wasm.html" class="btn btn-neutral float-right" title="WebAssembly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="treasury.html" class="btn btn-neutral float-left" title="Treasury" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Auth &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bank" href="bank.html" />
+    <link rel="prev" title="Exceptions" href="../common/exceptions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-terra_sdk.core.auth.data.account">Account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-terra_sdk.core.auth.data.tx">Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-terra_sdk.core.auth.data.public_key">Public Key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Auth</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/auth.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="auth">
+<h1>Auth<a class="headerlink" href="#auth" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Data objects are also aliased under at <code class="docutils literal notranslate"><span class="pre">terra_sdk.core.auth</span></code>.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.auth.AuthAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.auth.</code><code class="sig-name descname">AuthAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/auth.html#AuthAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.auth.AuthAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.auth.AuthAPI.account_info">
+<code class="sig-name descname">account_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/auth.html#AuthAPI.account_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.auth.AuthAPI.account_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the account information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account information</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="#terra_sdk.core.auth.data.account.Account" title="terra_sdk.core.auth.data.account.Account">Account</a>, <a class="reference internal" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount" title="terra_sdk.core.auth.data.account.LazyGradedVestingAccount">LazyGradedVestingAccount</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-terra_sdk.core.auth.data.account">
+<span id="account"></span><h3>Account<a class="headerlink" href="#module-terra_sdk.core.auth.data.account" title="Permalink to this headline">¶</a></h3>
+<p>Data objects pertaining to accounts.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.account.Account">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.account.</code><code class="sig-name descname">Account</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">coins</span></em>, <em class="sig-param"><span class="n">public_key</span></em>, <em class="sig-param"><span class="n">account_number</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/account.html#Account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores information about an account.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.Account.account_number">
+<code class="sig-name descname">account_number</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.account_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.Account.address">
+<code class="sig-name descname">address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.Account.coins">
+<code class="sig-name descname">coins</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.coins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.Account.public_key">
+<code class="sig-name descname">public_key</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.auth.data.public_key.PublicKey" title="terra_sdk.core.auth.data.public_key.PublicKey">terra_sdk.core.auth.data.public_key.PublicKey</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.public_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.Account.sequence">
+<code class="sig-name descname">sequence</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.sequence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.account.Account.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/account.html#Account.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.account.Account.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.account.</code><code class="sig-name descname">LazyGradedVestingAccount</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">coins</span></em>, <em class="sig-param"><span class="n">public_key</span></em>, <em class="sig-param"><span class="n">account_number</span></em>, <em class="sig-param"><span class="n">sequence</span></em>, <em class="sig-param"><span class="n">original_vesting</span></em>, <em class="sig-param"><span class="n">delegated_free</span></em>, <em class="sig-param"><span class="n">delegated_vesting</span></em>, <em class="sig-param"><span class="n">end_time</span></em>, <em class="sig-param"><span class="n">vesting_schedules</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/account.html#LazyGradedVestingAccount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores information about an account with vesting.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.account_number">
+<code class="sig-name descname">account_number</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.account_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.address">
+<code class="sig-name descname">address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.coins">
+<code class="sig-name descname">coins</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.coins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.delegated_free">
+<code class="sig-name descname">delegated_free</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.delegated_free" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.delegated_vesting">
+<code class="sig-name descname">delegated_vesting</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.delegated_vesting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.end_time">
+<code class="sig-name descname">end_time</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.end_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.original_vesting">
+<code class="sig-name descname">original_vesting</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.original_vesting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.public_key">
+<code class="sig-name descname">public_key</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.auth.data.public_key.PublicKey" title="terra_sdk.core.auth.data.public_key.PublicKey">terra_sdk.core.auth.data.public_key.PublicKey</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.public_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.sequence">
+<code class="sig-name descname">sequence</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.sequence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/account.html#LazyGradedVestingAccount.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.account.LazyGradedVestingAccount.vesting_schedules">
+<code class="sig-name descname">vesting_schedules</code><em class="property">: List<span class="p">[</span>dict<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.account.LazyGradedVestingAccount.vesting_schedules" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.auth.data.tx">
+<span id="transactions"></span><h3>Transactions<a class="headerlink" href="#module-terra_sdk.core.auth.data.tx" title="Permalink to this headline">¶</a></h3>
+<p>Data objects pertaining to building, signing, and parsing Transactions.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.StdFee">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">StdFee</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gas</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdFee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdFee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure holding information for a transaction fee.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gas</strong> (<em>int</em>) – gas to use (“gas requested”)</p></li>
+<li><p><strong>amount</strong> (<em>Coins.Input</em>) – fee amount</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.tx.StdFee.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdFee.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdFee.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.StdSignMsg">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">StdSignMsg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chain_id</span></em>, <em class="sig-param"><span class="n">account_number</span></em>, <em class="sig-param"><span class="n">sequence</span></em>, <em class="sig-param"><span class="n">fee</span></em>, <em class="sig-param"><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">memo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdSignMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdSignMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure holding information which can be signed to create a <a class="reference internal" href="#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This object can be considered an “unsigned transaction”.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chain_id</strong> (<em>str</em>) – chain ID</p></li>
+<li><p><strong>account_number</strong> (<em>int</em>) – account number</p></li>
+<li><p><strong>sequence</strong> (<em>int</em>) – sequence number</p></li>
+<li><p><strong>fee</strong> (<a class="reference internal" href="#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a>) – transaction fee</p></li>
+<li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
+<li><p><strong>memo</strong> (<em>str</em>) – transaction memo</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.tx.StdSignMsg.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdSignMsg.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdSignMsg.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.StdSignature">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">StdSignature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">signature</span></em>, <em class="sig-param"><span class="n">pub_key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdSignature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdSignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure holding information for a transaction signature.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.StdSignature.pub_key">
+<code class="sig-name descname">pub_key</code><em class="property">: Optional<span class="p">[</span><a class="reference internal" href="#terra_sdk.core.auth.data.public_key.PublicKey" title="terra_sdk.core.auth.data.public_key.PublicKey">terra_sdk.core.auth.data.public_key.PublicKey</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdSignature.pub_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signature’s public key information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.StdSignature.signature">
+<code class="sig-name descname">signature</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdSignature.signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actual signature contents.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.StdTx">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">StdTx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">fee</span></em>, <em class="sig-param"><span class="n">signatures</span></em>, <em class="sig-param"><span class="n">memo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdTx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdTx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure for a transaction which can be broadcasted.</p>
+<dl class="simple">
+<dt>Arg:</dt><dd><p>msg: list of messages to include in transaction
+fee: fee to use for transaction
+signatures: list of signatures
+memo: transaction memo</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.tx.StdTx.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdTx.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdTx.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">TxInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">height</span></em>, <em class="sig-param"><span class="n">txhash</span></em>, <em class="sig-param"><span class="n">rawlog</span></em>, <em class="sig-param"><span class="n">logs</span></em>, <em class="sig-param"><span class="n">gas_wanted</span></em>, <em class="sig-param"><span class="n">gas_used</span></em>, <em class="sig-param"><span class="n">tx</span></em>, <em class="sig-param"><span class="n">timestamp</span></em>, <em class="sig-param"><span class="n">code</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">codespace</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#TxInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds information pertaining to a transaction which has been included in a block
+on the blockchain.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Users are not expected to create this object directly. It is returned by
+<a class="reference internal" href="tx.html#terra_sdk.client.lcd.api.tx.TxAPI.tx_info" title="terra_sdk.client.lcd.api.tx.TxAPI.tx_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TxAPI.tx_info()</span></code></a></p>
+</div>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.code">
+<code class="sig-name descname">code</code><em class="property">: Optional<span class="p">[</span>int<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.code" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this field is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, the transaction failed at <code class="docutils literal notranslate"><span class="pre">DeliverTx</span></code> stage.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.codespace">
+<code class="sig-name descname">codespace</code><em class="property">: Optional<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.codespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error subspace (used alongside <code class="docutils literal notranslate"><span class="pre">code</span></code>).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.gas_used">
+<code class="sig-name descname">gas_used</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.gas_used" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actual gas amount used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.gas_wanted">
+<code class="sig-name descname">gas_wanted</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.gas_wanted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas requested by transaction.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.height">
+<code class="sig-name descname">height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Block height at which transaction was included.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.logs">
+<code class="sig-name descname">logs</code><em class="property">: Optional<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#terra_sdk.core.auth.data.tx.TxLog" title="terra_sdk.core.auth.data.tx.TxLog">terra_sdk.core.auth.data.tx.TxLog</a><span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event log information.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.rawlog">
+<code class="sig-name descname">rawlog</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.rawlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event log information as a raw JSON-string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.timestamp">
+<code class="sig-name descname">timestamp</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time at which transaction was included.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#TxInfo.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.tx">
+<code class="sig-name descname">tx</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx">terra_sdk.core.auth.data.tx.StdTx</a></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.tx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxInfo.txhash">
+<code class="sig-name descname">txhash</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxInfo.txhash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction hash.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.tx.TxLog">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">TxLog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_index</span></em>, <em class="sig-param"><span class="n">log</span></em>, <em class="sig-param"><span class="n">events</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#TxLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object containing the events of a transaction that is automatically generated when
+<a class="reference internal" href="#terra_sdk.core.auth.data.tx.TxInfo" title="terra_sdk.core.auth.data.tx.TxInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">TxInfo</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">BlockTxBroadcastResult</span></code> objects are read.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxLog.events">
+<code class="sig-name descname">events</code><em class="property">: List<span class="p">[</span>dict<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxLog.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw event log data</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxLog.events_by_type">
+<code class="sig-name descname">events_by_type</code><em class="property">: Dict<span class="p">[</span>str<span class="p">, </span>Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxLog.events_by_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event log data, re-indexed by event type name and attribute type.</p>
+<p>For instance, the event type may be: <code class="docutils literal notranslate"><span class="pre">store_code</span></code> and an attribute key could be
+<code class="docutils literal notranslate"><span class="pre">code_id</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">logs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">events_by_type</span><span class="p">[</span><span class="s2">&quot;&lt;event-type&gt;&quot;</span><span class="p">][</span><span class="s2">&quot;&lt;attribute-key&gt;&quot;</span><span class="p">]</span>
+<span class="go">[&#39;&lt;attribute-value&gt;&#39;, &#39;&lt;attribute-value2&gt;&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxLog.log">
+<code class="sig-name descname">log</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxLog.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>This field may be populated with details of the message’s error, if any.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.tx.TxLog.msg_index">
+<code class="sig-name descname">msg_index</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.auth.data.tx.TxLog.msg_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of the message inside the transaction that it was included in.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.auth.data.public_key">
+<span id="public-key"></span><h3>Public Key<a class="headerlink" href="#module-terra_sdk.core.auth.data.public_key" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.public_key.</code><code class="sig-name descname">PublicKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/public_key.html#PublicKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data object holding the public key component of an account or signature.</p>
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey.MULTISIG">
+<code class="sig-name descname">MULTISIG</code><em class="property">: str</em><em class="property"> = 'tendermint/PubKeyMultisigThreshold'</em><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey.MULTISIG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multisig public key type.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey.SIMPLE">
+<code class="sig-name descname">SIMPLE</code><em class="property">: str</em><em class="property"> = 'tendermint/PubKeySecp256k1'</em><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey.SIMPLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normal signature public key type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey.to_data">
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/public_key.html#PublicKey.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey.to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Either <a class="reference internal" href="#terra_sdk.core.auth.data.public_key.PublicKey.SIMPLE" title="terra_sdk.core.auth.data.public_key.PublicKey.SIMPLE"><code class="xref py py-data docutils literal notranslate"><span class="pre">PublicKey.SIMPLE</span></code></a> or <a class="reference internal" href="#terra_sdk.core.auth.data.public_key.PublicKey.MULTISIG" title="terra_sdk.core.auth.data.public_key.PublicKey.MULTISIG"><code class="xref py py-data docutils literal notranslate"><span class="pre">PublicKey.MULTISIG</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.auth.data.public_key.PublicKey.value">
+<code class="sig-name descname">value</code><em class="property">: Optional<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>dict<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.auth.data.public_key.PublicKey.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="bank.html" class="btn btn-neutral float-right" title="Bank" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../common/exceptions.html" class="btn btn-neutral float-left" title="Exceptions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.core.numeric &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.core.numeric</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.core.numeric</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Numeric types.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
+
+<span class="n">DEC_NUM_DIGITS</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="sd">&quot;&quot;&quot;Number of digits for Decimal.&quot;&quot;&quot;</span>
+
+<span class="n">DEC_ONE</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">DEC_NUM_DIGITS</span>
+<span class="n">DEC_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(\-)?(\d+)(\.(\d+))?\Z&quot;</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DEC_NUM_DIGITS&quot;</span><span class="p">,</span> <span class="s2">&quot;Dec&quot;</span><span class="p">,</span> <span class="s2">&quot;Numeric&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">convert_to_dec_bignum</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">arg</span> <span class="o">*</span> <span class="n">DEC_ONE</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">DEC_PATTERN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to parse Dec from string: </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">DEC_ONE</span>  <span class="c1"># whole part</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">fraction</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">DEC_NUM_DIGITS</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">DEC_NUM_DIGITS</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">fraction</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">):</span>
+        <span class="n">whole</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="n">fraction</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">arg</span> <span class="o">%</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">whole</span> <span class="o">*</span> <span class="n">DEC_ONE</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">fraction</span> <span class="o">*</span> <span class="n">DEC_ONE</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Unable to parse Dec integer representation from given argument </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">chop_precision_and_round</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Cosmos-SDK&#39;s banker&#39;s rounding:</span>
+<span class="sd">    https://github.com/cosmos/cosmos-sdk/blob/1d75e0e984e7132efd54c3526e36b3585e2d91c0/types/decimal.go#L491</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">chop_precision_and_round</span><span class="p">(</span><span class="n">d</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">quo</span><span class="p">,</span> <span class="n">rem</span> <span class="o">=</span> <span class="n">d</span> <span class="o">//</span> <span class="n">DEC_ONE</span><span class="p">,</span> <span class="n">d</span> <span class="o">%</span> <span class="n">DEC_ONE</span>
+
+    <span class="k">if</span> <span class="n">rem</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">quo</span>
+
+    <span class="k">if</span> <span class="n">rem</span> <span class="o">&lt;</span> <span class="n">DEC_ONE</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">quo</span>
+    <span class="k">elif</span> <span class="n">rem</span> <span class="o">&gt;</span> <span class="n">DEC_ONE</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">quo</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">quo</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">quo</span>
+        <span class="k">return</span> <span class="n">quo</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<div class="viewcode-block" id="Dec"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec">[docs]</a><span class="k">class</span> <span class="nc">Dec</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;BigInt-based Decimal representation with basic arithmetic operations with</span>
+<span class="sd">    compatible Python numeric types (int, float, Decimal). Does not work with</span>
+<span class="sd">    ``NaN``, ``Infinity``, ``+0``, ``-0``, etc. Serializes as a string with 18 points of</span>
+<span class="sd">    decimal precision.</span>
+
+<span class="sd">    &gt;&gt;&gt; Dec(5)</span>
+<span class="sd">    Dec(&quot;5.0&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; Dec(&quot;121.1232&quot;)</span>
+<span class="sd">    Dec(&quot;121.1232&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; Dec(121.1232)</span>
+<span class="sd">    Dec(&quot;121.1232&quot;)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arg (Union[str, int, float, Decimal, Dec]): argument to coerce into Dec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_i</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Dec</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">_i</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">convert_to_dec_bignum</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Dec.zero"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.zero">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Dec representation of zero.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: zero</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dec.one"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.one">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">one</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dec representation of one.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: one</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">nd</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">DEC_ONE</span>
+        <span class="k">return</span> <span class="n">nd</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Converts to a string using all 18 decimal precision points.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: string representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;0.&quot;</span> <span class="o">+</span> <span class="n">DEC_NUM_DIGITS</span> <span class="o">*</span> <span class="s2">&quot;0&quot;</span>
+        <span class="n">parity</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parity</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">whole</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">frac</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="Dec.to_short_str"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.to_short_str">[docs]</a>    <span class="k">def</span> <span class="nf">to_short_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Converts to a string, but truncates all unnecessary zeros.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: string representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parity</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">frac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frac</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parity</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">whole</span><span class="si">}{</span><span class="n">dot</span><span class="si">}{</span><span class="n">frac</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Dec(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">to_short_str</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>  <span class="c1"># short representation</span>
+
+    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">int_part</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">//</span> <span class="n">DEC_ONE</span>
+        <span class="n">int_part</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">int_part</span>
+
+    <span class="k">def</span> <span class="fm">__float__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># NOTE: This is not robust enough for: float(Dec(float)) to give the same output</span>
+        <span class="c1"># and should mainly be used as getting a rough value from the Dec object.</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">/</span> <span class="n">DEC_ONE</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the parity of the Dec value. Returns -1 if value is below 0, and 1 otherwise.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: parity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">whole</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the integral part of the Dec value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: integer, as string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">//</span> <span class="n">DEC_ONE</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frac</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the fractional part of the Dec value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: fraction, as string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">%</span> <span class="n">DEC_ONE</span><span class="p">)</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">DEC_NUM_DIGITS</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.to_data"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">==</span> <span class="n">Dec</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span>
+
+<div class="viewcode-block" id="Dec.lt"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.lt">[docs]</a>    <span class="k">def</span> <span class="nf">lt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check less than.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Union[str, int, float, Decimal, Dec]): compared object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_i</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">/</span> <span class="n">DEC_ONE</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">other</span></div>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.le"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.le">[docs]</a>    <span class="k">def</span> <span class="nf">le</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check less than or equal to.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Union[str, int, float, Decimal, Dec]): compared object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">other</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.gt"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.gt">[docs]</a>    <span class="k">def</span> <span class="nf">gt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check greater than.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Union[str, int, float, Decimal, Dec]): compared object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_i</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span> <span class="o">/</span> <span class="n">DEC_ONE</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">other</span></div>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.ge"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.ge">[docs]</a>    <span class="k">def</span> <span class="nf">ge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check greater than or equal to.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (Union[str, int, float, Decimal, Dec]): compared object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ge</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.add"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs addition. ``addend`` is first converted into Dec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            addend (Union[str, int, float, Decimal, Dec]): addend</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: sum</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">Dec</span><span class="o">.</span><span class="n">zero</span><span class="p">()</span>
+        <span class="n">nd</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">+</span> <span class="n">Dec</span><span class="p">(</span><span class="n">addend</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span>
+        <span class="k">return</span> <span class="n">nd</span></div>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">addend</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">addend</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.sub"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.sub">[docs]</a>    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtrahend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs subtraction. ``subtrahend`` is first converted into Dec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            subtrahend (Union[str, int, float, Decimal, Dec]): subtrahend</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: difference</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">Dec</span><span class="o">.</span><span class="n">zero</span><span class="p">()</span>
+        <span class="n">nd</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">-</span> <span class="n">Dec</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span>
+        <span class="k">return</span> <span class="n">nd</span></div>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtrahend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minuend</span><span class="p">:</span> <span class="n">Dec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">minuend</span><span class="p">)</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.mul"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.mul">[docs]</a>    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs multiplication. ``multiplier`` is first converted into Dec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            multiplier (Union[str, int, float, Decimal, Dec]): multiplier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: product</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">Dec</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">Dec</span><span class="o">.</span><span class="n">zero</span><span class="p">()</span>
+        <span class="n">nd</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">chop_precision_and_round</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nd</span></div>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplicand</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">multiplicand</span><span class="p">)</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.div"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs division. ``divisor`` is first converted into Dec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            divisor (Union[str, int, float, Decimal, Dec]): divisor</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ZeroDivisionError: if ``divisor`` is 0</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: quotient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">Dec</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tried to divide by 0: </span><span class="si">{</span><span class="bp">self</span><span class="si">!r}</span><span class="s2"> / </span><span class="si">{</span><span class="n">divisor</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">Dec</span><span class="o">.</span><span class="n">zero</span><span class="p">()</span>
+        <span class="n">nd</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">chop_precision_and_round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">*</span> <span class="n">DEC_ONE</span> <span class="o">*</span> <span class="n">DEC_ONE</span> <span class="o">//</span> <span class="n">Dec</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nd</span></div>
+
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">divisor</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Dec.mod"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.mod">[docs]</a>    <span class="k">def</span> <span class="nf">mod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulo</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Performs modulus. ``modulo`` is first converted into Dec.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            modulo (Union[str, int, float, Decimal, Dec]): modulo</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: modulus</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">Dec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">_i</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">Dec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">_i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="fm">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Dec.from_data"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.from_data">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Converts Dec-formatted string into proper :class:`Dec` object.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dec.with_prec"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Dec.with_prec">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">with_prec</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">prec</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Replicates Cosmos SDK&#39;s ``Dec.withPreic(i, prec)``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (Union[int, str]): numeric value</span>
+<span class="sd">            prec (int): precision</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dec: decimal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">DEC_NUM_DIGITS</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="Numeric"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Numeric">[docs]</a><span class="k">class</span> <span class="nc">Numeric</span><span class="p">:</span>
+
+    <span class="n">Input</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+
+    <span class="n">Output</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Numeric.parse"><a class="viewcode-back" href="../../../common/numeric.html#terra_sdk.core.numeric.Numeric.parse">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Output</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Parses the value and coerces it into an ``int`` or :class:`Dec`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value (Numeric.Input): value to be parsed</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: if supplied value could not be parsed</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Numeric.Output: coerced number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Dec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;could not parse numeric value to Dec or int: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

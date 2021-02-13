@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Market &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mint" href="mint.html" />
+    <link rel="prev" title="Gov" href="gov.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.market.msgs">Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Market</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/core_modules/market.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="market">
+<h1>Market<a class="headerlink" href="#market" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.client.lcd.api.market.MarketAPI">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.market.</code><code class="sig-name descname">MarketAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/market.html#MarketAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.market.MarketAPI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="terra_sdk.client.lcd.api.market.MarketAPI.parameters">
+<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/market.html#MarketAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.market.MarketAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the Market module’s parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Market module parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.market.MarketAPI.swap_rate">
+<code class="sig-name descname">swap_rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offer_coin</span></em>, <em class="sig-param"><span class="n">ask_denom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/market.html#MarketAPI.swap_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.market.MarketAPI.swap_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates a swap given an amount offered and a target denom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offer_coin</strong> (<a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a>) – amount offered (swap from)</p></li>
+<li><p><strong>ask_denom</strong> (<em>str</em>) – target denom (swap to)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>simulated amount received</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">Coin</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.client.lcd.api.market.MarketAPI.terra_pool_delta">
+<code class="sig-name descname">terra_pool_delta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/market.html#MarketAPI.terra_pool_delta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.market.MarketAPI.terra_pool_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the Terra pool delta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Terra pool delta</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../common/numeric.html#terra_sdk.core.Dec" title="terra_sdk.core.Dec">Dec</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.core.market.msgs">
+<span id="messages"></span><h2>Messages<a class="headerlink" href="#module-terra_sdk.core.market.msgs" title="Permalink to this headline">¶</a></h2>
+<p>Market module message types.</p>
+<dl class="py class">
+<dt id="terra_sdk.core.market.msgs.MsgSwap">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.market.msgs.</code><code class="sig-name descname">MsgSwap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trader</span></em>, <em class="sig-param"><span class="n">offer_coin</span></em>, <em class="sig-param"><span class="n">ask_denom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/market/msgs.html#MsgSwap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a native on-chain swap from <code class="docutils literal notranslate"><span class="pre">offer_coin</span></code> to <code class="docutils literal notranslate"><span class="pre">ask_denom</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trader</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account performing swap</p></li>
+<li><p><strong>offer_coin</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>, </em><em>str</em><em>, </em><em>dict</em><em>]</em>) – coin offered for swap</p></li>
+<li><p><strong>ask_denom</strong> (<em>str</em>) – denom into which to swap</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.market.msgs.MsgSwap.action">
+<code class="sig-name descname">action</code><em class="property"> = 'swap'</em><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwap.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.market.msgs.MsgSwap.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'market/MsgSwap'</em><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwap.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="terra_sdk.core.market.msgs.MsgSwapSend">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.market.msgs.</code><code class="sig-name descname">MsgSwapSend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">from_address</span></em>, <em class="sig-param"><span class="n">to_address</span></em>, <em class="sig-param"><span class="n">offer_coin</span></em>, <em class="sig-param"><span class="n">ask_denom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/market/msgs.html#MsgSwapSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwapSend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a swap and sends the resultant swapped amount to <code class="docutils literal notranslate"><span class="pre">to_address</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account performing swap</p></li>
+<li><p><strong>to_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account which will received resultant funds from swap</p></li>
+<li><p><strong>offer_coin</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>, </em><em>str</em><em>, </em><em>dict</em><em>]</em>) – coin offered for swap</p></li>
+<li><p><strong>ask_denom</strong> (<em>str</em>) – denom into which to swap</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.core.market.msgs.MsgSwapSend.action">
+<code class="sig-name descname">action</code><em class="property"> = 'swapsend'</em><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwapSend.action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.core.market.msgs.MsgSwapSend.type">
+<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'market/MsgSwapSend'</em><a class="headerlink" href="#terra_sdk.core.market.msgs.MsgSwapSend.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mint.html" class="btn btn-neutral float-right" title="Mint" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gov.html" class="btn btn-neutral float-left" title="Gov" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

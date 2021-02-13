@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>terra_sdk.key.key &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Intro</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">Using LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/keys.html">Guide to using Keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>terra_sdk.key.key</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for terra_sdk.key.key</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">bech32</span> <span class="kn">import</span> <span class="n">bech32_encode</span><span class="p">,</span> <span class="n">convertbits</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">AccPubKey</span><span class="p">,</span> <span class="n">ValAddress</span><span class="p">,</span> <span class="n">ValPubKey</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdSignature</span><span class="p">,</span> <span class="n">StdSignMsg</span><span class="p">,</span> <span class="n">StdTx</span>
+
+<span class="n">BECH32_PUBKEY_DATA_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;eb5ae98721&quot;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_bech</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">convertbits</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;could not parse data: prefix </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">, payload </span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bech32_encode</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>  <span class="c1"># base64 -&gt; base32</span>
+
+
+<span class="k">def</span> <span class="nf">address_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">sha</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="n">rip</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;ripemd160&quot;</span><span class="p">)</span>
+    <span class="n">sha</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
+    <span class="n">rip</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sha</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">rip</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">BECH32_PUBKEY_DATA_PREFIX</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">+=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Key"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key">[docs]</a><span class="k">class</span> <span class="nc">Key</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Abstract Key interface, representing an agent with transaction-signing capabilities.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        public_key (Optional[bytes]): compressed public key bytes,</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;Compressed public key bytes, used to derive :data:`raw_address` and :data:`raw_pubkey`.&quot;&quot;&quot;</span>
+
+    <span class="n">raw_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;Raw Bech32 words of address, used to derive associated account and validator</span>
+<span class="sd">    operator addresses.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">raw_pubkey</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;Raw Bech32 words of pubkey, used to derive associated account and validator</span>
+<span class="sd">    pubkeys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="o">=</span> <span class="n">public_key</span>
+        <span class="k">if</span> <span class="n">public_key</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span> <span class="o">=</span> <span class="n">address_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span> <span class="o">=</span> <span class="n">pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Key.sign"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.sign">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Signs the data payload. An implementation of Key is expected to override this method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payload (bytes): arbitrary data payload</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: if not implemented</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bytes: signed payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;an instance of Key must implement Key.sign&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">acc_address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccAddress</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Terra Bech32 account address. Default derivation via :data:`public_key` is provided.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if Key was not initialized with proper public key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccAddress: account address</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute acc_address: missing raw_address&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AccAddress</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terra&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">val_address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValAddress</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Terra Bech32 validator operator address. Default derivation via :data:`public_key` is provided.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if Key was not initialized with proper public key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ValAddress: validator operator address</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute val_address: missing raw_address&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ValAddress</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terravaloper&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">acc_pubkey</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccPubKey</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Terra Bech32 account pubkey. Default derivation via :data:`public_key` is provided.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if Key was not initialized with proper public key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AccPubKey: account pubkey</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute acc_pubkey: missing raw_pubkey&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AccPubKey</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terrapub&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">val_pubkey</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValPubKey</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Terra Bech32 validator pubkey. Default derivation via ``public_key`` is provided.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if Key was not initialized with proper public key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ValPubKey: validator pubkey</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute val_pubkey: missing raw_pubkey&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ValPubKey</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terravaloperpub&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
+
+<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignature</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
+<span class="sd">        and outputs the signature. The signature is only returned, and must be manually added to</span>
+<span class="sd">        the ``signatures`` field of an :class:`StdTx`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdSignMsg): unsigned transaction</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: if missing ``public_key``</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            StdSignature: signature object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;signature could not be created: Key instance missing public_key&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">sig_buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">tx</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">StdSignature</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">sig_buffer</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+                <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tendermint/PubKeySecp256k1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
+<span class="sd">        and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tx (StdSignMsg): unsigned transaction</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            StdTx: ready-to-broadcast transaction object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StdTx</span><span class="p">(</span><span class="n">tx</span><span class="o">.</span><span class="n">msgs</span><span class="p">,</span> <span class="n">tx</span><span class="o">.</span><span class="n">fee</span><span class="p">,</span> <span class="p">[</span><span class="n">sig</span><span class="p">],</span> <span class="n">tx</span><span class="o">.</span><span class="n">memo</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
