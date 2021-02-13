@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Keys &mdash; Terra SDK 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Terra SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/msgauth.html">MsgAuth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/supply.html">Supply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/treasury.html">Treasury</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Terra SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Keys</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/common/custom_key.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="keys">
+<h1>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>Key</strong> is an object that provides an abstraction for the agency of signing transactions.</p>
+<div class="section" id="key-abstract">
+<h2>Key (abstract)<a class="headerlink" href="#key-abstract" title="Permalink to this headline">¶</a></h2>
+<p>Implementers of Keys meant for signing should override <a class="reference internal" href="#terra_sdk.key.key.Key.sign" title="terra_sdk.key.key.Key.sign"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.sign()</span></code></a>
+or <a class="reference internal" href="#terra_sdk.key.key.Key.create_signature" title="terra_sdk.key.key.Key.create_signature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.create_signature()</span></code></a> methods. More details are
+available in <a href="#id1"><span class="problematic" id="id2">`Implementing a custom Key`_</span></a>.</p>
+<p>Some properties such as <a class="reference internal" href="#terra_sdk.key.key.Key.acc_address" title="terra_sdk.key.key.Key.acc_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acc_address</span></code></a> and
+<a class="reference internal" href="#terra_sdk.key.key.Key.val_address" title="terra_sdk.key.key.Key.val_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">val_address</span></code></a> are provided.</p>
+<span class="target" id="module-terra_sdk.key.key"></span><dl class="py class">
+<dt id="terra_sdk.key.key.Key">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.key.key.</code><code class="sig-name descname">Key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">public_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.key.Key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract Key interface, representing an agent with transaction-signing capabilities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>public_key</strong> (<em>Optional</em><em>[</em><em>bytes</em><em>]</em>) – compressed public key bytes,</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.acc_address">
+<em class="property">property </em><code class="sig-name descname">acc_address</code><a class="headerlink" href="#terra_sdk.key.key.Key.acc_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account address. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.acc_pubkey">
+<em class="property">property </em><code class="sig-name descname">acc_pubkey</code><a class="headerlink" href="#terra_sdk.key.key.Key.acc_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account pubkey. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.create_signature">
+<code class="sig-name descname">create_signature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.create_signature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.key.Key.create_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signs the transaction with the signing algorithm provided by this Key implementation,
+and outputs the signature. The signature is only returned, and must be manually added to
+the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of an <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><em>StdSignMsg</em></a>) – unsigned transaction</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if missing <code class="docutils literal notranslate"><span class="pre">public_key</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>signature object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignature" title="terra_sdk.core.auth.data.tx.StdSignature">StdSignature</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.key.Key.public_key">
+<code class="sig-name descname">public_key</code><em class="property">: Optional<span class="p">[</span>bytes<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.key.key.Key.public_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compressed public key bytes, used to derive <a class="reference internal" href="#terra_sdk.key.key.Key.raw_address" title="terra_sdk.key.key.Key.raw_address"><code class="xref py py-data docutils literal notranslate"><span class="pre">raw_address</span></code></a> and <a class="reference internal" href="#terra_sdk.key.key.Key.raw_pubkey" title="terra_sdk.key.key.Key.raw_pubkey"><code class="xref py py-data docutils literal notranslate"><span class="pre">raw_pubkey</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.key.Key.raw_address">
+<code class="sig-name descname">raw_address</code><em class="property">: Optional<span class="p">[</span>bytes<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw Bech32 words of address, used to derive associated account and validator
+operator addresses.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.key.Key.raw_pubkey">
+<code class="sig-name descname">raw_pubkey</code><em class="property">: Optional<span class="p">[</span>bytes<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw Bech32 words of pubkey, used to derive associated account and validator
+pubkeys.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.sign">
+<em class="property">abstract </em><code class="sig-name descname">sign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signs the data payload. An implementation of Key is expected to override this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – arbitrary data payload</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – if not implemented</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>signed payload</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.sign_tx">
+<code class="sig-name descname">sign_tx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign_tx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign_tx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signs the transaction with the signing algorithm provided by this Key implementation,
+and creates a ready-to-broadcast <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object with the signature applied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><em>StdSignMsg</em></a>) – unsigned transaction</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ready-to-broadcast transaction object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx">StdTx</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.val_address">
+<em class="property">property </em><code class="sig-name descname">val_address</code><a class="headerlink" href="#terra_sdk.key.key.Key.val_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator operator address. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator operator address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.key.Key.val_pubkey">
+<em class="property">property </em><code class="sig-name descname">val_pubkey</code><a class="headerlink" href="#terra_sdk.key.key.Key.val_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-terra_sdk.key.raw.RawKey-private_key">
+<span id="module-terra_sdk.key.raw.RawKey(private_key)"></span><span id="rawkey"></span><h2>RawKey<a class="headerlink" href="#module-terra_sdk.key.raw.RawKey-private_key" title="Permalink to this headline">¶</a></h2>
+<p>RawKey directly uses a raw (plaintext) private key in memory, and provides
+the implementation for signing with ECDSA on curve Secp256k1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">type private_key</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p>
+</dd>
+<dt class="field-even">param private_key</dt>
+<dd class="field-even"><p>private key in bytes</p>
+</dd>
+<dt class="field-odd">type private_key</dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.key.raw.RawKey.acc_address">
+<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">acc_address</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.acc_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.raw.RawKey.acc_pubkey">
+<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">acc_pubkey</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.acc_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account pubkey. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.raw.RawKey.val_address">
+<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">val_address</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.val_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator operator address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator operator address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.raw.RawKey.val_pubkey">
+<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">val_pubkey</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.val_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="mnemonickey">
+<h2>MnemonicKey<a class="headerlink" href="#mnemonickey" title="Permalink to this headline">¶</a></h2>
+<p>A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can change <code class="docutils literal notranslate"><span class="pre">coin_type</span></code> to 118 to derive the key for a legacy Terra
+wallet (shares <code class="docutils literal notranslate"><span class="pre">coin_type</span></code> with ATOM).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">type mnemonic</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+<dt class="field-even">param mnemonic</dt>
+<dd class="field-even"><p>space-separated mnemonic seed phrase. If not provided,
+a 24-word mnemonic will be generated.</p>
+</dd>
+<dt class="field-odd">type mnemonic</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+<dt class="field-even">type account</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">param account</dt>
+<dd class="field-odd"><p>HD path parameter - account number.</p>
+</dd>
+<dt class="field-even">type account</dt>
+<dd class="field-even"><p>int, optional</p>
+</dd>
+<dt class="field-odd">type index</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">param index</dt>
+<dd class="field-even"><p>HD path parameter - account index.</p>
+</dd>
+<dt class="field-odd">type index</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+<dt class="field-even">type coin_type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">param coin_type</dt>
+<dd class="field-odd"><p>HD path parameter - coin type.</p>
+</dd>
+<dt class="field-even">type coin_type</dt>
+<dd class="field-even"><p>int, optional</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.acc_address">
+<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">acc_address</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.acc_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.acc_pubkey">
+<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">acc_pubkey</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.acc_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 account pubkey. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>account pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.hd_path">
+<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">hd_path</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.hd_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the BIP32 HD path for key-derivation:</p>
+<p><code class="docutils literal notranslate"><span class="pre">m/44'/COIN_TYPE'/ACCOUNT'/0/INDEX'</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>full BIP32 HD path</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.val_address">
+<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">val_address</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.val_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator operator address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator operator address</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.val_pubkey">
+<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">val_pubkey</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.val_pubkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator pubkey</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Terraform Labs, PTE..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

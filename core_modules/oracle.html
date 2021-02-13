@@ -84,31 +84,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Guides</span></p>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/send_tx.html">Sending assets</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules</span></p>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
@@ -266,7 +262,7 @@
 <dd class="field-even"><p>exchange rate of Luna</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">Coin</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">Coin</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -280,7 +276,7 @@
 <dd class="field-odd"><p>exchange rates of Luna</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
+<dd class="field-even"><p><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,7 +419,7 @@
 <dd><p>Contains information about a validator’s aggregate vote.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.oracle.data.AggregateExchangeRateVote.exchange_rate_tuples">
-<code class="sig-name descname">exchange_rate_tuples</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.oracle.data.AggregateExchangeRateVote.exchange_rate_tuples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">exchange_rate_tuples</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.oracle.data.AggregateExchangeRateVote.exchange_rate_tuples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reported exchange rates by validator.</p>
 </dd></dl>
 
@@ -499,7 +495,7 @@
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.oracle.data.ExchangeRateVote.exchange_rate">
-<code class="sig-name descname">exchange_rate</code><em class="property">: <a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.oracle.data.ExchangeRateVote.exchange_rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">exchange_rate</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.oracle.data.ExchangeRateVote.exchange_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exchange rate of LUNA reported.</p>
 </dd></dl>
 

@@ -84,31 +84,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Guides</span></p>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/send_tx.html">Sending assets</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules</span></p>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
@@ -405,7 +401,7 @@
 <dd><p>Contains information about a current delegation pair (<code class="docutils literal notranslate"><span class="pre">delegator_address</span></code>, <code class="docutils literal notranslate"><span class="pre">validator_address</span></code>)</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.Delegation.balance">
-<code class="sig-name descname">balance</code><em class="property">: <a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.balance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">balance</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.balance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -704,7 +700,7 @@
 <li><p><strong>delegator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator</p></li>
 <li><p><strong>validator_src_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator to remove delegation FROM</p></li>
 <li><p><strong>validator_dst_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator to transfer delegate TO</p></li>
-<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to redelegate</p></li>
+<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to redelegate</p></li>
 </ul>
 </dd>
 </dl>
@@ -758,7 +754,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>delegator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator</p></li>
 <li><p><strong>validator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator to delegate to</p></li>
-<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to delegate</p></li>
+<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to delegate</p></li>
 </ul>
 </dd>
 </dl>
@@ -809,7 +805,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>delegator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – delegator</p></li>
 <li><p><strong>validator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator to undelegate from</p></li>
-<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to undelegate</p></li>
+<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><em>Coin</em></a><em>]</em>) – coin (LUNA) to undelegate</p></li>
 </ul>
 </dd>
 </dl>

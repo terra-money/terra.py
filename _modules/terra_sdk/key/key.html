@@ -82,31 +82,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Guides</span></p>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">Using LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../guides/keys.html">Guide to using Keys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/send_tx.html">Sending assets</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/strings.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../common/coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules</span></p>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
@@ -226,7 +222,7 @@
     <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Key"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key">[docs]</a><span class="k">class</span> <span class="nc">Key</span><span class="p">:</span>
+<div class="viewcode-block" id="Key"><a class="viewcode-back" href="../../../common/custom_key.html#terra_sdk.key.key.Key">[docs]</a><span class="k">class</span> <span class="nc">Key</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Abstract Key interface, representing an agent with transaction-signing capabilities.</span>
 
 <span class="sd">    Args:</span>
@@ -252,7 +248,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span> <span class="o">=</span> <span class="n">address_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span> <span class="o">=</span> <span class="n">pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Key.sign"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.sign">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+<div class="viewcode-block" id="Key.sign"><a class="viewcode-back" href="../../../common/custom_key.html#terra_sdk.key.key.Key.sign">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the data payload. An implementation of Key is expected to override this method.</span>
 
@@ -323,7 +319,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute val_pubkey: missing raw_pubkey&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ValPubKey</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terravaloperpub&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignature</span><span class="p">:</span>
+<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../common/custom_key.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignature</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
 <span class="sd">        and outputs the signature. The signature is only returned, and must be manually added to</span>
 <span class="sd">        the ``signatures`` field of an :class:`StdTx`.</span>
@@ -353,7 +349,7 @@
             <span class="p">}</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../guides/keys.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
+<div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../common/custom_key.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
 <span class="sd">        and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.</span>
 

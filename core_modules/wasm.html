@@ -83,31 +83,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Guides</span></p>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/send_tx.html">Sending assets</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules</span></p>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
@@ -347,7 +343,7 @@ Defaults to empty <code class="docutils literal notranslate"><span class="pre">C
 <li><p><strong>owner</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – address of contract owner</p></li>
 <li><p><strong>code_id</strong> (<em>int</em>) – code ID to use for instantiation</p></li>
 <li><p><strong>init_msg</strong> (<em>dict</em>) – InitMsg to initialize contract</p></li>
-<li><p><strong>init_coins</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – initial amount of coins to be sent to contract</p></li>
+<li><p><strong>init_coins</strong> (<a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – initial amount of coins to be sent to contract</p></li>
 <li><p><strong>migratable</strong> (<em>bool</em>) – whether the owner can change contract code IDs</p></li>
 </ul>
 </dd>

@@ -84,31 +84,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Guides</span></p>
+<p class="caption"><span class="caption-text">Usage Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">Using LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/keys.html">Guide to using Keys</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/send_tx.html">Sending assets</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Common SDK Types</span></p>
+<p class="caption"><span class="caption-text">SDK Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules</span></p>
+<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
@@ -215,7 +211,7 @@
 <dd class="field-odd"><p>community pool</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
+<dd class="field-even"><p><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">Coins</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -295,13 +291,13 @@
 <em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.distribution.</code><code class="sig-name descname">Rewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rewards</span></em>, <em class="sig-param"><span class="n">total</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#Rewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt id="terra_sdk.client.lcd.api.distribution.Rewards.rewards">
-<code class="sig-name descname">rewards</code><em class="property">: Dict<span class="p">[</span>ValAddress<span class="p">, </span><a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.rewards" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rewards</code><em class="property">: Dict<span class="p">[</span>ValAddress<span class="p">, </span><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.rewards" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delegator rewards, indexed by validator operator address.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.api.distribution.Rewards.total">
-<code class="sig-name descname">total</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.total" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">total</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.Rewards.total" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total sum of rewards.</p>
 </dd></dl>
 
@@ -312,13 +308,13 @@
 <em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.distribution.</code><code class="sig-name descname">ValidatorRewards</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self_bond_rewards</span></em>, <em class="sig-param"><span class="n">val_commission</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/distribution.html#ValidatorRewards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt id="terra_sdk.client.lcd.api.distribution.ValidatorRewards.self_bond_rewards">
-<code class="sig-name descname">self_bond_rewards</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.self_bond_rewards" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">self_bond_rewards</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.self_bond_rewards" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rewards for validator accrued from self-delegation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission">
-<code class="sig-name descname">val_commission</code><em class="property">: <a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">val_commission</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rewards for validator accrued from delegation commissions.</p>
 </dd></dl>
 
@@ -336,7 +332,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>depositor</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – sender</p></li>
-<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to fund community pool with</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to fund community pool with</p></li>
 </ul>
 </dd>
 </dl>
@@ -430,7 +426,7 @@
 <li><p><strong>title</strong> (<em>str</em>) – proposal title</p></li>
 <li><p><strong>description</strong> (<em>str</em>) – proposal description</p></li>
 <li><p><strong>recipient</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – designated recipient of funds if proposal passes</p></li>
-<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to spend from community pool</p></li>
+<li><p><strong>amount</strong> (<a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to spend from community pool</p></li>
 </ul>
 </dd>
 </dl>

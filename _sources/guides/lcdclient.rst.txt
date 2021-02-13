@@ -1,5 +1,5 @@
-Using LCDClient
-===============
+LCDClient
+=========
 
 The :class:`LCDClient` is an object representing a HTTP connection to a Terra LCD node.
 
