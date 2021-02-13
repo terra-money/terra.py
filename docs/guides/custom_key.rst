@@ -1,44 +1,7 @@
 .. keys:
 
-Guide to using Keys
-===================
-
-A **Key** is an object that provides an abstraction for the agency of signing transactions.
-
-Provided implementations
-------------------------
-
-Terra SDK provides a couple basic Key implementations to get started.
-
-RawKey
-^^^^^^
-
-.. autoclass:: terra_sdk.key.raw.RawKey
-    :members:
-
-
-MnemonicKey
-^^^^^^^^^^^
-
-.. autoclass:: terra_sdk.key.mnemonic.MnemonicKey
-    :members:
-
-Abstract Key interface
-----------------------
-
-Implementers of Keys meant for signing should override :meth:`Key.sign()<terra_sdk.key.key.Key.sign>`
-or :meth:`Key.create_signature()<terra_sdk.key.key.Key.create_signature>` methods. More details are
-available in `Implementing a custom Key`_.
-
-Some properties such as :meth:`acc_address<terra_sdk.key.key.Key.acc_address>` and
-:meth:`val_address<terra_sdk.key.key.Key.val_address>` are provided.
-
-.. automodule:: terra_sdk.key.key
-    :members:
-
-
-Implementing a custom Key
--------------------------
+Implementing a Custom Key
+=========================
 
 If none of the Key solutions provided by Terra SDK or the community are able to meet your requirements, 
 you might consider writing your own Key implementation. 
@@ -61,26 +24,22 @@ Can you determine the public key in advance, and is it static?
 
 Usually, reasons for requiring a custom Key fall into one of 3 patterns:
 
-External signing
-^^^^^^^^^^^^^^^^
+* External signing
 
-**Scenario:** The transaction signing is to be performed outside the Python program running Terra SDK,
-such as signing via hardware wallet (Ledger, Trezor), etc. 
-
-
-Alternative signing algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Scenario:** Terra account you need to sign transactions for requires a signature algorithm other than
-ECDSA on Secp256k1, such as Threshold Multisig or Ed25519. 
+    **Scenario:** The transaction signing is to be performed outside the Python program running Terra SDK,
+    such as signing via hardware wallet (Ledger, Trezor), etc. 
 
 
-Customize private key derivation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Alternative signing algorithm
 
-**Scenario:** User wants to provide a custom interface for generating a private key, eg. alternative mnemonic schemas,
-directed key.
+    **Scenario:** Terra account you need to sign transactions for requires a signature algorithm other than
+    ECDSA on Secp256k1, such as Threshold Multisig or Ed25519. 
 
+
+* Customize private key derivation
+
+    **Scenario:** User wants to provide a custom interface for generating a private key, eg. alternative mnemonic schemas,
+    directed key.
 
 The source for MnemonicKey is provided as an example:
 

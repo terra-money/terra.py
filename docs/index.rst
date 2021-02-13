@@ -17,39 +17,40 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
 
 .. toctree::
     :maxdepth: 1
-    :caption: Intro
+    :caption: Get Started
 
     tutorial
 
 .. toctree::
     :maxdepth: 1
-    :caption: Guides
+    :caption: Usage Guides
 
-    guides/lcdclient
     guides/async
-    guides/keys
     guides/transactions
     guides/smart_contracts
+    guides/custom_key
+    guides/troubleshooting
 
 .. toctree::
     :maxdepth: 1
-    :caption: Examples
+    :caption: Examples / Recipes
 
-    examples/send_tx
+    recipes/pseudo_feeder
 
 .. toctree::
     :maxdepth: 1 
-    :caption: Common SDK Types
+    :caption: SDK Reference
 
     common/strings
     common/numeric
-    common/coin
-    common/coins
+    common/coin_coins
+    common/keys
+    guides/lcdclient
     common/exceptions
 
 .. toctree::
     :maxdepth: 1 
-    :caption: Core Modules
+    :caption: Core Modules Reference
     
     core_modules/auth
     core_modules/bank
