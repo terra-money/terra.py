@@ -32,6 +32,12 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     guides/smart_contracts
 
 .. toctree::
+    :maxdepth: 1
+    :caption: Examples
+
+    examples/send_tx
+
+.. toctree::
     :maxdepth: 1 
     :caption: Common SDK Types
 
