@@ -1,3 +1,5 @@
+"""Staking module message types."""
+
 from __future__ import annotations
 
 from typing import Optional
@@ -7,14 +9,32 @@ import attr
 from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey
 from terra_sdk.core.msg import Msg
 
-from .data import Commission, CommissionRates, Description
+from .data import CommissionRates, Description
+
+__all__ = [
+    "MsgBeginRedelegate",
+    "MsgDelegate",
+    "MsgUndelegate",
+    "MsgEditValidator",
+    "MsgCreateValidator",
+]
 
 
 @attr.s
 class MsgBeginRedelegate(Msg):
+    """Redelegate staked Luna from ``validator_src_address`` to ``valdiator_dst_address``.
+
+    Args:
+        delegator_address: delegator
+        validator_src_address: validator to remove delegation FROM
+        validator_dst_address: validator to transfer delegate TO
+        amount (Union[str, dict, Coin]): coin (LUNA) to redelegate
+    """
 
     type = "staking/MsgBeginRedelegate"
+    """"""
     action = "begin_redelegate"
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
@@ -34,9 +54,18 @@ class MsgBeginRedelegate(Msg):
 
 @attr.s
 class MsgDelegate(Msg):
+    """Delegate Luna to validator at ``validator_address``.
+
+    Args:
+        delegator_address: delegator
+        validator_address: validator to delegate to
+        amount (Union[str, dict, Coin]): coin (LUNA) to delegate
+    """
 
     type = "staking/MsgDelegate"
+    """"""
     action = "delegate"
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -54,9 +83,18 @@ class MsgDelegate(Msg):
 
 @attr.s
 class MsgUndelegate(Msg):
+    """Undelegate Luna from staking position with ``validator_address``.
+
+    Args:
+        delegator_address: delegator
+        validator_address: validator to undelegate from
+        amount (Union[str, dict, Coin]): coin (LUNA) to undelegate
+    """
 
     type = "staking/MsgUndelegate"
+    """"""
     action = "begin_unbonding"
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -74,9 +112,19 @@ class MsgUndelegate(Msg):
 
 @attr.s
 class MsgEditValidator(Msg):
+    """Revise validator description and configuration.
+
+    Args:
+        Description: updated validator description
+        address: validator operator address
+        commission_rates: new validator commission rate,
+        min_self_delegation: new minimum self delegation,
+    """
 
     type = "staking/MsgEditValidator"
+    """"""
     action = "edit_validator"
+    """"""
 
     Description: Description = attr.ib()
     address: ValAddress = attr.ib()
@@ -98,9 +146,22 @@ class MsgEditValidator(Msg):
 
 @attr.s
 class MsgCreateValidator(Msg):
+    """Register a new validator with the Terra protocol.
+
+    Args:
+        description: validator description
+        commission: validator commission rates
+        min_self_delegation: minimum self-delegation policy
+        delegator_address: validator's account address
+        validator_address: validator's operator address
+        pubkey: validator consensus (Tendermint) public key
+        value (Coin.Input): initial amount of Luna toi self-delegate
+    """
 
     type = "staking/MsgCreateValidator"
+    """"""
     action = "create_validator"
+    """"""
 
     description: Description = attr.ib()
     commission: CommissionRates = attr.ib()

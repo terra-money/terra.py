@@ -1,3 +1,5 @@
+"Wasm module messages."
+
 from __future__ import annotations
 
 import copy
@@ -35,7 +37,15 @@ def dict_to_b64(data: dict) -> str:
 
 @attr.s
 class MsgStoreCode(Msg):
+    """Upload a new smart contract WASM binary to the blockchain.
+
+    Args:
+        sender: address of sender
+        wasm_byte_code: base64-encoded string containing bytecode
+    """
+
     type = "wasm/MsgStoreCode"
+    """"""
 
     sender: AccAddress = attr.ib()
     wasm_byte_code: str = attr.ib(converter=str)
@@ -48,7 +58,17 @@ class MsgStoreCode(Msg):
 
 @attr.s
 class MsgInstantiateContract(Msg):
+    """Creates a new instance of a smart contract from existing code on the blockchain.
+
+    Args:
+        owner: address of contract owner
+        code_id (int): code ID to use for instantiation
+        init_msg: InitMsg to initialize contract
+        init_coins (Coins): initial amount of coins to be sent to contract
+        migratable: whether the owner can change contract code IDs"""
+
     type = "wasm/MsgInstantiateContract"
+    """"""
 
     owner: AccAddress = attr.ib()
     code_id: int = attr.ib(converter=int)
@@ -76,7 +96,18 @@ class MsgInstantiateContract(Msg):
 
 @attr.s
 class MsgExecuteContract(Msg):
+    """Execute a state-mutating function on a smart contract.
+
+    Args:
+        sender: address of sender
+        contract: address of contract to execute function on
+        execute_msg: ExecuteMsg (aka. HandleMsg) to pass
+        coins: coins to be sent, if needed by contract to execute.
+            Defaults to empty ``Coins()``
+    """
+
     type = "wasm/MsgExecuteContract"
+    """"""
 
     sender: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
@@ -101,7 +132,17 @@ class MsgExecuteContract(Msg):
 
 @attr.s
 class MsgMigrateContract(Msg):
-    type = "wasm/MsgExecuteContract"
+    """Migrate the contract to a different code ID.
+
+    Args:
+        owner: address of owner
+        contract: address of contract to migrate
+        new_code_id (int): new code ID to migrate to
+        migrate_msg (dict): MigrateMsg to execute
+    """
+
+    type = "wasm/MsgMigrateContract"
+    """"""
 
     owner: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
@@ -127,7 +168,16 @@ class MsgMigrateContract(Msg):
 
 @attr.s
 class MsgUpdateContractOwner(Msg):
+    """Update a smart contract's owner.
+
+    Args:
+        owner: address of current owner (sender)
+        new_owner: address of new owner
+        contract: address of contract to change
+    """
+
     type = "wasm/MsgUpdateContractOwner"
+    """"""
 
     owner: AccAddress = attr.ib()
     new_owner: AccAddress = attr.ib()

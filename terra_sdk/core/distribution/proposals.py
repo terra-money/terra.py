@@ -1,3 +1,5 @@
+"""Distribution module governance proposal types."""
+
 from __future__ import annotations
 
 import attr
@@ -10,8 +12,17 @@ __all__ = ["CommunityPoolSpendProposal"]
 
 @attr.s
 class CommunityPoolSpendProposal(Content):
+    """Proposal for allocating funds from the community pool to an address.
+
+    Args:
+        title: proposal title
+        description: proposal description
+        recipient: designated recipient of funds if proposal passes
+        amount (Coins): amount to spend from community pool
+    """
 
     type = "distribution/CommunityPoolSpendProposal"
+    """"""
 
     title: str = attr.ib()
     description: str = attr.ib()

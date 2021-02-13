@@ -1,2 +1,4 @@
-from .lcdclient import LCDClient
-from .wallet import Wallet
+from .lcdclient import AsyncLCDClient, LCDClient
+from .wallet import AsyncWallet, Wallet
+
+__all__ = ["AsyncLCDClient", "LCDClient", "AsyncWallet", "Wallet"]

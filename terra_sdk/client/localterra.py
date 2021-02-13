@@ -2,9 +2,9 @@ from typing import Dict
 
 from terra_sdk.key.mnemonic import MnemonicKey
 
-from .lcd import LCDClient, Wallet
+from .lcd import AsyncLCDClient, AsyncWallet, LCDClient, Wallet
 
-__all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra"]
+__all__ = ["LOCALTERRA_MNEMONICS", "LocalTerra", "AsyncLocalTerra"]
 
 LOCALTERRA_MNEMONICS = {
     "validator": "satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn",
@@ -28,9 +28,37 @@ LOCALTERRA_DEFAULTS = {
 }
 
 
+class AsyncLocalTerra(AsyncLCDClient):
+    """An :class:`AsyncLCDClient` that comes preconfigured with the default settings for
+    connecting to a LocalTerra node.
+    """
+
+    wallets: Dict[str, AsyncWallet]
+    """Ready-to use :class:`Wallet` objects with LocalTerra default accounts."""
+
+    def __init__(self, *args, **kwargs):
+        options = {**LOCALTERRA_DEFAULTS, **kwargs}
+        super().__init__(*args, **options)
+        self.wallets = {
+            wallet_name: self.wallet(
+                MnemonicKey(mnemonic=LOCALTERRA_MNEMONICS[wallet_name])
+            )
+            for wallet_name in LOCALTERRA_MNEMONICS
+        }
+
+
 class LocalTerra(LCDClient):
+    """A :class:`LCDClient` that comes preconfigured with the default settings for
+    connecting to a LocalTerra node.
+    """
 
     wallets: Dict[str, Wallet]
+    """Ready-to use :class:`Wallet` objects with LocalTerra default accounts.
+
+    >>> terra = LocalTerra()
+    >>> terra.wallets['test1'].key.acc_address
+    'terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v'
+    """
 
     def __init__(self, *args, **kwargs):
         options = {**LOCALTERRA_DEFAULTS, **kwargs}

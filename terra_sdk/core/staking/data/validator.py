@@ -4,7 +4,7 @@ import copy
 
 import attr
 
-from terra_sdk.core import Coin, Coins, Dec, ValAddress, ValConsPubKey
+from terra_sdk.core import Dec, ValAddress, ValConsPubKey
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 
 __all__ = [
@@ -17,10 +17,16 @@ __all__ = [
 
 @attr.s
 class CommissionRates(JSONSerializable):
+    """Data structure for validator's commission rates & policy."""
 
     rate: Dec = attr.ib(converter=Dec)
+    """Current % commission rate."""
+
     max_rate: Dec = attr.ib(converter=Dec)
+    """Maximum % commission rate permitted by policy."""
+
     max_change_rate: Dec = attr.ib(converter=Dec)
+    """Maximum % change of commission per day."""
 
     @classmethod
     def from_data(cls, data: dict) -> CommissionRates:
@@ -33,9 +39,13 @@ class CommissionRates(JSONSerializable):
 
 @attr.s
 class Commission(JSONSerializable):
+    """Contains information about validator's commission rates."""
 
     commission_rates: CommissionRates = attr.ib()
+    """Validator commission rates."""
+
     update_time: str = attr.ib()
+    """Last time commission rates were updated."""
 
     @classmethod
     def from_data(cls, data: dict) -> Commission:
@@ -50,8 +60,17 @@ class Commission(JSONSerializable):
 
 @attr.s
 class Description(JSONSerializable):
+    """Validator description entry.
+
+    Args:
+        moniker: validator name, aka: \"Terran One\"
+        identity: keybase.io identifier (used for setting logo)
+        website: validator website
+        details: longer description of validator
+    """
 
     DO_NOT_MODIFY = "[do-not-modify]"
+    """"""
 
     moniker: str = attr.ib()
     identity: str = attr.ib()
@@ -65,18 +84,40 @@ class Description(JSONSerializable):
 
 @attr.s
 class Validator(JSONSerializable):
+    """Contains information about a registered validator."""
 
     operator_address: ValAddress = attr.ib()
+    """"""
+
     consensus_pubkey: ValConsPubKey = attr.ib()
+    """"""
+
     jailed: bool = attr.ib()
+    """"""
+
     status: int = attr.ib(converter=int)
+    """"""
+
     tokens: int = attr.ib(converter=int)
+    """"""
+
     delegator_shares: Dec = attr.ib(converter=Dec)
+    """"""
+
     description: Description = attr.ib()
+    """"""
+
     unbonding_height: int = attr.ib(converter=int)
+    """"""
+
     unbonding_time: str = attr.ib()
+    """"""
+
     commission: Commission = attr.ib()
+    """"""
+
     min_self_delegation: int = attr.ib(converter=int)
+    """"""
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)

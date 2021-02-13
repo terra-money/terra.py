@@ -12,12 +12,23 @@ from .numeric import Dec, Numeric
 
 @attr.s(frozen=True)
 class Coin(JSONSerializable):
+    """Represents a (denom, amount) pairing, analagous to ``sdk.Coin`` and ``sdk.DecCoin``
+    in Cosmos SDK. Used for representing Terra native assets.
+    """
 
     denom: str = attr.ib()
+    """Coin's denomination, ex ``uusd``, ``uluna``, etc."""
+
     amount: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore
+    """Coin's amount -- can be a ``int`` or :class:`Dec`"""
 
     @staticmethod
     def parse(arg: Union[Coin, str, dict]) -> Coin:
+        """Converts the argument into a coin.
+
+        Args:
+            arg (Union[Coin, str, dict]): value to be converted to coin
+        """
         if isinstance(arg, Coin):
             return arg
         elif isinstance(arg, str):
@@ -26,15 +37,19 @@ class Coin(JSONSerializable):
             return Coin.from_data(arg)
 
     def is_int_coin(self) -> bool:
+        """Checks whether the coin's amount is of type ``int``."""
         return isinstance(self.amount, int)
 
     def is_dec_coin(self) -> bool:
+        """Checks whether the coin's amount is of type :class:`Dec`."""
         return isinstance(self.amount, Dec)
 
     def to_int_coin(self) -> Coin:
+        """Creates a new :class:`Coin` with an ``int`` amount."""
         return Coin(self.denom, int(self.amount))
 
     def to_dec_coin(self) -> Coin:
+        """Creates a new :class:`Coin` with a :class:`Dec` amount."""
         return Coin(self.denom, Dec(self.amount))
 
     def __str__(self) -> str:
@@ -50,6 +65,29 @@ class Coin(JSONSerializable):
 
     @classmethod
     def from_str(cls, string: str) -> Coin:
+        """Creates a new :class:`Coin` from a coin-format string. Must match the format:
+        ``283923uusd`` (``int``-Coin) or ``23920.23020uusd`` (:class:`Dec`-Coin).
+
+        >>> int_coin = Coin.from_str("230920uusd")
+        >>> int_coin.denom
+        'uusd'
+        >>> int_coin.amount
+        230920
+        >>> dec_coin = Coin.from_str("203922.223uluna")
+        >>> dec_coin.denom
+        'uluna'
+        >>> dec_coin.amount
+        Dec('203922.223')
+
+        Args:
+            string (str): string to convert
+
+        Raises:
+            ValueError: if string is in wrong format
+
+        Returns:
+            Coin: converted string
+        """
         pattern = r"^(\-?[0-9]+(\.[0-9]+)?)([a-zA-Z]+)$"
         match = re.match(pattern, string)
         if match is None:
@@ -57,57 +95,104 @@ class Coin(JSONSerializable):
         else:
             return cls(match.group(3), match.group(1))
 
-    def add(self, other: Union[Numeric.Input, Coin]) -> Coin:
-        if isinstance(other, Coin):
-            if other.denom != self.denom:
+    def add(self, addend: Union[Numeric.Input, Coin]) -> Coin:
+        """Creates a new :class:`Coin` with the sum as amount. If the ``addend`` is a
+        :class:`Coin`, its ``denom`` must match.
+
+        Args:
+            addend (Union[Numeric.Input, Coin]): addend
+
+        Raises:
+            ArithmeticError: if addedend has different ``denom``
+
+        Returns:
+            Coin: sum
+        """
+        if isinstance(addend, Coin):
+            if addend.denom != self.denom:
                 raise ArithmeticError(
-                    f"cannot add/subtract two Coin objects of different denoms: {self.denom} and {other.denom}"
+                    f"cannot add/subtract two Coin objects of different denoms: {self.denom} and {addend.denom}"
                 )
-            return Coin(self.denom, self.amount + other.amount)
+            return Coin(self.denom, self.amount + addend.amount)
         else:
-            return Coin(self.denom, self.amount + Numeric.parse(other))
+            return Coin(self.denom, self.amount + Numeric.parse(addend))
 
-    def __add__(self, other: Union[Numeric.Input, Coin]) -> Coin:
-        return self.add(other)
+    def __add__(self, addend: Union[Numeric.Input, Coin]) -> Coin:
+        return self.add(addend)
 
-    def sub(self, other: Union[Numeric.Input, Coin]) -> Coin:
-        if isinstance(other, Coin):
-            return self.add(other.mul(-1))
+    def sub(self, subtrahend: Union[Numeric.Input, Coin]) -> Coin:
+        """Creates a new :class:`Coin` with the difference as amount. If the ``subtrahend`` is a
+        :class:`Coin`, its ``denom`` must match.
+
+        Args:
+            subtrahend (Union[Numeric.Input, Coin]): subtrahend
+
+        Returns:
+            Coin: difference
+        """
+        if isinstance(subtrahend, Coin):
+            return self.add(subtrahend.mul(-1))
         else:
-            return self.add(Numeric.parse(other) * -1)
+            return self.add(Numeric.parse(subtrahend) * -1)
 
-    def __sub__(self, other: Union[Numeric.Input, Coin]) -> Coin:
-        return self.sub(other)
+    def __sub__(self, subtrahend: Union[Numeric.Input, Coin]) -> Coin:
+        return self.sub(subtrahend)
 
-    def mul(self, other: Numeric.Input) -> Coin:
-        other_amount = Numeric.parse(other)
-        return Coin(self.denom, self.amount * other)
+    def mul(self, multiplier: Numeric.Input) -> Coin:
+        """Creates a new :class:`Coin` with the product as amount. The ``multiplier``
+        argument is first coerced to either an ``int`` or :class:`Dec`.
 
-    def __mul__(self, other: Numeric.Input) -> Coin:
-        return self.mul(other)
+        Args:
+            multiplier (Numeric.Input): multiplier
 
-    def div(self, other: Numeric.Input) -> Coin:
-        other_amount = Numeric.parse(other)
+        Returns:
+            Coin: product
+        """
+        other_amount = Numeric.parse(multiplier)
+        return Coin(self.denom, self.amount * other_amount)
+
+    def __mul__(self, multiplier: Numeric.Input) -> Coin:
+        return self.mul(multiplier)
+
+    def div(self, divisor: Numeric.Input) -> Coin:
+        """Creates a new :class:`Coin` with the quotient as amount. The ``divisor``
+        argument is first coerced to either an ``int`` or :class:`Dec`.
+
+        Args:
+            divisor (Numeric.Input): divisor
+
+        Returns:
+            Coin: quotient
+        """
+        other_amount = Numeric.parse(divisor)
         if isinstance(other_amount, int):
             return Coin(self.denom, (self.amount // other_amount))
         else:
             return Coin(self.denom, (self.amount / other_amount))
 
-    def __truediv__(self, other: Numeric.Input) -> Coin:
-        return self.div(other)
+    def __truediv__(self, divisor: Numeric.Input) -> Coin:
+        return self.div(divisor)
 
-    def __floordiv__(self, other: Numeric.Input) -> Coin:
-        return self.div(int(Numeric.parse(other)))
+    def __floordiv__(self, divisor: Numeric.Input) -> Coin:
+        return self.div(int(Numeric.parse(divisor)))
 
-    def mod(self, other: Numeric.Input) -> Coin:
-        other_amount = Numeric.parse(other)
+    def mod(self, modulo: Numeric.Input) -> Coin:
+        """Creates a new :class:`Coin` with the modulus as amount.
+
+        Args:
+            modulo (Numeric.Input): modulo
+
+        Returns:
+            Coin: modulo
+        """
+        other_amount = Numeric.parse(modulo)
         if isinstance(other_amount, Dec):
             return Coin(self.denom, Dec(self.amount).mod(other_amount))
         else:
             return Coin(self.denom, self.amount % other_amount)
 
-    def __mod__(self, other: Numeric.Input) -> Coin:
-        return self.mod(other)
+    def __mod__(self, modulo: Numeric.Input) -> Coin:
+        return self.mod(modulo)
 
     def __neg__(self) -> Coin:
         return Coin(denom=self.denom, amount=(-self.amount))
@@ -120,4 +205,9 @@ class Coin(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Coin:
+        """Deserializes a :class:`Coin` object from its JSON data representation.
+
+        Args:
+            data (dict): data object
+        """
         return cls(data["denom"], data["amount"])

@@ -1,5 +1,4 @@
 from terra_sdk.core.oracle import (
-    MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
     MsgDelegateFeedConsent,
     MsgExchangeRatePrevote,

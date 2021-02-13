@@ -1,3 +1,5 @@
+"""MsgAuth module message types."""
+
 from __future__ import annotations
 
 import copy
@@ -16,7 +18,15 @@ __all__ = ["MsgExecAuthorized", "MsgGrantAuthorization", "MsgRevokeAuthorization
 
 @attr.s
 class MsgExecAuthorized(Msg):
+    """Execute a set of messages, exercising an existing authorization.
+
+    Args:
+        grantee: grantee account (submitting on behalf of granter)
+        msg (List[Msg]): list of messages to execute using authorization grant
+    """
+
     type = "msgauth/MsgExecAuthorized"
+    """"""
 
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
@@ -31,6 +41,15 @@ class MsgExecAuthorized(Msg):
 
 @attr.s
 class MsgGrantAuthorization(Msg):
+    """Grant an authorization to ``grantee`` to call messages on behalf of ``granter``.
+
+    Args:
+        granter: account giving authorization
+        grantee: account receiving authorization
+        authorization: details of authorization granted
+        period (int): timeframe during which the authorization is considered valid
+    """
+
     type = "msgauth/MsgGrantAuthorization"
 
     granter: AccAddress = attr.ib()
@@ -56,7 +75,16 @@ class MsgGrantAuthorization(Msg):
 
 @attr.s
 class MsgRevokeAuthorization(Msg):
+    """Remove existing authorization grant of the specified message type.
+
+    Args:
+        granter: account removing authorization
+        grantee: account having authorization removed
+        authorization_msg_type: type of message to remove authorization for
+    """
+
     type = "msgauth/MsgRevokeAuthorization"
+    """"""
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()

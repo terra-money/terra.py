@@ -1,3 +1,5 @@
+"""Distribution module message types."""
+
 from __future__ import annotations
 
 import attr
@@ -15,9 +17,17 @@ __all__ = [
 
 @attr.s
 class MsgModifyWithdrawAddress(Msg):
+    """Modify the Withdraw Address of a delegator.
+
+    Args:
+        delegator_address: delegator
+        withdraw_address: new withdraw address
+    """
 
     type = "distribution/MsgModifyWithdrawAddress"
+    """"""
     action = "set_withdraw_address"
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
@@ -33,9 +43,17 @@ class MsgModifyWithdrawAddress(Msg):
 
 @attr.s
 class MsgWithdrawDelegationReward(Msg):
+    """Withdraw rewards for a delegation specified by a (delegator, validator) pair.
+
+    Args:
+        delegator_address: delegator
+        validator_address: validator
+    """
 
     type = "distribution/MsgWithdrawDelegationReward"
+    """"""
     action = "withdraw_delegation_reward"
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -51,9 +69,16 @@ class MsgWithdrawDelegationReward(Msg):
 
 @attr.s
 class MsgWithdrawValidatorCommission(Msg):
+    """Withdraw rewards accrued for a validator gained through commissions.
+
+    Args:
+        validator_address: validator operator address
+    """
 
     type = "distribution/MsgWithdrawValidatorCommission"
+    """"""
     action = "withdraw_validator_commission"
+    """"""
 
     validator_address: ValAddress = attr.ib()
 
@@ -65,8 +90,15 @@ class MsgWithdrawValidatorCommission(Msg):
 
 @attr.s
 class MsgFundCommunityPool(Msg):
+    """Deposit assets to the Community Pool.
+
+    Args:
+        depositor (AccAddress): sender
+        amount (Coins): amount to fund community pool with
+    """
 
     type = "distribution/MsgFundCommunityPool"
+    """"""
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
