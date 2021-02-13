@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Exceptions &mdash; Terra SDK 1.0.0 documentation</title>
+  <title>Sending assets &mdash; Terra SDK 1.0.0 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Auth" href="../core_modules/auth.html" />
-    <link rel="prev" title="Coins" href="coins.html" /> 
+    <link rel="next" title="Bech32 Strings" href="../common/strings.html" />
+    <link rel="prev" title="Working with Smart Contracts" href="../guides/smart_contracts.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,16 +97,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/send_tx.html">Sending assets</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sending assets</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Common SDK Types</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="strings.html">Bech32 Strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeric.html">Numeric Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="coin.html">Coin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="coins.html">Coins</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Exceptions</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coin.html">Coin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/coins.html">Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Core Modules</span></p>
 <ul>
@@ -174,13 +174,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Exceptions</li>
+      <li>Sending assets</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/common/exceptions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/send_tx.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,15 +193,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-terra_sdk.exceptions">
-<span id="exceptions"></span><h1>Exceptions<a class="headerlink" href="#module-terra_sdk.exceptions" title="Permalink to this headline">¶</a></h1>
-<p>Terra SDK-specific errors and exceptions.</p>
-<dl class="py exception">
-<dt id="terra_sdk.exceptions.LCDResponseError">
-<em class="property">exception </em><code class="sig-prename descclassname">terra_sdk.exceptions.</code><code class="sig-name descname">LCDResponseError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">response</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/exceptions.html#LCDResponseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.exceptions.LCDResponseError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Triggered when response from LCD is not 2xx status code</p>
-</dd></dl>
+  <div class="section" id="sending-assets">
+<h1>Sending assets<a class="headerlink" href="#sending-assets" title="Permalink to this headline">¶</a></h1>
+<p>The following example tries to send 1 LUNA and 1 KRT to the recipient of your choice.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">Coins</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
+<span class="n">MNEMONIC</span> <span class="o">=</span> <span class="s2">&quot;&lt;your-mnemonic&gt;&quot;</span>
+<span class="n">RECIPIENT</span> <span class="o">=</span> <span class="s2">&quot;&lt;recipient-address&quot;</span>
+
+<span class="c1"># make a Key instance from our mnemonic</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
+
+<span class="c1"># represents our connection to the node</span>
+<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-4&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># a wallet object helps you build and sign transactions</span>
+<span class="n">wallet</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
+
+<span class="c1"># message tells the blockchain what to change</span>
+<span class="n">send_msg</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span>
+    <span class="n">wallet</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+    <span class="n">RECIPIENT</span><span class="p">,</span>
+    <span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="n">ukrw</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># create and sign a transaction</span>
+<span class="n">send_tx</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">send_msg</span><span class="p">],</span>
+    <span class="n">memo</span><span class="o">=</span><span class="s2">&quot;Hello, Terra!&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># broadcast the tx and print results</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">send_tx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -210,8 +242,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../core_modules/auth.html" class="btn btn-neutral float-right" title="Auth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="coins.html" class="btn btn-neutral float-left" title="Coins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../common/strings.html" class="btn btn-neutral float-right" title="Bech32 Strings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../guides/smart_contracts.html" class="btn btn-neutral float-left" title="Working with Smart Contracts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
