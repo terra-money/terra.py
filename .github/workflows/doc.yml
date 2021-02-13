@@ -26,6 +26,16 @@ jobs:
         with:
           persist-credentials: false
       
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.1
+        with:
+          python-version: 3.8
+      
+      - name: Setup Poetry
+        run: |
+          pip install poetry
+          poetry install
+    
       - name: Build
         run: |
           make docs
