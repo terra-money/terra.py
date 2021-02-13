@@ -41,6 +41,7 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-poetry-
+      - run: poetry install
     
       - name: Build
         run: |
