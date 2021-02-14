@@ -1,5 +1,5 @@
-Keys
-====
+Keys & Wallets
+==============
 
 A **Key** is an object that provides an abstraction for the agency of signing transactions.
 
@@ -27,4 +27,10 @@ MnemonicKey
 -----------
 
 .. automodule:: terra_sdk.key.mnemonic.MnemonicKey
+    :members:
+
+Wallet
+------
+
+.. automodule:: terra_sdk.client.lcd.wallet
     :members:

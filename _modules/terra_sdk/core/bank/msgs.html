@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/lcdclient.html">LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/exceptions.html">Exceptions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Core Modules Reference</span></p>
@@ -194,8 +195,9 @@
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">Coins</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MsgSend&quot;</span><span class="p">,</span> <span class="s2">&quot;MsgMultiSend&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MsgSend&quot;</span><span class="p">,</span> <span class="s2">&quot;MsgMultiSend&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiSendIO&quot;</span><span class="p">]</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
 
@@ -230,28 +232,54 @@
         <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="MultiSendIO"><a class="viewcode-back" href="../../../../core_modules/bank.html#terra_sdk.core.bank.msgs.MultiSendIO">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">MultiSendIO</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the</span>
+<span class="sd">    format:</span>
+
+<span class="sd">        {</span>
+<span class="sd">           &quot;address&quot;: &quot;terra1...&quot;,</span>
+<span class="sd">           &quot;amount&quot;: &quot;123456789uusd&quot;</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Input / output address.&quot;&quot;&quot;</span>
+
+    <span class="n">coins</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Coins to be sent / received.&quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">],</span> <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;coins&quot;</span><span class="p">]))</span></div>
+
+
+<span class="k">def</span> <span class="nf">convert_io_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">MultiSendIO</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+
 <div class="viewcode-block" id="MsgMultiSend"><a class="viewcode-back" href="../../../../core_modules/bank.html#terra_sdk.core.bank.msgs.MsgMultiSend">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
 <span class="k">class</span> <span class="nc">MsgMultiSend</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Allows batch-sending between multiple source and destination addresses.</span>
 <span class="sd">    The total amount of coins in ``inputs`` must match ``outputs``. The transaction</span>
 <span class="sd">    containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.</span>
 
-<span class="sd">    The ``inputs`` and ``output`` arguments should be of the form::</span>
+<span class="sd">    The ``inputs`` and ``output`` arguments should be of the form:</span>
 
 <span class="sd">        [{</span>
 <span class="sd">            &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">            &quot;amount&quot;: &quot;123456789&quot;</span>
+<span class="sd">            &quot;amount&quot;: &quot;123456789uusd&quot;</span>
 <span class="sd">        },</span>
 <span class="sd">        {</span>
 <span class="sd">            &quot;address&quot;: &quot;terra12...&quot;,</span>
-<span class="sd">            &quot;amount&quot;: &quot;2983298&quot;</span>
+<span class="sd">            &quot;amount&quot;: &quot;2983298ukrw,21323uusd&quot;</span>
 <span class="sd">        }]</span>
 
-<span class="sd">    And so forth..</span>
+<span class="sd">    And so forth.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        inputs: senders</span>
-<span class="sd">        outputs: recipients</span>
+<span class="sd">        inputs: senders and amounts</span>
+<span class="sd">        outputs: recipients and amounts</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;bank/MsgMultiSend&quot;</span>
@@ -259,9 +287,8 @@
     <span class="n">action</span> <span class="o">=</span> <span class="s2">&quot;multisend&quot;</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-    <span class="c1"># TODO: improve interface - match terra.js</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">convert_io_list</span><span class="p">)</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">convert_io_list</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgMultiSend</span><span class="p">:</span>

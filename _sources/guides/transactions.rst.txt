@@ -38,6 +38,7 @@ correspond to the account you intend to sign the transaction with.
     terra = LCDClient("https://lcd.terra.dev", "columbus-4")
     wallet = terra.wallet(mk)
 
+
 Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.create_and_sign_tx`.
 
 .. code-block:: python
@@ -90,6 +91,67 @@ this behavior **per transaction**:
         denoms=["ukrw"] # optional
     )
 
+Applying multiple signatures
+----------------------------
+
+If you have message that requires multiple signatures, you need to use sign several
+different :class:`StdSignMsg` objects individually and then combine them in the ``signatures``
+list within the final :class:`StdTx` object.
+
+.. code-block:: python
+
+    from terra_sdk.client.lcd import LCDClient
+    from terra_sdk.core.auth import StdFee
+    from terra_sdk.core.bank import MsgMultiSend
+    from terra_sdk.key.mnemonic import MnemonicKey
+
+    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+    wallet1 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_1))
+    wallet2 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_2))
+
+    multisend = MsgMultiSend(
+        inputs=[
+            {"address": wallet1.key.acc_address, "coins": "12000uusd,11000uluna"},
+            {"address": wallet2.key.acc_address, "coins": "11000ukrw,10000uluna"}
+        ],
+        outputs=[
+            {"address": wallet1.key.acc_address, "coins": "11000ukrw,10000uluna"},
+            {"address": wallet2.key.acc_address, "coins": "12000uusd,11000uluna"}
+        ]    
+    )
+
+    msgs = [multisend]
+    fee = StdFee(200000, "12000uluna")
+    memo = "multisend example"
+
+    # create unsigned_tx #1
+    u_tx1 = wallet1.create_tx(
+        msgs=msgs,
+        fee=fee,
+        memo=memo
+    )
+
+    sig1 = wallet1.key.create_signature(u_tx1)
+
+    # create unsigned tx #2
+    u_tx2 = wallet2.create_tx(
+        msgs=msgs,
+        fee=fee,
+        memo=memo
+    )
+
+    sig2 = wallet2.key.create_signature(u_tx2)
+
+    # build stdtx
+    tx = u_tx1.to_stdtx()
+
+    # apply signatures
+    tx.signatures = [sig1, sig2]
+
+    # broadcast tx
+    result = terra.tx.broadcast(tx)
+    print(result)
+
 Signing transactions manually
 -----------------------------
 
@@ -130,8 +192,14 @@ A StdSignMsg contains the information required to build a StdTx:
         memo="test transaction!"
     )
 
-    # sign tx
-    tx = mk.sign_tx(unsigned_tx)
+    # get signature
+    sig = mk.create_signature(unsigned_tx)
+
+    # build stdtx
+    tx = unsigned_tx.to_stdtx()
+
+    # apply signature
+    tx.signature = [sig]
 
     # broadcast tx
     result = terra.tx.broadcast(tx)
