@@ -6,8 +6,9 @@ from typing import List
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.json import JSONSerializable
 
-__all__ = ["MsgSend", "MsgMultiSend"]
+__all__ = ["MsgSend", "MsgMultiSend", "MultiSendIO"]
 
 import attr
 
@@ -43,27 +44,53 @@ class MsgSend(Msg):
 
 
 @attr.s
+class MultiSendIO(JSONSerializable):
+    """Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
+    format:
+
+        {
+           "address": "terra1...",
+           "amount": "123456789uusd"
+        }
+    """
+
+    address: AccAddress = attr.ib()
+    """Input / output address."""
+
+    coins: Coins = attr.ib(converter=Coins)
+    """Coins to be sent / received."""
+
+    @classmethod
+    def from_data(cls, data: dict):
+        return cls(address=data["address"], coins=Coins.from_data(data["coins"]))
+
+
+def convert_io_list(data: list) -> List[MultiSendIO]:
+    return [MultiSendIO.from_data(d) for d in data]
+
+
+@attr.s
 class MsgMultiSend(Msg):
     """Allows batch-sending between multiple source and destination addresses.
     The total amount of coins in ``inputs`` must match ``outputs``. The transaction
     containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.
 
-    The ``inputs`` and ``output`` arguments should be of the form::
+    The ``inputs`` and ``output`` arguments should be of the form:
 
         [{
             "address": "terra1...",
-            "amount": "123456789"
+            "amount": "123456789uusd"
         },
         {
             "address": "terra12...",
-            "amount": "2983298"
+            "amount": "2983298ukrw,21323uusd"
         }]
 
-    And so forth..
+    And so forth.
 
     Args:
-        inputs: senders
-        outputs: recipients
+        inputs: senders and amounts
+        outputs: recipients and amounts
     """
 
     type = "bank/MsgMultiSend"
@@ -71,9 +98,8 @@ class MsgMultiSend(Msg):
     action = "multisend"
     """"""
 
-    # TODO: improve interface - match terra.js
-    inputs: List[dict] = attr.ib()
-    outputs: List[dict] = attr.ib()
+    inputs: List[MultiSendIO] = attr.ib(converter=convert_io_list)
+    outputs: List[MultiSendIO] = attr.ib(converter=convert_io_list)
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMultiSend:

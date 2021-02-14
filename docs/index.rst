@@ -44,8 +44,8 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     common/strings
     common/numeric
     common/coin_coins
-    common/keys
     guides/lcdclient
+    common/keys_wallet
     common/exceptions
 
 .. toctree::
