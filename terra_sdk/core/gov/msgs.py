@@ -16,7 +16,7 @@ __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 class MsgSubmitProposal(Msg):
     """Submit the attached proposal with an initial deposit.
 
-    Arg:
+    Args:
         content (Content): type of proposal
         initial_deposit (Coins): initial deposit for proposal made by proposer
         proposer: proposal submitter
