@@ -213,16 +213,15 @@ smart contracts, you must create a <strong>transaction</strong> and broadcast it
 <h2>Using a Wallet (recommended)<a class="headerlink" href="#using-a-wallet-recommended" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This method requires connecting to a node via LCDClient.</p>
+<p>This method requires an LCDClient instance with a proper node connection.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Some transactions containing messages like <code class="xref py py-class docutils literal notranslate"><span class="pre">MsgMultiSend</span></code> that require
 multiple signers cannot be signed using Wallet. See <a class="reference internal" href="#signing-transactions-manually">Signing transactions manually</a>.</p>
 </div>
-<p>The easiest method to building and signing transactions is through a <code class="xref py py-class docutils literal notranslate"><span class="pre">Wallet</span></code> object.</p>
-<p>A Wallet is a convenience utility object that first fetches required information for building
-the transaction (chain ID, account number and sequence).</p>
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Wallet</span></code> allows you to create and sign a transaction in a single step by automatically
+fetching the latest information from the blockchain (chain ID, account number, sequence).</p>
 <p>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">LCDClient.wallet()</span></code> to create a Wallet from any Key instance. The Key provided should
 correspond to the account you intend to sign the transaction with.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>

@@ -17,16 +17,14 @@ Terra SDK provides tools that greatly simplify the process of generating a StdTx
 Using a Wallet (recommended)
 ----------------------------
 
-.. note:: This method requires connecting to a node via LCDClient.
+.. note:: This method requires an LCDClient instance with a proper node connection.
 
 .. note::
     Some transactions containing messages like :class:`MsgMultiSend` that require 
     multiple signers cannot be signed using Wallet. See `Signing transactions manually`_.
 
-The easiest method to building and signing transactions is through a :class:`Wallet` object.
-
-A Wallet is a convenience utility object that first fetches required information for building 
-the transaction (chain ID, account number and sequence).
+A :class:`Wallet` allows you to create and sign a transaction in a single step by automatically
+fetching the latest information from the blockchain (chain ID, account number, sequence).
 
 Use :meth:`LCDClient.wallet` to create a Wallet from any Key instance. The Key provided should
 correspond to the account you intend to sign the transaction with.
