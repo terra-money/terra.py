@@ -234,7 +234,7 @@ blockchain (which will not have been updated).
     # get first sequence
     sequence = wallet.sequence()
     tx1 = wallet.create_and_sign_tx(
-        msgs=[MsgSend(...)]
+        msgs=[MsgSend(...)],
         sequence=sequence
     )
 
