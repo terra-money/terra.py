@@ -113,11 +113,9 @@ class Wallet:
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdTx:
-        """Creates and signs a :class:`StdTx` object in a single step. This is recommended
-        way of creating a transaction for immediate broadcasting. The ``Wallet`` will first
-        query the blockchain to fetch the latest ``account`` and ``sequence`` values for the
-        account corresponding to its Key, unless the they are both provided. If no ``fee``
-        parameter is set, automatic fee estimation will be used (see `fee_estimation`).
+        """Creates and signs a :class:`StdTx` object in a single step. This is the recommended
+        method for preparing transaction for immediate signing and broadcastring. The transaction
+        is generated exactly as :meth:`create_tx`.
 
         Args:
             msgs (List[Msg]): list of messages to include

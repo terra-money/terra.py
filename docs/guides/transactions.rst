@@ -17,11 +17,9 @@ Terra SDK provides tools that greatly simplify the process of generating a StdTx
 Using a Wallet (recommended)
 ----------------------------
 
-.. note:: This method requires an LCDClient instance with a proper node connection.
-
 .. note::
-    Some transactions containing messages like :class:`MsgMultiSend` that require 
-    multiple signers cannot be signed using Wallet. See `Signing transactions manually`_.
+    This method requires an LCDClient instance with a proper node connection. If you
+    can't use Wallet, see `Signing transactions manually`_.
 
 A :class:`Wallet` allows you to create and sign a transaction in a single step by automatically
 fetching the latest information from the blockchain (chain ID, account number, sequence).
@@ -63,18 +61,25 @@ And that's it! You should now be able to broadcast your transaction to the netwo
     result = terra.tx.broadcast(tx)
     print(result)
 
-Fee estimation
-^^^^^^^^^^^^^^
+Automatic fee estimation
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 If no ``fee`` parameter is provided for :meth:`Wallet.create_and_sign_tx()`, the transaction
 fee will be simulated against the node and populated for you. By default, ``Wallet`` will use
 the fee estimation parameters of the :class:`LCDClient` used to create it. You can override
 this behavior **per transaction**:
 
+.. important::
+    Fee estimation simulates the transaction in the node -- if the transaction would fail
+    due to an error, the simulation itself would fail as well.
+
 .. note::
-    The fee simulation by default will return with a fee amount in every denom available 
-    for which the signing account holds Coin balance (fee estimation will fail if account has 0
-    balance). Use the ``denoms`` parameter to restrict estimated fee to only denoms specified.
+    By default, the estimated fee returned consists of a fee paid in every denom for which the
+    signing account hold a balance. For instance, if the signer has a balance of ``uusd`` and ``uluna``,
+    the fee reported will be both ``uusd`` and ``uluna``. 
+    
+    Use the ``denoms`` argument to restrict the estimated fee to specific denoms.
+
 
 .. code-block:: python
     :emphasize-lines: 8-10
@@ -91,12 +96,72 @@ this behavior **per transaction**:
         denoms=["ukrw"] # optional
     )
 
+Signing transactions manually
+-----------------------------
+
+Below is the full process of signing a transaction manually that does not use ``Wallet``.
+You will need to build a :class:`StdSignMsg<terra_sdk.core.auth.data.tx.StdSignMsg>`, 
+sign it, and add the signatures to an ``StdTx``.
+
+A StdSignMsg contains the information required to build a StdTx:
+
+- **chain_id**: chain ID of blockchain network
+- **account_number**: account number in blockchain
+- **sequence**: sequence number (# of prior transactions)
+- **fee**: the transaction fee paid to network / validators
+- **msgs**: list of messages to include
+- **memo**: a short string describing transaction (can be empty string)
+
+.. code-block:: python
+
+    from terra_sdk.client.lcd import LCDClient
+    from terra_sdk.core.auth import StdSignMsg
+    from terra_sdk.core.bank import MsgSend
+    from terra_sdk.key.mnemonic import MnemonicKey
+
+    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+    mk = MnemonicKey(mnemonic=MNEMONIC) 
+
+    # create tx
+    unsigned_tx = StdSignMsg(
+        chain_id="columbus-4",
+        account_number=23982,
+        sequence=12,
+        fee=StdFee(200000, "120000uluna"),
+        msgs=[MsgSend(
+            mk.acc_address,
+            RECIPIENT,
+            "1000000uluna" # send 1 luna
+        )],
+        memo="test transaction!"
+    )
+
+    # get signature
+    sig = mk.create_signature(unsigned_tx)
+
+    # prepopulate stdtx with details
+    tx = unsigned_tx.to_stdtx()
+
+    # apply signature
+    tx.signature = [sig]
+
+    # broadcast tx
+    result = terra.tx.broadcast(tx)
+    print(result)
+
+
+
 Applying multiple signatures
 ----------------------------
 
-If you have message that requires multiple signatures, you need to use sign several
-different :class:`StdSignMsg` objects individually and then combine them in the ``signatures``
-list within the final :class:`StdTx` object.
+Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
+You must prepare a separate ``StdSignMsg`` for each signer to sign individually, and then
+combine them in the ``signatures`` field of the final :class:`StdTx` object. Each ``StdSignMsg``
+should only differ by ``account`` and ``sequence``, which vary according to the signing key.
+
+.. note::
+    In a transaction with multiple signers, the account of the first signature in the
+    ``StdTx`` is responsible for paying the fee.
 
 .. code-block:: python
 
@@ -147,58 +212,6 @@ list within the final :class:`StdTx` object.
 
     # apply signatures
     tx.signatures = [sig1, sig2]
-
-    # broadcast tx
-    result = terra.tx.broadcast(tx)
-    print(result)
-
-Signing transactions manually
------------------------------
-
-Below is the full process of signing a transaction manually that does not use ``Wallet``.
-You will need to build a ``StdSignMsg``, sign it, and add the signatures to an ``StdTx``.
-
-A StdSignMsg contains the information required to build a StdTx:
-
-- **chain_id**: chain ID of blockchain network
-- **account_number**: account number in blockchain
-- **sequence**: sequence number (# of prior transactions)
-- **fee**: the transaction fee paid to network / validators
-- **msgs**: list of messages to include
-- **memo**: a short string describing transaction (can be empty string)
-
-.. code-block:: python
-
-    from terra_sdk.client.lcd import LCDClient
-    from terra_sdk.core.auth import StdSignMsg
-    from terra_sdk.core.bank import MsgSend
-    from terra_sdk.key.mnemonic import MnemonicKey
-
-    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
-    mk = MnemonicKey(mnemonic=MNEMONIC) 
-
-    # create tx
-    unsigned_tx = StdSignMsg(
-        chain_id="columbus-4",
-        account_number=23982,
-        sequence=12,
-        fee=StdFee(200000, "120000uluna"),
-        msgs=[MsgSend(
-            mk.acc_address,
-            RECIPIENT,
-            "1000000uluna" # send 1 luna
-        )],
-        memo="test transaction!"
-    )
-
-    # get signature
-    sig = mk.create_signature(unsigned_tx)
-
-    # prepopulate stdtx with details
-    tx = unsigned_tx.to_stdtx()
-
-    # apply signature
-    tx.signature = [sig]
 
     # broadcast tx
     result = terra.tx.broadcast(tx)
