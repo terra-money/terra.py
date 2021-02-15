@@ -195,7 +195,7 @@
 
 
 <span class="k">class</span> <span class="nc">AsyncMarketAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">swap_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offer_coin</span><span class="p">:</span> <span class="n">Coin</span><span class="p">,</span> <span class="n">ask_denom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">swap_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offer_coin</span><span class="p">:</span> <span class="n">Coin</span><span class="p">,</span> <span class="n">ask_denom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Simulates a swap given an amount offered and a target denom.</span>
 
 <span class="sd">        Args:</span>
@@ -206,25 +206,25 @@
 <span class="sd">            Coin: simulated amount received</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;offer_coin&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">offer_coin</span><span class="p">),</span> <span class="s2">&quot;ask_denom&quot;</span><span class="p">:</span> <span class="n">ask_denom</span><span class="p">}</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/swap&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/swap&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Coin</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">terra_pool_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">terra_pool_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Fetches the Terra pool delta.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dec: Terra pool delta</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/terra_pool_delta&quot;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/terra_pool_delta&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Dec</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Fetches the Market module&#39;s parameters.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: Market module parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/parameters&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/market/parameters&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="MarketAPI"><a class="viewcode-back" href="../../../../../core_modules/market.html#terra_sdk.client.lcd.api.market.MarketAPI">[docs]</a><span class="k">class</span> <span class="nc">MarketAPI</span><span class="p">(</span><span class="n">AsyncMarketAPI</span><span class="p">):</span>
