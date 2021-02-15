@@ -221,25 +221,15 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core_modules/gov.html#terra_sdk.core.gov.msgs.MsgVote.ABSTAIN">ABSTAIN (terra_sdk.core.gov.msgs.MsgVote attribute)</a>
 </li>
-      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.acc_address">acc_address (in module terra_sdk.key.mnemonic.MnemonicKey)</a>
-
-      <ul>
-        <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.acc_address">(in module terra_sdk.key.raw.RawKey)</a>
-</li>
-      </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.acc_address">acc_address() (terra_sdk.key.key.Key property)</a>
 </li>
-      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.acc_pubkey">acc_pubkey (in module terra_sdk.key.mnemonic.MnemonicKey)</a>
-
-      <ul>
-        <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.acc_pubkey">(in module terra_sdk.key.raw.RawKey)</a>
-</li>
-      </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.acc_pubkey">acc_pubkey() (terra_sdk.key.key.Key property)</a>
 </li>
       <li><a href="common/strings.html#terra_sdk.core.strings.AccAddress">AccAddress (class in terra_sdk.core.strings)</a>
 </li>
       <li><a href="core_modules/auth.html#terra_sdk.core.auth.data.account.Account">Account (class in terra_sdk.core.auth.data.account)</a>
+</li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.account">account (terra_sdk.key.mnemonic.MnemonicKey attribute)</a>
 </li>
       <li><a href="core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI.account_info">account_info() (terra_sdk.client.lcd.api.auth.AuthAPI method)</a>
 </li>
@@ -408,6 +398,8 @@
 </li>
       </ul></li>
       <li><a href="common/coin_coins.html#terra_sdk.core.coin.Coin">Coin (class in terra_sdk.core.coin)</a>
+</li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.coin_type">coin_type (terra_sdk.key.mnemonic.MnemonicKey attribute)</a>
 </li>
       <li><a href="common/coin_coins.html#terra_sdk.core.coins.Coins">Coins (class in terra_sdk.core.coins)</a>
 </li>
@@ -585,8 +577,6 @@
 </li>
       <li><a href="common/numeric.html#terra_sdk.core.Dec.frac">frac() (terra_sdk.core.Dec property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="common/coin_coins.html#terra_sdk.core.coin.Coin.from_data">from_data() (terra_sdk.core.coin.Coin class method)</a>
 
       <ul>
@@ -595,6 +585,10 @@
         <li><a href="common/numeric.html#terra_sdk.core.Dec.from_data">(terra_sdk.core.Dec class method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.from_hex">from_hex() (terra_sdk.key.raw.RawKey class method)</a>
+</li>
       <li><a href="common/coin_coins.html#terra_sdk.core.coin.Coin.from_str">from_str() (terra_sdk.core.coin.Coin class method)</a>
 
       <ul>
@@ -661,7 +655,7 @@
       </ul></li>
       <li><a href="core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI.hash">hash() (terra_sdk.client.lcd.api.tx.TxAPI method)</a>
 </li>
-      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.hd_path">hd_path (in module terra_sdk.key.mnemonic.MnemonicKey)</a>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.hd_path">hd_path() (terra_sdk.key.mnemonic.MnemonicKey property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -682,6 +676,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core_modules/gov.html#terra_sdk.core.gov.data.Proposal.id">id (terra_sdk.core.gov.data.Proposal attribute)</a>
+</li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.index">index (terra_sdk.key.mnemonic.MnemonicKey attribute)</a>
 </li>
       <li><a href="core_modules/mint.html#terra_sdk.client.lcd.api.mint.MintAPI.inflation">inflation() (terra_sdk.client.lcd.api.mint.MintAPI method)</a>
 </li>
@@ -779,6 +775,10 @@
 </li>
       <li><a href="core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.misses">misses() (terra_sdk.client.lcd.api.oracle.OracleAPI method)</a>
 </li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.mnemonic">mnemonic (terra_sdk.key.mnemonic.MnemonicKey attribute)</a>
+</li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey">MnemonicKey (class in terra_sdk.key.mnemonic)</a>
+</li>
       <li><a href="common/coin_coins.html#terra_sdk.core.coin.Coin.mod">mod() (terra_sdk.core.coin.Coin method)</a>
 
       <ul>
@@ -841,7 +841,9 @@
 </li>
         <li><a href="common/keys_wallet.html#module-terra_sdk.key.key">terra_sdk.key.key</a>
 </li>
-        <li><a href="common/keys_wallet.html#module-terra_sdk.key.raw.RawKey-private_key">terra_sdk.key.raw.RawKey(private_key)</a>
+        <li><a href="common/keys_wallet.html#module-terra_sdk.key.mnemonic">terra_sdk.key.mnemonic</a>
+</li>
+        <li><a href="common/keys_wallet.html#module-terra_sdk.key.raw">terra_sdk.key.raw</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1004,6 +1006,8 @@
 </li>
       <li><a href="core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.prevotes">prevotes() (terra_sdk.client.lcd.api.oracle.OracleAPI method)</a>
 </li>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.private_key">private_key (terra_sdk.key.raw.RawKey attribute)</a>
+</li>
       <li><a href="core_modules/gov.html#terra_sdk.core.gov.data.Proposal">Proposal (class in terra_sdk.core.gov.data)</a>
 </li>
       <li><a href="core_modules/gov.html#terra_sdk.client.lcd.api.gov.GovAPI.proposal">proposal() (terra_sdk.client.lcd.api.gov.GovAPI method)</a>
@@ -1048,10 +1052,12 @@
       </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.raw_pubkey">raw_pubkey (terra_sdk.key.key.Key attribute)</a>
 </li>
-      <li><a href="core_modules/auth.html#terra_sdk.core.auth.data.tx.TxInfo.rawlog">rawlog (terra_sdk.core.auth.data.tx.TxInfo attribute)</a>
+      <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey">RawKey (class in terra_sdk.key.raw)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core_modules/auth.html#terra_sdk.core.auth.data.tx.TxInfo.rawlog">rawlog (terra_sdk.core.auth.data.tx.TxInfo attribute)</a>
+</li>
       <li><a href="core_modules/staking.html#terra_sdk.core.staking.data.delegation.Redelegation">Redelegation (class in terra_sdk.core.staking.data.delegation)</a>
 </li>
       <li><a href="core_modules/staking.html#terra_sdk.core.staking.data.delegation.RedelegationEntry">RedelegationEntry (class in terra_sdk.core.staking.data.delegation)</a>
@@ -1095,7 +1101,11 @@
       <li><a href="core_modules/staking.html#terra_sdk.core.staking.data.delegation.RedelegationEntry.shares_dst">shares_dst (terra_sdk.core.staking.data.delegation.RedelegationEntry attribute)</a>
 </li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.sign">sign() (terra_sdk.key.key.Key method)</a>
+
+      <ul>
+        <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.sign">(terra_sdk.key.raw.RawKey method)</a>
 </li>
+      </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.sign_tx">sign_tx() (terra_sdk.key.key.Key method)</a>
 </li>
       <li><a href="core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignature.signature">signature (terra_sdk.core.auth.data.tx.StdSignature attribute)</a>
@@ -1108,10 +1118,10 @@
 </li>
       <li><a href="core_modules/slashing.html#terra_sdk.client.lcd.api.slashing.SlashingAPI">SlashingAPI (class in terra_sdk.client.lcd.api.slashing)</a>
 </li>
-      <li><a href="guides/lcdclient.html#terra_sdk.client.lcd.LCDClient.staking">staking (terra_sdk.client.lcd.LCDClient attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="guides/lcdclient.html#terra_sdk.client.lcd.LCDClient.staking">staking (terra_sdk.client.lcd.LCDClient attribute)</a>
+</li>
       <li><a href="core_modules/staking.html#terra_sdk.client.lcd.api.staking.StakingAPI">StakingAPI (class in terra_sdk.client.lcd.api.staking)</a>
 </li>
       <li><a href="core_modules/staking.html#terra_sdk.core.staking.data.validator.Validator.status">status (terra_sdk.core.staking.data.validator.Validator attribute)</a>
@@ -1357,10 +1367,17 @@
 </li>
       </ul></li>
       <li>
-    terra_sdk.key.raw.RawKey(private_key)
+    terra_sdk.key.mnemonic
 
       <ul>
-        <li><a href="common/keys_wallet.html#module-terra_sdk.key.raw.RawKey-private_key">module</a>
+        <li><a href="common/keys_wallet.html#module-terra_sdk.key.mnemonic">module</a>
+</li>
+      </ul></li>
+      <li>
+    terra_sdk.key.raw
+
+      <ul>
+        <li><a href="common/keys_wallet.html#module-terra_sdk.key.raw">module</a>
 </li>
       </ul></li>
       <li><a href="core_modules/gov.html#terra_sdk.core.gov.proposals.TextProposal">TextProposal (class in terra_sdk.core.gov.proposals)</a>
@@ -1581,22 +1598,10 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.val_address">val_address (in module terra_sdk.key.mnemonic.MnemonicKey)</a>
-
-      <ul>
-        <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.val_address">(in module terra_sdk.key.raw.RawKey)</a>
-</li>
-      </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.val_address">val_address() (terra_sdk.key.key.Key property)</a>
 </li>
       <li><a href="core_modules/distribution.html#terra_sdk.client.lcd.api.distribution.ValidatorRewards.val_commission">val_commission (terra_sdk.client.lcd.api.distribution.ValidatorRewards attribute)</a>
 </li>
-      <li><a href="common/keys_wallet.html#terra_sdk.key.mnemonic.MnemonicKey.val_pubkey">val_pubkey (in module terra_sdk.key.mnemonic.MnemonicKey)</a>
-
-      <ul>
-        <li><a href="common/keys_wallet.html#terra_sdk.key.raw.RawKey.val_pubkey">(in module terra_sdk.key.raw.RawKey)</a>
-</li>
-      </ul></li>
       <li><a href="common/keys_wallet.html#terra_sdk.key.key.Key.val_pubkey">val_pubkey() (terra_sdk.key.key.Key property)</a>
 </li>
       <li><a href="common/strings.html#terra_sdk.core.strings.ValAddress">ValAddress (class in terra_sdk.core.strings)</a>
@@ -1619,12 +1624,12 @@
 </li>
       <li><a href="core_modules/tendermint.html#terra_sdk.client.lcd.api.tendermint.TendermintAPI.validator_set">validator_set() (terra_sdk.client.lcd.api.tendermint.TendermintAPI method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core_modules/staking.html#terra_sdk.core.staking.data.delegation.Redelegation.validator_src_address">validator_src_address (terra_sdk.core.staking.data.delegation.Redelegation attribute)</a>
 </li>
       <li><a href="core_modules/distribution.html#terra_sdk.client.lcd.api.distribution.ValidatorRewards">ValidatorRewards (class in terra_sdk.client.lcd.api.distribution)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core_modules/staking.html#terra_sdk.client.lcd.api.staking.StakingAPI.validators">validators() (terra_sdk.client.lcd.api.staking.StakingAPI method)</a>
 </li>
       <li><a href="common/strings.html#terra_sdk.core.strings.ValPubKey">ValPubKey (class in terra_sdk.core.strings)</a>

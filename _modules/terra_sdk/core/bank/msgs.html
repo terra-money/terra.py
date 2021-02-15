@@ -237,6 +237,8 @@
     <span class="sd">&quot;&quot;&quot;Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the</span>
 <span class="sd">    format:</span>
 
+<span class="sd">    .. code-block:: python</span>
+
 <span class="sd">        {</span>
 <span class="sd">           &quot;address&quot;: &quot;terra1...&quot;,</span>
 <span class="sd">           &quot;amount&quot;: &quot;123456789uusd&quot;</span>
@@ -266,6 +268,8 @@
 
 <span class="sd">    The ``inputs`` and ``output`` arguments should be of the form:</span>
 
+<span class="sd">    .. code-block:: python</span>
+
 <span class="sd">        [{</span>
 <span class="sd">            &quot;address&quot;: &quot;terra1...&quot;,</span>
 <span class="sd">            &quot;amount&quot;: &quot;123456789uusd&quot;</span>
@@ -275,11 +279,10 @@
 <span class="sd">            &quot;amount&quot;: &quot;2983298ukrw,21323uusd&quot;</span>
 <span class="sd">        }]</span>
 
-<span class="sd">    And so forth.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        inputs: senders and amounts</span>
-<span class="sd">        outputs: recipients and amounts</span>
+<span class="sd">        inputs (List[MultiSendIO]): senders and amounts</span>
+<span class="sd">        outputs (List[MultiSendIO]): recipients and amounts</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;bank/MsgMultiSend&quot;</span>

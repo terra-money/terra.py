@@ -231,26 +231,21 @@
 The total amount of coins in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> must match <code class="docutils literal notranslate"><span class="pre">outputs</span></code>. The transaction
 containing <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code> must contain signatures from all addresses used as inputs.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> arguments should be of the form:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>[{</dt><dd><p>“address”: “terra1…”,
-“amount”: “123456789uusd”</p>
-</dd>
-</dl>
-<p>},
-{</p>
-<blockquote>
-<div><p>“address”: “terra12…”,
-“amount”: “2983298ukrw,21323uusd”</p>
-</div></blockquote>
-<p>}]</p>
-</div></blockquote>
-<p>And so forth.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789uusd&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra12...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;2983298ukrw,21323uusd&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> – senders and amounts</p></li>
-<li><p><strong>outputs</strong> – recipients and amounts</p></li>
+<li><p><strong>inputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#terra_sdk.core.bank.msgs.MultiSendIO" title="terra_sdk.core.bank.msgs.MultiSendIO"><em>MultiSendIO</em></a><em>]</em>) – senders and amounts</p></li>
+<li><p><strong>outputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#terra_sdk.core.bank.msgs.MultiSendIO" title="terra_sdk.core.bank.msgs.MultiSendIO"><em>MultiSendIO</em></a><em>]</em>) – recipients and amounts</p></li>
 </ul>
 </dd>
 </dl>
@@ -297,14 +292,12 @@ containing <code class="docutils literal notranslate"><span class="pre">MsgMulti
 <em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MultiSendIO</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">coins</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MultiSendIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
 format:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>{</dt><dd><p>“address”: “terra1…”,
-“amount”: “123456789uusd”</p>
-</dd>
-</dl>
-<p>}</p>
-</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789uusd&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MultiSendIO.address">
 <code class="sig-name descname">address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO.address" title="Permalink to this definition">¶</a></dt>

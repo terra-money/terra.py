@@ -104,8 +104,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Keys &amp; Wallets</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#key-abstract">Key (abstract)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.key.raw.RawKey-private_key">RawKey</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mnemonickey">MnemonicKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.key.raw">RawKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.key.mnemonic">MnemonicKey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.client.lcd.wallet">Wallet</a></li>
 </ul>
 </li>
@@ -203,7 +203,7 @@
 <h2>Key (abstract)<a class="headerlink" href="#key-abstract" title="Permalink to this headline">¶</a></h2>
 <p>Implementers of Keys meant for signing should override <a class="reference internal" href="#terra_sdk.key.key.Key.sign" title="terra_sdk.key.key.Key.sign"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.sign()</span></code></a>
 or <a class="reference internal" href="#terra_sdk.key.key.Key.create_signature" title="terra_sdk.key.key.Key.create_signature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.create_signature()</span></code></a> methods. More details are
-available in <a href="#id1"><span class="problematic" id="id2">`Implementing a custom Key`_</span></a>.</p>
+available in <span class="xref std std-ref">guides/custom_key</span>.</p>
 <p>Some properties such as <a class="reference internal" href="#terra_sdk.key.key.Key.acc_address" title="terra_sdk.key.key.Key.acc_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acc_address</span></code></a> and
 <a class="reference internal" href="#terra_sdk.key.key.Key.val_address" title="terra_sdk.key.key.Key.val_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">val_address</span></code></a> are provided.</p>
 <span class="target" id="module-terra_sdk.key.key"></span><dl class="py class">
@@ -366,174 +366,103 @@ and creates a ready-to-broadcast <code class="xref py py-class docutils literal 
 </dd></dl>
 
 </div>
-<div class="section" id="module-terra_sdk.key.raw.RawKey-private_key">
-<span id="module-terra_sdk.key.raw.RawKey(private_key)"></span><span id="rawkey"></span><h2>RawKey<a class="headerlink" href="#module-terra_sdk.key.raw.RawKey-private_key" title="Permalink to this headline">¶</a></h2>
-<p>RawKey directly uses a raw (plaintext) private key in memory, and provides
+<div class="section" id="module-terra_sdk.key.raw">
+<span id="rawkey"></span><h2>RawKey<a class="headerlink" href="#module-terra_sdk.key.raw" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.key.raw.RawKey">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.key.raw.</code><code class="sig-name descname">RawKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">private_key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>RawKey directly uses a raw (plaintext) private key in memory, and provides
 the implementation for signing with ECDSA on curve Secp256k1.</p>
 <dl class="field-list simple">
-<dt class="field-odd">type private_key</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p>
-</dd>
-<dt class="field-even">param private_key</dt>
-<dd class="field-even"><p>private key in bytes</p>
-</dd>
-<dt class="field-odd">type private_key</dt>
-<dd class="field-odd"><p>bytes</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>private_key</strong> (<em>bytes</em>) – private key in bytes</p>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt id="terra_sdk.key.raw.RawKey.acc_address">
-<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">acc_address</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.acc_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 account address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dl class="py method">
+<dt id="terra_sdk.key.raw.RawKey.from_hex">
+<em class="property">classmethod </em><code class="sig-name descname">from_hex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">private_key_hex</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.from_hex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.from_hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new RawKey from a hex-encoded private key string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>private_key_hex</strong> (<em>str</em>) – hex-encoded private key</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>account address</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#terra_sdk.key.raw.RawKey" title="terra_sdk.key.raw.RawKey"><code class="xref py py-class docutils literal notranslate"><span class="pre">RawKey</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.raw.RawKey.acc_pubkey">
-<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">acc_pubkey</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.acc_pubkey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 account pubkey. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dt id="terra_sdk.key.raw.RawKey.private_key">
+<code class="sig-name descname">private_key</code><em class="property">: bytes</em><a class="headerlink" href="#terra_sdk.key.raw.RawKey.private_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private key, in bytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="terra_sdk.key.raw.RawKey.sign">
+<code class="sig-name descname">sign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signs the data payload using ECDSA and curve Secp256k1 with the private key as
+the signing key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – data to sign</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>account pubkey</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="terra_sdk.key.raw.RawKey.val_address">
-<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">val_address</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.val_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 validator operator address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>validator operator address</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.key.raw.RawKey.val_pubkey">
-<code class="sig-prename descclassname">terra_sdk.key.raw.RawKey.</code><code class="sig-name descname">val_pubkey</code><a class="headerlink" href="#terra_sdk.key.raw.RawKey.val_pubkey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>validator pubkey</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
-</dd>
-</dl>
 </dd></dl>
 
 </div>
-<div class="section" id="mnemonickey">
-<h2>MnemonicKey<a class="headerlink" href="#mnemonickey" title="Permalink to this headline">¶</a></h2>
-<p>A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.</p>
+<div class="section" id="module-terra_sdk.key.mnemonic">
+<span id="mnemonickey"></span><h2>MnemonicKey<a class="headerlink" href="#module-terra_sdk.key.mnemonic" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="terra_sdk.key.mnemonic.MnemonicKey">
+<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.key.mnemonic.</code><code class="sig-name descname">MnemonicKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mnemonic</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">account</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">index</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">coin_type</span><span class="o">=</span><span class="default_value">330</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/mnemonic.html#MnemonicKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You can change <code class="docutils literal notranslate"><span class="pre">coin_type</span></code> to 118 to derive the key for a legacy Terra
 wallet (shares <code class="docutils literal notranslate"><span class="pre">coin_type</span></code> with ATOM).</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">type mnemonic</dt>
-<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
-</dd>
-<dt class="field-even">param mnemonic</dt>
-<dd class="field-even"><p>space-separated mnemonic seed phrase. If not provided,
-a 24-word mnemonic will be generated.</p>
-</dd>
-<dt class="field-odd">type mnemonic</dt>
-<dd class="field-odd"><p>str, optional</p>
-</dd>
-<dt class="field-even">type account</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
-</dd>
-<dt class="field-odd">param account</dt>
-<dd class="field-odd"><p>HD path parameter - account number.</p>
-</dd>
-<dt class="field-even">type account</dt>
-<dd class="field-even"><p>int, optional</p>
-</dd>
-<dt class="field-odd">type index</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
-</dd>
-<dt class="field-even">param index</dt>
-<dd class="field-even"><p>HD path parameter - account index.</p>
-</dd>
-<dt class="field-odd">type index</dt>
-<dd class="field-odd"><p>int, optional</p>
-</dd>
-<dt class="field-even">type coin_type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
-</dd>
-<dt class="field-odd">param coin_type</dt>
-<dd class="field-odd"><p>HD path parameter - coin type.</p>
-</dd>
-<dt class="field-even">type coin_type</dt>
-<dd class="field-even"><p>int, optional</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mnemonic</strong> (<em>str</em><em>, </em><em>optional</em>) – space-separated mnemonic seed phrase. If not provided,
+a 24-word mnemonic will be generated.</p></li>
+<li><p><strong>account</strong> (<em>int</em><em>, </em><em>optional</em>) – HD path parameter - account number.</p></li>
+<li><p><strong>index</strong> (<em>int</em><em>, </em><em>optional</em>) – HD path parameter - account index.</p></li>
+<li><p><strong>coin_type</strong> (<em>int</em><em>, </em><em>optional</em>) – HD path parameter - coin type.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.acc_address">
-<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">acc_address</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.acc_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 account address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.account">
+<code class="sig-name descname">account</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.account" title="Permalink to this definition">¶</a></dt>
+<dd><p>account number.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>account address</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>HD path parameter</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.acc_pubkey">
-<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">acc_pubkey</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.acc_pubkey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 account pubkey. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.coin_type">
+<code class="sig-name descname">coin_type</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.coin_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>coin type</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>account pubkey</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>HD path parameter</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py method">
 <dt id="terra_sdk.key.mnemonic.MnemonicKey.hd_path">
-<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">hd_path</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.hd_path" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">hd_path</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.hd_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the BIP32 HD path for key-derivation:</p>
 <p><code class="docutils literal notranslate"><span class="pre">m/44'/COIN_TYPE'/ACCOUNT'/0/INDEX'</span></code></p>
 <dl class="field-list simple">
@@ -547,37 +476,22 @@ a 24-word mnemonic will be generated.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.val_address">
-<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">val_address</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.val_address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 validator operator address. Default derivation via <code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.index">
+<code class="sig-name descname">index</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>account index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>validator operator address</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>HD path parameter</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.val_pubkey">
-<code class="sig-prename descclassname">terra_sdk.key.mnemonic.MnemonicKey.</code><code class="sig-name descname">val_pubkey</code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.val_pubkey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if Key was not initialized with proper public key</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>validator pubkey</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
-</dd>
-</dl>
+<dt id="terra_sdk.key.mnemonic.MnemonicKey.mnemonic">
+<code class="sig-name descname">mnemonic</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.mnemonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mnemonic key phrase associated with the account (space-separated).</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -624,7 +538,7 @@ parameter is set, automatic fee estimation will be used (see <cite>fee_estimatio
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
 <li><p><strong>fee</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a><em>]</em><em>, </em><em>optional</em>) – transaction fee. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, will be estimated.
-See more on <a href="#id3"><span class="problematic" id="id4">`fee estimation`_</span></a>.</p></li>
+See more on <a href="#id1"><span class="problematic" id="id2">`fee estimation`_</span></a>.</p></li>
 <li><p><strong>memo</strong> (<em>str</em><em>, </em><em>optional</em>) – optional short string to include with transaction.</p></li>
 <li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices for fee estimation.</p></li>
 <li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment for fee estimation.</p></li>
@@ -655,7 +569,7 @@ parameter is set, automatic fee estimation will be used (see <cite>fee_estimatio
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
 <li><p><strong>fee</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a><em>]</em><em>, </em><em>optional</em>) – transaction fee. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, will be estimated.
-See more on <a href="#id5"><span class="problematic" id="id6">`fee estimation`_</span></a>.</p></li>
+See more on <a href="#id3"><span class="problematic" id="id4">`fee estimation`_</span></a>.</p></li>
 <li><p><strong>memo</strong> (<em>str</em><em>, </em><em>optional</em>) – optional short string to include with transaction.</p></li>
 <li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices for fee estimation.</p></li>
 <li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment for fee estimation.</p></li>

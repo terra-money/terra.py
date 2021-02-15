@@ -263,7 +263,7 @@ this behavior <strong>per transaction</strong>:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The fee simulation by default will return with a fee amount in every denom available
-for which the signing account’s has a Coin balance (it will fail if account has no
+for which the signing account holds Coin balance (fee estimation will fail if account has 0
 balance). Use the <code class="docutils literal notranslate"><span class="pre">denoms</span></code> parameter to restrict estimated fee to only denoms specified.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tx</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
@@ -342,9 +342,8 @@ list within the final <code class="xref py py-class docutils literal notranslate
 </div>
 <div class="section" id="signing-transactions-manually">
 <h2>Signing transactions manually<a class="headerlink" href="#signing-transactions-manually" title="Permalink to this headline">¶</a></h2>
-<p>If you prefer not to use <code class="docutils literal notranslate"><span class="pre">LCDClient</span></code> or <code class="docutils literal notranslate"><span class="pre">Wallet</span></code> for a reason (such as not wanting /
-having access to a node, internet, etc.) – you can sign transactions manually by first
-building a <code class="xref py py-class docutils literal notranslate"><span class="pre">StdSignMsg</span></code>.</p>
+<p>Below is the full process of signing a transaction manually that does not use <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>.
+You will need to build a <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code>, sign it, and add the signatures to an <code class="docutils literal notranslate"><span class="pre">StdTx</span></code>.</p>
 <p>A StdSignMsg contains the information required to build a StdTx:</p>
 <ul class="simple">
 <li><p><strong>chain_id</strong>: chain ID of blockchain network</p></li>
@@ -379,7 +378,7 @@ building a <code class="xref py py-class docutils literal notranslate"><span cla
 <span class="c1"># get signature</span>
 <span class="n">sig</span> <span class="o">=</span> <span class="n">mk</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">unsigned_tx</span><span class="p">)</span>
 
-<span class="c1"># build stdtx</span>
+<span class="c1"># prepopulate stdtx with details</span>
 <span class="n">tx</span> <span class="o">=</span> <span class="n">unsigned_tx</span><span class="o">.</span><span class="n">to_stdtx</span><span class="p">()</span>
 
 <span class="c1"># apply signature</span>
