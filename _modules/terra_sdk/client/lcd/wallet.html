@@ -302,11 +302,9 @@
         <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sequence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Creates and signs a :class:`StdTx` object in a single step. This is recommended</span>
-<span class="sd">        way of creating a transaction for immediate broadcasting. The ``Wallet`` will first</span>
-<span class="sd">        query the blockchain to fetch the latest ``account`` and ``sequence`` values for the</span>
-<span class="sd">        account corresponding to its Key, unless the they are both provided. If no ``fee``</span>
-<span class="sd">        parameter is set, automatic fee estimation will be used (see `fee_estimation`).</span>
+        <span class="sd">&quot;&quot;&quot;Creates and signs a :class:`StdTx` object in a single step. This is the recommended</span>
+<span class="sd">        method for preparing transaction for immediate signing and broadcastring. The transaction</span>
+<span class="sd">        is generated exactly as :meth:`create_tx`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            msgs (List[Msg]): list of messages to include</span>

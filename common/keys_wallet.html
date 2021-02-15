@@ -528,11 +528,9 @@ signing functionality. It is recommended to create this object through
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx">
 <code class="sig-name descname">create_and_sign_tx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msgs</span></em>, <em class="sig-param"><span class="n">fee</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">memo</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">gas_prices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gas_adjustment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">denoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">account_number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sequence</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.create_and_sign_tx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates and signs a <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object in a single step. This is recommended
-way of creating a transaction for immediate broadcasting. The <code class="docutils literal notranslate"><span class="pre">Wallet</span></code> will first
-query the blockchain to fetch the latest <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code> values for the
-account corresponding to its Key, unless the they are both provided. If no <code class="docutils literal notranslate"><span class="pre">fee</span></code>
-parameter is set, automatic fee estimation will be used (see <cite>fee_estimation</cite>).</p>
+<dd><p>Creates and signs a <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object in a single step. This is the recommended
+method for preparing transaction for immediate signing and broadcastring. The transaction
+is generated exactly as <a class="reference internal" href="#terra_sdk.client.lcd.wallet.Wallet.create_tx" title="terra_sdk.client.lcd.wallet.Wallet.create_tx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_tx()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
