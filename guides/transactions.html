@@ -98,6 +98,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#signing-transactions-manually">Signing transactions manually</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#applying-multiple-signatures">Applying multiple signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#signing-multiple-offline-transactions">Signing multiple offline transactions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="smart_contracts.html">Working with Smart Contracts</a></li>
@@ -203,14 +204,15 @@
 <p>If you want to perform a state-changing operation on the Terra blockchain such as
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a <strong>transaction</strong> and broadcast it to the network.</p>
-<p>The data object repesenting a transaction is <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code>. It contains:</p>
+<p>An <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a> is a data object that represents
+a transaction. It contains:</p>
 <ul class="simple">
 <li><p><strong>msgs</strong>: a list of state-altering messages</p></li>
 <li><p><strong>fee</strong>: the transaction fee paid to network / validators</p></li>
 <li><p><strong>signatures</strong>: a list of signatures from required signers (depends on messages)</p></li>
 <li><p><strong>memo</strong>: a short string describing transaction (can be empty string)</p></li>
 </ul>
-<p>Terra SDK provides tools that greatly simplify the process of generating a StdTx object.</p>
+<p>Terra SDK provides functions that help create StdTx objects.</p>
 <div class="section" id="using-a-wallet-recommended">
 <h2>Using a Wallet (recommended)<a class="headerlink" href="#using-a-wallet-recommended" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
@@ -218,9 +220,9 @@ smart contracts, you must create a <strong>transaction</strong> and broadcast it
 <p>This method requires an LCDClient instance with a proper node connection. If you
 can’t use Wallet, see <a class="reference internal" href="#signing-transactions-manually">Signing transactions manually</a>.</p>
 </div>
-<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Wallet</span></code> allows you to create and sign a transaction in a single step by automatically
+<p>A <a class="reference internal" href="../common/keys_wallet.html#terra_sdk.client.lcd.wallet.Wallet" title="terra_sdk.client.lcd.wallet.Wallet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wallet</span></code></a> allows you to create and sign a transaction in a single step by automatically
 fetching the latest information from the blockchain (chain ID, account number, sequence).</p>
-<p>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">LCDClient.wallet()</span></code> to create a Wallet from any Key instance. The Key provided should
+<p>Use <a class="reference internal" href="lcdclient.html#terra_sdk.client.lcd.LCDClient.wallet" title="terra_sdk.client.lcd.LCDClient.wallet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">LCDClient.wallet()</span></code></a> to create a Wallet from any Key instance. The Key provided should
 correspond to the account you intend to sign the transaction with.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
@@ -252,14 +254,14 @@ correspond to the account you intend to sign the transaction with.</p>
 </div>
 <div class="section" id="automatic-fee-estimation">
 <h3>Automatic fee estimation<a class="headerlink" href="#automatic-fee-estimation" title="Permalink to this headline">¶</a></h3>
-<p>If no <code class="docutils literal notranslate"><span class="pre">fee</span></code> parameter is provided for <code class="xref py py-meth docutils literal notranslate"><span class="pre">Wallet.create_and_sign_tx()</span></code>, the transaction
-fee will be simulated against the node and populated for you. By default, <code class="docutils literal notranslate"><span class="pre">Wallet</span></code> will use
-the fee estimation parameters of the <code class="xref py py-class docutils literal notranslate"><span class="pre">LCDClient</span></code> used to create it. You can override
+<p>If no <code class="docutils literal notranslate"><span class="pre">fee</span></code> parameter is provided for <a class="reference internal" href="../common/keys_wallet.html#terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx" title="terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Wallet.create_and_sign_tx()</span></code></a>,
+the transaction fee will be simulated against the node and populated for you. By default, <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>
+will use the fee estimation parameters of the <code class="docutils literal notranslate"><span class="pre">LCDClient</span></code> used to create it. You can override
 this behavior <strong>per transaction</strong>:</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Fee estimation simulates the transaction in the node – if the transaction would fail
-due to an error, the simulation itself would fail as well.</p>
+due to an error, such as an incorrect smart contract call, the estimation too would fail.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -338,8 +340,8 @@ sign it, and add the signatures to an <code class="docutils literal notranslate"
 <h2>Applying multiple signatures<a class="headerlink" href="#applying-multiple-signatures" title="Permalink to this headline">¶</a></h2>
 <p>Some messages, such as <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code>, require the transaction to be signed with multiple signatures.
 You must prepare a separate <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code> for each signer to sign individually, and then
-combine them in the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of the final <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object. Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code>
-should only differ by <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, which vary according to the signing key.</p>
+combine them in the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of the final <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a> object.
+Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code> should only differ by <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, which vary according to the signing key.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In a transaction with multiple signers, the account of the first signature in the
@@ -396,6 +398,32 @@ should only differ by <code class="docutils literal notranslate"><span class="pr
 <span class="c1"># broadcast tx</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="signing-multiple-offline-transactions">
+<h2>Signing multiple offline transactions<a class="headerlink" href="#signing-multiple-offline-transactions" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, you may wish to sign and save multiple transactions in
+advance, in order to broadcast them at a later date. To do so, you will
+need to manually update the <strong>sequence</strong> number to override the <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>’s
+automatic default behavior of loading the latest sequence number from the
+blockchain (which will not have been updated).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get first sequence</span>
+<span class="hll"><span class="n">sequence</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">sequence</span><span class="p">()</span>
+</span><span class="n">tx1</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span><span class="o">...</span><span class="p">)]</span>
+<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span>
+</span><span class="p">)</span>
+
+<span class="n">tx2</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSwap</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
+<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">1</span>
+</span><span class="p">)</span>
+
+<span class="n">tx3</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgExecuteContract</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
+<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">2</span>
+</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

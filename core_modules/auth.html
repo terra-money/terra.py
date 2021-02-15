@@ -428,11 +428,14 @@
 <dt id="terra_sdk.core.auth.data.tx.StdTx">
 <em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.auth.data.tx.</code><code class="sig-name descname">StdTx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="n">fee</span></em>, <em class="sig-param"><span class="n">signatures</span></em>, <em class="sig-param"><span class="n">memo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/auth/data/tx.html#StdTx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.auth.data.tx.StdTx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data structure for a transaction which can be broadcasted.</p>
-<dl class="simple">
-<dt>Arg:</dt><dd><p>msg: list of messages to include in transaction
-fee: fee to use for transaction
-signatures: list of signatures
-memo: transaction memo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include in transaction</p></li>
+<li><p><strong>fee</strong> (<a class="reference internal" href="#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a>) – fee to use for transaction</p></li>
+<li><p><strong>signatures</strong> (<em>List</em><em>[</em><a class="reference internal" href="#terra_sdk.core.auth.data.tx.StdSignature" title="terra_sdk.core.auth.data.tx.StdSignature"><em>StdSignature</em></a><em>]</em>) – list of signatures</p></li>
+<li><p><strong>memo</strong> (<em>str</em>) – transaction memo</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
