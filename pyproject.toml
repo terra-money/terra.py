@@ -51,7 +51,6 @@ sphinx-rtd-theme = "^0.5.1"
 sphinx-autodoc-typehints = "^1.11.1"
 sphinx-autobuild = "^2020.9.1"
 uvloop = "^0.14.0"
-easydev = "^0.11.0"
 
 [tool.pytest.ini_options]
 addopts = "-ra -q"

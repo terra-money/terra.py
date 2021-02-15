@@ -5,14 +5,15 @@ If you want to perform a state-changing operation on the Terra blockchain such a
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a **transaction** and broadcast it to the network.
 
-The data object repesenting a transaction is :class:`StdTx`. It contains:
+An :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` is a data object that represents
+a transaction. It contains:
 
 - **msgs**: a list of state-altering messages
 - **fee**: the transaction fee paid to network / validators
 - **signatures**: a list of signatures from required signers (depends on messages)
 - **memo**: a short string describing transaction (can be empty string)
 
-Terra SDK provides tools that greatly simplify the process of generating a StdTx object.
+Terra SDK provides functions that help create StdTx objects.
 
 Using a Wallet (recommended)
 ----------------------------
@@ -21,10 +22,10 @@ Using a Wallet (recommended)
     This method requires an LCDClient instance with a proper node connection. If you
     can't use Wallet, see `Signing transactions manually`_.
 
-A :class:`Wallet` allows you to create and sign a transaction in a single step by automatically
+A :class:`Wallet<terra_sdk.client.lcd.wallet.Wallet>` allows you to create and sign a transaction in a single step by automatically
 fetching the latest information from the blockchain (chain ID, account number, sequence).
 
-Use :meth:`LCDClient.wallet` to create a Wallet from any Key instance. The Key provided should
+Use :meth:`LCDClient.wallet()<terra_sdk.client.lcd.LCDClient.wallet>` to create a Wallet from any Key instance. The Key provided should
 correspond to the account you intend to sign the transaction with.
 
 .. code-block:: python
@@ -64,14 +65,14 @@ And that's it! You should now be able to broadcast your transaction to the netwo
 Automatic fee estimation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If no ``fee`` parameter is provided for :meth:`Wallet.create_and_sign_tx()`, the transaction
-fee will be simulated against the node and populated for you. By default, ``Wallet`` will use
-the fee estimation parameters of the :class:`LCDClient` used to create it. You can override
+If no ``fee`` parameter is provided for :meth:`Wallet.create_and_sign_tx()<terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx>`,
+the transaction fee will be simulated against the node and populated for you. By default, ``Wallet``
+will use the fee estimation parameters of the ``LCDClient`` used to create it. You can override
 this behavior **per transaction**:
 
 .. important::
     Fee estimation simulates the transaction in the node -- if the transaction would fail
-    due to an error, the simulation itself would fail as well.
+    due to an error, such as an incorrect smart contract call, the estimation too would fail.
 
 .. note::
     By default, the estimated fee returned consists of a fee paid in every denom for which the
@@ -156,8 +157,8 @@ Applying multiple signatures
 
 Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
 You must prepare a separate ``StdSignMsg`` for each signer to sign individually, and then
-combine them in the ``signatures`` field of the final :class:`StdTx` object. Each ``StdSignMsg``
-should only differ by ``account`` and ``sequence``, which vary according to the signing key.
+combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` object. 
+Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
 
 .. note::
     In a transaction with multiple signers, the account of the first signature in the
@@ -216,3 +217,35 @@ should only differ by ``account`` and ``sequence``, which vary according to the 
     # broadcast tx
     result = terra.tx.broadcast(tx)
     print(result)
+
+
+Signing multiple offline transactions
+-------------------------------------
+
+In some cases, you may wish to sign and save multiple transactions in
+advance, in order to broadcast them at a later date. To do so, you will
+need to manually update the **sequence** number to override the ``Wallet``'s
+automatic default behavior of loading the latest sequence number from the
+blockchain (which will not have been updated).
+
+.. code-block:: python
+    :emphasize-lines: 2,5,10,15
+
+    # get first sequence
+    sequence = wallet.sequence()
+    tx1 = wallet.create_and_sign_tx(
+        msgs=[MsgSend(...)]
+        sequence=sequence
+    )
+
+    tx2 = wallet.create_and_sign_tx(
+        msgs=[MsgSwap(...)],
+        sequence=sequence+1
+    )
+
+    tx3 = wallet.create_and_sign_tx(
+        msgs=[MsgExecuteContract(...)],
+        sequence=sequence+2
+    )
+
+

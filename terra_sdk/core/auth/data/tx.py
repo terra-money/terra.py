@@ -117,7 +117,7 @@ class StdSignMsg(JSONSerializable):
 class StdTx(JSONSerializable):
     """Data structure for a transaction which can be broadcasted.
 
-    Arg:
+    Args:
         msg: list of messages to include in transaction
         fee: fee to use for transaction
         signatures: list of signatures
