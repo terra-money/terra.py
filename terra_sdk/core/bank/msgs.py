@@ -48,6 +48,8 @@ class MultiSendIO(JSONSerializable):
     """Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
     format:
 
+    .. code-block:: python
+
         {
            "address": "terra1...",
            "amount": "123456789uusd"
@@ -77,6 +79,8 @@ class MsgMultiSend(Msg):
 
     The ``inputs`` and ``output`` arguments should be of the form:
 
+    .. code-block:: python
+
         [{
             "address": "terra1...",
             "amount": "123456789uusd"
@@ -86,11 +90,10 @@ class MsgMultiSend(Msg):
             "amount": "2983298ukrw,21323uusd"
         }]
 
-    And so forth.
 
     Args:
-        inputs: senders and amounts
-        outputs: recipients and amounts
+        inputs (List[MultiSendIO]): senders and amounts
+        outputs (List[MultiSendIO]): recipients and amounts
     """
 
     type = "bank/MsgMultiSend"

@@ -73,7 +73,7 @@ this behavior **per transaction**:
 
 .. note::
     The fee simulation by default will return with a fee amount in every denom available 
-    for which the signing account's has a Coin balance (it will fail if account has no
+    for which the signing account holds Coin balance (fee estimation will fail if account has 0
     balance). Use the ``denoms`` parameter to restrict estimated fee to only denoms specified.
 
 .. code-block:: python
@@ -155,9 +155,8 @@ list within the final :class:`StdTx` object.
 Signing transactions manually
 -----------------------------
 
-If you prefer not to use ``LCDClient`` or ``Wallet`` for a reason (such as not wanting /
-having access to a node, internet, etc.) -- you can sign transactions manually by first
-building a :class:`StdSignMsg`.
+Below is the full process of signing a transaction manually that does not use ``Wallet``.
+You will need to build a ``StdSignMsg``, sign it, and add the signatures to an ``StdTx``.
 
 A StdSignMsg contains the information required to build a StdTx:
 
@@ -195,7 +194,7 @@ A StdSignMsg contains the information required to build a StdTx:
     # get signature
     sig = mk.create_signature(unsigned_tx)
 
-    # build stdtx
+    # prepopulate stdtx with details
     tx = unsigned_tx.to_stdtx()
 
     # apply signature
