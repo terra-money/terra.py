@@ -354,7 +354,7 @@
         <span class="k">return</span> <span class="n">SyncTxBroadcastResult</span><span class="p">(</span>
             <span class="n">height</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
             <span class="n">txhash</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
-            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
+            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;raw_log&quot;</span><span class="p">),</span>
             <span class="n">code</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
             <span class="n">codespace</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
         <span class="p">)</span>
@@ -387,9 +387,9 @@
         <span class="k">return</span> <span class="n">BlockTxBroadcastResult</span><span class="p">(</span>
             <span class="n">height</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
             <span class="n">txhash</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
-            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
-            <span class="n">gas_wanted</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;gas_wanted&quot;</span><span class="p">],</span>
-            <span class="n">gas_used</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;gas_used&quot;</span><span class="p">],</span>
+            <span class="n">raw_log</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;raw_log&quot;</span><span class="p">),</span>
+            <span class="n">gas_wanted</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gas_wanted&quot;</span><span class="p">),</span>
+            <span class="n">gas_used</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gas_used&quot;</span><span class="p">),</span>
             <span class="n">logs</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logs&quot;</span><span class="p">),</span>
             <span class="n">code</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
             <span class="n">codespace</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
