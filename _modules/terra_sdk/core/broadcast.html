@@ -242,7 +242,7 @@
     <span class="sd">&quot;&quot;&quot;Height at which transaction was included.&quot;&quot;&quot;</span>
     <span class="n">txhash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;Transaction hash.&quot;&quot;&quot;</span>
-    <span class="n">raw_log</span><span class="p">:</span> <span class="n">Optiona</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">raw_log</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;Raw JSON of transaction events.&quot;&quot;&quot;</span>
     <span class="n">code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;If this is present, the transaction failed.&quot;&quot;&quot;</span>
