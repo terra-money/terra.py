@@ -53,7 +53,7 @@ class SyncTxBroadcastResult(JSONSerializable):
     """Height at which transaction was included."""
     txhash: str = attr.ib()
     """Transaction hash."""
-    raw_log: Optiona[str] = attr.ib()
+    raw_log: Optional[str] = attr.ib()
     """Raw JSON of transaction events."""
     code: Optional[int] = attr.ib(default=None)
     """If this is present, the transaction failed."""
