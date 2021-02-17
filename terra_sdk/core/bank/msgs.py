@@ -52,7 +52,7 @@ class MultiSendIO(JSONSerializable):
 
         {
            "address": "terra1...",
-           "amount": "123456789uusd"
+           "coins": "123456789uusd"
         }
     """
 
@@ -68,7 +68,10 @@ class MultiSendIO(JSONSerializable):
 
 
 def convert_io_list(data: list) -> List[MultiSendIO]:
-    return [MultiSendIO.from_data(d) for d in data]
+    if all(isinstance(x, MultiSendIO) for x in data):
+        return data
+    else:
+        return [MultiSendIO(address=d["address"], coins=d["coins"]) for d in data]
 
 
 @attr.s
@@ -83,11 +86,11 @@ class MsgMultiSend(Msg):
 
         [{
             "address": "terra1...",
-            "amount": "123456789uusd"
+            "coins": "123456789uusd"
         },
         {
             "address": "terra12...",
-            "amount": "2983298ukrw,21323uusd"
+            "coins": "2983298ukrw,21323uusd"
         }]
 
 
@@ -108,6 +111,6 @@ class MsgMultiSend(Msg):
     def from_data(cls, data: dict) -> MsgMultiSend:
         data = data["value"]
         return cls(
-            inputs=data["inputs"],
-            outputs=data["outputs"],
+            inputs=[MultiSendIO.from_data(x) for x in data["inputs"]],
+            outputs=[MultiSendIO.from_data(x) for x in data["outputs"]],
         )

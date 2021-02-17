@@ -14,6 +14,20 @@ def test_deserializes_msg_send(load_msg_examples):
     assert MsgSend.from_data(data).to_data() == data
 
 
+def test_msg_multi_send_io():
+
+    multisend = MsgMultiSend(
+        inputs=[
+            {"address": "", "coins": "12000uusd,11000uluna"},
+            {"address": "", "coins": "11000ukrw,10000uluna"},
+        ],
+        outputs=[
+            {"address": "", "coins": "11000ukrw,10000uluna"},
+            {"address": "", "coins": "12000uusd,11000uluna"},
+        ],
+    )
+
+
 def test_deserializes_msg_multi_send(load_msg_examples):
     data = {
         "type": "bank/MsgMultiSend",

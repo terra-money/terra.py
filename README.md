@@ -1,1 +1,1 @@
-# Terra SDK for Python
+![logo](./docs/img/logo.png)
