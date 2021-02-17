@@ -241,7 +241,7 @@
 
 <span class="sd">        {</span>
 <span class="sd">           &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">           &quot;amount&quot;: &quot;123456789uusd&quot;</span>
+<span class="sd">           &quot;coins&quot;: &quot;123456789uusd&quot;</span>
 <span class="sd">        }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -257,7 +257,10 @@
 
 
 <span class="k">def</span> <span class="nf">convert_io_list</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">MultiSendIO</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">MultiSendIO</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">MultiSendIO</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">],</span> <span class="n">coins</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;coins&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="MsgMultiSend"><a class="viewcode-back" href="../../../../core_modules/bank.html#terra_sdk.core.bank.msgs.MsgMultiSend">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
@@ -272,11 +275,11 @@
 
 <span class="sd">        [{</span>
 <span class="sd">            &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">            &quot;amount&quot;: &quot;123456789uusd&quot;</span>
+<span class="sd">            &quot;coins&quot;: &quot;123456789uusd&quot;</span>
 <span class="sd">        },</span>
 <span class="sd">        {</span>
 <span class="sd">            &quot;address&quot;: &quot;terra12...&quot;,</span>
-<span class="sd">            &quot;amount&quot;: &quot;2983298ukrw,21323uusd&quot;</span>
+<span class="sd">            &quot;coins&quot;: &quot;2983298ukrw,21323uusd&quot;</span>
 <span class="sd">        }]</span>
 
 
@@ -297,8 +300,8 @@
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgMultiSend</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">inputs</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">],</span>
-            <span class="n">outputs</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">],</span>
+            <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]],</span>
+            <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">MultiSendIO</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]],</span>
         <span class="p">)</span></div>
 </pre></div>
 
