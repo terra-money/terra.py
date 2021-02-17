@@ -165,7 +165,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         return SyncTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
-            raw_log=res["raw_log"],
+            raw_log=res.get("raw_log"),
             code=res.get("code"),
             codespace=res.get("codespace"),
         )
@@ -198,9 +198,9 @@ class AsyncTxAPI(BaseAsyncAPI):
         return BlockTxBroadcastResult(
             height=res["height"],
             txhash=res["txhash"],
-            raw_log=res["raw_log"],
-            gas_wanted=res["gas_wanted"],
-            gas_used=res["gas_used"],
+            raw_log=res.get("raw_log"),
+            gas_wanted=res.get("gas_wanted"),
+            gas_used=res.get("gas_used"),
             logs=res.get("logs"),
             code=res.get("code"),
             codespace=res.get("codespace"),

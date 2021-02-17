@@ -30,7 +30,7 @@ class Coins(JSONSerializable):
         if len(self) == 0:
             return "Coins()"
         else:
-            return f'Coins("{self!s}")'
+            return f"Coins('{self!s}')"
 
     def __str__(self) -> str:
         return ",".join(str(coin) for coin in self)

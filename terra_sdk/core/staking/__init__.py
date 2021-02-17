@@ -1,5 +1,8 @@
 from .data import (
+    Commission,
+    CommissionRates,
     Delegation,
+    Description,
     Redelegation,
     RedelegationEntry,
     UnbondingDelegation,
@@ -15,18 +18,18 @@ from .msgs import (
 )
 
 __all__ = [
+    "Commission",
+    "CommissionRates",
     "Delegation",
-    "UnbondingDelegation",
-    "UnbondingEntry",
+    "Description",
+    "MsgBeginRedelegate",
+    "MsgCreateValidator",
+    "MsgDelegate",
+    "MsgEditValidator",
+    "MsgUndelegate",
     "Redelegation",
     "RedelegationEntry",
-    "CommissionRates",
-    "Commission",
-    "Description",
+    "UnbondingDelegation",
+    "UnbondingEntry",
     "Validator",
-    "MsgBeginRedelegate",
-    "MsgDelegate",
-    "MsgUndelegate",
-    "MsgEditValidator",
-    "MsgCreateValidator",
 ]

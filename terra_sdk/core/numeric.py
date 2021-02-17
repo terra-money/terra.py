@@ -134,7 +134,7 @@ class Dec(JSONSerializable):
         return f"{parity}{self.whole}{dot}{frac}"
 
     def __repr__(self):
-        return f"Dec({self.to_short_str()})"  # short representation
+        return f"Dec('{self.to_short_str()}')"  # short representation
 
     def __int__(self) -> int:
         int_part = abs(self._i) // DEC_ONE
