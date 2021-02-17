@@ -67,19 +67,27 @@ class Description(JSONSerializable):
         identity: keybase.io identifier (used for setting logo)
         website: validator website
         details: longer description of validator
+        security_contact: contact information for validator
     """
 
     DO_NOT_MODIFY = "[do-not-modify]"
     """"""
 
-    moniker: str = attr.ib()
-    identity: str = attr.ib()
-    website: str = attr.ib()
-    details: str = attr.ib()
+    moniker: str = attr.ib(default="")
+    identity: str = attr.ib(default="")
+    website: str = attr.ib(default="")
+    details: str = attr.ib(default="")
+    security_contact: str = attr.ib(default="")
 
     @classmethod
     def from_data(cls, data) -> Description:
-        return cls(data["moniker"], data["identity"], data["website"], data["details"])
+        return cls(
+            data.get("moniker"),
+            data.get("identity"),
+            data.get("website"),
+            data.get("details"),
+            data.get("security_contact"),
+        )
 
 
 @attr.s
