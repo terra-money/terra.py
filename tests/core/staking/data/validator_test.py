@@ -14,6 +14,7 @@ def test_deserializes():
             "identity": "DA9C5AD3E308E426",
             "website": "https://www.westaking.io",
             "details": "Delegate your luna to us for the staking rewards. We will do our best as secure and stable validator.",
+            "security_contact": "",
         },
         "unbonding_height": "0",
         "unbonding_time": "1970-01-01T00:00:00Z",
