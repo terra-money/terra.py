@@ -11,14 +11,15 @@ from .numeric import Numeric
 
 class Coins(JSONSerializable):
     """Represents an unordered collection of :class:`Coin` objects
-    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK.
+    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK. If one of the 
+    input coins would be ``Dec``-amount type coin, the resultant Coins is converted to
+    ``Dec``-amount coins.
 
     Args:
         arg (Optional[Coins.Input], optional): argument to convert. Defaults to ``{}``.
 
     Raises:
         TypeError: if ``arg`` is not an Iterable
-        ValueError: if set would have both Dec-amount and ``int``-amount coins (non-homogeneous).
     """
 
     Input = Union[Iterable[Coin], str, Dict[str, Numeric.Input], Dict[str, Coin]]
@@ -83,13 +84,10 @@ class Coins(JSONSerializable):
             else:
                 self._coins[coin.denom] = coin
 
-        # check homogeneous
-        if not all([c.is_dec_coin() for c in self]) and not all(
-            [c.is_int_coin() for c in self]
-        ):
-            raise ValueError(
-                f"non-homogenous instantiation of Coins not supported: {self!s}"
-            )
+        # make all coins DecCoin if one is DecCoin
+        if not all([c.is_int_coin() for c in self]):
+            for denom in self._coins:
+                self._coins[denom] = self._coins[denom].to_dec_coin()
 
     def __getitem__(self, denom: str) -> Coin:
         return self._coins[denom]

@@ -13,9 +13,12 @@ def test_clobbers_similar_denom():
     assert coinLUNA.amount == 2000
 
 
-def test_rejects_nonhomogenous_sets():
-    with pytest.raises(ValueError) as _:
-        Coins(uluna=1000, ukrw=1.234)
+def test_converts_dec_coin():
+    c1 = Coins(uluna=1000, ukrw=1.234)
+    c2 = Coins(uluna=1000, ukrw=1234)
+
+    assert all(c.is_dec_coin() for c in c1)
+    assert not all(c.is_dec_coin() for c in c2)
 
 
 def test_from_str():
