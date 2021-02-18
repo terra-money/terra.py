@@ -159,7 +159,7 @@ def parse_events_by_type(event_data: List[dict]) -> Dict[str, Dict[str, List[str
                 events[ev["type"]] = {}
             if att["key"] not in events[ev["type"]]:
                 events[ev["type"]][att["key"]] = []
-            events[ev["type"]][att["key"]].append(att["value"])
+            events[ev["type"]][att["key"]].append(att.get("value"))
     return events
 
 
