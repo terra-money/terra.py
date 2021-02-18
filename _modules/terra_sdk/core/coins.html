@@ -200,14 +200,15 @@
 
 <div class="viewcode-block" id="Coins"><a class="viewcode-back" href="../../../common/coin_coins.html#terra_sdk.core.coins.Coins">[docs]</a><span class="k">class</span> <span class="nc">Coins</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Represents an unordered collection of :class:`Coin` objects</span>
-<span class="sd">    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK.</span>
+<span class="sd">    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK. If one of the </span>
+<span class="sd">    input coins would be ``Dec``-amount type coin, the resultant Coins is converted to</span>
+<span class="sd">    ``Dec``-amount coins.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        arg (Optional[Coins.Input], optional): argument to convert. Defaults to ``{}``.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: if ``arg`` is not an Iterable</span>
-<span class="sd">        ValueError: if set would have both Dec-amount and ``int``-amount coins (non-homogeneous).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">Input</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Coin</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Coin</span><span class="p">]]</span>
@@ -272,13 +273,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_coins</span><span class="p">[</span><span class="n">coin</span><span class="o">.</span><span class="n">denom</span><span class="p">]</span> <span class="o">=</span> <span class="n">coin</span>
 
-        <span class="c1"># check homogeneous</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">is_dec_coin</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">is_int_coin</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
-        <span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;non-homogenous instantiation of Coins not supported: </span><span class="si">{</span><span class="bp">self</span><span class="si">!s}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
+        <span class="c1"># make all coins DecCoin if one is DecCoin</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">is_int_coin</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">denom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coins</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_coins</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coins</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span><span class="o">.</span><span class="n">to_dec_coin</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coin</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coins</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span>

@@ -432,16 +432,15 @@ argument is first coerced to either an <code class="docutils literal notranslate
 <dt id="terra_sdk.core.coins.Coins">
 <em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.coins.</code><code class="sig-name descname">Coins</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">denoms</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an unordered collection of <code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code> objects
-– analagous to <code class="docutils literal notranslate"><span class="pre">sdk.Coins</span></code> and <code class="docutils literal notranslate"><span class="pre">sdk.DecCoins</span></code> in Cosmos SDK.</p>
+– analagous to <code class="docutils literal notranslate"><span class="pre">sdk.Coins</span></code> and <code class="docutils literal notranslate"><span class="pre">sdk.DecCoins</span></code> in Cosmos SDK. If one of the
+input coins would be <code class="docutils literal notranslate"><span class="pre">Dec</span></code>-amount type coin, the resultant Coins is converted to
+<code class="docutils literal notranslate"><span class="pre">Dec</span></code>-amount coins.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>arg</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – argument to convert. Defaults to <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – if <code class="docutils literal notranslate"><span class="pre">arg</span></code> is not an Iterable</p></li>
-<li><p><strong>ValueError</strong> – if set would have both Dec-amount and <code class="docutils literal notranslate"><span class="pre">int</span></code>-amount coins (non-homogeneous).</p></li>
-</ul>
+<dd class="field-even"><p><strong>TypeError</strong> – if <code class="docutils literal notranslate"><span class="pre">arg</span></code> is not an Iterable</p>
 </dd>
 </dl>
 <dl class="py attribute">
