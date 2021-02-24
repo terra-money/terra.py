@@ -11,7 +11,7 @@ from .numeric import Numeric
 
 class Coins(JSONSerializable):
     """Represents an unordered collection of :class:`Coin` objects
-    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK. If one of the 
+    -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK. If one of the
     input coins would be ``Dec``-amount type coin, the resultant Coins is converted to
     ``Dec``-amount coins.
 
