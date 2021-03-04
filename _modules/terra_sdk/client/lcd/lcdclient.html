@@ -216,6 +216,7 @@
 <span class="kn">from</span> <span class="nn">.api.treasury</span> <span class="kn">import</span> <span class="n">AsyncTreasuryAPI</span><span class="p">,</span> <span class="n">TreasuryAPI</span>
 <span class="kn">from</span> <span class="nn">.api.tx</span> <span class="kn">import</span> <span class="n">AsyncTxAPI</span><span class="p">,</span> <span class="n">TxAPI</span>
 <span class="kn">from</span> <span class="nn">.api.wasm</span> <span class="kn">import</span> <span class="n">AsyncWasmAPI</span><span class="p">,</span> <span class="n">WasmAPI</span>
+<span class="kn">from</span> <span class="nn">.lcdutils</span> <span class="kn">import</span> <span class="n">AsyncLCDUtils</span><span class="p">,</span> <span class="n">LCDUtils</span>
 <span class="kn">from</span> <span class="nn">.wallet</span> <span class="kn">import</span> <span class="n">AsyncWallet</span><span class="p">,</span> <span class="n">Wallet</span>
 
 
@@ -258,6 +259,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">treasury</span> <span class="o">=</span> <span class="n">AsyncTreasuryAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wasm</span> <span class="o">=</span> <span class="n">AsyncWasmAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tx</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utils</span> <span class="o">=</span> <span class="n">AsyncLCDUtils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">wallet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncWallet</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Creates a :class:`AsyncWallet` object from a key.</span>
@@ -398,6 +400,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">treasury</span> <span class="o">=</span> <span class="n">TreasuryAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wasm</span> <span class="o">=</span> <span class="n">WasmAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tx</span> <span class="o">=</span> <span class="n">TxAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utils</span> <span class="o">=</span> <span class="n">LCDUtils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>

@@ -255,7 +255,7 @@
         <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fee_denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sequence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignMsg</span><span class="p">:</span>
@@ -271,7 +271,7 @@
 <span class="sd">            memo (str, optional): optional short string to include with transaction.</span>
 <span class="sd">            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.</span>
 <span class="sd">            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.</span>
-<span class="sd">            denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.</span>
+<span class="sd">            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.</span>
 <span class="sd">            account_number (Optional[int], optional): account number (overrides blockchain query if</span>
 <span class="sd">                provided)</span>
 <span class="sd">            sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)</span>
@@ -286,7 +286,7 @@
             <span class="n">memo</span><span class="p">,</span>
             <span class="n">gas_prices</span><span class="p">,</span>
             <span class="n">gas_adjustment</span><span class="p">,</span>
-            <span class="n">denoms</span><span class="p">,</span>
+            <span class="n">fee_denoms</span><span class="p">,</span>
             <span class="n">account_number</span><span class="p">,</span>
             <span class="n">sequence</span><span class="p">,</span>
         <span class="p">)</span></div>
@@ -298,7 +298,7 @@
         <span class="n">memo</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Numeric</span><span class="o">.</span><span class="n">Input</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fee_denoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sequence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
@@ -313,7 +313,7 @@
 <span class="sd">            memo (str, optional): optional short string to include with transaction.</span>
 <span class="sd">            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.</span>
 <span class="sd">            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.</span>
-<span class="sd">            denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.</span>
+<span class="sd">            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.</span>
 <span class="sd">            account_number (Optional[int], optional): account number (overrides blockchain query if</span>
 <span class="sd">                provided)</span>
 <span class="sd">            sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)</span>
@@ -328,7 +328,7 @@
                 <span class="n">memo</span><span class="p">,</span>
                 <span class="n">gas_prices</span><span class="p">,</span>
                 <span class="n">gas_adjustment</span><span class="p">,</span>
-                <span class="n">denoms</span><span class="p">,</span>
+                <span class="n">fee_denoms</span><span class="p">,</span>
                 <span class="n">account_number</span><span class="p">,</span>
                 <span class="n">sequence</span><span class="p">,</span>
             <span class="p">)</span>
