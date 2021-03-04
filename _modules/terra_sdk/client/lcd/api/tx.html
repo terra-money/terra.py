@@ -245,11 +245,11 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            StdSignMsg: unsigned tx</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fee_denoms</span> <span class="o">=</span> <span class="n">fee_denoms</span> <span class="ow">or</span> <span class="p">[]</span>
 
         <span class="c1"># create the fake fee</span>
         <span class="k">if</span> <span class="n">fee</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">balance_one</span> <span class="o">=</span> <span class="p">[</span><span class="n">Coin</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">fee_denoms</span><span class="p">]</span>
+            <span class="n">balance_denoms</span> <span class="o">=</span> <span class="n">fee_denoms</span> <span class="ow">or</span> <span class="p">[]</span>
+            <span class="n">balance_one</span> <span class="o">=</span> <span class="p">[</span><span class="n">Coin</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">balance_denoms</span><span class="p">]</span>
             <span class="c1"># estimate the fee</span>
             <span class="n">tx</span> <span class="o">=</span> <span class="n">StdTx</span><span class="p">(</span><span class="n">msgs</span><span class="p">,</span> <span class="n">StdFee</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">balance_one</span><span class="p">),</span> <span class="p">[],</span> <span class="n">memo</span><span class="p">)</span>
             <span class="n">fee</span> <span class="o">=</span> <span class="k">await</span> <span class="n">BaseAsyncAPI</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span>
