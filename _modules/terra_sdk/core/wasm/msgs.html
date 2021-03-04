@@ -192,36 +192,21 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span><span class="p">,</span> <span class="n">b64encode</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">Coins</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.contract</span> <span class="kn">import</span> <span class="n">b64_to_dict</span><span class="p">,</span> <span class="n">dict_to_b64</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">dict_to_data</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;b64_to_dict&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dict_to_b64&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgStoreCode&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgInstantiateContract&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgExecuteContract&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgMigrateContract&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgUpdateContractOwner&quot;</span><span class="p">,</span>
 <span class="p">]</span>
-
-
-<div class="viewcode-block" id="b64_to_dict"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.b64_to_dict">[docs]</a><span class="k">def</span> <span class="nf">b64_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Converts ASCII-encoded base64 encoded string to dict.&quot;&quot;&quot;</span>
-    <span class="n">b64_bytes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
-    <span class="n">msg_bytes</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">b64_bytes</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg_bytes</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="dict_to_b64"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.dict_to_b64">[docs]</a><span class="k">def</span> <span class="nf">dict_to_b64</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Converts dict to ASCII-encoded base64 encoded string.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">b64encode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="s2">&quot;ascii&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="MsgStoreCode"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgStoreCode">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
