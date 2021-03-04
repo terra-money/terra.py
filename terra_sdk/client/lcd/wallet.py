@@ -66,7 +66,7 @@ class Wallet:
         memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdSignMsg:
@@ -82,7 +82,7 @@ class Wallet:
             memo (str, optional): optional short string to include with transaction.
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
             gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
+            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
             account_number (Optional[int], optional): account number (overrides blockchain query if
                 provided)
             sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
@@ -97,7 +97,7 @@ class Wallet:
             memo,
             gas_prices,
             gas_adjustment,
-            denoms,
+            fee_denoms,
             account_number,
             sequence,
         )
@@ -109,7 +109,7 @@ class Wallet:
         memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdTx:
@@ -124,7 +124,7 @@ class Wallet:
             memo (str, optional): optional short string to include with transaction.
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
             gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
+            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
             account_number (Optional[int], optional): account number (overrides blockchain query if
                 provided)
             sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
@@ -139,7 +139,7 @@ class Wallet:
                 memo,
                 gas_prices,
                 gas_adjustment,
-                denoms,
+                fee_denoms,
                 account_number,
                 sequence,
             )

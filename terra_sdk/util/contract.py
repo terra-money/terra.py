@@ -1,9 +1,10 @@
 """Useful contract-related functions."""
 
 import base64
-from typing import Union
+from typing import Dict, List, Union
 
 from terra_sdk.core import AccAddress
+from terra_sdk.core.auth import TxInfo
 from terra_sdk.core.broadcast import BlockTxBroadcastResult
 
 __all__ = ["read_file_as_b64", "get_code_id", "get_contract_address"]
@@ -23,7 +24,9 @@ def read_file_as_b64(path: Union[str, bytes, int]) -> str:
         return contract_bytes
 
 
-def get_code_id(tx_result: BlockTxBroadcastResult, msg_index: int = 0) -> str:
+def get_code_id(
+    tx_result: Union[BlockTxBroadcastResult, TxInfo], msg_index: int = 0
+) -> str:
     """Utility function for extracting the code id from a ``MsgStoreCode`` message.
 
     Args:
@@ -41,7 +44,7 @@ def get_code_id(tx_result: BlockTxBroadcastResult, msg_index: int = 0) -> str:
 
 
 def get_contract_address(
-    tx_result: BlockTxBroadcastResult, msg_index: int = 0
+    tx_result: Union[BlockTxBroadcastResult, TxInfo], msg_index: int = 0
 ) -> AccAddress:
     """Utility function for extracting the contract address from a ``MsgInstantiateContract``
     message.
@@ -60,3 +63,26 @@ def get_contract_address(
         return AccAddress(contract_address)
     else:
         raise ValueError("could not parse code id -- tx logs are empty.")
+
+
+def get_contract_events(
+    tx_result: Union[BlockTxBroadcastResult, TxInfo], msg_index: int = 0
+) -> List[Dict[str, str]]:
+    if tx_result.logs:
+        contract_events = []
+        for event in tx_result.logs[msg_index].events:
+            if event["type"] == "from_contract":
+                event_data: Dict[str, str] = {}
+                current_contract_address = event["attributes"][0]["value"]
+                for att in event["attributes"]:
+                    if att["key"] == "contract_address":
+                        if current_contract_address != att["value"]:
+                            contract_events.append(event_data)
+                            event_data = {}
+                            current_contract_address = att["value"]
+                    event_data[att["key"]] = att["value"]
+                contract_events.append(event_data)  # append remaining
+                return contract_events
+        raise ValueError("could not find event type 'from_contract' in logs")
+    else:
+        raise ValueError("could not parse contract events -- tx logs are empty.")

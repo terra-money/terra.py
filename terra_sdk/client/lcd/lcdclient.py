@@ -27,6 +27,7 @@ from .api.tendermint import AsyncTendermintAPI, TendermintAPI
 from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
+from .lcdutils import AsyncLCDUtils, LCDUtils
 from .wallet import AsyncWallet, Wallet
 
 
@@ -69,6 +70,7 @@ class AsyncLCDClient:
         self.treasury = AsyncTreasuryAPI(self)
         self.wasm = AsyncWasmAPI(self)
         self.tx = AsyncTxAPI(self)
+        self.utils = AsyncLCDUtils(self)
 
     def wallet(self, key: Key) -> AsyncWallet:
         """Creates a :class:`AsyncWallet` object from a key.
@@ -209,6 +211,7 @@ class LCDClient(AsyncLCDClient):
         self.treasury = TreasuryAPI(self)
         self.wasm = WasmAPI(self)
         self.tx = TxAPI(self)
+        self.utils = LCDUtils(self)
 
     async def __aenter__(self):
         raise NotImplementedError(

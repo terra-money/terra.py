@@ -35,7 +35,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdSignMsg:
@@ -49,25 +49,22 @@ class AsyncTxAPI(BaseAsyncAPI):
             memo (str, optional): memo to use. Defaults to "".
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
             gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating.
+            fee_denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating.
             account_number (Optional[int], optional): account number to use.
             sequence (Optional[int], optional): sequence number to use.
 
         Returns:
             StdSignMsg: unsigned tx
         """
+        fee_denoms = fee_denoms or []
+
+        # create the fake fee
         if fee is None:
-
-            # create the fake fee
-            balance = await BaseAsyncAPI._try_await(
-                self._c.bank.balance(source_address)
-            )
-            balance_one = [Coin(c.denom, 1) for c in balance]
-
+            balance_one = [Coin(c, 1) for c in fee_denoms]
             # estimate the fee
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
             fee = await BaseAsyncAPI._try_await(
-                self.estimate_fee(tx, gas_prices, gas_adjustment, denoms)
+                self.estimate_fee(tx, gas_prices, gas_adjustment, fee_denoms)
             )
 
         if account_number is None or sequence is None:
@@ -88,7 +85,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         tx: Union[StdSignMsg, StdTx],
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
     ) -> StdFee:
         """Estimates the proper fee to apply by simulating it within the node.
 
@@ -96,7 +93,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for
             gas_prices (Optional[Coins.Input], optional): gas prices to use.
             gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use.
-            denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.
+            fee_denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.
 
         Returns:
             StdFee: estimated fee
@@ -111,17 +108,24 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         tx_value["fee"]["gas"] = "0"
 
+        gas_prices_coins = None
+        if gas_prices:
+            gas_prices_coins = Coins(gas_prices)
+            if fee_denoms:
+                _fee_denoms: List[str] = fee_denoms  # satisfy mypy type checking :(
+                gas_prices_coins = gas_prices_coins.filter(
+                    lambda c: c.denom in _fee_denoms
+                )
+
         data = {
             "tx": tx_value,
-            "gas_prices": gas_prices and Coins(gas_prices).to_data(),
+            "gas_prices": gas_prices_coins and gas_prices_coins.to_data(),
             "gas_adjustment": gas_adjustment and str(gas_adjustment),
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
         fees = Coins.from_data(res["fees"])
-        # only pick the denoms we are interested in?
-        if denoms:
-            fees = fees.filter(lambda c: c.denom in denoms)  # type: ignore
+
         return StdFee(int(res["gas"]), fees)
 
     async def encode(self, tx: StdTx) -> str:
@@ -235,7 +239,7 @@ class TxAPI(AsyncTxAPI):
         memo: str = "",
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
         account_number: Optional[int] = None,
         sequence: Optional[int] = None,
     ) -> StdSignMsg:
@@ -249,7 +253,7 @@ class TxAPI(AsyncTxAPI):
         tx: Union[StdSignMsg, StdTx],
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
-        denoms: Optional[List[str]] = None,
+        fee_denoms: Optional[List[str]] = None,
     ) -> StdFee:
         pass
 
