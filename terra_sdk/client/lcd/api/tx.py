@@ -56,11 +56,11 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             StdSignMsg: unsigned tx
         """
-        fee_denoms = fee_denoms or []
 
         # create the fake fee
         if fee is None:
-            balance_one = [Coin(c, 1) for c in fee_denoms]
+            balance_denoms = fee_denoms or []
+            balance_one = [Coin(c, 1) for c in balance_denoms]
             # estimate the fee
             tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
             fee = await BaseAsyncAPI._try_await(
