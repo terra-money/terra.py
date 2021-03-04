@@ -1,13 +1,33 @@
 """Useful contract-related functions."""
 
 import base64
+import json
 from typing import Dict, List, Union
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.auth import TxInfo
 from terra_sdk.core.broadcast import BlockTxBroadcastResult
 
-__all__ = ["read_file_as_b64", "get_code_id", "get_contract_address"]
+__all__ = [
+    "b64_to_dict",
+    "dict_to_b64",
+    "read_file_as_b64",
+    "get_code_id",
+    "get_contract_address",
+    "get_contract_events",
+]
+
+
+def b64_to_dict(data: str) -> dict:
+    """Converts ASCII-encoded base64 encoded string to dict."""
+    b64_bytes = data.encode("ascii")
+    msg_bytes = base64.b64decode(b64_bytes)
+    return json.loads(msg_bytes)
+
+
+def dict_to_b64(data: dict) -> str:
+    """Converts dict to ASCII-encoded base64 encoded string."""
+    return base64.b64encode(bytes(json.dumps(data), "ascii")).decode()
 
 
 def read_file_as_b64(path: Union[str, bytes, int]) -> str:
@@ -75,11 +95,13 @@ def get_contract_events(
                 event_data: Dict[str, str] = {}
                 current_contract_address = event["attributes"][0]["value"]
                 for att in event["attributes"]:
-                    if att["key"] == "contract_address":
-                        if current_contract_address != att["value"]:
-                            contract_events.append(event_data)
-                            event_data = {}
-                            current_contract_address = att["value"]
+                    if (
+                        att["key"] == "contract_address"
+                        and current_contract_address != att["value"]
+                    ):
+                        contract_events.append(event_data)
+                        event_data = {}
+                        current_contract_address = att["value"]
                     event_data[att["key"]] = att["value"]
                 contract_events.append(event_data)  # append remaining
                 return contract_events

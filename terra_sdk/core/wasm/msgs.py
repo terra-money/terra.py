@@ -3,36 +3,21 @@
 from __future__ import annotations
 
 import copy
-import json
-from base64 import b64decode, b64encode
 
 import attr
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.contract import b64_to_dict, dict_to_b64
 from terra_sdk.util.json import dict_to_data
 
 __all__ = [
-    "b64_to_dict",
-    "dict_to_b64",
     "MsgStoreCode",
     "MsgInstantiateContract",
     "MsgExecuteContract",
     "MsgMigrateContract",
     "MsgUpdateContractOwner",
 ]
-
-
-def b64_to_dict(data: str) -> dict:
-    """Converts ASCII-encoded base64 encoded string to dict."""
-    b64_bytes = data.encode("ascii")
-    msg_bytes = b64decode(b64_bytes)
-    return json.loads(msg_bytes)
-
-
-def dict_to_b64(data: dict) -> str:
-    """Converts dict to ASCII-encoded base64 encoded string."""
-    return b64encode(bytes(json.dumps(data), "ascii")).decode()
 
 
 @attr.s
