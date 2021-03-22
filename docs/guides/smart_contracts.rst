@@ -8,15 +8,16 @@ Contract Deployment Example
 
 .. code-block:: python
 
-    from terra_sdk.client import LocalTerra
-    from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract
-
+    from terra_sdk.client.localterra import LocalTerra
+    from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract    
+    from terra_sdk.core.auth.data.tx import StdFee
+    
     terra = LocalTerra()
     test1 = terra.wallets["test1"]
     contract_file = open("./contract.wasm", "rb")
     file_bytes = base64.b64encode(contract_file.read()).decode()
     store_code = MsgStoreCode(test1.key.acc_address, file_bytes)
-    store_code_tx = test1.create_and_sign_tx(msgs=[store_code])
+    store_code_tx = test1.create_and_sign_tx(msgs=[store_code], fee=StdFee(2100000, "60000uluna"))
     store_code_tx_result = terra.tx.broadcast(store_code_tx)
     print(store_code_tx_result)
 
