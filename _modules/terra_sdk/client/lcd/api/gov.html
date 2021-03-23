@@ -215,7 +215,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Proposal: proposal</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/gov/proposals/</span><span class="si">{proposal_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/gov/proposals/</span><span class="si">{</span><span class="n">proposal_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Proposal</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">proposer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
