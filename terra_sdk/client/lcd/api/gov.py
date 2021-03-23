@@ -26,7 +26,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         Returns:
             Proposal: proposal
         """
-        res = await self._c._get("/gov/proposals/{proposal_id}")
+        res = await self._c._get(f"/gov/proposals/{proposal_id}")
         return Proposal.from_data(res)
 
     async def proposer(self, proposal_id: int) -> str:
