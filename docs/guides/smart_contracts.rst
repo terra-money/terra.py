@@ -8,6 +8,7 @@ Contract Deployment Example
 
 .. code-block:: python
 
+    import base64
     from terra_sdk.client.localterra import LocalTerra
     from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract    
     from terra_sdk.core.auth.data.tx import StdFee
