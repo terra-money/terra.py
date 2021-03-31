@@ -150,7 +150,7 @@ class Coins(JSONSerializable):
         Args:
             subtrahend (Union[Coin, Coins]): subtrahend
         """
-        return self.sub(self.mul(-1))
+        return self.add(subtrahend.mul(-1))
 
     def __sub__(self, subtrahend: Union[Coin, Coins]) -> Coins:
         return self.sub(subtrahend)
