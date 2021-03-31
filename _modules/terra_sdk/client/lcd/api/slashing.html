@@ -187,7 +187,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for terra_sdk.client.lcd.api.slashing</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">ValConsPubKey</span>
 
@@ -199,14 +199,14 @@
 <span class="k">class</span> <span class="nc">AsyncSlashingAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">signing_infos</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">val_cons_pub_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValConsPubKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Fetches signing infos, optionally filtering by validator consensus public key.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            val_cons_pub_key (Optional[ValConsPubKey], optional): validator consensus public key.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            List[dict]: signing infos</span>
+<span class="sd">            Union[List[dict], dict]: signing infos</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">val_cons_pub_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/slashing/signing_infos&quot;</span>
