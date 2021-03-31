@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from terra_sdk.core import ValConsPubKey
 
@@ -10,14 +10,14 @@ __all__ = ["AsyncSlashingAPI", "SlashingAPI"]
 class AsyncSlashingAPI(BaseAsyncAPI):
     async def signing_infos(
         self, val_cons_pub_key: Optional[ValConsPubKey] = None
-    ) -> List[dict]:
+    ) -> Union[List[dict], dict]:
         """Fetches signing infos, optionally filtering by validator consensus public key.
 
         Args:
             val_cons_pub_key (Optional[ValConsPubKey], optional): validator consensus public key.
 
         Returns:
-            List[dict]: signing infos
+            Union[List[dict], dict]: signing infos
         """
         if val_cons_pub_key is None:
             url = "/slashing/signing_infos"
