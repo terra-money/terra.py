@@ -89,14 +89,12 @@ class AsyncLCDClient:
         ) as response:
             try:
                 result = await response.json(content_type=None)
-                if not 200 <= response.status < 299:
-                    raise LCDResponseError(
-                        message=result.get("error"), response=response
-                    )
-                self.last_request_height = result.get("height")
-                return result if raw else result["result"]
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
+            if not 200 <= response.status < 299:
+                raise LCDResponseError(message=result.get("error"), response=response)
+        self.last_request_height = result.get("height")
+        return result if raw else result["result"]
 
     async def _post(
         self, endpoint: str, data: Optional[dict] = None, raw: bool = False
@@ -106,14 +104,12 @@ class AsyncLCDClient:
         ) as response:
             try:
                 result = await response.json(content_type=None)
-                if not 200 <= response.status < 299:
-                    raise LCDResponseError(
-                        message=result.get("error"), response=response
-                    )
-                self.last_request_height = result.get("height")
-                return result if raw else result["result"]
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
+            if not 200 <= response.status < 299:
+                raise LCDResponseError(message=result.get("error"), response=response)
+        self.last_request_height = result.get("height")
+        return result if raw else result["result"]
 
     async def __aenter__(self):
         return self
