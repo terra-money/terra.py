@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from asyncio import AbstractEventLoop, get_event_loop
+from json import JSONDecodeError
 from typing import Optional, Union
 from urllib.parse import urljoin
 
@@ -86,13 +87,13 @@ class AsyncLCDClient:
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
         ) as response:
-            result = await response.json(content_type=None)
-            if not str(response.status).startswith("2"):
+            try:
+                result = await response.json(content_type=None)
+            except JSONDecodeError:
+                raise LCDResponseError(message=str(response.reason), response=response)
+            if not 200 <= response.status < 299:
                 raise LCDResponseError(message=result.get("error"), response=response)
-        try:
-            self.last_request_height = result["height"]
-        except KeyError:
-            self.last_request_height = None
+        self.last_request_height = result.get("height")
         return result if raw else result["result"]
 
     async def _post(
@@ -101,13 +102,13 @@ class AsyncLCDClient:
         async with self.session.post(
             urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
-            result = await response.json(content_type=None)
-            if not str(response.status).startswith("2"):
+            try:
+                result = await response.json(content_type=None)
+            except JSONDecodeError:
+                raise LCDResponseError(message=str(response.reason), response=response)
+            if not 200 <= response.status < 299:
                 raise LCDResponseError(message=result.get("error"), response=response)
-        try:
-            self.last_request_height = result["height"]
-        except KeyError:
-            self.last_request_height = None
+        self.last_request_height = result.get("height")
         return result if raw else result["result"]
 
     async def __aenter__(self):
