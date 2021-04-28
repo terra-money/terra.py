@@ -1,5 +1,7 @@
 ![logo](./docs/img/logo.png)
 
+You can find the documentation [here](https://terra-project.github.io/terra-sdk-python/).
+
 ## Table of Contents <!-- omit in toc -->
 
 - [Installation](#installation)
