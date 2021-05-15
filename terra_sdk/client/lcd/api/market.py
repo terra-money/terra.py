@@ -20,13 +20,22 @@ class AsyncMarketAPI(BaseAsyncAPI):
         res = await self._c._get("/market/swap", params)
         return Coin.from_data(res)
 
-    async def terra_pool_delta(self) -> Dec:
-        """Fetches the Terra pool delta.
+    async def mint_pool_delta(self) -> Dec:
+        """Fetches the mint pool delta (usdr amount used for swap operation from the MintPool).
 
         Returns:
-            Dec: Terra pool delta
+            Dec: Mint pool delta
         """
-        res = await self._c._get("/market/terra_pool_delta")
+        res = await self._c._get("/market/mint_pool_delta")
+        return Dec(res)
+
+    async def burn_pool_delta(self) -> Dec:
+        """Fetches the burn pool delta (usdr amount used for swap operation from the BurnPool).
+
+        Returns:
+            Dec: Burn pool delta
+        """
+        res = await self._c._get("/market/burn_pool_delta")
         return Dec(res)
 
     async def parameters(self) -> dict:
@@ -45,11 +54,17 @@ class MarketAPI(AsyncMarketAPI):
 
     swap_rate.__doc__ = AsyncMarketAPI.swap_rate.__doc__
 
-    @sync_bind(AsyncMarketAPI.terra_pool_delta)
-    def terra_pool_delta(self) -> Dec:
+    @sync_bind(AsyncMarketAPI.mint_pool_delta)
+    def mint_pool_delta(self) -> Dec:
         pass
 
-    terra_pool_delta.__doc__ = AsyncMarketAPI.terra_pool_delta.__doc__
+    mint_pool_delta.__doc__ = AsyncMarketAPI.mint_pool_delta.__doc__
+
+    @sync_bind(AsyncMarketAPI.burn_pool_delta)
+    def burn_pool_delta(self) -> Dec:
+        pass
+
+    burn_pool_delta.__doc__ = AsyncMarketAPI.burn_pool_delta.__doc__
 
     @sync_bind(AsyncMarketAPI.parameters)
     def parameters(self) -> dict:
