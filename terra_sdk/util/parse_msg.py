@@ -32,7 +32,6 @@ from terra_sdk.core.wasm import (
     MsgInstantiateContract,
     MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
 )
 
 from .base import create_demux
@@ -71,7 +70,6 @@ wasm_msgs = [
     MsgInstantiateContract,
     MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
 ]
 
 parse_msg = create_demux(

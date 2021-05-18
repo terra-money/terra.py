@@ -16,7 +16,6 @@ __all__ = [
     "MsgInstantiateContract",
     "MsgExecuteContract",
     "MsgMigrateContract",
-    "MsgUpdateContractOwner",
 ]
 
 
@@ -151,28 +150,3 @@ class MsgMigrateContract(Msg):
         )
 
 
-@attr.s
-class MsgUpdateContractOwner(Msg):
-    """Update a smart contract's owner.
-
-    Args:
-        owner: address of current owner (sender)
-        new_owner: address of new owner
-        contract: address of contract to change
-    """
-
-    type = "wasm/MsgUpdateContractOwner"
-    """"""
-
-    owner: AccAddress = attr.ib()
-    new_owner: AccAddress = attr.ib()
-    contract: AccAddress = attr.ib()
-
-    @classmethod
-    def from_data(cls, data: dict) -> MsgUpdateContractOwner:
-        data = data["value"]
-        return cls(
-            owner=data["owner"],
-            new_owner=data["new_owner"],
-            contract=data["contract"],
-        )
