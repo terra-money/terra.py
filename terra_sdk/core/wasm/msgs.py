@@ -16,6 +16,9 @@ __all__ = [
     "MsgInstantiateContract",
     "MsgExecuteContract",
     "MsgMigrateContract",
+    "MsgMigrateCode",
+    "MsgUpdateContractAdmin",
+    "MsgClearContractAdmin",
 ]
 
 
@@ -149,4 +152,86 @@ class MsgMigrateContract(Msg):
             migrate_msg=b64_to_dict(data["migrate_msg"]),
         )
 
+
+@attr.s
+class MsgMigrateCode(Msg):
+    """Message to submit Wasm code to the system.
+
+    Args:
+        code_id (int): CodeID is the migration target code id
+        sender: Sender is the that actor that signed the messages
+        wasm_byte_code: WASMByteCode can be raw or gzip compressed
+    """
+
+    type = "wasm/MsgMigrateCode"
+    """"""
+
+    code_id: int = attr.ib(converter=int)
+    sender: AccAddress = attr.ib()
+    wasm_byte_code: str = attr.ib(converter=str)
+
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["code_id"] = str(d["new_code_id"])
+        return {"type": self.type, "value": dict_to_data(d)}
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgMigrateCode:
+        data = data["value"]
+        return cls(
+            code_id=data["code_id"],
+            sender=data["sender"],
+            wasm_byte_code=data["wasm_byte_code"],
+        )
+
+
+@attr.s
+class MsgUpdateContractAdmin(Msg):
+    """Message to set a new admin for a smart contract.
+
+    Args:
+        admin: Admin is the current contract admin
+        new_admin: NewAdmin is the new contract admin
+        contract: Contract is the address of the smart contract
+    """
+
+    type = "wasm/MsgUpdateContractAdmin"
+    """"""
+
+    admin: AccAddress = attr.ib()
+    new_admin: AccAddress = attr.ib()
+    contract: AccAddress = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgUpdateContractAdmin:
+        data = data["value"]
+        return cls(
+            admin=data["admin"],
+            new_admin=data["new_admin"],
+            contract=data["contract"],
+        )
+
+
+@attr.s
+class MsgClearContractAdmin(Msg):
+    """Message to clear admin address from a smart contract.
+
+    Args:
+        admin: Admin is the current contract admin
+        contract: Contract is the address of the smart contract
+    """
+
+    type = "wasm/MsgClearContractAdmin"
+    """"""
+
+    admin: AccAddress = attr.ib()
+    contract: AccAddress = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgClearContractAdmin:
+        data = data["value"]
+        return cls(
+            admin=data["admin"],
+            contract=data["contract"],
+        )
 
