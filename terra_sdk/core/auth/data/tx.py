@@ -8,11 +8,13 @@ import attr
 
 from terra_sdk.core.coins import Coins
 from terra_sdk.core.msg import Msg
+from terra_sdk.core.numeric import Numeric
 from terra_sdk.util.json import JSONSerializable
 
 from .public_key import PublicKey
 
 __all__ = [
+    "BaseReq",
     "StdSignature",
     "StdFee",
     "StdSignMsg",
@@ -280,4 +282,76 @@ class TxInfo(JSONSerializable):
             data["timestamp"],
             data.get("code"),
             data.get("codespace"),
+        )
+
+
+@attr.s
+class BaseReq(JSONSerializable):
+    """BaseReq defines a structure that can be embedded in other request structures that all share common "base" fields.
+
+    Args:
+        address (AccAddress): transaction sender's account address (alias: 'from')
+        memo (str): transaction memo
+        chain_id (str): chain ID
+        account_number (int): account number
+        sequence (int): sequence number
+        timeout_height (Optional[int], optional): timeout is the block height after which this transaction will not be processed by the chain
+        fees (Optional[Coins.Input], optional): transaction fee
+        gas_prices (Optional[Coins.Input], optional): gas prices to use
+        gas (int): gas to use ("gas requested")
+        gas_adjustment (Numeric.Input): gas adjustment to use
+        simulate (bool): Estimate gas for a transaction (cannot be used in conjunction with generate_only)
+        
+    """
+
+    address: AccAddress = attr.ib()
+    memo: str = attr.ib()
+    chain_id: str = attr.ib()
+    account_number: int = attr.ib(converter=int)
+    sequence: int = attr.ib(converter=int)
+    timeout_height: Optional[int] = attr.ib()
+    fees: Optional[Coins] = attr.ib()
+    gas_prices: Optional[Coins] = attr.ib()
+    gas: int = attr.ib(converter=int)
+    gas_adjustment: Numeric.Output = attr.ib(converter=Numeric.parse)
+    simulate: bool = attr.ib(converter=bool)
+
+    def to_data(self) -> dict:
+        val = {
+            "from": self.address,
+            "memo": self.memo,
+            "chain_id": self.chain_id,
+            "account_number": str(self.account_number),
+            "sequence": str(self.sequence),
+            "timeout_height": str(self.timeout_height),
+            "fees": self.fees.to_data() if self.fees else None,
+            "gas_prices": self.gas_prices.to_dec_coins().to_data() if self.gas_prices else None,
+            "gas": str(self.gas),
+            "gas_adjustment": str(self.gas_adjustment),
+            "simulate": self.simulate,
+        }
+
+        if not val["timeout_height"]:
+            del val["timeout_height"]
+        if not val["fees"]:
+            del val["fees"]
+        if not val["gas_prices"]:
+            del val["gas_prices"]
+        
+        return val
+
+    @classmethod
+    def from_data(cls, data: dict) -> BaseReq:
+        return cls(
+            data["from"],
+            data["memo"],
+            data["chain_id"],
+            int(data["account_number"]),
+            int(data["sequence"]),
+            int(data["timeout_height"]) if "timeout_height" in data and data["timeout_height"] else None,
+            Coins.from_data(data["fees"]) if "fees" in data and data["fees"] else None,
+            Coins.from_data(data["gas_prices"]) if "gas_prices" in data and data["gas_prices"] else None,
+            int(data["gas"]),
+            Numeric.parse(data["gas_adjustment"]),
+            bool(data["simulate"]),
         )

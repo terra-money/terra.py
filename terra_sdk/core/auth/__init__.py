@@ -1,5 +1,6 @@
 from .data import (
     Account,
+    BaseReq,
     LazyGradedVestingAccount,
     PublicKey,
     StdFee,
@@ -13,6 +14,7 @@ from .data import (
 
 __all__ = [
     "Account",
+    "BaseReq",
     "LazyGradedVestingAccount",
     "StdSignature",
     "StdFee",

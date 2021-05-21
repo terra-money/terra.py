@@ -1,7 +1,7 @@
 from typing import List, Optional, Union
 
 from terra_sdk.core import AccAddress, Coin, Coins, Numeric
-from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
+from terra_sdk.core.auth import BaseReq, StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
     BlockTxBroadcastResult,
@@ -57,16 +57,6 @@ class AsyncTxAPI(BaseAsyncAPI):
             StdSignMsg: unsigned tx
         """
 
-        # create the fake fee
-        if fee is None:
-            balance_denoms = fee_denoms or []
-            balance_one = [Coin(c, 1) for c in balance_denoms]
-            # estimate the fee
-            tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
-            fee = await BaseAsyncAPI._try_await(
-                self.estimate_fee(tx, gas_prices, gas_adjustment, fee_denoms)
-            )
-
         if account_number is None or sequence is None:
             account = await BaseAsyncAPI._try_await(
                 self._c.auth.account_info(source_address)
@@ -75,6 +65,15 @@ class AsyncTxAPI(BaseAsyncAPI):
                 account_number = account.account_number
             if sequence is None:
                 sequence = account.sequence
+        
+        # create the fake fee
+        if fee is None:
+            balance_denoms = fee_denoms or []
+            balance_one = [Coin(c, 1) for c in balance_denoms]
+            # estimate the fee
+            fee = await BaseAsyncAPI._try_await(
+                self.estimate_fee(source_address, msgs, account_number, sequence, memo, 0, balance_one, gas_prices, gas_adjustment, fee_denoms)
+            )
 
         return StdSignMsg(
             self._c.chain_id, account_number or 0, sequence or 0, fee, msgs, memo  # type: ignore
@@ -82,7 +81,13 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def estimate_fee(
         self,
-        tx: Union[StdSignMsg, StdTx],
+        source_address: AccAddress,
+        msgs: List[Msg],
+        account_number: int,
+        sequence: int,
+        memo: str = "",
+        gas: Optional[int] = 0,
+        fees: Optional[Coins.Input] = None,
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         fee_denoms: Optional[List[str]] = None,
@@ -90,23 +95,23 @@ class AsyncTxAPI(BaseAsyncAPI):
         """Estimates the proper fee to apply by simulating it within the node.
 
         Args:
-            tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for
-            gas_prices (Optional[Coins.Input], optional): gas prices to use.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use.
+            source_address (AccAddress): transaction sender's account address
+            msgs (List[Msg]): list of messages to include
+            account_number (int): account number to use.
+            sequence (int): sequence number to use.
+            memo (str, optional): memo to use. Defaults to "".
+            gas (Optional[int], optional): gas to use ("gas requested")
+            fees (Optional[Coins.Input], optional): fee to use (estimates if empty).
+            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
+            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
             fee_denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.
 
         Returns:
             StdFee: estimated fee
         """
+        
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
-
-        if isinstance(tx, StdSignMsg):
-            tx_value = tx.to_stdtx().to_data()["value"]
-        else:
-            tx_value = tx.to_data()["value"]
-
-        tx_value["fee"]["gas"] = "0"
 
         gas_prices_coins = None
         if gas_prices:
@@ -117,16 +122,29 @@ class AsyncTxAPI(BaseAsyncAPI):
                     lambda c: c.denom in _fee_denoms
                 )
 
+        base_req = BaseReq(
+            source_address,
+            memo,
+            self._c.chain_id,
+            account_number,
+            sequence,
+            None,
+            fees,
+            gas_prices_coins if not fees else None,
+            gas,
+            gas_adjustment,
+            True,
+        )
+
         data = {
-            "tx": tx_value,
-            "gas_prices": gas_prices_coins and gas_prices_coins.to_data(),
-            "gas_adjustment": gas_adjustment and str(gas_adjustment),
+            "base_req": base_req.to_data(),
+            "msgs": [msg.to_data() for msg in msgs]
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
-        fees = Coins.from_data(res["fees"])
+        fees = Coins.from_data(res["fee"]["amount"])
 
-        return StdFee(int(res["gas"]), fees)
+        return StdFee(int(res["fee"]["gas"]), fees)
 
     async def encode(self, tx: StdTx) -> str:
         """Fetches a transaction's amino encoding.
