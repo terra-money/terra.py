@@ -169,8 +169,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             List[Validator]: validator informations
         """
-        res = await self._c._get("/staking/validators")
-        return [Validator.from_data(d) for d in res]
+        res = await self._c._get("/cosmos/staking/v1beta1/validators", raw=True)
+        return [Validator.from_data(d) for d in res["validators"]]
 
     async def validator(self, validator: ValAddress) -> Validator:
         """Fetch information about a single validator.

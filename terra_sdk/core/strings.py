@@ -41,9 +41,9 @@ AccPubKey.__doc__ = """Terra Bech32 Account Address -- type alias of str."""
 ValPubKey = NewType("ValPubKey", str)
 ValPubKey.__doc__ = """Terra Bech32 Validator PubKey -- type alias of str."""
 
-ValConsPubKey = NewType("ValConsPubKey", str)
+ValConsPubKey = NewType("ValConsPubKey", dict)
 ValConsPubKey.__doc__ = (
-    """Terra Bech32 Validator Conensus PubKey -- type alias of str."""
+    """Terra Bech32 Validator Conensus PubKey -- type alias of dict."""
 )
 
 

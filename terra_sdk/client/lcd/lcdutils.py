@@ -8,7 +8,7 @@ from .api._base import BaseAsyncAPI, sync_bind
 
 
 def index_by_pub_key(m: Dict[str, Any], o: Any):
-    m[o["pub_key"]] = o
+    m[o["pub_key"]["key"]] = o
     return m
 
 
@@ -42,9 +42,9 @@ class AsyncLCDUtils(BaseAsyncAPI):
         )
         res = {}
         for v in validators:
-            delegate_info = validator_set[v.consensus_pubkey]
-            if delegate_info is None:
+            if v.consensus_pubkey["key"] not in validator_set:
                 continue
+            delegate_info = validator_set[v.consensus_pubkey["key"]]
             res[v.operator_address] = {
                 "validator_info": v,
                 "voting_power": int(delegate_info["voting_power"]),

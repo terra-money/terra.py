@@ -97,13 +97,14 @@ class Validator(JSONSerializable):
     operator_address: ValAddress = attr.ib()
     """"""
 
-    consensus_pubkey: ValConsPubKey = attr.ib()
+    # TODO: Switch this back to more sophisticated ValConsPubKey class
+    consensus_pubkey: dict = attr.ib()
     """"""
 
     jailed: bool = attr.ib()
     """"""
 
-    status: int = attr.ib(converter=int)
+    status: str = attr.ib()
     """"""
 
     tokens: int = attr.ib(converter=int)
