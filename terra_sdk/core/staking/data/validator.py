@@ -4,7 +4,7 @@ import copy
 
 import attr
 
-from terra_sdk.core import Dec, ValAddress, ValConsPubKey
+from terra_sdk.core import Dec, ValAddress  # , ValConsPubKey
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 
 __all__ = [
