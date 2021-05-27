@@ -111,7 +111,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             account_number (int): account number to use.
             sequence (int): sequence number to use.
             memo (str, optional): memo to use. Defaults to "".
-            gas (Optional[int], optional): gas to use ("gas requested")
+            gas (int, optional): gas to use ("gas requested")
             fees (Optional[Coins.Input], optional): fee to use (estimates if empty).
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
             gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
