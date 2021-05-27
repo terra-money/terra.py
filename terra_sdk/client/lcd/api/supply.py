@@ -12,8 +12,8 @@ class AsyncSupplyAPI(BaseAsyncAPI):
         Returns:
             Coins: total supply
         """
-        res = await self._c._get("/supply/total")
-        return Coins.from_data(res)
+        res = await self._c._get("/bank/total")
+        return Coins.from_data(res["supply"])
 
 
 class SupplyAPI(AsyncSupplyAPI):
