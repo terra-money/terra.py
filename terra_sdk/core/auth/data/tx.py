@@ -314,7 +314,7 @@ class BaseReq(JSONSerializable):
     fees: Optional[Coins] = attr.ib()
     gas_prices: Optional[Coins] = attr.ib()
     gas: int = attr.ib(converter=int)
-    gas_adjustment: Numeric.Output = attr.ib(converter=Numeric.parse)
+    gas_adjustment: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore
     simulate: bool = attr.ib(converter=bool)
 
     def to_data(self) -> dict:
