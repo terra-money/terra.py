@@ -65,14 +65,25 @@ class AsyncTxAPI(BaseAsyncAPI):
                 account_number = account.account_number
             if sequence is None:
                 sequence = account.sequence
-        
+
         # create the fake fee
         if fee is None:
             balance_denoms = fee_denoms or []
             balance_one = [Coin(c, 1) for c in balance_denoms]
             # estimate the fee
             fee = await BaseAsyncAPI._try_await(
-                self.estimate_fee(source_address, msgs, account_number, sequence, memo, 0, balance_one, gas_prices, gas_adjustment, fee_denoms)
+                self.estimate_fee(
+                    source_address,
+                    msgs,
+                    account_number,
+                    sequence,
+                    memo,
+                    0,
+                    balance_one,
+                    gas_prices,
+                    gas_adjustment,
+                    fee_denoms,
+                )
             )
 
         return StdSignMsg(
@@ -109,7 +120,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             StdFee: estimated fee
         """
-        
+
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
 
@@ -136,10 +147,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             True,
         )
 
-        data = {
-            "base_req": base_req.to_data(),
-            "msgs": [msg.to_data() for msg in msgs]
-        }
+        data = {"base_req": base_req.to_data(), "msgs": [msg.to_data() for msg in msgs]}
 
         res = await self._c._post("/txs/estimate_fee", data)
         fees = Coins.from_data(res["fee"]["amount"])

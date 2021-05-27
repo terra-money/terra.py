@@ -234,4 +234,3 @@ class MsgClearContractAdmin(Msg):
             admin=data["admin"],
             contract=data["contract"],
         )
-

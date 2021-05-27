@@ -301,7 +301,7 @@ class BaseReq(JSONSerializable):
         gas (int): gas to use ("gas requested")
         gas_adjustment (Numeric.Input): gas adjustment to use
         simulate (bool): Estimate gas for a transaction (cannot be used in conjunction with generate_only)
-        
+
     """
 
     address: AccAddress = attr.ib()
@@ -325,7 +325,9 @@ class BaseReq(JSONSerializable):
             "sequence": str(self.sequence),
             "timeout_height": str(self.timeout_height),
             "fees": self.fees.to_data() if self.fees else None,
-            "gas_prices": self.gas_prices.to_dec_coins().to_data() if self.gas_prices else None,
+            "gas_prices": self.gas_prices.to_dec_coins().to_data()
+            if self.gas_prices
+            else None,
             "gas": str(self.gas),
             "gas_adjustment": str(self.gas_adjustment),
             "simulate": self.simulate,
@@ -337,7 +339,7 @@ class BaseReq(JSONSerializable):
             del val["fees"]
         if not val["gas_prices"]:
             del val["gas_prices"]
-        
+
         return val
 
     @classmethod
@@ -348,9 +350,13 @@ class BaseReq(JSONSerializable):
             data["chain_id"],
             int(data["account_number"]),
             int(data["sequence"]),
-            int(data["timeout_height"]) if "timeout_height" in data and data["timeout_height"] else None,
+            int(data["timeout_height"])
+            if "timeout_height" in data and data["timeout_height"]
+            else None,
             Coins.from_data(data["fees"]) if "fees" in data and data["fees"] else None,
-            Coins.from_data(data["gas_prices"]) if "gas_prices" in data and data["gas_prices"] else None,
+            Coins.from_data(data["gas_prices"])
+            if "gas_prices" in data and data["gas_prices"]
+            else None,
             int(data["gas"]),
             Numeric.parse(data["gas_adjustment"]),
             bool(data["simulate"]),

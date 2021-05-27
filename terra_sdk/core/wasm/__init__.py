@@ -1,11 +1,11 @@
 from .msgs import (
+    MsgClearContractAdmin,
     MsgExecuteContract,
     MsgInstantiateContract,
+    MsgMigrateCode,
     MsgMigrateContract,
     MsgStoreCode,
-    MsgMigrateCode,
     MsgUpdateContractAdmin,
-    MsgClearContractAdmin,
     b64_to_dict,
     dict_to_b64,
 )

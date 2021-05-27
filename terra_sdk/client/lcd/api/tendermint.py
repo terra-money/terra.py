@@ -32,7 +32,9 @@ class AsyncTendermintAPI(BaseAsyncAPI):
             dict: validator set
         """
         x = "latest" if height is None else height
-        return await self._c._get(f"/cosmos/base/tendermint/v1beta1/validatorsets/{x}", raw=True)
+        return await self._c._get(
+            f"/cosmos/base/tendermint/v1beta1/validatorsets/{x}", raw=True
+        )
 
     async def block_info(self, height: Optional[int] = None) -> dict:
         """Fetches the block information for a given height. If no height is given, defaults to latest block.
