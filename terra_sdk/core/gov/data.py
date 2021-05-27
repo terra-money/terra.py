@@ -43,7 +43,7 @@ class Proposal(JSONSerializable):
     content: Content = attr.ib()
     """Proposal contents."""
 
-    proposal_status: str = attr.ib()
+    status: str = attr.ib()
     """Status of proposal."""
 
     final_tally_result: dict = attr.ib()
@@ -74,7 +74,7 @@ class Proposal(JSONSerializable):
         return cls(
             id=data["id"],
             content=Content.from_data(data["content"]),
-            proposal_status=data["proposal_status"],
+            status=data["status"],
             final_tally_result=data["final_tally_result"],
             submit_time=data["submit_time"],
             deposit_end_time=data["deposit_end_time"],
