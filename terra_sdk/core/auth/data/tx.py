@@ -6,6 +6,7 @@ from typing import Dict, List, Optional
 
 import attr
 
+from terra_sdk.core import AccAddress
 from terra_sdk.core.coins import Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.core.numeric import Numeric
