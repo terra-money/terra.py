@@ -119,22 +119,6 @@ class AsyncOracleAPI(BaseAsyncAPI):
 
 
 class OracleAPI(AsyncOracleAPI):
-    @sync_bind(AsyncOracleAPI.prevotes)
-    def prevotes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRatePrevote]:
-        pass
-
-    prevotes.__doc__ = AsyncOracleAPI.prevotes.__doc__
-
-    @sync_bind(AsyncOracleAPI.votes)
-    def votes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRateVote]:
-        pass
-
-    votes.__doc__ = AsyncOracleAPI.votes.__doc__
-
     @sync_bind(AsyncOracleAPI.exchange_rates)
     def exchange_rates(self) -> Coins:
         pass
