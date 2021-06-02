@@ -22,7 +22,7 @@ assert "min_valid_per_window" in parameters
 exchange_rates = bombay.oracle.exchange_rates()
 assert type(exchange_rates) == Coins
 
-exchange_rate = bombay.oracle.exchange_rate('uusd')
+exchange_rate = bombay.oracle.exchange_rate("uusd")
 assert type(exchange_rate) == Coin
 
 active_denoms = bombay.oracle.active_denoms()
@@ -37,7 +37,11 @@ misses = bombay.oracle.misses(validator_address)
 assert type(misses) == int
 
 aggregate_prevote = bombay.oracle.aggregate_prevote(validator_address)
-assert type(aggregate_prevote) == AggregateExchangeRatePrevote if aggregate_prevote else True
+assert (
+    type(aggregate_prevote) == AggregateExchangeRatePrevote
+    if aggregate_prevote
+    else True
+)
 
 aggregate_vote = bombay.oracle.aggregate_vote(validator_address)
 assert type(aggregate_vote) == AggregateExchangeRateVote if aggregate_vote else True
