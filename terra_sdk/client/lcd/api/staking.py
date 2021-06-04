@@ -40,10 +40,11 @@ class AsyncStakingAPI(BaseAsyncAPI):
             List[Delegation]: delegations
         """
         if delegator is not None and validator is not None:
-            res = await self._c._get(
-                f"/staking/delegators/{delegator}/delegations/{validator}"
-            )
-            return [Delegation.from_data(res)]
+            res = self.delegation(delegator, validator)
+            # Type checking to avoid double awaits on sync binded code
+            if type(res) == Delegation:
+                return [res]
+            return [(await res)]
         elif delegator is not None:
             res = await self._c._get(f"/staking/delegators/{delegator}/delegations")
             return [Delegation.from_data(d) for d in res]
@@ -68,7 +69,7 @@ class AsyncStakingAPI(BaseAsyncAPI):
         res = await self._c._get(
             f"/staking/delegators/{delegator}/delegations/{validator}"
         )
-        return res
+        return Delegation.from_data(res)
 
     async def unbonding_delegations(
         self,
