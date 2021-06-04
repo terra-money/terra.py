@@ -32,9 +32,9 @@ class Delegation(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> Delegation:
         return cls(
-            delegator_address=data["delegator_address"],
-            validator_address=data["validator_address"],
-            shares=data["shares"],
+            delegator_address=data["delegation"]["delegator_address"],
+            validator_address=data["delegation"]["validator_address"],
+            shares=data["delegation"]["shares"],
             balance=Coin.from_data(data["balance"]),
         )
 
