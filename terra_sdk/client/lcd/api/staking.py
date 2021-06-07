@@ -184,8 +184,10 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             Validator: validator information
         """
-        res = await self._c._get(f"/staking/validators/{validator}")
-        return Validator.from_data(res)
+        res = await self._c._get(
+            f"/cosmos/staking/v1beta1/validators/{validator}", raw=True
+        )
+        return Validator.from_data(res["validator"])
 
     async def pool(self) -> StakingPool:
         """Fetch current staking pool information.
