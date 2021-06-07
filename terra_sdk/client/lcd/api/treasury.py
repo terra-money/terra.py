@@ -54,7 +54,7 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         res = await self._c._get("/treasury/seigniorage_proceeds")
         return Coin("uluna", res)
 
-    async def parameters(self) -> Coin:
+    async def parameters(self) -> dict:
         """Fetches the Treasury module parameters.
 
         Returns:
@@ -96,7 +96,7 @@ class TreasuryAPI(AsyncTreasuryAPI):
     seigniorage_proceeds.__doc__ = AsyncTreasuryAPI.seigniorage_proceeds.__doc__
 
     @sync_bind(AsyncTreasuryAPI.parameters)
-    def parameters(self) -> Coin:
+    def parameters(self) -> dict:
         pass
 
     parameters.__doc__ = AsyncTreasuryAPI.parameters.__doc__
