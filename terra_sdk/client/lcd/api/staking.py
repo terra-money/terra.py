@@ -43,14 +43,14 @@ class AsyncStakingAPI(BaseAsyncAPI):
             res = self.delegation(delegator, validator)
             # Type checking to avoid double awaits on sync binded code
             if type(res) == Delegation:
-                return [res]
-            return [(await res)]
+                return [res]  # type: ignore
+            return [(await res)]  # type: ignore
         elif delegator is not None:
             res = await self._c._get(f"/staking/delegators/{delegator}/delegations")
-            return [Delegation.from_data(d) for d in res]
+            return [Delegation.from_data(d) for d in res]  # type: ignore
         elif validator is not None:
             res = await self._c._get(f"/staking/validators/{validator}/delegations")
-            return [Delegation.from_data(d) for d in res]
+            return [Delegation.from_data(d) for d in res]  # type: ignore
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
@@ -90,19 +90,20 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """
         if delegator is not None and validator is not None:
             res = self.unbonding_delegation(delegator, validator)
+            # Type checking to avoid double awaits on sync binded code
             if type(res) == UnbondingDelegation:
-                return [res]
-            return [(await res)]
+                return [res]  # type: ignore
+            return [(await res)]  # type: ignore
         elif delegator is not None:
             res = await self._c._get(
                 f"/staking/delegators/{delegator}/unbonding_delegations"
             )
-            return [UnbondingDelegation.from_data(x) for x in res]
+            return [UnbondingDelegation.from_data(x) for x in res]  # type: ignore
         elif validator is not None:
             res = await self._c._get(
                 f"/staking/validators/{validator}/unbonding_delegations"
             )
-            return [UnbondingDelegation.from_data(x) for x in res]
+            return [UnbondingDelegation.from_data(x) for x in res]  # type: ignore
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
