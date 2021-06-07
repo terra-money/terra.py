@@ -161,7 +161,9 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             List[Validator]: currently bonded validators
         """
-        res = await self._c._get(f"/cosmos/staking/v1beta1/delegators/{delegator}/validators", raw=True)
+        res = await self._c._get(
+            f"/cosmos/staking/v1beta1/delegators/{delegator}/validators", raw=True
+        )
         return [Validator.from_data(d) for d in res["validators"]]
 
     async def validators(self) -> List[Validator]:
