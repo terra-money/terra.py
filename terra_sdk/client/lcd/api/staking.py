@@ -89,10 +89,10 @@ class AsyncStakingAPI(BaseAsyncAPI):
             List[UnbondingDelegation]: undelegations
         """
         if delegator is not None and validator is not None:
-            res = await self._c._get(
-                f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
-            )
-            return [UnbondingDelegation.from_data(res)]
+            res = self.unbonding_delegation(delegator, validator)
+            if type(res) == UnbondingDelegation:
+                return [res]
+            return [(await res)]
         elif delegator is not None:
             res = await self._c._get(
                 f"/staking/delegators/{delegator}/unbonding_delegations"
@@ -161,8 +161,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             List[Validator]: currently bonded validators
         """
-        res = await self._c._get(f"/staking/delegators/{delegator}/validators")
-        return [Validator.from_data(d) for d in res]
+        res = await self._c._get(f"/cosmos/staking/v1beta1/delegators/{delegator}/validators", raw=True)
+        return [Validator.from_data(d) for d in res["validators"]]
 
     async def validators(self) -> List[Validator]:
         """Fetch information of all validators.
