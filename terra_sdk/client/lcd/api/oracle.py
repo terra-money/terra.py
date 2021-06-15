@@ -90,8 +90,11 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             Coin: exchange rate of Luna
         """
-        rates = await self.exchange_rates()
-        return rates[denom]
+        rates = self.exchange_rates()
+        # Types ignored to ensure await isn't called on non-coroutine in sync version
+        if type(rates) != Coins:
+            rates = await rates  # type: ignore
+        return rates[denom]  # type: ignore
 
     async def active_denoms(self) -> List[str]:
         """Fetches current active denoms.
