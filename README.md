@@ -1,23 +1,21 @@
 <br/>
 <br/>
 
-<div  align="center"> <p > <img src="https://raw.githubusercontent.com/terra-project/terra-sdk-python/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
-You can find the documentation [here](https://terra-money.github.io/terra-sdk-python/).
-
+<div  align="center"> <p > <img src="https://raw.githubusercontent.com/terra-money/terra-sdk-python/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
 
 The Python SDK for Terra
 <br/>
 <p><sub>(Unfamiliar with Terra?  <a href="https://docs.terra.money/">Check out Terra Docs</a>)</sub></p>
 
-  <p > <img alt="GitHub" src="https://img.shields.io/github/license/terra-project/terra-sdk-python">
+  <p > <img alt="GitHub" src="https://img.shields.io/github/license/terra-money/terra-sdk-python">
 <img alt="Python" src="https://img.shields.io/pypi/pyversions/terra-sdk">
   <img alt="pip" src="https://img.shields.io/pypi/v/terra-sdk"></p>
 <p>
-  <a href="https://terra-project.github.io/terra-sdk-python/index.html"><strong>Explore the Docs »</strong></a>
+  <a href="https://terra-money.github.io/terra-sdk-python/index.html"><strong>Explore the Docs »</strong></a>
 <br/>
   <a href="https://pypi.org/project/terra-sdk/">PyPI Package</a>
   ·
-  <a href="https://github.com/terra-project/terra-sdk-python">GitHub Repository</a>
+  <a href="https://github.com/terra-money/terra-sdk-python">GitHub Repository</a>
 </p></div>
 
 
@@ -56,7 +54,7 @@ The Terra Software Development Kit (SDK) in Python is a simple library toolkit f
 
 
 # API Reference
-An intricate reference to the APIs on the Terra SDK can be found <a href="https://terra-project.github.io/terra-sdk-python/index.html">here</a>.
+An intricate reference to the APIs on the Terra SDK can be found <a href="https://terra-money.github.io/terra-sdk-python/index.html">here</a>.
 
 <br/>
 
@@ -101,7 +99,7 @@ $ make qa && make format
 
 # Usage Examples
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
-Following examples are provided to help get building started; use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-project.github.io/terra-sdk-python/index.html">here</a>.
+Following examples are provided to help get building started; use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra-sdk-python/index.html">here</a>.
 
 In order to interact with the Terra blockchain, you'll need a connection to a Terra node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra LCD node.):
 
@@ -195,7 +193,7 @@ Community contribution, whether it's a new feature, correction, bug report, addi
 
 ## Reporting an Issue 
 First things first: **Do NOT report security vulnerabilities in public issues!** Please disclose responsibly by letting the <a href="mailto:william@terra.money">Terra SDK team</a> know upfront. We will assess the issue as soon as possible on a best-effort basis and will give you an estimate for when we have a fix and release available for an eventual public disclosure. </br>
-If you encounter a different issue with the Python SDK, check first to see if there is an existing issue on the <a href="https://github.com/terra-project/terra-sdk-python/issues">Issues</a> page or a pull request on the <a href="https://github.com/terra-project/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs) addressing the topic.
+If you encounter a different issue with the Python SDK, check first to see if there is an existing issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page or a pull request on the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs) addressing the topic.
 
 If there isn't a discussion on the topic there, you can file an issue. The ideal report includes:
 
@@ -209,7 +207,7 @@ If there isn't a discussion on the topic there, you can file an issue. The ideal
 </br>
 
 ## Requesting a Feature
-If you wish to request the addition of a feature, please first checkout the <a href="https://github.com/terra-project/terra-sdk-python/issues">Issues</a> page and the <a href="https://github.com/terra-project/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs). If you decide to continue with the request, think of the merits of the feature to convince the project's developers, and provide as much detail and context as possible in the form of filing an issue on the <a href="https://github.com/terra-project/terra-sdk-python/issues">Issues</a> page.
+If you wish to request the addition of a feature, please first checkout the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page and the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs). If you decide to continue with the request, think of the merits of the feature to convince the project's developers, and provide as much detail and context as possible in the form of filing an issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page.
 
 
 <br/>
