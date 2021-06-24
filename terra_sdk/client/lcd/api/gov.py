@@ -8,13 +8,16 @@ __all__ = ["AsyncGovAPI", "GovAPI"]
 
 
 class AsyncGovAPI(BaseAsyncAPI):
-    async def proposals(self) -> List[Proposal]:
+    async def proposals(self, options: dict = {}) -> List[Proposal]:
         """Fetches all proposals.
+
+        Args:
+            options (dict, optional): dictionary containing options. Defaults to {}.
 
         Returns:
             List[Proposal]: proposals
         """
-        res = await self._c._get("/gov/proposals")
+        res = await self._c._get("/gov/proposals", options)
         return [Proposal.from_data(d) for d in res]
 
     async def proposal(self, proposal_id: int) -> Proposal:

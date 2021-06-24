@@ -2,6 +2,7 @@
 <br/>
 
 <div  align="center"> <p > <img src="https://raw.githubusercontent.com/terra-project/terra-sdk-python/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
+You can find the documentation [here](https://terra-money.github.io/terra-sdk-python/).
 
 
 The Python SDK for Terra
