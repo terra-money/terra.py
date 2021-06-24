@@ -6,7 +6,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -28,7 +27,7 @@ bech32 = "^1.2.0"
 bip32utils = "^0.3.post4"
 ecdsa = "^0.16.1"
 mnemonic = "^0.19"
-python = "^3.6"
+python = "^3.7"
 wrapt = "^1.12.1"
 nest-asyncio = "^1.5.1"
 
