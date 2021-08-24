@@ -21,7 +21,7 @@ class PolicyConstraints:
     """"""
     cap: Coin = attr.ib()
     """"""
-    change_max: Dec = attr.ib()
+    change_rate_max: Dec = attr.ib()
     """"""
 
     def clamp(self, prev_rate: Dec, new_rate: Dec) -> Dec:
@@ -44,11 +44,11 @@ class PolicyConstraints:
 
         delta = new_rate - prev_rate
         if new_rate > prev_rate:
-            if delta > self.change_max:
-                new_rate = prev_rate + self.change_max
+            if delta > self.change_rate_max:
+                new_rate = prev_rate + self.change_rate_max
         else:
-            if abs(delta) > self.change_max:
-                new_rate = prev_rate - self.change_max
+            if abs(delta) > self.change_rate_max:
+                new_rate = prev_rate - self.change_rate_max
         return new_rate
 
     @classmethod
@@ -57,5 +57,5 @@ class PolicyConstraints:
             rate_min=Dec(data["rate_min"]),
             rate_max=Dec(data["rate_max"]),
             cap=Coin.from_data(data["cap"]),
-            change_max=Dec(data["change_max"]),
+            change_rate_max=Dec(data["change_rate_max"]),
         )
