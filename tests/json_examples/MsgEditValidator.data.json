@@ -50,7 +50,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -131,7 +131,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -190,7 +190,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -270,7 +270,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -372,7 +372,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "CF172959AC3A8BB2",
                                 "website": "[do-not-modify]",
@@ -477,7 +477,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -579,7 +579,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -681,7 +681,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -783,7 +783,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -888,7 +888,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -993,7 +993,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1095,7 +1095,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1200,7 +1200,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1302,7 +1302,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1407,7 +1407,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1512,7 +1512,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1614,7 +1614,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1716,7 +1716,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1818,7 +1818,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1902,7 +1902,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -1985,7 +1985,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "syncnode",
                                 "identity": "F422F328C14AFBFA",
                                 "website": "https://ip.sx/",
@@ -2087,7 +2087,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2189,7 +2189,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2273,7 +2273,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2356,7 +2356,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2461,7 +2461,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2563,7 +2563,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2668,7 +2668,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2770,7 +2770,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2875,7 +2875,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -2980,7 +2980,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3085,7 +3085,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3190,7 +3190,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3295,7 +3295,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3379,7 +3379,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3462,7 +3462,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3567,7 +3567,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3672,7 +3672,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3777,7 +3777,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3861,7 +3861,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -3944,7 +3944,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4049,7 +4049,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "FRESHLUNA",
                                 "identity": "63575EE3F0F9FAFC",
                                 "website": "https://freshluna.com",
@@ -4154,7 +4154,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4259,7 +4259,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4361,7 +4361,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4466,7 +4466,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4568,7 +4568,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4673,7 +4673,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "syncnode",
                                 "identity": "F422F328C14AFBFA",
                                 "website": "https://ip.sx/",
@@ -4775,7 +4775,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -4859,7 +4859,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "syncnode",
                                 "identity": "F422F328C14AFBFA",
                                 "website": "wallet.syncnode.ro",
@@ -4939,7 +4939,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "syncnode",
                                 "identity": "F422F328C14AFBFA",
                                 "website": "wallet.syncnode.ro",
@@ -5041,7 +5041,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5143,7 +5143,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "Forbole",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5245,7 +5245,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "",
                                 "website": "https://bit.ly/2trIu0A",
@@ -5347,7 +5347,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "cthulhu",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5449,7 +5449,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5554,7 +5554,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5659,7 +5659,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "BasBlock",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5761,7 +5761,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -5866,7 +5866,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "stefanski",
                                 "identity": "878AB3284CD8CBED",
                                 "website": "http://stefancondurachi.com/",
@@ -5968,7 +5968,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -6073,7 +6073,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
@@ -6178,7 +6178,7 @@
                     "msg": [{
                         "type": "staking/MsgEditValidator",
                         "value": {
-                            "Description": {
+                            "description": {
                                 "moniker": "[do-not-modify]",
                                 "identity": "[do-not-modify]",
                                 "website": "[do-not-modify]",
