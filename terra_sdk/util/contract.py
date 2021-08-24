@@ -9,25 +9,11 @@ from terra_sdk.core.auth import TxInfo
 from terra_sdk.core.broadcast import BlockTxBroadcastResult
 
 __all__ = [
-    "b64_to_dict",
-    "dict_to_b64",
     "read_file_as_b64",
     "get_code_id",
     "get_contract_address",
     "get_contract_events",
 ]
-
-
-def b64_to_dict(data: str) -> dict:
-    """Converts ASCII-encoded base64 encoded string to dict."""
-    b64_bytes = data.encode("ascii")
-    msg_bytes = base64.b64decode(b64_bytes)
-    return json.loads(msg_bytes)
-
-
-def dict_to_b64(data: dict) -> str:
-    """Converts dict to ASCII-encoded base64 encoded string."""
-    return base64.b64encode(bytes(json.dumps(data), "ascii")).decode()
 
 
 def read_file_as_b64(path: Union[str, bytes, int]) -> str:
