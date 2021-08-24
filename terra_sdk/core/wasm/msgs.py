@@ -13,10 +13,12 @@ from terra_sdk.util.json import dict_to_data
 
 __all__ = [
     "MsgStoreCode",
+    "MsgMigrateCode",
     "MsgInstantiateContract",
     "MsgExecuteContract",
     "MsgMigrateContract",
-    "MsgUpdateContractOwner",
+    "MsgUpdateContractAdmin",
+    "MsgClearContractAdmin",
 ]
 
 
@@ -42,29 +44,64 @@ class MsgStoreCode(Msg):
 
 
 @attr.s
+class MsgMigrateCode(Msg):
+    """Upload a new smart contract WASM binary to the blockchain, replacing an existing code ID.
+    Can only be called once by creator of the contract, and is used for migrating from Col-4 to Col-5.
+
+    Args:
+        sender: address of sender
+        code_id: reference to the code on the blockchain
+        wasm_byte_code: base64-encoded string containing bytecode
+    """
+
+    type = "wasm/MsgStoreCode"
+    """"""
+
+    sender: AccAddress = attr.ib()
+    code_id: int = attr.ib(converter=int)
+    wasm_byte_code: str = attr.ib(converter=str)
+
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["sender"] = str(d["sender"])
+        d["code_id"] = str(d["code_id"])
+        d["wasm_byte_code"] = str(d["wasm_byte_code"])
+        return {"type": self.type, "value": dict_to_data(d)}
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgStoreCode:
+        data = data["value"]
+        return cls(
+            sender=data["sender"],
+            code_id=data["code_id"],
+            wasm_byte_code=data["wasm_byte_code"],
+        )
+
+
+@attr.s
 class MsgInstantiateContract(Msg):
     """Creates a new instance of a smart contract from existing code on the blockchain.
 
     Args:
-        owner: address of contract owner
+        sender: address of sender
+        admin: address of contract admin
         code_id (int): code ID to use for instantiation
-        init_msg: InitMsg to initialize contract
+        init_msg (dict): InitMsg to initialize contract
         init_coins (Coins): initial amount of coins to be sent to contract
-        migratable: whether the owner can change contract code IDs"""
+    """
 
     type = "wasm/MsgInstantiateContract"
     """"""
 
-    owner: AccAddress = attr.ib()
+    sender: AccAddress = attr.ib()
+    admin: AccAddress = attr.ib()
     code_id: int = attr.ib(converter=int)
     init_msg: dict = attr.ib()
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
-    migratable: bool = attr.ib(default=False)
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
         d["code_id"] = str(d["code_id"])
-        d["init_msg"] = dict_to_b64(d["init_msg"])
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
@@ -73,7 +110,7 @@ class MsgInstantiateContract(Msg):
         return cls(
             owner=data["owner"],
             code_id=data["code_id"],
-            init_msg=b64_to_dict(data["init_msg"]),
+            init_msg=data["init_msg"],
             init_coins=Coins.from_data(data["init_coins"]),
             migratable=data["migratable"],
         )
@@ -86,7 +123,7 @@ class MsgExecuteContract(Msg):
     Args:
         sender: address of sender
         contract: address of contract to execute function on
-        execute_msg: ExecuteMsg (aka. HandleMsg) to pass
+        execute_msg (dict): ExecuteMsg to pass
         coins: coins to be sent, if needed by contract to execute.
             Defaults to empty ``Coins()``
     """
@@ -99,18 +136,13 @@ class MsgExecuteContract(Msg):
     execute_msg: dict = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["execute_msg"] = dict_to_b64(d["execute_msg"])
-        return {"type": self.type, "value": dict_to_data(d)}
-
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
         data = data["value"]
         return cls(
             sender=data["sender"],
             contract=data["contract"],
-            execute_msg=b64_to_dict(data["execute_msg"]),
+            execute_msg=data["execute_msg"],
             coins=Coins.from_data(data["coins"]),
         )
 
@@ -120,7 +152,7 @@ class MsgMigrateContract(Msg):
     """Migrate the contract to a different code ID.
 
     Args:
-        owner: address of owner
+        admin: address of contract admin
         contract: address of contract to migrate
         new_code_id (int): new code ID to migrate to
         migrate_msg (dict): MigrateMsg to execute
@@ -129,50 +161,72 @@ class MsgMigrateContract(Msg):
     type = "wasm/MsgMigrateContract"
     """"""
 
-    owner: AccAddress = attr.ib()
+    admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
     new_code_id: int = attr.ib(converter=int)
     migrate_msg: dict = attr.ib()
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
-        d["new_code_id"] = str(d["new_code_id"])
-        d["migrate_msg"] = dict_to_b64(d["migrate_msg"])
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateContract:
         data = data["value"]
         return cls(
-            owner=data["owner"],
+            admin=data["admin"],
             contract=data["contract"],
             new_code_id=data["new_code_id"],
-            migrate_msg=b64_to_dict(data["migrate_msg"]),
+            migrate_msg=data["migrate_msg"],
         )
 
 
 @attr.s
-class MsgUpdateContractOwner(Msg):
-    """Update a smart contract's owner.
+class MsgUpdateContractAdmin(Msg):
+    """Update a smart contract's admin.
 
     Args:
-        owner: address of current owner (sender)
-        new_owner: address of new owner
+        owner: address of current admin (sender)
+        new_owner: address of new admin
         contract: address of contract to change
     """
 
-    type = "wasm/MsgUpdateContractOwner"
+    type = "wasm/MsgUpdateContractAdmin"
     """"""
 
-    owner: AccAddress = attr.ib()
-    new_owner: AccAddress = attr.ib()
+    admin: AccAddress = attr.ib()
+    new_admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgUpdateContractOwner:
+    def from_data(cls, data: dict) -> MsgUpdateContractAdmin:
         data = data["value"]
         return cls(
-            owner=data["owner"],
-            new_owner=data["new_owner"],
+            admin=data["admin"],
+            new_admin=data["new_admin"],
+            contract=data["contract"],
+        )
+
+
+@attr.s
+class MsgClearContractAdmin(Msg):
+    """Clears the contract's admin field.
+
+    Args:
+        admin: address of current admin (sender)
+        contract: address of contract to change
+    """
+
+    type = "wasm/MsgClearContractAdmin"
+    """"""
+
+    admin: AccAddress = attr.ib()
+    contract: AccAddress = attr.ib()
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgUpdateContractAdmin:
+        data = data["value"]
+        return cls(
+            admin=data["admin"],
             contract=data["contract"],
         )
