@@ -115,8 +115,8 @@ class MsgEditValidator(Msg):
     """Revise validator description and configuration.
 
     Args:
-        Description: updated validator description
-        address: validator operator address
+        description: updated validator description
+        validator_address: validator operator address
         commission_rates: new validator commission rate,
         min_self_delegation: new minimum self delegation,
     """
@@ -126,8 +126,8 @@ class MsgEditValidator(Msg):
     action = "edit_validator"
     """"""
 
-    Description: Description = attr.ib()
-    address: ValAddress = attr.ib()
+    description: Description = attr.ib()
+    validator_address: ValAddress = attr.ib()
     commission_rate: Optional[Dec] = attr.ib(default=None)
     min_self_delegation: Optional[int] = attr.ib(default=None)
 
@@ -137,8 +137,8 @@ class MsgEditValidator(Msg):
         msd = int(data["min_self_delegation"]) if data["min_self_delegation"] else None
         cr = Dec(data["commission_rate"]) if data["commission_rate"] else None
         return cls(
-            Description=data["Description"],
-            address=data["address"],
+            description=data["description"],
+            validator_address=data["validator_address"],
             commission_rate=cr,
             min_self_delegation=msd,
         )
