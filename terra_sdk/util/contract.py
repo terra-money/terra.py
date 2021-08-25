@@ -1,7 +1,6 @@
 """Useful contract-related functions."""
 
 import base64
-import json
 from typing import Dict, List, Union
 
 from terra_sdk.core import AccAddress

@@ -8,6 +8,7 @@ import attr
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
+from terra_sdk.util.json import JSONSerializable
 
 from .data import Authorization
 
@@ -38,9 +39,9 @@ class MsgExecAuthorized(Msg):
 
 
 @attr.s
-class Grant:
-    granter: AccAddress = attr.ib()
-    grantee: AccAddress = attr.ib()
+class Grant(JSONSerializable):
+    authorization: Authorization = attr.ib()
+    expiration: str = attr.ib()
 
 
 @attr.s
@@ -48,27 +49,27 @@ class MsgGrantAuthorization(Msg):
     """Grant an authorization to ``grantee`` to call messages on behalf of ``granter``.
 
     Args:
-        grant: pair of `granter`, `grantee`
-        authorization: details of authorization granted
-        expiration: time of expiry
+        granter: account granting authorization
+        grantee: account receiving authorization
+        grant: pair of authorization, expiration
     """
 
     type = "msgauth/MsgGrantAuthorization"
 
+    granter: AccAddress = attr.ib()
+    grantee: AccAddress = attr.ib()
     grant: Grant = attr.ib()
-    authorization: Authorization = attr.ib()
-    expiration: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAuthorization:
         data = data["value"]
         return cls(
+            granter=data["granter"],
+            grantee=data["grantee"],
             grant=Grant(
-                granter=data["granter"],
-                grantee=data["grantee"],
+                authorization=Authorization.from_data(data["grant"]["authorization"]),
+                expiration=str(data["grant"]["expiration"]),
             ),
-            authorization=Authorization.from_data(data["authorization"]),
-            expiration=str(data["expiration"]),
         )
 
 

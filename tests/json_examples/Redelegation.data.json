@@ -3,8 +3,7 @@
     "redelegation": {
       "delegator_address": "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
       "validator_src_address": "terravaloper14un92kpq0pvflyjd8sxmrsswglhn8mf5hkruc2",
-      "validator_dst_address": "terravaloper18t8mtyvxlxf2gjh4x5r06gjfg0nk6gqs974uxh",
-      "entries": null
+      "validator_dst_address": "terravaloper18t8mtyvxlxf2gjh4x5r06gjfg0nk6gqs974uxh"
     },
     "entries": [
       {
@@ -40,8 +39,7 @@
     "redelegation": {
       "delegator_address": "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
       "validator_src_address": "terravaloper14un92kpq0pvflyjd8sxmrsswglhn8mf5hkruc2",
-      "validator_dst_address": "terravaloper1krj7amhhagjnyg2tkkuh6l0550y733jnjnnlzy",
-      "entries": null
+      "validator_dst_address": "terravaloper1krj7amhhagjnyg2tkkuh6l0550y733jnjnnlzy"
     },
     "entries": [
       {

@@ -17,7 +17,7 @@ __all__ = [
 
 
 @attr.s
-class DelegationInfo:
+class DelegationInfo(JSONSerializable):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     shares: Dec = attr.ib(converter=Dec)
@@ -95,7 +95,7 @@ class UnbondingDelegation(JSONSerializable):
 
 
 @attr.s
-class RedelegationEntryInfo:
+class RedelegationEntryInfo(JSONSerializable):
     initial_balance: int = attr.ib(converter=int)
     """"""
     shares_dst: Dec = attr.ib(converter=Dec)
@@ -140,7 +140,7 @@ class RedelegationEntry(JSONSerializable):
 
 
 @attr.s
-class RedelegationInfo:
+class RedelegationInfo(JSONSerializable):
     delegator_address: AccAddress = attr.ib()
     """"""
     validator_src_address: ValAddress = attr.ib()
