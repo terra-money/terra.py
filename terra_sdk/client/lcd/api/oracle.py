@@ -4,8 +4,6 @@ from terra_sdk.core import AccAddress, Coin, Coins, ValAddress
 from terra_sdk.core.oracle import (
     AggregateExchangeRatePrevote,
     AggregateExchangeRateVote,
-    ExchangeRatePrevote,
-    ExchangeRateVote,
 )
 from terra_sdk.exceptions import LCDResponseError
 
@@ -15,60 +13,6 @@ __all__ = ["AsyncOracleAPI", "OracleAPI"]
 
 
 class AsyncOracleAPI(BaseAsyncAPI):
-    async def prevotes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRatePrevote]:
-        """Fetches active oracle prevotes, filtering by denom, or validator, or both.
-
-        Args:
-            denom (Optional[str], optional): denom.
-            validator (Optional[ValAddress], optional): validator operator address.
-
-        Raises:
-            TypeError: if both ``denom`` and ``validator`` are ``None``
-
-        Returns:
-            List[ExchangeRatePrevote]: prevotes
-        """
-        if denom is not None and validator is not None:
-            res = await self._c._get(f"/oracle/denoms/{denom}/prevotes/{validator}")
-            return [ExchangeRatePrevote.from_data(res)]
-        elif validator is not None:
-            res = await self._c._get(f"/oracle/voters/{validator}/prevotes")
-            return [ExchangeRatePrevote.from_data(d) for d in res]
-        elif denom is not None:
-            res = await self._c._get(f"/oracle/denoms/{denom}/prevotes")
-            return [ExchangeRatePrevote.from_data(d) for d in res]
-        else:
-            raise TypeError("both denom and validator cannot both be None")
-
-    async def votes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRateVote]:
-        """Fetches active oracle votes, filtering by denom, or validator, or both.
-
-        Args:
-            denom (Optional[str], optional): denom.
-            validator (Optional[ValAddress], optional): validator operator address.
-
-        Raises:
-            TypeError: if both ``denom`` and ``validator`` are ``None``
-
-        Returns:
-            List[ExchangeRateVote]: votes
-        """
-        if denom is not None and validator is not None:
-            res = await self._c._get(f"/oracle/denoms/{denom}/votes/{validator}")
-            return [ExchangeRateVote.from_data(res)]
-        elif validator is not None:
-            res = await self._c._get(f"/oracle/voters/{validator}/votes")
-            return [ExchangeRateVote.from_data(d) for d in res]
-        elif denom is not None:
-            res = await self._c._get(f"/oracle/denoms/{denom}/votes")
-            return [ExchangeRateVote.from_data(d) for d in res]
-        else:
-            raise TypeError("both denom and validator cannot both be None")
-
     async def exchange_rates(self) -> Coins:
         """Fetches registered exchange rates of Luna in all available denoms.
 
@@ -176,22 +120,6 @@ class AsyncOracleAPI(BaseAsyncAPI):
 
 
 class OracleAPI(AsyncOracleAPI):
-    @sync_bind(AsyncOracleAPI.prevotes)
-    def prevotes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRatePrevote]:
-        pass
-
-    prevotes.__doc__ = AsyncOracleAPI.prevotes.__doc__
-
-    @sync_bind(AsyncOracleAPI.votes)
-    def votes(
-        self, denom: Optional[str] = None, validator: Optional[ValAddress] = None
-    ) -> List[ExchangeRateVote]:
-        pass
-
-    votes.__doc__ = AsyncOracleAPI.votes.__doc__
-
     @sync_bind(AsyncOracleAPI.exchange_rates)
     def exchange_rates(self) -> Coins:
         pass

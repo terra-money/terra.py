@@ -118,10 +118,10 @@ class RedelegationEntry(JSONSerializable):
     def to_data(self) -> dict:
         return {
             "redelegation_entry": {
-                "initial_balance": str(self.initial_balance),
-                "shares_dst": str(self.shares_dst),
-                "creation_height": self.creation_height,
-                "completion_time": self.completion_time,
+                "initial_balance": str(self.redelegation_entry.initial_balance),
+                "shares_dst": str(self.redelegation_entry.shares_dst),
+                "creation_height": self.redelegation_entry.creation_height,
+                "completion_time": self.redelegation_entry.completion_time,
             },
             "balance": str(self.balance),
         }
@@ -130,10 +130,10 @@ class RedelegationEntry(JSONSerializable):
     def from_data(cls, data: dict) -> RedelegationEntry:
         return cls(
             redelegation_entry=RedelegationEntryInfo(
-                initial_balance=data["initial_balance"],
-                shares_dst=data["shares_dst"],
-                creation_height=int(data["creation_height"]),
-                completion_time=data["completion_time"],
+                initial_balance=data["redelegation_entry"]["initial_balance"],
+                shares_dst=data["redelegation_entry"]["shares_dst"],
+                creation_height=int(data["redelegation_entry"]["creation_height"]),
+                completion_time=data["redelegation_entry"]["completion_time"],
             ),
             balance=data["balance"],
         )

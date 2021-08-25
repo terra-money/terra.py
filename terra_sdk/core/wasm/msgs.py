@@ -8,7 +8,6 @@ import attr
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.contract import b64_to_dict, dict_to_b64
 from terra_sdk.util.json import dict_to_data
 
 __all__ = [
@@ -54,7 +53,7 @@ class MsgMigrateCode(Msg):
         wasm_byte_code: base64-encoded string containing bytecode
     """
 
-    type = "wasm/MsgStoreCode"
+    type = "wasm/MsgMigrateCode"
     """"""
 
     sender: AccAddress = attr.ib()
@@ -69,7 +68,7 @@ class MsgMigrateCode(Msg):
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgStoreCode:
+    def from_data(cls, data: dict) -> MsgMigrateCode:
         data = data["value"]
         return cls(
             sender=data["sender"],
@@ -108,11 +107,11 @@ class MsgInstantiateContract(Msg):
     def from_data(cls, data: dict) -> MsgInstantiateContract:
         data = data["value"]
         return cls(
-            owner=data["owner"],
+            sender=data["sender"],
+            admin=data["admin"],
             code_id=data["code_id"],
             init_msg=data["init_msg"],
             init_coins=Coins.from_data(data["init_coins"]),
-            migratable=data["migratable"],
         )
 
 
@@ -224,7 +223,7 @@ class MsgClearContractAdmin(Msg):
     contract: AccAddress = attr.ib()
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgUpdateContractAdmin:
+    def from_data(cls, data: dict) -> MsgClearContractAdmin:
         data = data["value"]
         return cls(
             admin=data["admin"],

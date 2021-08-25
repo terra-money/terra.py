@@ -16,8 +16,6 @@ from terra_sdk.core.oracle import (
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
     MsgDelegateFeedConsent,
-    MsgExchangeRatePrevote,
-    MsgExchangeRateVote,
 )
 from terra_sdk.core.slashing import MsgUnjail
 from terra_sdk.core.staking import (
@@ -28,11 +26,13 @@ from terra_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_sdk.core.wasm import (
-    MsgExecuteContract,
-    MsgInstantiateContract,
-    MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
+    MsgMigrateCode,
+    MsgInstantiateContract,
+    MsgExecuteContract,
+    MsgMigrateContract,
+    MsgUpdateContractAdmin,
+    MsgClearContractAdmin,
 )
 
 from .base import create_demux
@@ -55,8 +55,6 @@ oracle_msgs = [
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
     MsgDelegateFeedConsent,
-    MsgExchangeRatePrevote,
-    MsgExchangeRateVote,
 ]
 slashing_msgs = [MsgUnjail]
 staking_msgs = [
@@ -67,11 +65,13 @@ staking_msgs = [
     MsgUndelegate,
 ]
 wasm_msgs = [
-    MsgExecuteContract,
-    MsgInstantiateContract,
-    MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
+    MsgMigrateCode,
+    MsgInstantiateContract,
+    MsgExecuteContract,
+    MsgMigrateContract,
+    MsgUpdateContractAdmin,
+    MsgClearContractAdmin,
 ]
 
 parse_msg = create_demux(

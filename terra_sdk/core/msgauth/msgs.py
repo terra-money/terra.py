@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-import copy
 from typing import List
 
 import attr
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.json import dict_to_data
 
 from .data import Authorization
 
@@ -26,7 +24,7 @@ class MsgExecAuthorized(Msg):
     """
 
     type = "msgauth/MsgExecAuthorized"
-""""""
+    """"""
 
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
@@ -57,7 +55,7 @@ class MsgGrantAuthorization(Msg):
 
     type = "msgauth/MsgGrantAuthorization"
 
-    grant: GrantInfo = attr.ib()
+    grant: Grant = attr.ib()
     authorization: Authorization = attr.ib()
     expiration: str = attr.ib()
 
