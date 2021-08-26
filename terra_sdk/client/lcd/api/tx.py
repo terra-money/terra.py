@@ -1,6 +1,6 @@
 from typing import List, Optional, Union
 
-from terra_sdk.core import AccAddress, Coin, Coins, Numeric
+from terra_sdk.core import AccAddress, Coins, Numeric
 from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
@@ -29,10 +29,11 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def create(
         self,
-        source_address: AccAddress,
+        sender: AccAddress,
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
         memo: str = "",
+        gas: Optional[int] = None,
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         fee_denoms: Optional[List[str]] = None,
@@ -43,7 +44,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         chain ID, account number, sequence and fee estimation.
 
         Args:
-            source_address (AccAddress): transaction sender's account address
+            sender (AccAddress): transaction sender's account address
             msgs (List[Msg]): list of messages to include
             fee (Optional[StdFee], optional): fee to use (estimates if empty).
             memo (str, optional): memo to use. Defaults to "".
@@ -59,18 +60,14 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         # create the fake fee
         if fee is None:
-            balance_denoms = fee_denoms or []
-            balance_one = [Coin(c, 1) for c in balance_denoms]
-            # estimate the fee
-            tx = StdTx(msgs, StdFee(0, balance_one), [], memo)
             fee = await BaseAsyncAPI._try_await(
-                self.estimate_fee(tx, gas_prices, gas_adjustment, fee_denoms)
+                self.estimate_fee(
+                    sender, msgs, memo, gas, gas_prices, gas_adjustment, fee_denoms
+                )
             )
 
         if account_number is None or sequence is None:
-            account = await BaseAsyncAPI._try_await(
-                self._c.auth.account_info(source_address)
-            )
+            account = await BaseAsyncAPI._try_await(self._c.auth.account_info(sender))
             if account_number is None:
                 account_number = account.account_number
             if sequence is None:
@@ -82,7 +79,10 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def estimate_fee(
         self,
-        tx: Union[StdSignMsg, StdTx],
+        sender: AccAddress,
+        msgs: List[Msg],
+        memo: str = "",
+        gas: Optional[int] = None,
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         fee_denoms: Optional[List[str]] = None,
@@ -101,13 +101,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         gas_prices = gas_prices or self._c.gas_prices
         gas_adjustment = gas_adjustment or self._c.gas_adjustment
 
-        if isinstance(tx, StdSignMsg):
-            tx_value = tx.to_stdtx().to_data()["value"]
-        else:
-            tx_value = tx.to_data()["value"]
-
-        tx_value["fee"]["gas"] = "0"
-
         gas_prices_coins = None
         if gas_prices:
             gas_prices_coins = Coins(gas_prices)
@@ -118,15 +111,21 @@ class AsyncTxAPI(BaseAsyncAPI):
                 )
 
         data = {
-            "tx": tx_value,
-            "gas_prices": gas_prices_coins and gas_prices_coins.to_data(),
-            "gas_adjustment": gas_adjustment and str(gas_adjustment),
+            "base_req": {
+                "chain_id": self._c.chain_id,
+                "from": sender,
+                "gas": (gas and str(gas)) or "auto",
+                "memo": memo,
+                "gas_prices": gas_prices_coins and gas_prices_coins.to_data(),
+                "gas_adjustment": gas_adjustment and str(gas_adjustment),
+            },
+            "msgs": msgs,
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
-        fees = Coins.from_data(res["fees"])
+        fee_amount = Coins.from_data(res["fee"]["amount"])
 
-        return StdFee(int(res["gas"]), fees)
+        return StdFee(int(res["fee"]["gas"]), fee_amount)
 
     async def encode(self, tx: StdTx) -> str:
         """Fetches a transaction's amino encoding.
@@ -200,7 +199,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         """
         res = await self._broadcast(tx, "block")
         return BlockTxBroadcastResult(
-            height=res["height"],
+            height=res.get("height") or 0,
             txhash=res["txhash"],
             raw_log=res.get("raw_log"),
             gas_wanted=res.get("gas_wanted") or 0,
@@ -233,7 +232,7 @@ class TxAPI(AsyncTxAPI):
     @sync_bind(AsyncTxAPI.create)
     def create(
         self,
-        source_address: AccAddress,
+        sender: AccAddress,
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
         memo: str = "",

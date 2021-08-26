@@ -1,7 +1,4 @@
-from .data import (
-    AggregateExchangeRatePrevote,
-    AggregateExchangeRateVote,
-)
+from .data import AggregateExchangeRatePrevote, AggregateExchangeRateVote
 from .msgs import (
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,

@@ -27,10 +27,10 @@ def main():
         msgs=[
             MsgInstantiateContract(
                 test1.key.acc_address,
+                test1.key.acc_address,
                 code_id,
                 {"count": 0},
                 {"uluna": 10000000, "ukrw": 1000000},
-                False,
             )
         ]
     )

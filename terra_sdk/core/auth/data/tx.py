@@ -194,8 +194,8 @@ class TxLog(JSONSerializable):
 def parse_tx_logs(logs) -> Optional[List[TxLog]]:
     return (
         [
-            TxLog(msg_index=log["msg_index"], log=log["log"], events=log["events"])
-            for log in logs
+            TxLog(msg_index=i, log=log.get("log"), events=log.get("events"))
+            for i, log in enumerate(logs)
         ]
         if logs
         else None

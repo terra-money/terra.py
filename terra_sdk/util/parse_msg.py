@@ -26,13 +26,13 @@ from terra_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_sdk.core.wasm import (
-    MsgStoreCode,
-    MsgMigrateCode,
-    MsgInstantiateContract,
-    MsgExecuteContract,
-    MsgMigrateContract,
-    MsgUpdateContractAdmin,
     MsgClearContractAdmin,
+    MsgExecuteContract,
+    MsgInstantiateContract,
+    MsgMigrateCode,
+    MsgMigrateContract,
+    MsgStoreCode,
+    MsgUpdateContractAdmin,
 )
 
 from .base import create_demux

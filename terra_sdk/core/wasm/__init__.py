@@ -1,11 +1,11 @@
 from .msgs import (
-    MsgStoreCode,
-    MsgMigrateCode,
-    MsgInstantiateContract,
-    MsgExecuteContract,
-    MsgMigrateContract,
-    MsgUpdateContractAdmin,
     MsgClearContractAdmin,
+    MsgExecuteContract,
+    MsgInstantiateContract,
+    MsgMigrateCode,
+    MsgMigrateContract,
+    MsgStoreCode,
+    MsgUpdateContractAdmin,
 )
 
 __all__ = [
