@@ -13,8 +13,9 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from terra.market.v1beta1 import \
-    market_pb2 as terra_dot_market_dot_v1beta1_dot_market__pb2
+from terra.market.v1beta1 import (
+    market_pb2 as terra_dot_market_dot_v1beta1_dot_market__pb2,
+)
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name="terra/market/v1beta1/genesis.proto",

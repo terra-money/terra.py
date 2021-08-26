@@ -12,10 +12,10 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from cosmos.auth.v1beta1 import \
-    auth_pb2 as cosmos_dot_auth_dot_v1beta1_dot_auth__pb2
-from cosmos.base.query.v1beta1 import \
-    pagination_pb2 as cosmos_dot_base_dot_query_dot_v1beta1_dot_pagination__pb2
+from cosmos.auth.v1beta1 import auth_pb2 as cosmos_dot_auth_dot_v1beta1_dot_auth__pb2
+from cosmos.base.query.v1beta1 import (
+    pagination_pb2 as cosmos_dot_base_dot_query_dot_v1beta1_dot_pagination__pb2,
+)
 from cosmos_proto import cosmos_pb2 as cosmos__proto_dot_cosmos__pb2
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2

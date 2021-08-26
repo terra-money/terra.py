@@ -13,10 +13,12 @@ from google.protobuf.internal import enum_type_wrapper
 _sym_db = _symbol_database.Default()
 
 
-from cosmos.base.abci.v1beta1 import \
-    abci_pb2 as cosmos_dot_base_dot_abci_dot_v1beta1_dot_abci__pb2
-from cosmos.base.query.v1beta1 import \
-    pagination_pb2 as cosmos_dot_base_dot_query_dot_v1beta1_dot_pagination__pb2
+from cosmos.base.abci.v1beta1 import (
+    abci_pb2 as cosmos_dot_base_dot_abci_dot_v1beta1_dot_abci__pb2,
+)
+from cosmos.base.query.v1beta1 import (
+    pagination_pb2 as cosmos_dot_base_dot_query_dot_v1beta1_dot_pagination__pb2,
+)
 from cosmos.tx.v1beta1 import tx_pb2 as cosmos_dot_tx_dot_v1beta1_dot_tx__pb2
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2

@@ -14,13 +14,10 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from google.protobuf import \
-    timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from tendermint.crypto import proof_pb2 as tendermint_dot_crypto_dot_proof__pb2
-from tendermint.types import \
-    validator_pb2 as tendermint_dot_types_dot_validator__pb2
-from tendermint.version import \
-    types_pb2 as tendermint_dot_version_dot_types__pb2
+from tendermint.types import validator_pb2 as tendermint_dot_types_dot_validator__pb2
+from tendermint.version import types_pb2 as tendermint_dot_version_dot_types__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name="tendermint/types/types.proto",

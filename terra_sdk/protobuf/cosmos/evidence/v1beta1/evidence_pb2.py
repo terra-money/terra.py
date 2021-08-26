@@ -13,8 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from google.protobuf import \
-    timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name="cosmos/evidence/v1beta1/evidence.proto",

@@ -12,8 +12,9 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from cosmos.vesting.v1beta1 import \
-    vesting_pb2 as cosmos_dot_vesting_dot_v1beta1_dot_vesting__pb2
+from cosmos.vesting.v1beta1 import (
+    vesting_pb2 as cosmos_dot_vesting_dot_v1beta1_dot_vesting__pb2,
+)
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(

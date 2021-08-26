@@ -13,15 +13,12 @@ from google.protobuf.internal import enum_type_wrapper
 _sym_db = _symbol_database.Default()
 
 
-from cosmos.base.v1beta1 import \
-    coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
+from cosmos.base.v1beta1 import coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
 from cosmos_proto import cosmos_pb2 as cosmos__proto_dot_cosmos__pb2
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
-from google.protobuf import \
-    duration_pb2 as google_dot_protobuf_dot_duration__pb2
-from google.protobuf import \
-    timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from tendermint.types import types_pb2 as tendermint_dot_types_dot_types__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(

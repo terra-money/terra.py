@@ -12,11 +12,11 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from cosmos.base.v1beta1 import \
-    coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
+from cosmos.base.v1beta1 import coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from terra.oracle.v1beta1 import \
-    oracle_pb2 as terra_dot_oracle_dot_v1beta1_dot_oracle__pb2
+from terra.oracle.v1beta1 import (
+    oracle_pb2 as terra_dot_oracle_dot_v1beta1_dot_oracle__pb2,
+)
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name="terra/oracle/v1beta1/genesis.proto",

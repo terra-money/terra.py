@@ -14,8 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from google.protobuf import \
-    timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from tendermint.crypto import keys_pb2 as tendermint_dot_crypto_dot_keys__pb2
 from tendermint.crypto import proof_pb2 as tendermint_dot_crypto_dot_proof__pb2
 from tendermint.types import params_pb2 as tendermint_dot_types_dot_params__pb2

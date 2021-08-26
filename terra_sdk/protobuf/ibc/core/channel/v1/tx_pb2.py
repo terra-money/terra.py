@@ -13,10 +13,12 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from ibc.core.channel.v1 import \
-    channel_pb2 as ibc_dot_core_dot_channel_dot_v1_dot_channel__pb2
-from ibc.core.client.v1 import \
-    client_pb2 as ibc_dot_core_dot_client_dot_v1_dot_client__pb2
+from ibc.core.channel.v1 import (
+    channel_pb2 as ibc_dot_core_dot_channel_dot_v1_dot_channel__pb2,
+)
+from ibc.core.client.v1 import (
+    client_pb2 as ibc_dot_core_dot_client_dot_v1_dot_client__pb2,
+)
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name="ibc/core/channel/v1/tx.proto",
