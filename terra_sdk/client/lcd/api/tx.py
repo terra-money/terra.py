@@ -119,7 +119,7 @@ class AsyncTxAPI(BaseAsyncAPI):
                 "gas_prices": gas_prices_coins and gas_prices_coins.to_data(),
                 "gas_adjustment": gas_adjustment and str(gas_adjustment),
             },
-            "msgs": msgs,
+            "msgs": [m.to_data() for m in msgs],
         }
 
         res = await self._c._post("/txs/estimate_fee", data)
