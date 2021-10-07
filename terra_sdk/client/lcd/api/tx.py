@@ -1,5 +1,7 @@
 from typing import List, Optional, Union
 
+import attr
+
 from terra_sdk.core import AccAddress, Coins, Numeric
 from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx, TxInfo
 from terra_sdk.core.broadcast import (
@@ -12,8 +14,12 @@ from terra_sdk.util.hash import hash_amino
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncTxAPI", "TxAPI"]
+__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions"]
 
+@attr.s
+class BroadcastOptions:
+    sequences: Optional[List[int]] = attr.ib(factory=list)
+    fee_granter: Optional[AccAddress] = attr.ib(default=None)
 
 class AsyncTxAPI(BaseAsyncAPI):
     async def tx_info(self, tx_hash: str) -> TxInfo:
@@ -127,7 +133,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         return StdFee(int(res["fee"]["gas"]), fee_amount)
 
-    async def encode(self, tx: StdTx) -> str:
+    async def encode(self, tx: StdTx, options: BroadcastOptions = None) -> str:
         """Fetches a transaction's amino encoding.
 
         Args:
@@ -136,7 +142,14 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             str: base64 string containing amino-encoded tx
         """
-        res = await self._c._post("/txs/encode", tx.to_data())
+        data = tx.to_data()
+        if options is not None:
+            if options.sequences is not None and len(options.sequences) > 0:
+                data["sequences"] = [ str(i) for i in options.sequences]
+            if options.fee_granter is not None and len(options.fee_granter) > 0:
+                data["fee_granter"] = options.fee_granter
+
+        res = await self._c._post("/txs/encode", data)
         return res["tx"]
 
     async def hash(self, tx: StdTx) -> str:
@@ -151,11 +164,16 @@ class AsyncTxAPI(BaseAsyncAPI):
         amino = await self.encode(tx)
         return hash_amino(amino)
 
-    async def _broadcast(self, tx: StdTx, mode: str) -> dict:
+    async def _broadcast(self, tx: StdTx, mode: str, options: BroadcastOptions = None) -> dict:
         data = {"tx": tx.to_data()["value"], "mode": mode}
+        if options is not None:
+            if options.sequences is not None and len(options.sequences) > 0:
+                data["sequences"] = [str(i) for i in options.sequences]
+            if options.fee_granter is not None and len(options.fee_granter) > 0:
+                data["fee_granter"] = options.fee_granter
         return await self._c._post("/txs", data, raw=True)
 
-    async def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+    async def broadcast_sync(self, tx: StdTx, options: BroadcastOptions = None) -> SyncTxBroadcastResult:
         """Broadcasts a transaction using the ``sync`` broadcast mode.
 
         Args:
@@ -164,16 +182,15 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             SyncTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "sync")
+        res = await self._broadcast(tx, "sync", options)
         return SyncTxBroadcastResult(
-            height=res["height"],
-            txhash=res["txhash"],
+            txhash=res.get("txhash"),
             raw_log=res.get("raw_log"),
             code=res.get("code"),
             codespace=res.get("codespace"),
         )
 
-    async def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+    async def broadcast_async(self, tx: StdTx, options: BroadcastOptions = None) -> AsyncTxBroadcastResult:
         """Broadcasts a transaction using the ``async`` broadcast mode.
 
         Args:
@@ -182,13 +199,12 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             AsyncTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "async")
+        res = await self._broadcast(tx, "async", options)
         return AsyncTxBroadcastResult(
-            height=res["height"],
-            txhash=res["txhash"],
+            txhash=res.get("txhash"),
         )
 
-    async def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+    async def broadcast(self, tx: StdTx, options: BroadcastOptions = None) -> BlockTxBroadcastResult:
         """Broadcasts a transaction using the ``block`` broadcast mode.
 
         Args:
@@ -197,10 +213,10 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             BlockTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "block")
+        res = await self._broadcast(tx, "block", options)
         return BlockTxBroadcastResult(
-            height=res.get("height") or 0,
-            txhash=res["txhash"],
+            height=res.get("height"),
+            txhash=res.get("txhash"),
             raw_log=res.get("raw_log"),
             gas_wanted=res.get("gas_wanted") or 0,
             gas_used=res.get("gas_used") or 0,
@@ -259,7 +275,7 @@ class TxAPI(AsyncTxAPI):
     estimate_fee.__doc__ = AsyncTxAPI.estimate_fee.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
-    def encode(self, tx: StdTx) -> str:
+    def encode(self, tx: StdTx, options: BroadcastOptions = None) -> str:
         pass
 
     encode.__doc__ = AsyncTxAPI.encode.__doc__
@@ -271,19 +287,19 @@ class TxAPI(AsyncTxAPI):
     hash.__doc__ = AsyncTxAPI.hash.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_sync)
-    def broadcast_sync(self, tx: StdTx) -> SyncTxBroadcastResult:
+    def broadcast_sync(self, tx: StdTx, options: BroadcastOptions = None) -> SyncTxBroadcastResult:
         pass
 
     broadcast_sync.__doc__ = AsyncTxAPI.broadcast_sync.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_async)
-    def broadcast_async(self, tx: StdTx) -> AsyncTxBroadcastResult:
+    def broadcast_async(self, tx: StdTx, options: BroadcastOptions = None) -> AsyncTxBroadcastResult:
         pass
 
     broadcast_async.__doc__ = AsyncTxAPI.broadcast_async.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast)
-    def broadcast(self, tx: StdTx) -> BlockTxBroadcastResult:
+    def broadcast(self, tx: StdTx, options: BroadcastOptions = None) -> BlockTxBroadcastResult:
         pass
 
     broadcast.__doc__ = AsyncTxAPI.broadcast.__doc__
