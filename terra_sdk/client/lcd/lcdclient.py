@@ -3,7 +3,7 @@ from __future__ import annotations
 from asyncio import AbstractEventLoop, get_event_loop
 from json import JSONDecodeError
 from typing import Optional, Union
-from urllib.parse import urljoin
+from terra_sdk.util.url import urljoin
 
 import nest_asyncio
 from aiohttp import ClientSession
