@@ -1,5 +1,5 @@
 import furl
 
 def urljoin(base: str, url: str) -> str:
-    return furl.furl(base).add(path=url).url
+    return furl.furl(base.removesuffix('/')).add(path=url).url
 
