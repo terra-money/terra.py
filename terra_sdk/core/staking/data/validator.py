@@ -100,7 +100,7 @@ class Validator(JSONSerializable):
     consensus_pubkey: ValConsPubKey = attr.ib()
     """"""
 
-    jailed: bool = attr.ib()
+    jailed: bool = attr.ib(converter=bool)
     """"""
 
     status: int = attr.ib(converter=int)
@@ -139,12 +139,12 @@ class Validator(JSONSerializable):
         return cls(
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
-            jailed=data["jailed"],
+            jailed=data.get("jailed"),
             status=data["status"],
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),
-            unbonding_height=data["unbonding_height"],
+            unbonding_height=data.get("unbonding_height") or 0,
             unbonding_time=data["unbonding_time"],
             commission=Commission.from_data(data["commission"]),
             min_self_delegation=data["min_self_delegation"],
