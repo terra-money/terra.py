@@ -16,10 +16,12 @@ from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions"]
 
+
 @attr.s
 class BroadcastOptions:
-    sequences: Optional[List[int]] = attr.ib(factory=list)
+    sequences: Optional[List[int]] = attr.ib()
     fee_granter: Optional[AccAddress] = attr.ib(default=None)
+
 
 class AsyncTxAPI(BaseAsyncAPI):
     async def tx_info(self, tx_hash: str) -> TxInfo:
@@ -145,7 +147,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         data = tx.to_data()
         if options is not None:
             if options.sequences is not None and len(options.sequences) > 0:
-                data["sequences"] = [ str(i) for i in options.sequences]
+                data["sequences"] = [str(i) for i in options.sequences]
             if options.fee_granter is not None and len(options.fee_granter) > 0:
                 data["fee_granter"] = options.fee_granter
 
@@ -215,7 +217,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         """
         res = await self._broadcast(tx, "block", options)
         return BlockTxBroadcastResult(
-            height=res.get("height"),
+            height=res.get("height") or 0,
             txhash=res.get("txhash"),
             raw_log=res.get("raw_log"),
             gas_wanted=res.get("gas_wanted") or 0,

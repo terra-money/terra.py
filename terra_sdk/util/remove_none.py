@@ -1,11 +1,8 @@
-from typing import Any
-from boltons.iterutils import remap
+from boltons.iterutils import remap  # type: ignore
 
 __all__ = ["remove_none"]
-
-dropper = lambda path, key, value: key is not None and value is not None
 
 
 def remove_none(obj: dict):
     """remove keys for None in a dict"""
-    return remap(obj, visit=dropper)
+    return remap(obj, visit=lambda path, key, value: key is not None and value is not None)
