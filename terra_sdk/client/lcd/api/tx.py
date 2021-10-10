@@ -166,7 +166,9 @@ class AsyncTxAPI(BaseAsyncAPI):
         amino = await self.encode(tx)
         return hash_amino(amino)
 
-    async def _broadcast(self, tx: StdTx, mode: str, options: BroadcastOptions = None) -> dict:
+    async def _broadcast(
+        self, tx: StdTx, mode: str, options: BroadcastOptions = None
+    ) -> dict:
         data = {"tx": tx.to_data()["value"], "mode": mode}
         if options is not None:
             if options.sequences is not None and len(options.sequences) > 0:
@@ -175,7 +177,9 @@ class AsyncTxAPI(BaseAsyncAPI):
                 data["fee_granter"] = options.fee_granter
         return await self._c._post("/txs", data, raw=True)
 
-    async def broadcast_sync(self, tx: StdTx, options: BroadcastOptions = None) -> SyncTxBroadcastResult:
+    async def broadcast_sync(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> SyncTxBroadcastResult:
         """Broadcasts a transaction using the ``sync`` broadcast mode.
 
         Args:
@@ -192,7 +196,9 @@ class AsyncTxAPI(BaseAsyncAPI):
             codespace=res.get("codespace"),
         )
 
-    async def broadcast_async(self, tx: StdTx, options: BroadcastOptions = None) -> AsyncTxBroadcastResult:
+    async def broadcast_async(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> AsyncTxBroadcastResult:
         """Broadcasts a transaction using the ``async`` broadcast mode.
 
         Args:
@@ -206,7 +212,9 @@ class AsyncTxAPI(BaseAsyncAPI):
             txhash=res.get("txhash"),
         )
 
-    async def broadcast(self, tx: StdTx, options: BroadcastOptions = None) -> BlockTxBroadcastResult:
+    async def broadcast(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> BlockTxBroadcastResult:
         """Broadcasts a transaction using the ``block`` broadcast mode.
 
         Args:
@@ -289,19 +297,25 @@ class TxAPI(AsyncTxAPI):
     hash.__doc__ = AsyncTxAPI.hash.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_sync)
-    def broadcast_sync(self, tx: StdTx, options: BroadcastOptions = None) -> SyncTxBroadcastResult:
+    def broadcast_sync(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> SyncTxBroadcastResult:
         pass
 
     broadcast_sync.__doc__ = AsyncTxAPI.broadcast_sync.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_async)
-    def broadcast_async(self, tx: StdTx, options: BroadcastOptions = None) -> AsyncTxBroadcastResult:
+    def broadcast_async(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> AsyncTxBroadcastResult:
         pass
 
     broadcast_async.__doc__ = AsyncTxAPI.broadcast_async.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast)
-    def broadcast(self, tx: StdTx, options: BroadcastOptions = None) -> BlockTxBroadcastResult:
+    def broadcast(
+        self, tx: StdTx, options: BroadcastOptions = None
+    ) -> BlockTxBroadcastResult:
         pass
 
     broadcast.__doc__ = AsyncTxAPI.broadcast.__doc__
