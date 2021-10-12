@@ -63,7 +63,7 @@ class WasmAPI(AsyncWasmAPI):
     def contract_info(self, contract_address: str) -> dict:
         pass
 
-    contract_info.__doc__ = AsyncWasmAPI.code_info.__doc__
+    contract_info.__doc__ = AsyncWasmAPI.contract_info.__doc__
 
     @sync_bind(AsyncWasmAPI.contract_query)
     def contract_query(self, contract_address: str, query_msg: dict) -> Any:
