@@ -9,6 +9,7 @@ import attr
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
+from terra_sdk.util.remove_none import remove_none
 
 __all__ = [
     "MsgStoreCode",
@@ -107,10 +108,10 @@ class MsgInstantiateContract(Msg):
     def from_data(cls, data: dict) -> MsgInstantiateContract:
         data = data["value"]
         return cls(
-            sender=data["sender"],
-            admin=data["admin"],
+            sender=data.get("sender"),
+            admin=data.get("admin"),
             code_id=data["code_id"],
-            init_msg=data["init_msg"],
+            init_msg=remove_none(data["init_msg"]),
             init_coins=Coins.from_data(data["init_coins"]),
         )
 
@@ -141,7 +142,7 @@ class MsgExecuteContract(Msg):
         return cls(
             sender=data["sender"],
             contract=data["contract"],
-            execute_msg=data["execute_msg"],
+            execute_msg=remove_none(data.get("execute_msg")),
             coins=Coins.from_data(data["coins"]),
         )
 
