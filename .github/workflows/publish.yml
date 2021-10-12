@@ -2,8 +2,9 @@ name: publish
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+" # Push events to matching v*, i.e. v1.0, v20.15.10
-      - "v[0-9]+.[0-9]+.[0-9]+-rc*" # Push events to matching v*, i.e. v1.0-rc1, v20.15.10-rc5
+      - "[0-9]+.[0-9]+.[0-9]+" # Push events to matching v*, i.e. 1.0, 20.15.10
+      - "[0-9]+.[0-9]+.[0-9]+rc*" # Push events to matching v*, i.e. 1.0rc1, 20.15.10rc5
+      - "[0-9]+.[0-9]+.[0-9]+b*" # Push events to matching v*, i.e. 1.0b1, 20.15.10b5
 
 jobs:
   publish:
