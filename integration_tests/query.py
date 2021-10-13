@@ -11,7 +11,7 @@ from terra_sdk.util.contract import get_code_id
 
 def main():
     terra = LCDClient(
-        url="https://silent-restless-snowflake.terra-mainnet.quiknode.pro/166cf94134bb9f132e27d52f456ed967332e8ba3/",
+        url="https://bombay-lcd.terra.dev/",
         chain_id="columbus-5",
     )
 
