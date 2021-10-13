@@ -91,15 +91,16 @@ class Wallet:
             StdSignMsg: unsigned transaction
         """
         return self.lcd.tx.create(
-            self.key.acc_address,
-            msgs,
-            fee,
-            memo,
-            gas_prices,
-            gas_adjustment,
-            fee_denoms,
-            account_number,
-            sequence,
+            sender=self.key.acc_address,
+            msgs=msgs,
+            fee=fee,
+            memo=memo,
+            gas=None,
+            gas_prices=gas_prices,
+            gas_adjustment=gas_adjustment,
+            fee_denoms=fee_denoms,
+            account_number=account_number,
+            sequence=sequence,
         )
 
     def create_and_sign_tx(

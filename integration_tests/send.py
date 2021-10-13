@@ -20,7 +20,9 @@ def main():
         Coins(uluna=1000000),
     )
     print(msg)
-    tx = test1.create_and_sign_tx(msgs=[msg])
+    tx = test1.create_and_sign_tx(msgs=[msg],
+                                  gas_prices="0.2uluna",
+                                  gas_adjustment="1.4")
     print(tx)
 
     result = terra.tx.broadcast(tx)
