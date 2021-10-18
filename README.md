@@ -11,7 +11,7 @@ The Python SDK for Terra
 <img alt="Python" src="https://img.shields.io/pypi/pyversions/terra-sdk">
   <img alt="pip" src="https://img.shields.io/pypi/v/terra-sdk"></p>
 <p>
-  <a href="https://terra-money.github.io/terra-sdk-python/index.html"><strong>Explore the Docs »</strong></a>
+  <a href="https://terra-money.github.io/terra.py/index.html"><strong>Explore the Docs »</strong></a>
 <br/>
   <a href="https://pypi.org/project/terra-sdk/">PyPI Package</a>
   ·
