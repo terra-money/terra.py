@@ -7,7 +7,7 @@ from terra_sdk.core.distribution import (
 )
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.msgauth import (
+from terra_sdk.core.authz import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,
@@ -46,7 +46,7 @@ distribution_msgs = [
 ]
 gov_msgs = [MsgDeposit, MsgSubmitProposal, MsgVote]
 market_msgs = [MsgSwap, MsgSwapSend]
-msgauth_msgs = [
+authz_msgs = [
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,

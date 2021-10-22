@@ -1,4 +1,4 @@
-"""MsgAuth module message types."""
+"""Authz module message types."""
 
 from __future__ import annotations
 

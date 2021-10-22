@@ -17,6 +17,8 @@ def main():
 
     #result = terra.authz.grants('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v', 'terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp')
 
+    #result = terra.bank.total()
+
     #result = terra.distribution.rewards('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
     #result = terra.distribution.validator_commission('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
     #result = terra.distribution.withdraw_address('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
@@ -56,10 +58,11 @@ def main():
     #result = terra.wasm.code_info(3)
     #result = terra.wasm.contract_info('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98')
     #result = terra.wasm.contract_query('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98', {"all_allowances":{"owner":"terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc"}})
-    result = terra.wasm.parameters()
+    #result = terra.wasm.parameters()
+
+    # tendermint: changes
 
     # staking
-    # supply
     # tendermint
     # treasury
     # tx

@@ -130,7 +130,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 
 >>> async def main():
       <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
-      total_supply = await terra.supply.total()
+      total_supply = await terra.bank.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
 

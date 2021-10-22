@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from terra_sdk.core import AccAddress
-from terra_sdk.core.msgauth import AuthorizationGrant
+from terra_sdk.core.authz import AuthorizationGrant
 
 from ._base import BaseAsyncAPI, sync_bind
 

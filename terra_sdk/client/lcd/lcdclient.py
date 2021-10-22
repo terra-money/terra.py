@@ -23,7 +23,6 @@ from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.oracle import AsyncOracleAPI, OracleAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
-from .api.supply import AsyncSupplyAPI, SupplyAPI
 from .api.tendermint import AsyncTendermintAPI, TendermintAPI
 from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
@@ -66,7 +65,6 @@ class AsyncLCDClient:
         self.oracle = AsyncOracleAPI(self)
         self.slashing = AsyncSlashingAPI(self)
         self.staking = AsyncStakingAPI(self)
-        self.supply = AsyncSupplyAPI(self)
         self.tendermint = AsyncTendermintAPI(self)
         self.treasury = AsyncTreasuryAPI(self)
         self.wasm = AsyncWasmAPI(self)
@@ -179,9 +177,6 @@ class LCDClient(AsyncLCDClient):
     staking: StakingAPI
     """:class:`StakingAPI<terra_sdk.client.lcd.api.staking.StakingAPI>`."""
 
-    supply: SupplyAPI
-    """:class:`SupplyAPI<terra_sdk.client.lcd.api.supply.SupplyAPI>`."""
-
     tendermint: TendermintAPI
     """:class:`TendermintAPI<terra_sdk.client.lcd.api.tendermint.TendermintAPI>`."""
 
@@ -220,7 +215,6 @@ class LCDClient(AsyncLCDClient):
         self.oracle = OracleAPI(self)
         self.slashing = SlashingAPI(self)
         self.staking = StakingAPI(self)
-        self.supply = SupplyAPI(self)
         self.tendermint = TendermintAPI(self)
         self.treasury = TreasuryAPI(self)
         self.wasm = WasmAPI(self)
