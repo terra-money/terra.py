@@ -60,11 +60,21 @@ def main():
     #result = terra.wasm.contract_query('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98', {"all_allowances":{"owner":"terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc"}})
     #result = terra.wasm.parameters()
 
-    # tendermint: changes
+    #result = terra.treasury.tax_cap('uusd')
+    #result = terra.treasury.tax_rate()
+    #result = terra.treasury.tax_rate(6248404)
+    #result = terra.treasury.reward_weight()
+    #result = terra.treasury.tax_proceeds()
+    #result = terra.treasury.seigniorage_proceeds()
+    #result = terra.treasury.parameters()
+
+    # tendermint: no changes
 
     # staking
     # tendermint
-    # treasury
+
+
+
     # tx
 
     # ibc
