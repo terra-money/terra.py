@@ -19,7 +19,7 @@ from .api.distribution import AsyncDistributionAPI, DistributionAPI
 from .api.gov import AsyncGovAPI, GovAPI
 from .api.market import AsyncMarketAPI, MarketAPI
 from .api.mint import AsyncMintAPI, MintAPI
-from .api.msgauth import AsyncMsgAuthAPI, MsgAuthAPI
+from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.oracle import AsyncOracleAPI, OracleAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
@@ -62,7 +62,7 @@ class AsyncLCDClient:
         self.gov = AsyncGovAPI(self)
         self.market = AsyncMarketAPI(self)
         self.mint = AsyncMintAPI(self)
-        self.msgauth = AsyncMsgAuthAPI(self)
+        self.authz = AsyncAuthzAPI(self)
         self.oracle = AsyncOracleAPI(self)
         self.slashing = AsyncSlashingAPI(self)
         self.staking = AsyncStakingAPI(self)
@@ -82,7 +82,7 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-        self, endpoint: str, params: Optional[dict] = None, raw: bool = False
+        self, endpoint: str, params: Optional[dict] = None  # , raw: bool = False
     ):
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
@@ -92,9 +92,9 @@ class AsyncLCDClient:
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
-                raise LCDResponseError(message=result.get("error"), response=response)
+                raise LCDResponseError(message=str(result), response=response)
         self.last_request_height = result.get("height")
-        return result if raw else result["result"]
+        return result  # if raw else result["result"]
 
     async def _post(
         self, endpoint: str, data: Optional[dict] = None, raw: bool = False
@@ -110,6 +110,19 @@ class AsyncLCDClient:
                 raise LCDResponseError(message=result.get("error"), response=response)
         self.last_request_height = result.get("height")
         return result if raw else result["result"]
+
+    async def _search(self, events: dict = {}) -> dict:
+        """Searches for transactions given critera.
+
+        Args:
+            options (dict, optional): dictionary containing options. Defaults to {}.
+
+        Returns:
+            dict: transaction search results
+        """
+        res = await self._get("/cosmos/tx/v1beta1/txs", events)  # , raw=True)
+        return res
+
 
     async def __aenter__(self):
         return self
@@ -154,8 +167,8 @@ class LCDClient(AsyncLCDClient):
     mint: MintAPI
     """:class:`MintAPI<terra_sdk.client.lcd.api.mint.MintAPI>`."""
 
-    msgauth: MsgAuthAPI
-    """:class:`MsgAuthAPI<terra_sdk.client.lcd.api.msgauth.MsgAuthAPI>`."""
+    authz: AuthzAPI
+    """:class:`AuthzAPI<terra_sdk.client.lcd.api.authz.AuthzAPI>`."""
 
     oracle: OracleAPI
     """:class:`OracleAPI<terra_sdk.client.lcd.api.oracle.OracleAPI>`."""
@@ -203,7 +216,7 @@ class LCDClient(AsyncLCDClient):
         self.gov = GovAPI(self)
         self.market = MarketAPI(self)
         self.mint = MintAPI(self)
-        self.msgauth = MsgAuthAPI(self)
+        self.authz = AuthzAPI(self)
         self.oracle = OracleAPI(self)
         self.slashing = SlashingAPI(self)
         self.staking = StakingAPI(self)
@@ -253,6 +266,18 @@ class LCDClient(AsyncLCDClient):
         )
         try:
             result = await super()._post(*args, **kwargs)
+        finally:
+            await self.session.close()
+        return result
+
+    async def _search(self, *args, **kwargs):
+        # session has to be manually created and torn down for each HTTP request in a
+        # synchronous client
+        self.session = ClientSession(
+            headers={"Accept": "application/json"}, loop=self.loop
+        )
+        try:
+            result = await super()._search(*args, **kwargs)
         finally:
             await self.session.close()
         return result

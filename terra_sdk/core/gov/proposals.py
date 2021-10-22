@@ -16,10 +16,9 @@ class TextProposal(Content):
         description: proposal description
     """
 
-    type = "gov/TextProposal"
+    type_url = "/cosmos.gov.v1beta1.TextProposal"
     """"""
 
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:
-        data = data["value"]
         return cls(title=data["title"], description=data["description"])

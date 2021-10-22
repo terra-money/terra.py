@@ -4,6 +4,7 @@ import copy
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
 from terra_sdk.util.json import JSONSerializable
+from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
 from .coin import Coin
 from .numeric import Numeric
@@ -115,6 +116,19 @@ class Coins(JSONSerializable):
 
     def to_data(self) -> List[dict]:
         return [coin.to_data() for coin in self]
+
+    @classmethod
+    def from_proto(cls, proto: List[Coin_pb]) -> Coins:
+        """Converts list of Coin-data objects to :class:`Coins`.
+
+        Args:
+            data (list): list of Coin-data objects
+        """
+        coins = map(Coin.from_proto, proto)
+        return cls(coins)
+
+    def to_proto(self) -> List[Coin_pb]:
+        return [coin.to_proto() for coin in self]
 
     def denoms(self) -> List[str]:
         """Get the list of denoms for all Coin objects contained."""

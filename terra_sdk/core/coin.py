@@ -6,6 +6,7 @@ from typing import Union
 import attr
 
 from terra_sdk.util.json import JSONSerializable
+from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
 from .numeric import Dec, Numeric
 
@@ -62,6 +63,16 @@ class Coin(JSONSerializable):
 
     def to_data(self) -> dict:
         return {"denom": self.denom, "amount": str(self.amount)}
+
+    @classmethod
+    def from_proto(cls, proto: Coin_pb) -> Coin:
+        return cls(proto["denom"], proto["amount"])
+
+    def to_proto(self) -> Coin_pb:
+        coin = Coin_pb()
+        coin.denom = self.denom
+        coin.amount = self.amount
+        return coin
 
     @classmethod
     def from_str(cls, string: str) -> Coin:

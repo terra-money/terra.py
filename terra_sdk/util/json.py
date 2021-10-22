@@ -1,5 +1,7 @@
+import abc
 import copy
 import json
+from abc import ABC
 from typing import Any
 
 
@@ -18,10 +20,14 @@ def dict_to_data(d: dict) -> dict:
     return {key: to_data(d[key]) for key in d}
 
 
-class JSONSerializable:
+class JSONSerializable(ABC):
     def to_data(self) -> Any:
         """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))
+
+    # @abc.abstractmethod
+    # def to_proto(self):
+    #    raise NotImplementedError()
 
     def to_json(self) -> str:
         """Marshals the object into a stringified JSON serialization. Keys are first sorted

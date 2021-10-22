@@ -5,10 +5,10 @@ from terra_sdk.core.msgauth import AuthorizationGrant
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncMsgAuthAPI", "MsgAuthAPI"]
+__all__ = ["AsyncAuthzAPI", "AuthzAPI"]
 
 
-class AsyncMsgAuthAPI(BaseAsyncAPI):
+class AsyncAuthzAPI(BaseAsyncAPI):
     async def grants(
         self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
     ) -> List[AuthorizationGrant]:
@@ -22,26 +22,25 @@ class AsyncMsgAuthAPI(BaseAsyncAPI):
         Returns:
             List[AuthorizationGrant]: message authorization grants matching criteria
         """
-        if msg_type is None:
-            res = await self._c._get(
-                f"/msgauth/granters/{granter}/grantees/{grantee}/grants"
-            )
-            return [AuthorizationGrant.from_data(x) for x in res]
-        else:
-            res = await self._c._get(
-                f"/msgauth/granters/{granter}/grantees/{grantee}/grants/{msg_type}"
-            )
-            if res is None:
-                return []
-            else:
-                return [AuthorizationGrant.from_data(x) for x in res]
+        params = {
+            "granter": granter,
+            "grantee": grantee,
+        }
+        if msg_type is not None:
+            params["msg_type_url"] = msg_type
+
+        res = await self._c._get(
+            f"/cosmos/authz/v1beta1/grants",
+            params
+        )
+        return [AuthorizationGrant.from_data(x) for x in res["grants"]]
 
 
-class MsgAuthAPI(AsyncMsgAuthAPI):
-    @sync_bind(AsyncMsgAuthAPI.grants)
+class AuthzAPI(AsyncAuthzAPI):
+    @ sync_bind(AsyncAuthzAPI.grants)
     def grants(
         self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
     ) -> List[AuthorizationGrant]:
         pass
 
-    grants.__doc__ = AsyncMsgAuthAPI.grants.__doc__
+    grants.__doc__ = AsyncAuthzAPI.grants.__doc__

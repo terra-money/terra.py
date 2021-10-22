@@ -29,7 +29,7 @@ class Content(BaseTerraData):
     @staticmethod
     def from_data(data: dict) -> Content:
         from terra_sdk.util.parse_content import parse_content
-
+        print("parse.py - content - from_data", data)
         return parse_content(data)
 
 
@@ -37,13 +37,13 @@ class Content(BaseTerraData):
 class Proposal(JSONSerializable):
     """Contains information about a submitted proposal on the blockchain."""
 
-    id: int = attr.ib(converter=int)
+    proposal_id: int = attr.ib(converter=int)
     """Proposal's ID."""
 
     content: Content = attr.ib()
     """Proposal contents."""
 
-    proposal_status: str = attr.ib()
+    status: str = attr.ib()
     """Status of proposal."""
 
     final_tally_result: dict = attr.ib()
@@ -72,9 +72,9 @@ class Proposal(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
         return cls(
-            id=data["id"],
+            proposal_id=data["proposal_id"],
             content=Content.from_data(data["content"]),
-            proposal_status=data["proposal_status"],
+            status=data["status"],
             final_tally_result=data["final_tally_result"],
             submit_time=data["submit_time"],
             deposit_end_time=data["deposit_end_time"],

@@ -244,7 +244,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             dict: transaction search results
         """
-        res = await self._c._get("/txs", options, raw=True)
+        res = await self._c._get("/cosmos/tx/v1beta1/txs", options, raw=True)
         return res
 
 

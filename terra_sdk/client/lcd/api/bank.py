@@ -15,8 +15,8 @@ class AsyncBankAPI(BaseAsyncAPI):
         Returns:
             Coins: balance
         """
-        res = await self._c._get(f"/bank/balances/{address}")
-        return Coins.from_data(res)
+        res = await self._c._get(f"/cosmos/bank/v1beta1/balances/{address}")
+        return Coins.from_data(res["balances"])
 
 
 class BankAPI(AsyncBankAPI):

@@ -21,7 +21,7 @@ class CommunityPoolSpendProposal(Content):
         amount (Coins): amount to spend from community pool
     """
 
-    type = "distribution/CommunityPoolSpendProposal"
+    type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
     """"""
 
     title: str = attr.ib()
@@ -31,7 +31,6 @@ class CommunityPoolSpendProposal(Content):
 
     @classmethod
     def from_data(cls, data: dict) -> CommunityPoolSpendProposal:
-        data = data["value"]
         return cls(
             title=data["title"],
             description=data["description"],

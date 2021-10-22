@@ -1,4 +1,0 @@
-[submodule "proto"]
-	path = terra.proto
-	url = https://github.com/Vritra4/terra.proto.git
-	branch = feature/python

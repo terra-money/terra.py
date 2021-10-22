@@ -22,7 +22,7 @@ class ParameterChangeProposal(Content):
         change (List[dict]): list of parameter changes
     """
 
-    type = "params/ParameterChangeProposal"
+    type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""
 
     title: str = attr.ib()
@@ -31,7 +31,6 @@ class ParameterChangeProposal(Content):
 
     @classmethod
     def from_data(cls, data: dict) -> ParameterChangeProposal:
-        data = data["value"]
         return cls(
             title=data["title"],
             description=data["description"],
