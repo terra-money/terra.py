@@ -51,7 +51,21 @@ def main():
 
     #result = terra.slashing.signing_infos()
     #result = terra.slashing.signing_info('terravalcons1px544qs6a6m5jxfx5sjtx22mq79chsqxyszhe0')
-    result = terra.slashing.parameters()
+    #result = terra.slashing.parameters()
+
+    #result = terra.wasm.code_info(3)
+    #result = terra.wasm.contract_info('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98')
+    #result = terra.wasm.contract_query('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98', {"all_allowances":{"owner":"terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc"}})
+    result = terra.wasm.parameters()
+
+    # staking
+    # supply
+    # tendermint
+    # treasury
+    # tx
+
+    # ibc
+    # ibc-transfer
 
     print(result)
 
