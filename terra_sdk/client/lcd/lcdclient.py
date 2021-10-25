@@ -27,6 +27,7 @@ from .api.tendermint import AsyncTendermintAPI, TendermintAPI
 from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
+from .api.ibc import AsyncIbcAPI, IbcAPI
 from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
 from .wallet import AsyncWallet, Wallet
@@ -69,6 +70,7 @@ class AsyncLCDClient:
         self.tendermint = AsyncTendermintAPI(self)
         self.treasury = AsyncTreasuryAPI(self)
         self.wasm = AsyncWasmAPI(self)
+        self.ibc = AsyncIbcAPI(self)
         self.ibc_transfer = AsyncIbcTransferAPI(self)
         self.tx = AsyncTxAPI(self)
         self.utils = AsyncLCDUtils(self)
@@ -191,6 +193,9 @@ class LCDClient(AsyncLCDClient):
     tx: TxAPI
     """:class:`TxAPI<terra_sdk.client.lcd.api.tx.TxAPI>`."""
 
+    ibc: IbcAPI
+    """:class:`IbcAPI<terra_sdk.client.lcd.api.ibc.IbcAPI>`."""
+
     ibc_transfer: IbcTransferAPI
     """:class:`IbcTransferAPI<terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI>`."""
 
@@ -224,6 +229,7 @@ class LCDClient(AsyncLCDClient):
         self.tendermint = TendermintAPI(self)
         self.treasury = TreasuryAPI(self)
         self.wasm = WasmAPI(self)
+        self.ibc = IbcAPI(self)
         self.ibc_transfer = IbcTransferAPI(self)
         self.tx = TxAPI(self)
         self.utils = LCDUtils(self)
