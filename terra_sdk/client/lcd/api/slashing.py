@@ -7,6 +7,8 @@ from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncSlashingAPI", "SlashingAPI"]
 
+from ..api_requester import APIParams
+
 
 class AsyncSlashingAPI(BaseAsyncAPI):
 
@@ -22,8 +24,8 @@ class AsyncSlashingAPI(BaseAsyncAPI):
         Returns:
             Union[List[dict], dict]: signing info
         """
-        res = await self._c._get(f'/cosmos/slashing/v1beta1/signing_infos/${val_cons_pub_key}')
-        info = res["info"]
+        res = await self._c._get(f'/cosmos/slashing/v1beta1/signing_infos/{val_cons_pub_key}')
+        info = res["val_signing_info"]
         return {
             "address": info["address"],
             "start_height": Numeric.parse(info["start_height"]),
@@ -33,13 +35,13 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             "missed_blocks_counter": Numeric.parse(info["missed_blocks_counter"])
         }
 
-    async def signing_infos(self): # -> Union[List[dict], dict]:
+    async def signing_infos(self, params: Optional[APIParams] = None) -> (Union[List[dict], dict], dict):
         """Fetches all signing info.
 
         Returns:
             Union[List[dict], dict]: signing infos
         """
-        res = await self._c._get('/cosmos/slashing/v1beta1/signing_infos')
+        res = await self._c._get('/cosmos/slashing/v1beta1/signing_infos', params)
         infos = res["info"]
         return [
             {
@@ -51,7 +53,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
                 "missed_blocks_counter": Numeric.parse(info["missed_blocks_counter"])
             }
             for info in infos
-        ]
+        ], res.get("pagination")
 
     async def parameters(self) -> dict:
         """Fetches Slashing module parameters.
@@ -81,7 +83,7 @@ class SlashingAPI(AsyncSlashingAPI):
     signing_info.__doc__ = AsyncSlashingAPI.signing_info.__doc__
 
     @sync_bind(AsyncSlashingAPI.signing_infos)
-    def signing_infos(self) -> List[dict]:
+    def signing_infos(self, params: Optional[APIParams]) -> (Union[List[dict], dict], dict):
         pass
 
     signing_infos.__doc__ = AsyncSlashingAPI.signing_infos.__doc__

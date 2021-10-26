@@ -11,9 +11,11 @@ def main():
         chain_id="bombay-12",
     )
 
-    result = terra.slashing.signing_infos()
+    pagopt = PaginationOptions(limit=3, count_total=True, reverse=True)
+
+    result = terra.slashing.signing_infos(pagopt)
     print(result)
-    result = terra.slashing.signing_info('terravalcons1px544qs6a6m5jxfx5sjtx22mq79chsqxyszhe0')
+    result = terra.slashing.signing_info("terravalcons1lcjwqqp8sk86laggdagvk2lez0v3helfztsarh")
     print(result)
     result = terra.slashing.parameters()
     print(result)

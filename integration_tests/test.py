@@ -20,15 +20,12 @@ def main():
 
     """
     TODO: pagination test
-    import lcd_authz
-    import lcd_bank
     import lcd_gov
-    import lcd_slashing
     import lcd_staking
     import lcd_tx
     """
 
-    import lcd_bank
+    import lcd_slashing
 
 
     # stakin
