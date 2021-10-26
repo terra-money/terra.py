@@ -4,6 +4,7 @@ from asyncio import AbstractEventLoop, get_event_loop
 from json import JSONDecodeError
 from typing import Optional, Union
 
+import attr
 import nest_asyncio
 from aiohttp import ClientSession
 
@@ -32,16 +33,17 @@ from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
 from .wallet import AsyncWallet, Wallet
 
+from .api_requester import PaginationOption
 
 class AsyncLCDClient:
     def __init__(
-        self,
-        url: str,
-        chain_id: Optional[str] = None,
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
-        loop: Optional[AbstractEventLoop] = None,
-        _create_session: bool = True,  # don't create a session (used for sync LCDClient)
+            self,
+            url: str,
+            chain_id: Optional[str] = None,
+            gas_prices: Optional[Coins.Input] = None,
+            gas_adjustment: Optional[Numeric.Input] = None,
+            loop: Optional[AbstractEventLoop] = None,
+            _create_session: bool = True,  # don't create a session (used for sync LCDClient)
     ):
         if loop is None:
             loop = get_event_loop()
@@ -84,10 +86,12 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-        self, endpoint: str, params: Optional[dict] = None  # , raw: bool = False
+            self, endpoint: str, params: Optional[dict] = None, pagination: Optional[PaginationOption] = None # , raw: bool = False
     ):
+        if pagination is not None:
+            params = {**params, **(pagination.to_dict())}
         async with self.session.get(
-            urljoin(self.url, endpoint), params=params
+                urljoin(self.url, endpoint), params=params
         ) as response:
             try:
                 result = await response.json(content_type=None)
@@ -99,10 +103,10 @@ class AsyncLCDClient:
         return result  # if raw else result["result"]
 
     async def _post(
-        self, endpoint: str, data: Optional[dict] = None, raw: bool = False
+            self, endpoint: str, data: Optional[dict] = None, raw: bool = False
     ):
         async with self.session.post(
-            urljoin(self.url, endpoint), json=data and dict_to_data(data)
+                urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
             try:
                 result = await response.json(content_type=None)
@@ -124,7 +128,6 @@ class AsyncLCDClient:
         """
         res = await self._get("/cosmos/tx/v1beta1/txs", events)  # , raw=True)
         return res
-
 
     async def __aenter__(self):
         return self
@@ -199,13 +202,12 @@ class LCDClient(AsyncLCDClient):
     ibc_transfer: IbcTransferAPI
     """:class:`IbcTransferAPI<terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI>`."""
 
-
     def __init__(
-        self,
-        url: str,
-        chain_id: str = None,
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
+            self,
+            url: str,
+            chain_id: str = None,
+            gas_prices: Optional[Coins.Input] = None,
+            gas_adjustment: Optional[Numeric.Input] = None,
     ):
         super().__init__(
             url,
@@ -288,3 +290,4 @@ class LCDClient(AsyncLCDClient):
         finally:
             await self.session.close()
         return result
+
