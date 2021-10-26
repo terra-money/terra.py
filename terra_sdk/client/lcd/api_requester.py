@@ -21,11 +21,12 @@ class PaginationOption:
     """
 
     def __init__(self,
-        key: Optional[str] = None,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
-        count_total: Optional[bool] = None,
-        reverse: Optional[bool] = None):
+                 key: Optional[str] = None,
+                 offset: Optional[int] = None,
+                 limit: Optional[int] = None,
+                 count_total: Optional[bool] = None,
+                 reverse: Optional[bool] = None
+                 ):
         self.key = key
         self.offset = offset
         self.limit = limit
