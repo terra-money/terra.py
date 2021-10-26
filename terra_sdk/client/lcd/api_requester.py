@@ -1,9 +1,17 @@
+import abc
+from abc import ABC
 from typing import Optional
 
 
-__all__ = ["PaginationOption"]
+__all__ = ["APIParams", "PaginationOptions"]
 
-class PaginationOption:
+class APIParams(ABC):
+
+    @abc.abstractmethod
+    def to_dict(self):
+        pass
+
+class PaginationOptions(APIParams):
     """This could be used when you need pagination options for APIs
 
     Args:

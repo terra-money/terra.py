@@ -33,7 +33,8 @@ from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
 from .wallet import AsyncWallet, Wallet
 
-from .api_requester import PaginationOption
+from .api_requester import PaginationOptions, APIParams
+
 
 class AsyncLCDClient:
     def __init__(
@@ -86,10 +87,10 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-            self, endpoint: str, params: Optional[dict] = None, pagination: Optional[PaginationOption] = None # , raw: bool = False
+            self, endpoint: str, params: Optional[APIParams] = None # , raw: bool = False
     ):
-        if pagination is not None:
-            params = {**params, **(pagination.to_dict())}
+        params = params.to_dict() if params else None
+
         async with self.session.get(
                 urljoin(self.url, endpoint), params=params
         ) as response:
