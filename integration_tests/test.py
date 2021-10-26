@@ -1,86 +1,101 @@
-import asyncio
-import base64
-from pathlib import Path
-
-from terra_sdk.client.lcd import LCDClient
-from terra_sdk.core import Coins, Coin
-from terra_sdk.core.auth import StdFee
-from terra_sdk.core.bank import MsgSend
-from terra_sdk.util.contract import get_code_id
-
 
 def main():
-    terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
-        chain_id="bombay-12",
-    )
 
-    #result = terra.authz.grants('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v', 'terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp')
+    """
+    import lcd_auth
+    import lcd_authz
+    import lcd_bank
+    import lcd_distribution
+    import lcd_gov
+    import lcd_market
+    import lcd_mint
+    import lcd_oracle
+    import lcd_slashing
+    import lcd_wasm
+    import lcd_treasury
+    import lcd_tendermint
+    import lcd_ibc
+    import lcd_ibc_transfer
+    """
 
-    #result = terra.bank.total()
+    """
+    TODO: pagination test
+    import lcd_authz
+    import lcd_bank
+    import lcd_gov
+    import lcd_slashing
+    import lcd_staking
+    import lcd_tx
+    """
 
-    #result = terra.distribution.rewards('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
-    #result = terra.distribution.validator_commission('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
-    #result = terra.distribution.withdraw_address('terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
-    #result = terra.distribution.community_pool()
-    #result = terra.distribution.parameters()
-
-    #result = terra.gov.proposals()
-    #result = terra.gov.proposal(1)      # not working.. tx.height
-    #result = terra.gov.deposits(1)       # tx.height problem
-    #result = terra.gov.tally(1)
-    #result = terra.gov.deposit_parameters()
-    #result = terra.gov.voting_parameters()
-    #result = terra.gov.tally_parameters()
-    #result = terra.gov.parameters()
-
-    #result = terra.market.swap_rate(Coin.parse('10000uluna'), 'uusd')
-    #result = terra.market.terra_pool_delta()
-    #result = terra.market.parameters()
-
-    #result = terra.mint.inflation()
-    #result = terra.mint.annual_provisions()
-    #result = terra.mint.parameters()
-
-    #result = terra.oracle.exchange_rates()
-    #result = terra.oracle.exchange_rate('ukrw')
-    #result = terra.oracle.active_denoms()
-    #result = terra.oracle.feeder_address('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
-    #result = terra.oracle.misses('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
-    #result = terra.oracle.aggregate_prevote('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
-    #result = terra.oracle.aggregate_vote('terravaloper19ne0aqltndwxl0n32zyuglp2z8mm3nu0gxpfaw')
-    #result = terra.oracle.parameters()
-
-    #result = terra.slashing.signing_infos()
-    #result = terra.slashing.signing_info('terravalcons1px544qs6a6m5jxfx5sjtx22mq79chsqxyszhe0')
-    #result = terra.slashing.parameters()
-
-    #result = terra.wasm.code_info(3)
-    #result = terra.wasm.contract_info('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98')
-    #result = terra.wasm.contract_query('terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98', {"all_allowances":{"owner":"terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc"}})
-    #result = terra.wasm.parameters()
-
-    #result = terra.treasury.tax_cap('uusd')
-    #result = terra.treasury.tax_rate()
-    #result = terra.treasury.tax_rate(6248404)
-    #result = terra.treasury.reward_weight()
-    #result = terra.treasury.tax_proceeds()
-    #result = terra.treasury.seigniorage_proceeds()
-    #result = terra.treasury.parameters()
-
-    # tendermint: no changes
-
-    # staking
-    # tendermint
+    import lcd_bank
 
 
+    # stakin
+    #result = terra.staking.delegations(validator='terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef', delegator=None)
+    #result = terra.staking.delegations(validator=None, delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
+    #result = terra.staking.delegations(validator='terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef', delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
+    #result = terra.staking.delegation(validator='terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef', delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
 
-    # tx
+    # TODO: key not found only.. not tested for success case
+    #result = terra.staking.unbonding_delegations(validator='terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef', delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
+    #print('both', result)
+    # TODO: untested
+    #result = terra.staking.unbonding_delegations(validator='terravaloper1qxqrtvg3smlfdfhvwcdzh0huh4f50kfs6gdt4x', delegator=None)
+    #print('valonly', result)
+    # TODO: untested
+    #result = terra.staking.unbonding_delegations(validator=None, delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
+    #print('delonly', result)
+    # TODO: untested
+    #result = terra.staking.unbonding_delegation(validator='terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef', delegator='terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v')
+    #print('single', result)
+    """
+    result = terra.staking.redelegations("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
+    print('redel with del', result)
+    # TODO: valSRc, valDst test
 
-    # ibc
-    # ibc-transfer
+    result = terra.staking.bonded_validators("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
+    print("bonded validators", result)
 
-    print(result)
+    result = terra.staking.validators()
+    print("vals", result)
+
+    result = terra.staking.validator("terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef")
+    print("val", result)
+
+    result = terra.staking.pool();
+    print("pool", result)
+
+    result = terra.staking.parameters();
+    print("params", result)
+
+    # tx - just querying APIs
+    result = terra.tx.tx_info("")
+    print("tx_info", result)
+    result = terra.tx.txInfosByHeight()
+    result = terra.tx.search()
+
+    # tx - actual tx related
+    result = terra.tx.encode()
+    result = terra.tx.hash()
+
+    result = terra.tx.estimate_fee()
+    result = terra.tx.estimate_gas()
+    result = terra.tx.compute_tax()
+    result = terra.tx.create()
+
+    # tx - broadcast
+    result = terra.tx.broadcast()  # block-mode
+    result = terra.tx.broadcast_sync()
+    result = terra.tx.broadcast_async()
+
+    # wallet related
+    """
+
+    #opt = PaginationOption(limit="1",count_total=True,offset=0)
+    #print(f"[{str(opt)}]")
+
+    #print(result)
 
 
 main()
