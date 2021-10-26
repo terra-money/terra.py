@@ -5,12 +5,17 @@ from terra_sdk.core.authz import AuthorizationGrant
 
 from ._base import BaseAsyncAPI, sync_bind
 
+from ..api_requester import APIParams
+
 __all__ = ["AsyncAuthzAPI", "AuthzAPI"]
+
+from ..api_requester import PaginationOptions
 
 
 class AsyncAuthzAPI(BaseAsyncAPI):
     async def grants(
-        self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
+        self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None,
+            params : Optional[APIParams] = None
     ) -> List[AuthorizationGrant]:
         """Fetches current active message authorization grants.
 
@@ -39,7 +44,8 @@ class AsyncAuthzAPI(BaseAsyncAPI):
 class AuthzAPI(AsyncAuthzAPI):
     @ sync_bind(AsyncAuthzAPI.grants)
     def grants(
-        self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None
+        self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None,
+            params: Optional[APIParams] = None
     ) -> List[AuthorizationGrant]:
         pass
 
