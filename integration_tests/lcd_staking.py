@@ -51,9 +51,8 @@ def main():
     #result = terra.staking.redelegations("terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp", validator_src='terravaloper1vk20anceu6h9s00d27pjlvslz3avetkvnwmr35', validator_dst='terravaloper1ze5dxzs4zcm60tg48m9unp8eh7maerma38dl84')
     #print("both", result)
 
-    # TODO untested
-    result = terra.staking.bonded_validators("terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp", pagOpt)
-    print("bonded validators", result)
+    #result = terra.staking.bonded_validators("terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp", pagOpt)
+    #print("bonded validators", result)
 
     #result = terra.staking.pool();
     #print("pool", result)

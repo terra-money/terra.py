@@ -16,6 +16,7 @@ class AsyncGovAPI(BaseAsyncAPI):
 
         Args:
             options (dict, optional): dictionary containing options. Defaults to {}.
+            params (APIParams): parameters for pagination, optional
 
         Returns:
             List[Proposal]: proposals
@@ -36,15 +37,49 @@ class AsyncGovAPI(BaseAsyncAPI):
         return Proposal.from_data(res.get("proposal"))
 
     # keep it private
-    async def __search_proposal(self, proposal_id: int, action: str, height: int):
+    async def __search_submit_proposal(self, proposal_id: int):
         params = [
-            ("events", f"message.action='{action}'"),
-            ("events", f"submit_proposal.proposal_id={proposal_id}"),
-            ("events", f"tx.height={height}")
+            ("events", f"message.action='/cosmos.gov.v1beta1.MsgSubmitProposal'"),
+            ("events", f"submit_proposal.proposal_id={proposal_id}")
         ]
-        return await self._c._search(params)
+        res = await self._c._search(params)
+        txs = res.get("txs")
+        if txs is None or len(txs) <= 0:
+            raise Exception('failed to find submit proposal')
+        return txs[0]
 
-    # FIXME: no height.. untested
+    # keep it private
+    async def __search_deposits(self, proposal_id: int, params: Optional[APIParams] = None):
+        events = [
+            ("events", f"message.action='/cosmos.gov.v1beta1.MsgDeposit'"),
+            ("events", f"proposal_deposit.proposal_id={proposal_id}")
+        ]
+        if params is not None:
+            d = params.to_dict()
+            for i in d.keys():
+                events.append((i, d.get(i)))
+        res = await self._c._search(events)
+        txs = res.get("txs")
+        if txs is None or len(txs) <= 0:
+            raise Exception('failed to find deposit txs')
+        return txs, res.get("pagination")
+
+    # keep it private
+    async def __search_votes(self, proposal_id: int, action: str, params: Optional[APIParams] = None):
+        events = [
+            ("events", f"message.action='/cosmos.gov.v1beta1.MsgVote'"),
+            ("events", f"proposal_vote.proposal_id={proposal_id}")
+        ]
+        if params is not None:
+            d = params.to_dict()
+            for i in d.keys():
+                events.append((i, d.get(i)))
+        res = await self._c._search(events)
+        txs = res.get("txs")
+        if txs is None or len(txs) <= 0:
+            raise Exception('failed to find vote txs')
+        return txs, res.get("pagination")
+
     async def proposer(self, proposal_id: int) -> str:
         """Fetches the proposer of a proposal.
 
@@ -52,49 +87,65 @@ class AsyncGovAPI(BaseAsyncAPI):
             proposal_id (int): proposal ID
 
         Returns:
-            str: proposal's proposer
+            str: proposal's proposer, None if proposal is not exist
         """
 
-        raise NotImplementedError
+        res = await self.__search_submit_proposal(proposal_id)
+        msgs = res["body"]["messages"]
+        for msg in msgs:
+            if msg.get("@type") == "/cosmos.gov.v1beta1.MsgSubmitProposal":
+                return msg["proposer"]
+        return None
 
-        # FIXME: height 1 is just filler
-        res = await self.__search_proposal(proposal_id,"/cosmos.gov.v1beta1.MsgSubmitProposal", 1)
-        return res["proposer"]
-
-    # FIXME: no height.. untested
     async def deposits(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the deposit information about a proposal.
 
         Args:
             proposal_id (int): proposal ID
+            params (APIParams): parameters for pagination, optional
         """
-
-        raise NotImplementedError
 
         proposal = self.proposal(proposal_id)
 
         status = proposal.status
         if status == ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD.name \
                 or status == ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD.name:
-            deposits = self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits", params)
-            return (Deposit.from_data(d) for d in deposits)
+            res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits", params)
+            return [Deposit.from_data(d) for d in res.get("deposits")]
 
-        # FIXME: height 1 is just filler
-        depositTxs = self.__search_proposal(
-            proposal_id, "/cosmos.gov.v1beta1.MsgDeposit", 1
-        )
-        return (Deposit.from_data(d) for d in depositTxs)
+        res, pagination = await self.__search_deposits(proposal_id, params)
+        deposits = []
+        for tx in res:
+            for msg in tx.get("body").get("messages"):
+                if msg.get("@type") == "/cosmos.gov.v1beta1.MsgDeposit":
+                    deposits.append(Deposit.from_data(msg))
+        return deposits, pagination
 
-    # TODO: col5
     async def votes(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the votes for a proposal.
 
         Args:
             proposal_id (int): proposal ID
+            params (APIParams): parameters for pagination, optional
         """
 
-        res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/votes", params)
-        return res.get("votes"), res.get("pagination")
+        proposal = self.proposal(proposal_id)
+        if proposal.status == ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
+            res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/votes", params)
+            return res.get("votes"), res.get("pagination")
+
+        res, pagination = await self.__search_votes(proposal_id, params)
+        votes = []
+        for tx in res:
+            for msg in tx.get("body").get("messages"):
+                if msg.get("@type") == "/cosmos.gov.v1beta1.MsgVote" and msg.get("proposal_id") == proposal_id:
+                    # FIXME
+                    raise NotImplementedError('core/gov/Vote is needed')
+                elif msg.get("@type") == "/cosmos.gov.v1beta1.MsgVoteWeighted" and msg.get(
+                        "proposal_id") == proposal_id:
+                    # FIXME
+                    raise NotImplementedError('core/gov/Vote is needed')
+            return votes, pagination
 
     async def tally(self, proposal_id: int):
         """Fetches the tally for a proposal.

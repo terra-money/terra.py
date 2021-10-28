@@ -87,9 +87,9 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-            self, endpoint: str, params: Optional[APIParams] = None # , raw: bool = False
+            self, endpoint: str, params: Optional[Union[APIParams, list, dict]] = None # , raw: bool = False
     ):
-        if params and type(params) is not dict:
+        if params and (type(params) is not dict and type(params) is not list):
             params = params.to_dict()
 
         async with self.session.get(
@@ -119,7 +119,7 @@ class AsyncLCDClient:
         self.last_request_height = result.get("height")
         return result if raw else result["result"]
 
-    async def _search(self, events: dict = {}) -> dict:
+    async def _search(self, params: list = []) -> dict:
         """Searches for transactions given critera.
 
         Args:
@@ -128,7 +128,7 @@ class AsyncLCDClient:
         Returns:
             dict: transaction search results
         """
-        res = await self._get("/cosmos/tx/v1beta1/txs", events)  # , raw=True)
+        res = await self._get("/cosmos/tx/v1beta1/txs", params)
         return res
 
     async def __aenter__(self):

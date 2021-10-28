@@ -11,6 +11,13 @@ class APIParams(ABC):
     def to_dict(self):
         pass
 
+    def to_list(self) -> list:
+        l = []
+        d = self.to_dict()
+        for key in d.keys():
+            l.append((key, d.get(key)))
+        return l
+
 class PaginationOptions(APIParams):
     """This could be used when you need pagination options for APIs
 
