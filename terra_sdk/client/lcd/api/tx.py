@@ -33,7 +33,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             TxInfo: transaction info
         """
-        return TxInfo.from_data(await self._c._get(f"/txs/{tx_hash}", raw=True))
+        return TxInfo.from_data(await self._c._get(f"/cosmos/tx/v1beta1/txs/{tx_hash}").get("tx"))
 
     async def create(
         self,

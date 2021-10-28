@@ -9,12 +9,16 @@ def main():
     pagOpt = PaginationOptions(limit=2)
 
     result = terra.gov.proposals()
-    print(result)
+    print("whole proposals", result)
+    result = terra.gov.proposals(PaginationOptions(limit=2))
+    print("first 2 params", result)
     #result = terra.gov.proposal(1)      # FIXME: not working.. tx.height
     print(result)
     #result = terra.gov.deposits(1)       # FIXME: tx.height problem
     print(result)
-    result = terra.gov.tally(1)
+    result = terra.gov.votes(5333, pagOpt)
+    print(result)
+    result = terra.gov.tally(5333)
     print(result)
     result = terra.gov.deposit_parameters()
     print(result)

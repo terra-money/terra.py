@@ -29,7 +29,6 @@ class Content(BaseTerraData):
     @staticmethod
     def from_data(data: dict) -> Content:
         from terra_sdk.util.parse_content import parse_content
-        print("parse.py - content - from_data", data)
         return parse_content(data)
 
 

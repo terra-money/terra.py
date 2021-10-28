@@ -1,7 +1,7 @@
 from typing import Optional
 
 from terra_sdk.core import AccAddress, Coins
-from ..api_requester import APIParams
+from ..params import APIParams
 
 from ._base import BaseAsyncAPI, sync_bind
 

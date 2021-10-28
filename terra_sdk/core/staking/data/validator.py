@@ -12,8 +12,10 @@ __all__ = [
     "Commission",
     "Description",
     "Validator",
+    "BondStatus"
 ]
 
+from terra_proto.cosmos.staking.v1beta1 import BondStatus
 
 @attr.s
 class CommissionRates(JSONSerializable):
@@ -103,7 +105,7 @@ class Validator(JSONSerializable):
     jailed: bool = attr.ib(converter=bool)
     """"""
 
-    status: int = attr.ib(converter=int)
+    status: BondStatus = attr.ib(converter=BondStatus.from_string)
     """"""
 
     tokens: int = attr.ib(converter=int)

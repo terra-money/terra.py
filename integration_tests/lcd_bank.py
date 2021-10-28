@@ -1,5 +1,5 @@
 from terra_sdk.client.lcd import LCDClient
-from terra_sdk.client.lcd.api_requester import PaginationOptions
+from terra_sdk.client.lcd.params import PaginationOptions
 from terra_sdk.core import Coins, Coin
 from terra_sdk.core.auth import StdFee
 from terra_sdk.core.bank import MsgSend

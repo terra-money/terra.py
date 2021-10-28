@@ -7,7 +7,7 @@ from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncSlashingAPI", "SlashingAPI"]
 
-from ..api_requester import APIParams
+from ..params import APIParams
 
 
 class AsyncSlashingAPI(BaseAsyncAPI):

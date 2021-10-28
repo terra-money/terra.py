@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from terra_sdk.core.gov import Proposal, ProposalStatus
 from terra_sdk.core import Deposit, Coins, Numeric, Dec
@@ -7,9 +7,11 @@ from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncGovAPI", "GovAPI"]
 
+from ..params import APIParams
+
 
 class AsyncGovAPI(BaseAsyncAPI):
-    async def proposals(self, options: dict = {}) -> List[Proposal]:
+    async def proposals(self, options: dict = {}, params: Optional[APIParams] = None) -> (List[Proposal], dict):
         """Fetches all proposals.
 
         Args:
@@ -19,7 +21,7 @@ class AsyncGovAPI(BaseAsyncAPI):
             List[Proposal]: proposals
         """
         res = await self._c._get("/cosmos/gov/v1beta1/proposals", options)
-        return [Proposal.from_data(d) for d in res.get("proposals")]
+        return [Proposal.from_data(d) for d in res.get("proposals")], res.get("pagination")
 
     async def proposal(self, proposal_id: int) -> Proposal:
         """Fetches a single proposal by id.
@@ -60,7 +62,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         return res["proposer"]
 
     # FIXME: no height.. untested
-    async def deposits(self, proposal_id: int):
+    async def deposits(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the deposit information about a proposal.
 
         Args:
@@ -74,26 +76,25 @@ class AsyncGovAPI(BaseAsyncAPI):
         status = proposal.status
         if status == ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD.name \
                 or status == ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD.name:
-            deposits = self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits")
+            deposits = self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits", params)
             return (Deposit.from_data(d) for d in deposits)
 
         # FIXME: height 1 is just filler
         depositTxs = self.__search_proposal(
             proposal_id, "/cosmos.gov.v1beta1.MsgDeposit", 1
         )
-        return ( Deposit.from_data(d) for d in depositTxs)
+        return (Deposit.from_data(d) for d in depositTxs)
 
     # TODO: col5
-    async def votes(self, proposal_id: int):
+    async def votes(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the votes for a proposal.
 
         Args:
             proposal_id (int): proposal ID
         """
 
-        raise NotImplementedError
-
-        return await self._c._get(f"/gov/proposals/{proposal_id}/votes")
+        res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/votes", params)
+        return res.get("votes"), res.get("pagination")
 
     async def tally(self, proposal_id: int):
         """Fetches the tally for a proposal.
@@ -155,7 +156,7 @@ class AsyncGovAPI(BaseAsyncAPI):
 
 class GovAPI(AsyncGovAPI):
     @sync_bind(AsyncGovAPI.proposals)
-    def proposals(self) -> List[Proposal]:
+    def proposals(self, params: Optional[APIParams] = None) -> (List[Proposal], dict):
         pass
 
     proposals.__doc__ = AsyncGovAPI.proposals.__doc__
@@ -173,13 +174,13 @@ class GovAPI(AsyncGovAPI):
     proposer.__doc__ = AsyncGovAPI.proposer.__doc__
 
     @sync_bind(AsyncGovAPI.deposits)
-    def deposits(self, proposal_id: int):
+    def deposits(self, proposal_id: int, params: Optional[APIParams] = None):
         pass
 
     deposits.__doc__ = AsyncGovAPI.deposits.__doc__
 
     @sync_bind(AsyncGovAPI.votes)
-    def votes(self, proposal_id: int):
+    def votes(self, proposal_id: int, params: Optional[APIParams] = None):
         pass
 
     votes.__doc__ = AsyncGovAPI.votes.__doc__

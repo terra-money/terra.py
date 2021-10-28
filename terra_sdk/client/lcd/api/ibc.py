@@ -17,6 +17,7 @@ class AsyncIbcAPI(BaseAsyncAPI):
         params = res["params"]
         return params["allowed_clients"]
 
+    # TODO: functions for clients, connections and channels
 
 class IbcAPI(AsyncIbcAPI):
 

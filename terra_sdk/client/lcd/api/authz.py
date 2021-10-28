@@ -5,11 +5,11 @@ from terra_sdk.core.authz import AuthorizationGrant
 
 from ._base import BaseAsyncAPI, sync_bind
 
-from ..api_requester import APIParams
+from ..params import APIParams
 
 __all__ = ["AsyncAuthzAPI", "AuthzAPI"]
 
-from ..api_requester import PaginationOptions
+from ..params import PaginationOptions
 
 
 class AsyncAuthzAPI(BaseAsyncAPI):
