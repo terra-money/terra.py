@@ -32,6 +32,7 @@ __all__ = [
     "SignMode",
     "AuthInfo",
     "Tx",
+    "TxBody",
     "TxLog",
     "TxInfo",
     "parse_tx_logs",

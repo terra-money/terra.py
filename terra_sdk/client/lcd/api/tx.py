@@ -8,7 +8,7 @@ from terra_sdk.util.json import JSONSerializable
 
 from terra_sdk.core import AccAddress, Coins, Numeric, PublicKey, Dec
 from terra_sdk.core.tx import Fee, SignMode, TxInfo, TxBody, AuthInfo, Tx, SignerData
-from terra_sdk.core.auth import StdSignMsg, StdTx, TxInfo, Account
+from terra_sdk.core.auth import StdSignMsg, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
     BlockTxBroadcastResult,
@@ -19,7 +19,7 @@ from terra_sdk.util.hash import hash_amino
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions"]
+__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions", "CreateTxOptions"]
 
 
 @attr.s
@@ -119,7 +119,6 @@ class AsyncTxAPI(BaseAsyncAPI):
             AuthInfo([], opt.fee), ''
         )
 
-
     async def estimate_fee(
         self,
         signers: List[SignerOptions],
@@ -128,10 +127,8 @@ class AsyncTxAPI(BaseAsyncAPI):
         """Estimates the proper fee to apply by simulating it within the node.
 
         Args:
-            tx (Union[StdSignMsg, StdTx]): transaction to estimate fee for
-            gas_prices (Optional[Coins.Input], optional): gas prices to use.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment to use.
-            fee_denoms (Optional[List[str]], optional): list of denoms to use to pay for gas.
+            signers ([SignerOptions]): signers
+            options (CreateTxOptions): transaction info to estimate fee
 
         Returns:
             Fee: estimated fee
@@ -183,7 +180,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         """Compute hash for a transaction.
 
         Args:
-            tx (StdTx): transaction to hash
+            tx (Tx): transaction to hash
 
         Returns:
             str: transaction hash
@@ -192,7 +189,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         return hash_amino(amino)
 
     async def _broadcast(
-        self, tx: StdTx, mode: str, options: BroadcastOptions = None
+        self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
         data = {"tx": tx.to_data()["value"], "mode": mode}
         if options is not None:
@@ -203,12 +200,12 @@ class AsyncTxAPI(BaseAsyncAPI):
         return await self._c._post("/txs", data, raw=True)
 
     async def broadcast_sync(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> SyncTxBroadcastResult:
         """Broadcasts a transaction using the ``sync`` broadcast mode.
 
         Args:
-            tx (StdTx): transaction to broadcast
+            tx (Tx): transaction to broadcast
 
         Returns:
             SyncTxBroadcastResult: result
@@ -222,12 +219,12 @@ class AsyncTxAPI(BaseAsyncAPI):
         )
 
     async def broadcast_async(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> AsyncTxBroadcastResult:
         """Broadcasts a transaction using the ``async`` broadcast mode.
 
         Args:
-            tx (StdTx): transaction to broadcast
+            tx (Tx): transaction to broadcast
 
         Returns:
             AsyncTxBroadcastResult: result
@@ -238,12 +235,12 @@ class AsyncTxAPI(BaseAsyncAPI):
         )
 
     async def broadcast(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> BlockTxBroadcastResult:
         """Broadcasts a transaction using the ``block`` broadcast mode.
 
         Args:
-            tx (StdTx): transaction to broadcast
+            tx (Tx): transaction to broadcast
 
         Returns:
             BlockTxBroadcastResult: result
@@ -309,20 +306,20 @@ class TxAPI(AsyncTxAPI):
     estimate_fee.__doc__ = AsyncTxAPI.estimate_fee.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
-    def encode(self, tx: StdTx, options: BroadcastOptions = None) -> str:
+    def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
         pass
 
     encode.__doc__ = AsyncTxAPI.encode.__doc__
 
     @sync_bind(AsyncTxAPI.hash)
-    def hash(self, tx: StdTx) -> str:
+    def hash(self, tx: Tx) -> str:
         pass
 
     hash.__doc__ = AsyncTxAPI.hash.__doc__
 
     @sync_bind(AsyncTxAPI.broadcast_sync)
     def broadcast_sync(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> SyncTxBroadcastResult:
         pass
 
@@ -330,7 +327,7 @@ class TxAPI(AsyncTxAPI):
 
     @sync_bind(AsyncTxAPI.broadcast_async)
     def broadcast_async(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> AsyncTxBroadcastResult:
         pass
 
@@ -338,7 +335,7 @@ class TxAPI(AsyncTxAPI):
 
     @sync_bind(AsyncTxAPI.broadcast)
     def broadcast(
-        self, tx: StdTx, options: BroadcastOptions = None
+        self, tx: Tx, options: BroadcastOptions = None
     ) -> BlockTxBroadcastResult:
         pass
 
