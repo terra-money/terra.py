@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 from typing import Dict, List, Optional
 
 import attr
@@ -13,19 +14,19 @@ from terra_sdk.core.tx import AuthInfo, TxBody
 from terra_sdk.util.json import JSONSerializable
 
 from terra_proto.cosmos.tx.v1beta1 import SignDoc as SignDoc_pb
-from terra_proto.cosmos.tx.v1beta1 import TxBody as TxBody_pb
 
 __all__ = ["SignDoc"]
 
-class SignDoc(JSONSerializable, SignDoc_pb):
-
-    __doc__ == SignDoc_pb.__doc__
-
-    tx_body: TxBody_pb
+@attr.s
+class SignDoc(JSONSerializable):
+    chain_id: str = attr.ib()
+    account_number: int = attr.ib(converter=int)
+    sequence: int = attr.ib(converter=int)
+    auth_info: AuthInfo = attr.ib()
+    tx_body: TxBody = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> SignDoc:
-        data = data["value"]
         return cls(
             chain_id=data["chain_id"],
             account_number=data["account_number"],
@@ -35,7 +36,6 @@ class SignDoc(JSONSerializable, SignDoc_pb):
         )
 
     def to_data(self) -> dict:
-        self.to_json()
         return {
             "chain_id": self.chain_id,
             "account_nubmer": self.account_number,
@@ -56,8 +56,8 @@ class SignDoc(JSONSerializable, SignDoc_pb):
         proto = SignDoc_pb()
         proto.chain_id = self.chain_id
         proto.account_number = self.account_number
-        proto.auth_info_bytes = self.auth_info.to_proto(), # FIXME: encode/base64
-        proto.body_bytes = self.tx_body.to_proto() # FIXME: encode/base64
+        proto.auth_info_bytes = bytes(self.auth_info.to_proto())  # FIXME: encode/base64
+        proto.body_bytes = bytes(self.tx_body.to_proto())  # FIXME: encode/base64
         return proto
 
     def to_bytes(self) -> bytes:

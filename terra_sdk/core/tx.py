@@ -64,7 +64,7 @@ class Tx(JSONSerializable):
     """
     body: TxBody = attr.ib()
     auth_info: AuthInfo = attr.ib()
-    signatures: List[str] = attr.ib()
+    signatures: List[str] = attr.ib(converter=list)
 
     def to_data(self) -> dict:
         return {
@@ -153,7 +153,6 @@ class TxBody(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> TxBody:
-        data = data["value"]
         return cls(
             [Msg.from_data(m) for m in data["messages"]],
             data["memo"],
@@ -196,7 +195,6 @@ class AuthInfo(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> AuthInfo:
-        data = data["value"]
         return cls(
             [SignerInfo.from_data(m) for m in data["signer_infos"]],
             Fee.from_data(data["fee"])

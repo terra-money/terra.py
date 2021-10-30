@@ -30,8 +30,8 @@ class SignatureV2:
 
 @attr.s
 class Descriptor:
-    single: Optional[Single] = attr.ib()
-    multi: Optional[Multi] = attr.ib()
+    single: Optional[Single] = attr.ib(default=None)
+    multi: Optional[Multi] = attr.ib(default=None)
 
     @classmethod
     def from_data(cls, data: dict) -> Descriptor:

@@ -1,17 +1,29 @@
 import abc
 import base64
+import copy
 import hashlib
 from typing import Optional
 
+import attr
 from bech32 import bech32_encode, convertbits
 
+from terra_sdk.core.signature_v2 import Descriptor, Single as SingleDescriptor
+from terra_sdk.core.tx import Tx, SignMode, SignerInfo, ModeInfo, ModeInfoSingle
+
 from terra_sdk.core.public_key import PublicKey
-from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey
-from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
+from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey, SignDoc, SignatureV2
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
-__all__ = ["Key"]
+__all__ = ["Key", "SignOptions"]
+
+
+@attr.s
+class SignOptions:
+    account_number: int = attr.ib(converter=int)
+    sequence: int = attr.ib(converter=int)
+    sign_mode: SignMode = attr.ib()
+    chain_id: str = attr.ib()
 
 
 def get_bech(prefix: str, payload: str) -> str:
@@ -132,45 +144,102 @@ class Key:
             raise ValueError("could not compute val_pubkey: missing raw_pubkey")
         return ValPubKey(get_bech("terravaloperpub", self.raw_pubkey.hex()))
 
-    def create_signature(self, tx: StdSignMsg) -> StdSignature:
+    def create_signature_amino(self, signDoc: SignDoc) -> SignatureV2:
+        if self.public_key is None:
+            raise ValueError(
+                "signature could not be created: Key instance missing public_key"
+            )
+
+        return SignatureV2(
+            public_key=self.public_key,
+            data=Descriptor(
+                SingleDescriptor(
+                    mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
+                    signature=(self.sign(base64.b64encode(signDoc.to_json()).decode()))
+                )
+            ),
+            sequence=signDoc.sequence
+        )
+
+    def create_signature(self, signDoc: SignDoc) -> SignatureV2:
         """Signs the transaction with the signing algorithm provided by this Key implementation,
         and outputs the signature. The signature is only returned, and must be manually added to
         the ``signatures`` field of an :class:`StdTx`.
 
         Args:
-            tx (StdSignMsg): unsigned transaction
+            signDoc (SignDoc): unsigned transaction
 
         Raises:
             ValueError: if missing ``public_key``
 
         Returns:
-            StdSignature: signature object
+            SignatureV2: signature object
         """
         if self.public_key is None:
             raise ValueError(
                 "signature could not be created: Key instance missing public_key"
             )
 
-        sig_buffer = self.sign(tx.to_json().strip().encode())
-        return StdSignature.from_data(
-            {
-                "signature": base64.b64encode(sig_buffer).decode(),
-                "pub_key": {
-                    "type": "tendermint/PubKeySecp256k1",
-                    "value": base64.b64encode(self.public_key).decode(),
-                },
-            }
+        # make backup
+        si_backup = copy.deepcopy(signDoc.auth_info.signer_infos)
+        signDoc.auth_info.signer_infos = [
+            SignerInfo(
+                public_key=self.public_key,
+                sequence=signDoc.sequence,
+                mode_info=ModeInfo(ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT))
+            )
+        ]
+        print("signDoc", signDoc)
+        print("toProto", signDoc.to_proto().to_json())
+        signature = base64.b64encode( self.sign( bytes(signDoc.to_proto()) ) ).decode()
+
+        # restore
+        signDoc.auth_info.signer_infos = si_backup
+
+        return SignatureV2(
+            public_key=self.public_key,
+            data=Descriptor(single=SingleDescriptor(mode=SignMode.SIGN_MODE_DIRECT, signature=signature)),
+            sequence=signDoc.sequence
         )
 
-    def sign_tx(self, tx: StdSignMsg) -> StdTx:
+    def sign_tx(self, tx: Tx, options: SignOptions) -> Tx:
         """Signs the transaction with the signing algorithm provided by this Key implementation,
         and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.
 
         Args:
-            tx (StdSignMsg): unsigned transaction
+            tx (Tx): unsigned transaction
+            options (SignOptions): options for signing
 
         Returns:
-            StdTx: ready-to-broadcast transaction object
+            Tx: ready-to-broadcast transaction object
         """
-        sig = self.create_signature(tx)
-        return StdTx(tx.msgs, tx.fee, [sig], tx.memo)
+
+        signedTx = copy.deepcopy(tx)
+        signDoc = SignDoc(
+            chain_id=options.chain_id,
+            account_number=options.account_number,
+            sequence=options.sequence,
+            auth_info=signedTx.auth_info,
+            tx_body=signedTx.body
+        )
+
+        if options.sign_mode == SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
+            signature: SignatureV2 = self.create_signature_amino(signDoc)
+        else:
+            signature: SignatureV2 = self.create_signature(signDoc)
+
+        sigData: SingleDescriptor = signature.data.single
+        for sig in tx.signatures:
+            signedTx.signatures.append(sig)
+        signedTx.signatures.append(sigData.signature)
+        for infos in tx.auth_info.signer_infos:
+            signedTx.auth_info.signer_infos.append(infos)
+        #signedTx.auth_info.signer_infos.append(tx.auth_info.signer_infos)
+        signedTx.auth_info.signer_infos.append(
+            SignerInfo(
+                public_key=signature.public_key,
+                sequence=signature.sequence,
+                mode_info=ModeInfoSingle(mode=sigData.mode)
+            )
+        )
+        return signedTx

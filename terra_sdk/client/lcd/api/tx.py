@@ -191,13 +191,9 @@ class AsyncTxAPI(BaseAsyncAPI):
     async def _broadcast(
         self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
-        data = {"tx": tx.to_data()["value"], "mode": mode}
-        if options is not None:
-            if options.sequences is not None and len(options.sequences) > 0:
-                data["sequences"] = [str(i) for i in options.sequences]
-            if options.fee_granter is not None and len(options.fee_granter) > 0:
-                data["fee_granter"] = options.fee_granter
-        return await self._c._post("/txs", data, raw=True)
+        data = {"tx_bytes": self.encode(tx), "mode": mode}
+        print(f"DATA : [{data}]")
+        return await self._c._post("/cosmos/tx/v1beta1/txs", data)  #, raw=True)
 
     async def broadcast_sync(
         self, tx: Tx, options: BroadcastOptions = None
@@ -210,7 +206,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             SyncTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "sync", options)
+        res = await self._broadcast(tx, "BROADCAST_MODE_SYNC", options)
         return SyncTxBroadcastResult(
             txhash=res.get("txhash"),
             raw_log=res.get("raw_log"),
@@ -229,7 +225,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             AsyncTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "async", options)
+        res = await self._broadcast(tx, "BROADCAST_MODE_ASYNC", options)
         return AsyncTxBroadcastResult(
             txhash=res.get("txhash"),
         )
@@ -245,7 +241,9 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             BlockTxBroadcastResult: result
         """
-        res = await self._broadcast(tx, "block", options)
+        res = await self._broadcast(tx, "BROADCAST_MODE_BLOCK", options)
+        print("broadcast.res", res)
+        res = res["tx_response"]
         return BlockTxBroadcastResult(
             height=res.get("height") or 0,
             txhash=res.get("txhash"),

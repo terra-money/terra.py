@@ -58,7 +58,7 @@ class SimplePublicKey(PublicKey):
 
     def to_data(self) -> dict:
         return {
-            "key": self.key.decode('utf-8')
+            "key": self.key  #.decode('utf-8')
         }
 
     @classmethod

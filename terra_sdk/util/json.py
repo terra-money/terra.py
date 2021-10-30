@@ -31,7 +31,7 @@ class JSONSerializable(ABC):
         """Marshals the object into a stringified JSON serialization. Keys are first sorted
         and the JSON rendered removes all unnecessary whitespace.
 
-   #    Returns:
-   #        str: JSON string representation
-   #    """
-   #    return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))
+        Returns:
+           str: JSON string representation
+        """
+        return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))

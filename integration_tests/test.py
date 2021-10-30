@@ -50,13 +50,11 @@ def main():
     opt = CreateTxOptions(
         msgs=[msg],
         memo='test from terra.py')
-    tx = test1.create_tx(opt)
-    """
+    #tx = test1.create_tx(opt)
     tx = test1.create_and_sign_tx(opt)
     print(tx)
 
     result = terra.tx.broadcast(tx)
-    print(result)
-    """
+    print(f"RESULT:{result}")
 
 main()

@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from terra_sdk.core import Coins, Numeric
 from terra_sdk.core.auth import StdSignMsg, StdTx
 from terra_sdk.core.msg import Msg
-from terra_sdk.key.key import Key
+from terra_sdk.key.key import Key, SignOptions
 from .api.tx import CreateTxOptions, SignerOptions
 
 __all__ = ["Wallet", "AsyncWallet"]
 
-from ...core.tx import Tx
+from ...core.tx import Tx, SignMode
 
 
 class AsyncWallet:
@@ -116,9 +116,24 @@ class Wallet:
         Returns:
             StdTx: signed transaction
         """
-        print(type(options))
+
+        account_number = options.account_number
+        sequence = options.sequence
+        if account_number is None or sequence is None:
+            res = self.account_number_and_sequence()
+            if account_number is None:
+                account_number = res.get("account_number")
+            if sequence is None:
+                sequence = res.get("sequence")
+        options.sequence = sequence
+        options.account_number = account_number
         return self.key.sign_tx(
-            self.create_tx(
+            tx=self.create_tx(
               options
-            )
+            ),
+            options=SignOptions(
+                account_number=account_number,
+                sequence=sequence,
+                chain_id=self.lcd.chain_id,
+                sign_mode=options.sign_mode if options.sign_mode else SignMode.SIGN_MODE_DIRECT)
         )
