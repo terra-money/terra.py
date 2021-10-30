@@ -278,23 +278,16 @@ class ModeInfo(JSONSerializable):
         proto = ModeInfo_pb()
         if self.single_mode:
             proto.single = self.single_mode.to_proto()
-        else:
+        if self.multi_mode:
             proto.multi = self.multi_mode.to_proto()
         return proto
 
     @classmethod
     def from_proto(cls, proto: ModeInfo_pb) -> ModeInfo:
-        sm=None
-        mm=None
         if proto["single"]:
-            sm=ModeInfoSingle.from_proto(proto["single"])
+            return ModeInfoSingle.from_proto(proto["single"])
         else:
-            mm=ModeInfoMulti.from_proto(proto["multi"])
-        return cls(
-            sm,
-            mm
-        )
-
+            return ModeInfoMulti.from_proto(proto["multi"])
 
 @ attr.s
 class ModeInfoSingle(JSONSerializable):
