@@ -12,6 +12,8 @@ from terra_sdk.util.json import JSONSerializable
 from ...public_key import PublicKey
 from .base_account import BaseAccount
 
+from terra_proto.terra.vesting.v1beta1 import LazyGradedVestingAccount as LazyGradedVestingAccount_pb
+
 __all__ = ["LazyGradedVestingAccount"]
 
 
@@ -46,6 +48,12 @@ class LazyGradedVestingAccount(BaseAccount):
     vesting_schedules: List[dict] = attr.ib()
     """"""
 
+    def get_sequence(self) -> int:
+        return self.sequence
+
+    def get_public_key(self) -> PublicKey:
+        return self.public_key
+
     def to_data(self) -> dict:
         return {
             "type": "core/LazyGradedVestingAccount",
@@ -76,3 +84,10 @@ class LazyGradedVestingAccount(BaseAccount):
             end_time=data["end_time"],
             vesting_schedules=data["vesting_schedules"],
         )
+
+    def to_proto(self) -> LazyGradedVestingAccount_pb:
+        proto = LazyGradedVestingAccount_pb()
+        proto.base_vesting_account = self.base_vesting_account.to_proto()
+        proto.vesting_schedules = [vs.to_proto()
+                                   for vs in self.vesting_schedules]
+        return proto

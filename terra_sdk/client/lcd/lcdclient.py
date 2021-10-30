@@ -36,6 +36,12 @@ from .wallet import AsyncWallet, Wallet
 from .params import PaginationOptions, APIParams
 
 
+
+LCD_DEFAULTS = {
+    "gas_adjustment": 1.75,
+    "gas_prices": Coins('0.15uluna')
+}
+
 class AsyncLCDClient:
     def __init__(
             self,
@@ -105,7 +111,7 @@ class AsyncLCDClient:
         return result  # if raw else result["result"]
 
     async def _post(
-            self, endpoint: str, data: Optional[dict] = None, raw: bool = False
+            self, endpoint: str, data: Optional[dict] = None  #, raw: bool = False
     ):
         async with self.session.post(
                 urljoin(self.url, endpoint), json=data and dict_to_data(data)
@@ -117,7 +123,7 @@ class AsyncLCDClient:
             if not 200 <= response.status < 299:
                 raise LCDResponseError(message=result.get("error"), response=response)
         self.last_request_height = result.get("height")
-        return result if raw else result["result"]
+        return result # if raw else result["result"]
 
     async def _search(self, params: list = []) -> dict:
         """Searches for transactions given critera.

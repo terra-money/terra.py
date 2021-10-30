@@ -4,6 +4,8 @@ import json
 from abc import ABC
 from typing import Any
 
+import betterproto
+
 
 def to_data(x: Any) -> Any:
     if "to_data" in dir(x):
@@ -25,15 +27,11 @@ class JSONSerializable(ABC):
         """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))
 
-    # @abc.abstractmethod
-    # def to_proto(self):
-    #    raise NotImplementedError()
-
     def to_json(self) -> str:
         """Marshals the object into a stringified JSON serialization. Keys are first sorted
         and the JSON rendered removes all unnecessary whitespace.
 
-        Returns:
-            str: JSON string representation
-        """
-        return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))
+   #    Returns:
+   #        str: JSON string representation
+   #    """
+   #    return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))

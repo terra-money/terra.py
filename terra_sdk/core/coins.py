@@ -4,13 +4,14 @@ import copy
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Union
 
 from terra_sdk.util.json import JSONSerializable
-from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
 from .coin import Coin
 from .numeric import Numeric
 
+from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
-class Coins(JSONSerializable):
+
+class Coins(JSONSerializable, List[Coin_pb]):
     """Represents an unordered collection of :class:`Coin` objects
     -- analagous to ``sdk.Coins`` and ``sdk.DecCoins`` in Cosmos SDK. If one of the
     input coins would be ``Dec``-amount type coin, the resultant Coins is converted to
@@ -129,6 +130,9 @@ class Coins(JSONSerializable):
 
     def to_proto(self) -> List[Coin_pb]:
         return [coin.to_proto() for coin in self]
+
+    def to_dict(self) -> List[dict]:
+        return [coin.to_dict for coin in self]
 
     def denoms(self) -> List[str]:
         """Get the list of denoms for all Coin objects contained."""

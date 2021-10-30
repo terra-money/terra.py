@@ -33,6 +33,12 @@ class BaseAccount(JSONSerializable):
     sequence: int = attr.ib(converter=int)
     """"""
 
+    def get_sequence(self) -> int:
+        return self.sequence
+
+    def get_public_key(self) -> PublicKey:
+        return self.public_key
+
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,

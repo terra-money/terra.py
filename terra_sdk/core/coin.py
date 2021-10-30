@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Union
 
 import attr
@@ -66,12 +67,12 @@ class Coin(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: Coin_pb) -> Coin:
-        return cls(proto["denom"], proto["amount"])
+        return cls(proto.denom, proto.amount)
 
     def to_proto(self) -> Coin_pb:
         coin = Coin_pb()
         coin.denom = self.denom
-        coin.amount = self.amount
+        coin.amount = str(self.amount)
         return coin
 
     @classmethod

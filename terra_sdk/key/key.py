@@ -5,6 +5,7 @@ from typing import Optional
 
 from bech32 import bech32_encode, convertbits
 
+from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey
 from terra_sdk.core.auth import StdSignature, StdSignMsg, StdTx
 
@@ -20,17 +21,17 @@ def get_bech(prefix: str, payload: str) -> str:
     return bech32_encode(prefix, data)  # base64 -> base32
 
 
-def address_from_public_key(public_key: bytes) -> bytes:
+def address_from_public_key(public_key: PublicKey) -> bytes:
     sha = hashlib.sha256()
     rip = hashlib.new("ripemd160")
-    sha.update(public_key)
+    sha.update(public_key.key)
     rip.update(sha.digest())
     return rip.digest()
 
 
 def pubkey_from_public_key(public_key: bytes) -> bytes:
     arr = bytearray.fromhex(BECH32_PUBKEY_DATA_PREFIX)
-    arr += bytearray(public_key)
+    arr += bytearray(public_key.key)
     return bytes(arr)
 
 
@@ -41,7 +42,7 @@ class Key:
         public_key (Optional[bytes]): compressed public key bytes,
     """
 
-    public_key: Optional[bytes]
+    public_key: Optional[PublicKey]
     """Compressed public key bytes, used to derive :data:`raw_address` and :data:`raw_pubkey`."""
 
     raw_address: Optional[bytes]

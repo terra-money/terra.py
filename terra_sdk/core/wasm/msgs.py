@@ -11,6 +11,8 @@ from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.remove_none import remove_none
 
+from terra_proto.terra.wasm.v1beta1 import MsgExecuteContract as MsgExecuteContract_pb
+
 __all__ = [
     "MsgStoreCode",
     "MsgMigrateCode",

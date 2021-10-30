@@ -9,9 +9,11 @@ from .key import Key
 
 __all__ = ["RawKey"]
 
+from ..core import SimplePublicKey, PublicKey
 
-def compute_public_key(private_key: bytes) -> bytes:
-    return (
+
+def compute_public_key(private_key: bytes) -> PublicKey:
+    return SimplePublicKey(key=
         SigningKey.from_string(private_key, curve=SECP256k1)
         .get_verifying_key()
         .to_string("compressed")

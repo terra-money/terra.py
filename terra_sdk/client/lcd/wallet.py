@@ -3,11 +3,14 @@ from __future__ import annotations
 from typing import List, Optional
 
 from terra_sdk.core import Coins, Numeric
-from terra_sdk.core.auth import StdFee, StdSignMsg, StdTx
+from terra_sdk.core.auth import StdSignMsg, StdTx
 from terra_sdk.core.msg import Msg
 from terra_sdk.key.key import Key
+from .api.tx import CreateTxOptions, SignerOptions
 
 __all__ = ["Wallet", "AsyncWallet"]
+
+from ...core.tx import Tx
 
 
 class AsyncWallet:
@@ -61,15 +64,8 @@ class Wallet:
 
     def create_tx(
         self,
-        msgs: List[Msg],
-        fee: Optional[StdFee] = None,
-        memo: str = "",
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
-        fee_denoms: Optional[List[str]] = None,
-        account_number: Optional[int] = None,
-        sequence: Optional[int] = None,
-    ) -> StdSignMsg:
+        options: CreateTxOptions
+    ) -> Tx:
         """Builds an unsigned transaction object. The ``Wallet`` will first
         query the blockchain to fetch the latest ``account`` and ``sequence`` values for the
         account corresponding to its Key, unless the they are both provided. If no ``fee``
@@ -90,29 +86,16 @@ class Wallet:
         Returns:
             StdSignMsg: unsigned transaction
         """
-        return self.lcd.tx.create(
-            sender=self.key.acc_address,
-            msgs=msgs,
-            fee=fee,
-            memo=memo,
-            gas=None,
-            gas_prices=gas_prices,
-            gas_adjustment=gas_adjustment,
-            fee_denoms=fee_denoms,
-            account_number=account_number,
-            sequence=sequence,
-        )
+        sigOpt = [SignerOptions(
+            address=self.key.acc_address,
+            sequence=options.sequence,
+            public_key=self.key.public_key
+        )]
+        return self.lcd.tx.create(sigOpt, options)
 
     def create_and_sign_tx(
         self,
-        msgs: List[Msg],
-        fee: Optional[StdFee] = None,
-        memo: str = "",
-        gas_prices: Optional[Coins.Input] = None,
-        gas_adjustment: Optional[Numeric.Input] = None,
-        fee_denoms: Optional[List[str]] = None,
-        account_number: Optional[int] = None,
-        sequence: Optional[int] = None,
+        options: CreateTxOptions
     ) -> StdTx:
         """Creates and signs a :class:`StdTx` object in a single step. This is the recommended
         method for preparing transaction for immediate signing and broadcastring. The transaction
@@ -133,15 +116,9 @@ class Wallet:
         Returns:
             StdTx: signed transaction
         """
+        print(type(options))
         return self.key.sign_tx(
             self.create_tx(
-                msgs,
-                fee,
-                memo,
-                gas_prices,
-                gas_adjustment,
-                fee_denoms,
-                account_number,
-                sequence,
+              options
             )
         )
