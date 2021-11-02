@@ -155,7 +155,7 @@ class Key:
             data=Descriptor(
                 SingleDescriptor(
                     mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-                    signature=(self.sign(base64.b64encode(signDoc.to_json()).decode()))
+                    signature=(self.sign(signDoc.to_bytes()))  # FIXME toAminoJSON
                 )
             ),
             sequence=signDoc.sequence
@@ -164,7 +164,7 @@ class Key:
     def create_signature(self, signDoc: SignDoc) -> SignatureV2:
         """Signs the transaction with the signing algorithm provided by this Key implementation,
         and outputs the signature. The signature is only returned, and must be manually added to
-        the ``signatures`` field of an :class:`StdTx`.
+        the ``signatures`` field of an :class:`Tx`.
 
         Args:
             signDoc (SignDoc): unsigned transaction
@@ -186,12 +186,12 @@ class Key:
             SignerInfo(
                 public_key=self.public_key,
                 sequence=signDoc.sequence,
-                mode_info=ModeInfo(ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT))
+                mode_info=ModeInfo(single=ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT))
             )
         ]
-        print("signDoc", signDoc)
-        print("toProto", signDoc.to_proto().to_json())
-        signature = base64.b64encode( self.sign( bytes(signDoc.to_proto()) ) ).decode()
+        print(f"SIGNDOC_AUTHINFO_SIGNERINFOS: {signDoc.auth_info.signer_infos}")
+        signature = self.sign(signDoc.to_bytes())
+        #signature = self.sign(signDoc.to_bytes())
 
         # restore
         signDoc.auth_info.signer_infos = si_backup
@@ -204,7 +204,7 @@ class Key:
 
     def sign_tx(self, tx: Tx, options: SignOptions) -> Tx:
         """Signs the transaction with the signing algorithm provided by this Key implementation,
-        and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.
+        and creates a ready-to-broadcast :class:`Tx` object with the signature applied.
 
         Args:
             tx (Tx): unsigned transaction
@@ -223,10 +223,13 @@ class Key:
             tx_body=signedTx.body
         )
 
+        print("unsigned tx", tx.to_json())
+
         if options.sign_mode == SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
             signature: SignatureV2 = self.create_signature_amino(signDoc)
         else:
             signature: SignatureV2 = self.create_signature(signDoc)
+        print("SIGNATURE", signature.data)
 
         sigData: SingleDescriptor = signature.data.single
         for sig in tx.signatures:
@@ -234,12 +237,12 @@ class Key:
         signedTx.signatures.append(sigData.signature)
         for infos in tx.auth_info.signer_infos:
             signedTx.auth_info.signer_infos.append(infos)
-        #signedTx.auth_info.signer_infos.append(tx.auth_info.signer_infos)
         signedTx.auth_info.signer_infos.append(
             SignerInfo(
                 public_key=signature.public_key,
                 sequence=signature.sequence,
-                mode_info=ModeInfoSingle(mode=sigData.mode)
+                mode_info=ModeInfo(single=ModeInfoSingle(mode=sigData.mode))
             )
         )
+        print("signed tx", signedTx.to_proto().to_json())
         return signedTx

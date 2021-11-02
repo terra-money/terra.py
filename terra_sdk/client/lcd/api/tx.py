@@ -1,6 +1,6 @@
 import base64
 import copy
-from typing import List, Optional, Union
+from typing import List, Optional
 
 import attr
 from terra_proto.cosmos.tx.v1beta1 import SimulateResponse as SimulateResponse_pb
@@ -8,7 +8,6 @@ from terra_sdk.util.json import JSONSerializable
 
 from terra_sdk.core import AccAddress, Coins, Numeric, PublicKey, Dec
 from terra_sdk.core.tx import Fee, SignMode, TxInfo, TxBody, AuthInfo, Tx, SignerData
-from terra_sdk.core.auth import StdSignMsg, TxInfo
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
     BlockTxBroadcastResult,
@@ -28,6 +27,7 @@ class SignerOptions:
     sequence: Optional[int] = attr.ib(default=None)
     public_key: Optional[PublicKey] = attr.ib(default=None)
 
+
 @attr.s
 class CreateTxOptions:
     msgs: List[Msg] = attr.ib()
@@ -43,19 +43,41 @@ class CreateTxOptions:
     timeout_height: Optional[int] = attr.ib(default=None)
     sign_mode: Optional[SignMode] = attr.ib(default=None)
 
+
 @attr.s
 class BroadcastOptions:
     sequences: Optional[List[int]] = attr.ib()
     fee_granter: Optional[AccAddress] = attr.ib(default=None)
 
+@attr.s
+class GasInfo:
+    gas_wanted: int = attr.ib(converter=int)
+    gas_used: int = attr.ib(converter=int)
 
-class SimulateResponse(JSONSerializable, SimulateResponse_pb):
+@attr.s
+class EventAttribute:
+    key: str = attr.ib()
+    value: str = attr.ib()
+
+@attr.s
+class Event:
+    type: str = attr.ib()
+    attributes: List[EventAttribute] = attr.ib(converter=list)
+
+@attr.s
+class SimulateResult:
+    data: str = attr.ib()
+    log: str = attr.ib()
+    events: List[Event] = attr.ib(converter=list)
+
+@attr.s
+class SimulateResponse(JSONSerializable):
+    gas_info: GasInfo = attr.ib()
+    result: SimulateResult = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict):
         return cls(gas_info=data["gas_info"], result=data["result"])
-
-
 
 class AsyncTxAPI(BaseAsyncAPI):
     async def tx_info(self, tx_hash: str) -> Tx:
@@ -74,7 +96,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         self,
         signers: List[SignerOptions],
         options: CreateTxOptions
-    ) -> StdSignMsg:
+    ) -> Tx:
         """Create a new unsigned transaction, with helpful utilities such as lookup of
         chain ID, account number, sequence and fee estimation.
 
@@ -90,7 +112,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             sequence (Optional[int], optional): sequence number to use.
 
         Returns:
-            StdSignMsg: unsigned tx
+            Tx: unsigned tx
         """
 
         opt = copy.deepcopy(options)
@@ -101,7 +123,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             pubkey = signer.public_key
 
             if seq is None or pubkey is None:
-                acc = await BaseAsyncAPI._try_await( self._c.auth.account_info(signer.address) )
+                acc = await BaseAsyncAPI._try_await(self._c.auth.account_info(signer.address))
                 if seq is None:
                     seq = acc.get_sequence()
                 if pubkey is None:
@@ -146,18 +168,20 @@ class AsyncTxAPI(BaseAsyncAPI):
                     lambda c: c.denom in _fee_denoms
                 )
         tx_body = TxBody(messages=options.msgs, memo=options.memo or '')
-        emptyCoins =  Coins()
+        emptyCoins = Coins()
         emptyFee = Fee(0, emptyCoins)
-        auth_info = AuthInfo( [], emptyFee )
+        auth_info = AuthInfo([], emptyFee)
 
         tx = Tx(tx_body, auth_info, [])
         tx.append_empty_signatures(signers)
 
         gas = options.gas
         if gas is None or gas == "auto" or gas == 0:
-            gas = str(self.estimate_gas(tx, options))
+            opt = copy.deepcopy(options)
+            opt.gas_adjustment = gas_adjustment
+            gas = str(self.estimate_gas(tx, opt))
 
-        tax_amount = self.compute_tax(tx); # TODO
+        tax_amount = self.compute_tax(tx)  # TODO
         fee_amount = tax_amount.add(gas_prices_coins.mul(gas).to_int_coins()) if\
             gas_prices_coins else tax_amount
 
@@ -165,8 +189,10 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def estimate_gas(self, tx: Tx, options: Optional[CreateTxOptions]) -> int:
         gas_adjustment = options.gas_adjustment if options else self._c.gas_adjustment
+
         res = await self._c._post("/cosmos/tx/v1beta1/simulate", {"tx_bytes": self.encode(tx)})
         simulated = SimulateResponse.from_data(res)
+
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
 
     async def compute_tax(self, tx: Tx) -> Coins:
@@ -174,7 +200,8 @@ class AsyncTxAPI(BaseAsyncAPI):
         return Coins.from_data(res.get("tax_amount"))
 
     async def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
-        return base64.b64encode(bytes(tx.to_proto())).decode()
+        print(f"api.tx.encode {tx}")
+        return base64.b64encode(tx.to_proto().SerializeToString()).decode()
 
     async def hash(self, tx: Tx) -> str:
         """Compute hash for a transaction.
@@ -192,7 +219,20 @@ class AsyncTxAPI(BaseAsyncAPI):
         self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
         data = {"tx_bytes": self.encode(tx), "mode": mode}
-        print(f"DATA : [{data}]")
+        """
+        print("=====BROADCAST=====")
+        enc = base64.b64encode(bytes(tx.to_proto()))
+        dec = tx.to_proto().parse(base64.b64decode(enc))
+        print(dec.SerializeToString())
+        print("py=========")
+        print(tx.to_proto().to_json())
+        print("js=========")
+        tx = tx.to_proto().from_json('{"body":{"messages":[{"@type":"/cosmos.bank.v1beta1.MsgSend","from_address":"terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v","to_address":"terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp","amount":[{"denom":"uluna","amount":"1000004"}]}],"memo":"test from terra.js!","timeout_height":"0","extension_options":[],"non_critical_extension_options":[]},"auth_info":{"signer_infos":[{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AjszqFJDRAYbEjZMuiD+ChqzbUSGq/RRu3zr0R6iJB5b"},"mode_info":{"single":{"mode":"SIGN_MODE_DIRECT"}},"sequence":"1"}],"fee":{"amount":[{"denom":"uusd","amount":"11905"}],"gas_limit":"79366","payer":"","granter":""}},"signatures":["PT6MzzjW3ilQ87KIt1t5/AI2ThlJu8gfwBgLEzgP71keBZ53rH+P8qclokcLNpCA5liYZyVkwIzkn1GA4c13yA=="]}').to_json()
+        print(tx)
+        #data = {"tx_bytes": tx, "mode": mode}
+        print("=========")
+        print("DATA: ", data)
+        """
         return await self._c._post("/cosmos/tx/v1beta1/txs", data)  #, raw=True)
 
     async def broadcast_sync(
@@ -202,6 +242,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         Args:
             tx (Tx): transaction to broadcast
+            options (BroadcastOptions): broacast options, optional
 
         Returns:
             SyncTxBroadcastResult: result
@@ -221,6 +262,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         Args:
             tx (Tx): transaction to broadcast
+            options (BroadcastOptions): broacast options, optional
 
         Returns:
             AsyncTxBroadcastResult: result
@@ -237,6 +279,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         Args:
             tx (Tx): transaction to broadcast
+            options (BroadcastOptions): broacast options, optional
 
         Returns:
             BlockTxBroadcastResult: result

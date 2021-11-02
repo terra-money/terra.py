@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import List, Optional, Union
 
 from terra_sdk.core import Coins, Numeric
-from terra_sdk.core.auth import StdSignMsg, StdTx
 from terra_sdk.core.msg import Msg
 from terra_sdk.key.key import Key, SignOptions
 from .api.tx import CreateTxOptions, SignerOptions
@@ -30,10 +29,10 @@ class AsyncWallet:
         res = await self.lcd.auth.account_info(self.key.acc_address)
         return {"account_number": res.account_number, "sequence": res.sequence}
 
-    async def create_tx(self, *args, **kwargs) -> StdSignMsg:
+    async def create_tx(self, *args, **kwargs) -> Tx:
         return await self.lcd.tx.create(self.key.acc_address, *args, **kwargs)
 
-    async def create_and_sign_tx(self, *args, **kwargs) -> StdTx:
+    async def create_and_sign_tx(self, *args, **kwargs) -> Tx:
         tx = await self.create_tx(*args, **kwargs)
         return self.key.sign_tx(tx)
 
@@ -84,7 +83,7 @@ class Wallet:
             sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
 
         Returns:
-            StdSignMsg: unsigned transaction
+            Tx: unsigned transaction
         """
         sigOpt = [SignerOptions(
             address=self.key.acc_address,
@@ -96,8 +95,8 @@ class Wallet:
     def create_and_sign_tx(
         self,
         options: CreateTxOptions
-    ) -> StdTx:
-        """Creates and signs a :class:`StdTx` object in a single step. This is the recommended
+    ) -> Tx:
+        """Creates and signs a :class:`Tx` object in a single step. This is the recommended
         method for preparing transaction for immediate signing and broadcastring. The transaction
         is generated exactly as :meth:`create_tx`.
 
@@ -114,7 +113,7 @@ class Wallet:
             sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
 
         Returns:
-            StdTx: signed transaction
+            Tx: signed transaction
         """
 
         account_number = options.account_number

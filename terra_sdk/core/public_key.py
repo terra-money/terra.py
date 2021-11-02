@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 from abc import ABC, abstractmethod
 from typing import Optional, Union, List
 
@@ -11,7 +12,7 @@ from terra_proto.cosmos.crypto.ed25519 import PubKey as ValConsPubKey_pb
 from terra_proto.cosmos.crypto.multisig import LegacyAminoPubKey as LegacyAminoPubKey_pb
 from betterproto.lib.google.protobuf import Any as Any_pb
 
-__all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey"]
+__all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey", "LegacyAminoPubKey"]
 
 
 class PublicKey(JSONSerializable, ABC):
@@ -47,6 +48,7 @@ class PublicKey(JSONSerializable, ABC):
     def pack_any(self) -> Any_pb:
         raise NotImplementedError
 
+
 @attr.s
 class SimplePublicKey(PublicKey):
     """Data object holding the SIMPLE public key component of an account or signature."""
@@ -54,11 +56,11 @@ class SimplePublicKey(PublicKey):
     __type_url = "/cosmos.crypto.secp256k1.PubKey"
     """Normal signature public key type."""
 
-    key: bytes = attr.ib()
+    key: str = attr.ib()
 
     def to_data(self) -> dict:
         return {
-            "key": self.key  #.decode('utf-8')
+            "key": self.key
         }
 
     @classmethod
@@ -76,6 +78,7 @@ class SimplePublicKey(PublicKey):
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.__type_url, value=bytes(self.to_proto()))
 
+
 @attr.s
 class ValConsPubKey(PublicKey):
     """Data object holding the public key component of an validator's account or signature."""
@@ -83,7 +86,7 @@ class ValConsPubKey(PublicKey):
     __type_url = "/cosmos.crypto.ed25519.PubKey"
     """an ed25519 tendermint public key type."""
 
-    key: bytes = attr.ib()
+    key: str = attr.ib()
 
     def to_data(self) -> dict:
         return {
@@ -100,7 +103,7 @@ class ValConsPubKey(PublicKey):
         return self.__type_url
 
     def to_proto(self) -> ValConsPubKey_pb:
-        return ValConsPubKey_pb(key=self.key)
+        return ValConsPubKey_pb(key=base64.b64encode(self.key))
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.__type_url, value=bytes(self.to_proto()))

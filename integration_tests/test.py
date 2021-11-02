@@ -25,6 +25,7 @@ from terra_sdk.core.bank import MsgSend
 from terra_sdk.client.localterra import LocalTerra
 
 from terra_sdk.client.lcd import LCDClient
+from terra_sdk.core.tx import SignMode
 
 from terra_sdk.util.json import JSONSerializable
 
@@ -44,15 +45,15 @@ def main():
     msg = MsgSend(
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
         "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
-        Coins(uusd=1312029),
+        Coins(uluna=30000),
     )
 
     opt = CreateTxOptions(
-        msgs=[msg],
-        memo='test from terra.py')
+        msgs=[msg]
+    )
     #tx = test1.create_tx(opt)
     tx = test1.create_and_sign_tx(opt)
-    print(tx)
+    print("SIGNED TX", tx)
 
     result = terra.tx.broadcast(tx)
     print(f"RESULT:{result}")

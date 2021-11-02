@@ -36,12 +36,12 @@ class Fee(JSONSerializable):
         return {"gas_limit": str(self.gas_limit), "amount": self.amount.to_data(), "payer": str(self.payer), "granter": str(self.granter)}
 
     def to_proto(self) -> Fee_pb:
-        fee = Fee_pb()
-        fee.gas_limit = self.gas_limit
-        fee.amount = self.amount.to_proto()
-        fee.payer = self.payer
-        fee.granter = self.granter
-        return fee
+        return Fee_pb(
+            amount=self.amount.to_proto(),
+            gas_limit=self.gas_limit,
+            payer=self.payer,
+            granter=self.granter
+        )
 
     @classmethod
     def from_proto(cls, proto: Fee_pb) -> Fee:

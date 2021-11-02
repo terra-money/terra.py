@@ -31,8 +31,8 @@ class SignDoc(JSONSerializable):
             chain_id=data["chain_id"],
             account_number=data["account_number"],
             sequence=data["sequence"],
-            auth_info=AuthInfo.from_data(data["auth_info"]),  # FIXME: encode/base64
-            tx_body=TxBody.from_data(data["tx_body"]) # FIXME: encode/base64)
+            auth_info=AuthInfo.from_data(data["auth_info"]),
+            tx_body=TxBody.from_data(data["tx_body"])
         )
 
     def to_data(self) -> dict:
@@ -43,22 +43,25 @@ class SignDoc(JSONSerializable):
             "auth_info": self.auth_info.to_data(),
             "tx_body": self.tx_body.to_data()
         }
+
     @classmethod
     def from_proto(cls, proto: SignDoc_pb) -> SignDoc:
         return cls(
             chain_id=proto.chain_id,
             account_number=proto.account_number,
-            auth_info=AuthInfo.from_proto(proto.auth_info_bytes), # FIXME: encode/base64,
+            auth_info=AuthInfo.from_proto(proto.auth_info_bytes), # FIXME: encode/base64
             tx_body=TxBody.from_proto(proto.body_bytes)  # FIXME: encode/base64
         )
 
     def to_proto(self) -> SignDoc_pb:
-        proto = SignDoc_pb()
-        proto.chain_id = self.chain_id
-        proto.account_number = self.account_number
-        proto.auth_info_bytes = bytes(self.auth_info.to_proto())  # FIXME: encode/base64
-        proto.body_bytes = bytes(self.tx_body.to_proto())  # FIXME: encode/base64
+        return SignDoc_pb(
+            body_bytes=bytes(self.tx_body.to_proto()),            # FIXME: encode/base64
+            auth_info_bytes=bytes(self.auth_info.to_proto()),        # FIXME: encode/base64
+            chain_id=self.chain_id,
+            account_number=self.account_number
+        )
         return proto
 
     def to_bytes(self) -> bytes:
-        return self.to_proto().to_json().encode('base64')
+        #return base64.b64encode(bytes(self.to_proto()))
+        return bytes(self.to_proto())

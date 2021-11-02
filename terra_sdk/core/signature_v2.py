@@ -9,7 +9,13 @@ import attr
 from terra_sdk.core.tx import CompactBitArray
 from terra_sdk.core.public_key import PublicKey
 
-__all__ = ["SignatureV2", "Descriptor", "Single", "Multi"]
+
+from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
+from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptor as SignatureDescriptor_pb
+from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptorDataSingle as SignatureDescriptorDataSingle_pb
+from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptorDataMulti as SignatureDescriptorDataMulti_pb
+
+__all__ = ["SignatureV2", "Descriptor", "Single", "Multi", "SignMode"]
 
 
 @attr.s
@@ -35,7 +41,7 @@ class Descriptor:
 
     @classmethod
     def from_data(cls, data: dict) -> Descriptor:
-        data = data["value"]
+        data = data["value"] if data.get("value") else data
         if data["single"] is not None:
             s = Single.from_data(data["single"])
         if data["multi"] is not None:
@@ -45,12 +51,14 @@ class Descriptor:
 
 @attr.s
 class Single:
-    mode: str = attr.ib()
-    signature: str = attr.ib()
+    mode: SignMode = attr.ib()
+    signature: bytes = attr.ib()
+
+    def to_proto(self) -> SignatureDescriptorDataSingle_pb:
+        return SignatureDescriptorDataSingle_pb(mode=self.mode, signature=self.signature)
 
     @classmethod
     def from_data(cls, data: dict) -> Single:
-        data = data["value"]
         return cls(mode=data["mode"], signature=data["signature"])
 
 
@@ -59,9 +67,14 @@ class Multi:
     bitarray: CompactBitArray = attr.ib()
     signatures: List[Descriptor] = attr.ib()
 
+    def to_proto(self) -> SignatureDescriptorDataMulti_pb:
+        return SignatureDescriptorDataMulti_pb(
+            bitarray=self.bitarray.to_proto(),
+            signatures=[sig.to_proto() for sig in self.signatures]
+        )
+
     @classmethod
     def from_data(cls, data: dict) -> Multi:
-        data = data["value"]
         return cls(
             CompactBitArray.from_data(data["bitarray"]),
             [Descriptor.from_data(d) for d in data["signatures"]]

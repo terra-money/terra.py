@@ -42,7 +42,6 @@ class MsgSend(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSend:
-        data = data["value"]
         return cls(
             from_address=data["from_address"],
             to_address=data["to_address"],
@@ -78,9 +77,6 @@ class MsgSend(Msg):
     @classmethod
     def unpack_any(cls, any: Any) -> MsgSend:
         return MsgSend.from_proto(any)
-
-    #def to_dict(self, casing, include_default_values) -> dict:
-    #    return self.to_proto().to_dict()
 
 
 @attr.s
