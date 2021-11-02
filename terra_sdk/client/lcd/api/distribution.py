@@ -58,7 +58,7 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         res = await self._c._get(f"/distribution/validators/{validator}")
         return ValidatorRewards(
             self_bond_rewards=Coins.from_data(res["self_bond_rewards"]),
-            val_commission=Coins.from_data(res["val_commission"]),
+            val_commission=Coins.from_data(res["val_commission"]["commission"])
         )
 
     async def withdraw_address(self, delegator: AccAddress) -> AccAddress:
