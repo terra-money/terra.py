@@ -19,7 +19,6 @@ class AsyncBankAPI(BaseAsyncAPI):
             Coins: balance
         """
         res = await self._c._get(f"/cosmos/bank/v1beta1/balances/{address}", params)
-        print("balance res", res)
         return Coins.from_data(res["balances"]), res.get("pagination")
 
     async def total(self, params: Optional[APIParams] = None) -> Coins:

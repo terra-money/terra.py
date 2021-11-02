@@ -200,7 +200,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         return Coins.from_data(res.get("tax_amount"))
 
     async def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
-        print(f"api.tx.encode {tx}")
         return base64.b64encode(tx.to_proto().SerializeToString()).decode()
 
     async def hash(self, tx: Tx) -> str:
@@ -219,20 +218,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
         data = {"tx_bytes": self.encode(tx), "mode": mode}
-        """
-        print("=====BROADCAST=====")
-        enc = base64.b64encode(bytes(tx.to_proto()))
-        dec = tx.to_proto().parse(base64.b64decode(enc))
-        print(dec.SerializeToString())
-        print("py=========")
-        print(tx.to_proto().to_json())
-        print("js=========")
-        tx = tx.to_proto().from_json('{"body":{"messages":[{"@type":"/cosmos.bank.v1beta1.MsgSend","from_address":"terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v","to_address":"terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp","amount":[{"denom":"uluna","amount":"1000004"}]}],"memo":"test from terra.js!","timeout_height":"0","extension_options":[],"non_critical_extension_options":[]},"auth_info":{"signer_infos":[{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AjszqFJDRAYbEjZMuiD+ChqzbUSGq/RRu3zr0R6iJB5b"},"mode_info":{"single":{"mode":"SIGN_MODE_DIRECT"}},"sequence":"1"}],"fee":{"amount":[{"denom":"uusd","amount":"11905"}],"gas_limit":"79366","payer":"","granter":""}},"signatures":["PT6MzzjW3ilQ87KIt1t5/AI2ThlJu8gfwBgLEzgP71keBZ53rH+P8qclokcLNpCA5liYZyVkwIzkn1GA4c13yA=="]}').to_json()
-        print(tx)
-        #data = {"tx_bytes": tx, "mode": mode}
-        print("=========")
-        print("DATA: ", data)
-        """
         return await self._c._post("/cosmos/tx/v1beta1/txs", data)  #, raw=True)
 
     async def broadcast_sync(
@@ -285,7 +270,6 @@ class AsyncTxAPI(BaseAsyncAPI):
             BlockTxBroadcastResult: result
         """
         res = await self._broadcast(tx, "BROADCAST_MODE_BLOCK", options)
-        print("broadcast.res", res)
         res = res["tx_response"]
         return BlockTxBroadcastResult(
             height=res.get("height") or 0,

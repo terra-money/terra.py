@@ -34,5 +34,4 @@ class JSONSerializable(ABC):
         Returns:
            str: JSON string representation
         """
-        print("in to_json", self)
         return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))

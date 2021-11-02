@@ -78,7 +78,6 @@ class Tx(JSONSerializable):
         proto = Tx_pb()
         proto.body = self.body.to_proto()
         proto.auth_info = self.auth_info.to_proto()
-        print("SIGS", self.signatures)
         proto.signatures = [sig for sig in self.signatures]
         return proto
 

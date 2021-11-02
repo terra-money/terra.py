@@ -181,7 +181,6 @@ class AsyncStakingAPI(BaseAsyncAPI):
         for x in list(_params.keys()):
             if _params[x] is None:
                 del _params[x]
-        print("_params", _params)
         res = await self._c._get(f"/cosmos/staking/v1beta1/delegators/{delegator}/redelegations", _params)
         return [Redelegation.from_data(d) for d in res.get("redelegation_responses")], res.get("pagination")
 

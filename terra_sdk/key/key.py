@@ -189,9 +189,7 @@ class Key:
                 mode_info=ModeInfo(single=ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT))
             )
         ]
-        print(f"SIGNDOC_AUTHINFO_SIGNERINFOS: {signDoc.auth_info.signer_infos}")
         signature = self.sign(signDoc.to_bytes())
-        #signature = self.sign(signDoc.to_bytes())
 
         # restore
         signDoc.auth_info.signer_infos = si_backup
@@ -223,13 +221,11 @@ class Key:
             tx_body=signedTx.body
         )
 
-        print("unsigned tx", tx.to_json())
 
         if options.sign_mode == SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
             signature: SignatureV2 = self.create_signature_amino(signDoc)
         else:
             signature: SignatureV2 = self.create_signature(signDoc)
-        print("SIGNATURE", signature.data)
 
         sigData: SingleDescriptor = signature.data.single
         for sig in tx.signatures:
@@ -244,5 +240,4 @@ class Key:
                 mode_info=ModeInfo(single=ModeInfoSingle(mode=sigData.mode))
             )
         )
-        print("signed tx", signedTx.to_proto().to_json())
         return signedTx
