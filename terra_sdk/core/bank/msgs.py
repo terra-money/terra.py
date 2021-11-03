@@ -148,14 +148,14 @@ class MultiSendOutput(JSONSerializable):
 
 
 def convert_input_list(data: list) -> List[MultiSendInput]:
-    if all(isinstance(x, MultiSendOutput) for x in data):
+    if all(isinstance(x, MultiSendInput) for x in data):
         return data
     else:
         return [MultiSendInput(address=d["address"], coins=d["coins"]) for d in data]
 
 
 def convert_output_list(data: list) -> List[MultiSendOutput]:
-    if all(isinstance(x, MultiSendInput) for x in data):
+    if all(isinstance(x, MultiSendOutput) for x in data):
         return data
     else:
         return [MultiSendOutput(address=d["address"], coins=d["coins"]) for d in data]
@@ -200,13 +200,12 @@ class MsgMultiSend(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "inputs": [ mi.from_data() for mi in self.inputs],
+            "inputs": [mi.from_data() for mi in self.inputs],
             "outputs": [mo.from_data() for mo in self.outputs],
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMultiSend:
-        data = data["value"]
         return cls(
             inputs=[MultiSendInput.from_data(x) for x in data["inputs"]],
             outputs=[MultiSendOutput.from_data(x) for x in data["outputs"]],
@@ -220,7 +219,7 @@ class MsgMultiSend(Msg):
         )
 
     def to_proto(self) -> MsgMultiSend_pb:
-        proto = MsgMultiSend_pb()
-        proto.inputs = [i.to_proto for i in self.inputs]
-        proto.outputs = [o.to_proto for o in self.outputs]
-        return proto
+        return MsgMultiSend_pb(
+            inputs=[i.to_proto() for i in self.inputs],
+            outputs=[o.to_proto() for o in self.outputs]
+        )
