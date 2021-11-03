@@ -7,6 +7,8 @@ import attr
 from terra_sdk.core import AccAddress, Coin
 from terra_sdk.core.msg import Msg
 
+from terra_proto.terra.market.v1beta1 import MsgSwap as MsgSwap_pb, MsgSwapSend as MsgSwapSend_pb
+
 __all__ = ["MsgSwap", "MsgSwapSend"]
 
 
@@ -21,6 +23,8 @@ class MsgSwap(Msg):
     """
 
     type = "market/MsgSwap"
+    """"""
+    type_url = "/terra.market.v1beta1.MsgSwap"
     """"""
     action = "swap"
     """"""
@@ -38,6 +42,14 @@ class MsgSwap(Msg):
             ask_denom=data["ask_denom"],
         )
 
+    def to_proto(self) -> MsgSwap_pb:
+        return MsgSwap_pb(
+            trader=self.trader,
+            offer_coin=self.offer_coin.to_proto(),
+            ask_denom=self.ask_denom
+        )
+
+
 
 @attr.s
 class MsgSwapSend(Msg):
@@ -51,6 +63,8 @@ class MsgSwapSend(Msg):
     """
 
     type = "market/MsgSwapSend"
+    """"""
+    type_url = "/terra.market.v1beta1.MsgSwapSend"
     """"""
     action = "swapsend"
     """"""
@@ -69,3 +83,11 @@ class MsgSwapSend(Msg):
             offer_coin=Coin.from_data(data["offer_coin"]),
             ask_denom=data["ask_denom"],
         )
+
+    def to_proto(self) -> MsgSwapSend_pb:
+        return MsgSwapSend_pb(
+            from_address=self.from_address,
+            to_address=self.to_address,
+            offer_coin=self.offer_coin.to_proto(),
+            ask_denom=self.ask_denom
+            )

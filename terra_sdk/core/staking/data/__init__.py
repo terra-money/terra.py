@@ -3,14 +3,14 @@ from .delegation import (
     Redelegation,
     RedelegationEntry,
     UnbondingDelegation,
-    UnbondingEntry,
+    UnbondingDelegationEntry,
 )
 from .validator import Commission, CommissionRates, Description, Validator
 
 __all__ = [
     "Delegation",
     "UnbondingDelegation",
-    "UnbondingEntry",
+    "UnbondingDelegationEntry",
     "Redelegation",
     "RedelegationEntry",
     "CommissionRates",

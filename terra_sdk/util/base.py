@@ -10,9 +10,8 @@ class BaseTerraData(JSONSerializable, Message):
 
     type: str
 
-    @abstractmethod
     def to_data(self) -> dict:
-        pass
+        return {"type": self.type_url, "value": dict_to_data(self.__dict__)}
 
     @abstractmethod
     def to_proto(self):
@@ -21,7 +20,7 @@ class BaseTerraData(JSONSerializable, Message):
 
 
 def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:
-    table = {i.__type_url: i.from_data for i in inputs}
+    table = {i.type_url: i.from_data for i in inputs}
 
     def from_data(data: dict):
         return table[data["@type"]](data)

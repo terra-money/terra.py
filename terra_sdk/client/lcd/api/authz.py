@@ -15,7 +15,7 @@ from ..params import PaginationOptions
 class AsyncAuthzAPI(BaseAsyncAPI):
     async def grants(
         self, granter: AccAddress, grantee: AccAddress, msg_type: Optional[str] = None,
-            params : Optional[APIParams] = None
+            params: Optional[APIParams] = None
     ) -> List[AuthorizationGrant]:
         """Fetches current active message authorization grants.
 

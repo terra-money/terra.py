@@ -7,6 +7,10 @@ import attr
 from terra_sdk.core import Coin, Coins, ValAddress
 from terra_sdk.util.json import JSONSerializable
 
+from terra_proto.terra.oracle.v1beta1 import AggregateExchangeRateVote as AggregateExchangeRateVote_pb
+from terra_proto.terra.oracle.v1beta1 import AggregateExchangeRatePrevote as AggregateExchangeRatePrevote_pb
+
+
 __all__ = [
     "AggregateExchangeRatePrevote",
     "AggregateExchangeRateVote",
@@ -44,6 +48,15 @@ class AggregateExchangeRateVote(JSONSerializable):
             voter=data["voter"],
         )
 
+    def to_proto(self) -> AggregateExchangeRateVote_pb:
+        return AggregateExchangeRateVote_pb(
+            exchange_rate_tuples=[
+                {"denom":tuple.denom, "exchange_rate":str(tuple.amount)}
+                for tuple in self.exchange_rate_tuples.to_list()
+            ],
+            voter=self.voter
+        )
+
 
 @attr.s
 class AggregateExchangeRatePrevote(JSONSerializable):
@@ -71,4 +84,11 @@ class AggregateExchangeRatePrevote(JSONSerializable):
             hash=data["hash"],
             voter=data["voter"],
             submit_block=int(data["submit_block"]),
+        )
+
+    def to_proto(self) -> AggregateExchangeRatePrevote_pb:
+        return AggregateExchangeRatePrevote_pb(
+            hash=self.hash,
+            voter=self.voter,
+            submit_block=self.submit_block
         )

@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+from betterproto.lib.google.protobuf import Any as Any_pb
+
 from .data import Content
+
+from terra_proto.cosmos.gov.v1beta1 import TextProposal as TextProposal_pb
 
 __all__ = ["TextProposal"]
 
@@ -22,3 +26,14 @@ class TextProposal(Content):
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:
         return cls(title=data["title"], description=data["description"])
+
+    def to_proto(self) -> TextProposal_pb:
+        return TextProposal_pb(
+            title=self.title,
+            description=self.description
+        )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(
+            type_url=self.type_url, value=bytes(self.to_proto())
+        )

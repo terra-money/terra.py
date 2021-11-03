@@ -71,9 +71,6 @@ class MsgSend(Msg):
         proto.amount = [c.to_proto() for c in self.amount]
         return proto
 
-    def pack_any(self) -> Any_pb:
-        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
-
     @classmethod
     def unpack_any(cls, any: Any) -> MsgSend:
         return MsgSend.from_proto(any)

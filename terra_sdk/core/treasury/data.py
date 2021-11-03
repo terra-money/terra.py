@@ -8,6 +8,7 @@ import attr
 
 from terra_sdk.core import Coin, Dec
 
+from terra_proto.terra.treasury.v1beta1 import PolicyConstraints as PolicyConstraints_pb
 
 @attr.s
 class PolicyConstraints:
@@ -58,4 +59,12 @@ class PolicyConstraints:
             rate_max=Dec(data["rate_max"]),
             cap=Coin.from_data(data["cap"]),
             change_rate_max=Dec(data["change_rate_max"]),
+        )
+
+    def to_proto(self) -> PolicyConstraints_pb:
+        return PolicyConstraints_pb(
+            rate_min=str(self.rate_min),
+            rate_max=str(self.rate_max),
+            cap=self.cap.to_proto(),
+            change_rate_max=str(self.change_rate_max)
         )

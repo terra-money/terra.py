@@ -25,22 +25,22 @@ class PublicKey(JSONSerializable, ABC):
     @classmethod
     def from_proto(cls, proto: Any_pb):
         type_url = proto.type_url
-        if type_url == SimplePublicKey.__type_url:
+        if type_url == SimplePublicKey.type_url:
             return SimplePublicKey.from_proto(proto)
-        elif type_url == ValConsPubKey.__type_url:
+        elif type_url == ValConsPubKey.type_url:
             return ValConsPubKey.from_proto(proto)
-        elif type_url == LegacyAminoPubKey.__type_url:
+        elif type_url == LegacyAminoPubKey.type_url:
             return LegacyAminoPubKey.from_proto(proto)
         raise TypeError(f"could not marshal PublicKey: type is incorrect")
 
     @classmethod
     def from_data(cls, data: dict):
         type_url = data["@type"]
-        if type_url == SimplePublicKey.__type_url:
+        if type_url == SimplePublicKey.type_url:
             return SimplePublicKey.from_data(data)
-        elif type_url == ValConsPubKey.__type_url:
+        elif type_url == ValConsPubKey.type_url:
             return ValConsPubKey.from_data(data)
-        elif type_url == LegacyAminoPubKey.__type_url:
+        elif type_url == LegacyAminoPubKey.type_url:
             return LegacyAminoPubKey.from_data(data)
         raise TypeError(f"could not unmarshal PublicKey: type is incorrect")
 
@@ -53,7 +53,7 @@ class PublicKey(JSONSerializable, ABC):
 class SimplePublicKey(PublicKey):
     """Data object holding the SIMPLE public key component of an account or signature."""
 
-    __type_url = "/cosmos.crypto.secp256k1.PubKey"
+    type_url = "/cosmos.crypto.secp256k1.PubKey"
     """Normal signature public key type."""
 
     key: str = attr.ib()
@@ -73,17 +73,17 @@ class SimplePublicKey(PublicKey):
         return SimplePubKey_pb(key=self.key)
 
     def get_type(self) -> str:
-        return self.__type_url
+        return self.type_url
 
     def pack_any(self) -> Any_pb:
-        return Any_pb(type_url=self.__type_url, value=bytes(self.to_proto()))
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
 
 @attr.s
 class ValConsPubKey(PublicKey):
     """Data object holding the public key component of an validator's account or signature."""
 
-    __type_url = "/cosmos.crypto.ed25519.PubKey"
+    type_url = "/cosmos.crypto.ed25519.PubKey"
     """an ed25519 tendermint public key type."""
 
     key: str = attr.ib()
@@ -100,20 +100,20 @@ class ValConsPubKey(PublicKey):
         )
 
     def get_type(self) -> str:
-        return self.__type_url
+        return self.type_url
 
     def to_proto(self) -> ValConsPubKey_pb:
         return ValConsPubKey_pb(key=base64.b64encode(self.key))
 
     def pack_any(self) -> Any_pb:
-        return Any_pb(type_url=self.__type_url, value=bytes(self.to_proto()))
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
 
 # FIXME: NOT TESTED
 class LegacyAminoPubKey(PublicKey):
     """Data object holding the Legacy Amino-typed public key component of an account or signature."""
 
-    __type_url = "/cosmos.crypto.multisig.LegacyAminoPubKey"
+    type_url = "/cosmos.crypto.multisig.LegacyAminoPubKey"
     """Multisig public key type."""
 
     threshold: int = attr.ib(converter=int)
@@ -133,10 +133,10 @@ class LegacyAminoPubKey(PublicKey):
         )
 
     def get_type(self) -> str:
-        return self.__type_url
+        return self.type_url
 
     def to_proto(self) -> LegacyAminoPubKey_pb:
         return LegacyAminoPubKey_pb(threshold=self.threshold, public_keys=self.public_keys)
 
     def pack_any(self) -> Any_pb:
-        return Any_pb(type_url=self.__type_url, value=bytes(self.to_proto()))
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

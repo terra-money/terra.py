@@ -11,6 +11,11 @@ from terra_sdk.core import AccAddress, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 
+from terra_proto.terra.oracle.v1beta1 import MsgDelegateFeedConsent as MsgDelegateFeedConsent_pb
+from terra_proto.terra.oracle.v1beta1 import MsgAggregateExchangeRateVote as MsgAggregateExchangeRateVote_pb
+from terra_proto.terra.oracle.v1beta1 import MsgAggregateExchangeRatePrevote as MsgAggregateExchangeRatePrevote_pb
+
+
 __all__ = [
     "vote_hash",
     "aggregate_vote_hash",
@@ -64,6 +69,8 @@ class MsgDelegateFeedConsent(Msg):
 
     type = "oracle/MsgDelegateFeedConsent"
     """"""
+    type_url = "/terra.oracle.v1beta1.MsgDelegateFeedConsent"
+    """"""
     action = "delegatefeeder"
     """"""
 
@@ -72,8 +79,13 @@ class MsgDelegateFeedConsent(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegateFeedConsent:
-        data = data["value"]
         return cls(operator=data["operator"], delegate=data["delegate"])
+
+    def to_proto(self) -> MsgDelegateFeedConsent_pb:
+        return MsgDelegateFeedConsent_pb(
+            operator=self.operator,
+            delegate=self.delegate
+        )
 
 
 @attr.s
@@ -88,6 +100,8 @@ class MsgAggregateExchangeRatePrevote(Msg):
 
     type = "oracle/MsgAggregateExchangeRatePrevote"
     """"""
+    type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRatePrevote"
+    """"""
 
     hash: str = attr.ib()
     feeder: AccAddress = attr.ib()
@@ -95,11 +109,17 @@ class MsgAggregateExchangeRatePrevote(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgAggregateExchangeRatePrevote:
-        data = data["value"]
         return cls(
             hash=data["hash"],
             feeder=data["feeder"],
             validator=data["validator"],
+        )
+
+    def to_proto(self) -> MsgAggregateExchangeRatePrevote_pb:
+        return MsgAggregateExchangeRatePrevote_pb(
+            hash=self.hash,
+            feeder=self.feeder,
+            validator=self.validator
         )
 
 
@@ -116,6 +136,8 @@ class MsgAggregateExchangeRateVote(Msg):
 
     type = "oracle/MsgAggregateExchangeRateVote"
     """"""
+    type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRateVote"
+    """"""
 
     exchange_rates: Coins = attr.ib(converter=Coins)
     salt: str = attr.ib()
@@ -129,12 +151,19 @@ class MsgAggregateExchangeRateVote(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgAggregateExchangeRateVote:
-        data = data["value"]
         return cls(
             exchange_rates=Coins.from_str(data["exchange_rates"]),
             salt=data["salt"],
             feeder=data["feeder"],
             validator=data["validator"],
+        )
+
+    def to_proto(self) -> MsgAggregateExchangeRateVote_pb:
+        return MsgAggregateExchangeRateVote_pb(
+            exchange_rates=self.exchange_rates.to_proto(),
+            salt=self.salt,
+            feeder=self.feeder,
+            validator=self.validator
         )
 
     def get_aggregate_vote_hash(self) -> str:

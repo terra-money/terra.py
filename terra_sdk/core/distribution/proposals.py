@@ -7,6 +7,8 @@ import attr
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.gov import Content
 
+from terra_proto.cosmos.distribution.v1beta1 import CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb
+
 __all__ = ["CommunityPoolSpendProposal"]
 
 
@@ -36,4 +38,12 @@ class CommunityPoolSpendProposal(Content):
             description=data["description"],
             recipient=data["recipient"],
             amount=Coins.from_data(data["amount"]),
+        )
+
+    def to_proto(self) -> CommunityPoolSpendProposal_pb:
+        return CommunityPoolSpendProposal_pb(
+            title=self.title,
+            description=self.description,
+            recipient=self.recipient,
+            amount=self.amount.to_proto()
         )

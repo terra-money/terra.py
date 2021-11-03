@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import betterproto
 from typing import List
 
 import attr
@@ -9,6 +10,11 @@ import attr
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import JSONSerializable
+
+from terra_proto.cosmos.authz.v1beta1 import MsgExec as MsgExec_pb
+from terra_proto.cosmos.authz.v1beta1 import MsgGrant as MsgGrant_pb, Grant as Grant_pb
+from terra_proto.cosmos.authz.v1beta1 import MsgRevoke as MsgRevoke_pb
+
 
 from .data import Authorization
 
@@ -32,9 +38,14 @@ class MsgExecAuthorized(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
-        data = data["value"]
         return cls(
             grantee=data["grantee"], msgs=[Msg.from_data(md) for md in data["msgs"]]
+        )
+
+    def to_proto(self) -> MsgExec_pb:
+        return MsgExec_pb(
+            grantee=self.grantee,
+            msgs=[m.pack_any() for m in self.msgs]
         )
 
 
@@ -42,6 +53,12 @@ class MsgExecAuthorized(Msg):
 class Grant(JSONSerializable):
     authorization: Authorization = attr.ib()
     expiration: str = attr.ib()
+
+    def to_proto(self) -> Grant_pb:
+        return Grant_pb(
+            authorization=self.authorization.to_proto(),
+            expiration=betterproto.datetime.fromisoformat(self.expiration)
+        )
 
 
 @attr.s
@@ -55,6 +72,9 @@ class MsgGrantAuthorization(Msg):
     """
 
     type = "msgauth/MsgGrantAuthorization"
+    """"""
+    type_url = "/cosmos.authz.v1beta1.MsgGrant"
+    """"""
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
@@ -72,6 +92,12 @@ class MsgGrantAuthorization(Msg):
             ),
         )
 
+    def to_proto(self) -> MsgGrant_pb:
+        return MsgGrant_pb(
+            granter=self.granter,
+            grantee=self.grantee,
+            grant=self.grant.to_proto()
+        )
 
 @attr.s
 class MsgRevokeAuthorization(Msg):
@@ -92,9 +118,15 @@ class MsgRevokeAuthorization(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgRevokeAuthorization:
-        data = data["value"]
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
             msg_type_url=data["msg_type_url"],
+        )
+
+    def to_proto(self) -> MsgRevoke_pb:
+        return MsgRevoke_pb(
+            granter=self.granter,
+            grantee=self.grantee,
+            msg_type_url=self.msg_type_url
         )

@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import copy
+from abc import abstractmethod
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
+from betterproto import datetime
 
 from terra_sdk.core import Coins
 from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable, dict_to_data
+
+from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
+from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 
 __all__ = ["Proposal", "Content"]
 
@@ -31,6 +37,24 @@ class Content(BaseTerraData):
         from terra_sdk.util.parse_content import parse_content
         return parse_content(data)
 
+    def to_proto(self):
+        raise NotImplementedError()
+
+
+@attr.s
+class TallyResult(JSONSerializable):
+    yes: str = attr.ib()
+    abstain: str = attr.ib()
+    no:  str = attr.ib()
+    no_with_veto:  str = attr.ib()
+
+    def to_proto(self) -> TallyResult_pb:
+        return TallyResult_pb(
+            yes=self.yes,
+            abstain=self.abstain,
+            no=self.no,
+            no_with_veto=self.no_with_veto
+        )
 
 @attr.s
 class Proposal(JSONSerializable):
@@ -45,7 +69,7 @@ class Proposal(JSONSerializable):
     status: str = attr.ib()
     """Status of proposal."""
 
-    final_tally_result: dict = attr.ib()
+    final_tally_result: TallyResult = attr.ib()
     """Final tallied result of the proposal (after vote)."""
 
     submit_time: str = attr.ib()
@@ -80,4 +104,17 @@ class Proposal(JSONSerializable):
             total_deposit=Coins.from_data(data["total_deposit"]),
             voting_start_time=data["voting_start_time"],
             voting_end_time=data["voting_end_time"],
+        )
+
+    def to_proto(self) -> Proposal_pb:
+        return Proposal_pb(
+            proposal_id=self.proposal_id,
+            content=self.content.pack_any(),
+            status=self.status,
+            final_tally_result=self.final_tally_result.to_proto(),
+            submit_time=datetime.fromisoformat(self.submit_time),
+            deposit_end_time=datetime.fromisoformat(self.deposit_end_time),
+            total_deposit=self.total_deposit.to_proto(),
+            voting_start_time=datetime.fromisoformat(self.voting_start_time),
+            voting_end_time=datetime.fromisoformat(self.voting_end_time)
         )

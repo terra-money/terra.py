@@ -1,3 +1,3 @@
-from .proposals import ParameterChangeProposal
+from .proposals import ParameterChangeProposal, ParamChange
 
-__all__ = ["ParameterChangeProposal"]
+__all__ = ["ParameterChangeProposal", "ParamChange"]
