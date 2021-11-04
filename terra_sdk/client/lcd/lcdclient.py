@@ -32,15 +32,8 @@ from .api.ibc import AsyncIbcAPI, IbcAPI
 from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
 from .wallet import AsyncWallet, Wallet
-
 from .params import PaginationOptions, APIParams
 
-
-
-LCD_DEFAULTS = {
-    "gas_adjustment": 1.75,
-    "gas_prices": Coins('0.15uluna')
-}
 
 class AsyncLCDClient:
     def __init__(

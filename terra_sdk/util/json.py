@@ -21,10 +21,6 @@ def dict_to_data(d: dict) -> dict:
 
 class JSONSerializable(ABC):
 
-    @abstractmethod
-    def to_proto(self):
-        pass
-
     def to_data(self) -> Any:
         """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))
