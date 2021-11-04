@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import copy
 import json
 
@@ -46,7 +47,7 @@ class MsgStoreCode(Msg):
     """"""
 
     sender: AccAddress = attr.ib()
-    wasm_byte_code: str = attr.ib(converter=str)
+    wasm_byte_code: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
@@ -55,7 +56,7 @@ class MsgStoreCode(Msg):
     def to_proto(self) -> MsgStoreCode_pb:
         return MsgStoreCode_pb(
             sender=self.sender,
-            wasm_byte_code=self.wasm_byte_code
+            wasm_byte_code=base64.b64decode(self.wasm_byte_code)
         )
 
 
