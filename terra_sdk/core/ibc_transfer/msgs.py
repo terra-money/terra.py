@@ -42,6 +42,18 @@ class MsgTransfer(Msg):
     timeout_height: Height = attr.ib()
     timeout_timestamp: int = attr.ib(converter=int)
 
+    @classmethod
+    def from_data(cls, data: dict) -> MsgTransfer:
+        return cls(
+            source_port=data["source_port"],
+            source_channel=data["source_channel"],
+            token=Coin.from_data(data["token"]),
+            sender=data["sender"],
+            receiver=data["receiver"],
+            timeout_height=Height.from_data(data["timeout_height"]),
+            timeout_timestamp=data["timeout_timestamp"]
+        )
+
     def to_proto(self) -> MsgTransfer_pb:
         return MsgTransfer_pb(
             source_port=self.source_port,

@@ -104,7 +104,7 @@ class Allowance(Union[BasicAllowance, PeriodicAllowance]):
 
     @classmethod
     def from_data(cls, data: dict):
-        if data.get("@type") == BasicAllowance.type_url :
+        if data.get("@type") == BasicAllowance.type_url:
             return BasicAllowance.from_data(data)
         else:
             return PeriodicAllowance.from_data(data)

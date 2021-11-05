@@ -15,6 +15,13 @@ class Height(JSONSerializable):
     revision_number: int = attr.ib(converter=int)
     revision_height: int = attr.ib(converter=int)
 
+    @classmethod
+    def from_data(cls, data: dict) -> Height:
+        return cls(
+            revision_number=data["revision_number"],
+            revision_height=data["revision_height"]
+        )
+
     def to_proto(self) -> Height_pb:
         return Height_pb(
             revision_number=self.revision_number,

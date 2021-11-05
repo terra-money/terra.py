@@ -174,7 +174,7 @@ class Validator(JSONSerializable):
             unbonding_height=data.get("unbonding_height") or 0,
             unbonding_time=data["unbonding_time"],
             commission=Commission.from_data(data["commission"]),
-            min_self_delegation=data["min_self_delegation"],
+            min_self_delegation=data["min_self_delegation"]
         )
 
     def to_proto(self) -> Validator_pb:

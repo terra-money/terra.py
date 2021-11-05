@@ -48,6 +48,15 @@ class TallyResult(JSONSerializable):
     no:  str = attr.ib()
     no_with_veto:  str = attr.ib()
 
+    @classmethod
+    def from_data(cls, data: dict) -> TallyResult:
+        return cls(
+            yes=data["yes"],
+            abstain=data["abstain"],
+            no=data["no"],
+            no_with_veto=data["no_with_veto"]
+        )
+
     def to_proto(self) -> TallyResult_pb:
         return TallyResult_pb(
             yes=self.yes,

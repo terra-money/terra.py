@@ -20,6 +20,14 @@ class ParamChange(JSONSerializable):
     key: str = attr.ib()
     value: str = attr.ib()
 
+    @classmethod
+    def from_data(cls, data: dict) -> ParamChange:
+        return cls(
+            subspace=data["subspace"],
+            key=data["key"],
+            value=data["value"]
+        )
+
     def to_proto(self) -> ParamChange_pb:
         return ParamChange_pb(
             subspace=self.subspace,
@@ -51,7 +59,7 @@ class ParameterChangeProposal(Content):
         return cls(
             title=data["title"],
             description=data["description"],
-            changes=data["changes"],
+            changes=[ParamChange.from_data(change) for change in data["changes"]],
         )
 
     def to_proto(self) -> ParameterChangeProposal_pb:

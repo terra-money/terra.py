@@ -193,7 +193,6 @@ class MsgMultiSend(Msg):
     inputs: List[MultiSendInput] = attr.ib(converter=convert_input_list)
     outputs: List[MultiSendOutput] = attr.ib(converter=convert_output_list)
 
-
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
