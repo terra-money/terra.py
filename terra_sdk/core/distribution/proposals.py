@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import attr
+from terra_sdk.util.json import JSONSerializable
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.core.gov import Content
 
 from terra_proto.cosmos.distribution.v1beta1 import CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb
 
@@ -13,7 +13,7 @@ __all__ = ["CommunityPoolSpendProposal"]
 
 
 @attr.s
-class CommunityPoolSpendProposal(Content):
+class CommunityPoolSpendProposal(JSONSerializable):
     """Proposal for allocating funds from the community pool to an address.
 
     Args:

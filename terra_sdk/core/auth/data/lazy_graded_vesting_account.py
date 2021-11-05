@@ -48,6 +48,8 @@ class LazyGradedVestingAccount(BaseAccount):
     vesting_schedules: List[dict] = attr.ib()
     """"""
 
+    type_url = "/terra.vesting.v1beta1.LazyGradedVestingAccount"
+
     def get_sequence(self) -> int:
         return self.sequence
 
@@ -56,7 +58,7 @@ class LazyGradedVestingAccount(BaseAccount):
 
     def to_data(self) -> dict:
         return {
-            "type": "core/LazyGradedVestingAccount",
+            "@type": self.type_url,
             "address": self.address,
             "public_key": self.public_key and self.public_key.to_data(),
             "account_number": str(self.account_number),

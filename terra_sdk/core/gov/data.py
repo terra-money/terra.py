@@ -4,12 +4,19 @@ from __future__ import annotations
 
 import copy
 from abc import abstractmethod
+from types import Union
 
 import attr
 from betterproto.lib.google.protobuf import Any as Any_pb
 from betterproto import datetime
+from terra_sdk.core.params import ParameterChangeProposal
+
+from terra_sdk.core.distribution import CommunityPoolSpendProposal
+
+from terra_sdk.core.gov import TextProposal
 
 from terra_sdk.core import Coins
+from terra_sdk.core.upgrade import SoftwareUpgradeProposal, CancelSoftwareUpgradeProposal
 from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 
@@ -19,27 +26,8 @@ from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 __all__ = ["Proposal", "Content"]
 
 
-@attr.s
-class Content(BaseTerraData):
-    """Abstract proposal content type.
-
-    .. note::
-        This object is abstract, and not meant to be instantiated directly.
-    """
-
-    title: str = attr.ib()
-    """"""
-    description: str = attr.ib()
-    """"""
-
-    @staticmethod
-    def from_data(data: dict) -> Content:
-        from terra_sdk.util.parse_content import parse_content
-        return parse_content(data)
-
-    def to_proto(self):
-        raise NotImplementedError()
-
+Content = Union[TextProposal, CommunityPoolSpendProposal, ParameterChangeProposal,
+                SoftwareUpgradeProposal, CancelSoftwareUpgradeProposal]
 
 @attr.s
 class TallyResult(JSONSerializable):

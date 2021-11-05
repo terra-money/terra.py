@@ -7,8 +7,6 @@ from typing import List
 import attr
 from terra_sdk.util.json import JSONSerializable
 
-from terra_sdk.core.gov import Content
-
 from terra_proto.cosmos.params.v1beta1 import ParameterChangeProposal as ParameterChangeProposal_pb
 from terra_proto.cosmos.params.v1beta1 import ParamChange as ParamChange_pb
 
@@ -37,7 +35,7 @@ class ParamChange(JSONSerializable):
 
 
 @attr.s
-class ParameterChangeProposal(Content):
+class ParameterChangeProposal(JSONSerializable):
     """Proposal to alter the blockchain parameters. Changes would be effective
     as soon as the proposal is passed.
 
@@ -50,8 +48,8 @@ class ParameterChangeProposal(Content):
     type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""
 
-    #title: str = attr.ib()
-    #description: str = attr.ib()
+    title: str = attr.ib()
+    description: str = attr.ib()
     changes: List[ParamChange] = attr.ib()
 
     @classmethod

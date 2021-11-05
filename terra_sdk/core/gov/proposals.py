@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_sdk.util.json import JSONSerializable
 
 from .data import Content
 
@@ -11,7 +12,7 @@ from terra_proto.cosmos.gov.v1beta1 import TextProposal as TextProposal_pb
 __all__ = ["TextProposal"]
 
 
-class TextProposal(Content):
+class TextProposal(JSONSerializable):
     """Generic proposal type with only title and description that does nothing if
     passed. Primarily used for assessing the community sentiment around the proposal.
 

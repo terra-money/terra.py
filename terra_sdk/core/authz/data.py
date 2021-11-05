@@ -72,6 +72,7 @@ class GenericAuthorization(Authorization):
 
     type = "msgauth/GenericAuthorization"
     """"""
+    type_url = "/cosmos.authz.v1beta1.GenericAuthorization"
 
     msg: str = attr.ib()
 
