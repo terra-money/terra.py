@@ -1,4 +1,4 @@
-from .data import BasicAllowance, PeriodicAllowance, AllowedMsgAllowance
+from .data import AllowedMsgAllowance, BasicAllowance, PeriodicAllowance
 from .msgs import MsgGrantAllowance, MsgRevokeAllowance
 
 __all__ = [
@@ -6,5 +6,5 @@ __all__ = [
     "PeriodicAllowance",
     "AllowedMsgAllowance",
     "MsgGrantAllowance",
-    "MsgRevokeAllowance"
+    "MsgRevokeAllowance",
 ]

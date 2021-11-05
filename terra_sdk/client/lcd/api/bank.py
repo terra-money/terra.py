@@ -1,15 +1,17 @@
 from typing import Optional
 
 from terra_sdk.core import AccAddress, Coins
-from ..params import APIParams
 
+from ..params import APIParams
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncBankAPI", "BankAPI"]
 
 
 class AsyncBankAPI(BaseAsyncAPI):
-    async def balance(self, address: AccAddress, params: Optional[APIParams] = None) -> (Coins, dict):
+    async def balance(
+        self, address: AccAddress, params: Optional[APIParams] = None
+    ) -> (Coins, dict):
         """Fetches an account's current balance.
 
         Args:
@@ -43,4 +45,3 @@ class BankAPI(AsyncBankAPI):
         pass
 
     total.__doc__ = AsyncBankAPI.total.__doc__
-

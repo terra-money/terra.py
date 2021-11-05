@@ -5,14 +5,15 @@ from __future__ import annotations
 from typing import List, Optional
 
 import attr
+from terra_proto.terra.vesting.v1beta1 import (
+    LazyGradedVestingAccount as LazyGradedVestingAccount_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.util.json import JSONSerializable
 
 from ...public_key import PublicKey
 from .base_account import BaseAccount
-
-from terra_proto.terra.vesting.v1beta1 import LazyGradedVestingAccount as LazyGradedVestingAccount_pb
 
 __all__ = ["LazyGradedVestingAccount"]
 
@@ -67,7 +68,7 @@ class LazyGradedVestingAccount(BaseAccount):
             "delegated_free": self.delegated_free.to_data(),
             "delegated_vesting": self.delegated_vesting.to_data(),
             "end_time": str(self.end_time),
-            "vesting_schedules": self.vesting_schedules
+            "vesting_schedules": self.vesting_schedules,
         }
 
     @classmethod
@@ -81,12 +82,11 @@ class LazyGradedVestingAccount(BaseAccount):
             delegated_free=Coins.from_data(data["delegated_free"]),
             delegated_vesting=Coins.from_data(data["delegated_vesting"]),
             end_time=data["end_time"],
-            vesting_schedules=data["vesting_schedules"]
+            vesting_schedules=data["vesting_schedules"],
         )
 
     def to_proto(self) -> LazyGradedVestingAccount_pb:
         proto = LazyGradedVestingAccount_pb()
         proto.base_vesting_account = self.base_vesting_account.to_proto()
-        proto.vesting_schedules = [vs.to_proto()
-                                   for vs in self.vesting_schedules]
+        proto.vesting_schedules = [vs.to_proto() for vs in self.vesting_schedules]
         return proto

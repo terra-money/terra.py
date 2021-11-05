@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.slashing.v1beta1 import MsgUnjail as MsgUnjail_pb
 
 from terra_sdk.core import ValAddress
 from terra_sdk.core.msg import Msg
-
-from terra_proto.cosmos.slashing.v1beta1 import MsgUnjail as MsgUnjail_pb
 
 __all__ = ["MsgUnjail"]
 
@@ -33,6 +32,4 @@ class MsgUnjail(Msg):
         return cls(address=data["address"])
 
     def to_proto(self) -> MsgUnjail_pb:
-        return MsgUnjail_pb(
-            validator_addr=self.address
-        )
+        return MsgUnjail_pb(validator_addr=self.address)

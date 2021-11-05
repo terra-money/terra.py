@@ -2,9 +2,10 @@
 from abc import abstractmethod
 from typing import Any, Callable, Dict, List
 
+from betterproto import Message
+
 from .json import JSONSerializable, dict_to_data
 
-from betterproto import Message
 
 class BaseTerraData(JSONSerializable, Message):
 
@@ -16,7 +17,6 @@ class BaseTerraData(JSONSerializable, Message):
     @abstractmethod
     def to_proto(self):
         pass
-
 
 
 def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:

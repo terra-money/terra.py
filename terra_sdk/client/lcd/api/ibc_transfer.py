@@ -6,7 +6,6 @@ __all__ = ["AsyncIbcTransferAPI", "IbcTransferAPI"]
 
 
 class AsyncIbcTransferAPI(BaseAsyncAPI):
-
     async def parameters(self) -> dict:
         """Fetches the IbcTransfer module's parameters.
 
@@ -17,12 +16,11 @@ class AsyncIbcTransferAPI(BaseAsyncAPI):
         params = res["params"]
         return {
             "send_enabled": bool(params["send_enabled"]),
-            "receive_enabled": bool(params["receive_enabled"])
+            "receive_enabled": bool(params["receive_enabled"]),
         }
 
 
 class IbcTransferAPI(AsyncIbcTransferAPI):
-
     @sync_bind(AsyncIbcTransferAPI.parameters)
     def parameters(self) -> dict:
         pass

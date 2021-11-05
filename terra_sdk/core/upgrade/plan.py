@@ -4,15 +4,15 @@ from __future__ import annotations
 
 __all__ = ["Plan"]
 
-from typing import Optional, Any
+from typing import Any, Optional
 
 import attr
+from betterproto import datetime
+from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
+
 from terra_sdk.util.json import JSONSerializable
 
-from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
-from betterproto.lib.google.protobuf import Any as Any_pb
-
-from betterproto import datetime
 
 @attr.s
 class Plan(JSONSerializable):
@@ -29,7 +29,9 @@ class Plan(JSONSerializable):
             time=data["time"] if data.get("time") else None,
             height=data["height"],
             info=data["info"],
-            upgrade_client_state=data["upgrade_client_state"] if data.get("upgrade_client_state") else None
+            upgrade_client_state=data["upgrade_client_state"]
+            if data.get("upgrade_client_state")
+            else None,
         )
 
     def to_proto(self) -> Plan_pb:
@@ -41,5 +43,5 @@ class Plan(JSONSerializable):
             time=self.time,
             height=self.height,
             info=self.info,
-            upgraded_client_state=ucs if ucs else None
+            upgraded_client_state=ucs if ucs else None,
         )

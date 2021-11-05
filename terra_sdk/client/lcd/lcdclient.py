@@ -15,12 +15,14 @@ from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.url import urljoin
 
 from .api.auth import AsyncAuthAPI, AuthAPI
+from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.bank import AsyncBankAPI, BankAPI
 from .api.distribution import AsyncDistributionAPI, DistributionAPI
 from .api.gov import AsyncGovAPI, GovAPI
+from .api.ibc import AsyncIbcAPI, IbcAPI
+from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .api.market import AsyncMarketAPI, MarketAPI
 from .api.mint import AsyncMintAPI, MintAPI
-from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.oracle import AsyncOracleAPI, OracleAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
@@ -28,22 +30,20 @@ from .api.tendermint import AsyncTendermintAPI, TendermintAPI
 from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
-from .api.ibc import AsyncIbcAPI, IbcAPI
-from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
+from .params import APIParams, PaginationOptions
 from .wallet import AsyncWallet, Wallet
-from .params import PaginationOptions, APIParams
 
 
 class AsyncLCDClient:
     def __init__(
-            self,
-            url: str,
-            chain_id: Optional[str] = None,
-            gas_prices: Optional[Coins.Input] = None,
-            gas_adjustment: Optional[Numeric.Input] = None,
-            loop: Optional[AbstractEventLoop] = None,
-            _create_session: bool = True,  # don't create a session (used for sync LCDClient)
+        self,
+        url: str,
+        chain_id: Optional[str] = None,
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
+        loop: Optional[AbstractEventLoop] = None,
+        _create_session: bool = True,  # don't create a session (used for sync LCDClient)
     ):
         if loop is None:
             loop = get_event_loop()
@@ -86,13 +86,15 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-            self, endpoint: str, params: Optional[Union[APIParams, list, dict]] = None # , raw: bool = False
+        self,
+        endpoint: str,
+        params: Optional[Union[APIParams, list, dict]] = None,  # , raw: bool = False
     ):
         if params and (type(params) is not dict and type(params) is not list):
             params = params.to_dict()
 
         async with self.session.get(
-                urljoin(self.url, endpoint), params=params
+            urljoin(self.url, endpoint), params=params
         ) as response:
             try:
                 result = await response.json(content_type=None)
@@ -104,10 +106,10 @@ class AsyncLCDClient:
         return result  # if raw else result["result"]
 
     async def _post(
-            self, endpoint: str, data: Optional[dict] = None  #, raw: bool = False
+        self, endpoint: str, data: Optional[dict] = None  # , raw: bool = False
     ):
         async with self.session.post(
-                urljoin(self.url, endpoint), json=data and dict_to_data(data)
+            urljoin(self.url, endpoint), json=data and dict_to_data(data)
         ) as response:
             try:
                 result = await response.json(content_type=None)
@@ -116,7 +118,7 @@ class AsyncLCDClient:
             if not 200 <= response.status < 299:
                 raise LCDResponseError(message=result.get("error"), response=response)
         self.last_request_height = result.get("height")
-        return result # if raw else result["result"]
+        return result  # if raw else result["result"]
 
     async def _search(self, params: list = []) -> dict:
         """Searches for transactions given critera.
@@ -204,11 +206,11 @@ class LCDClient(AsyncLCDClient):
     """:class:`IbcTransferAPI<terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI>`."""
 
     def __init__(
-            self,
-            url: str,
-            chain_id: str = None,
-            gas_prices: Optional[Coins.Input] = None,
-            gas_adjustment: Optional[Numeric.Input] = None,
+        self,
+        url: str,
+        chain_id: str = None,
+        gas_prices: Optional[Coins.Input] = None,
+        gas_adjustment: Optional[Numeric.Input] = None,
     ):
         super().__init__(
             url,
@@ -291,4 +293,3 @@ class LCDClient(AsyncLCDClient):
         finally:
             await self.session.close()
         return result
-

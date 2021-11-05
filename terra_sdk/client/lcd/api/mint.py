@@ -38,7 +38,7 @@ class AsyncMintAPI(BaseAsyncAPI):
             "inflation_max": Dec(params["inflation_max"]),
             "inflation_min": Dec(params["inflation_min"]),
             "goal_bonded": Dec(params["goal_bonded"]),
-            "blocks_per_year": Numeric.parse(params["blocks_per_year"])
+            "blocks_per_year": Numeric.parse(params["blocks_per_year"]),
         }
 
 

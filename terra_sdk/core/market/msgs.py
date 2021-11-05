@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.terra.market.v1beta1 import MsgSwap as MsgSwap_pb
+from terra_proto.terra.market.v1beta1 import MsgSwapSend as MsgSwapSend_pb
 
 from terra_sdk.core import AccAddress, Coin
 from terra_sdk.core.msg import Msg
-
-from terra_proto.terra.market.v1beta1 import MsgSwap as MsgSwap_pb, MsgSwapSend as MsgSwapSend_pb
 
 __all__ = ["MsgSwap", "MsgSwapSend"]
 
@@ -45,9 +45,8 @@ class MsgSwap(Msg):
         return MsgSwap_pb(
             trader=self.trader,
             offer_coin=self.offer_coin.to_proto(),
-            ask_denom=self.ask_denom
+            ask_denom=self.ask_denom,
         )
-
 
 
 @attr.s
@@ -87,5 +86,5 @@ class MsgSwapSend(Msg):
             from_address=self.from_address,
             to_address=self.to_address,
             offer_coin=self.offer_coin.to_proto(),
-            ask_denom=self.ask_denom
-            )
+            ask_denom=self.ask_denom,
+        )

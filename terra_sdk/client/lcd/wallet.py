@@ -5,11 +5,12 @@ from typing import List, Optional, Union
 from terra_sdk.core import Coins, Numeric
 from terra_sdk.core.msg import Msg
 from terra_sdk.key.key import Key, SignOptions
+
 from .api.tx import CreateTxOptions, SignerOptions
 
 __all__ = ["Wallet", "AsyncWallet"]
 
-from ...core.tx import Tx, SignMode
+from ...core.tx import SignMode, Tx
 
 
 class AsyncWallet:
@@ -61,10 +62,7 @@ class Wallet:
         res = self.lcd.auth.account_info(self.key.acc_address)
         return {"account_number": res.account_number, "sequence": res.sequence}
 
-    def create_tx(
-        self,
-        options: CreateTxOptions
-    ) -> Tx:
+    def create_tx(self, options: CreateTxOptions) -> Tx:
         """Builds an unsigned transaction object. The ``Wallet`` will first
         query the blockchain to fetch the latest ``account`` and ``sequence`` values for the
         account corresponding to its Key, unless the they are both provided. If no ``fee``
@@ -85,17 +83,16 @@ class Wallet:
         Returns:
             Tx: unsigned transaction
         """
-        sigOpt = [SignerOptions(
-            address=self.key.acc_address,
-            sequence=options.sequence,
-            public_key=self.key.public_key
-        )]
+        sigOpt = [
+            SignerOptions(
+                address=self.key.acc_address,
+                sequence=options.sequence,
+                public_key=self.key.public_key,
+            )
+        ]
         return self.lcd.tx.create(sigOpt, options)
 
-    def create_and_sign_tx(
-        self,
-        options: CreateTxOptions
-    ) -> Tx:
+    def create_and_sign_tx(self, options: CreateTxOptions) -> Tx:
         """Creates and signs a :class:`Tx` object in a single step. This is the recommended
         method for preparing transaction for immediate signing and broadcastring. The transaction
         is generated exactly as :meth:`create_tx`.
@@ -127,12 +124,13 @@ class Wallet:
         options.sequence = sequence
         options.account_number = account_number
         return self.key.sign_tx(
-            tx=self.create_tx(
-              options
-            ),
+            tx=self.create_tx(options),
             options=SignOptions(
                 account_number=account_number,
                 sequence=sequence,
                 chain_id=self.lcd.chain_id,
-                sign_mode=options.sign_mode if options.sign_mode else SignMode.SIGN_MODE_DIRECT)
+                sign_mode=options.sign_mode
+                if options.sign_mode
+                else SignMode.SIGN_MODE_DIRECT,
+            ),
         )

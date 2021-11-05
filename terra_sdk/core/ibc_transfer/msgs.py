@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import attr
-
-from terra_sdk.core import AccAddress, Coin
-from terra_sdk.core.msg import Msg
-from terra_sdk.core.ibc.data import Height
-
 from terra_proto.ibc.applications.transfer.v1 import MsgTransfer as MsgTransfer_pb
 
+from terra_sdk.core import AccAddress, Coin
+from terra_sdk.core.ibc.data import Height
+from terra_sdk.core.msg import Msg
+
 __all__ = ["MsgTransfer"]
+
 
 @attr.s
 class MsgTransfer(Msg):
@@ -51,7 +51,7 @@ class MsgTransfer(Msg):
             sender=data["sender"],
             receiver=data["receiver"],
             timeout_height=Height.from_data(data["timeout_height"]),
-            timeout_timestamp=data["timeout_timestamp"]
+            timeout_timestamp=data["timeout_timestamp"],
         )
 
     def to_proto(self) -> MsgTransfer_pb:
@@ -62,6 +62,5 @@ class MsgTransfer(Msg):
             sender=self.sender,
             receiver=self.receiver,
             timeout_height=self.timeout_height.to_proto(),
-            timeout_timestamp=self.timeout_timestamp
+            timeout_timestamp=self.timeout_timestamp,
         )
-

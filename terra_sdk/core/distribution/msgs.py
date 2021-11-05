@@ -3,14 +3,21 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgFundCommunityPool as MsgFundCommunityPool_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgSetWithdrawAddress as MsgSetWithdrawAddress_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgWithdrawDelegatorReward as MsgWithdrawDelegatorReward_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgWithdrawValidatorCommission as MsgWithdrawValidatorCommission_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins, ValAddress
 from terra_sdk.core.msg import Msg
-
-from terra_proto.cosmos.distribution.v1beta1 import MsgSetWithdrawAddress as MsgSetWithdrawAddress_pb
-from terra_proto.cosmos.distribution.v1beta1 import MsgWithdrawDelegatorReward as MsgWithdrawDelegatorReward_pb
-from terra_proto.cosmos.distribution.v1beta1 import MsgWithdrawValidatorCommission as MsgWithdrawValidatorCommission_pb
-from terra_proto.cosmos.distribution.v1beta1 import MsgFundCommunityPool as MsgFundCommunityPool_pb
 
 __all__ = [
     "MsgSetWithdrawAddress",
@@ -49,7 +56,7 @@ class MsgSetWithdrawAddress(Msg):
     def to_proto(self) -> MsgSetWithdrawAddress_pb:
         return MsgSetWithdrawAddress_pb(
             delegator_address=self.delegator_address,
-            withdraw_address=self.withdraw_address
+            withdraw_address=self.withdraw_address,
         )
 
 
@@ -82,7 +89,7 @@ class MsgWithdrawDelegationReward(Msg):
     def to_proto(self) -> MsgWithdrawDelegatorReward_pb:
         return MsgWithdrawDelegatorReward_pb(
             delegator_address=self.delegator_address,
-            validator_address=self.validator_address
+            validator_address=self.validator_address,
         )
 
 
@@ -136,6 +143,5 @@ class MsgFundCommunityPool(Msg):
 
     def to_proto(self) -> MsgFundCommunityPool_pb:
         return MsgFundCommunityPool_pb(
-            depositor=self.depositor,
-            amount=self.amount.to_proto()
+            depositor=self.depositor, amount=self.amount.to_proto()
         )

@@ -5,17 +5,20 @@ from __future__ import annotations
 from typing import Optional
 
 import attr
+from terra_proto.cosmos.staking.v1beta1 import (
+    MsgBeginRedelegate as MsgBeginRedelegate_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import (
+    MsgCreateValidator as MsgCreateValidator_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import MsgDelegate as MsgDelegate_pb
+from terra_proto.cosmos.staking.v1beta1 import MsgEditValidator as MsgEditValidator_pb
+from terra_proto.cosmos.staking.v1beta1 import MsgUndelegate as MsgUndelegate_pb
 
 from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey
 from terra_sdk.core.msg import Msg
 
 from .data import CommissionRates, Description
-
-from terra_proto.cosmos.staking.v1beta1 import MsgBeginRedelegate as MsgBeginRedelegate_pb
-from terra_proto.cosmos.staking.v1beta1 import MsgDelegate as MsgDelegate_pb
-from terra_proto.cosmos.staking.v1beta1 import MsgUndelegate as MsgUndelegate_pb
-from terra_proto.cosmos.staking.v1beta1 import MsgEditValidator as MsgEditValidator_pb
-from terra_proto.cosmos.staking.v1beta1 import MsgCreateValidator as MsgCreateValidator_pb
 
 __all__ = [
     "MsgBeginRedelegate",
@@ -63,7 +66,7 @@ class MsgBeginRedelegate(Msg):
             delegator_address=self.delegator_address,
             validator_src_address=self.validator_src_address,
             validator_dst_address=self.validator_dst_address,
-            amount=self.amount.to_proto()
+            amount=self.amount.to_proto(),
         )
 
 
@@ -100,9 +103,8 @@ class MsgDelegate(Msg):
         return MsgDelegate_pb(
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
-            amount=self.amount.to_proto()
+            amount=self.amount.to_proto(),
         )
-
 
 
 @attr.s
@@ -138,7 +140,7 @@ class MsgUndelegate(Msg):
         return MsgUndelegate_pb(
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
-            amount=self.amount.to_proto()
+            amount=self.amount.to_proto(),
         )
 
 
@@ -181,7 +183,9 @@ class MsgEditValidator(Msg):
             description=self.description.to_proto(),
             validator_address=self.validator_address,
             commission_rate=str(self.commission_rate) if self.commission_rate else None,
-            min_self_delegation=str(self.min_self_delegation) if self.min_self_delegation else None
+            min_self_delegation=str(self.min_self_delegation)
+            if self.min_self_delegation
+            else None,
         )
 
 
@@ -234,5 +238,5 @@ class MsgCreateValidator(Msg):
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
             pubkey=self.pubkey.to_proto(),
-            value=self.value.to_proto()
+            value=self.value.to_proto(),
         )

@@ -3,17 +3,23 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.gov.v1beta1 import MsgDeposit as MsgDeposit_pb
+from terra_proto.cosmos.gov.v1beta1 import MsgSubmitProposal as MsgSubmitProposal_pb
+from terra_proto.cosmos.gov.v1beta1 import MsgVote as MsgVote_pb
+from terra_proto.cosmos.gov.v1beta1 import VoteOption, WeightedVoteOption
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
-from terra_proto.cosmos.gov.v1beta1 import VoteOption, WeightedVoteOption
-from terra_proto.cosmos.gov.v1beta1 import MsgSubmitProposal as MsgSubmitProposal_pb
-from terra_proto.cosmos.gov.v1beta1 import MsgDeposit as MsgDeposit_pb
-from terra_proto.cosmos.gov.v1beta1 import MsgVote as MsgVote_pb
 
 from .data import Content
 
-__all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote", "VoteOption", "WeightedVoteOption"]
+__all__ = [
+    "MsgSubmitProposal",
+    "MsgDeposit",
+    "MsgVote",
+    "VoteOption",
+    "WeightedVoteOption",
+]
 
 
 @attr.s
@@ -52,7 +58,7 @@ class MsgSubmitProposal(Msg):
         return MsgSubmitProposal_pb(
             content=self.content.to_proto(),
             initial_deposit=self.initial_deposit.to_proto(),
-            proposer=self.proposer
+            proposer=self.proposer,
         )
 
 
@@ -99,7 +105,7 @@ class MsgDeposit(Msg):
         return MsgDeposit_pb(
             proposal_id=self.proposal_id,
             depositor=self.depositor,
-            amount=self.amount.to_proto()
+            amount=self.amount.to_proto(),
         )
 
 
@@ -173,7 +179,5 @@ class MsgVote(Msg):
 
     def to_proto(self) -> MsgVote_pb:
         return MsgVote_pb(
-            proposal_id=self.proposal_id,
-            voter=self.voter,
-            options=self.option
+            proposal_id=self.proposal_id, voter=self.voter, options=self.option
         )

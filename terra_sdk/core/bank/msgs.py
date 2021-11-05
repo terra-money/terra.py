@@ -2,21 +2,22 @@
 
 from __future__ import annotations
 
-from typing import List, Any
+from typing import Any, List
+
+from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.cosmos.bank.v1beta1 import Input as Input_pb
+from terra_proto.cosmos.bank.v1beta1 import MsgMultiSend as MsgMultiSend_pb
+from terra_proto.cosmos.bank.v1beta1 import MsgSend as MsgSend_pb
+from terra_proto.cosmos.bank.v1beta1 import Output as Output_pb
 
 from terra_sdk.core import AccAddress, Coin, Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import JSONSerializable
 
-from terra_proto.cosmos.bank.v1beta1 import MsgSend as MsgSend_pb
-from terra_proto.cosmos.bank.v1beta1 import MsgMultiSend as MsgMultiSend_pb
-from terra_proto.cosmos.bank.v1beta1 import Input as Input_pb
-from terra_proto.cosmos.bank.v1beta1 import Output as Output_pb
-from betterproto.lib.google.protobuf import Any as Any_pb
-
 __all__ = ["MsgSend", "MsgMultiSend", "MultiSendInput", "MultiSendOutput"]
 
 import attr
+
 
 @attr.s
 class MsgSend(Msg):
@@ -51,9 +52,9 @@ class MsgSend(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "from_address":self.from_address,
-            "to_address":self.to_address,
-            "amount":self.amount.to_data()
+            "from_address": self.from_address,
+            "to_address": self.to_address,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -61,7 +62,7 @@ class MsgSend(Msg):
         return cls(
             from_address=proto["from_address"],
             to_address=proto["to_address"],
-            amount=Coins.from_proto(proto["amount"])
+            amount=Coins.from_proto(proto["amount"]),
         )
 
     def to_proto(self) -> MsgSend_pb:
@@ -217,5 +218,5 @@ class MsgMultiSend(Msg):
     def to_proto(self) -> MsgMultiSend_pb:
         return MsgMultiSend_pb(
             inputs=[i.to_proto() for i in self.inputs],
-            outputs=[o.to_proto() for o in self.outputs]
+            outputs=[o.to_proto() for o in self.outputs],
         )

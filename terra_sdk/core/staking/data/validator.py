@@ -3,25 +3,17 @@ from __future__ import annotations
 import copy
 
 import attr
+from betterproto import datetime
+from terra_proto.cosmos.staking.v1beta1 import BondStatus
+from terra_proto.cosmos.staking.v1beta1 import Commission as Commission_pb
+from terra_proto.cosmos.staking.v1beta1 import CommissionRates as CommissionRates_pb
+from terra_proto.cosmos.staking.v1beta1 import Description as Description_pb
+from terra_proto.cosmos.staking.v1beta1 import Validator as Validator_pb
 
 from terra_sdk.core import Dec, ValAddress, ValConsPubKey
 from terra_sdk.util.json import JSONSerializable, dict_to_data
 
-from terra_proto.cosmos.staking.v1beta1 import CommissionRates as CommissionRates_pb
-from terra_proto.cosmos.staking.v1beta1 import Commission as Commission_pb
-from terra_proto.cosmos.staking.v1beta1 import Description as Description_pb
-from terra_proto.cosmos.staking.v1beta1 import Validator as Validator_pb
-from terra_proto.cosmos.staking.v1beta1 import BondStatus
-
-from betterproto import datetime
-
-__all__ = [
-    "CommissionRates",
-    "Commission",
-    "Description",
-    "Validator",
-    "BondStatus"
-]
+__all__ = ["CommissionRates", "Commission", "Description", "Validator", "BondStatus"]
 
 
 @attr.s
@@ -49,7 +41,7 @@ class CommissionRates(JSONSerializable):
         return CommissionRates_pb(
             rate=str(self.rate),
             max_rate=str(self.max_rate),
-            max_change_rate=str(self.max_change_rate)
+            max_change_rate=str(self.max_change_rate),
         )
 
 
@@ -73,8 +65,9 @@ class Commission(JSONSerializable):
     def to_proto(self) -> Commission_pb:
         return Commission_pb(
             commission_rates=self.commission_rates.to_proto(),
-            update_time=datetime.fromisoformat(self.update_time)
+            update_time=datetime.fromisoformat(self.update_time),
         )
+
 
 @attr.s
 class Description(JSONSerializable):
@@ -113,7 +106,7 @@ class Description(JSONSerializable):
             identity=self.identity,
             website=self.website,
             details=self.details,
-            security_contact=self.security_contact
+            security_contact=self.security_contact,
         )
 
 
@@ -174,7 +167,7 @@ class Validator(JSONSerializable):
             unbonding_height=data.get("unbonding_height") or 0,
             unbonding_time=data["unbonding_time"],
             commission=Commission.from_data(data["commission"]),
-            min_self_delegation=data["min_self_delegation"]
+            min_self_delegation=data["min_self_delegation"],
         )
 
     def to_proto(self) -> Validator_pb:
@@ -189,5 +182,5 @@ class Validator(JSONSerializable):
             unbonding_height=self.unbonding_height,
             unbonding_time=datetime.fromisoformat(self.unbonding_time),
             commission=self.commission.to_proto(),
-            min_self_delegation=str(self.min_self_delegation)
+            min_self_delegation=str(self.min_self_delegation),
         )

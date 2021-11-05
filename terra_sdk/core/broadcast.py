@@ -45,7 +45,6 @@ class BlockTxBroadcastResult(JSONSerializable):
     timestamp: Optional[str] = attr.ib(default=None)
     """timestamp"""
 
-
     def is_tx_error(self) -> bool:
         """Returns whether the transaction failed."""
         return is_tx_error(self)

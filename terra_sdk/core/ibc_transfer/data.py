@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import attr
-
 from terra_proto.ibc.applications.transfer.v1 import DenomTrace as DenomTrace_pb
 
 from terra_sdk.util.json import JSONSerializable
@@ -17,13 +16,7 @@ class DenomTrace(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> DenomTrace:
-        return cls(
-            path=data["path"],
-            base_denom=data["base_denom"]
-        )
+        return cls(path=data["path"], base_denom=data["base_denom"])
 
     def to_proto(self) -> DenomTrace_pb:
-        return DenomTrace_pb(
-            path=self.path,
-            base_denom=self.base_denom
-        )
+        return DenomTrace_pb(path=self.path, base_denom=self.base_denom)

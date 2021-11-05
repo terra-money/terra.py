@@ -28,7 +28,9 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             Rewards: delegator rewards
         """
-        res = await self._c._get(f"/cosmos/distribution/v1beta1/delegators/{delegator}/rewards")
+        res = await self._c._get(
+            f"/cosmos/distribution/v1beta1/delegators/{delegator}/rewards"
+        )
         return Rewards(
             rewards={
                 item["validator_address"]: Coins.from_data(item["reward"] or [])
@@ -46,7 +48,9 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             ValidatorCommission: validator rewards
         """
-        res = await self._c._get(f"/cosmos/distribution/v1beta1/validators/{validator}/commission")
+        res = await self._c._get(
+            f"/cosmos/distribution/v1beta1/validators/{validator}/commission"
+        )
         commission = res["commission"]
         return Coins.from_data(commission["commission"])
 

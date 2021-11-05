@@ -2,15 +2,15 @@ from __future__ import annotations
 
 import base64
 from abc import ABC, abstractmethod
-from typing import Optional, Union, List
+from typing import List, Optional, Union
 
 import attr
-
-from terra_sdk.util.json import JSONSerializable
-from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.crypto.ed25519 import PubKey as ValConsPubKey_pb
 from terra_proto.cosmos.crypto.multisig import LegacyAminoPubKey as LegacyAminoPubKey_pb
-from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
+
+from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey", "LegacyAminoPubKey"]
 
@@ -59,15 +59,11 @@ class SimplePublicKey(PublicKey):
     key: str = attr.ib()
 
     def to_data(self) -> dict:
-        return {
-            "key": self.key
-        }
+        return {"key": self.key}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
-        return cls(
-            key=data["key"]
-        )
+        return cls(key=data["key"])
 
     def to_proto(self) -> SimplePubKey_pb:
         return SimplePubKey_pb(key=self.key)
@@ -89,15 +85,11 @@ class ValConsPubKey(PublicKey):
     key: str = attr.ib()
 
     def to_data(self) -> dict:
-        return {
-            "key": self.key
-        }
+        return {"key": self.key}
 
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
-        return cls(
-            key=data["key"]
-        )
+        return cls(key=data["key"])
 
     def get_type(self) -> str:
         return self.type_url
@@ -120,23 +112,19 @@ class LegacyAminoPubKey(PublicKey):
     public_keys: List[bytes] = attr.ib(factory=List)
 
     def to_data(self) -> dict:
-        return {
-            "threshold": self.threshold,
-            "public_keys": self.public_keys
-        }
+        return {"threshold": self.threshold, "public_keys": self.public_keys}
 
     @classmethod
     def from_data(cls, data: dict) -> LegacyAminoPubKey:
-        return cls(
-            threshold=data["threshold"],
-            public_keys=data["public_keys"]
-        )
+        return cls(threshold=data["threshold"], public_keys=data["public_keys"])
 
     def get_type(self) -> str:
         return self.type_url
 
     def to_proto(self) -> LegacyAminoPubKey_pb:
-        return LegacyAminoPubKey_pb(threshold=self.threshold, public_keys=self.public_keys)
+        return LegacyAminoPubKey_pb(
+            threshold=self.threshold, public_keys=self.public_keys
+        )
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

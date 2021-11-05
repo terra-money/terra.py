@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import attr
-from terra_sdk.util.json import JSONSerializable
+from terra_proto.cosmos.distribution.v1beta1 import (
+    CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins
-
-from terra_proto.cosmos.distribution.v1beta1 import CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb
+from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["CommunityPoolSpendProposal"]
 
@@ -45,5 +46,5 @@ class CommunityPoolSpendProposal(JSONSerializable):
             title=self.title,
             description=self.description,
             recipient=self.recipient,
-            amount=self.amount.to_proto()
+            amount=self.amount.to_proto(),
         )

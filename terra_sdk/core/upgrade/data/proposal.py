@@ -7,12 +7,15 @@ __all__ = ["SoftwareUpgradeProposal", "CancelSoftwareUpgradeProposal"]
 from typing import Optional
 
 import attr
+from terra_proto.cosmos.upgrade.v1beta1 import (
+    CancelSoftwareUpgradeProposal as CancelSoftwareUpgradeProposal_pb,
+)
+from terra_proto.cosmos.upgrade.v1beta1 import (
+    SoftwareUpgradeProposal as SoftwareUpgradeProposal_pb,
+)
 
 from terra_sdk.core.upgrade.plan import Plan
 from terra_sdk.util.json import JSONSerializable
-
-from terra_proto.cosmos.upgrade.v1beta1 import SoftwareUpgradeProposal as SoftwareUpgradeProposal_pb
-from terra_proto.cosmos.upgrade.v1beta1 import CancelSoftwareUpgradeProposal as CancelSoftwareUpgradeProposal_pb
 
 
 @attr.s
@@ -28,14 +31,12 @@ class SoftwareUpgradeProposal(JSONSerializable):
         return cls(
             title=data["title"],
             description=data["description"],
-            plan=Plan.from_data(data["plan"]) if data.get("plan") else None
+            plan=Plan.from_data(data["plan"]) if data.get("plan") else None,
         )
 
     def to_proto(self) -> SoftwareUpgradeProposal_pb:
         return SoftwareUpgradeProposal_pb(
-            title=self.title,
-            description=self.description,
-            plan=self.plan.to_proto()
+            title=self.title, description=self.description, plan=self.plan.to_proto()
         )
 
 
@@ -48,13 +49,9 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> CancelSoftwareUpgradeProposal:
-        return cls(
-            title=data["title"],
-            description=data["description"]
-        )
+        return cls(title=data["title"], description=data["description"])
 
     def to_proto(self) -> CancelSoftwareUpgradeProposal_pb:
         return CancelSoftwareUpgradeProposal_pb(
-            title=self.title,
-            description=self.description
+            title=self.title, description=self.description
         )

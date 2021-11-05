@@ -5,17 +5,20 @@ from types import Union
 from typing import List
 
 import attr
-
 from betterproto import datetime
-
-from terra_proto.cosmos.feegrant.v1beta1 import AllowedMsgAllowance as AllowedMsgAllowance_pb
+from terra_proto.cosmos.feegrant.v1beta1 import (
+    AllowedMsgAllowance as AllowedMsgAllowance_pb,
+)
 from terra_proto.cosmos.feegrant.v1beta1 import BasicAllowance as BasicAllowance_pb
-from terra_proto.cosmos.feegrant.v1beta1 import PeriodicAllowance as PeriodicAllowance_pb
-from terra_sdk.core import Coins
+from terra_proto.cosmos.feegrant.v1beta1 import (
+    PeriodicAllowance as PeriodicAllowance_pb,
+)
 
+from terra_sdk.core import Coins
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["BasicAllowance", "PeriodicAllowance", "AllowedMsgAllowance", "Allowance"]
+
 
 @attr.s
 class BasicAllowance(JSONSerializable):
@@ -23,6 +26,7 @@ class BasicAllowance(JSONSerializable):
     BasicAllowance implements Allowance with a one-time grant of tokens
     that optionally expires. The grantee can use up to SpendLimit to cover fees.
     """
+
     spend_limit: Coins = attr.ib(converter=Coins)
     expiration: datetime = attr.ib(converter=datetime.fromisoformat)
 
@@ -32,14 +36,14 @@ class BasicAllowance(JSONSerializable):
     def from_data(cls, data: dict) -> BasicAllowance:
         return cls(
             spend_limit=Coins.from_data(data["spend_limit"]),
-            expiration=datetime.fromisoformat(data["expiration"])
+            expiration=datetime.fromisoformat(data["expiration"]),
         )
 
     def to_proto(self) -> BasicAllowance_pb:
         return BasicAllowance_pb(
-            spend_limit=self.spend_limit.to_proto(),
-            expiration=self.expiration
+            spend_limit=self.spend_limit.to_proto(), expiration=self.expiration
         )
+
 
 @attr.s
 class PeriodicAllowance(JSONSerializable):
@@ -47,6 +51,7 @@ class PeriodicAllowance(JSONSerializable):
     PeriodicAllowance extends Allowance to allow for both a maximum cap,
      as well as a limit per time period.
     """
+
     basic: BasicAllowance = attr.ib()
     period: int = attr.ib(converter=int)
     period_spend_limit: Coins = attr.ib(converter=Coins)
@@ -62,7 +67,7 @@ class PeriodicAllowance(JSONSerializable):
             period=data["period"],
             period_spend_limit=Coins.from_data(data["period_spend_limit"]),
             period_can_spend=Coins.from_data(data["period_can_spend"]),
-            period_reset=data["period_reset"]
+            period_reset=data["period_reset"],
         )
 
     def to_proto(self) -> PeriodicAllowance_pb:
@@ -71,8 +76,9 @@ class PeriodicAllowance(JSONSerializable):
             period=self.period,
             period_spend_limit=self.period_spend_limit.to_proto(),
             period_can_spend=self.period_can_spend.to_proto(),
-            period_reset=self.period_reset
+            period_reset=self.period_reset,
         )
+
 
 @attr.s
 class AllowedMsgAllowance(JSONSerializable):
@@ -90,22 +96,19 @@ class AllowedMsgAllowance(JSONSerializable):
         allowance = data["allowance"]
         return cls(
             allowance=Allowance.from_data(allowance),
-            allowed_messages=data["allowed_messages"]
+            allowed_messages=data["allowed_messages"],
         )
 
     def to_proto(self) -> AllowedMsgAllowance_pb:
         return AllowedMsgAllowance_pb(
-            allowance=self.allowance.to_proto(),
-            allowed_messages=self.allowed_messages
+            allowance=self.allowance.to_proto(), allowed_messages=self.allowed_messages
         )
 
 
 class Allowance(Union[BasicAllowance, PeriodicAllowance]):
-
     @classmethod
     def from_data(cls, data: dict):
         if data.get("@type") == BasicAllowance.type_url:
             return BasicAllowance.from_data(data)
         else:
             return PeriodicAllowance.from_data(data)
-

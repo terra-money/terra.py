@@ -1,5 +1,5 @@
-import json
 import base64
+import json
 from typing import Any
 
 from terra_sdk.core import Numeric
@@ -24,7 +24,7 @@ class AsyncWasmAPI(BaseAsyncAPI):
         return {
             "code_id": Numeric.parse(code_info["code_id"]),
             "code_hash": code_info["code_hash"],
-            "creator": code_info["creator"]
+            "creator": code_info["creator"],
         }
 
     async def contract_info(self, contract_address: str) -> dict:
@@ -43,7 +43,7 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "address": contract_info["address"],
             "creator": contract_info["creator"],
             "admin": contract_info.get("admin", None),
-            "init_msg": contract_info["init_msg"]
+            "init_msg": contract_info["init_msg"],
         }
 
     async def contract_query(self, contract_address: str, query: dict) -> Any:
@@ -56,8 +56,14 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             Any: results of query
         """
-        params = {"query_msg": base64.b64encode(json.dumps(query).encode('utf-8')).decode('utf-8')}
-        res = await self._c._get(f"/terra/wasm/v1beta1/contracts/{contract_address}/store", params)
+        params = {
+            "query_msg": base64.b64encode(json.dumps(query).encode("utf-8")).decode(
+                "utf-8"
+            )
+        }
+        res = await self._c._get(
+            f"/terra/wasm/v1beta1/contracts/{contract_address}/store", params
+        )
         return res.get("query_result")
 
     async def parameters(self) -> dict:

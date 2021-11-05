@@ -5,12 +5,15 @@ from __future__ import annotations
 from typing import List
 
 import attr
+from terra_proto.cosmos.params.v1beta1 import ParamChange as ParamChange_pb
+from terra_proto.cosmos.params.v1beta1 import (
+    ParameterChangeProposal as ParameterChangeProposal_pb,
+)
+
 from terra_sdk.util.json import JSONSerializable
 
-from terra_proto.cosmos.params.v1beta1 import ParameterChangeProposal as ParameterChangeProposal_pb
-from terra_proto.cosmos.params.v1beta1 import ParamChange as ParamChange_pb
-
 __all__ = ["ParameterChangeProposal", "ParamChange"]
+
 
 @attr.s
 class ParamChange(JSONSerializable):
@@ -20,18 +23,10 @@ class ParamChange(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> ParamChange:
-        return cls(
-            subspace=data["subspace"],
-            key=data["key"],
-            value=data["value"]
-        )
+        return cls(subspace=data["subspace"], key=data["key"], value=data["value"])
 
     def to_proto(self) -> ParamChange_pb:
-        return ParamChange_pb(
-            subspace=self.subspace,
-            key=self.key,
-            value=self.value
-        )
+        return ParamChange_pb(subspace=self.subspace, key=self.key, value=self.value)
 
 
 @attr.s
@@ -64,5 +59,5 @@ class ParameterChangeProposal(JSONSerializable):
         return ParameterChangeProposal_pb(
             title=self.title,
             description=self.description,
-            changes=self.changes.to_proto()
+            changes=self.changes.to_proto(),
         )

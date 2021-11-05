@@ -7,11 +7,18 @@ from typing import Optional
 import attr
 from bech32 import bech32_encode, convertbits
 
-from terra_sdk.core.signature_v2 import Descriptor, Single as SingleDescriptor
-from terra_sdk.core.tx import Tx, SignMode, SignerInfo, ModeInfo, ModeInfoSingle
-
+from terra_sdk.core import (
+    AccAddress,
+    AccPubKey,
+    SignatureV2,
+    SignDoc,
+    ValAddress,
+    ValPubKey,
+)
 from terra_sdk.core.public_key import PublicKey
-from terra_sdk.core import AccAddress, AccPubKey, ValAddress, ValPubKey, SignDoc, SignatureV2
+from terra_sdk.core.signature_v2 import Descriptor
+from terra_sdk.core.signature_v2 import Single as SingleDescriptor
+from terra_sdk.core.tx import ModeInfo, ModeInfoSingle, SignerInfo, SignMode, Tx
 
 BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
 
@@ -155,10 +162,10 @@ class Key:
             data=Descriptor(
                 SingleDescriptor(
                     mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-                    signature=(self.sign(signDoc.to_bytes()))  # FIXME toAminoJSON
+                    signature=(self.sign(signDoc.to_bytes())),  # FIXME toAminoJSON
                 )
             ),
-            sequence=signDoc.sequence
+            sequence=signDoc.sequence,
         )
 
     def create_signature(self, signDoc: SignDoc) -> SignatureV2:
@@ -186,7 +193,9 @@ class Key:
             SignerInfo(
                 public_key=self.public_key,
                 sequence=signDoc.sequence,
-                mode_info=ModeInfo(single=ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT))
+                mode_info=ModeInfo(
+                    single=ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT)
+                ),
             )
         ]
         signature = self.sign(signDoc.to_bytes())
@@ -196,8 +205,12 @@ class Key:
 
         return SignatureV2(
             public_key=self.public_key,
-            data=Descriptor(single=SingleDescriptor(mode=SignMode.SIGN_MODE_DIRECT, signature=signature)),
-            sequence=signDoc.sequence
+            data=Descriptor(
+                single=SingleDescriptor(
+                    mode=SignMode.SIGN_MODE_DIRECT, signature=signature
+                )
+            ),
+            sequence=signDoc.sequence,
         )
 
     def sign_tx(self, tx: Tx, options: SignOptions) -> Tx:
@@ -218,9 +231,8 @@ class Key:
             account_number=options.account_number,
             sequence=options.sequence,
             auth_info=signedTx.auth_info,
-            tx_body=signedTx.body
+            tx_body=signedTx.body,
         )
-
 
         if options.sign_mode == SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
             signature: SignatureV2 = self.create_signature_amino(signDoc)
@@ -237,7 +249,7 @@ class Key:
             SignerInfo(
                 public_key=signature.public_key,
                 sequence=signature.sequence,
-                mode_info=ModeInfo(single=ModeInfoSingle(mode=sigData.mode))
+                mode_info=ModeInfo(single=ModeInfoSingle(mode=sigData.mode)),
             )
         )
         return signedTx

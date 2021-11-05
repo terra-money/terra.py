@@ -6,7 +6,6 @@ __all__ = ["AsyncIbcAPI", "IbcAPI"]
 
 
 class AsyncIbcAPI(BaseAsyncAPI):
-
     async def parameters(self) -> dict:
         """Fetches the Ibc module's parameters.
 
@@ -19,8 +18,8 @@ class AsyncIbcAPI(BaseAsyncAPI):
 
     # TODO: functions for clients, connections and channels
 
-class IbcAPI(AsyncIbcAPI):
 
+class IbcAPI(AsyncIbcAPI):
     @sync_bind(AsyncIbcAPI.parameters)
     def parameters(self) -> dict:
         pass

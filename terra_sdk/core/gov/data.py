@@ -7,34 +7,40 @@ from abc import abstractmethod
 from types import Union
 
 import attr
-from betterproto.lib.google.protobuf import Any as Any_pb
 from betterproto import datetime
-from terra_sdk.core.params import ParameterChangeProposal
-
-from terra_sdk.core.distribution import CommunityPoolSpendProposal
-
-from terra_sdk.core.gov import TextProposal
-
-from terra_sdk.core import Coins
-from terra_sdk.core.upgrade import SoftwareUpgradeProposal, CancelSoftwareUpgradeProposal
-from terra_sdk.util.base import BaseTerraData
-from terra_sdk.util.json import JSONSerializable, dict_to_data
-
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
+
+from terra_sdk.core import Coins
+from terra_sdk.core.distribution import CommunityPoolSpendProposal
+from terra_sdk.core.gov import TextProposal
+from terra_sdk.core.params import ParameterChangeProposal
+from terra_sdk.core.upgrade import (
+    CancelSoftwareUpgradeProposal,
+    SoftwareUpgradeProposal,
+)
+from terra_sdk.util.base import BaseTerraData
+from terra_sdk.util.json import JSONSerializable, dict_to_data
 
 __all__ = ["Proposal", "Content"]
 
 
-Content = Union[TextProposal, CommunityPoolSpendProposal, ParameterChangeProposal,
-                SoftwareUpgradeProposal, CancelSoftwareUpgradeProposal]
+Content = Union[
+    TextProposal,
+    CommunityPoolSpendProposal,
+    ParameterChangeProposal,
+    SoftwareUpgradeProposal,
+    CancelSoftwareUpgradeProposal,
+]
+
 
 @attr.s
 class TallyResult(JSONSerializable):
     yes: str = attr.ib()
     abstain: str = attr.ib()
-    no:  str = attr.ib()
-    no_with_veto:  str = attr.ib()
+    no: str = attr.ib()
+    no_with_veto: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> TallyResult:
@@ -42,7 +48,7 @@ class TallyResult(JSONSerializable):
             yes=data["yes"],
             abstain=data["abstain"],
             no=data["no"],
-            no_with_veto=data["no_with_veto"]
+            no_with_veto=data["no_with_veto"],
         )
 
     def to_proto(self) -> TallyResult_pb:
@@ -50,8 +56,9 @@ class TallyResult(JSONSerializable):
             yes=self.yes,
             abstain=self.abstain,
             no=self.no,
-            no_with_veto=self.no_with_veto
+            no_with_veto=self.no_with_veto,
         )
+
 
 @attr.s
 class Proposal(JSONSerializable):
@@ -113,5 +120,5 @@ class Proposal(JSONSerializable):
             deposit_end_time=datetime.fromisoformat(self.deposit_end_time),
             total_deposit=self.total_deposit.to_proto(),
             voting_start_time=datetime.fromisoformat(self.voting_start_time),
-            voting_end_time=datetime.fromisoformat(self.voting_end_time)
+            voting_end_time=datetime.fromisoformat(self.voting_end_time),
         )

@@ -7,19 +7,24 @@ import copy
 import json
 
 import attr
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgClearContractAdmin as MsgClearContractAdmin_pb,
+)
+from terra_proto.terra.wasm.v1beta1 import MsgExecuteContract as MsgExecuteContract_pb
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgInstantiateContract as MsgInstantiateContract_pb,
+)
+from terra_proto.terra.wasm.v1beta1 import MsgMigrateCode as MsgMigrateCode_pb
+from terra_proto.terra.wasm.v1beta1 import MsgMigrateContract as MsgMigrateContract_pb
+from terra_proto.terra.wasm.v1beta1 import MsgStoreCode as MsgStoreCode_pb
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgUpdateContractAdmin as MsgUpdateContractAdmin_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.remove_none import remove_none
-
-from terra_proto.terra.wasm.v1beta1 import MsgStoreCode as MsgStoreCode_pb
-from terra_proto.terra.wasm.v1beta1 import MsgMigrateCode as MsgMigrateCode_pb
-from terra_proto.terra.wasm.v1beta1 import MsgInstantiateContract as MsgInstantiateContract_pb
-from terra_proto.terra.wasm.v1beta1 import MsgExecuteContract as MsgExecuteContract_pb
-from terra_proto.terra.wasm.v1beta1 import MsgMigrateContract as MsgMigrateContract_pb
-from terra_proto.terra.wasm.v1beta1 import MsgUpdateContractAdmin as MsgUpdateContractAdmin_pb
-from terra_proto.terra.wasm.v1beta1 import MsgClearContractAdmin as MsgClearContractAdmin_pb
 
 __all__ = [
     "MsgStoreCode",
@@ -55,8 +60,7 @@ class MsgStoreCode(Msg):
 
     def to_proto(self) -> MsgStoreCode_pb:
         return MsgStoreCode_pb(
-            sender=self.sender,
-            wasm_byte_code=base64.b64decode(self.wasm_byte_code)
+            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code)
         )
 
 
@@ -97,9 +101,7 @@ class MsgMigrateCode(Msg):
 
     def to_proto(self) -> MsgMigrateCode_pb:
         return MsgMigrateCode_pb(
-            sender=self.sender,
-            code_id=self.code_id,
-            wasm_byte_code=self.wasm_byte_code
+            sender=self.sender, code_id=self.code_id, wasm_byte_code=self.wasm_byte_code
         )
 
 
@@ -146,8 +148,8 @@ class MsgInstantiateContract(Msg):
             sender=self.sender,
             admin=self.admin,
             code_id=self.code_id,
-            init_msg=bytes(json.dumps(self.init_msg), 'utf-8'),
-            init_coins=self.init_coins.to_proto()
+            init_msg=bytes(json.dumps(self.init_msg), "utf-8"),
+            init_coins=self.init_coins.to_proto(),
         )
 
 
@@ -186,8 +188,8 @@ class MsgExecuteContract(Msg):
         return MsgExecuteContract_pb(
             sender=self.sender,
             contract=self.contract,
-            execute_msg=bytes(json.dumps(self.execute_msg), 'utf-8'),
-            coins=self.coins.to_proto()
+            execute_msg=bytes(json.dumps(self.execute_msg), "utf-8"),
+            coins=self.coins.to_proto(),
         )
 
 
@@ -230,7 +232,7 @@ class MsgMigrateContract(Msg):
             admin=self.admin,
             contract=self.contract,
             new_code_id=self.new_code_id,
-            migrate_msg=bytes(json.dumps(self.migrate_msg), 'utf-8'),
+            migrate_msg=bytes(json.dumps(self.migrate_msg), "utf-8"),
         )
 
 
@@ -263,9 +265,7 @@ class MsgUpdateContractAdmin(Msg):
 
     def to_proto(self) -> MsgUpdateContractAdmin_pb:
         return MsgUpdateContractAdmin_pb(
-            admin=self.admin,
-            new_admin=self.new_admin,
-            contract=self.contract
+            admin=self.admin, new_admin=self.new_admin, contract=self.contract
         )
 
 
@@ -294,7 +294,4 @@ class MsgClearContractAdmin(Msg):
         )
 
     def to_proto(self) -> MsgClearContractAdmin_pb:
-        return MsgClearContractAdmin_pb(
-            admin=self.admin,
-            contract=self.contract
-        )
+        return MsgClearContractAdmin_pb(admin=self.admin, contract=self.contract)

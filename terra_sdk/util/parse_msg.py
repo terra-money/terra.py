@@ -1,3 +1,8 @@
+from terra_sdk.core.authz import (
+    MsgExecAuthorized,
+    MsgGrantAuthorization,
+    MsgRevokeAuthorization,
+)
 from terra_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
@@ -7,11 +12,6 @@ from terra_sdk.core.distribution import (
 )
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.authz import (
-    MsgExecAuthorized,
-    MsgGrantAuthorization,
-    MsgRevokeAuthorization,
-)
 from terra_sdk.core.oracle import (
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,

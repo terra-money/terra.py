@@ -2,11 +2,10 @@ import abc
 from abc import ABC
 from typing import Optional
 
-
 __all__ = ["APIParams", "PaginationOptions"]
 
-class APIParams(ABC):
 
+class APIParams(ABC):
     @abc.abstractmethod
     def to_dict(self):
         pass
@@ -17,6 +16,7 @@ class APIParams(ABC):
         for key in d.keys():
             l.append((key, d.get(key)))
         return l
+
 
 class PaginationOptions(APIParams):
     """This could be used when you need pagination options for APIs
@@ -35,13 +35,14 @@ class PaginationOptions(APIParams):
         reverse (bool): reverse is set to true if results are to be returned in the descending order.
     """
 
-    def __init__(self,
-                 key: Optional[str] = None,
-                 offset: Optional[int] = None,
-                 limit: Optional[int] = None,
-                 count_total: Optional[bool] = None,
-                 reverse: Optional[bool] = None
-                 ):
+    def __init__(
+        self,
+        key: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        count_total: Optional[bool] = None,
+        reverse: Optional[bool] = None,
+    ):
         self.key = key
         self.offset = offset
         self.limit = limit
@@ -49,13 +50,18 @@ class PaginationOptions(APIParams):
         self.reverse = reverse
 
     def __str__(self):
-        return '&'.join(self.to_dict())
+        return "&".join(self.to_dict())
 
     def to_dict(self):
         params = {}
-        if self.key is not None: params["pagination.key"] = self.key
-        if self.offset is not None: params["pagination.offset"] = self.offset
-        if self.limit is not None: params["pagination.limit"] = self.limit
-        if self.count_total is not None: params["pagination.count_total"] = str(self.count_total).lower()
-        if self.reverse is not None: params["pagination.reverse"] = str(self.reverse).lower()
+        if self.key is not None:
+            params["pagination.key"] = self.key
+        if self.offset is not None:
+            params["pagination.offset"] = self.offset
+        if self.limit is not None:
+            params["pagination.limit"] = self.limit
+        if self.count_total is not None:
+            params["pagination.count_total"] = str(self.count_total).lower()
+        if self.reverse is not None:
+            params["pagination.reverse"] = str(self.reverse).lower()
         return params

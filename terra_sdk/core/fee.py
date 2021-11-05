@@ -5,12 +5,11 @@ from __future__ import annotations
 from typing import Dict, List, Optional
 
 import attr
+from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.coins import Coins
 from terra_sdk.util.json import JSONSerializable
-
-from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
 
 __all__ = ["Fee"]
 
@@ -23,6 +22,7 @@ class Fee(JSONSerializable):
         gas (int): gas to use ("gas requested")
         amount (Coins.Input): fee amount
     """
+
     gas_limit: int = attr.ib(converter=int)
     amount: Coins = attr.ib(converter=Coins)
     payer: Optional[AccAddress] = attr.ib(default=None)
@@ -30,17 +30,27 @@ class Fee(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Fee:
-        return cls(int(data["gas_limit"]), Coins.from_data(data["amount"]), data["payer"], data["granter"])
+        return cls(
+            int(data["gas_limit"]),
+            Coins.from_data(data["amount"]),
+            data["payer"],
+            data["granter"],
+        )
 
     def to_data(self) -> dict:
-        return {"gas_limit": str(self.gas_limit), "amount": self.amount.to_data(), "payer": str(self.payer), "granter": str(self.granter)}
+        return {
+            "gas_limit": str(self.gas_limit),
+            "amount": self.amount.to_data(),
+            "payer": str(self.payer),
+            "granter": str(self.granter),
+        }
 
     def to_proto(self) -> Fee_pb:
         return Fee_pb(
             amount=self.amount.to_proto(),
             gas_limit=self.gas_limit,
             payer=self.payer,
-            granter=self.granter
+            granter=self.granter,
         )
 
     @classmethod
@@ -49,7 +59,7 @@ class Fee(JSONSerializable):
             gas_limit=proto["gas_limit"],
             amount=Coins.from_proto(proto["amount"]),
             payer=proto["payer"],
-            granter=proto["granter"]
+            granter=proto["granter"],
         )
 
     @property

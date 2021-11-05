@@ -2,29 +2,34 @@
 
 from __future__ import annotations
 
-from typing import Optional, List
+from typing import List, Optional
 
 import attr
 import betterproto
+from terra_proto.cosmos.authz.v1beta1 import (
+    GenericAuthorization as GenericAuthorization_pb,
+)
+from terra_proto.cosmos.authz.v1beta1 import Grant as Grant_pb
+from terra_proto.cosmos.authz.v1beta1 import GrantAuthorization as GrantAuthorization_pb
+from terra_proto.cosmos.bank.v1beta1 import SendAuthorization as SendAuthorization_pb
+from terra_proto.cosmos.staking.v1beta1 import AuthorizationType
+from terra_proto.cosmos.staking.v1beta1 import (
+    StakeAuthorization as StakeAuthorization_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import (
+    StakeAuthorizationValidators as StakeAuthorizationValidators_pb,
+)
 
-from terra_sdk.core import Coins, Coin, AccAddress
+from terra_sdk.core import AccAddress, Coin, Coins
 from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable
-
-from terra_proto.cosmos.authz.v1beta1 import GrantAuthorization as GrantAuthorization_pb
-from terra_proto.cosmos.authz.v1beta1 import GenericAuthorization as GenericAuthorization_pb
-from terra_proto.cosmos.authz.v1beta1 import Grant as Grant_pb
-from terra_proto.cosmos.bank.v1beta1 import SendAuthorization as SendAuthorization_pb
-from terra_proto.cosmos.staking.v1beta1 import StakeAuthorization as StakeAuthorization_pb
-from terra_proto.cosmos.staking.v1beta1 import AuthorizationType
-from terra_proto.cosmos.staking.v1beta1 import StakeAuthorizationValidators as StakeAuthorizationValidators_pb
 
 __all__ = [
     "Authorization",
     "SendAuthorization",
     "GenericAuthorization",
     "AuthorizationGrant",
-    "AuthorizationType"
+    "AuthorizationType",
 ]
 
 
@@ -58,9 +63,7 @@ class SendAuthorization(Authorization):
         return cls(spend_limit=Coins.from_data(data["spend_limit"]))
 
     def to_proto(self) -> SendAuthorization_pb:
-        return SendAuthorization_pb(
-            spend_limit=self.spend_limit.to_proto()
-        )
+        return SendAuthorization_pb(spend_limit=self.spend_limit.to_proto())
 
 
 @attr.s
@@ -81,9 +84,7 @@ class GenericAuthorization(Authorization):
         return cls(msg=data["msg"])
 
     def to_proto(self) -> GenericAuthorization_pb:
-        return GenericAuthorization_pb(
-            msg=self.msg
-        )
+        return GenericAuthorization_pb(msg=self.msg)
 
 
 @attr.s
@@ -106,8 +107,9 @@ class AuthorizationGrant(JSONSerializable):
     def to_proto(self) -> Grant_pb:
         return Grant_pb(
             authorization=self.authorization.to_proto(),
-            expiration=betterproto.datetime.fromisoformat(self.expiration)
+            expiration=betterproto.datetime.fromisoformat(self.expiration),
         )
+
 
 @attr.s
 class StakeAuthorizationValidators(JSONSerializable):
@@ -118,9 +120,7 @@ class StakeAuthorizationValidators(JSONSerializable):
         return cls(address=data["address"])
 
     def to_proto(self):
-        return StakeAuthorizationValidators_pb(
-            address=self.address
-        )
+        return StakeAuthorizationValidators_pb(address=self.address)
 
 
 @attr.s
@@ -132,11 +132,10 @@ class StakeAuthorization(Authorization):
 
     type_url = "/cosmos.staking.v1beta1.StakeAuthorization"
 
-
     def to_proto(self) -> StakeAuthorization_pb:
         return StakeAuthorization_pb(
             authorization_type=self.authorization_type,
             max_tokens=self.max_tokens.to_proto() if self.max_tokens else None,
             allow_list=self.allow_list.to_proto() if self.allow_list else None,
-            deny_list=self.deny_list.to_proto() if self.deny_list else None
+            deny_list=self.deny_list.to_proto() if self.deny_list else None,
         )

@@ -1,6 +1,6 @@
 import copy
 import json
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 from typing import Any
 
 
@@ -20,7 +20,6 @@ def dict_to_data(d: dict) -> dict:
 
 
 class JSONSerializable(ABC):
-
     def to_data(self) -> Any:
         """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))

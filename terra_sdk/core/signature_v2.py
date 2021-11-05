@@ -5,15 +5,19 @@ from __future__ import annotations
 from typing import Dict, List, Optional
 
 import attr
-
-from terra_sdk.core.tx import CompactBitArray
-from terra_sdk.core.public_key import PublicKey
-
-
+from terra_proto.cosmos.tx.signing.v1beta1 import (
+    SignatureDescriptor as SignatureDescriptor_pb,
+)
+from terra_proto.cosmos.tx.signing.v1beta1 import (
+    SignatureDescriptorDataMulti as SignatureDescriptorDataMulti_pb,
+)
+from terra_proto.cosmos.tx.signing.v1beta1 import (
+    SignatureDescriptorDataSingle as SignatureDescriptorDataSingle_pb,
+)
 from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
-from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptor as SignatureDescriptor_pb
-from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptorDataSingle as SignatureDescriptorDataSingle_pb
-from terra_proto.cosmos.tx.signing.v1beta1 import SignatureDescriptorDataMulti as SignatureDescriptorDataMulti_pb
+
+from terra_sdk.core.public_key import PublicKey
+from terra_sdk.core.tx import CompactBitArray
 
 __all__ = ["SignatureV2", "Descriptor", "Single", "Multi", "SignMode"]
 
@@ -29,7 +33,7 @@ class SignatureV2:
         return cls(
             public_key=PublicKey.from_data(data["public_key"]),
             data=Descriptor.from_data(data["data"]),
-            sequence=data["sequence"]
+            sequence=data["sequence"],
         )
 
 
@@ -53,7 +57,9 @@ class Single:
     signature: bytes = attr.ib()
 
     def to_proto(self) -> SignatureDescriptorDataSingle_pb:
-        return SignatureDescriptorDataSingle_pb(mode=self.mode, signature=self.signature)
+        return SignatureDescriptorDataSingle_pb(
+            mode=self.mode, signature=self.signature
+        )
 
     @classmethod
     def from_data(cls, data: dict) -> Single:
@@ -68,12 +74,12 @@ class Multi:
     def to_proto(self) -> SignatureDescriptorDataMulti_pb:
         return SignatureDescriptorDataMulti_pb(
             bitarray=self.bitarray.to_proto(),
-            signatures=[sig.to_proto() for sig in self.signatures]
+            signatures=[sig.to_proto() for sig in self.signatures],
         )
 
     @classmethod
     def from_data(cls, data: dict) -> Multi:
         return cls(
             CompactBitArray.from_data(data["bitarray"]),
-            [Descriptor.from_data(d) for d in data["signatures"]]
+            [Descriptor.from_data(d) for d in data["signatures"]],
         )

@@ -40,7 +40,7 @@ class AsyncMarketAPI(BaseAsyncAPI):
         return {
             "base_pool": Dec(params.get("base_pool")),
             "pool_recovery_period": int(params.get("pool_recovery_period")),
-            "min_stability_spread": Dec(params.get("min_stability_spread"))
+            "min_stability_spread": Dec(params.get("min_stability_spread")),
         }
 
 

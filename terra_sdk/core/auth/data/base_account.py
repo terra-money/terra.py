@@ -5,11 +5,10 @@ from __future__ import annotations
 from typing import List, Optional
 
 import attr
+from terra_proto.cosmos.auth.v1beta1 import BaseAccount as BaseAccount_pb
 
 from ....core import AccAddress, Coins
 from ....util.json import JSONSerializable
-from terra_proto.cosmos.auth.v1beta1 import BaseAccount as BaseAccount_pb
-
 from ...public_key import PublicKey
 
 __all__ = ["BaseAccount"]
@@ -64,7 +63,7 @@ class BaseAccount(JSONSerializable):
             address=proto.address,
             public_key=PublicKey.from_proto(proto.pub_key),
             account_number=proto.account_number,
-            sequence=proto.sequence
+            sequence=proto.sequence,
         )
 
     def to_proto(self) -> BaseAccount_pb:
@@ -72,5 +71,5 @@ class BaseAccount(JSONSerializable):
             address=self.address,
             pub_key=self.public_key.to_proto() if self.public_key else None,
             account_number=self.account_number,
-            sequence=self.sequence
+            sequence=self.sequence,
         )

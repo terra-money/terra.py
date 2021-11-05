@@ -4,17 +4,17 @@ from typing import List, Optional
 
 import attr
 from terra_proto.cosmos.tx.v1beta1 import SimulateResponse as SimulateResponse_pb
-from terra_sdk.util.json import JSONSerializable
 
-from terra_sdk.core import AccAddress, Coins, Numeric, PublicKey, Dec
-from terra_sdk.core.tx import Fee, SignMode, TxInfo, TxBody, AuthInfo, Tx, SignerData
+from terra_sdk.core import AccAddress, Coins, Dec, Numeric, PublicKey
 from terra_sdk.core.broadcast import (
     AsyncTxBroadcastResult,
     BlockTxBroadcastResult,
     SyncTxBroadcastResult,
 )
 from terra_sdk.core.msg import Msg
+from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, TxInfo
 from terra_sdk.util.hash import hash_amino
+from terra_sdk.util.json import JSONSerializable
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -36,7 +36,9 @@ class CreateTxOptions:
     gas: Optional[str] = attr.ib(default=None)
     gas_prices: Optional[Coins] = attr.ib(default=None)
     # FIXME: is it okay with 0 bye default?
-    gas_adjustment: Optional[Numeric.Output] = attr.ib(default=0, converter=Numeric.parse)
+    gas_adjustment: Optional[Numeric.Output] = attr.ib(
+        default=0, converter=Numeric.parse
+    )
     fee_denoms: Optional[str] = attr.ib(default=None)
     account_number: Optional[int] = attr.ib(default=None)
     sequence: Optional[int] = attr.ib(default=None)
@@ -49,26 +51,31 @@ class BroadcastOptions:
     sequences: Optional[List[int]] = attr.ib()
     fee_granter: Optional[AccAddress] = attr.ib(default=None)
 
+
 @attr.s
 class GasInfo:
     gas_wanted: int = attr.ib(converter=int)
     gas_used: int = attr.ib(converter=int)
+
 
 @attr.s
 class EventAttribute:
     key: str = attr.ib()
     value: str = attr.ib()
 
+
 @attr.s
 class Event:
     type: str = attr.ib()
     attributes: List[EventAttribute] = attr.ib(converter=list)
+
 
 @attr.s
 class SimulateResult:
     data: str = attr.ib()
     log: str = attr.ib()
     events: List[Event] = attr.ib(converter=list)
+
 
 @attr.s
 class SimulateResponse(JSONSerializable):
@@ -78,6 +85,7 @@ class SimulateResponse(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict):
         return cls(gas_info=data["gas_info"], result=data["result"])
+
 
 class AsyncTxAPI(BaseAsyncAPI):
     async def tx_info(self, tx_hash: str) -> Tx:
@@ -93,9 +101,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         return TxInfo.from_data(res)
 
     async def create(
-        self,
-        signers: List[SignerOptions],
-        options: CreateTxOptions
+        self, signers: List[SignerOptions], options: CreateTxOptions
     ) -> Tx:
         """Create a new unsigned transaction, with helpful utilities such as lookup of
         chain ID, account number, sequence and fee estimation.
@@ -123,7 +129,9 @@ class AsyncTxAPI(BaseAsyncAPI):
             pubkey = signer.public_key
 
             if seq is None or pubkey is None:
-                acc = await BaseAsyncAPI._try_await(self._c.auth.account_info(signer.address))
+                acc = await BaseAsyncAPI._try_await(
+                    self._c.auth.account_info(signer.address)
+                )
                 if seq is None:
                     seq = acc.get_sequence()
                 if pubkey is None:
@@ -132,19 +140,16 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         # create the fake fee
         if opt.fee is None:
-            opt.fee = await BaseAsyncAPI._try_await(
-                self.estimate_fee(signerData, opt)
-            )
+            opt.fee = await BaseAsyncAPI._try_await(self.estimate_fee(signerData, opt))
 
         return Tx(
-            TxBody(opt.msgs, opt.memo or '', opt.timeout_height or 0),
-            AuthInfo([], opt.fee), ''
+            TxBody(opt.msgs, opt.memo or "", opt.timeout_height or 0),
+            AuthInfo([], opt.fee),
+            "",
         )
 
     async def estimate_fee(
-        self,
-        signers: List[SignerOptions],
-        options: CreateTxOptions
+        self, signers: List[SignerOptions], options: CreateTxOptions
     ) -> Fee:
         """Estimates the proper fee to apply by simulating it within the node.
 
@@ -163,11 +168,13 @@ class AsyncTxAPI(BaseAsyncAPI):
         if gas_prices:
             gas_prices_coins = Coins(gas_prices)
             if options.fee_denoms:
-                _fee_denoms: List[str] = options.fee_denoms  # satisfy mypy type checking :(
+                _fee_denoms: List[
+                    str
+                ] = options.fee_denoms  # satisfy mypy type checking :(
                 gas_prices_coins = gas_prices_coins.filter(
                     lambda c: c.denom in _fee_denoms
                 )
-        tx_body = TxBody(messages=options.msgs, memo=options.memo or '')
+        tx_body = TxBody(messages=options.msgs, memo=options.memo or "")
         emptyCoins = Coins()
         emptyFee = Fee(0, emptyCoins)
         auth_info = AuthInfo([], emptyFee)
@@ -182,21 +189,28 @@ class AsyncTxAPI(BaseAsyncAPI):
             gas = str(self.estimate_gas(tx, opt))
 
         tax_amount = self.compute_tax(tx)  # TODO
-        fee_amount = tax_amount.add(gas_prices_coins.mul(gas).to_int_coins()) if\
-            gas_prices_coins else tax_amount
+        fee_amount = (
+            tax_amount.add(gas_prices_coins.mul(gas).to_int_coins())
+            if gas_prices_coins
+            else tax_amount
+        )
 
-        return Fee(Numeric.parse(gas), fee_amount, '', '')
+        return Fee(Numeric.parse(gas), fee_amount, "", "")
 
     async def estimate_gas(self, tx: Tx, options: Optional[CreateTxOptions]) -> int:
         gas_adjustment = options.gas_adjustment if options else self._c.gas_adjustment
 
-        res = await self._c._post("/cosmos/tx/v1beta1/simulate", {"tx_bytes": self.encode(tx)})
+        res = await self._c._post(
+            "/cosmos/tx/v1beta1/simulate", {"tx_bytes": self.encode(tx)}
+        )
         simulated = SimulateResponse.from_data(res)
 
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
 
     async def compute_tax(self, tx: Tx) -> Coins:
-        res = await self._c._post("/terra/tx/v1beta1/compute_tax", {"tx_bytes": self.encode(tx)})
+        res = await self._c._post(
+            "/terra/tx/v1beta1/compute_tax", {"tx_bytes": self.encode(tx)}
+        )
         return Coins.from_data(res.get("tax_amount"))
 
     async def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
@@ -218,7 +232,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
         data = {"tx_bytes": self.encode(tx), "mode": mode}
-        return await self._c._post("/cosmos/tx/v1beta1/txs", data)  #, raw=True)
+        return await self._c._post("/cosmos/tx/v1beta1/txs", data)  # , raw=True)
 
     async def broadcast_sync(
         self, tx: Tx, options: BroadcastOptions = None
@@ -303,25 +317,21 @@ class TxAPI(AsyncTxAPI):
     tx_info.__doc__ = AsyncTxAPI.tx_info.__doc__
 
     @sync_bind(AsyncTxAPI.create)
-    def create(
-            self,
-            signers: List[SignerOptions],
-            options: CreateTxOptions
-    ) -> Tx:
+    def create(self, signers: List[SignerOptions], options: CreateTxOptions) -> Tx:
         pass
 
     create.__doc__ = AsyncTxAPI.create.__doc__
 
     @sync_bind(AsyncTxAPI.estimate_fee)
     def estimate_fee(
-            self,
-            signers: List[SignerOptions],
-            options: CreateTxOptions
+        self, signers: List[SignerOptions], options: CreateTxOptions
     ) -> Fee:
         pass
 
     @sync_bind(AsyncTxAPI.estimate_gas)
-    def estimate_gas(self, tx: Tx, options: Optional[CreateTxOptions]) -> SimulateResponse:
+    def estimate_gas(
+        self, tx: Tx, options: Optional[CreateTxOptions]
+    ) -> SimulateResponse:
         pass
 
     @sync_bind(AsyncTxAPI.compute_tax)

@@ -21,7 +21,7 @@ class AsyncAuthAPI(BaseAsyncAPI):
             Union[BaseAccount, LazyGradedVestingAccount]: account information
         """
         result = await self._c._get(f"/cosmos/auth/v1beta1/accounts/{address}")
-        return Account.from_data(result['account'])
+        return Account.from_data(result["account"])
 
 
 class AuthAPI(AsyncAuthAPI):

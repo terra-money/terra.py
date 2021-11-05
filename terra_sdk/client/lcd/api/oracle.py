@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from terra_sdk.core import AccAddress, Coin, Coins, ValAddress, Dec, Numeric
+from terra_sdk.core import AccAddress, Coin, Coins, Dec, Numeric, ValAddress
 from terra_sdk.core.oracle import (
     AggregateExchangeRatePrevote,
     AggregateExchangeRateVote,
@@ -83,7 +83,9 @@ class AsyncOracleAPI(BaseAsyncAPI):
             Optional[AggregateExchangeRatePrevote]: current aggegate prevote (if any).
         """
         try:
-            res = await self._c._get(f"/terra/oracle/v1beta1/validators/{validator}/aggregate_prevote")
+            res = await self._c._get(
+                f"/terra/oracle/v1beta1/validators/{validator}/aggregate_prevote"
+            )
         except LCDResponseError as e:
             if e.response.status == 404:
                 return None
@@ -103,7 +105,9 @@ class AsyncOracleAPI(BaseAsyncAPI):
             Optional[AggregateExchangeRatePrevote]: current aggegate vote (if any).
         """
         try:
-            res = await self._c._get(f"/terra/oracle/v1beta1/validators/{validator}/aggregate_vote")
+            res = await self._c._get(
+                f"/terra/oracle/v1beta1/validators/{validator}/aggregate_vote"
+            )
         except LCDResponseError as e:
             if e.response.status == 404:
                 return None
@@ -123,14 +127,16 @@ class AsyncOracleAPI(BaseAsyncAPI):
             "vote_period": Numeric.parse(params["vote_period"]),
             "vote_threshold": Dec(params["vote_threshold"]),
             "reward_band": Dec(params["reward_band"]),
-            "reward_distribution_window": Numeric.parse(params["reward_distribution_window"]),
-            "whitelist": [{
-                "name": x["name"],
-                "tobin_tax": Dec(x["tobin_tax"])
-            } for x in params["whitelist"]],
+            "reward_distribution_window": Numeric.parse(
+                params["reward_distribution_window"]
+            ),
+            "whitelist": [
+                {"name": x["name"], "tobin_tax": Dec(x["tobin_tax"])}
+                for x in params["whitelist"]
+            ],
             "slash_fraction": Dec(params["slash_fraction"]),
             "slash_window": Numeric.parse(params["slash_window"]),
-            "min_valid_per_window": Dec(params["min_valid_per_window"])
+            "min_valid_per_window": Dec(params["min_valid_per_window"]),
         }
 
 

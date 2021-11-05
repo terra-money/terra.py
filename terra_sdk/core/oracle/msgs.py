@@ -6,15 +6,19 @@ import copy
 import hashlib
 
 import attr
+from terra_proto.terra.oracle.v1beta1 import (
+    MsgAggregateExchangeRatePrevote as MsgAggregateExchangeRatePrevote_pb,
+)
+from terra_proto.terra.oracle.v1beta1 import (
+    MsgAggregateExchangeRateVote as MsgAggregateExchangeRateVote_pb,
+)
+from terra_proto.terra.oracle.v1beta1 import (
+    MsgDelegateFeedConsent as MsgDelegateFeedConsent_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
 from terra_sdk.util.json import dict_to_data
-
-from terra_proto.terra.oracle.v1beta1 import MsgDelegateFeedConsent as MsgDelegateFeedConsent_pb
-from terra_proto.terra.oracle.v1beta1 import MsgAggregateExchangeRateVote as MsgAggregateExchangeRateVote_pb
-from terra_proto.terra.oracle.v1beta1 import MsgAggregateExchangeRatePrevote as MsgAggregateExchangeRatePrevote_pb
-
 
 __all__ = [
     "vote_hash",
@@ -82,10 +86,7 @@ class MsgDelegateFeedConsent(Msg):
         return cls(operator=data["operator"], delegate=data["delegate"])
 
     def to_proto(self) -> MsgDelegateFeedConsent_pb:
-        return MsgDelegateFeedConsent_pb(
-            operator=self.operator,
-            delegate=self.delegate
-        )
+        return MsgDelegateFeedConsent_pb(operator=self.operator, delegate=self.delegate)
 
 
 @attr.s
@@ -117,9 +118,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
 
     def to_proto(self) -> MsgAggregateExchangeRatePrevote_pb:
         return MsgAggregateExchangeRatePrevote_pb(
-            hash=self.hash,
-            feeder=self.feeder,
-            validator=self.validator
+            hash=self.hash, feeder=self.feeder, validator=self.validator
         )
 
 
@@ -163,7 +162,7 @@ class MsgAggregateExchangeRateVote(Msg):
             exchange_rates=self.exchange_rates.to_proto(),
             salt=self.salt,
             feeder=self.feeder,
-            validator=self.validator
+            validator=self.validator,
         )
 
     def get_aggregate_vote_hash(self) -> str:

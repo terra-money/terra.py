@@ -1,8 +1,7 @@
 from typing import Optional
 
-from terra_sdk.core.treasury import PolicyConstraints
-
 from terra_sdk.core import Coin, Coins, Dec, Numeric
+from terra_sdk.core.treasury import PolicyConstraints
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -76,7 +75,7 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
             "seigniorage_burden_target": Dec(params["seigniorage_burden_target"]),
             "window_long": Numeric.parse(params["window_long"]),
             "window_short": Numeric.parse(params["window_short"]),
-            "window_probation": Numeric.parse(params["window_probation"])
+            "window_probation": Numeric.parse(params["window_probation"]),
         }
 
 

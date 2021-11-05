@@ -3,19 +3,25 @@ from __future__ import annotations
 from typing import List
 
 import attr
+from betterproto import datetime
+from terra_proto.cosmos.staking.v1beta1 import Delegation as Delegation_pb
+from terra_proto.cosmos.staking.v1beta1 import (
+    DelegationResponse as DelegationResponse_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import Redelegation as Redelegation_pb
+from terra_proto.cosmos.staking.v1beta1 import RedelegationEntry as RedelegationEntry_pb
+from terra_proto.cosmos.staking.v1beta1 import (
+    RedelegationEntryResponse as RedelegationEntryResponse_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import (
+    UnbondingDelegation as UnbondingDelegation_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import (
+    UnbondingDelegationEntry as UnbondingDelegationEntry_pb,
+)
 
 from terra_sdk.core import AccAddress, Coin, Dec, ValAddress
 from terra_sdk.util.json import JSONSerializable
-
-from terra_proto.cosmos.staking.v1beta1 import Delegation as Delegation_pb
-from terra_proto.cosmos.staking.v1beta1 import DelegationResponse as DelegationResponse_pb
-from terra_proto.cosmos.staking.v1beta1 import UnbondingDelegation as UnbondingDelegation_pb
-from terra_proto.cosmos.staking.v1beta1 import UnbondingDelegationEntry as UnbondingDelegationEntry_pb
-from terra_proto.cosmos.staking.v1beta1 import Redelegation as Redelegation_pb
-from terra_proto.cosmos.staking.v1beta1 import RedelegationEntry as RedelegationEntry_pb
-from terra_proto.cosmos.staking.v1beta1 import RedelegationEntryResponse as RedelegationEntryResponse_pb
-
-from betterproto import datetime
 
 __all__ = [
     "Delegation",
@@ -31,7 +37,6 @@ class DelegationInfo(JSONSerializable):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     shares: Dec = attr.ib(converter=Dec)
-
 
 
 @attr.s
@@ -57,9 +62,9 @@ class Delegation(JSONSerializable):
             delegation=Delegation_pb(
                 delegator_address=self.delegation.delegator_address,
                 validator_address=self.delegation.validator_address,
-                shares=str(self.delegation.shares)
+                shares=str(self.delegation.shares),
             ),
-            balance=self.balance.to_proto()
+            balance=self.balance.to_proto(),
         )
 
 
@@ -98,7 +103,7 @@ class UnbondingDelegationEntry(JSONSerializable):
             initial_balance=str(self.initial_balance),
             balance=str(self.balance),
             creation_height=self.creation_height,
-            completion_time=datetime.fromisostring(self.completion_time)
+            completion_time=datetime.fromisostring(self.completion_time),
         )
 
 
@@ -115,7 +120,9 @@ class UnbondingDelegation(JSONSerializable):
 
     @classmethod
     def from_data(cls, data) -> UnbondingDelegation:
-        entries = [UnbondingDelegationEntry.from_data(entry) for entry in data["entries"]]
+        entries = [
+            UnbondingDelegationEntry.from_data(entry) for entry in data["entries"]
+        ]
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
@@ -126,7 +133,7 @@ class UnbondingDelegation(JSONSerializable):
         return UnbondingDelegation_pb(
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
-            entries=[entry.to_proto() for entry in self.entries]
+            entries=[entry.to_proto() for entry in self.entries],
         )
 
 
@@ -146,9 +153,8 @@ class RedelegationEntryInfo(JSONSerializable):
             initial_balance=str(self.initial_balance),
             shares_dst=str(self.shares_dst),
             creation_height=self.creation_height,
-            completion_time=datetime.fromisoformat(self.completion_time)
+            completion_time=datetime.fromisoformat(self.completion_time),
         )
-
 
 
 @attr.s
@@ -186,7 +192,7 @@ class RedelegationEntry(JSONSerializable):
     def to_proto(self) -> RedelegationEntryResponse_pb:
         return RedelegationEntryResponse_pb(
             redelegation_entry=self.redelegation_entry.to_proto(),
-            balance=str(self.balance)
+            balance=str(self.balance),
         )
 
 
@@ -203,7 +209,7 @@ class RedelegationInfo(JSONSerializable):
         return Redelegation_pb(
             delegator_address=self.delegator_address,
             validator_src_address=self.validator_src_address,
-            validator_dst_address=self.validator_dst_address
+            validator_dst_address=self.validator_dst_address,
         )
 
 
@@ -233,5 +239,5 @@ class Redelegation(JSONSerializable):
             delegator_address=self.redelegation.delegator_address,
             validator_src_address=self.redelegation.validator_src_address,
             validator_dst_address=self.redelegation.validator_dst_address,
-            entries=[entry.to_proto() for entry in self.entries]
+            entries=[entry.to_proto() for entry in self.entries],
         )
