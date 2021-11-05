@@ -57,17 +57,15 @@ class LazyGradedVestingAccount(BaseAccount):
     def to_data(self) -> dict:
         return {
             "type": "core/LazyGradedVestingAccount",
-            "value": {
-                "address": self.address,
-                "public_key": self.public_key and self.public_key.to_data(),
-                "account_number": str(self.account_number),
-                "sequence": str(self.sequence),
-                "original_vesting": self.original_vesting.to_data(),
-                "delegated_free": self.delegated_free.to_data(),
-                "delegated_vesting": self.delegated_vesting.to_data(),
-                "end_time": str(self.end_time),
-                "vesting_schedules": self.vesting_schedules,
-            },
+            "address": self.address,
+            "public_key": self.public_key and self.public_key.to_data(),
+            "account_number": str(self.account_number),
+            "sequence": str(self.sequence),
+            "original_vesting": self.original_vesting.to_data(),
+            "delegated_free": self.delegated_free.to_data(),
+            "delegated_vesting": self.delegated_vesting.to_data(),
+            "end_time": str(self.end_time),
+            "vesting_schedules": self.vesting_schedules
         }
 
     @classmethod
@@ -81,7 +79,7 @@ class LazyGradedVestingAccount(BaseAccount):
             delegated_free=Coins.from_data(data["delegated_free"]),
             delegated_vesting=Coins.from_data(data["delegated_vesting"]),
             end_time=data["end_time"],
-            vesting_schedules=data["vesting_schedules"],
+            vesting_schedules=data["vesting_schedules"]
         )
 
     def to_proto(self) -> LazyGradedVestingAccount_pb:

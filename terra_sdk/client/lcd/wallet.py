@@ -72,7 +72,7 @@ class Wallet:
 
         Args:
             msgs (List[Msg]): list of messages to include
-            fee (Optional[StdFee], optional): transaction fee. If ``None``, will be estimated.
+            fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
                 See more on `fee estimation`_.
             memo (str, optional): optional short string to include with transaction.
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
@@ -102,7 +102,7 @@ class Wallet:
 
         Args:
             msgs (List[Msg]): list of messages to include
-            fee (Optional[StdFee], optional): transaction fee. If ``None``, will be estimated.
+            fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
                 See more on `fee estimation`_.
             memo (str, optional): optional short string to include with transaction.
             gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.

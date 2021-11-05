@@ -20,7 +20,7 @@ class PublicKey(JSONSerializable, ABC):
 
     @abstractmethod
     def get_type(self) -> str:
-        pass
+        return self.type_url
 
     @classmethod
     def from_proto(cls, proto: Any_pb):
