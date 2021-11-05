@@ -3,25 +3,23 @@
 from __future__ import annotations
 
 import copy
-from abc import abstractmethod
-from types import Union
+from typing import Union
 
 import attr
 from betterproto import datetime
-from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 
 from terra_sdk.core import Coins
 from terra_sdk.core.distribution import CommunityPoolSpendProposal
-from terra_sdk.core.gov import TextProposal
 from terra_sdk.core.params import ParameterChangeProposal
 from terra_sdk.core.upgrade import (
     CancelSoftwareUpgradeProposal,
     SoftwareUpgradeProposal,
 )
-from terra_sdk.util.base import BaseTerraData
 from terra_sdk.util.json import JSONSerializable, dict_to_data
+
+from .proposals import TextProposal
 
 __all__ = ["Proposal", "Content"]
 

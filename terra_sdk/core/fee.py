@@ -7,7 +7,7 @@ from typing import Dict, List, Optional
 import attr
 from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
 
-from terra_sdk.core import AccAddress
+from terra_sdk.core.strings import AccAddress
 from terra_sdk.core.coins import Coins
 from terra_sdk.util.json import JSONSerializable
 

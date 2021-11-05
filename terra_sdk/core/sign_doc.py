@@ -2,15 +2,9 @@
 
 from __future__ import annotations
 
-import base64
-from typing import Dict, List, Optional
-
 import attr
 from terra_proto.cosmos.tx.v1beta1 import SignDoc as SignDoc_pb
 
-from terra_sdk.core import AccAddress
-from terra_sdk.core.coins import Coins
-from terra_sdk.core.public_key import PublicKey
 from terra_sdk.core.tx import AuthInfo, TxBody
 from terra_sdk.util.json import JSONSerializable
 

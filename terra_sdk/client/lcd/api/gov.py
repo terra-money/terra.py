@@ -1,6 +1,7 @@
 from typing import List, Optional
 
-from terra_sdk.core import Coins, Dec, Deposit, Numeric
+from terra_sdk.core import Coins, Dec
+from terra_sdk.core.deposit import Deposit
 from terra_sdk.core.gov import Proposal, ProposalStatus
 
 from ._base import BaseAsyncAPI, sync_bind

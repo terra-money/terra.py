@@ -7,8 +7,6 @@ from terra_proto.cosmos.gov.v1beta1 import TextProposal as TextProposal_pb
 
 from terra_sdk.util.json import JSONSerializable
 
-from .data import Content
-
 __all__ = ["TextProposal"]
 
 
