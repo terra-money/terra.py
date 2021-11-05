@@ -41,6 +41,15 @@ class CommunityPoolSpendProposal(JSONSerializable):
             amount=Coins.from_data(data["amount"]),
         )
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "title": self.title,
+            "description": self.description,
+            "recipient": self.recipient,
+            "amount": self.amount.to_data()
+        }
+
     def to_proto(self) -> CommunityPoolSpendProposal_pb:
         return CommunityPoolSpendProposal_pb(
             title=self.title,

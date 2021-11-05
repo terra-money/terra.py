@@ -46,6 +46,13 @@ class MsgSetWithdrawAddress(Msg):
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "delegator_address": self.delegator_address,
+            "withdraw_address": self.withdraw_address
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSetWithdrawAddress:
         return cls(
@@ -79,6 +86,13 @@ class MsgWithdrawDelegationReward(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "delegator_address": self.delegator_address,
+            "withdraw_address": self.withdraw_address
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
         return cls(
@@ -110,6 +124,12 @@ class MsgWithdrawValidatorCommission(Msg):
 
     validator_address: ValAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "validator_address": self.validator_address
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawValidatorCommission:
         return cls(validator_address=data["validator_address"])
@@ -136,6 +156,13 @@ class MsgFundCommunityPool(Msg):
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "depositor": self.depositor,
+            "amount": self.amount.to_data()
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgFundCommunityPool:
