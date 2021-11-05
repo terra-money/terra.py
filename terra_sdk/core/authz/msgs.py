@@ -37,6 +37,13 @@ class MsgExecAuthorized(Msg):
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "grantee": self.grantee,
+            "msgs": [msg.to_data() for msg in self.msgs]
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
         return cls(
@@ -51,6 +58,12 @@ class MsgExecAuthorized(Msg):
 class Grant(JSONSerializable):
     authorization: Authorization = attr.ib()
     expiration: str = attr.ib()
+
+    def to_data(self) -> dict:
+        return {
+            "authorization": self.authorization.to_data(),
+            "expiration": self.expiration
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> Grant:
@@ -84,6 +97,14 @@ class MsgGrantAuthorization(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     grant: Grant = attr.ib()
+
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "grant": self.grant.to_data()
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAuthorization:

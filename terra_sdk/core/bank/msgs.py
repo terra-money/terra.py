@@ -96,6 +96,12 @@ class MultiSendInput(JSONSerializable):
     coins: Coins = attr.ib(converter=Coins)
     """Coins to be sent / received."""
 
+    def to_data(self) -> dict:
+        return {
+            "address": self.address,
+            "coins": self.coins.to_data()
+        }
+
     @classmethod
     def from_data(cls, data: dict):
         return cls(address=data["address"], coins=Coins.from_data(data["coins"]))
@@ -133,6 +139,12 @@ class MultiSendOutput(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict):
         return cls(address=data["address"], coins=Coins.from_data(data["coins"]))
+
+    def to_data(self) -> dict:
+        return {
+            "address": self.address,
+            "coins": self.coins.to_data()
+        }
 
     @classmethod
     def from_proto(cls, proto: Output_pb) -> MultiSendOutput:
@@ -197,8 +209,8 @@ class MsgMultiSend(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "inputs": [mi.from_data() for mi in self.inputs],
-            "outputs": [mo.from_data() for mo in self.outputs],
+            "inputs": [mi.to_data() for mi in self.inputs],
+            "outputs": [mo.to_data() for mo in self.outputs],
         }
 
     @classmethod
