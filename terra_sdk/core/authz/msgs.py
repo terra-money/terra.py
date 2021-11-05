@@ -56,6 +56,13 @@ class Grant(JSONSerializable):
     authorization: Authorization = attr.ib()
     expiration: str = attr.ib()
 
+    @classmethod
+    def from_data(cls, data: dict) -> Grant:
+        return cls(
+            authorization=Authorization.from_data(data["authorization"]),
+            expiration=data["expiration"]
+        )
+
     def to_proto(self) -> Grant_pb:
         return Grant_pb(
             authorization=self.authorization.to_proto(),

@@ -72,7 +72,6 @@ class LazyGradedVestingAccount(BaseAccount):
 
     @classmethod
     def from_data(cls, data: dict) -> LazyGradedVestingAccount:
-        data = data["value"]
         return cls(
             address=data["address"],
             public_key=PublicKey.from_data(data["public_key"]),

@@ -139,7 +139,6 @@ class StdTx(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> StdTx:
-        data = data["value"]
         return cls(
             [Msg.from_data(m) for m in data["msg"]],
             StdFee.from_data(data["fee"]),

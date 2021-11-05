@@ -83,7 +83,6 @@ class Tx(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Tx:
-        data = data["value"]
         return cls(
             TxBody.from_data(data["body"]),
             AuthInfo.from_data(data["auth_info"]),
@@ -219,8 +218,8 @@ class SignerInfo(JSONSerializable):
        mode_info:
     """
     public_key: PublicKey = attr.ib()
-    sequence: int = attr.ib(converter=int)
     mode_info: ModeInfo = attr.ib()
+    sequence: int = attr.ib(converter=int)
 
     def to_data(self) -> dict:
         return {
@@ -239,17 +238,17 @@ class SignerInfo(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> SignerInfo:
         return cls(
-            PublicKey.from_data(data["public_key"]),
-            ModeInfo.from_data(data["mode_info"]),
-            data["sequence"]
+            public_key=PublicKey.from_data(data["public_key"]),
+            mode_info=ModeInfo.from_data(data["mode_info"]),
+            sequence=data["sequence"]
         )
 
     @classmethod
     def from_proto(cls, proto: SignerInfo_pb) -> SignerInfo:
         return cls(
-            PublicKey.from_proto(proto["public_key"]),
-            ModeInfo.from_proto(proto["mode_info"]),
-            proto["sequence"]
+            public_key=PublicKey.from_proto(proto["public_key"]),
+            mode_info=ModeInfo.from_proto(proto["mode_info"]),
+            sequence=proto["sequence"]
         )
 
 
@@ -268,8 +267,8 @@ class ModeInfo(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> ModeInfo:
         return cls(
-            ModeInfoSingle.from_data(data["single"]) if data["single"] else None,
-            ModeInfoMulti.from_data(data["multi"]) if data["multi"] else None
+            ModeInfoSingle.from_data(data.get("single")) if data.get("single") else None,
+            ModeInfoMulti.from_data(data.get("multi")) if data.get("multi") else None
         )
 
     def to_proto(self) -> ModeInfo_pb:
@@ -319,7 +318,6 @@ class ModeInfoMulti(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfoMulti:
-        data = data["value"]
         return cls(
             data["bitarray"],
             data["mode_infos"]
@@ -346,7 +344,6 @@ class CompactBitArray(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> CompactBitArray:
-        data = data["value"]
         return cls(
             data["extra_bits_stored"],
             data["elems"]
@@ -534,17 +531,19 @@ class TxInfo(JSONSerializable):
 
     @ classmethod
     def from_data(cls, data: dict) -> TxInfo:
+        tx = data["tx"]
+        resp = data["tx_response"]
         return cls(
-            data["height"],
-            data["txhash"],
-            data["raw_log"],
-            parse_tx_logs(data.get("logs")),
-            data["gas_wanted"],
-            data["gas_used"],
-            Tx.from_data(data["tx"]),
-            data["timestamp"],
-            data.get("code"),
-            data.get("codespace"),
+            resp["height"],
+            resp["txhash"],
+            resp["raw_log"],
+            parse_tx_logs(resp.get("logs")),
+            resp["gas_wanted"],
+            resp["gas_used"],
+            Tx.from_data(tx),
+            resp["timestamp"],
+            resp.get("code"),
+            resp.get("codespace"),
         )
 
     def to_proto(self) -> TxResponse_pb:

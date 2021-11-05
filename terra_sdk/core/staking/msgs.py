@@ -135,7 +135,7 @@ class MsgUndelegate(Msg):
         )
 
     def to_proto(self) -> MsgUndelegate_pb:
-        return MsgUndelegate(
+        return MsgUndelegate_pb(
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
             amount=self.amount.to_proto()

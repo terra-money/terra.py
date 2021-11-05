@@ -1,7 +1,7 @@
 from terra_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 )
@@ -40,7 +40,7 @@ from .base import create_demux
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 ]

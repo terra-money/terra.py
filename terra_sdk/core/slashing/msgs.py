@@ -30,7 +30,6 @@ class MsgUnjail(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUnjail:
-        data = data["value"]
         return cls(address=data["address"])
 
     def to_proto(self) -> MsgUnjail_pb:

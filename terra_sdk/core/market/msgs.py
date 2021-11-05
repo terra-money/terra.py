@@ -35,7 +35,6 @@ class MsgSwap(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:
-        data = data["value"]
         return cls(
             trader=data["trader"],
             offer_coin=Coin.from_data(data["offer_coin"]),
@@ -76,7 +75,6 @@ class MsgSwapSend(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwapSend:
-        data = data["value"]
         return cls(
             from_address=data["from_address"],
             to_address=data["to_address"],

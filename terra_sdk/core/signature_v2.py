@@ -26,7 +26,6 @@ class SignatureV2:
 
     @classmethod
     def from_data(cls, data: dict) -> SignatureV2:
-        data = data["value"]
         return cls(
             public_key=PublicKey.from_data(data["public_key"]),
             data=Descriptor.from_data(data["data"]),
@@ -41,7 +40,6 @@ class Descriptor:
 
     @classmethod
     def from_data(cls, data: dict) -> Descriptor:
-        data = data["value"] if data.get("value") else data
         if data["single"] is not None:
             s = Single.from_data(data["single"])
         if data["multi"] is not None:

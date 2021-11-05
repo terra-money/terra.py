@@ -112,6 +112,10 @@ class AuthorizationGrant(JSONSerializable):
 class StakeAuthorizationValidators(JSONSerializable):
     address: List[AccAddress] = attr.ib(converter=list)
 
+    @classmethod
+    def from_data(cls, data: dict) -> StakeAuthorizationValidators:
+        return cls(address=data["address"])
+
     def to_proto(self):
         return StakeAuthorizationValidators_pb(
             address=self.address
