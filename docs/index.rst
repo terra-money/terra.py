@@ -41,7 +41,7 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     :maxdepth: 1 
     :caption: SDK Reference
 
-    common/strings
+    common/bech32
     common/numeric
     common/coin_coins
     guides/lcdclient

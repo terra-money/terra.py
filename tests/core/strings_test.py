@@ -1,4 +1,4 @@
-from terra_sdk.core.strings import (
+from terra_sdk.core.bech32 import (
     is_acc_address,
     is_acc_pubkey,
     is_val_address,

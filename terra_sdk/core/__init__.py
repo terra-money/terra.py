@@ -7,6 +7,7 @@ __all__ = [
     "AccAddress",
     "AccPubKey",
     "ValAddress",
+    "SimplePublicKey",
     "ValConsPubKey",
     "ValPubKey",
     "SignDoc",
@@ -19,4 +20,4 @@ from .numeric import Dec, Numeric
 from .public_key import PublicKey, SimplePublicKey, ValConsPubKey
 from .sign_doc import SignDoc
 from .signature_v2 import SignatureV2
-from .strings import AccAddress, AccPubKey, ValAddress, ValPubKey
+from .bech32 import AccAddress, AccPubKey, ValAddress, ValPubKey

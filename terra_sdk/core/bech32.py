@@ -6,12 +6,13 @@ from typing import NewType
 
 from bech32 import bech32_decode, bech32_encode
 
+from .public_key import ValConsPubKey
+
 __all__ = [
     "AccAddress",
     "ValAddress",
     "AccPubKey",
     "ValPubKey",
-    "ValConsPubKey",
     "is_acc_address",
     "is_acc_pubkey",
     "is_val_address",
