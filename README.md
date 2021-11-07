@@ -105,7 +105,7 @@ In order to interact with the Terra blockchain, you'll need a connection to a Te
 
 ```
 >>> from terra_sdk.client.lcd import LCDClient
->>> terra = LCDClient(chain_id="columbus-4", url="https://lcd.terra.dev")
+>>> terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
 ```
 
 ## Getting Blockchain Information
@@ -129,8 +129,8 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 >>> from terra_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-4")</strong>
-      total_supply = await terra.supply.total()
+      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
+      total_supply = await terra.bank.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
 
@@ -154,7 +154,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 >>> from terra_sdk.key.mnemonic import MnemonicKey
 
 >>> mk = MnemonicKey(mnemonic=MNEMONIC) 
->>> terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+>>> terra = LCDClient("https://lcd.terra.dev", "columbus-5")
 >>> wallet = terra.wallet(mk)
 ```
 
@@ -162,7 +162,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
 
 
 ```
->>> from terra_sdk.core.auth import StdFee
+>>> from terra_sdk.core.auth import Fee
 >>> from terra_sdk.core.bank import MsgSend
 
 >>> tx = wallet.create_and_sign_tx(
@@ -172,7 +172,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
             "1000000uluna"    # send 1 luna
         )],
         memo="test transaction!",
-        fee=StdFee(200000, "120000uluna")
+        fee=Fee(200000, "120000uluna")
     )
 ```
 

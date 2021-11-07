@@ -2,16 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Dict
-
 import attr
+from terra_proto.terra.oracle.v1beta1 import (
+    AggregateExchangeRatePrevote as AggregateExchangeRatePrevote_pb,
+)
+from terra_proto.terra.oracle.v1beta1 import (
+    AggregateExchangeRateVote as AggregateExchangeRateVote_pb,
+)
 
 from terra_sdk.core import Coin, Coins, ValAddress
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
-    "ExchangeRatePrevote",
-    "ExchangeRateVote",
     "AggregateExchangeRatePrevote",
     "AggregateExchangeRateVote",
 ]
@@ -48,6 +50,15 @@ class AggregateExchangeRateVote(JSONSerializable):
             voter=data["voter"],
         )
 
+    def to_proto(self) -> AggregateExchangeRateVote_pb:
+        return AggregateExchangeRateVote_pb(
+            exchange_rate_tuples=[
+                {"denom": tuple.denom, "exchange_rate": str(tuple.amount)}
+                for tuple in self.exchange_rate_tuples.to_list()
+            ],
+            voter=self.voter,
+        )
+
 
 @attr.s
 class AggregateExchangeRatePrevote(JSONSerializable):
@@ -77,62 +88,7 @@ class AggregateExchangeRatePrevote(JSONSerializable):
             submit_block=int(data["submit_block"]),
         )
 
-
-@attr.s
-class ExchangeRateVote(JSONSerializable):
-    """Contains information about a validator's vote for price of LUNA."""
-
-    exchange_rate: Coin = attr.ib(converter=Coin.parse)  # type: ignore
-    """Exchange rate of LUNA reported."""
-
-    denom: str = attr.ib()
-    """Stablecoin variant in which reported exchange rate is denominated in."""
-
-    voter: ValAddress = attr.ib()
-    """Validator that submitted vote."""
-
-    def to_data(self) -> dict:
-        return {
-            "exchange_rate": str(self.exchange_rate.amount),
-            "denom": self.denom,
-            "voter": self.voter,
-        }
-
-    @classmethod
-    def from_data(cls, data) -> ExchangeRateVote:
-        xr = Coin(data["denom"], data["exchange_rate"])
-        return cls(exchange_rate=xr, denom=xr.denom, voter=data["voter"])
-
-
-@attr.s
-class ExchangeRatePrevote(JSONSerializable):
-    """Contains information about a validator's prevote."""
-
-    hash: str = attr.ib()
-    """Vote hash for the upcoming vote."""
-
-    denom: str = attr.ib()
-    """Stablecoin variant for which the prevote corresponds to."""
-
-    voter: ValAddress = attr.ib()
-    """Validator that submitted the prevote."""
-
-    submit_block: int = attr.ib(converter=int)
-    """Block height at which the prevote was submitted."""
-
-    def to_data(self) -> Dict[str, str]:
-        return {
-            "hash": self.hash,
-            "denom": self.denom,
-            "voter": self.voter,
-            "submit_block": str(self.submit_block),
-        }
-
-    @classmethod
-    def from_data(cls, data: dict) -> ExchangeRatePrevote:
-        return cls(
-            hash=data["hash"],
-            denom=data["denom"],
-            voter=data["voter"],
-            submit_block=int(data["submit_block"]),
+    def to_proto(self) -> AggregateExchangeRatePrevote_pb:
+        return AggregateExchangeRatePrevote_pb(
+            hash=self.hash, voter=self.voter, submit_block=self.submit_block
         )

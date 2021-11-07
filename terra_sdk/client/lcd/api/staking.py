@@ -1,8 +1,9 @@
+import copy
 from typing import List, Optional
 
 import attr
 
-from terra_sdk.core import AccAddress, Coin, ValAddress
+from terra_sdk.core import AccAddress, Coin, Numeric, ValAddress
 from terra_sdk.core.staking import (
     Delegation,
     Redelegation,
@@ -13,6 +14,32 @@ from terra_sdk.core.staking import (
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncStakingAPI", "StakingAPI", "StakingPool"]
+
+from ..params import APIParams, PaginationOptions
+
+
+class RedelegationsOptions(PaginationOptions):
+    """just internal class for relegation option"""
+
+    def __init__(
+        self,
+        src_validator_addr: Optional[str] = None,
+        dst_validator_addr: Optional[str] = None,
+    ):
+        super().__init__(self)
+        self.src_validator_addr = src_validator_addr
+        self.dst_validator_addr = dst_validator_addr
+
+    def __str__(self):
+        return "&".join(self.to_dict())
+
+    def to_dict(self) -> dict:
+        params = super().to_dict()
+        if self.src_validator_addr is not None:
+            params["src_validator_addr"] = self.src_validator_addr
+        if self.dst_validator_addr is not None:
+            params["dst_validator_addr"] = self.dst_validator_addr
+        return params
 
 
 @attr.s
@@ -26,12 +53,14 @@ class AsyncStakingAPI(BaseAsyncAPI):
         self,
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
-    ) -> List[Delegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[Delegation], dict):
         """Fetches current delegations, filtering by delegator, validator, or both.
 
         Args:
             delegator (Optional[AccAddress], optional): delegator account address.
             validator (Optional[ValAddress], optional): validator operator address.
+            params (Optional[APIParams], optional): api parameters
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
@@ -41,15 +70,26 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """
         if delegator is not None and validator is not None:
             res = await self._c._get(
-                f"/staking/delegators/{delegator}/delegations/{validator}"
+                f"/cosmos/staking/v1beta1/validators/{validator}/delegations/{delegator}",
+                params,
             )
-            return [Delegation.from_data(res)]
+            return [Delegation.from_data(res.get("delegation_response"))], res.get(
+                "pagination"
+            )
         elif delegator is not None:
-            res = await self._c._get(f"/staking/delegators/{delegator}/delegations")
-            return [Delegation.from_data(d) for d in res]
+            res = await self._c._get(
+                f"/cosmos/staking/v1beta1/delegations/{delegator}", params
+            )
+            return [
+                Delegation.from_data(d) for d in res.get("delegation_responses")
+            ], res.get("pagination")
         elif validator is not None:
-            res = await self._c._get(f"/staking/validators/{validator}/delegations")
-            return [Delegation.from_data(d) for d in res]
+            res = await self._c._get(
+                f"/cosmos/staking/v1beta1/validators/{validator}/delegations", params
+            )
+            return [
+                Delegation.from_data(d) for d in res.get("delegation_responses")
+            ], res.get("pagination")
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
@@ -59,27 +99,30 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """Fetch a single delegation via a delegator, validator pair.
 
         Args:
-            delegator (AccAddress): delegator account address
-            validator (ValAddress): validator operator address
+            delegator (Optional[AccAddress), optional: delegator account address
+            validator (Optional[ValAddress], optional): validator operator address
 
         Returns:
             Delegation: delegation
         """
         res = await self._c._get(
-            f"/staking/delegators/{delegator}/delegations/{validator}"
+            f"/cosmos/staking/v1beta1/validators/{validator}/delegations/{delegator}"
         )
+        res = res.get("delegation_response").get("delegation")
         return res
 
     async def unbonding_delegations(
         self,
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
-    ) -> List[UnbondingDelegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[UnbondingDelegation], dict):
         """Fetches current undelegations, filtering by delegator, validator, or both.
 
         Args:
             delegator (Optional[AccAddress], optional): delegator account address.
             validator (Optional[ValAddress], optional): validator operator address.
+            params (Optional[APIParams], optional): api parameters
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
@@ -89,19 +132,28 @@ class AsyncStakingAPI(BaseAsyncAPI):
         """
         if delegator is not None and validator is not None:
             res = await self._c._get(
-                f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
+                f"/cosmos/staking/v1beta1/validators/{validator}/delegations/{delegator}/unbonding_delegation",
+                params,
             )
-            return [UnbondingDelegation.from_data(res)]
+            return [UnbondingDelegation.from_data(res.get("unbond"))], res.get(
+                "pagination"
+            )
         elif delegator is not None:
             res = await self._c._get(
-                f"/staking/delegators/{delegator}/unbonding_delegations"
+                f"/cosmos/staking/v1beta1/delegators/{delegator}/unbonding_delegations",
+                params,
             )
-            return [UnbondingDelegation.from_data(x) for x in res]
+            return [
+                UnbondingDelegation.from_data(x) for x in res.get("unbonding_responses")
+            ], res.get("pagination")
         elif validator is not None:
             res = await self._c._get(
-                f"/staking/validators/{validator}/unbonding_delegations"
+                f"/cosmos/staking/v1beta1/validators/{validator}/unbonding_delegations",
+                params,
             )
-            return [UnbondingDelegation.from_data(x) for x in res]
+            return [
+                UnbondingDelegation.from_data(x) for x in res.get("unbonding_responses")
+            ], res.get("pagination")
         else:
             raise TypeError("arguments delegator and validator cannot both be None")
 
@@ -118,40 +170,49 @@ class AsyncStakingAPI(BaseAsyncAPI):
             UnbondingDelegation: undelegation
         """
         res = await self._c._get(
-            f"/staking/delegators/{delegator}/unbonding_delegations/{validator}"
+            f"/cosmos/staking/v1beta1/validators/{validator}/delegations/{delegator}/unbonding_delegation"
         )
-        return UnbondingDelegation.from_data(res)
+        return UnbondingDelegation.from_data(res.get("unbond"))
 
     async def redelegations(
         self,
         delegator: Optional[AccAddress] = None,
         validator_src: Optional[ValAddress] = None,
         validator_dst: Optional[ValAddress] = None,
-    ) -> List[Redelegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[Redelegation], dict):
         """Fetch redelgations.
 
         Args:
             delegator (Optional[AccAddress], optional): delegator account address.
             validator_src (Optional[ValAddress], optional): source validator operator address (from).
             validator_dst (Optional[ValAddress], optional): dest. validator operator address (to).
+            params (Optional[APIParams], optional): api parameters
 
         Returns:
             List[Redelegation]: redelegations
         """
-        params = {
-            "delegator": delegator,
-            "validator_from": validator_src,
-            "validator_to": validator_dst,
-        }
 
-        for x in list(params.keys()):
-            if params[x] is None:
-                del params[x]
+        # _params = RedelegationsOptions(src_validator_addr=validator_src, dst_validator_addr=validator_dst)
+        if params is not None:
+            _params = params.to_dict()
+        else:
+            _params = {}
+        _params["src_validator_addr"] = validator_src
+        _params["dst_validator_addr"] = validator_dst
+        for x in list(_params.keys()):
+            if _params[x] is None:
+                del _params[x]
+        res = await self._c._get(
+            f"/cosmos/staking/v1beta1/delegators/{delegator}/redelegations", _params
+        )
+        return [
+            Redelegation.from_data(d) for d in res.get("redelegation_responses")
+        ], res.get("pagination")
 
-        res = await self._c._get("/staking/redelegations", params)
-        return [Redelegation.from_data(d) for d in res]
-
-    async def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
+    async def bonded_validators(
+        self, delegator: AccAddress, params: Optional[PaginationOptions]
+    ) -> (List[Validator], dict):
         """Fetches the list of validators a delegator is currently delegating to.
 
         Args:
@@ -160,17 +221,23 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             List[Validator]: currently bonded validators
         """
-        res = await self._c._get(f"/staking/delegators/{delegator}/validators")
-        return [Validator.from_data(d) for d in res]
+        res = await self._c._get(
+            f"/cosmos/staking/v1beta1/delegators/{delegator}/validators", params
+        )
+        return [Validator.from_data(d) for d in res.get("validators")], res.get(
+            "pagination"
+        )
 
-    async def validators(self) -> List[Validator]:
+    async def validators(self, params: Optional[APIParams]) -> (List[Validator], dict):
         """Fetch information of all validators.
 
         Returns:
             List[Validator]: validator informations
         """
-        res = await self._c._get("/staking/validators")
-        return [Validator.from_data(d) for d in res]
+        res = await self._c._get("/cosmos/staking/v1beta1/validators", params)
+        return [Validator.from_data(d) for d in res.get("validators")], res.get(
+            "pagination"
+        )
 
     async def validator(self, validator: ValAddress) -> Validator:
         """Fetch information about a single validator.
@@ -181,8 +248,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             Validator: validator information
         """
-        res = await self._c._get(f"/staking/validators/{validator}")
-        return Validator.from_data(res)
+        res = await self._c._get(f"/cosmos/staking/v1beta1/validators/{validator}")
+        return Validator.from_data(res.get("validator"))
 
     async def pool(self) -> StakingPool:
         """Fetch current staking pool information.
@@ -190,7 +257,8 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             StakingPool: information about current staking pool
         """
-        res = await self._c._get("/staking/pool")
+        res = await self._c._get("/cosmos/staking/v1beta1/pool")
+        res = res.get("pool")
         return StakingPool(
             bonded_tokens=Coin("uluna", res["bonded_tokens"]),
             not_bonded_tokens=Coin("uluna", res["not_bonded_tokens"]),
@@ -202,8 +270,15 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Returns:
             dict: Staking module parameters
         """
-        res = await self._c._get("/staking/parameters")
-        return res
+        res = await self._c._get("/cosmos/staking/v1beta1/params")
+        res = res.get("params")
+        return {
+            "unbonding_time": res["unbonding_time"],
+            "max_validators": Numeric.parse(res["max_validators"]),
+            "max_entries": Numeric.parse(res["max_entries"]),
+            "historical_entries": Numeric.parse(res["historical_entries"]),
+            "bond_denom": res["bond_denom"],
+        }
 
 
 class StakingAPI(AsyncStakingAPI):
@@ -212,7 +287,8 @@ class StakingAPI(AsyncStakingAPI):
         self,
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
-    ) -> List[Delegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[Delegation], dict):
         pass
 
     delegations.__doc__ = AsyncStakingAPI.delegations.__doc__
@@ -228,7 +304,8 @@ class StakingAPI(AsyncStakingAPI):
         self,
         delegator: Optional[AccAddress] = None,
         validator: Optional[ValAddress] = None,
-    ) -> List[UnbondingDelegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[UnbondingDelegation], dict):
         pass
 
     unbonding_delegations.__doc__ = AsyncStakingAPI.unbonding_delegations.__doc__
@@ -247,19 +324,22 @@ class StakingAPI(AsyncStakingAPI):
         delegator: Optional[AccAddress] = None,
         validator_src: Optional[ValAddress] = None,
         validator_dst: Optional[ValAddress] = None,
-    ) -> List[Redelegation]:
+        params: Optional[APIParams] = None,
+    ) -> (List[Redelegation], dict):
         pass
 
     redelegations.__doc__ = AsyncStakingAPI.redelegations.__doc__
 
     @sync_bind(AsyncStakingAPI.bonded_validators)
-    def bonded_validators(self, delegator: AccAddress) -> List[Validator]:
+    def bonded_validators(
+        self, delegator: AccAddress, params: Optional[PaginationOptions] = None
+    ) -> (List[Validator], dict):
         pass
 
     bonded_validators.__doc__ = AsyncStakingAPI.bonded_validators.__doc__
 
     @sync_bind(AsyncStakingAPI.validators)
-    def validators(self) -> List[Validator]:
+    def validators(self, params: Optional[APIParams]) -> (List[Validator], dict):
         pass
 
     validators.__doc__ = AsyncStakingAPI.validators.__doc__

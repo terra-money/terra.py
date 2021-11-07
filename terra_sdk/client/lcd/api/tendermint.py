@@ -12,7 +12,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
         Returns:
             dict: node information
         """
-        return await self._c._get("/node_info", raw=True)
+        return await self._c._get("/cosmos/base/tendermint/v1beta1/node_info")
 
     async def syncing(self) -> bool:
         """Fetches whether the curent connect node is syncing with the network.
@@ -20,7 +20,9 @@ class AsyncTendermintAPI(BaseAsyncAPI):
         Returns:
             bool: syncing status
         """
-        return (await self._c._get("/syncing", raw=True))["syncing"]
+        return (await self._c._get("/cosmos/base/tendermint/v1beta1/syncing"))[
+            "syncing"
+        ]
 
     async def validator_set(self, height: Optional[int] = None) -> dict:
         """Fetches the validator set for a height. If no height is given, defaults to latest.
@@ -32,7 +34,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
             dict: validator set
         """
         x = "latest" if height is None else height
-        return await self._c._get(f"/validatorsets/{x}")
+        return await self._c._get(f"/cosmos/base/tendermint/v1beta1/validatorsets/{x}")
 
     async def block_info(self, height: Optional[int] = None) -> dict:
         """Fetches the block information for a given height. If no height is given, defaults to latest block.
@@ -44,7 +46,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
             dict: block info
         """
         x = "latest" if height is None else height
-        return await self._c._get(f"/blocks/{x}", raw=True)
+        return await self._c._get(f"/cosmos/base/tendermint/v1beta1/blocks/{x}")
 
 
 class TendermintAPI(AsyncTendermintAPI):

@@ -17,8 +17,8 @@ class AsyncMarketAPI(BaseAsyncAPI):
             Coin: simulated amount received
         """
         params = {"offer_coin": str(offer_coin), "ask_denom": ask_denom}
-        res = await self._c._get("/market/swap", params)
-        return Coin.from_data(res)
+        res = await self._c._get("/terra/market/v1beta1/swap", params)
+        return Coin.from_data(res.get("return_coin"))
 
     async def terra_pool_delta(self) -> Dec:
         """Fetches the Terra pool delta.
@@ -26,8 +26,8 @@ class AsyncMarketAPI(BaseAsyncAPI):
         Returns:
             Dec: Terra pool delta
         """
-        res = await self._c._get("/market/terra_pool_delta")
-        return Dec(res)
+        res = await self._c._get("/terra/market/v1beta1/terra_pool_delta")
+        return Dec(res.get("terra_pool_delta"))
 
     async def parameters(self) -> dict:
         """Fetches the Market module's parameters.
@@ -35,7 +35,13 @@ class AsyncMarketAPI(BaseAsyncAPI):
         Returns:
             dict: Market module parameters
         """
-        return await self._c._get("/market/parameters")
+        res = await self._c._get("/terra/market/v1beta1/params")
+        params = res["params"]
+        return {
+            "base_pool": Dec(params.get("base_pool")),
+            "pool_recovery_period": int(params.get("pool_recovery_period")),
+            "min_stability_spread": Dec(params.get("min_stability_spread")),
+        }
 
 
 class MarketAPI(AsyncMarketAPI):

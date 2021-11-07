@@ -3,12 +3,24 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgFundCommunityPool as MsgFundCommunityPool_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgSetWithdrawAddress as MsgSetWithdrawAddress_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgWithdrawDelegatorReward as MsgWithdrawDelegatorReward_pb,
+)
+from terra_proto.cosmos.distribution.v1beta1 import (
+    MsgWithdrawValidatorCommission as MsgWithdrawValidatorCommission_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins, ValAddress
 from terra_sdk.core.msg import Msg
 
 __all__ = [
-    "MsgModifyWithdrawAddress",
+    "MsgSetWithdrawAddress",
     "MsgWithdrawDelegationReward",
     "MsgWithdrawValidatorCommission",
     "MsgFundCommunityPool",
@@ -16,7 +28,7 @@ __all__ = [
 
 
 @attr.s
-class MsgModifyWithdrawAddress(Msg):
+class MsgSetWithdrawAddress(Msg):
     """Modify the Withdraw Address of a delegator.
 
     Args:
@@ -24,7 +36,9 @@ class MsgModifyWithdrawAddress(Msg):
         withdraw_address: new withdraw address
     """
 
-    type = "distribution/MsgModifyWithdrawAddress"
+    type = "distribution/MsgSetWithdrawAddress"
+    """"""
+    type_url = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
     """"""
     action = "set_withdraw_address"
     """"""
@@ -32,12 +46,24 @@ class MsgModifyWithdrawAddress(Msg):
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "delegator_address": self.delegator_address,
+            "withdraw_address": self.withdraw_address
+        }
+
     @classmethod
-    def from_data(cls, data: dict) -> MsgModifyWithdrawAddress:
-        data = data["value"]
+    def from_data(cls, data: dict) -> MsgSetWithdrawAddress:
         return cls(
             delegator_address=data["delegator_address"],
             withdraw_address=data["withdraw_address"],
+        )
+
+    def to_proto(self) -> MsgSetWithdrawAddress_pb:
+        return MsgSetWithdrawAddress_pb(
+            delegator_address=self.delegator_address,
+            withdraw_address=self.withdraw_address,
         )
 
 
@@ -52,18 +78,32 @@ class MsgWithdrawDelegationReward(Msg):
 
     type = "distribution/MsgWithdrawDelegationReward"
     """"""
+    type_url = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+    """"""
     action = "withdraw_delegation_reward"
     """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "delegator_address": self.delegator_address,
+            "withdraw_address": self.withdraw_address
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
-        data = data["value"]
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
+        )
+
+    def to_proto(self) -> MsgWithdrawDelegatorReward_pb:
+        return MsgWithdrawDelegatorReward_pb(
+            delegator_address=self.delegator_address,
+            validator_address=self.validator_address,
         )
 
 
@@ -77,15 +117,27 @@ class MsgWithdrawValidatorCommission(Msg):
 
     type = "distribution/MsgWithdrawValidatorCommission"
     """"""
+    type_url = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
+    """"""
     action = "withdraw_validator_commission"
     """"""
 
     validator_address: ValAddress = attr.ib()
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "validator_address": self.validator_address
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawValidatorCommission:
-        data = data["value"]
         return cls(validator_address=data["validator_address"])
+
+    def to_proto(self) -> MsgWithdrawValidatorCommission_pb:
+        return MsgWithdrawValidatorCommission_pb(
+            validator_address=self.validator_address
+        )
 
 
 @attr.s
@@ -99,11 +151,24 @@ class MsgFundCommunityPool(Msg):
 
     type = "distribution/MsgFundCommunityPool"
     """"""
+    type_url = "/cosmos.distribution.v1beta1.MsgFundCommunityPool"
+    """"""
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "depositor": self.depositor,
+            "amount": self.amount.to_data()
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgFundCommunityPool:
-        data = data["value"]
         return cls(depositor=data["depositor"], amount=Coins.from_data(data["amount"]))
+
+    def to_proto(self) -> MsgFundCommunityPool_pb:
+        return MsgFundCommunityPool_pb(
+            depositor=self.depositor, amount=self.amount.to_proto()
+        )

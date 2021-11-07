@@ -18,13 +18,10 @@ class AsyncAuthAPI(BaseAsyncAPI):
             address (AccAddress): account address
 
         Returns:
-            Union[Account, LazyGradedVestingAccount]: account information
+            Union[BaseAccount, LazyGradedVestingAccount]: account information
         """
-        result = await self._c._get(f"/auth/accounts/{address}")
-        if result["type"] == "core/Account":
-            return Account.from_data(result)
-        else:
-            return LazyGradedVestingAccount.from_data(result)
+        result = await self._c._get(f"/cosmos/auth/v1beta1/accounts/{address}")
+        return Account.from_data(result["account"])
 
 
 class AuthAPI(AsyncAuthAPI):

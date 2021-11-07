@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Union
 
 import attr
+from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
 from terra_sdk.util.json import JSONSerializable
 
@@ -64,6 +66,16 @@ class Coin(JSONSerializable):
         return {"denom": self.denom, "amount": str(self.amount)}
 
     @classmethod
+    def from_proto(cls, proto: Coin_pb) -> Coin:
+        return cls(proto.denom, proto.amount)
+
+    def to_proto(self) -> Coin_pb:
+        coin = Coin_pb()
+        coin.denom = self.denom
+        coin.amount = str(self.amount)
+        return coin
+
+    @classmethod
     def from_str(cls, string: str) -> Coin:
         """Creates a new :class:`Coin` from a coin-format string. Must match the format:
         ``283923uusd`` (``int``-Coin) or ``23920.23020uusd`` (:class:`Dec`-Coin).
@@ -88,7 +100,7 @@ class Coin(JSONSerializable):
         Returns:
             Coin: converted string
         """
-        pattern = r"^(\-?[0-9]+(\.[0-9]+)?)([a-zA-Z]+)$"
+        pattern = r"^(\-?[0-9]+(\.[0-9]+)?)([0-9a-zA-Z/]+)$"
         match = re.match(pattern, string)
         if match is None:
             raise ValueError(f"failed to parse Coin: {string}")

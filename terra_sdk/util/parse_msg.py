@@ -1,23 +1,21 @@
+from terra_sdk.core.authz import (
+    MsgExecAuthorized,
+    MsgGrantAuthorization,
+    MsgRevokeAuthorization,
+)
 from terra_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 )
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.msgauth import (
-    MsgExecAuthorized,
-    MsgGrantAuthorization,
-    MsgRevokeAuthorization,
-)
 from terra_sdk.core.oracle import (
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
     MsgDelegateFeedConsent,
-    MsgExchangeRatePrevote,
-    MsgExchangeRateVote,
 )
 from terra_sdk.core.slashing import MsgUnjail
 from terra_sdk.core.staking import (
@@ -28,11 +26,13 @@ from terra_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_sdk.core.wasm import (
+    MsgClearContractAdmin,
     MsgExecuteContract,
     MsgInstantiateContract,
+    MsgMigrateCode,
     MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
+    MsgUpdateContractAdmin,
 )
 
 from .base import create_demux
@@ -40,13 +40,13 @@ from .base import create_demux
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 ]
 gov_msgs = [MsgDeposit, MsgSubmitProposal, MsgVote]
 market_msgs = [MsgSwap, MsgSwapSend]
-msgauth_msgs = [
+authz_msgs = [
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,
@@ -55,8 +55,6 @@ oracle_msgs = [
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
     MsgDelegateFeedConsent,
-    MsgExchangeRatePrevote,
-    MsgExchangeRateVote,
 ]
 slashing_msgs = [MsgUnjail]
 staking_msgs = [
@@ -67,11 +65,13 @@ staking_msgs = [
     MsgUndelegate,
 ]
 wasm_msgs = [
-    MsgExecuteContract,
-    MsgInstantiateContract,
-    MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractOwner,
+    MsgMigrateCode,
+    MsgInstantiateContract,
+    MsgExecuteContract,
+    MsgMigrateContract,
+    MsgUpdateContractAdmin,
+    MsgClearContractAdmin,
 ]
 
 parse_msg = create_demux(

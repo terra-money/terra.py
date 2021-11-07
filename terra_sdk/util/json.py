@@ -1,5 +1,6 @@
 import copy
 import json
+from abc import ABC, abstractmethod
 from typing import Any
 
 
@@ -18,7 +19,7 @@ def dict_to_data(d: dict) -> dict:
     return {key: to_data(d[key]) for key in d}
 
 
-class JSONSerializable:
+class JSONSerializable(ABC):
     def to_data(self) -> Any:
         """Converts the object to its JSON-serializable Python data representation."""
         return dict_to_data(copy.deepcopy(self.__dict__))
@@ -28,6 +29,6 @@ class JSONSerializable:
         and the JSON rendered removes all unnecessary whitespace.
 
         Returns:
-            str: JSON string representation
+           str: JSON string representation
         """
         return json.dumps(self.to_data(), sort_keys=True, separators=(",", ":"))

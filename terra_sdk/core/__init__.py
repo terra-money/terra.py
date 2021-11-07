@@ -9,9 +9,14 @@ __all__ = [
     "ValAddress",
     "ValConsPubKey",
     "ValPubKey",
+    "SignDoc",
+    "SignatureV2",
 ]
 
 from .coin import Coin
 from .coins import Coins
 from .numeric import Dec, Numeric
-from .strings import AccAddress, AccPubKey, ValAddress, ValConsPubKey, ValPubKey
+from .public_key import PublicKey, SimplePublicKey, ValConsPubKey
+from .sign_doc import SignDoc
+from .signature_v2 import SignatureV2
+from .strings import AccAddress, AccPubKey, ValAddress, ValPubKey

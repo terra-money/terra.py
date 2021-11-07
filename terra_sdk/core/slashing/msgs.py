@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.slashing.v1beta1 import MsgUnjail as MsgUnjail_pb
 
 from terra_sdk.core import ValAddress
 from terra_sdk.core.msg import Msg
@@ -19,6 +20,8 @@ class MsgUnjail(Msg):
 
     type = "slashing/MsgUnjail"
     """"""
+    type_url = "/cosmos.slashing.v1beta1.MsgUnjail"
+    """"""
     action = "unjail"
     """"""
 
@@ -26,5 +29,7 @@ class MsgUnjail(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUnjail:
-        data = data["value"]
         return cls(address=data["address"])
+
+    def to_proto(self) -> MsgUnjail_pb:
+        return MsgUnjail_pb(validator_addr=self.address)

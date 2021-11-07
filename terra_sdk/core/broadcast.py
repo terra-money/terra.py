@@ -38,6 +38,12 @@ class BlockTxBroadcastResult(JSONSerializable):
     """If this is present, the transaction failed."""
     codespace: Optional[str] = attr.ib(default=None)
     """Error subspace name: used alongside ``code``."""
+    info: Optional[str] = attr.ib(default=None)
+    """"""
+    data: Optional[str] = attr.ib(default=None)
+    """"""
+    timestamp: Optional[str] = attr.ib(default=None)
+    """timestamp"""
 
     def is_tx_error(self) -> bool:
         """Returns whether the transaction failed."""
@@ -49,8 +55,6 @@ class SyncTxBroadcastResult(JSONSerializable):
     """Data object that contains the response result from node after transaction
     has been broadcasted with the ``sync`` broadcast mode."""
 
-    height: int = attr.ib(converter=int)
-    """Height at which transaction was included."""
     txhash: str = attr.ib()
     """Transaction hash."""
     raw_log: Optional[str] = attr.ib()
@@ -70,8 +74,6 @@ class AsyncTxBroadcastResult(JSONSerializable):
     """Data object that contains the response result from node after transaction
     has been broadcasted with the ``sync`` broadcast mode."""
 
-    height: int = attr.ib(converter=int)
-    """Height at which transaction was included."""
     txhash: str = attr.ib()
     """Transaction hash."""
 

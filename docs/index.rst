@@ -58,12 +58,11 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     core_modules/gov
     core_modules/market
     core_modules/mint
-    core_modules/msgauth
+    core_modules/authz
     core_modules/oracle
     core_modules/params
     core_modules/slashing
     core_modules/staking
-    core_modules/supply
     core_modules/tendermint
     core_modules/treasury
     core_modules/tx
