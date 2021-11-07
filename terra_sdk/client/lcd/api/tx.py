@@ -188,7 +188,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             opt.gas_adjustment = gas_adjustment
             gas = str(self.estimate_gas(tx, opt))
 
-        tax_amount = self.compute_tax(tx)  # TODO
+        tax_amount = self.compute_tax(tx)
         fee_amount = (
             tax_amount.add(gas_prices_coins.mul(gas).to_int_coins())
             if gas_prices_coins

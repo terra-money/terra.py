@@ -4,10 +4,11 @@ from __future__ import annotations
 
 __all__ = ["Plan"]
 
+import datetime
 from typing import Any, Optional
 
 import attr
-from betterproto import datetime
+from dateutil import parser
 from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
 
@@ -19,14 +20,14 @@ class Plan(JSONSerializable):
     name: str = attr.ib()
     height: str = attr.ib()
     info: str = attr.ib()
-    time: Optional[datetime] = attr.ib(default=None, converter=datetime.fromisoformat)
+    time: Optional[datetime] = attr.ib(default=None, converter=parser.parse)
     upgrade_client_state: Optional[Any] = attr.ib(default=None)
 
     @classmethod
     def from_data(cls, data: dict) -> Plan:
         return cls(
             name=data["name"],
-            time=data["time"] if data.get("time") else None,
+            time=parser.parse(data["time"]) if data.get("time") else None,
             height=data["height"],
             info=data["info"],
             upgrade_client_state=data["upgrade_client_state"]

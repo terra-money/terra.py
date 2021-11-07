@@ -45,19 +45,18 @@ class SignDoc(JSONSerializable):
             account_number=proto.account_number,
             auth_info=AuthInfo.from_proto(
                 proto.auth_info_bytes
-            ),  # FIXME: encode/base64
-            tx_body=TxBody.from_proto(proto.body_bytes),  # FIXME: encode/base64
+            ),
+            tx_body=TxBody.from_proto(proto.body_bytes),
         )
 
     def to_proto(self) -> SignDoc_pb:
         return SignDoc_pb(
-            body_bytes=bytes(self.tx_body.to_proto()),  # FIXME: encode/base64
-            auth_info_bytes=bytes(self.auth_info.to_proto()),  # FIXME: encode/base64
+            body_bytes=bytes(self.tx_body.to_proto()),
+            auth_info_bytes=bytes(self.auth_info.to_proto()),
             chain_id=self.chain_id,
             account_number=self.account_number,
         )
         return proto
 
     def to_bytes(self) -> bytes:
-        # return base64.b64encode(bytes(self.to_proto()))
         return bytes(self.to_proto())

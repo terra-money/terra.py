@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Optional, Union
 
 from terra_sdk.core import Dec, Numeric, ValConsPubKey
+from dateutil import parser
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -12,7 +13,6 @@ from ..params import APIParams
 
 class AsyncSlashingAPI(BaseAsyncAPI):
 
-    # TODO: untested
     async def signing_info(
         self, val_cons_pub_key: ValConsPubKey
     ) -> Union[List[dict], dict]:
@@ -32,7 +32,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             "address": info["address"],
             "start_height": Numeric.parse(info["start_height"]),
             "index_offset": Numeric.parse(info["index_offset"]),
-            "jailed_until": info["jailed_until"],  # TODO: convert to datetime
+            "jailed_until": parser.parse(info["jailed_until"]),  # TODO: convert to datetime
             "tombstoned": bool(info["tombstoned"]),
             "missed_blocks_counter": Numeric.parse(info["missed_blocks_counter"]),
         }

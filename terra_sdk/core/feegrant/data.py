@@ -1,11 +1,12 @@
 """feegrant module data objects."""
 from __future__ import annotations
 
+import datetime
 from types import Union
 from typing import List
 
 import attr
-from betterproto import datetime
+from dateutil import parser
 from terra_proto.cosmos.feegrant.v1beta1 import (
     AllowedMsgAllowance as AllowedMsgAllowance_pb,
 )
@@ -28,7 +29,7 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Coins = attr.ib(converter=Coins)
-    expiration: datetime = attr.ib(converter=datetime.fromisoformat)
+    expiration: datetime = attr.ib(converter=parser.parse)
 
     type_url = "/cosmos.feegrant.v1beta1.BasicAllowanc"
 
@@ -36,7 +37,7 @@ class BasicAllowance(JSONSerializable):
     def from_data(cls, data: dict) -> BasicAllowance:
         return cls(
             spend_limit=Coins.from_data(data["spend_limit"]),
-            expiration=datetime.fromisoformat(data["expiration"]),
+            expiration=parser.parse(data["expiration"]),
         )
 
     def to_proto(self) -> BasicAllowance_pb:
@@ -56,7 +57,7 @@ class PeriodicAllowance(JSONSerializable):
     period: int = attr.ib(converter=int)
     period_spend_limit: Coins = attr.ib(converter=Coins)
     period_can_spend: Coins = attr.ib(converter=Coins)
-    period_reset: datetime = attr.ib(converter=datetime.fromisoformat)
+    period_reset: datetime = attr.ib(converter=parser.parse)
 
     type_url = "/cosmos.feegrant.v1beta1.PeriodicAllowance"
 

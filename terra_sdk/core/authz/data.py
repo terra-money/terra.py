@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Optional
 
 import attr
-import betterproto
+from dateutil import parser
 from terra_proto.cosmos.authz.v1beta1 import (
     GenericAuthorization as GenericAuthorization_pb,
 )
@@ -125,7 +125,7 @@ class AuthorizationGrant(JSONSerializable):
     def to_proto(self) -> Grant_pb:
         return Grant_pb(
             authorization=self.authorization.to_proto(),
-            expiration=betterproto.datetime.fromisoformat(self.expiration),
+            expiration=parser.parse(self.expiration),
         )
 
 

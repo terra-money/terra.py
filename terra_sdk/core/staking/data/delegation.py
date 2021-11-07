@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List
 
 import attr
-from betterproto import datetime
+from dateutil import parser
 from terra_proto.cosmos.staking.v1beta1 import Delegation as Delegation_pb
 from terra_proto.cosmos.staking.v1beta1 import (
     DelegationResponse as DelegationResponse_pb,
@@ -103,7 +103,7 @@ class UnbondingDelegationEntry(JSONSerializable):
             initial_balance=str(self.initial_balance),
             balance=str(self.balance),
             creation_height=self.creation_height,
-            completion_time=datetime.fromisostring(self.completion_time),
+            completion_time=parser.parse(self.completion_time),
         )
 
 
@@ -153,7 +153,7 @@ class RedelegationEntryInfo(JSONSerializable):
             initial_balance=str(self.initial_balance),
             shares_dst=str(self.shares_dst),
             creation_height=self.creation_height,
-            completion_time=datetime.fromisoformat(self.completion_time),
+            completion_time=parser.parse(self.completion_time),
         )
 
 

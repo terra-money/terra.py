@@ -36,7 +36,7 @@ class MsgTransfer(Msg):
 
     source_port: str = attr.ib()
     source_channel: str = attr.ib()
-    token: Coin = attr.ib(converter=Coin.parse())
+    token: Coin = attr.ib(converter=Coin.parse)
     sender: AccAddress = attr.ib()
     receiver: str = attr.ib()  # stay str-typed because it may not be our address
     timeout_height: Height = attr.ib()

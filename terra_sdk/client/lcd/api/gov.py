@@ -2,7 +2,8 @@ from typing import List, Optional
 
 from terra_sdk.core import Coins, Dec
 from terra_sdk.core.deposit import Deposit
-from terra_sdk.core.gov import Proposal, ProposalStatus
+from terra_sdk.core.gov import Proposal, ProposalStatus, WeightedVoteOption
+from terra_sdk.core.gov.data import Vote
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -157,15 +158,17 @@ class AsyncGovAPI(BaseAsyncAPI):
                     msg.get("@type") == "/cosmos.gov.v1beta1.MsgVote"
                     and msg.get("proposal_id") == proposal_id
                 ):
-                    # FIXME
-                    raise NotImplementedError("core/gov/Vote is needed")
+                    votes.append(WeightedVoteOption(msg.get("option"), 1))
                 elif (
                     msg.get("@type") == "/cosmos.gov.v1beta1.MsgVoteWeighted"
                     and msg.get("proposal_id") == proposal_id
                 ):
-                    # FIXME
-                    raise NotImplementedError("core/gov/Vote is needed")
-            return votes, pagination
+                    votes.append(Vote(
+                        proposal_id=proposal_id,
+                        voter=msg.get("voter"),
+                        options=msg.get("options")
+                    ))
+        return votes, pagination
 
     async def tally(self, proposal_id: int):
         """Fetches the tally for a proposal.

@@ -3,7 +3,7 @@ from __future__ import annotations
 import copy
 
 import attr
-from betterproto import datetime
+from dateutil import parser
 from terra_proto.cosmos.staking.v1beta1 import BondStatus
 from terra_proto.cosmos.staking.v1beta1 import Commission as Commission_pb
 from terra_proto.cosmos.staking.v1beta1 import CommissionRates as CommissionRates_pb
@@ -65,7 +65,7 @@ class Commission(JSONSerializable):
     def to_proto(self) -> Commission_pb:
         return Commission_pb(
             commission_rates=self.commission_rates.to_proto(),
-            update_time=datetime.fromisoformat(self.update_time),
+            update_time=parser.parse(self.update_time),
         )
 
 
@@ -180,7 +180,7 @@ class Validator(JSONSerializable):
             delegator_shares=str(self.delegator_shares),
             description=self.description.to_proto(),
             unbonding_height=self.unbonding_height,
-            unbonding_time=datetime.fromisoformat(self.unbonding_time),
+            unbonding_time=parser.parse(self.unbonding_time),
             commission=self.commission.to_proto(),
             min_self_delegation=str(self.min_self_delegation),
         )
