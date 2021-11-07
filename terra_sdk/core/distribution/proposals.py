@@ -47,7 +47,7 @@ class CommunityPoolSpendProposal(JSONSerializable):
             "title": self.title,
             "description": self.description,
             "recipient": self.recipient,
-            "amount": self.amount.to_data()
+            "amount": self.amount.to_data(),
         }
 
     def to_proto(self) -> CommunityPoolSpendProposal_pb:

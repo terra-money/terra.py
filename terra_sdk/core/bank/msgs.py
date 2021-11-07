@@ -97,10 +97,7 @@ class MultiSendInput(JSONSerializable):
     """Coins to be sent / received."""
 
     def to_data(self) -> dict:
-        return {
-            "address": self.address,
-            "coins": self.coins.to_data()
-        }
+        return {"address": self.address, "coins": self.coins.to_data()}
 
     @classmethod
     def from_data(cls, data: dict):
@@ -141,10 +138,7 @@ class MultiSendOutput(JSONSerializable):
         return cls(address=data["address"], coins=Coins.from_data(data["coins"]))
 
     def to_data(self) -> dict:
-        return {
-            "address": self.address,
-            "coins": self.coins.to_data()
-        }
+        return {"address": self.address, "coins": self.coins.to_data()}
 
     @classmethod
     def from_proto(cls, proto: Output_pb) -> MultiSendOutput:

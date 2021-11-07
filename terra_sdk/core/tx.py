@@ -42,7 +42,7 @@ __all__ = [
     "ModeInfoMulti",
     "SignerInfo",
     "SignerData",
-    "CompactBitArray"
+    "CompactBitArray",
 ]
 
 # just alias
@@ -355,8 +355,7 @@ class CompactBitArray(JSONSerializable):
 
     def to_proto(self) -> CompactBitArray_pb:
         return CompactBitArray_pb(
-            extra_bits_stored=self.extra_bits_stored,
-            elems=self.elems
+            extra_bits_stored=self.extra_bits_stored, elems=self.elems
         )
 
     @classmethod
@@ -364,44 +363,44 @@ class CompactBitArray(JSONSerializable):
         if bits <= 0:
             raise ValueError("CompactBitArray bits must be bigger than 0")
 
-        num_elems = (bits+7)/8
-        if num_elems <= 0 or num_elems > (math.pow(2, 32)-1):
+        num_elems = (bits + 7) / 8
+        if num_elems <= 0 or num_elems > (math.pow(2, 32) - 1):
             raise ValueError("CompactBitArray overflow")
 
-        return CompactBitArray(bits%8, bytes(num_elems))
+        return CompactBitArray(bits % 8, bytes(num_elems))
 
     def count(self) -> int:
         if self.extra_bits_stored == 0:
-            return len(self.elems)*8
-        return (len(self.elems)-1)*8 + self.extra_bits_stored
+            return len(self.elems) * 8
+        return (len(self.elems) - 1) * 8 + self.extra_bits_stored
 
     def get_index(self, i: int) -> bool:
         if i < 0 or i >= self.count():
             return False
-        return self.elems[(i>>3)] & ( (1 << (7 - (i % 8))) > 0 )
+        return self.elems[(i >> 3)] & ((1 << (7 - (i % 8))) > 0)
 
     def set_index(self, i: int, v: bool) -> bool:
         if i < 0 or i >= self.count():
             return False
         if v:  # True
-            self.elems[i >> 3] |= 1 << (7-(i%8))
+            self.elems[i >> 3] |= 1 << (7 - (i % 8))
         else:  # False
-            self.elems[i >> 3] &= ~(1 << (7-(i%8)))
+            self.elems[i >> 3] &= ~(1 << (7 - (i % 8)))
         return True
 
     def num_true_bits_before(self, index: int) -> int:
         def count_one_bits(n: int):
-            return len("{0:b}".format(n).split("0").join(''))
+            return len("{0:b}".format(n).split("0").join(""))
 
         ones_count = 0
         max = self.count()
         if index > max:
-            index=max
+            index = max
 
         elem = 0
         while True:
-            if elem*8+7 >= index:
-                ones_count += count_one_bits(self.elems[elem] >> (7-(index%8)+1))
+            if elem * 8 + 7 >= index:
+                ones_count += count_one_bits(self.elems[elem] >> (7 - (index % 8) + 1))
                 return ones_count
             ones_count += count_one_bits(self.elems[elem])
 

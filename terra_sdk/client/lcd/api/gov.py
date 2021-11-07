@@ -163,11 +163,13 @@ class AsyncGovAPI(BaseAsyncAPI):
                     msg.get("@type") == "/cosmos.gov.v1beta1.MsgVoteWeighted"
                     and msg.get("proposal_id") == proposal_id
                 ):
-                    votes.append(Vote(
-                        proposal_id=proposal_id,
-                        voter=msg.get("voter"),
-                        options=msg.get("options")
-                    ))
+                    votes.append(
+                        Vote(
+                            proposal_id=proposal_id,
+                            voter=msg.get("voter"),
+                            options=msg.get("options"),
+                        )
+                    )
         return votes, pagination
 
     async def tally(self, proposal_id: int):

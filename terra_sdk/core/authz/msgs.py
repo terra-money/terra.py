@@ -39,7 +39,7 @@ class MsgExecAuthorized(Msg):
         return {
             "@type": self.type_url,
             "grantee": self.grantee,
-            "msgs": [msg.to_data() for msg in self.msgs]
+            "msgs": [msg.to_data() for msg in self.msgs],
         }
 
     @classmethod
@@ -50,6 +50,7 @@ class MsgExecAuthorized(Msg):
 
     def to_proto(self) -> MsgExec_pb:
         return MsgExec_pb(grantee=self.grantee, msgs=[m.pack_any() for m in self.msgs])
+
 
 @attr.s
 class MsgGrantAuthorization(Msg):
@@ -75,7 +76,7 @@ class MsgGrantAuthorization(Msg):
             "@type": self.type_url,
             "granter": self.granter,
             "grantee": self.grantee,
-            "grant": self.grant.to_data()
+            "grant": self.grant.to_data(),
         }
 
     @classmethod

@@ -50,7 +50,7 @@ class MsgSetWithdrawAddress(Msg):
         return {
             "@type": self.type_url,
             "delegator_address": self.delegator_address,
-            "withdraw_address": self.withdraw_address
+            "withdraw_address": self.withdraw_address,
         }
 
     @classmethod
@@ -90,7 +90,7 @@ class MsgWithdrawDelegationReward(Msg):
         return {
             "@type": self.type_url,
             "delegator_address": self.delegator_address,
-            "withdraw_address": self.withdraw_address
+            "withdraw_address": self.withdraw_address,
         }
 
     @classmethod
@@ -125,10 +125,7 @@ class MsgWithdrawValidatorCommission(Msg):
     validator_address: ValAddress = attr.ib()
 
     def to_data(self) -> dict:
-        return {
-            "@type": self.type_url,
-            "validator_address": self.validator_address
-        }
+        return {"@type": self.type_url, "validator_address": self.validator_address}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawValidatorCommission:
@@ -161,7 +158,7 @@ class MsgFundCommunityPool(Msg):
         return {
             "@type": self.type_url,
             "depositor": self.depositor,
-            "amount": self.amount.to_data()
+            "amount": self.amount.to_data(),
         }
 
     @classmethod

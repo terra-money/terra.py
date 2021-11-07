@@ -59,10 +59,7 @@ class SendAuthorization(Authorization):
     spend_limit: Coins = attr.ib(converter=Coins)
 
     def to_data(self) -> dict:
-        return {
-            "@type": self.type_url,
-            "spend_limit": self.spend_limit.to_data()
-        }
+        return {"@type": self.type_url, "spend_limit": self.spend_limit.to_data()}
 
     @classmethod
     def from_data(cls, data: dict) -> SendAuthorization:
@@ -86,10 +83,7 @@ class GenericAuthorization(Authorization):
     msg: str = attr.ib()
 
     def to_data(self) -> dict:
-        return {
-            "@type": self.type_url,
-            "msg": self.msg
-        }
+        return {"@type": self.type_url, "msg": self.msg}
 
     @classmethod
     def from_data(cls, data: dict) -> GenericAuthorization:
@@ -112,7 +106,7 @@ class AuthorizationGrant(JSONSerializable):
     def to_data(self) -> dict:
         return {
             "authorization": self.authorization.to_data(),
-            "expiration": self.expiration
+            "expiration": self.expiration,
         }
 
     @classmethod
@@ -134,9 +128,7 @@ class StakeAuthorizationValidators(JSONSerializable):
     address: List[AccAddress] = attr.ib(converter=list)
 
     def to_data(self) -> dict:
-        return {
-            "address": self.address
-        }
+        return {"address": self.address}
 
     @classmethod
     def from_data(cls, data: dict) -> StakeAuthorizationValidators:
@@ -161,16 +153,22 @@ class StakeAuthorization(Authorization):
             "authorization_type": self.authorization_type,
             "max_tokens": self.max_tokens.to_data() if self.max_tokens else None,
             "allow_list": self.allow_list.to_data() if self.allow_list else None,
-            "deny_list": self.deny_list.to_data() if self.deny_list else None
+            "deny_list": self.deny_list.to_data() if self.deny_list else None,
         }
 
     @classmethod
     def from_data(cls, data: dict) -> StakeAuthorization:
         return StakeAuthorization(
             authorization_type=data["authorization_type"],
-            max_tokens=Coins.from_data(data["max_tokens"]) if data.get("max_tokens") else None,
-            allow_list=StakeAuthorizationValidators.from_data(data["allow_list"]) if data.get("allow_list") else None,
-            deny_list=StakeAuthorizationValidators.from_data(data["deny_list"]) if data.get("deny_list") else None
+            max_tokens=Coins.from_data(data["max_tokens"])
+            if data.get("max_tokens")
+            else None,
+            allow_list=StakeAuthorizationValidators.from_data(data["allow_list"])
+            if data.get("allow_list")
+            else None,
+            deny_list=StakeAuthorizationValidators.from_data(data["deny_list"])
+            if data.get("deny_list")
+            else None,
         )
 
     def to_proto(self) -> StakeAuthorization_pb:

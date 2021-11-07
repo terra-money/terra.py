@@ -5,7 +5,7 @@ If you want to perform a state-changing operation on the Terra blockchain such a
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a **transaction** and broadcast it to the network.
 
-An :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` is a data object that represents
+An :class:`StdTx<terra_sdk.core.tx.Tx>` is a data object that represents
 a transaction. It contains:
 
 - **msgs**: a list of state-altering messages
@@ -42,7 +42,7 @@ Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.cre
 
 .. code-block:: python
 
-    from terra_sdk.core.auth import StdFee
+    from terra_sdk.core.fee import Fee
     from terra_sdk.core.bank import MsgSend
 
     tx = wallet.create_and_sign_tx(
@@ -52,7 +52,7 @@ Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.cre
             "1000000uluna" # send 1 luna
         )],
         memo="test transaction!",
-        fee=StdFee(200000, "120000uluna")
+        fee=Fee(200000, "120000uluna")
     )
 
 And that's it! You should now be able to broadcast your transaction to the network.
@@ -101,7 +101,7 @@ Signing transactions manually
 -----------------------------
 
 Below is the full process of signing a transaction manually that does not use ``Wallet``.
-You will need to build a :class:`StdSignMsg<terra_sdk.core.auth.data.tx.StdSignMsg>`, 
+You will need to build a :class:`StdSignMsg<terra_sdk.core..tx.SignDoc>`, 
 sign it, and add the signatures to an ``StdTx``.
 
 A StdSignMsg contains the information required to build a StdTx:
@@ -128,7 +128,7 @@ A StdSignMsg contains the information required to build a StdTx:
         chain_id="columbus-4",
         account_number=23982,
         sequence=12,
-        fee=StdFee(200000, "120000uluna"),
+        fee=Fee(200000, "120000uluna"),
         msgs=[MsgSend(
             mk.acc_address,
             RECIPIENT,
@@ -157,7 +157,7 @@ Applying multiple signatures
 
 Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
 You must prepare a separate ``StdSignMsg`` for each signer to sign individually, and then
-combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` object. 
+combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core..tx.Tx>` object. 
 Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
 
 .. note::
@@ -167,7 +167,7 @@ Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which va
 .. code-block:: python
 
     from terra_sdk.client.lcd import LCDClient
-    from terra_sdk.core.auth import StdFee
+    from terra_sdk.core.fee import Fee
     from terra_sdk.core.bank import MsgMultiSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
@@ -187,7 +187,7 @@ Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which va
     )
 
     msgs = [multisend]
-    fee = StdFee(200000, "12000uluna")
+    fee = Fee(200000, "12000uluna")
     memo = "multisend example"
 
     # create unsigned_tx #1

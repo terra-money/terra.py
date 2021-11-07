@@ -22,7 +22,7 @@ Account
 Transactions
 ^^^^^^^^^^^^
 
-.. automodule:: terra_sdk.core.auth.data.tx
+.. automodule:: terra_sdk.core.tx
     :members:
 
 Public Key

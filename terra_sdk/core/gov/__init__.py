@@ -13,5 +13,5 @@ __all__ = [
     "TextProposal",
     "ProposalStatus",
     "VoteOption",
-    "WeightedVoteOption"
+    "WeightedVoteOption",
 ]

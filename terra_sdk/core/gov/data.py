@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import copy
-from typing import Union, List
+from typing import List, Union
 
 import attr
 from dateutil import parser
 from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
+from terra_proto.cosmos.gov.v1beta1 import Vote as Vote_pb
+from terra_proto.cosmos.gov.v1beta1 import VoteOption
+from terra_proto.cosmos.gov.v1beta1 import WeightedVoteOption as WeightedVoteOption_pb
 
-from terra_sdk.core import Coins, AccAddress
+from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.distribution import CommunityPoolSpendProposal
 from terra_sdk.core.params import ParameterChangeProposal
 from terra_sdk.core.upgrade import (
@@ -18,11 +21,6 @@ from terra_sdk.core.upgrade import (
     SoftwareUpgradeProposal,
 )
 from terra_sdk.util.json import JSONSerializable, dict_to_data
-from terra_proto.cosmos.gov.v1beta1 import (
-    VoteOption,
-    WeightedVoteOption as WeightedVoteOption_pb,
-    Vote as Vote_pb
-)
 
 from .proposals import TextProposal
 
@@ -137,10 +135,7 @@ class WeightedVoteOption(JSONSerializable):
         return cls(option=data["option"], weight=data["weight"])
 
     def to_proto(self) -> WeightedVoteOption_pb:
-        return WeightedVoteOption_pb(
-            option=self.option,
-            weight=self.weight
-        )
+        return WeightedVoteOption_pb(option=self.option, weight=self.weight)
 
 
 @attr.s
@@ -154,12 +149,10 @@ class Vote(JSONSerializable):
         return cls(
             proposal_id=data["proposal_id"],
             voter=data["voter"],
-            options=data["options"]
+            options=data["options"],
         )
 
     def to_proto(self) -> Vote_pb:
         return Vote_pb(
-            proposal_id=self.proposal_id,
-            voter=self.voter,
-            options=self.options
+            proposal_id=self.proposal_id, voter=self.voter, options=self.options
         )

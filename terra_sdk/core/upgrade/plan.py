@@ -8,8 +8,8 @@ import datetime
 from typing import Any, Optional
 
 import attr
-from dateutil import parser
 from betterproto.lib.google.protobuf import Any as Any_pb
+from dateutil import parser
 from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
 
 from terra_sdk.util.json import JSONSerializable

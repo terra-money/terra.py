@@ -43,9 +43,7 @@ class SignDoc(JSONSerializable):
         return cls(
             chain_id=proto.chain_id,
             account_number=proto.account_number,
-            auth_info=AuthInfo.from_proto(
-                proto.auth_info_bytes
-            ),
+            auth_info=AuthInfo.from_proto(proto.auth_info_bytes),
             tx_body=TxBody.from_proto(proto.body_bytes),
         )
 

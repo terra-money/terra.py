@@ -12,12 +12,7 @@ from terra_sdk.core.msg import Msg
 
 from .data import Content
 
-__all__ = [
-    "MsgSubmitProposal",
-    "MsgDeposit",
-    "MsgVote"
-]
-
+__all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
 
 @attr.s
