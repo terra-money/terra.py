@@ -1,44 +1,48 @@
-from terra_sdk.client.lcd import LCDClient
+from terra_sdk.exceptions import LCDResponseError
+
+from terra_sdk.client.lcd import LCDClient, PaginationOptions
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
-from terra_sdk.client.localterra import LocalTerra
-from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.tx import SignMode
-from terra_sdk.util.json import JSONSerializable
-
-""" untested
-import lcd_gov
-"""
-
-########
-
 from terra_sdk.core import Coin, Coins
-from terra_sdk.core.public_key import SimplePublicKey
+from terra_sdk.core.ibc import Height
+from terra_sdk.core.ibc_transfer import MsgTransfer
+from terra_sdk.util.contract import get_code_id
+
+from terra_sdk.key.mnemonic import MnemonicKey
 
 
 def main():
-    terra = LocalTerra()
-    test1 = terra.wallets["test1"]
-
-    msg = MsgSwap(
-        trader="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
-        offer_coin=Coin.parse("1000000ukrw"),
-        ask_denom="uusd",
+    terra = LCDClient(
+        url="https://bombay-lcd.terra.dev/",
+        chain_id="bombay-12",
     )
 
-    msg2 = MsgSwapSend(
-        from_address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
-        to_address="terra1av6ssz7k4xpc5nsjj2884nugakpp874ae0krx7",
-        offer_coin=Coin.parse("1000000ukrw"),
-        ask_denom="uusd",
+    key = MnemonicKey(mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius")
+
+    wallet = terra.wallet(key=key)
+
+    signedTx = wallet.create_and_sign_tx(
+        CreateTxOptions(
+            msgs=[
+                MsgTransfer(source_port="transfer",
+                            source_channel="channel-9",
+                            token="10000uluna",
+                            sender="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+                            receiver="terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
+                            timeout_height=Height(revision_number=0, revision_height=10000),
+                            timeout_timestamp=0
+                            )
+            ]
+        )
     )
+    try:
+        result = terra.tx.broadcast(signedTx)
+    except LCDResponseError as err:
+        print("err: ", err)
+    else:
+        print("err..")
 
-    opt = CreateTxOptions(msgs=[msg, msg2], memo="send test")
-    # tx = test1.create_tx(opt)
-    tx = test1.create_and_sign_tx(opt)
-    print("SIGNED TX", tx)
+    print(result)
 
-    result = terra.tx.broadcast(tx)
-    print(f"RESULT:{result}")
 
 
 main()

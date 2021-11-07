@@ -4,7 +4,6 @@ from pathlib import Path
 
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coins
-from terra_sdk.core.auth import StdFee
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.util.contract import get_code_id
 
@@ -20,9 +19,9 @@ def main():
         Coins(uluna=1000000),
     )
     print(msg)
-    tx = test1.create_and_sign_tx(msgs=[msg],
-                                  gas_prices="0.2uluna",
-                                  gas_adjustment="1.4")
+    tx = test1.create_and_sign_tx(
+        msgs=[msg], gas_prices="0.2uluna", gas_adjustment="1.4"
+    )
     print(tx)
 
     result = terra.tx.broadcast(tx)

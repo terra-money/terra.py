@@ -14,4 +14,5 @@ def main():
     result = terra.mint.parameters()
     print(result)
 
+
 main()

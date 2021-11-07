@@ -1,5 +1,5 @@
 from terra_sdk.client.lcd import LCDClient, PaginationOptions
-from terra_sdk.core import Coins, Coin
+from terra_sdk.core import Coin, Coins
 
 
 def main():
@@ -8,11 +8,12 @@ def main():
         chain_id="bombay-12",
     )
 
-    result = terra.market.swap_rate(Coin.parse('10000uluna'), 'uusd')
+    result = terra.market.swap_rate(Coin.parse("10000uluna"), "uusd")
     print(result)
     result = terra.market.terra_pool_delta()
     print(result)
     result = terra.market.parameters()
     print(result)
+
 
 main()

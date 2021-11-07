@@ -1,6 +1,5 @@
 from terra_sdk.client.lcd import LCDClient, PaginationOptions
-from terra_sdk.core import Coins, Coin
-from terra_sdk.core.auth import StdFee
+from terra_sdk.core import Coin, Coins
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.util.contract import get_code_id
 
@@ -19,5 +18,6 @@ def main():
     print(result)
     result = terra.tendermint.syncing()
     print(result)
+
 
 main()

@@ -1,7 +1,6 @@
 from terra_sdk.client.lcd import LCDClient
 from terra_sdk.client.lcd.params import PaginationOptions
-from terra_sdk.core import Coins, Coin
-from terra_sdk.core.auth import StdFee
+from terra_sdk.core import Coin, Coins
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.util.contract import get_code_id
 
@@ -13,7 +12,9 @@ def main():
     )
 
     pagOpt = PaginationOptions(limit=2, count_total=True)
-    result = terra.bank.balance(address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v", params=pagOpt)
+    result = terra.bank.balance(
+        address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v", params=pagOpt
+    )
     print(result)
     result = terra.bank.balance(address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
     print(result)
@@ -21,5 +22,6 @@ def main():
     print(result)
     result = terra.bank.total()
     print(result)
+
 
 main()

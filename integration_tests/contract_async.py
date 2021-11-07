@@ -2,8 +2,7 @@ import asyncio
 from pathlib import Path
 
 from terra_sdk.client.localterra import AsyncLocalTerra
-from terra_sdk.core import Coins
-from terra_sdk.core.auth import StdFee
+from terra_sdk.core import Coins, Fee
 from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
 from terra_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
@@ -46,7 +45,7 @@ async def async_main():
                     {"uluna": 100000},
                 )
             ],
-            fee=StdFee(1000000, Coins(uluna=1000000)),
+            fee=Fee(1000000, Coins(uluna=1000000)),
         )
 
         execute_tx_result = await terra.tx.broadcast(execute_tx)
