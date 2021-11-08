@@ -36,7 +36,7 @@ class MsgSetWithdrawAddress(Msg):
         withdraw_address: new withdraw address
     """
 
-    type = "distribution/MsgSetWithdrawAddress"
+    type_amino = "distribution/MsgSetWithdrawAddress"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
     """"""
@@ -45,6 +45,15 @@ class MsgSetWithdrawAddress(Msg):
 
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "withdraw_address": self.withdraw_address
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -76,7 +85,7 @@ class MsgWithdrawDelegationReward(Msg):
         validator_address: validator
     """
 
-    type = "distribution/MsgWithdrawDelegationReward"
+    type_amino = "distribution/MsgWithdrawDelegationReward"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
     """"""
@@ -86,24 +95,33 @@ class MsgWithdrawDelegationReward(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "withdraw_address": self.withdraw_address
+            }
+        }
+
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
             "delegator_address": self.delegator_address,
-            "withdraw_address": self.withdraw_address,
+            "withdraw_address": self.withdraw_address
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
         return cls(
             delegator_address=data["delegator_address"],
-            validator_address=data["validator_address"],
+            validator_address=data["validator_address"]
         )
 
     def to_proto(self) -> MsgWithdrawDelegatorReward_pb:
         return MsgWithdrawDelegatorReward_pb(
             delegator_address=self.delegator_address,
-            validator_address=self.validator_address,
+            validator_address=self.validator_address
         )
 
 
@@ -115,7 +133,7 @@ class MsgWithdrawValidatorCommission(Msg):
         validator_address: validator operator address
     """
 
-    type = "distribution/MsgWithdrawValidatorCommission"
+    type_amino = "distribution/MsgWithdrawValidatorCommission"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
     """"""
@@ -123,6 +141,14 @@ class MsgWithdrawValidatorCommission(Msg):
     """"""
 
     validator_address: ValAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "validator_address": self.validator_address
+            }
+        }
 
     def to_data(self) -> dict:
         return {"@type": self.type_url, "validator_address": self.validator_address}
@@ -146,13 +172,22 @@ class MsgFundCommunityPool(Msg):
         amount (Coins): amount to fund community pool with
     """
 
-    type = "distribution/MsgFundCommunityPool"
+    type_amino = "distribution/MsgFundCommunityPool"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgFundCommunityPool"
     """"""
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "depositor": self.depositor,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         return {

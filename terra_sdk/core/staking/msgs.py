@@ -40,7 +40,7 @@ class MsgBeginRedelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to redelegate
     """
 
-    type = "staking/MsgBeginRedelegate"
+    type_amino = "staking/MsgBeginRedelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
     """"""
@@ -50,7 +50,18 @@ class MsgBeginRedelegate(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
     validator_dst_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_src_address": self.validator_src_address,
+                "validator_dst_address": self.validator_dst_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgBeginRedelegate:
@@ -80,7 +91,7 @@ class MsgDelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to delegate
     """
 
-    type = "staking/MsgDelegate"
+    type_amino = "staking/MsgDelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgDelegate"
     """"""
@@ -89,7 +100,17 @@ class MsgDelegate(Msg):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_address": self.validator_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegate:
@@ -117,7 +138,7 @@ class MsgUndelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to undelegate
     """
 
-    type = "staking/MsgUndelegate"
+    type_amino = "staking/MsgUndelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgUndelegate"
     """"""
@@ -126,7 +147,17 @@ class MsgUndelegate(Msg):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_address": self.validator_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUndelegate:

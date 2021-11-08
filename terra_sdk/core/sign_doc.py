@@ -19,6 +19,19 @@ class SignDoc(JSONSerializable):
     auth_info: AuthInfo = attr.ib()
     tx_body: TxBody = attr.ib()
 
+    def to_amino(self) -> dict:
+        tx = self.tx_body
+        auth = self.auth_info
+        return {
+            "chain_id": self.chain_id,
+            "account_number": str(self.account_number),
+            "sequence": str(self.sequence),
+            "timeout_height": str(tx.timeout_height) if (tx.timeout_height and tx.timeout_height != 0) else None,
+            "fee": auth.fee.to_amino(),
+            "msgs": [msg.to_amino() for msg in tx.messages],
+            "memo": tx.memo if tx.memo else ""
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> SignDoc:
         return cls(

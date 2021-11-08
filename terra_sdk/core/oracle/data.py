@@ -29,6 +29,13 @@ class AggregateExchangeRateVote(JSONSerializable):
     voter: ValAddress = attr.ib()
     """Validator that sent the aggregate vote."""
 
+    def to_amino(self) -> dict:
+        tuples = self.exchange_rate_tuples.to_amino()
+        return {
+            "exchange_rate_tuples": [{"denom": x.denom, "exchange_rate":str(x.amount)} for x in tuples],
+            "voter": self.voter
+        }
+
     def to_data(self) -> dict:
         return {
             "exchange_rate_tuples": [
@@ -73,11 +80,18 @@ class AggregateExchangeRatePrevote(JSONSerializable):
     submit_block: int = attr.ib(converter=int)
     """Block height at which the aggregate prevote was submitted."""
 
+    def to_amino(self) -> dict:
+        return {
+            "hash": self.hash,
+            "voter": self.voter,
+            "submit_block": str(self.submit_block)
+        }
+
     def to_data(self) -> dict:
         return {
             "hash": self.hash,
             "voter": self.voter,
-            "submit_block": str(self.submit_block),
+            "submit_block": str(self.submit_block)
         }
 
     @classmethod

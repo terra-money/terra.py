@@ -62,6 +62,9 @@ class Coin(JSONSerializable):
             return f"{amount_str}{self.denom}"
         return f"{self.amount}{self.denom}"
 
+    def to_amino(self) -> dict:
+        return {"denom": self.denom, "amount": str(self.amount)}
+
     def to_data(self) -> dict:
         return {"denom": self.denom, "amount": str(self.amount)}
 

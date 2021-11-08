@@ -71,7 +71,7 @@ class MsgDelegateFeedConsent(Msg):
         delegate: new feeder address
     """
 
-    type = "oracle/MsgDelegateFeedConsent"
+    type_amino = "oracle/MsgDelegateFeedConsent"
     """"""
     type_url = "/terra.oracle.v1beta1.MsgDelegateFeedConsent"
     """"""
@@ -80,6 +80,15 @@ class MsgDelegateFeedConsent(Msg):
 
     operator: ValAddress = attr.ib()
     delegate: AccAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "operator": self.operator,
+                "delegate": self.delegate
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegateFeedConsent:
@@ -99,7 +108,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
         validator: validator to which the aggregate prevote corresponds
     """
 
-    type = "oracle/MsgAggregateExchangeRatePrevote"
+    type_amino = "oracle/MsgAggregateExchangeRatePrevote"
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRatePrevote"
     """"""
@@ -107,6 +116,16 @@ class MsgAggregateExchangeRatePrevote(Msg):
     hash: str = attr.ib()
     feeder: AccAddress = attr.ib()
     validator: ValAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "hash": self.hash,
+                "feeder": self.feeder,
+                "validator": self.validator
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgAggregateExchangeRatePrevote:
@@ -133,7 +152,7 @@ class MsgAggregateExchangeRateVote(Msg):
         validator: validator vote corresponds to
     """
 
-    type = "oracle/MsgAggregateExchangeRateVote"
+    type_amino = "oracle/MsgAggregateExchangeRateVote"
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRateVote"
     """"""
@@ -143,9 +162,20 @@ class MsgAggregateExchangeRateVote(Msg):
     feeder: AccAddress = attr.ib()
     validator: ValAddress = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "exchange_rates": str(self.exchange_rates.to_dec_coins()),
+                "salt": self.salt,
+                "feeder": self.feeder,
+                "validator": self.validator
+            }
+        }
+
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
-        d["exchange_rates"] = str(self.exchange_rates)
+        d["exchange_rates"] = str(self.exchange_rates.to_dec_coins())
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
@@ -159,7 +189,7 @@ class MsgAggregateExchangeRateVote(Msg):
 
     def to_proto(self) -> MsgAggregateExchangeRateVote_pb:
         return MsgAggregateExchangeRateVote_pb(
-            exchange_rates=self.exchange_rates.to_proto(),
+            exchange_rates=str(self.exchange_rates),
             salt=self.salt,
             feeder=self.feeder,
             validator=self.validator,

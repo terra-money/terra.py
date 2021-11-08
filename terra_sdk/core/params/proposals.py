@@ -21,6 +21,13 @@ class ParamChange(JSONSerializable):
     key: str = attr.ib()
     value: str = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "subspace": self.subspace,
+            "key": self.key,
+            "value": self.value
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> ParamChange:
         return cls(subspace=data["subspace"], key=data["key"], value=data["value"])
@@ -40,12 +47,24 @@ class ParameterChangeProposal(JSONSerializable):
         change (List[ParamChange]): list of parameter changes
     """
 
+    type_amino = "params/ParameterChangeProposal"
+    """"""
     type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""
 
     title: str = attr.ib()
     description: str = attr.ib()
     changes: List[ParamChange] = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "title": self.title,
+                "description": self.description,
+                "changes": [change.to_amino() for change in self.changes]
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> ParameterChangeProposal:

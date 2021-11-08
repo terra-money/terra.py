@@ -12,6 +12,7 @@ from betterproto.lib.google.protobuf import Any as Any_pb
 from dateutil import parser
 from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
 
+from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.json import JSONSerializable
 
 
@@ -22,6 +23,15 @@ class Plan(JSONSerializable):
     info: str = attr.ib()
     time: Optional[datetime] = attr.ib(default=None, converter=parser.parse)
     upgrade_client_state: Optional[Any] = attr.ib(default=None)
+
+    def to_amino(self) -> dict:
+        return {
+            "name": self.name,
+            "height": self.height,
+            "info": self.info,
+            "time": to_isoformat(self.time) if self.time else None,
+            "upgrade_client_state": self.upgrade_client_state
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> Plan:

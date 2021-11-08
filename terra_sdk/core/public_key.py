@@ -53,10 +53,19 @@ class PublicKey(JSONSerializable, ABC):
 class SimplePublicKey(PublicKey):
     """Data object holding the SIMPLE public key component of an account or signature."""
 
+    type_amino = "tendermint/PubKeySecp256k1"
+    """"""
+
     type_url = "/cosmos.crypto.secp256k1.PubKey"
     """Normal signature public key type."""
 
     key: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": self.key
+        }
 
     def to_data(self) -> dict:
         return {"key": self.key}
@@ -79,10 +88,19 @@ class SimplePublicKey(PublicKey):
 class ValConsPubKey(PublicKey):
     """Data object holding the public key component of an validator's account or signature."""
 
+    type_amino = "tendermint/PubKeyEd25519"
+    """"""
+
     type_url = "/cosmos.crypto.ed25519.PubKey"
     """an ed25519 tendermint public key type."""
 
     key: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": self.key
+        }
 
     def to_data(self) -> dict:
         return {"key": self.key}
@@ -105,11 +123,23 @@ class ValConsPubKey(PublicKey):
 class LegacyAminoPubKey(PublicKey):
     """Data object holding the Legacy Amino-typed public key component of an account or signature."""
 
+    type_amino = "tendermint/PubKeyMultisigThreshold"
+    """"""
+
     type_url = "/cosmos.crypto.multisig.LegacyAminoPubKey"
     """Multisig public key type."""
 
     threshold: int = attr.ib(converter=int)
     public_keys: List[bytes] = attr.ib(factory=List)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "threshold": str(self.threshold),
+                "pubkeys": [pubkey.to_amino() for pubkey in self.public_keys]
+            }
+        }
 
     def to_data(self) -> dict:
         return {"threshold": self.threshold, "public_keys": self.public_keys}

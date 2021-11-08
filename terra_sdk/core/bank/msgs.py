@@ -30,7 +30,7 @@ class MsgSend(Msg):
         amount (Coins): coins to send
     """
 
-    type = "bank/MsgSend"
+    type_amino = "bank/MsgSend"
     """"""
     type_url = "/cosmos.bank.v1beta1.MsgSend"
     """"""
@@ -40,6 +40,16 @@ class MsgSend(Msg):
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "from_address": self.from_address,
+                "to_address": self.to_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSend:
@@ -96,6 +106,12 @@ class MultiSendInput(JSONSerializable):
     coins: Coins = attr.ib(converter=Coins)
     """Coins to be sent / received."""
 
+    def to_amino(self) -> dict:
+        return {
+            "address": self.address,
+            "coins": self.coins.to_amino()
+        }
+
     def to_data(self) -> dict:
         return {"address": self.address, "coins": self.coins.to_data()}
 
@@ -132,6 +148,12 @@ class MultiSendOutput(JSONSerializable):
 
     coins: Coins = attr.ib(converter=Coins)
     """Coins to be sent / received."""
+
+    def to_amino(self) -> dict:
+        return {
+            "address": self.address,
+            "coins": self.coins.to_amino()
+        }
 
     @classmethod
     def from_data(cls, data: dict):
@@ -190,7 +212,7 @@ class MsgMultiSend(Msg):
         outputs (List[MultiSendIO]): recipients and amounts
     """
 
-    type = "bank/MsgMultiSend"
+    type_amino = "bank/MsgMultiSend"
     """"""
     type_url = "/cosmos.bank.v1beta1.MsgMultiSend"
     """"""
@@ -199,6 +221,15 @@ class MsgMultiSend(Msg):
 
     inputs: List[MultiSendInput] = attr.ib(converter=convert_input_list)
     outputs: List[MultiSendOutput] = attr.ib(converter=convert_output_list)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "inputs": [mi.to_amino() for mi in self.inputs],
+                "outputs": [mo.to_amino() for mo in self.inputs],
+            }
+        }
 
     def to_data(self) -> dict:
         return {

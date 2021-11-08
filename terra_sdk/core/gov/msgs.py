@@ -10,7 +10,7 @@ from terra_proto.cosmos.gov.v1beta1 import MsgVote as MsgVote_pb
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 
-from .data import Content
+from .data import Content, VoteOption
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
@@ -25,7 +25,7 @@ class MsgSubmitProposal(Msg):
         proposer: proposal submitter
     """
 
-    type = "gov/MsgSubmitProposal"
+    type_amino = "gov/MsgSubmitProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgSubmitProposal"
     """"""
@@ -35,6 +35,16 @@ class MsgSubmitProposal(Msg):
     content: Content = attr.ib()
     initial_deposit: Coins = attr.ib(converter=Coins)
     proposer: AccAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "content": self.content.to_amino(),
+                "initial_deposit": self.initial_deposit.to_amino(),
+                "proposer": self.proposer
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
@@ -65,7 +75,7 @@ class MsgDeposit(Msg):
         amount (Coins): amount to deposit
     """
 
-    type = "gov/MsgDeposit"
+    type_amino = "gov/MsgDeposit"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgDeposit"
     """"""
@@ -75,6 +85,16 @@ class MsgDeposit(Msg):
     proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "depositor": self.depositor,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -113,7 +133,7 @@ class MsgVote(Msg):
             :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`,
     """
 
-    type = "gov/MsgVote"
+    type_amino = "gov/MsgVote"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgVote"
     """"""
@@ -151,6 +171,16 @@ class MsgVote(Msg):
                 f"incorrect value for option: {value}, must be one of: {possible_options}"
             )
     """
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "voter": self.voter,
+                "option": self.option.name
+            }
+        }
 
     def to_data(self) -> dict:
         return {

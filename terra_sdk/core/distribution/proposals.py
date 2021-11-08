@@ -24,6 +24,8 @@ class CommunityPoolSpendProposal(JSONSerializable):
         amount (Coins): amount to spend from community pool
     """
 
+    type_amino = "distribution/CommunityPoolSpendProposal"
+    """"""
     type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
     """"""
 
@@ -31,6 +33,17 @@ class CommunityPoolSpendProposal(JSONSerializable):
     description: str = attr.ib()
     recipient: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "title": self.title,
+                "description": self.description,
+                "recipient": self.recipient,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> CommunityPoolSpendProposal:

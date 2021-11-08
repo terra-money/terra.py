@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import List, Optional
 
 import attr
@@ -22,6 +23,7 @@ from terra_proto.cosmos.staking.v1beta1 import (
 
 from terra_sdk.core import AccAddress, Coin, Coins
 from terra_sdk.util.base import BaseTerraData
+from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
@@ -52,11 +54,19 @@ class SendAuthorization(Authorization):
         spend_limit (Coins.Input): coins representing allowance of grant
     """
 
-    type = "msgauth/SendAuthorization"
+    type_amino = "msgauth/SendAuthorization"
     """"""
     type_url = "/cosmos.bank.v1beta1.SendAuthorization"
 
     spend_limit: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "spend_limit": self.spend_limit.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         return {"@type": self.type_url, "spend_limit": self.spend_limit.to_data()}
@@ -76,11 +86,19 @@ class GenericAuthorization(Authorization):
     Args:
         grant_msg_type: type of message allowed by authorization"""
 
-    type = "msgauth/GenericAuthorization"
+    type_amino = "msgauth/GenericAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.GenericAuthorization"
 
     msg: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "msg": self.msg()
+            }
+        }
 
     def to_data(self) -> dict:
         return {"@type": self.type_url, "msg": self.msg}
@@ -100,32 +118,41 @@ class AuthorizationGrant(JSONSerializable):
     authorization: Authorization = attr.ib()
     """Grant authorization details."""
 
-    expiration: str = attr.ib()
+    expiration: datetime = attr.ib(converter=parser.parse)
     """Grant expiration."""
+
+    def to_amino(self) -> dict:
+        return {
+            "authorization": self.authorization.to_amino(),
+            "expiration": to_isoformat(self.expiration)
+        }
 
     def to_data(self) -> dict:
         return {
             "authorization": self.authorization.to_data(),
-            "expiration": self.expiration,
+            "expiration": to_isoformat(self.expiration)
         }
 
     @classmethod
     def from_data(cls, data: dict) -> AuthorizationGrant:
         return cls(
             authorization=Authorization.from_data(data["authorization"]),
-            expiration=str(data["expiration"]),
+            expiration=parser.parse(data["expiration"])
         )
 
     def to_proto(self) -> Grant_pb:
         return Grant_pb(
             authorization=self.authorization.to_proto(),
-            expiration=parser.parse(self.expiration),
+            expiration=self.expiration,
         )
 
 
 @attr.s
 class StakeAuthorizationValidators(JSONSerializable):
     address: List[AccAddress] = attr.ib(converter=list)
+
+    def to_amino(self):
+        raise Exception("Amino not supported")
 
     def to_data(self) -> dict:
         return {"address": self.address}
@@ -146,6 +173,9 @@ class StakeAuthorization(Authorization):
     deny_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
 
     type_url = "/cosmos.staking.v1beta1.StakeAuthorization"
+
+    def to_amino(self):
+        raise Exception("Amino not supported")
 
     def to_data(self) -> dict:
         return {

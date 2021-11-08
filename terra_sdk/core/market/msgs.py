@@ -22,7 +22,7 @@ class MsgSwap(Msg):
         ask_denom: denom into which to swap
     """
 
-    type = "market/MsgSwap"
+    type_amino = "market/MsgSwap"
     """"""
     type_url = "/terra.market.v1beta1.MsgSwap"
     """"""
@@ -32,6 +32,16 @@ class MsgSwap(Msg):
     trader: AccAddress = attr.ib()
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "trader": self.trader,
+                "offer_coin": self.offer_coin.to_amino(),
+                "ask_denom": self.ask_denom
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:
@@ -60,7 +70,7 @@ class MsgSwapSend(Msg):
         ask_denom: denom into which to swap
     """
 
-    type = "market/MsgSwapSend"
+    type_amino = "market/MsgSwapSend"
     """"""
     type_url = "/terra.market.v1beta1.MsgSwapSend"
     """"""
@@ -71,6 +81,17 @@ class MsgSwapSend(Msg):
     to_address: AccAddress = attr.ib()
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "from_address": self.from_address,
+                "to_address": self.to_address,
+                "offer_coin": self.offer_coin.to_amino(),
+                "ask_denom": self.ask_denom
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwapSend:

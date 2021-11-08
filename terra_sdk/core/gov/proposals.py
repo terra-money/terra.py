@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import attr
 from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.gov.v1beta1 import TextProposal as TextProposal_pb
 
@@ -10,6 +11,7 @@ from terra_sdk.util.json import JSONSerializable
 __all__ = ["TextProposal"]
 
 
+@attr.s
 class TextProposal(JSONSerializable):
     """Generic proposal type with only title and description that does nothing if
     passed. Primarily used for assessing the community sentiment around the proposal.
@@ -18,9 +20,22 @@ class TextProposal(JSONSerializable):
         title: proposal title
         description: proposal description
     """
-
+    type_amino = "gov/TextProposal"
+    """"""
     type_url = "/cosmos.gov.v1beta1.TextProposal"
     """"""
+
+    title: str = attr.ib()
+    description: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "title": self.title,
+                "description": self.description
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:

@@ -42,6 +42,20 @@ class MsgTransfer(Msg):
     timeout_height: Height = attr.ib()
     timeout_timestamp: int = attr.ib(converter=int)
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "source_port": self.source_port,
+                "source_channel": self.source_channel,
+                "token": self.token.to_amino(),
+                "sender": self.sender,
+                "receiver": self.receiver,
+                "timeout_height": self.timeout_height.to_amino(),
+                "timeout_timestamp": self.timeout_timestamp
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgTransfer:
         return cls(

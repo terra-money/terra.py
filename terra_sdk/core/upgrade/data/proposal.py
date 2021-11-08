@@ -24,7 +24,20 @@ class SoftwareUpgradeProposal(JSONSerializable):
     description: str = attr.ib()
     plan: Optional[Plan] = attr.ib()
 
+    type_amino = "upgrade/SoftwareUpgradeProposal"
+    """"""
     type_url = "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal"
+    """"""
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "title": self.title,
+                "description": self.description,
+                "plan": self.plan.to_amino() if self.plan else None
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> SoftwareUpgradeProposal:
@@ -45,7 +58,19 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
     title: str = attr.ib()
     description: str = attr.ib()
 
+    type_amino = "upgrade/CancelSoftwareUpgradeProposal"
+    """"""
     type_url = "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal"
+    """"""
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "title": self.title,
+                "description": self.description,
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> CancelSoftwareUpgradeProposal:

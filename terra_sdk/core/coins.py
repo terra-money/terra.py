@@ -115,6 +115,9 @@ class Coins(JSONSerializable, List[Coin_pb]):
         coins = map(Coin.from_data, data)
         return cls(coins)
 
+    def to_amino(self) -> List[dict]:
+        return [coin.to_amino() for coin in self]
+
     def to_data(self) -> List[dict]:
         return [coin.to_data() for coin in self]
 

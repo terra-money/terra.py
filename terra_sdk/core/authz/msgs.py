@@ -27,13 +27,22 @@ class MsgExecAuthorized(Msg):
         msg (List[Msg]): list of messages to execute using authorization grant
     """
 
-    type = "msgauth/MsgExecAuthorized"
+    type_amino = "msgauth/MsgExecAuthorized"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgExec"
     """"""
 
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "grantee": self.grantee,
+                "msgs": [msg.to_amino() for msg in self.msgs]
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -62,7 +71,7 @@ class MsgGrantAuthorization(Msg):
         grant: pair of authorization, expiration
     """
 
-    type = "msgauth/MsgGrantAuthorization"
+    type_amino = "msgauth/MsgGrantAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgGrant"
     """"""
@@ -70,6 +79,16 @@ class MsgGrantAuthorization(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     grant: AuthorizationGrant = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "granter": self.granter,
+                "grantee": self.grantee,
+                "grant": self.grant.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -107,7 +126,7 @@ class MsgRevokeAuthorization(Msg):
         msg_type_url: type of message to remove authorization for
     """
 
-    type = "msgauth/MsgRevokeAuthorization"
+    type_amino = "msgauth/MsgRevokeAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgRevoke"
     """"""
@@ -115,6 +134,16 @@ class MsgRevokeAuthorization(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     msg_type_url: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "granter": self.granter,
+                "grantee": self.grantee,
+                "msg_type_url": self.msg_type_url
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgRevokeAuthorization:

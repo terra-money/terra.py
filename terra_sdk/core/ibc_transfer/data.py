@@ -14,6 +14,12 @@ class DenomTrace(JSONSerializable):
     path: str = attr.ib()
     base_denom: str = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "path": self.path,
+            "base_denom": self.base_denom
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> DenomTrace:
         return cls(path=data["path"], base_denom=data["base_denom"])

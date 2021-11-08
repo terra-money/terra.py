@@ -18,6 +18,7 @@ __all__ = ["BaseAccount"]
 class BaseAccount(JSONSerializable):
     """Stores information about an account."""
 
+    type_amino = "core/Account"
     type_url = "/cosmos.auth.v1beta1.BaseAccount"
 
     address: AccAddress = attr.ib()
@@ -31,6 +32,17 @@ class BaseAccount(JSONSerializable):
 
     sequence: int = attr.ib(converter=int)
     """"""
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "address": self.address,
+                "public_key": self.public_key.to_amino(),
+                "account_number": self.account_number,
+                "sequence": self.sequence
+            }
+        }
 
     def get_sequence(self) -> int:
         return self.sequence

@@ -18,7 +18,7 @@ class MsgUnjail(Msg):
     Args:
         address: validator address to unjail"""
 
-    type = "slashing/MsgUnjail"
+    type_amino = "slashing/MsgUnjail"
     """"""
     type_url = "/cosmos.slashing.v1beta1.MsgUnjail"
     """"""
@@ -26,6 +26,14 @@ class MsgUnjail(Msg):
     """"""
 
     address: ValAddress = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "address": self.address
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUnjail:

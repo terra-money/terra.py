@@ -52,6 +52,14 @@ class PolicyConstraints:
                 new_rate = prev_rate - self.change_rate_max
         return new_rate
 
+    def to_amino(self) -> dict:
+        return {
+            "rate_min": str(self.rate_min),
+            "rate_max": str(self.rate_max),
+            "cap": self.cap.to_amino(),
+            "change_rate_max": str(self.change_rate_max)
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> PolicyConstraints:
         return cls(

@@ -28,6 +28,12 @@ class Fee(JSONSerializable):
     payer: Optional[AccAddress] = attr.ib(default=None)
     granter: Optional[AccAddress] = attr.ib(default=None)
 
+    def to_amino(self) -> dict:
+        return {
+            "gas": str(self.gas_limit),
+            "amount": self.amount.to_amino()
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> Fee:
         return cls(

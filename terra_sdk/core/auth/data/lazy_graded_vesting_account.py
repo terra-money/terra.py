@@ -57,6 +57,22 @@ class LazyGradedVestingAccount(BaseAccount):
     def get_public_key(self) -> PublicKey:
         return self.public_key
 
+    def to_amino(self) -> dict:
+        return {
+            "type": "core/LazyGradedVestingAccount",
+            "value": {
+                "address": self.address,
+                "public_key": self.public_key and self.public_key.to_amino(),
+                "account_number": str(self.account_number),
+                "sequence": str(self.sequence),
+                "original_vesting": self.original_vesting.to_amino(),
+                "delegated_free": self.delegated_free.to_amino(),
+                "delegated_vesting": self.delegated_vesting.to_amino(),
+                "end_time": str(self.end_time),
+                "vesting_schedules": self.vesting_schedules,
+            }
+        }
+
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
