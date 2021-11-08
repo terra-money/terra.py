@@ -78,5 +78,5 @@ class AuthorizationGrant(JSONSerializable):
     def from_data(cls, data: dict) -> AuthorizationGrant:
         return cls(
             authorization=Authorization.from_data(data["authorization"]),
-            expiration=data["expiration"],
+            expiration=str(data["expiration"]),
         )

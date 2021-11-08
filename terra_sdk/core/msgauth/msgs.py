@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import copy
 from typing import List
 
 import attr
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.json import dict_to_data
+from terra_sdk.util.json import JSONSerializable
 
 from .data import Authorization
 
@@ -40,27 +39,26 @@ class MsgExecAuthorized(Msg):
 
 
 @attr.s
+class Grant(JSONSerializable):
+    authorization: Authorization = attr.ib()
+    expiration: str = attr.ib()
+
+
+@attr.s
 class MsgGrantAuthorization(Msg):
     """Grant an authorization to ``grantee`` to call messages on behalf of ``granter``.
 
     Args:
-        granter: account giving authorization
+        granter: account granting authorization
         grantee: account receiving authorization
-        authorization: details of authorization granted
-        period (int): timeframe during which the authorization is considered valid
+        grant: pair of authorization, expiration
     """
 
     type = "msgauth/MsgGrantAuthorization"
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
-    authorization: Authorization = attr.ib()
-    period: int = attr.ib(converter=int)
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["period"] = str(d["period"])
-        return {"type": self.type, "value": dict_to_data(d)}
+    grant: Grant = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAuthorization:
@@ -68,8 +66,10 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            authorization=Authorization.from_data(data["authorization"]),
-            period=data["period"],
+            grant=Grant(
+                authorization=Authorization.from_data(data["grant"]["authorization"]),
+                expiration=str(data["grant"]["expiration"]),
+            ),
         )
 
 
@@ -80,7 +80,7 @@ class MsgRevokeAuthorization(Msg):
     Args:
         granter: account removing authorization
         grantee: account having authorization removed
-        authorization_msg_type: type of message to remove authorization for
+        msg_type_url: type of message to remove authorization for
     """
 
     type = "msgauth/MsgRevokeAuthorization"
@@ -88,7 +88,7 @@ class MsgRevokeAuthorization(Msg):
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
-    authorization_msg_type: str = attr.ib()
+    msg_type_url: str = attr.ib()
 
     @classmethod
     def from_data(cls, data: dict) -> MsgRevokeAuthorization:
@@ -96,5 +96,5 @@ class MsgRevokeAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            authorization_msg_type=data["authorization_msg_type"],
+            msg_type_url=data["msg_type_url"],
         )

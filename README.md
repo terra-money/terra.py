@@ -105,7 +105,7 @@ In order to interact with the Terra blockchain, you'll need a connection to a Te
 
 ```
 >>> from terra_sdk.client.lcd import LCDClient
->>> terra = LCDClient(chain_id="columbus-4", url="https://lcd.terra.dev")
+>>> terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
 ```
 
 ## Getting Blockchain Information
@@ -129,7 +129,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 >>> from terra_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-4")</strong>
+      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
       total_supply = await terra.supply.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
@@ -154,7 +154,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 >>> from terra_sdk.key.mnemonic import MnemonicKey
 
 >>> mk = MnemonicKey(mnemonic=MNEMONIC) 
->>> terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+>>> terra = LCDClient("https://lcd.terra.dev", "columbus-5")
 >>> wallet = terra.wallet(mk)
 ```
 

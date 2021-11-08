@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 import attr
 
@@ -21,10 +21,7 @@ class Account(JSONSerializable):
     address: AccAddress = attr.ib()
     """"""
 
-    coins: Coins = attr.ib(converter=Coins)
-    """"""
-
-    public_key: PublicKey = attr.ib()
+    public_key: Optional[PublicKey] = attr.ib()
     """"""
 
     account_number: int = attr.ib(converter=int)
@@ -38,8 +35,7 @@ class Account(JSONSerializable):
             "type": "core/Account",
             "value": {
                 "address": self.address,
-                "coins": self.coins.to_data(),
-                "public_key": self.public_key.to_data(),
+                "public_key": self.public_key and self.public_key.to_data(),
                 "account_number": str(self.account_number),
                 "sequence": str(self.sequence),
             },
@@ -50,10 +46,10 @@ class Account(JSONSerializable):
         data = data["value"]
         return cls(
             address=data["address"],
-            coins=Coins.from_data(data["coins"]),
-            public_key=PublicKey.from_data(data["public_key"]),
-            account_number=data["account_number"],
-            sequence=data["sequence"],
+            public_key=data.get("public_key")
+            and PublicKey.from_data(data["public_key"]),
+            account_number=data.get("account_number") or 0,
+            sequence=data.get("sequence") or 0,
         )
 
 
@@ -62,9 +58,6 @@ class LazyGradedVestingAccount(Account):
     """Stores information about an account with vesting."""
 
     address: AccAddress = attr.ib()
-    """"""
-
-    coins: Coins = attr.ib(converter=Coins)
     """"""
 
     public_key: PublicKey = attr.ib()
@@ -96,7 +89,6 @@ class LazyGradedVestingAccount(Account):
             "type": "core/LazyGradedVestingAccount",
             "value": {
                 "address": self.address,
-                "coins": self.coins.to_data(),
                 "public_key": self.public_key and self.public_key.to_data(),
                 "account_number": str(self.account_number),
                 "sequence": str(self.sequence),
@@ -113,7 +105,6 @@ class LazyGradedVestingAccount(Account):
         data = data["value"]
         return cls(
             address=data["address"],
-            coins=Coins.from_data(data["coins"]),
             public_key=PublicKey.from_data(data["public_key"]),
             account_number=data["account_number"],
             sequence=data["sequence"],

@@ -88,7 +88,7 @@ class Coin(JSONSerializable):
         Returns:
             Coin: converted string
         """
-        pattern = r"^(\-?[0-9]+(\.[0-9]+)?)([a-zA-Z]+)$"
+        pattern = r"^(\-?[0-9]+(\.[0-9]+)?)([0-9a-zA-Z/]+)$"
         match = re.match(pattern, string)
         if match is None:
             raise ValueError(f"failed to parse Coin: {string}")
