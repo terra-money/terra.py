@@ -10,6 +10,7 @@ from .json import JSONSerializable, dict_to_data
 class BaseTerraData(JSONSerializable, Message):
 
     type: str
+    type_url: str
 
     def to_data(self) -> dict:
         return {"type": self.type_url, "value": dict_to_data(self.__dict__)}

@@ -1,4 +1,4 @@
-"""ibc-trasfer module data objects."""
+"""ibc-trasfer module data ㅛobjects."""
 from __future__ import annotations
 
 import attr

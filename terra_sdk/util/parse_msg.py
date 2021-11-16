@@ -34,6 +34,28 @@ from terra_sdk.core.wasm import (
     MsgStoreCode,
     MsgUpdateContractAdmin,
 )
+from terra_sdk.core.ibc.msgs import (
+    MsgCreateClient,
+    MsgUpdateClient,
+    MsgUpgradeClient,
+    MsgSubmitMisbehaviour,
+    MsgConnectionOpenInit,
+    MsgConnectionOpenTry,
+    MsgConnectionOpenAck,
+    MsgConnectionOpenConfirm,
+    MsgChannelOpenInit,
+    MsgChannelOpenTry,
+    MsgChannelOpenAck,
+    MsgChannelOpenConfirm,
+    MsgChannelCloseInit,
+    MsgChannelCloseConfirm,
+    MsgRecvPacket,
+    MsgTimeout,
+    MsgAcknowledgement
+)
+from terra_sdk.core.ibc_transfer import (
+    MsgTransfer
+)
 
 from .base import create_demux
 
@@ -74,6 +96,29 @@ wasm_msgs = [
     MsgClearContractAdmin,
 ]
 
+ibc_transfer_msgs = [
+    MsgTransfer
+]
+ibc_msgs = [
+    MsgCreateClient,
+    MsgUpdateClient,
+    MsgUpgradeClient,
+    MsgSubmitMisbehaviour,
+    MsgConnectionOpenInit,
+    MsgConnectionOpenTry,
+    MsgConnectionOpenAck,
+    MsgConnectionOpenConfirm,
+    MsgChannelOpenInit,
+    MsgChannelOpenTry,
+    MsgChannelOpenAck,
+    MsgChannelOpenConfirm,
+    MsgChannelCloseInit,
+    MsgChannelCloseConfirm,
+    MsgRecvPacket,
+    MsgTimeout,
+    MsgAcknowledgement
+]
+
 parse_msg = create_demux(
     [
         *bank_msgs,
@@ -84,5 +129,7 @@ parse_msg = create_demux(
         *slashing_msgs,
         *staking_msgs,
         *wasm_msgs,
+        *ibc_msgs,
+        *ibc_transfer_msgs
     ]
 )

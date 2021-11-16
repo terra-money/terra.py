@@ -34,7 +34,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             "index_offset": Numeric.parse(info["index_offset"]),
             "jailed_until": parser.parse(
                 info["jailed_until"]
-            ),  # TODO: convert to datetime
+            ),
             "tombstoned": bool(info["tombstoned"]),
             "missed_blocks_counter": Numeric.parse(info["missed_blocks_counter"]),
         }
