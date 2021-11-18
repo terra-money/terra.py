@@ -1,0 +1,20 @@
+# Common examples
+
+## Configuring LCDClient
+
+The following code example shows how to initialize the LCDClient. The rest of the examples assume you initialized it by using this example or similar code.
+
+```
+from .lcdclient import AsyncLCDClient, LCDClient
+from .wallet import AsyncWallet, Wallet
+
+__all__ = ["AsyncLCDClient", "LCDClient", "AsyncWallet", "Wallet"]
+```
+
+
+
+
+
+
+
+
