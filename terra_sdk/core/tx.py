@@ -393,9 +393,9 @@ class CompactBitArray(JSONSerializable):
             return len("{0:b}".format(n).split("0").join(""))
 
         ones_count = 0
-        max = self.count()
-        if index > max:
-            index = max
+        _max = self.count()
+        if index > _max:
+            index = _max
 
         elem = 0
         while True:

@@ -20,7 +20,12 @@ from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
 from terra_sdk.core.tx import ModeInfo, ModeInfoSingle, SignerInfo, SignMode, Tx
 
-BECH32_PUBKEY_DATA_PREFIX = "eb5ae98721"
+from terra_sdk.core.public_key import (
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1,
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519,
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD
+)
+
 
 __all__ = ["Key", "SignOptions"]
 
@@ -48,8 +53,8 @@ def address_from_public_key(public_key: PublicKey) -> bytes:
     return rip.digest()
 
 
-def pubkey_from_public_key(public_key: bytes) -> bytes:
-    arr = bytearray.fromhex(BECH32_PUBKEY_DATA_PREFIX)
+def pubkey_from_public_key(public_key: PublicKey) -> bytes:
+    arr = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1)
     arr += bytearray(public_key.key)
     return bytes(arr)
 

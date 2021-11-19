@@ -44,6 +44,9 @@ class BaseAccount(JSONSerializable):
             }
         }
 
+    def get_account_number(self) -> int:
+        return self.account_number
+
     def get_sequence(self) -> int:
         return self.sequence
 

@@ -35,9 +35,8 @@ class CreateTxOptions:
     memo: Optional[str] = attr.ib(default=None)
     gas: Optional[str] = attr.ib(default=None)
     gas_prices: Optional[Coins] = attr.ib(default=None)
-    # FIXME: is it okay with 0 bye default?
     gas_adjustment: Optional[Numeric.Output] = attr.ib(
-        default=0, converter=Numeric.parse
+        default=1, converter=Numeric.parse
     )
     fee_denoms: Optional[str] = attr.ib(default=None)
     account_number: Optional[int] = attr.ib(default=None)
