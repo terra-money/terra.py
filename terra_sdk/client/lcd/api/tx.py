@@ -262,6 +262,7 @@ class TxAPI(AsyncTxAPI):
         msgs: List[Msg],
         fee: Optional[StdFee] = None,
         memo: str = "",
+        gas: Optional[int] = None,
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         fee_denoms: Optional[List[str]] = None,
@@ -275,7 +276,10 @@ class TxAPI(AsyncTxAPI):
     @sync_bind(AsyncTxAPI.estimate_fee)
     def estimate_fee(
         self,
-        tx: Union[StdSignMsg, StdTx],
+        sender: AccAddress,
+        msgs: List[Msg],
+        memo: str = "",
+        gas: Optional[int] = None,
         gas_prices: Optional[Coins.Input] = None,
         gas_adjustment: Optional[Numeric.Input] = None,
         fee_denoms: Optional[List[str]] = None,
