@@ -18,7 +18,7 @@ license = "MIT"
 packages = [{ include = "terra_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra-sdk-python"
-version = "1.0.1"
+version = "1.0.2"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.7.3"
