@@ -327,17 +327,21 @@ class TxAPI(AsyncTxAPI):
     ) -> Fee:
         pass
 
+    estimate_fee.__doc__ = AsyncTxAPI.estimate_fee.__doc__
+
     @sync_bind(AsyncTxAPI.estimate_gas)
     def estimate_gas(
         self, tx: Tx, options: Optional[CreateTxOptions]
     ) -> SimulateResponse:
         pass
 
+    estimate_gas.__doc__ = AsyncTxAPI.estimate_gas.__doc__
+
     @sync_bind(AsyncTxAPI.compute_tax)
     def compute_tax(self, tx: Tx) -> Coins:
         pass
 
-    estimate_fee.__doc__ = AsyncTxAPI.estimate_fee.__doc__
+    compute_tax.__doc__ = AsyncTxAPI.compute_tax.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
     def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
