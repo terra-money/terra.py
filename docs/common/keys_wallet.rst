@@ -3,6 +3,8 @@ Keys & Wallets
 
 A **Key** is an object that provides an abstraction for the agency of signing transactions.
 
+Terra.py provides several standard Key implementations that provide a variety of ways to load an account with signing features into your program.
+
 Key (abstract)
 --------------
 
@@ -41,7 +43,9 @@ Key.create_signature()<terra_sdk.key.key.Key.create_signature>
 
 RawKey
 ------
-RawKey directly uses a raw (plaintext) private key in memory, and provides the implementation for signing with ECDSA on curve Secp256k1
+The most basic implementation of Key is RawKey, which is created with a plain private key.
+RawKey directly uses a raw (plaintext) private key in memory, and provides the implementation for signing with ECDSA on curve Secp256k1. 
+
 
 .. automodule:: class RawKey(Key):
 
@@ -58,7 +62,7 @@ RawKey directly uses a raw (plaintext) private key in memory, and provides the i
 
 MnemonicKey
 -----------
-A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard. A mnemonic is a string that is optional in the class. If not provided, a 24-word mnemonic will be generated.
+A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard. A mnemonic is a string that is optional in the class. If not provided, a 24-word mnemonic will be generated. If you want to generate a random mnemonic, you can create a MnemonicKey without any arguments:
 
 .. automodule:: class MnemonicKey(RawKey):
     """
