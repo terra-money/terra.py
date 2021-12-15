@@ -15,7 +15,7 @@ The Python SDK for Terra
 <br/>
   <a href="https://pypi.org/project/terra-sdk/">PyPI Package</a>
   ·
-  <a href="https://github.com/terra-money/terra-sdk-python">GitHub Repository</a>
+  <a href="https://github.com/terra-money/terra.py">GitHub Repository</a>
 </p></div>
 
 
@@ -54,7 +54,7 @@ The Terra Software Development Kit (SDK) in Python is a simple library toolkit f
 
 
 # API Reference
-An intricate reference to the APIs on the Terra SDK can be found <a href="https://terra-money.github.io/terra-sdk-python/index.html">here</a>.
+An intricate reference to the APIs on the Terra SDK can be found <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
 
 <br/>
 
@@ -99,7 +99,7 @@ $ make qa && make format
 
 # Usage Examples
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
-Following examples are provided to help get building started; use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra-sdk-python/index.html">here</a>.
+Following examples are provided to help get building started; use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
 
 In order to interact with the Terra blockchain, you'll need a connection to a Terra node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra LCD node.):
 
