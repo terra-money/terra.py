@@ -18,6 +18,7 @@ from .api.auth import AsyncAuthAPI, AuthAPI
 from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.bank import AsyncBankAPI, BankAPI
 from .api.distribution import AsyncDistributionAPI, DistributionAPI
+from .api.feegrant import AsyncFeeGrantAPI, FeeGrantAPI
 from .api.gov import AsyncGovAPI, GovAPI
 from .api.ibc import AsyncIbcAPI, IbcAPI
 from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
@@ -62,6 +63,7 @@ class AsyncLCDClient:
         self.auth = AsyncAuthAPI(self)
         self.bank = AsyncBankAPI(self)
         self.distribution = AsyncDistributionAPI(self)
+        self.feegrant = AsyncFeeGrantAPI(self)
         self.gov = AsyncGovAPI(self)
         self.market = AsyncMarketAPI(self)
         self.mint = AsyncMintAPI(self)
@@ -116,7 +118,7 @@ class AsyncLCDClient:
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
-                raise LCDResponseError(message=result.get("error"), response=response)
+                raise LCDResponseError(message=result.get("message"), response=response)
         self.last_request_height = result.get("height")
         return result  # if raw else result["result"]
 
@@ -168,6 +170,9 @@ class LCDClient(AsyncLCDClient):
 
     gov: GovAPI
     """:class:`GovAPI<terra_sdk.client.lcd.api.gov.GovAPI>`."""
+
+    feegrant: FeeGrantAPI
+    """:class:`FeeGrant<terra_sdk.client.lcd.api.feegrant.FeeGrantAPI>`."""
 
     market: MarketAPI
     """:class:`MarketAPI<terra_sdk.client.lcd.api.market.MarketAPI>`."""
@@ -225,6 +230,7 @@ class LCDClient(AsyncLCDClient):
         self.bank = BankAPI(self)
         self.distribution = DistributionAPI(self)
         self.gov = GovAPI(self)
+        self.feegrant = FeeGrantAPI(self)
         self.market = MarketAPI(self)
         self.mint = MintAPI(self)
         self.authz = AuthzAPI(self)

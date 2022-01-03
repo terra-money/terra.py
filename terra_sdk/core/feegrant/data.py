@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 import datetime
-from types import Union
-from typing import List
+from typing import List, Union, Optional
 
 import attr
+from attr import converters
 from dateutil import parser
 from terra_proto.cosmos.feegrant.v1beta1 import (
     AllowedMsgAllowance as AllowedMsgAllowance_pb,
@@ -29,8 +29,8 @@ class BasicAllowance(JSONSerializable):
     that optionally expires. The grantee can use up to SpendLimit to cover fees.
     """
 
-    spend_limit: Coins = attr.ib(converter=Coins)
-    expiration: datetime = attr.ib(converter=parser.parse)
+    spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
+    expiration: Optional[datetime] = attr.ib(converter=converters.optional(parser.parse))
 
     type_amino = "feegrant/BasicAllowance"
     type_url = "/cosmos.feegrant.v1beta1.BasicAllowance"
@@ -52,9 +52,11 @@ class BasicAllowance(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> BasicAllowance:
+        sl = data.get("spend_limit")
+        exp = data.get("expiration")
         return cls(
-            spend_limit=Coins.from_data(data["spend_limit"]),
-            expiration=data["expiration"],
+            spend_limit=Coins.from_data(sl) if sl else None,
+            expiration=exp
         )
 
     def to_proto(self) -> BasicAllowance_pb:
@@ -150,12 +152,12 @@ class AllowedMsgAllowance(JSONSerializable):
         )
 
 
-Allowance = Union[BasicAllowance, PeriodicAllowance]
-#class Allowance(Union[BasicAllowance, PeriodicAllowance]):
-#
-#    @classmethod
-#    def from_data(cls, data: dict):
-#        if data.get("@type") == BasicAllowance.type_url:
-#            return BasicAllowance.from_data(data)
-#        else:
-#            return PeriodicAllowance.from_data(data)
+#Allowance = Union[BasicAllowance, PeriodicAllowance]
+class Allowance:#(BasicAllowance, PeriodicAllowance):
+
+    @classmethod
+    def from_data(cls, data: dict):
+        if data.get("@type") == BasicAllowance.type_url:
+            return BasicAllowance.from_data(data)
+        else:
+            return PeriodicAllowance.from_data(data)
