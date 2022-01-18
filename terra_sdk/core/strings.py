@@ -168,7 +168,7 @@ def to_val_pubkey(data: AccPubKey) -> ValPubKey:
     return ValPubKey(bech32_encode("terravaloperpub", vals[1]))
 
 
-def is_valcons_pubkey(data: str) -> ValConsPubKey:
+def is_valcons_pubkey(data: str) -> bool:
     """Checks whether provided string is a properly formatted Terra validator consensus
     pubkey.
 
@@ -176,6 +176,6 @@ def is_valcons_pubkey(data: str) -> ValConsPubKey:
         data (str): string to check
 
     Returns:
-        ValConsPubKey: validator consensus pubkey
+        bool: whether string is validator consensus pubkey
     """
     return check_prefix_and_length("terravalconspub", data, 83)
