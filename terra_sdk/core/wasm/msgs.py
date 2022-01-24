@@ -143,10 +143,10 @@ class MsgInstantiateContract(Msg):
     """"""
 
     sender: AccAddress = attr.ib()
+    admin: Optional[AccAddress] = attr.ib()
     code_id: int = attr.ib(converter=int)
     init_msg: dict = attr.ib()
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
-    admin: Optional[AccAddress] = attr.ib(default=None)
 
     def to_amino(self) -> dict:
         return {
