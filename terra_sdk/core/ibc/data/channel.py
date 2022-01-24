@@ -13,7 +13,7 @@ from terra_proto.ibc.core.channel.v1 import (
 )
 from betterproto.lib.google.protobuf import Any as Any_pb
 
-from terra_sdk.core.ibc import Height
+from terra_sdk.core.ibc.data import Height
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["Counterparty", "Channel", "Order", "State", "Packet"]
