@@ -1,9 +1,11 @@
 import base64
 import copy
-from typing import List, Optional
-
+import urllib.parse
+from typing import List, Optional, Union, Dict
+from multidict import CIMultiDict
 import attr
-from terra_proto.cosmos.tx.v1beta1 import SimulateResponse as SimulateResponse_pb
+
+from ..params import APIParams
 
 from terra_sdk.core import AccAddress, Coins, Dec, Numeric, PublicKey
 from terra_sdk.core.broadcast import (
@@ -12,9 +14,11 @@ from terra_sdk.core.broadcast import (
     SyncTxBroadcastResult,
 )
 from terra_sdk.core.msg import Msg
+from terra_sdk.core.block import Block
 from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, TxInfo
 from terra_sdk.util.hash import hash_amino
 from terra_sdk.util.json import JSONSerializable
+from . import tendermint
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -49,6 +53,12 @@ class CreateTxOptions:
 class BroadcastOptions:
     sequences: Optional[List[int]] = attr.ib()
     fee_granter: Optional[AccAddress] = attr.ib(default=None)
+
+
+@attr.s
+class TxSearchOption:
+    key: str = attr.ib()
+    value: Union[str, int] = attr.ib()
 
 
 @attr.s
@@ -212,8 +222,13 @@ class AsyncTxAPI(BaseAsyncAPI):
         )
         return Coins.from_data(res.get("tax_amount"))
 
-    async def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
+    async def encode(self, tx: Tx) -> str:
+        """Encode a Tx to base64 encoded proto string"""
         return base64.b64encode(tx.to_proto().SerializeToString()).decode()
+
+    async def decode(self, tx: str) -> Tx:
+        """Decode base64 encoded proto string to a Tx"""
+        return Tx.from_proto(Tx.base64.b64decode(tx))  # FIXME
 
     async def hash(self, tx: Tx) -> str:
         """Compute hash for a transaction.
@@ -295,17 +310,56 @@ class AsyncTxAPI(BaseAsyncAPI):
             codespace=res.get("codespace"),
         )
 
-    async def search(self, options: dict = {}) -> dict:
-        """Searches for transactions given critera.
+    async def search(self, events: List[list], params: Optional[APIParams] = None) -> dict:
+        """Searches for transactions given criteria.
 
         Args:
-            options (dict, optional): dictionary containing options. Defaults to {}.
+            events (dict): dictionary containing options
+            params (APIParams): optional parameters
 
         Returns:
             dict: transaction search results
         """
-        res = await self._c._get("/cosmos/tx/v1beta1/txs", options, raw=True)
-        return res
+
+        actual_params = CIMultiDict()
+
+        for event in events:
+            print(f"EEEE:{event}")
+            if event[0] == "tx.height":
+                actual_params.add("events", f"{event[0]}={event[1]}")
+            else:
+                actual_params.add("events", f"{event[0]}='{event[1]}'")
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
+        res = await self._c._get("/cosmos/tx/v1beta1/txs", actual_params)
+        print(f"RES|{res}")
+        return {
+            "txs": [TxInfo.from_data(tx) for tx in res.get("tx_responses")],
+            "pagination": res.get("pagination")
+        }
+
+    async def tx_infos_by_height(self, height: Optional[int] = None) -> List:
+        """Fetches information for an included transaction given height.
+
+        Args:
+            height (Optional[int]): height of block to lookup
+        Returns:
+
+            TxInfo: transaction info
+        """
+        if height is None:
+            x = "latest"
+        else:
+            x = height
+
+        res = await self._c._get(f"/cosmos/base/tendermint/v1beta1/blocks/{x}")
+
+        txs = res.get("data").get("txs")
+        if len(txs) <= 0:
+            return []
+        return [TxInfo.from_data(tx) for tx in txs]
 
 
 class TxAPI(AsyncTxAPI):
@@ -344,10 +398,16 @@ class TxAPI(AsyncTxAPI):
     compute_tax.__doc__ = AsyncTxAPI.compute_tax.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
-    def encode(self, tx: Tx, options: BroadcastOptions = None) -> str:
+    def encode(self, tx: Tx) -> str:
         pass
 
     encode.__doc__ = AsyncTxAPI.encode.__doc__
+
+    @sync_bind(AsyncTxAPI.decode)
+    def decode(self, tx: str) -> Tx:
+        pass
+
+    decode.__doc__ = AsyncTxAPI.decode.__doc__
 
     @sync_bind(AsyncTxAPI.hash)
     def hash(self, tx: Tx) -> str:
@@ -380,7 +440,13 @@ class TxAPI(AsyncTxAPI):
     broadcast.__doc__ = AsyncTxAPI.broadcast.__doc__
 
     @sync_bind(AsyncTxAPI.search)
-    def search(self, options: dict = {}) -> dict:
+    def search(self, events: List[list], params: Optional[APIParams] = None) -> dict:
         pass
 
     search.__doc__ = AsyncTxAPI.search.__doc__
+
+    @sync_bind(AsyncTxAPI.tx_infos_by_height)
+    def tx_infos_by_height(self, height: Optional[int] = None) -> List:
+        pass
+
+    tx_infos_by_height.__doc__ = AsyncTxAPI.tx_infos_by_height.__doc__

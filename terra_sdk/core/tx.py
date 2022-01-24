@@ -562,19 +562,17 @@ class TxInfo(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
-        tx = data["tx"]
-        resp = data["tx_response"]
         return cls(
-            resp["height"],
-            resp["txhash"],
-            resp["raw_log"],
-            parse_tx_logs(resp.get("logs")),
-            resp["gas_wanted"],
-            resp["gas_used"],
-            Tx.from_data(tx),
-            resp["timestamp"],
-            resp.get("code"),
-            resp.get("codespace"),
+            data["height"],
+            data["txhash"],
+            data["raw_log"],
+            parse_tx_logs(data.get("logs")),
+            data["gas_wanted"],
+            data["gas_used"],
+            Tx.from_data(data['tx']),
+            data["timestamp"],
+            data.get("code"),
+            data.get("codespace"),
         )
 
     def to_proto(self) -> TxResponse_pb:

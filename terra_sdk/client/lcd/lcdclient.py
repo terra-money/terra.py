@@ -3,10 +3,11 @@ from __future__ import annotations
 from asyncio import AbstractEventLoop, get_event_loop
 from json import JSONDecodeError
 from typing import Optional, Union
+from urllib import parse
 
-import attr
 import nest_asyncio
 from aiohttp import ClientSession
+from multidict import CIMultiDict
 
 from terra_sdk.core import Coins, Dec, Numeric
 from terra_sdk.exceptions import LCDResponseError
@@ -32,7 +33,7 @@ from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
-from .params import APIParams, PaginationOptions
+from .params import APIParams
 from .wallet import AsyncWallet, Wallet
 
 
@@ -90,9 +91,10 @@ class AsyncLCDClient:
     async def _get(
         self,
         endpoint: str,
-        params: Optional[Union[APIParams, list, dict]] = None,  # , raw: bool = False
+        params: Optional[Union[APIParams, CIMultiDict, list, dict]] = None,
+        # raw: bool = False
     ):
-        if params and (type(params) is not dict and type(params) is not list):
+        if params and hasattr(params, "to_dict") and callable(getattr(params, "to_dict")):
             params = params.to_dict()
 
         async with self.session.get(
@@ -121,18 +123,6 @@ class AsyncLCDClient:
                 raise LCDResponseError(message=result.get("message"), response=response)
         self.last_request_height = result.get("height")
         return result  # if raw else result["result"]
-
-    async def _search(self, params: list = []) -> dict:
-        """Searches for transactions given critera.
-
-        Args:
-            options (dict, optional): dictionary containing options. Defaults to {}.
-
-        Returns:
-            dict: transaction search results
-        """
-        res = await self._get("/cosmos/tx/v1beta1/txs", params)
-        return res
 
     async def __aenter__(self):
         return self

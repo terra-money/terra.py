@@ -13,7 +13,9 @@ __all__ = [
     "ValPubKey",
     "SignDoc",
     "SignatureV2",
-    "MultiSignature"
+    "MultiSignature",
+    "Tx",
+    "TxInfo"
 ]
 
 from .bech32 import AccAddress, AccPubKey, ValAddress, ValPubKey
@@ -24,3 +26,4 @@ from .public_key import PublicKey, SimplePublicKey, ValConsPubKey, LegacyAminoPu
 from .sign_doc import SignDoc
 from .signature_v2 import SignatureV2
 from .multisig import MultiSignature
+from .tx import Tx, TxInfo
