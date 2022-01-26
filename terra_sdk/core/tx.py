@@ -46,6 +46,8 @@ __all__ = [
 ]
 
 # just alias
+from terra_sdk.util.parse_msg import parse_msg, parse_proto
+
 SignMode = SignMode_pb
 
 
@@ -92,12 +94,18 @@ class Tx(JSONSerializable):
         )
 
     @classmethod
-    def from_proto(cls, proto: Tx_pb) -> Tx:
+    def from_proto(cls, proto: Tx_pb):  # -> Tx:
+        ptx = proto.to_dict()
         return cls(
-            TxBody.from_proto(proto["body"]),
-            AuthInfo.from_proto(proto["auth_info"]),
-            proto["signatures"],
+            TxBody.from_proto(ptx["body"]),
+            AuthInfo.from_proto(ptx["authInfo"]),
+            ptx["signatures"],
         )
+
+    @classmethod
+    def from_bytes(cls, txb: bytes) -> Tx_pb:
+        return Tx_pb().parse(txb)
+
 
     def append_empty_signatures(self, signers: List[SignerData]):
         for signer in signers:
@@ -170,10 +178,11 @@ class TxBody(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TxBody_pb) -> TxBody:
+        print(f"MSG:{proto['messages'][0]}")
         return cls(
-            [Msg.unpack_any(m) for m in proto["messages"]],
-            proto["memo"],
-            proto["timeout_height"],
+            [parse_proto(m) for m in proto["messages"]],
+            proto.memo,
+            proto.timeout_height,
         )
 
 
@@ -562,6 +571,7 @@ class TxInfo(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
+        print("DATAAA", data)
         return cls(
             data["height"],
             data["txhash"],
@@ -591,15 +601,16 @@ class TxInfo(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TxResponse_pb) -> TxInfo:
+        print("PROTOOO", proto)
         return cls(
-            height=proto["height"],
-            txhash=proto["txhash"],
-            rawlog=proto["raw_log"],
-            logs=parse_tx_logs_proto(proto["logs"]),
-            gas_wanted=proto["gas_wanted"],
-            gas_used=proto["gas_used"],
-            timestamp=proto["timestamp"],
-            tx=Tx.from_proto(proto["tx"]),
-            code=proto["code"],
-            codespace=proto["codespace"],
+            height=proto.height,
+            txhash=proto.txhash,
+            rawlog=proto.raw_log,
+            logs=parse_tx_logs_proto(proto.logs),
+            gas_wanted=proto.gas_wanted,
+            gas_used=proto.gas_used,
+            timestamp=proto.timestamp,
+            tx=Tx.from_proto(proto.tx),
+            code=proto.code,
+            codespace=proto.codespace,
         )

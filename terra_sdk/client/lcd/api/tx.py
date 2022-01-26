@@ -216,6 +216,9 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
 
+
+
+    # TODO: deprecate
     async def compute_tax(self, tx: Tx) -> Coins:
         res = await self._c._post(
             "/terra/tx/v1beta1/compute_tax", {"tx_bytes": self.encode(tx)}
@@ -228,7 +231,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def decode(self, tx: str) -> Tx:
         """Decode base64 encoded proto string to a Tx"""
-        return Tx.from_proto(Tx.base64.b64decode(tx))  # FIXME
+        return Tx.from_bytes(base64.b64decode(tx))  # FIXME
 
     async def hash(self, tx: Tx) -> str:
         """Compute hash for a transaction.
@@ -334,20 +337,19 @@ class AsyncTxAPI(BaseAsyncAPI):
                 actual_params.add(p, params[p])
 
         res = await self._c._get("/cosmos/tx/v1beta1/txs", actual_params)
-        print(f"RES|{res}")
         return {
             "txs": [TxInfo.from_data(tx) for tx in res.get("tx_responses")],
             "pagination": res.get("pagination")
         }
 
-    async def tx_infos_by_height(self, height: Optional[int] = None) -> List:
-        """Fetches information for an included transaction given height.
+    async def tx_infos_by_height(self, height: Optional[int] = None) -> List[TxInfo]:
+        """Fetches information for an included transaction given block height or latest
 
         Args:
-            height (Optional[int]): height of block to lookup
-        Returns:
+            height (int, optional): height to lookup. latest if height is None.
 
-            TxInfo: transaction info
+        Returns:
+            List[TxInfo]: transaction info
         """
         if height is None:
             x = "latest"
@@ -356,10 +358,11 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         res = await self._c._get(f"/cosmos/base/tendermint/v1beta1/blocks/{x}")
 
-        txs = res.get("data").get("txs")
+        print(res)
+        txs = res.get("block").get("data").get("txs")
         if len(txs) <= 0:
             return []
-        return [TxInfo.from_data(tx) for tx in txs]
+        return [self.decode(tx) for tx in txs]
 
 
 class TxAPI(AsyncTxAPI):
@@ -446,7 +449,7 @@ class TxAPI(AsyncTxAPI):
     search.__doc__ = AsyncTxAPI.search.__doc__
 
     @sync_bind(AsyncTxAPI.tx_infos_by_height)
-    def tx_infos_by_height(self, height: Optional[int] = None) -> List:
+    def tx_infos_by_height(self, height: Optional[int] = None) -> List[TxInfo]:
         pass
 
     tx_infos_by_height.__doc__ = AsyncTxAPI.tx_infos_by_height.__doc__
