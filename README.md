@@ -5,7 +5,7 @@
 
 The Python SDK for Terra
 <br/>
-<p><sub>(Unfamiliar with Terra?  <a href="https://docs.terra.money/">Check out Terra Docs</a>)</sub></p>
+<p><sub>(Unfamiliar with Terra?  <a href="https://docs.terra.money/">Check out the Terra Docs</a>)</sub></p>
 
   <p > <img alt="GitHub" src="https://img.shields.io/github/license/terra-money/terra-sdk-python">
 <img alt="Python" src="https://img.shields.io/pypi/pyversions/terra-sdk">
@@ -23,7 +23,7 @@ The Terra Software Development Kit (SDK) in Python is a simple library toolkit f
 
 ## Features
 
-- Written in Python offering extensive support libraries
+- Written in Python with extensive support libraries
 - Versatile support for key management solutions
 - Exposes the Terra API through LCDClient
 
@@ -59,7 +59,7 @@ An intricate reference to the APIs on the Terra SDK can be found <a href="https:
 <br/>
 
 # Getting Started
-A walk-through of the steps to get started with the Terra SDK alongside with a few use case examples are provided below. Alternatively, a tutorial video is also available <a href="https://www.youtube.com/watch?v=GfasBlJHKIg">here</a> as reference.
+A walk-through of the steps to get started with the Terra SDK alongside a few use case examples are provided below. Alternatively, a tutorial video is also available <a href="https://www.youtube.com/watch?v=GfasBlJHKIg">here</a> as reference.
 
 ## Requirements
 Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
@@ -99,7 +99,7 @@ $ make qa && make format
 
 # Usage Examples
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
-Following examples are provided to help get building started; use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
+The following examples are provided to help you get started. Use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
 
 In order to interact with the Terra blockchain, you'll need a connection to a Terra node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra LCD node.):
 
@@ -192,8 +192,8 @@ Community contribution, whether it's a new feature, correction, bug report, addi
 <br/>
 
 ## Reporting an Issue 
-First things first: **Do NOT report security vulnerabilities in public issues!** Please disclose responsibly by letting the <a href="mailto:william@terra.money">Terra SDK team</a> know upfront. We will assess the issue as soon as possible on a best-effort basis and will give you an estimate for when we have a fix and release available for an eventual public disclosure. </br>
-If you encounter a different issue with the Python SDK, check first to see if there is an existing issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page or a pull request on the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs) addressing the topic.
+First things first: **Do NOT report security vulnerabilities in public issues!** Please disclose responsibly by submitting your findings to the [Terra Bugcrowd submission form](https://www.terra.money/bugcrowd). The issue will be assessed as soon as possible. 
+If you encounter a different issue with the Python SDK, check first to see if there is an existing issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page, or if there is a pull request on the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page. Be sure to check both the Open and Closed tabs addressing the issue. 
 
 If there isn't a discussion on the topic there, you can file an issue. The ideal report includes:
 
@@ -207,13 +207,13 @@ If there isn't a discussion on the topic there, you can file an issue. The ideal
 </br>
 
 ## Requesting a Feature
-If you wish to request the addition of a feature, please first checkout the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page and the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs). If you decide to continue with the request, think of the merits of the feature to convince the project's developers, and provide as much detail and context as possible in the form of filing an issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page.
+If you wish to request the addition of a feature, please first check out the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page and the <a href="https://github.com/terra-money/terra-sdk-python/pulls">Pull requests</a> page (both Open and Closed tabs). If you decide to continue with the request, think of the merits of the feature to convince the project's developers, and provide as much detail and context as possible in the form of filing an issue on the <a href="https://github.com/terra-money/terra-sdk-python/issues">Issues</a> page.
 
 
 <br/>
 
 ## Contributing Code
-If you wish to contribute to the repository in the form of patches, improvements, new features, etc., first scale the contribution. If it is a major development, like implementing a feature, it is recommended that you consult with the developers of the project before starting the development in order not to risk spending a lot of time working on a change that might not get merged into the project. Once confirmed, you are welcome to submit your pull request.
+If you wish to contribute to the repository in the form of patches, improvements, new features, etc., first scale the contribution. If it is a major development, like implementing a feature, it is recommended that you consult with the developers of the project before starting the development to avoid duplicating efforts. Once confirmed, you are welcome to submit your pull request.
 </br>
 
 ### For new contributors, here is a quick guide: 
@@ -227,19 +227,19 @@ If you wish to contribute to the repository in the form of patches, improvements
    
 
 A good pull request:
-* is clear.
-* works across all supported versions of Python. (3.7+)
+* Is clear and concise.
+* Works across all supported versions of Python. (3.7+)
 * Follows the existing style of the code base (<a href="https://pypi.org/project/flake8/">`Flake8`</a>).
 * Has comments included as needed.
-* A test case that demonstrates the previous flaw that now passes with the included patch, or demonstrates the newly added feature.
-* If it adds / changes a public API, it must also include documentation for those changes.
+* Includes a test case that demonstrates the previous flaw that now passes with the included patch, or demonstrates the newly added feature.
+* Must include documentation for changing or adding any public APIs.
 * Must be appropriately licensed (MIT License).
 </br>
 
 ## Documentation Contributions
 Documentation improvements are always welcome. The documentation files live in the [docs](./docs) directory of the repository and are written in <a href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> and use <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> to create the full suite of documentation.
 </br>
-When contributing documentation, please do your best to follow the style of the documentation files. This means a soft-limit of 88 characters wide in your text files and a semi-formal, yet friendly and approachable, prose style. You can propose your imporvements by submiting a pull request as explained above.
+When contributing documentation, please do your best to follow the style of the documentation files. This means a soft limit of 88 characters wide in your text files and a semi-formal, yet friendly and approachable, prose style. You can propose your improvements by submitting a pull request as explained above.
 
 ### Need more information on how to contribute?
 You can give this <a href="https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution">guide</a> read for more insight.
@@ -263,3 +263,4 @@ This software is licensed under the MIT license. See [LICENSE](./LICENSE) for fu
 <div align="center">
   <sub><em>Powering the innovation of money.</em></sub>
 </div>
+
