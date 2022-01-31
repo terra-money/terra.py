@@ -38,7 +38,7 @@ def test_signature():
 
     fee = StdFee(46467, dict(uluna=698))
 
-    stdsignmsg = StdSignMsg("columbus-3-testnet", 45, 0, fee, [send], "")
+    stdsignmsg = StdSignMsg("columbus-5-testnet", 45, 0, fee, [send], "")
     signature = mk.create_signature(stdsignmsg).signature
     assert (
         signature
