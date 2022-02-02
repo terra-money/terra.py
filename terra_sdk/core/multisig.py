@@ -10,7 +10,7 @@ from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
 from terra_sdk.core import SignatureV2
 from terra_sdk.core.bech32 import AccAddress
 from terra_sdk.core.coins import Coins
-from terra_sdk.core.public_key import LegacyAminoPubKey, SimplePublicKey
+from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
 from terra_sdk.core.signature_v2 import Descriptor, Multi as MultiDescriptor
 from terra_sdk.core.tx import CompactBitArray
 from terra_sdk.util.json import JSONSerializable
@@ -21,7 +21,7 @@ __all__ = ["MultiSignature"]
 class MultiSignature(JSONSerializable):
     bitarray: CompactBitArray = attr.ib(init=False)
     signatures: List[Descriptor] = attr.ib(init=False)
-    multisig_pubkey: LegacyAminoPubKey = attr.ib()
+    multisig_pubkey: LegacyAminoMultisigPublicKey = attr.ib()
 
     def __attrs_post_init__(self):
         n = len(self.multisig_pubkey.public_keys)

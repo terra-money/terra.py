@@ -15,7 +15,7 @@ from terra_sdk.core import (
     ValAddress,
     ValPubKey,
 )
-from terra_sdk.core.public_key import PublicKey
+from terra_sdk.core.public_key import PublicKey, get_bech, address_from_public_key, pubkey_from_public_key
 from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
 from terra_sdk.core.tx import ModeInfo, ModeInfoSingle, SignerInfo, SignMode, Tx
@@ -36,27 +36,6 @@ class SignOptions:
     sequence: int = attr.ib(converter=int)
     sign_mode: SignMode = attr.ib()
     chain_id: str = attr.ib()
-
-
-def get_bech(prefix: str, payload: str) -> str:
-    data = convertbits(bytes.fromhex(payload), 8, 5)
-    if data is None:
-        raise ValueError(f"could not parse data: prefix {prefix}, payload {payload}")
-    return bech32_encode(prefix, data)  # base64 -> base32
-
-
-def address_from_public_key(public_key: PublicKey) -> bytes:
-    sha = hashlib.sha256()
-    rip = hashlib.new("ripemd160")
-    sha.update(public_key.key)
-    rip.update(sha.digest())
-    return rip.digest()
-
-
-def pubkey_from_public_key(public_key: PublicKey) -> bytes:
-    arr = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1)
-    arr += bytearray(public_key.key)
-    return bytes(arr)
 
 
 class Key:

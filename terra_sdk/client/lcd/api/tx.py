@@ -345,7 +345,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         actual_params = CIMultiDict()
 
         for event in events:
-            print(f"EEEE:{event}")
             if event[0] == "tx.height":
                 actual_params.add("events", f"{event[0]}={event[1]}")
             else:
@@ -376,7 +375,6 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         res = await self._c._get(f"/cosmos/base/tendermint/v1beta1/blocks/{x}")
 
-        print(res)
         txs = res.get("block").get("data").get("txs")
         if len(txs) <= 0:
             return []

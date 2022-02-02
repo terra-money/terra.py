@@ -26,7 +26,7 @@ from terra_proto.cosmos.tx.v1beta1 import TxBody as TxBody_pb
 
 from terra_sdk.core.fee import Fee
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.public_key import LegacyAminoPubKey, PublicKey, SimplePublicKey
+from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, PublicKey, SimplePublicKey
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = [
@@ -110,7 +110,7 @@ class Tx(JSONSerializable):
     def append_empty_signatures(self, signers: List[SignerData]):
         for signer in signers:
             if signer.public_key is not None:
-                if isinstance(signer.public_key, LegacyAminoPubKey):
+                if isinstance(signer.public_key, LegacyAminoMultisigPublicKey):
                     signer_info = SignerInfo(
                         public_key=signer.public_key,
                         sequence=signer.sequence,
@@ -178,7 +178,6 @@ class TxBody(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TxBody_pb) -> TxBody:
-        print(f"MSG:{proto['messages'][0]}")
         return cls(
             [parse_proto(m) for m in proto["messages"]],
             proto.memo,
@@ -372,7 +371,7 @@ class CompactBitArray(JSONSerializable):
         if bits <= 0:
             raise ValueError("CompactBitArray bits must be bigger than 0")
 
-        num_elems = (bits + 7) / 8
+        num_elems = (bits + 7) // 8
         if num_elems <= 0 or num_elems > (math.pow(2, 32) - 1):
             raise ValueError("CompactBitArray overflow")
 
@@ -571,7 +570,6 @@ class TxInfo(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
-        print("DATAAA", data)
         return cls(
             data["height"],
             data["txhash"],
@@ -601,7 +599,6 @@ class TxInfo(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TxResponse_pb) -> TxInfo:
-        print("PROTOOO", proto)
         return cls(
             height=proto.height,
             txhash=proto.txhash,
