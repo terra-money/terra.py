@@ -27,3 +27,12 @@ def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:
         return table[data["@type"]](data)
 
     return from_data
+
+
+def create_demux_proto(inputs: List) -> Callable[[Dict[str, Any]], Any]:
+    table = {i.type_url: i.from_proto for i in inputs}
+
+    def from_proto(data: dict):
+        return table[data["@type"]](data)
+
+    return from_proto

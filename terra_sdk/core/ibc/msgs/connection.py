@@ -58,6 +58,18 @@ class MsgConnectionOpenInit(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgConnectionOpenInit_pb) -> MsgConnectionOpenInit:
+        return cls(
+            client_id=proto["client_id"],
+            counterparty=Counterparty.from_proto(proto["counterparty"]),
+            version=Version.from_proto(proto["version"]),
+            delay_period=proto["delay_period"],
+            signer=proto["signer"]
+        )
+
+
+
 
 @attr.s
 class MsgConnectionOpenTry(Msg):
@@ -70,7 +82,7 @@ class MsgConnectionOpenTry(Msg):
 
     client_id: str = attr.ib()
     previous_connection_id: str = attr.ib()
-    client_state: Any_pb = attr.ib()
+    client_state: dict = attr.ib()
     counterparty: Counterparty = attr.ib()
     delay_period: int = attr.ib(converter=int)
     counterparty_versions: List[Version] = attr.ib(converter=list)
@@ -89,7 +101,7 @@ class MsgConnectionOpenTry(Msg):
         return cls(
             client_id=data["client_id"],
             previous_connection_id=data["previous_connection_id"],
-            client_state=Any_pb.FromString(data["client_state"]),
+            client_state=data["client_state"],
             counterparty=Counterparty.from_data(data["counterparty"]),
             delay_period=data["delay_period"],
             counterparty_versions=[Version.from_data(ver) for ver in data["counterparty_versions"]],
@@ -105,7 +117,7 @@ class MsgConnectionOpenTry(Msg):
         return MsgConnectionOpenTry_pb(
             client_id=self.client_id,
             previous_connection_id=self.previous_connection_id,
-            client_state=self.client_state,
+            client_state=Any_pb().from_dict(self.client_state),
             counterparty=self.counterparty.to_proto(),
             delay_period=self.delay_period,
             counterparty_versions=[ver.to_proto() for ver in self.counterparty_versions],
@@ -115,6 +127,23 @@ class MsgConnectionOpenTry(Msg):
             proof_consensus=self.proof_consensus,
             consensus_height=self.consensus_height.to_proto(),
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgConnectionOpenTry_pb) -> MsgConnectionOpenTry:
+        return cls(
+            client_id=proto["client_id"],
+            previous_connection_id=proto["previous_connection_id"],
+            client_state=proto["client_state"],
+            counterparty=Counterparty.from_proto(proto["counterparty"]),
+            delay_period=proto["delay_period"],
+            counterparty_versions=[Version.from_proto(ver) for ver in proto["counterparty_versions"]],
+            proof_height=Height.from_proto(proto["proof_height"]),
+            proof_init=proto["proof_init"],
+            proof_client=proto["proof_client"],
+            proof_consensus=proto["proof_consensus"],
+            consensus_height=Height.from_proto(proto["consensus_height"]),
+            signer=proto["signer"]
         )
 
 @attr.s
@@ -129,7 +158,7 @@ class MsgConnectionOpenAck(Msg):
     connection_id: str = attr.ib()
     counterparty_connection_id: str = attr.ib()
     version: Version = attr.ib()
-    client_state: Any_pb= attr.ib()
+    client_state: dict = attr.ib()
     proof_height: Height = attr.ib()
     proof_try: bytes = attr.ib()
     proof_client: bytes = attr.ib()
@@ -147,7 +176,7 @@ class MsgConnectionOpenAck(Msg):
             connection_id=data["connection_id"],
             counterparty_connection_id=data["counterparty_connection_id"],
             version=Version.from_data(data["version"]),
-            client_state=Any_pb.FromString(data["client_state"]),
+            client_state=data["client_state"],
             proof_height=Height.from_data(data["proof_height"]),
             proof_try=data["proof_try"],
             proof_client=data["proof_client"],
@@ -161,7 +190,7 @@ class MsgConnectionOpenAck(Msg):
             connection_id=self.connection_id,
             counterparty_connection_id=self.counterparty_connection_id,
             version=self.version.to_proto(),
-            client_state=self.client_state,
+            client_state=Any_pb().from_dict(self.client_state),
             proof_height=self.proof_height.to_proto(),
             proof_try=self.proof_try,
             proof_client=self.proof_client,
@@ -169,6 +198,22 @@ class MsgConnectionOpenAck(Msg):
             consensus_height=self.consensus_height.to_proto(),
             signer=self.signer
         )
+
+    @classmethod
+    def from_proto(cls, proto: MsgConnectionOpenAck_pb) -> MsgConnectionOpenAck:
+        return cls(
+            connection_id=proto.connection_id,
+            counterparty_connection_id=proto.counterparty_connection_id,
+            version=Version.from_proto(proto.version),
+            client_state=Any_pb().parse(proto.client_state),
+            proof_height=Height.from_proto(proto.proof_height),
+            proof_try=proto.proof_try,
+            proof_client=proto.proof_client,
+            proof_consensus=proto.proof_consensus,
+            consensus_height=Height.from_proto(proto.consensus_height),
+            signer=proto.signer
+        )
+
 
 
 @attr.s
@@ -205,4 +250,12 @@ class MsgConnectionOpenConfirm(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgConnectionOpenConfirm_pb) -> MsgConnectionOpenConfirm:
+        return cls(
+            connection_id=proto.connection_id,
+            proof_ack=proto.proof_ack,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )
 

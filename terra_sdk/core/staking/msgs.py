@@ -80,6 +80,15 @@ class MsgBeginRedelegate(Msg):
             amount=self.amount.to_proto(),
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgBeginRedelegate_pb) -> MsgBeginRedelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_src_address=proto.validator_src_address,
+            validator_dst_address=proto.validator_dst_address,
+            amount=Coin.from_proto(proto.amount),
+        )
+
 
 @attr.s
 class MsgDelegate(Msg):
@@ -125,6 +134,14 @@ class MsgDelegate(Msg):
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
             amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgDelegate_pb) -> MsgDelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            amount=Coin.from_proto(proto.amount),
         )
 
 
@@ -174,6 +191,14 @@ class MsgUndelegate(Msg):
             amount=self.amount.to_proto(),
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgUndelegate_pb) -> MsgUndelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            amount=Coin.from_proto(proto.amount),
+        )
+
 
 @attr.s
 class MsgEditValidator(Msg):
@@ -217,6 +242,17 @@ class MsgEditValidator(Msg):
             min_self_delegation=str(self.min_self_delegation)
             if self.min_self_delegation
             else None,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgEditValidator_pb) -> MsgEditValidator:
+        msd = int(proto.min_self_delegation) if proto.min_self_delegation else "0"
+        cr = Dec(proto.commission_rate) if proto.commission_rate else Dec("0")
+        return cls(
+            description=proto.description,
+            validator_address=proto.validator_address,
+            commission_rate=cr,
+            min_self_delegation=msd,
         )
 
 
@@ -270,4 +306,16 @@ class MsgCreateValidator(Msg):
             validator_address=self.validator_address,
             pubkey=self.pubkey.to_proto(),
             value=self.value.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgCreateValidator_pb) -> MsgCreateValidator:
+        return cls(
+            description=Description.from_proto(proto.description),
+            commission=CommissionRates.from_proto(proto.commission),
+            min_self_delegation=int(proto.min_self_delegation),
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            pubkey=proto.pubkey,
+            value=Coin.from_proto(proto.value),
         )

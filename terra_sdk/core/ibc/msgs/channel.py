@@ -61,6 +61,15 @@ class MsgChannelOpenInit(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgChannelOpenInit_pb) -> MsgChannelOpenInit:
+        return cls(
+            port_id=proto.port_id,
+            channel=Channel.from_proto(proto.port_id),
+            signer=proto.signer
+        )
+
+
 
 @attr.s
 class MsgChannelOpenTry(Msg):
@@ -106,8 +115,19 @@ class MsgChannelOpenTry(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgChannelOpenTry_pb) -> MsgChannelOpenTry:
+        return cls(
+            port_id=proto.port_id,
+            previous_channel_id=proto.previous_channel_id,
+            channel=Channel.from_proto(proto.channel),
+            counterparty_version=proto.counterparty_version,
+            proof_init=proto.proof_init,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )
 
-@attr.s
+
 class MsgChannelOpenAck(Msg):
     """
     MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
@@ -151,6 +171,18 @@ class MsgChannelOpenAck(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgChannelOpenAck) -> MsgChannelOpenAck:
+        return cls(
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+            counterparty_channel_id=proto.counterparty_channel_id,
+            counterparty_version=proto.counterparty_version,
+            proof_try=proto.proof_try,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )
+
 
 @attr.s
 class MsgChannelOpenConfirm(Msg):
@@ -190,6 +222,17 @@ class MsgChannelOpenConfirm(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgChannelOpenConfirm_pb) -> MsgChannelOpenConfirm:
+        return cls(
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+            proof_ack=proto.proof_ack,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )
+
+
 
 @attr.s
 class MsgChannelCloseInit(Msg):
@@ -219,6 +262,14 @@ class MsgChannelCloseInit(Msg):
             port_id=self.port_id,
             channel_id=self.channel_id,
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgChannelOpenInit_pb) -> MsgChannelCloseInit:
+        return cls(
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+            signer=proto.signer
         )
 
 
@@ -260,6 +311,16 @@ class MsgChannelCloseConfirm(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgChannelCloseConfirm_pb) -> MsgChannelCloseConfirm:
+        return cls(
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+            proof_init=proto.proof_init,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )
+
 
 @attr.s
 class MsgRecvPacket(Msg):
@@ -293,6 +354,15 @@ class MsgRecvPacket(Msg):
             proof_commitment=self.proof_commitment,
             proof_height=self.proof_height.to_proto(),
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgRecvPacket_pb) -> MsgRecvPacket:
+        return cls(
+            packet=Packet.from_proto(proto.packet),
+            proof_commitment=proto.proof_commitment,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
         )
 
 
@@ -333,6 +403,17 @@ class MsgTimeout(Msg):
             signer=self.signer
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgTimeout_pb) -> MsgTimeout:
+        return cls(
+            packet=Packet.from_proto(proto.packet),
+            proof_unreceived=proto.proof_unreceived,
+            proof_height=Height.from_proto(proto.proof_height),
+            next_sequence_recv=proto.next_sequence_recv,
+            signer=proto.signer
+        )
+
+
 @attr.s
 class MsgAcknowledgement(Msg):
     """
@@ -370,6 +451,12 @@ class MsgAcknowledgement(Msg):
             signer=self.signer
         )
 
-
-
-
+    @classmethod
+    def from_proto(cls, proto: MsgAcknowledgement_pb) -> MsgAcknowledgement:
+        return cls(
+            packet=Packet.from_proto(proto.packet),
+            acknowledgement=proto.acknowledgement,
+            proof_acked=proto.proof_acked,
+            proof_height=Height.from_proto(proto.proof_height),
+            signer=proto.signer
+        )

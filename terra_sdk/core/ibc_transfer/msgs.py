@@ -78,3 +78,15 @@ class MsgTransfer(Msg):
             timeout_height=self.timeout_height.to_proto(),
             timeout_timestamp=self.timeout_timestamp,
         )
+
+    @classmethod
+    def from_proto(cls, proto: MsgTransfer_pb) -> MsgTransfer:
+        return cls(
+            source_port=proto.source_port,
+            source_channel=proto.source_channel,
+            token=Coin.from_proto(proto.token),
+            sender=proto.sender,
+            receiver=proto.receiver,
+            timeout_height=Height.from_proto(proto.timeout_height),
+            timeout_timestamp=proto.timeout_timestamp,
+        )

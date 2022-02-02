@@ -75,6 +75,13 @@ class MsgSetWithdrawAddress(Msg):
             withdraw_address=self.withdraw_address,
         )
 
+    @classmethod
+    def from_proto(cls, data: MsgSetWithdrawAddress_pb) -> MsgSetWithdrawAddress:
+        return cls(
+            delegator_address=data["delegator_address"],
+            withdraw_address=data["withdraw_address"],
+        )
+
 
 @attr.s
 class MsgWithdrawDelegationReward(Msg):
@@ -124,6 +131,13 @@ class MsgWithdrawDelegationReward(Msg):
             validator_address=self.validator_address
         )
 
+    @classmethod
+    def from_proto(cls, data: MsgWithdrawDelegatorReward_pb) -> MsgWithdrawDelegationReward:
+        return cls(
+            delegator_address=data["delegator_address"],
+            validator_address=data["validator_address"]
+        )
+
 
 @attr.s
 class MsgWithdrawValidatorCommission(Msg):
@@ -161,6 +175,10 @@ class MsgWithdrawValidatorCommission(Msg):
         return MsgWithdrawValidatorCommission_pb(
             validator_address=self.validator_address
         )
+
+    @classmethod
+    def from_proto(cls, data: MsgWithdrawValidatorCommission_pb) -> MsgWithdrawValidatorCommission:
+        return cls(validator_address=data["validator_address"])
 
 
 @attr.s
@@ -204,3 +222,7 @@ class MsgFundCommunityPool(Msg):
         return MsgFundCommunityPool_pb(
             depositor=self.depositor, amount=self.amount.to_proto()
         )
+
+    @classmethod
+    def from_proto(cls, data: MsgFundCommunityPool_pb) -> MsgFundCommunityPool:
+        return cls(depositor=data["depositor"], amount=Coins.from_proto(data["amount"]))

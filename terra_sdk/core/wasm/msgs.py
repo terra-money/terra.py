@@ -73,6 +73,13 @@ class MsgStoreCode(Msg):
             sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code)
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
+        return cls(
+            sender=proto.sender,
+            wasm_byte_code=proto.wasm_byte_code
+        )
+
 
 @attr.s
 class MsgMigrateCode(Msg):
@@ -122,6 +129,14 @@ class MsgMigrateCode(Msg):
     def to_proto(self) -> MsgMigrateCode_pb:
         return MsgMigrateCode_pb(
             sender=self.sender, code_id=self.code_id, wasm_byte_code=self.wasm_byte_code
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgMigrateCode_pb) -> MsgMigrateCode:
+        return cls(
+            sender=proto.sender,
+            code_id=proto.code_id,
+            wasm_byte_code=proto.wasm_byte_code,
         )
 
 
@@ -184,6 +199,17 @@ class MsgInstantiateContract(Msg):
             init_coins=self.init_coins.to_proto(),
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgInstantiateContract_pb) -> MsgInstantiateContract:
+        return cls(
+            sender=proto.sender,
+            admin=proto.admin,
+            code_id=proto.code_id,
+            init_msg=remove_none(proto.init_msg),
+            init_coins=Coins.from_proto(proto.init_coins),
+        )
+
+
 
 @attr.s
 class MsgExecuteContract(Msg):
@@ -233,6 +259,15 @@ class MsgExecuteContract(Msg):
             contract=self.contract,
             execute_msg=bytes(json.dumps(self.execute_msg), "utf-8"),
             coins=self.coins.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgExecuteContract_pb) -> MsgExecuteContract:
+        return cls(
+            sender=proto.sender,
+            contract=proto.contract,
+            execute_msg=remove_none(proto.execute_msg),
+            coins=Coins.from_proto(proto.coins),
         )
 
 
@@ -289,6 +324,15 @@ class MsgMigrateContract(Msg):
             migrate_msg=bytes(json.dumps(self.migrate_msg), "utf-8"),
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgMigrateContract_pb) -> MsgMigrateContract:
+        return cls(
+            admin=proto.admin,
+            contract=proto.contract,
+            new_code_id=proto.new_code_id,
+            migrate_msg=proto.migrate_msg,
+        )
+
 
 @attr.s
 class MsgUpdateContractAdmin(Msg):
@@ -332,6 +376,14 @@ class MsgUpdateContractAdmin(Msg):
             admin=self.admin, new_admin=self.new_admin, contract=self.contract
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgUpdateContractAdmin_pb) -> MsgUpdateContractAdmin:
+        return cls(
+            admin=proto.admin,
+            new_admin=proto.new_admin,
+            contract=proto.contract,
+        )
+
 
 @attr.s
 class MsgClearContractAdmin(Msg):
@@ -368,3 +420,10 @@ class MsgClearContractAdmin(Msg):
 
     def to_proto(self) -> MsgClearContractAdmin_pb:
         return MsgClearContractAdmin_pb(admin=self.admin, contract=self.contract)
+
+    @classmethod
+    def from_proto(cls, proto: MsgClearContractAdmin_pb) -> MsgClearContractAdmin:
+        return cls(
+            admin=proto.admin,
+            contract=proto.contract,
+        )

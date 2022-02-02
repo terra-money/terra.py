@@ -57,7 +57,7 @@ from terra_sdk.core.ibc_transfer import (
     MsgTransfer
 )
 
-from .base import create_demux
+from .base import create_demux, create_demux_proto
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
@@ -120,6 +120,20 @@ ibc_msgs = [
 ]
 
 parse_msg = create_demux(
+    [
+        *bank_msgs,
+        *distribution_msgs,
+        *gov_msgs,
+        *market_msgs,
+        *oracle_msgs,
+        *slashing_msgs,
+        *staking_msgs,
+        *wasm_msgs,
+        *ibc_msgs,
+        *ibc_transfer_msgs
+    ]
+)
+parse_proto = create_demux_proto(
     [
         *bank_msgs,
         *distribution_msgs,

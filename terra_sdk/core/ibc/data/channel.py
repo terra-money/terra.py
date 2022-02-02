@@ -43,6 +43,14 @@ class Counterparty(JSONSerializable):
             port_id=self.port_id, channel_id=self.channel_id
         )
 
+    @classmethod
+    def from_proto(cls, proto: Counterparty_pb) -> Counterparty:
+        return cls(
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+        )
+
+
 
 @attr.s
 class Channel(JSONSerializable):
@@ -78,6 +86,16 @@ class Channel(JSONSerializable):
             counterparty=self.counterparty.to_proto(),
             connection_hops=self.connection_hops,
             version=self.version
+        )
+
+    @classmethod
+    def from_proto(cls, proto: Channel_pb) -> Channel:
+        return cls(
+            state=proto.state,
+            ordering=proto.ordering,
+            counterparty=Counterparty.from_proto(proto.counterparty),
+            connection_hops=proto.connection_hops,
+            version=proto.version
         )
 
 
@@ -122,4 +140,17 @@ class Packet(JSONSerializable):
             data=self.data,
             timeout_height=self.timeout_height.to_proto(),
             timeout_timestamp=self.timeout_timestamp
+        )
+
+    @classmethod
+    def from_proto(cls, proto: Packet_pb) -> Packet:
+        return cls(
+            sequence=proto.sequence,
+            source_port=proto.source_port,
+            source_channel=proto.source_channel,
+            destination_port=proto.destination_port,
+            destination_channel=proto.destination_channel,
+            data=proto.data,
+            timeout_height=Height.from_proto(proto.timeout_height),
+            timeout_timestamp=proto.timeout_timestamp
         )

@@ -34,6 +34,13 @@ class Version(JSONSerializable):
             identifier=self.identifier, features=self.features
         )
 
+    @classmethod
+    def from_proto(cls, proto: Version_pb) -> Version:
+        return cls(
+            identifier=proto.identifier,
+            features=proto.features
+        )
+
 
 @attr.s
 class Counterparty(JSONSerializable):
@@ -57,4 +64,12 @@ class Counterparty(JSONSerializable):
             client_id=self.client_id,
             connection_id=self.connection_id,
             prefix=self.prefix.to_proto()
+        )
+
+    @classmethod
+    def from_proto(cls, proto: Counterparty_pb) -> Counterparty:
+        return cls(
+            client_id=proto.client_id,
+            connection_id=proto.connection_id,
+            prefix=MerklePrefix.from_proto(proto.prefix)
         )

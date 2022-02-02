@@ -27,8 +27,8 @@ class MsgCreateClient(Msg):
     type_url = "/ibc.core.client.v1.MsgCreateClient"
     """"""
 
-    client_state: Any_pb = attr.ib()
-    consensus_state: Any_pb = attr.ib()
+    client_state: dict = attr.ib()
+    consensus_state: dict = attr.ib()
     signer: str = attr.ib()
 
     def to_amino(self):
@@ -37,16 +37,24 @@ class MsgCreateClient(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgCreateClient:
         return cls(
-            client_state=Any_pb.FromString(data["client_state"]),
-            consensus_state=Any_pb.FromString(data["consensus_state"]),
+            client_state=data["client_state"],
+            consensus_state=data["consensus_state"],
             signer=data["signer"]
         )
 
     def to_proto(self) -> MsgCreateClient_pb:
         return MsgCreateClient_pb(
-            client_state=self.client_state,
-            consensus_state=self.consensus_state,
+            client_state=Any_pb().from_dict(self.client_state),
+            consensus_state=Any_pb().from_dict(self.consensus_state),
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgCreateClient_pb) -> MsgCreateClient:
+        return cls(
+            client_state=proto.client_state.to_dict(),
+            consensus_state=proto.consensus_state.to_dict(),
+            signer=proto.signer
         )
 
 
@@ -60,7 +68,7 @@ class MsgUpdateClient(Msg):
     """"""
 
     client_id: str = attr.ib()
-    header: Any_pb = attr.ib()
+    header: dict = attr.ib()
     signer: str = attr.ib()
 
     def to_amino(self):
@@ -70,15 +78,23 @@ class MsgUpdateClient(Msg):
     def from_data(cls, data: dict) -> MsgUpdateClient:
         return cls(
             client_id=data["client_id"],
-            header=Any_pb.FromString(data["header"]),
+            header=data["header"],
             signer=data["signer"]
         )
 
     def to_proto(self) -> MsgUpdateClient_pb:
         return MsgUpdateClient_pb(
             client_id=self.client_id,
-            header=self.header,
+            header=Any_pb().from_dict(self.header),
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgUpdateClient_pb) -> MsgUpdateClient:
+        return cls(
+            client_id=proto.client_id,
+            header=proto.header.to_dict(),
+            signer=proto.signer
         )
 
 
@@ -93,8 +109,8 @@ class MsgUpgradeClient(Msg):
     """"""
 
     client_id: str = attr.ib()
-    client_state: Any_pb = attr.ib()
-    consensus_state: Any_pb = attr.ib()
+    client_state: dict = attr.ib()
+    consensus_state: dict = attr.ib()
     proof_upgrade_client: bytes = attr.ib()
     proof_upgrade_consensus_state: bytes = attr.ib()
     signer: str = attr.ib()
@@ -106,8 +122,8 @@ class MsgUpgradeClient(Msg):
     def from_data(cls, data: dict) -> MsgUpgradeClient:
         return cls(
             client_id=data["client_id"],
-            client_state=Any_pb.FromString(data["client_state"]),
-            consensus_state=Any_pb.FromString(data["consensus_state"]),
+            client_state=data["client_state"],
+            consensus_state=data["consensus_state"],
             proof_upgrade_client=data["proof_upgrade_client"],
             proof_upgrade_consensus_state=data["proof_upgrade_consensus_state"],
             signer=data["signer"]
@@ -116,11 +132,22 @@ class MsgUpgradeClient(Msg):
     def to_proto(self) -> MsgUpgradeClient_pb:
         return MsgUpgradeClient_pb(
             client_id=self.client_id,
-            client_state=self.client_state,
-            consensus_state=self.consensus_state,
+            client_state=Any_pb().from_dict(self.client_state),
+            consensus_state=Any_pb().from_dict(self.consensus_state),
             proof_upgrade_client=self.proof_upgrade_client,
             proof_upgrade_consensus_state=self.proof_upgrade_consensus_state,
             signer=self.signer
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgUpgradeClient_pb) -> MsgUpgradeClient:
+        return cls(
+            client_id=proto.client_id,
+            client_state=proto.client_state.to_dict(),
+            consensus_state=proto.consensus_state.to_dict(),
+            proof_upgrade_client=proto.proof_upgrade_client,
+            proof_upgrade_consensus_state=proto.proof_upgrade_consensus_state,
+            signer=proto.signer
         )
 
 
@@ -134,7 +161,7 @@ class MsgSubmitMisbehaviour(Msg):
     """"""
 
     client_id: str = attr.ib()
-    misbehaviour: Any_pb = attr.ib()
+    misbehaviour: dict = attr.ib()
     signer: str = attr.ib()
 
     def to_amino(self):
@@ -144,13 +171,31 @@ class MsgSubmitMisbehaviour(Msg):
     def from_data(cls, data: dict) -> MsgSubmitMisbehaviour:
         return cls(
             client_id=data["client_id"],
-            misbehaviour=Any_pb.FromString(data["misbehaviour"]),
+            misbehaviour=data["misbehaviour"],
             signer=data["signer"]
         )
 
     def to_proto(self) -> MsgSubmitMisbehaviour_pb:
         return MsgSubmitMisbehaviour_pb(
             client_id=self.client_id,
-            misbehaviour=self.misbehaviour,
+            misbehaviour=Any_pb().from_dict(self.misbehaviour),
             signer=self.signer
         )
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgSubmitMisbehaviour:
+        return cls(
+            client_id=data["client_id"],
+            misbehaviour=data["misbehaviour"],
+            signer=data["signer"]
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgSubmitMisbehaviour_pb) -> MsgSubmitMisbehaviour:
+        return cls(
+            client_id=proto["client_id"],
+            misbehaviour=Any_pb().from_dict(proto["misbehaviour"]),
+            signer=proto["signer"]
+        )
+
+

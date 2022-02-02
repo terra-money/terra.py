@@ -64,6 +64,14 @@ class MsgSubmitProposal(Msg):
             proposer=self.proposer,
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
+        return cls(
+            content=Content.from_proto(proto["content"]),
+            initial_deposit=Coins.from_proto(proto["initial_deposit"]),
+            proposer=proto["proposer"],
+        )
+
 
 @attr.s
 class MsgDeposit(Msg):
@@ -119,6 +127,14 @@ class MsgDeposit(Msg):
             proposal_id=self.proposal_id,
             depositor=self.depositor,
             amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgDeposit_pb) -> MsgDeposit:
+        return cls(
+            proposal_id=proto["proposal_id"],
+            depositor=proto["depositor"],
+            amount=Coins.from_proto(proto["amount"]),
         )
 
 
@@ -203,4 +219,12 @@ class MsgVote(Msg):
     def to_proto(self) -> MsgVote_pb:
         return MsgVote_pb(
             proposal_id=self.proposal_id, voter=self.voter, options=self.option
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgVote_pb) -> MsgVote:
+        return cls(
+            proposal_id=proto["proposal_id"],
+            voter=proto["voter"],
+            option=proto["option"],
         )

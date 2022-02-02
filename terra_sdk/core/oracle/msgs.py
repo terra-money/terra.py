@@ -97,6 +97,14 @@ class MsgDelegateFeedConsent(Msg):
     def to_proto(self) -> MsgDelegateFeedConsent_pb:
         return MsgDelegateFeedConsent_pb(operator=self.operator, delegate=self.delegate)
 
+    @classmethod
+    def from_proto(cls, proto: MsgDelegateFeedConsent_pb) -> MsgDelegateFeedConsent:
+        return cls(
+            operator=proto.operator,
+            delegate=proto.delegate
+        )
+
+
 
 @attr.s
 class MsgAggregateExchangeRatePrevote(Msg):
@@ -138,6 +146,14 @@ class MsgAggregateExchangeRatePrevote(Msg):
     def to_proto(self) -> MsgAggregateExchangeRatePrevote_pb:
         return MsgAggregateExchangeRatePrevote_pb(
             hash=self.hash, feeder=self.feeder, validator=self.validator
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgAggregateExchangeRatePrevote_pb) -> MsgAggregateExchangeRatePrevote:
+        return cls(
+            hash=proto.hash,
+            feeder=proto.feeder,
+            validator=proto.validator,
         )
 
 
@@ -193,6 +209,15 @@ class MsgAggregateExchangeRateVote(Msg):
             salt=self.salt,
             feeder=self.feeder,
             validator=self.validator,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgAggregateExchangeRateVote_pb) -> MsgAggregateExchangeRateVote:
+        return cls(
+            exchange_rates=Coins.from_proto(proto.exchange_rates),
+            salt=proto.salt,
+            feeder=proto.feeder,
+            validator=proto.validator,
         )
 
     def get_aggregate_vote_hash(self) -> str:

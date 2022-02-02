@@ -38,6 +38,13 @@ class Height(JSONSerializable):
             revision_number=self.revision_number, revision_height=self.revision_height
         )
 
+    @classmethod
+    def from_proto(cls, proto: Height_pb) -> Height:
+        return cls(
+            revision_number=proto.revision_number,
+            revision_height=proto.revision_height,
+        )
+
 @attr.s
 class IdentifiedClientState(JSONSerializable):
     """
@@ -45,7 +52,7 @@ class IdentifiedClientState(JSONSerializable):
     """
 
     client_id: str = attr.ib()
-    client_state: Any_pb = attr.ib()
+    client_state: dict = attr.ib()
 
     def to_amino(self):
         raise Exception("Amino not supported")
@@ -54,13 +61,20 @@ class IdentifiedClientState(JSONSerializable):
     def from_data(cls, data: dict) -> IdentifiedClientState:
         return cls(
             client_id=data["client_id"],
-            consensus_state=Any_pb.FromString(data["client_state"])
+            consensus_state=Any_pb().from_dict(data["client_state"])
         )
 
     def to_proto(self) -> IdentifiedClientState_pb:
         return IdentifiedClientState_pb(
             client_id=self.client_id,
-            client_state=self.consensus_state
+            client_state=Any_pb().from_dict(self.consensus_state)
+        )
+
+    @classmethod
+    def from_proto(cls, proto: IdentifiedClientState_pb) -> IdentifiedClientState:
+        return cls(
+            client_id=proto.client_id,
+            consensus_state=proto.client_state.to_dict()
         )
 
 
@@ -71,7 +85,7 @@ class ConsensusStateWithHeight(JSONSerializable):
     """
 
     height: str = attr.ib()
-    consensus_state: Any_pb = attr.ib()
+    consensus_state: dict = attr.ib()
 
     def to_amino(self):
         raise Exception("Amino not supported")
@@ -80,13 +94,20 @@ class ConsensusStateWithHeight(JSONSerializable):
     def from_data(cls, data: dict) -> ConsensusStateWithHeight:
         return cls(
             height=data["height"],
-            consensus_state=Any_pb.FromString(data["consensus_state"])
+            consensus_state=Any_pb().from_dict(data["consensus_state"])
         )
 
     def to_proto(self) -> ConsensusStateWithHeight_pb:
         return ConsensusStateWithHeight_pb(
             height=self.height,
-            consensus_state=self.consensus_state
+            consensus_state=Any_pb().from_dict(self.consensus_state)
+        )
+
+    @classmethod
+    def from_proto(cls, proto: ConsensusStateWithHeight_pb) -> ConsensusStateWithHeight:
+        return cls(
+            height=proto.height,
+            consensus_state=proto.consensus_state.to_dict()
         )
 
 
@@ -115,6 +136,13 @@ class ClientConsensusStates(JSONSerializable):
             consensus_states=[state.to_proto for state in self.consensus_states]
         )
 
+    @classmethod
+    def from_proto(cls, proto: ClientConsensusStates_pb) -> ClientConsensusStates:
+        return cls(
+            client_id=proto.client_id,
+            consensus_states=[ConsensusStateWithHeight.from_proto(state) for state in proto.consensus_states]
+        )
+
 
 
 @attr.s
@@ -137,5 +165,11 @@ class Params(JSONSerializable):
     def to_proto(self) -> Params_pb:
         return Params_pb(
             allowed_clients=self.allowed_clients
+        )
+
+    @classmethod
+    def from_proto(cls, proto: Params_pb) -> Params:
+        return cls(
+            allowed_clients=proto.allowed_clients
         )
 

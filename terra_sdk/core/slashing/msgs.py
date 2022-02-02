@@ -41,3 +41,7 @@ class MsgUnjail(Msg):
 
     def to_proto(self) -> MsgUnjail_pb:
         return MsgUnjail_pb(validator_addr=self.address)
+
+    @classmethod
+    def from_proto(cls, proto: MsgUnjail_pb) -> MsgUnjail:
+        return cls(address=proto.address)

@@ -58,6 +58,14 @@ class MsgSwap(Msg):
             ask_denom=self.ask_denom,
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgSwap_pb) -> MsgSwap:
+        return cls(
+            trader=proto.trader,
+            offer_coin=Coin.from_proto(proto.offer_coin),
+            ask_denom=proto.ask_denom,
+        )
+
 
 @attr.s
 class MsgSwapSend(Msg):
@@ -109,3 +117,13 @@ class MsgSwapSend(Msg):
             offer_coin=self.offer_coin.to_proto(),
             ask_denom=self.ask_denom,
         )
+
+    @classmethod
+    def from_proto(cls, proto: MsgSwapSend_pb) -> MsgSwapSend:
+        return cls(
+            from_address=proto.from_address,
+            to_address=proto.to_address,
+            offer_coin=Coin.from_proto(proto.offer_coin),
+            ask_denom=proto.ask_denom,
+        )
+
