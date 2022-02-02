@@ -69,16 +69,7 @@ class Wallet:
         parameter is set, automatic fee estimation will be used (see `fee_estimation`).
 
         Args:
-            msgs (List[Msg]): list of messages to include
-            fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
-                See more on `fee estimation`_.
-            memo (str, optional): optional short string to include with transaction.
-            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
-            account_number (Optional[int], optional): account number (overrides blockchain query if
-                provided)
-            sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
+            options (CreateTxOptions): Options to create a tx
 
         Returns:
             Tx: unsigned transaction
@@ -98,16 +89,7 @@ class Wallet:
         is generated exactly as :meth:`create_tx`.
 
         Args:
-            msgs (List[Msg]): list of messages to include
-            fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
-                See more on `fee estimation`_.
-            memo (str, optional): optional short string to include with transaction.
-            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            fee_denoms (Optional[List[str]], optional): list of denoms to use for fee after estimation.
-            account_number (Optional[int], optional): account number (overrides blockchain query if
-                provided)
-            sequence (Optional[int], optional): sequence (overrides blockchain qu ery if provided)
+            options (CreateTxOptions): Options to create a tx
 
         Returns:
             Tx: signed transaction

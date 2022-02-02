@@ -34,6 +34,22 @@ class SignerOptions:
 
 @attr.s
 class CreateTxOptions:
+    """
+
+    Args:
+        msgs (List[Msg]): list of messages to include
+        fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
+            See more on `fee estimation`_.
+        memo (str, optional): optional short string to include with transaction.
+        gas_prices (Coins.Input, optional): gas prices for fee estimation.
+        gas_adjustment (Numeric.Input, optional): gas adjustment for fee estimation.
+        fee_denoms (List[str], optional): list of denoms to use for fee after estimation.
+        account_number (int, optional): account number (overrides blockchain query if
+            provided)
+        sequence (int, optional): sequence (overrides blockchain qu ery if provided)
+        timeout_height (int, optional):  specifies a block timeout height to prevent the tx from being committed past a certain height.
+        sign_mode: (SignMode, optional): SignMode.SIGN_MODE_DIRECT by default. multisig needs SignMode.SIGN_MODE_LEGACY_AMINO_JSON.
+    """
     msgs: List[Msg] = attr.ib()
     fee: Optional[Fee] = attr.ib(default=None)
     memo: Optional[str] = attr.ib(default=None)
@@ -55,10 +71,12 @@ class BroadcastOptions:
     fee_granter: Optional[AccAddress] = attr.ib(default=None)
 
 
+""" deprecated
 @attr.s
 class TxSearchOption:
     key: str = attr.ib()
     value: Union[str, int] = attr.ib()
+"""
 
 
 @attr.s
