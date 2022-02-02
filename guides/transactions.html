@@ -228,7 +228,7 @@ correspond to the account you intend to sign the transaction with.</p>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
 <span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
-<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span>
+<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="n">wallet</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -304,12 +304,12 @@ sign it, and add the signatures to an <code class="docutils literal notranslate"
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgSend</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
-<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span>
+<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
 
 <span class="c1"># create tx</span>
 <span class="n">unsigned_tx</span> <span class="o">=</span> <span class="n">StdSignMsg</span><span class="p">(</span>
-    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-4&quot;</span><span class="p">,</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-5&quot;</span><span class="p">,</span>
     <span class="n">account_number</span><span class="o">=</span><span class="mi">23982</span><span class="p">,</span>
     <span class="n">sequence</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
     <span class="n">fee</span><span class="o">=</span><span class="n">StdFee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;120000uluna&quot;</span><span class="p">),</span>
@@ -352,7 +352,7 @@ Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</sp
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgMultiSend</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
-<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span>
+<span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="n">wallet1</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC_1</span><span class="p">))</span>
 <span class="n">wallet2</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC_2</span><span class="p">))</span>
 

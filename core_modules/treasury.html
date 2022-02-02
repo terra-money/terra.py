@@ -123,7 +123,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Treasury</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.treasury.data">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-terra_sdk.core.treasury.proposals">Proposals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proposals">Proposals</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
@@ -201,10 +201,10 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.treasury.</code><code class="sig-name descname">TreasuryAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.treasury.</span></code><code class="sig-name descname"><span class="pre">TreasuryAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.parameters">
-<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">parameters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the Treasury module parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -218,7 +218,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.reward_weight">
-<code class="sig-name descname">reward_weight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.reward_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.reward_weight" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">reward_weight</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.reward_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.reward_weight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the current reward rate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -232,7 +232,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.seigniorage_proceeds">
-<code class="sig-name descname">seigniorage_proceeds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.seigniorage_proceeds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.seigniorage_proceeds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">seigniorage_proceeds</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.seigniorage_proceeds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.seigniorage_proceeds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the current seigniorage proceeds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -246,7 +246,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_cap">
-<code class="sig-name descname">tax_cap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">denom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_cap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_cap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tax_cap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">denom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_cap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_cap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the tax cap for a denom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -263,7 +263,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_proceeds">
-<code class="sig-name descname">tax_proceeds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_proceeds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_proceeds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tax_proceeds</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_proceeds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_proceeds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the current tax proceeds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -277,7 +277,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_rate">
-<code class="sig-name descname">tax_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tax_rate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/treasury.html#TreasuryAPI.tax_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.treasury.TreasuryAPI.tax_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the current tax rate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -297,22 +297,22 @@
 <p>Treasury module data objects.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.treasury.data.PolicyConstraints">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.treasury.data.</code><code class="sig-name descname">PolicyConstraints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rate_min</span></em>, <em class="sig-param"><span class="n">rate_max</span></em>, <em class="sig-param"><span class="n">cap</span></em>, <em class="sig-param"><span class="n">change_max</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/data.html#PolicyConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.treasury.data.</span></code><code class="sig-name descname"><span class="pre">PolicyConstraints</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change_rate_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/data.html#PolicyConstraints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about tax reward or reward weight
 policy constraints.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.treasury.data.PolicyConstraints.cap">
-<code class="sig-name descname">cap</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.cap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">cap</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><span class="pre">terra_sdk.core.coin.Coin</span></a></em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.cap" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.core.treasury.data.PolicyConstraints.change_max">
-<code class="sig-name descname">change_max</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.change_max" title="Permalink to this definition">¶</a></dt>
+<dt id="terra_sdk.core.treasury.data.PolicyConstraints.change_rate_max">
+<code class="sig-name descname"><span class="pre">change_rate_max</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.change_rate_max" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.treasury.data.PolicyConstraints.clamp">
-<code class="sig-name descname">clamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prev_rate</span></em>, <em class="sig-param"><span class="n">new_rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/data.html#PolicyConstraints.clamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.clamp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">clamp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/data.html#PolicyConstraints.clamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.clamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates the effect of the policy contraint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -332,60 +332,19 @@ policy constraints.</p>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.treasury.data.PolicyConstraints.rate_max">
-<code class="sig-name descname">rate_max</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.rate_max" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">rate_max</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.rate_max" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.treasury.data.PolicyConstraints.rate_min">
-<code class="sig-name descname">rate_min</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.rate_min" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">rate_min</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.treasury.data.PolicyConstraints.rate_min" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-terra_sdk.core.treasury.proposals">
-<span id="proposals"></span><h2>Proposals<a class="headerlink" href="#module-terra_sdk.core.treasury.proposals" title="Permalink to this headline">¶</a></h2>
-<p>Treasury module governance proposals.</p>
-<dl class="py class">
-<dt id="terra_sdk.core.treasury.proposals.RewardWeightUpdateProposal">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.treasury.proposals.</code><code class="sig-name descname">RewardWeightUpdateProposal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">reward_weight</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/proposals.html#RewardWeightUpdateProposal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.treasury.proposals.RewardWeightUpdateProposal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Proposal to adjust the protocol-level reward weight.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>title</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – proposal title</p></li>
-<li><p><strong>description</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – proposal description</p></li>
-<li><p><strong>reward_weight</strong> (<a class="reference internal" href="../common/numeric.html#terra_sdk.core.Dec" title="terra_sdk.core.Dec"><em>Dec</em></a>) – new proposed tax rate</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt id="terra_sdk.core.treasury.proposals.RewardWeightUpdateProposal.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'treasury/RewardWeightUpdateProposal'</em><a class="headerlink" href="#terra_sdk.core.treasury.proposals.RewardWeightUpdateProposal.type" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="terra_sdk.core.treasury.proposals.TaxRateUpdateProposal">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.treasury.proposals.</code><code class="sig-name descname">TaxRateUpdateProposal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">tax_rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/treasury/proposals.html#TaxRateUpdateProposal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.treasury.proposals.TaxRateUpdateProposal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Proposal to adjust the protocol-level tax rate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>title</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – proposal title</p></li>
-<li><p><strong>description</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – proposal description</p></li>
-<li><p><strong>tax_rate</strong> (<a class="reference internal" href="../common/numeric.html#terra_sdk.core.Dec" title="terra_sdk.core.Dec"><em>Dec</em></a>) – new proposed tax rate</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt id="terra_sdk.core.treasury.proposals.TaxRateUpdateProposal.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'treasury/TaxRateUpdateProposal'</em><a class="headerlink" href="#terra_sdk.core.treasury.proposals.TaxRateUpdateProposal.type" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="proposals">
+<h2>Proposals<a class="headerlink" href="#proposals" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

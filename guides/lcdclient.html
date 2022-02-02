@@ -207,9 +207,9 @@
 <p>It is common practice to name the active LCDClient instance <code class="docutils literal notranslate"><span class="pre">terra</span></code>, but this is not required.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span><span class="o">.</span><span class="n">tendermint</span><span class="o">.</span><span class="n">node_info</span><span class="p">()[</span><span class="s1">&#39;node_info&#39;</span><span class="p">][</span><span class="s1">&#39;network&#39;</span><span class="p">]</span>
-<span class="go">&#39;columbus-4&#39;</span>
+<span class="go">&#39;columbus-5&#39;</span>
 </pre></div>
 </div>
 <p>You can also specify gas estimation parameters for your chain for building transactions.</p>
@@ -219,7 +219,7 @@
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://fcd.terra.dev/v1/txs/gas_prices&quot;</span><span class="p">)</span>
 <span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span>
     <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span>
-    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-4&quot;</span><span class="p">,</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-5&quot;</span><span class="p">,</span>
 <span class="hll">    <span class="n">gas_prices</span><span class="o">=</span><span class="n">Coins</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()),</span>
 </span><span class="hll">    <span class="n">gas_adjustment</span><span class="o">=</span><span class="s2">&quot;1.4&quot;</span>
 </span><span class="p">)</span>
@@ -258,125 +258,125 @@ are useful for easily creating and signing transactions.</p>
 <h2>LCDClient Reference<a class="headerlink" href="#lcdclient-reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.LCDClient">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.</code><code class="sig-name descname">LCDClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em>, <em class="sig-param"><span class="n">chain_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gas_prices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gas_adjustment</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/lcdclient.html#LCDClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.</span></code><code class="sig-name descname"><span class="pre">LCDClient</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_prices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_adjustment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/lcdclient.html#LCDClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>An object representing a connection to a node running the Terra LCD server.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.auth">
-<code class="sig-name descname">auth</code><em class="property">: <a class="reference internal" href="../core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI" title="terra_sdk.client.lcd.api.auth.AuthAPI">terra_sdk.client.lcd.api.auth.AuthAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.auth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">auth</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI" title="terra_sdk.client.lcd.api.auth.AuthAPI"><span class="pre">terra_sdk.client.lcd.api.auth.AuthAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.auth" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.client.lcd.api.auth.AuthAPI" title="terra_sdk.client.lcd.api.auth.AuthAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.bank">
-<code class="sig-name descname">bank</code><em class="property">: <a class="reference internal" href="../core_modules/bank.html#terra_sdk.client.lcd.api.bank.BankAPI" title="terra_sdk.client.lcd.api.bank.BankAPI">terra_sdk.client.lcd.api.bank.BankAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.bank" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">bank</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/bank.html#terra_sdk.client.lcd.api.bank.BankAPI" title="terra_sdk.client.lcd.api.bank.BankAPI"><span class="pre">terra_sdk.client.lcd.api.bank.BankAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.bank" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/bank.html#terra_sdk.client.lcd.api.bank.BankAPI" title="terra_sdk.client.lcd.api.bank.BankAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">BankAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.chain_id">
-<code class="sig-name descname">chain_id</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.chain_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">chain_id</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.chain_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chain ID of blockchain network connecting to.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.distribution">
-<code class="sig-name descname">distribution</code><em class="property">: <a class="reference internal" href="../core_modules/distribution.html#terra_sdk.client.lcd.api.distribution.DistributionAPI" title="terra_sdk.client.lcd.api.distribution.DistributionAPI">terra_sdk.client.lcd.api.distribution.DistributionAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.distribution" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">distribution</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/distribution.html#terra_sdk.client.lcd.api.distribution.DistributionAPI" title="terra_sdk.client.lcd.api.distribution.DistributionAPI"><span class="pre">terra_sdk.client.lcd.api.distribution.DistributionAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.distribution" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/distribution.html#terra_sdk.client.lcd.api.distribution.DistributionAPI" title="terra_sdk.client.lcd.api.distribution.DistributionAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">DistributionAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.gas_adjustment">
-<code class="sig-name descname">gas_adjustment</code><em class="property">: Union<span class="p">[</span>str<span class="p">, </span>float<span class="p">, </span>int<span class="p">, </span>terra_sdk.core.numeric.Dec<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gas_adjustment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gas_adjustment</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">terra_sdk.core.numeric.Dec</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gas_adjustment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gas adjustment factor for automatic fee estimation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.gas_prices">
-<code class="sig-name descname">gas_prices</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gas_prices" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gas_prices</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><span class="pre">terra_sdk.core.coins.Coins</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gas_prices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gas prices to use for automatic fee estimation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.gov">
-<code class="sig-name descname">gov</code><em class="property">: <a class="reference internal" href="../core_modules/gov.html#terra_sdk.client.lcd.api.gov.GovAPI" title="terra_sdk.client.lcd.api.gov.GovAPI">terra_sdk.client.lcd.api.gov.GovAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gov</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/gov.html#terra_sdk.client.lcd.api.gov.GovAPI" title="terra_sdk.client.lcd.api.gov.GovAPI"><span class="pre">terra_sdk.client.lcd.api.gov.GovAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.gov" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/gov.html#terra_sdk.client.lcd.api.gov.GovAPI" title="terra_sdk.client.lcd.api.gov.GovAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">GovAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.last_request_height">
-<code class="sig-name descname">last_request_height</code><em class="property">: Optional<span class="p">[</span>int<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.last_request_height" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">last_request_height</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.last_request_height" title="Permalink to this definition">¶</a></dt>
 <dd><p>Height of response of last-made made LCD request.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.market">
-<code class="sig-name descname">market</code><em class="property">: <a class="reference internal" href="../core_modules/market.html#terra_sdk.client.lcd.api.market.MarketAPI" title="terra_sdk.client.lcd.api.market.MarketAPI">terra_sdk.client.lcd.api.market.MarketAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.market" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">market</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/market.html#terra_sdk.client.lcd.api.market.MarketAPI" title="terra_sdk.client.lcd.api.market.MarketAPI"><span class="pre">terra_sdk.client.lcd.api.market.MarketAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.market" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/market.html#terra_sdk.client.lcd.api.market.MarketAPI" title="terra_sdk.client.lcd.api.market.MarketAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">MarketAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.mint">
-<code class="sig-name descname">mint</code><em class="property">: <a class="reference internal" href="../core_modules/mint.html#terra_sdk.client.lcd.api.mint.MintAPI" title="terra_sdk.client.lcd.api.mint.MintAPI">terra_sdk.client.lcd.api.mint.MintAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.mint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mint</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/mint.html#terra_sdk.client.lcd.api.mint.MintAPI" title="terra_sdk.client.lcd.api.mint.MintAPI"><span class="pre">terra_sdk.client.lcd.api.mint.MintAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.mint" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/mint.html#terra_sdk.client.lcd.api.mint.MintAPI" title="terra_sdk.client.lcd.api.mint.MintAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">MintAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.msgauth">
-<code class="sig-name descname">msgauth</code><em class="property">: <a class="reference internal" href="../core_modules/msgauth.html#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI" title="terra_sdk.client.lcd.api.msgauth.MsgAuthAPI">terra_sdk.client.lcd.api.msgauth.MsgAuthAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.msgauth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">msgauth</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/msgauth.html#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI" title="terra_sdk.client.lcd.api.msgauth.MsgAuthAPI"><span class="pre">terra_sdk.client.lcd.api.msgauth.MsgAuthAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.msgauth" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/msgauth.html#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI" title="terra_sdk.client.lcd.api.msgauth.MsgAuthAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">MsgAuthAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.oracle">
-<code class="sig-name descname">oracle</code><em class="property">: <a class="reference internal" href="../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI" title="terra_sdk.client.lcd.api.oracle.OracleAPI">terra_sdk.client.lcd.api.oracle.OracleAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.oracle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">oracle</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI" title="terra_sdk.client.lcd.api.oracle.OracleAPI"><span class="pre">terra_sdk.client.lcd.api.oracle.OracleAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.oracle" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI" title="terra_sdk.client.lcd.api.oracle.OracleAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">OracleAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.slashing">
-<code class="sig-name descname">slashing</code><em class="property">: <a class="reference internal" href="../core_modules/slashing.html#terra_sdk.client.lcd.api.slashing.SlashingAPI" title="terra_sdk.client.lcd.api.slashing.SlashingAPI">terra_sdk.client.lcd.api.slashing.SlashingAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.slashing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">slashing</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/slashing.html#terra_sdk.client.lcd.api.slashing.SlashingAPI" title="terra_sdk.client.lcd.api.slashing.SlashingAPI"><span class="pre">terra_sdk.client.lcd.api.slashing.SlashingAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.slashing" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/slashing.html#terra_sdk.client.lcd.api.slashing.SlashingAPI" title="terra_sdk.client.lcd.api.slashing.SlashingAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">SlashingAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.staking">
-<code class="sig-name descname">staking</code><em class="property">: <a class="reference internal" href="../core_modules/staking.html#terra_sdk.client.lcd.api.staking.StakingAPI" title="terra_sdk.client.lcd.api.staking.StakingAPI">terra_sdk.client.lcd.api.staking.StakingAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.staking" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">staking</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/staking.html#terra_sdk.client.lcd.api.staking.StakingAPI" title="terra_sdk.client.lcd.api.staking.StakingAPI"><span class="pre">terra_sdk.client.lcd.api.staking.StakingAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.staking" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/staking.html#terra_sdk.client.lcd.api.staking.StakingAPI" title="terra_sdk.client.lcd.api.staking.StakingAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">StakingAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.supply">
-<code class="sig-name descname">supply</code><em class="property">: <a class="reference internal" href="../core_modules/supply.html#terra_sdk.client.lcd.api.supply.SupplyAPI" title="terra_sdk.client.lcd.api.supply.SupplyAPI">terra_sdk.client.lcd.api.supply.SupplyAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.supply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">supply</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/supply.html#terra_sdk.client.lcd.api.supply.SupplyAPI" title="terra_sdk.client.lcd.api.supply.SupplyAPI"><span class="pre">terra_sdk.client.lcd.api.supply.SupplyAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.supply" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/supply.html#terra_sdk.client.lcd.api.supply.SupplyAPI" title="terra_sdk.client.lcd.api.supply.SupplyAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">SupplyAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.tendermint">
-<code class="sig-name descname">tendermint</code><em class="property">: <a class="reference internal" href="../core_modules/tendermint.html#terra_sdk.client.lcd.api.tendermint.TendermintAPI" title="terra_sdk.client.lcd.api.tendermint.TendermintAPI">terra_sdk.client.lcd.api.tendermint.TendermintAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.tendermint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tendermint</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/tendermint.html#terra_sdk.client.lcd.api.tendermint.TendermintAPI" title="terra_sdk.client.lcd.api.tendermint.TendermintAPI"><span class="pre">terra_sdk.client.lcd.api.tendermint.TendermintAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.tendermint" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/tendermint.html#terra_sdk.client.lcd.api.tendermint.TendermintAPI" title="terra_sdk.client.lcd.api.tendermint.TendermintAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TendermintAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.treasury">
-<code class="sig-name descname">treasury</code><em class="property">: <a class="reference internal" href="../core_modules/treasury.html#terra_sdk.client.lcd.api.treasury.TreasuryAPI" title="terra_sdk.client.lcd.api.treasury.TreasuryAPI">terra_sdk.client.lcd.api.treasury.TreasuryAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.treasury" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">treasury</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/treasury.html#terra_sdk.client.lcd.api.treasury.TreasuryAPI" title="terra_sdk.client.lcd.api.treasury.TreasuryAPI"><span class="pre">terra_sdk.client.lcd.api.treasury.TreasuryAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.treasury" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/treasury.html#terra_sdk.client.lcd.api.treasury.TreasuryAPI" title="terra_sdk.client.lcd.api.treasury.TreasuryAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TreasuryAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.tx">
-<code class="sig-name descname">tx</code><em class="property">: <a class="reference internal" href="../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI" title="terra_sdk.client.lcd.api.tx.TxAPI">terra_sdk.client.lcd.api.tx.TxAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.tx" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tx</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI" title="terra_sdk.client.lcd.api.tx.TxAPI"><span class="pre">terra_sdk.client.lcd.api.tx.TxAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.tx" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/tx.html#terra_sdk.client.lcd.api.tx.TxAPI" title="terra_sdk.client.lcd.api.tx.TxAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TxAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.url">
-<code class="sig-name descname">url</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.url" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">url</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.url" title="Permalink to this definition">¶</a></dt>
 <dd><p>URL endpoint of LCD server.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.LCDClient.wallet">
-<code class="sig-name descname">wallet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/lcdclient.html#LCDClient.wallet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.wallet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wallet</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/lcdclient.html#LCDClient.wallet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.wallet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">Wallet</span></code> object from a key for easy transaction creating and
 signing.</p>
 <dl class="field-list simple">
@@ -391,7 +391,7 @@ signing.</p>
 
 <dl class="py attribute">
 <dt id="terra_sdk.client.lcd.LCDClient.wasm">
-<code class="sig-name descname">wasm</code><em class="property">: <a class="reference internal" href="../core_modules/wasm.html#terra_sdk.client.lcd.api.wasm.WasmAPI" title="terra_sdk.client.lcd.api.wasm.WasmAPI">terra_sdk.client.lcd.api.wasm.WasmAPI</a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.wasm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wasm</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../core_modules/wasm.html#terra_sdk.client.lcd.api.wasm.WasmAPI" title="terra_sdk.client.lcd.api.wasm.WasmAPI"><span class="pre">terra_sdk.client.lcd.api.wasm.WasmAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.wasm" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference internal" href="../core_modules/wasm.html#terra_sdk.client.lcd.api.wasm.WasmAPI" title="terra_sdk.client.lcd.api.wasm.WasmAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">WasmAPI</span></code></a>.</p>
 </dd></dl>
 

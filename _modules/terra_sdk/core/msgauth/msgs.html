@@ -191,14 +191,13 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">dict_to_data</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
 
 <span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">Authorization</span>
 
@@ -228,28 +227,27 @@
         <span class="p">)</span></div>
 
 
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">Grant</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="n">authorization</span><span class="p">:</span> <span class="n">Authorization</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">expiration</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+
 <div class="viewcode-block" id="MsgGrantAuthorization"><a class="viewcode-back" href="../../../../core_modules/msgauth.html#terra_sdk.core.msgauth.msgs.MsgGrantAuthorization">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
 <span class="k">class</span> <span class="nc">MsgGrantAuthorization</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Grant an authorization to ``grantee`` to call messages on behalf of ``granter``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        granter: account giving authorization</span>
+<span class="sd">        granter: account granting authorization</span>
 <span class="sd">        grantee: account receiving authorization</span>
-<span class="sd">        authorization: details of authorization granted</span>
-<span class="sd">        period (int): timeframe during which the authorization is considered valid</span>
+<span class="sd">        grant: pair of authorization, expiration</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;msgauth/MsgGrantAuthorization&quot;</span>
 
     <span class="n">granter</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">grantee</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">authorization</span><span class="p">:</span> <span class="n">Authorization</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">period</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-
-<div class="viewcode-block" id="MsgGrantAuthorization.to_data"><a class="viewcode-back" href="../../../../core_modules/msgauth.html#terra_sdk.core.msgauth.msgs.MsgGrantAuthorization.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span></div>
+    <span class="n">grant</span><span class="p">:</span> <span class="n">Grant</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgGrantAuthorization</span><span class="p">:</span>
@@ -257,8 +255,10 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">granter</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;granter&quot;</span><span class="p">],</span>
             <span class="n">grantee</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;grantee&quot;</span><span class="p">],</span>
-            <span class="n">authorization</span><span class="o">=</span><span class="n">Authorization</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;authorization&quot;</span><span class="p">]),</span>
-            <span class="n">period</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">],</span>
+            <span class="n">grant</span><span class="o">=</span><span class="n">Grant</span><span class="p">(</span>
+                <span class="n">authorization</span><span class="o">=</span><span class="n">Authorization</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;grant&quot;</span><span class="p">][</span><span class="s2">&quot;authorization&quot;</span><span class="p">]),</span>
+                <span class="n">expiration</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;grant&quot;</span><span class="p">][</span><span class="s2">&quot;expiration&quot;</span><span class="p">]),</span>
+            <span class="p">),</span>
         <span class="p">)</span></div>
 
 
@@ -269,7 +269,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        granter: account removing authorization</span>
 <span class="sd">        grantee: account having authorization removed</span>
-<span class="sd">        authorization_msg_type: type of message to remove authorization for</span>
+<span class="sd">        msg_type_url: type of message to remove authorization for</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;msgauth/MsgRevokeAuthorization&quot;</span>
@@ -277,7 +277,7 @@
 
     <span class="n">granter</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">grantee</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">authorization_msg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">msg_type_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgRevokeAuthorization</span><span class="p">:</span>
@@ -285,7 +285,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">granter</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;granter&quot;</span><span class="p">],</span>
             <span class="n">grantee</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;grantee&quot;</span><span class="p">],</span>
-            <span class="n">authorization_msg_type</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;authorization_msg_type&quot;</span><span class="p">],</span>
+            <span class="n">msg_type_url</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;msg_type_url&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 </pre></div>
 

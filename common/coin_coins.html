@@ -200,12 +200,12 @@
 <h2>Coin<a class="headerlink" href="#coin" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.core.coin.Coin">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.coin.</code><code class="sig-name descname">Coin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">denom</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.coin.</span></code><code class="sig-name descname"><span class="pre">Coin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">denom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a (denom, amount) pairing, analagous to <code class="docutils literal notranslate"><span class="pre">sdk.Coin</span></code> and <code class="docutils literal notranslate"><span class="pre">sdk.DecCoin</span></code>
 in Cosmos SDK. Used for representing Terra native assets.</p>
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with the sum as amount. If the <code class="docutils literal notranslate"><span class="pre">addend</span></code> is a
 <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a>, its <code class="docutils literal notranslate"><span class="pre">denom</span></code> must match.</p>
 <dl class="field-list simple">
@@ -226,19 +226,19 @@ in Cosmos SDK. Used for representing Terra native assets.</p>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.coin.Coin.amount">
-<code class="sig-name descname">amount</code><em class="property">: Union<span class="p">[</span>int<span class="p">, </span>terra_sdk.core.numeric.Dec<span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.coin.Coin.amount" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">amount</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">terra_sdk.core.numeric.Dec</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.core.coin.Coin.amount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coin’s amount – can be a <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code></p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.coin.Coin.denom">
-<code class="sig-name descname">denom</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.coin.Coin.denom" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">denom</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.core.coin.Coin.denom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coin’s denomination, ex <code class="docutils literal notranslate"><span class="pre">uusd</span></code>, <code class="docutils literal notranslate"><span class="pre">uluna</span></code>, etc.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.div">
-<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.div" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">div</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.div" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with the quotient as amount. The <code class="docutils literal notranslate"><span class="pre">divisor</span></code>
 argument is first coerced to either an <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code>.</p>
 <dl class="field-list simple">
@@ -256,7 +256,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.from_data">
-<em class="property">classmethod </em><code class="sig-name descname">from_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.from_data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deserializes a <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> object from its JSON data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -270,7 +270,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.from_str">
-<em class="property">classmethod </em><code class="sig-name descname">from_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.from_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.from_str" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_str</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.from_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.from_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> from a coin-format string. Must match the format:
 <code class="docutils literal notranslate"><span class="pre">283923uusd</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>-Coin) or <code class="docutils literal notranslate"><span class="pre">23920.23020uusd</span></code> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code>-Coin).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">int_coin</span> <span class="o">=</span> <span class="n">Coin</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;230920uusd&quot;</span><span class="p">)</span>
@@ -303,7 +303,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.is_dec_coin">
-<code class="sig-name descname">is_dec_coin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.is_dec_coin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.is_dec_coin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_dec_coin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.is_dec_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.is_dec_coin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the coin’s amount is of type <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -314,7 +314,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.is_int_coin">
-<code class="sig-name descname">is_int_coin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.is_int_coin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.is_int_coin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_int_coin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.is_int_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.is_int_coin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the coin’s amount is of type <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -325,7 +325,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.mod">
-<code class="sig-name descname">mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modulo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modulo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with the modulus as amount.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,7 +342,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.mul">
-<code class="sig-name descname">mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">multiplier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.mul" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mul</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiplier</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.mul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.mul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with the product as amount. The <code class="docutils literal notranslate"><span class="pre">multiplier</span></code>
 argument is first coerced to either an <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code>.</p>
 <dl class="field-list simple">
@@ -360,7 +360,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.parse">
-<em class="property">static </em><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.parse" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the argument into a coin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -374,7 +374,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.sub">
-<code class="sig-name descname">sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subtrahend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.sub" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sub</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtrahend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.sub"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.sub" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with the difference as amount. If the <code class="docutils literal notranslate"><span class="pre">subtrahend</span></code> is a
 <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a>, its <code class="docutils literal notranslate"><span class="pre">denom</span></code> must match.</p>
 <dl class="field-list simple">
@@ -392,7 +392,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -403,7 +403,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.to_dec_coin">
-<code class="sig-name descname">to_dec_coin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_dec_coin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_dec_coin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_dec_coin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_dec_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_dec_coin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code> amount.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -414,7 +414,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 
 <dl class="py method">
 <dt id="terra_sdk.core.coin.Coin.to_int_coin">
-<code class="sig-name descname">to_int_coin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_int_coin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_int_coin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_int_coin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.to_int_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.to_int_coin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> with an <code class="docutils literal notranslate"><span class="pre">int</span></code> amount.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -430,7 +430,7 @@ argument is first coerced to either an <code class="docutils literal notranslate
 <h2>Coins<a class="headerlink" href="#coins" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.core.coins.Coins">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.coins.</code><code class="sig-name descname">Coins</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">denoms</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.coins.</span></code><code class="sig-name descname"><span class="pre">Coins</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">denoms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an unordered collection of <code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code> objects
 – analagous to <code class="docutils literal notranslate"><span class="pre">sdk.Coins</span></code> and <code class="docutils literal notranslate"><span class="pre">sdk.DecCoins</span></code> in Cosmos SDK. If one of the
 input coins would be <code class="docutils literal notranslate"><span class="pre">Dec</span></code>-amount type coin, the resultant Coins is converted to
@@ -445,14 +445,14 @@ input coins would be <code class="docutils literal notranslate"><span class="pre
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.coins.Coins.Input">
-<code class="sig-name descname">Input</code><a class="headerlink" href="#terra_sdk.core.coins.Coins.Input" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">Input</span></code><a class="headerlink" href="#terra_sdk.core.coins.Coins.Input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Types which can be converted into a <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a> object.</p>
 <p>alias of Union[Iterable[terra_sdk.core.coin.Coin], str, Dict[str, Union[str, int, float, decimal.Decimal, terra_sdk.core.numeric.Dec]], Dict[str, terra_sdk.core.coin.Coin]]</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs addition, which combines the sets of Coin objects. Coins of similar denoms
 will be merged into one Coin representing the denom.</p>
 <dl class="field-list simple">
@@ -467,7 +467,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.denoms">
-<code class="sig-name descname">denoms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.denoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.denoms" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">denoms</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.denoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.denoms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the list of denoms for all Coin objects contained.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -478,7 +478,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.div">
-<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.div" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">div</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.div" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs division, which divides all the Coin objects in the set by a divisor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -492,7 +492,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a> collection which filters out all Coin objects that
 do not meet the predicate.</p>
 <dl class="field-list simple">
@@ -507,7 +507,7 @@ do not meet the predicate.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.from_data">
-<em class="property">classmethod </em><code class="sig-name descname">from_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.from_data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts list of Coin-data objects to <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -521,7 +521,7 @@ do not meet the predicate.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.from_str">
-<em class="property">classmethod </em><code class="sig-name descname">from_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.from_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.from_str" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_str</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.from_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.from_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a comma-separated list of Coin-format strings to <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Coins</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s1">&#39;1000uluna,1234ukrw&#39;</span><span class="p">)</span>
 <span class="go">Coins(&quot;1000uluna,1234ukrw&quot;)</span>
@@ -539,7 +539,7 @@ do not meet the predicate.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">denom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">denom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Coin with the denom contained in the Coins set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -556,7 +556,7 @@ do not meet the predicate.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.map">
-<code class="sig-name descname">map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an iterable which applies the function to all coins in the set,
 ordered by denomination.</p>
 <dl class="field-list simple">
@@ -577,7 +577,7 @@ ordered by denomination.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.mul">
-<code class="sig-name descname">mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">multiplier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.mul" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mul</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiplier</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.mul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.mul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs multiplicaiton, which multiplies all the Coin objects in the set by a
 multiplier.</p>
 <dl class="field-list simple">
@@ -592,7 +592,7 @@ multiplier.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.sub">
-<code class="sig-name descname">sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subtrahend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.sub" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sub</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtrahend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.sub"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.sub" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs subtraction, which combines the sets of Coin objects. Coins of similar denoms
 will be merged into one Coin representing the denom.</p>
 <dl class="field-list simple">
@@ -607,7 +607,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -618,7 +618,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.to_dec_coins">
-<code class="sig-name descname">to_dec_coins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_dec_coins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_dec_coins" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_dec_coins</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_dec_coins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_dec_coins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates new set of <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a> that have :class`Dec` amounts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -629,7 +629,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.to_int_coins">
-<code class="sig-name descname">to_int_coins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_int_coins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_int_coins" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_int_coins</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_int_coins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_int_coins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates new set of <a class="reference internal" href="#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coins</span></code></a> that have <code class="docutils literal notranslate"><span class="pre">int</span></code> amounts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -640,7 +640,7 @@ will be merged into one Coin representing the denom.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.coins.Coins.to_list">
-<code class="sig-name descname">to_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coins.html#Coins.to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coins.Coins.to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the set of <code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code> objects contained into a sorted list by denom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

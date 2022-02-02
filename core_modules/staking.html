@@ -205,10 +205,10 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.staking.</code><code class="sig-name descname">StakingAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.staking.</span></code><code class="sig-name descname"><span class="pre">StakingAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.bonded_validators">
-<code class="sig-name descname">bonded_validators</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.bonded_validators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.bonded_validators" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">bonded_validators</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.bonded_validators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.bonded_validators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the list of validators a delegator is currently delegating to.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,7 +225,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.delegation">
-<code class="sig-name descname">delegation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span></em>, <em class="sig-param"><span class="n">validator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.delegation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.delegation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delegation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.delegation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.delegation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a single delegation via a delegator, validator pair.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -245,7 +245,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.delegations">
-<code class="sig-name descname">delegations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validator</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.delegations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.delegations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delegations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.delegations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.delegations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches current delegations, filtering by delegator, validator, or both.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -268,7 +268,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.parameters">
-<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">parameters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch Staking module parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -282,7 +282,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.pool">
-<code class="sig-name descname">pool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.pool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.pool" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.pool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.pool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch current staking pool information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -296,7 +296,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.redelegations">
-<code class="sig-name descname">redelegations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validator_src</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validator_dst</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.redelegations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.redelegations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">redelegations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_dst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.redelegations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.redelegations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch redelgations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -317,7 +317,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegation">
-<code class="sig-name descname">unbonding_delegation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span></em>, <em class="sig-param"><span class="n">validator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.unbonding_delegation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">unbonding_delegation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.unbonding_delegation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a single undelegation via a delegator, validator pair.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -337,7 +337,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegations">
-<code class="sig-name descname">unbonding_delegations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">validator</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.unbonding_delegations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">unbonding_delegations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.unbonding_delegations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.unbonding_delegations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches current undelegations, filtering by delegator, validator, or both.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -360,7 +360,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.validator">
-<code class="sig-name descname">validator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">validator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.validator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">validator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.validator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.validator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch information about a single validator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -377,7 +377,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.staking.StakingAPI.validators">
-<code class="sig-name descname">validators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.validators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.validators" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">validators</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.validators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.validators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch information of all validators.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -398,88 +398,43 @@
 <span id="delegation"></span><h3>Delegation<a class="headerlink" href="#module-terra_sdk.core.staking.data.delegation" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.delegation.Delegation">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.delegation.</code><code class="sig-name descname">Delegation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em>, <em class="sig-param"><span class="n">shares</span></em>, <em class="sig-param"><span class="n">balance</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#Delegation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.delegation.</span></code><code class="sig-name descname"><span class="pre">Delegation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#Delegation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about a current delegation pair (<code class="docutils literal notranslate"><span class="pre">delegator_address</span></code>, <code class="docutils literal notranslate"><span class="pre">validator_address</span></code>)</p>
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Delegation.balance">
-<code class="sig-name descname">balance</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">terra_sdk.core.coin.Coin</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.balance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Delegation.delegator_address">
-<code class="sig-name descname">delegator_address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.delegator_address" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Delegation.shares">
-<code class="sig-name descname">shares</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.shares" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Delegation.validator_address">
-<code class="sig-name descname">validator_address</code><em class="property">: ValAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Delegation.validator_address" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.delegation.Redelegation">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.delegation.</code><code class="sig-name descname">Redelegation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_src_address</span></em>, <em class="sig-param"><span class="n">validator_dst_address</span></em>, <em class="sig-param"><span class="n">entries</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#Redelegation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.delegation.</span></code><code class="sig-name descname"><span class="pre">Redelegation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redelegation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#Redelegation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains informations about a redelgation for delegation tuple (<code class="docutils literal notranslate"><span class="pre">delegator_address</span></code>, <code class="docutils literal notranslate"><span class="pre">validator_src_address</span></code>, <code class="docutils literal notranslate"><span class="pre">validator_dst_address</span></code>)</p>
 <dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Redelegation.delegator_address">
-<code class="sig-name descname">delegator_address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.delegator_address" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.Redelegation.entries">
-<code class="sig-name descname">entries</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry" title="terra_sdk.core.staking.data.delegation.RedelegationEntry">terra_sdk.core.staking.data.delegation.RedelegationEntry</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.entries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">entries</span></code><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry" title="terra_sdk.core.staking.data.delegation.RedelegationEntry"><span class="pre">terra_sdk.core.staking.data.delegation.RedelegationEntry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.entries" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Redelegation.validator_dst_address">
-<code class="sig-name descname">validator_dst_address</code><em class="property">: ValAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.validator_dst_address" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.Redelegation.validator_src_address">
-<code class="sig-name descname">validator_src_address</code><em class="property">: ValAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.validator_src_address" title="Permalink to this definition">¶</a></dt>
+<dt id="terra_sdk.core.staking.data.delegation.Redelegation.redelegation">
+<code class="sig-name descname"><span class="pre">redelegation</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.staking.data.delegation.RedelegationInfo</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.Redelegation.redelegation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.delegation.</code><code class="sig-name descname">RedelegationEntry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_balance</span></em>, <em class="sig-param"><span class="n">balance</span></em>, <em class="sig-param"><span class="n">shares_dst</span></em>, <em class="sig-param"><span class="n">creation_height</span></em>, <em class="sig-param"><span class="n">completion_time</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#RedelegationEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.delegation.</span></code><code class="sig-name descname"><span class="pre">RedelegationEntry</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redelegation_entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#RedelegationEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about an active redelegated lot of Luna.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.balance">
-<code class="sig-name descname">balance</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.balance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">balance</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.balance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.completion_time">
-<code class="sig-name descname">completion_time</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.completion_time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.creation_height">
-<code class="sig-name descname">creation_height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.creation_height" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.initial_balance">
-<code class="sig-name descname">initial_balance</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.initial_balance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.shares_dst">
-<code class="sig-name descname">shares_dst</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.shares_dst" title="Permalink to this definition">¶</a></dt>
+<dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.redelegation_entry">
+<code class="sig-name descname"><span class="pre">redelegation_entry</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.staking.data.delegation.RedelegationEntryInfo</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.redelegation_entry" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.staking.data.delegation.RedelegationEntry.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#RedelegationEntry.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#RedelegationEntry.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.RedelegationEntry.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -492,52 +447,52 @@
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingDelegation">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.delegation.</code><code class="sig-name descname">UnbondingDelegation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em>, <em class="sig-param"><span class="n">entries</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingDelegation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.delegation.</span></code><code class="sig-name descname"><span class="pre">UnbondingDelegation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingDelegation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about undelegations for a delegation pair (<code class="docutils literal notranslate"><span class="pre">delegator_address</span></code>, <code class="docutils literal notranslate"><span class="pre">validator_address</span></code>)</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingDelegation.delegator_address">
-<code class="sig-name descname">delegator_address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.delegator_address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delegator_address</span></code><em class="property"><span class="pre">:</span> <span class="pre">AccAddress</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.delegator_address" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingDelegation.entries">
-<code class="sig-name descname">entries</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry" title="terra_sdk.core.staking.data.delegation.UnbondingEntry">terra_sdk.core.staking.data.delegation.UnbondingEntry</a><span class="p">]</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.entries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">entries</span></code><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry" title="terra_sdk.core.staking.data.delegation.UnbondingEntry"><span class="pre">terra_sdk.core.staking.data.delegation.UnbondingEntry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.entries" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingDelegation.validator_address">
-<code class="sig-name descname">validator_address</code><em class="property">: ValAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.validator_address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">validator_address</span></code><em class="property"><span class="pre">:</span> <span class="pre">ValAddress</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation.validator_address" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.delegation.</code><code class="sig-name descname">UnbondingEntry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_balance</span></em>, <em class="sig-param"><span class="n">balance</span></em>, <em class="sig-param"><span class="n">creation_height</span></em>, <em class="sig-param"><span class="n">completion_time</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.delegation.</span></code><code class="sig-name descname"><span class="pre">UnbondingEntry</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_balance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creation_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">completion_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about an active unbonding lot of Luna.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry.balance">
-<code class="sig-name descname">balance</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.balance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">balance</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.balance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry.completion_time">
-<code class="sig-name descname">completion_time</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.completion_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">completion_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.completion_time" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry.creation_height">
-<code class="sig-name descname">creation_height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.creation_height" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">creation_height</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.creation_height" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry.initial_balance">
-<code class="sig-name descname">initial_balance</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.initial_balance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">initial_balance</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.initial_balance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.staking.data.delegation.UnbondingEntry.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingEntry.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/delegation.html#UnbondingEntry.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.delegation.UnbondingEntry.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -553,17 +508,17 @@
 <span id="validator"></span><h3>Validator<a class="headerlink" href="#module-terra_sdk.core.staking.data.validator" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.validator.Commission">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.validator.</code><code class="sig-name descname">Commission</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commission_rates</span></em>, <em class="sig-param"><span class="n">update_time</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Commission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.validator.</span></code><code class="sig-name descname"><span class="pre">Commission</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commission_rates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Commission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about validator’s commission rates.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Commission.commission_rates">
-<code class="sig-name descname">commission_rates</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.staking.data.validator.CommissionRates" title="terra_sdk.core.staking.data.validator.CommissionRates">terra_sdk.core.staking.data.validator.CommissionRates</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission.commission_rates" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">commission_rates</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#terra_sdk.core.staking.data.validator.CommissionRates" title="terra_sdk.core.staking.data.validator.CommissionRates"><span class="pre">terra_sdk.core.staking.data.validator.CommissionRates</span></a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission.commission_rates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validator commission rates.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Commission.update_time">
-<code class="sig-name descname">update_time</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission.update_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Commission.update_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Last time commission rates were updated.</p>
 </dd></dl>
 
@@ -571,23 +526,23 @@
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.validator.CommissionRates">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.validator.</code><code class="sig-name descname">CommissionRates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rate</span></em>, <em class="sig-param"><span class="n">max_rate</span></em>, <em class="sig-param"><span class="n">max_change_rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#CommissionRates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.validator.</span></code><code class="sig-name descname"><span class="pre">CommissionRates</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_change_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#CommissionRates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Data structure for validator’s commission rates &amp; policy.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.CommissionRates.max_change_rate">
-<code class="sig-name descname">max_change_rate</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.max_change_rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">max_change_rate</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.max_change_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum % change of commission per day.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.CommissionRates.max_rate">
-<code class="sig-name descname">max_rate</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.max_rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">max_rate</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.max_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum % commission rate permitted by policy.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.CommissionRates.rate">
-<code class="sig-name descname">rate</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">rate</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.CommissionRates.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current % commission rate.</p>
 </dd></dl>
 
@@ -595,7 +550,7 @@
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.validator.Description">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.validator.</code><code class="sig-name descname">Description</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">moniker</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">identity</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">website</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">details</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">security_contact</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Description" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.validator.</span></code><code class="sig-name descname"><span class="pre">Description</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moniker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">website</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">details</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">security_contact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Description" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validator description entry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -610,58 +565,58 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Description.DO_NOT_MODIFY">
-<code class="sig-name descname">DO_NOT_MODIFY</code><em class="property"> = '[do-not-modify]'</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Description.DO_NOT_MODIFY" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">DO_NOT_MODIFY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'[do-not-modify]'</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Description.DO_NOT_MODIFY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.data.validator.Validator">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.data.validator.</code><code class="sig-name descname">Validator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operator_address</span></em>, <em class="sig-param"><span class="n">consensus_pubkey</span></em>, <em class="sig-param"><span class="n">jailed</span></em>, <em class="sig-param"><span class="n">status</span></em>, <em class="sig-param"><span class="n">tokens</span></em>, <em class="sig-param"><span class="n">delegator_shares</span></em>, <em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">unbonding_height</span></em>, <em class="sig-param"><span class="n">unbonding_time</span></em>, <em class="sig-param"><span class="n">commission</span></em>, <em class="sig-param"><span class="n">min_self_delegation</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.data.validator.</span></code><code class="sig-name descname"><span class="pre">Validator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consensus_pubkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jailed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delegator_shares</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unbonding_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unbonding_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_self_delegation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Validator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about a registered validator.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.commission">
-<code class="sig-name descname">commission</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.staking.data.validator.Commission" title="terra_sdk.core.staking.data.validator.Commission">terra_sdk.core.staking.data.validator.Commission</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.commission" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">commission</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#terra_sdk.core.staking.data.validator.Commission" title="terra_sdk.core.staking.data.validator.Commission"><span class="pre">terra_sdk.core.staking.data.validator.Commission</span></a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.commission" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.consensus_pubkey">
-<code class="sig-name descname">consensus_pubkey</code><em class="property">: ValConsPubKey</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.consensus_pubkey" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">consensus_pubkey</span></code><em class="property"><span class="pre">:</span> <span class="pre">ValConsPubKey</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.consensus_pubkey" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.delegator_shares">
-<code class="sig-name descname">delegator_shares</code><em class="property">: terra_sdk.core.numeric.Dec</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.delegator_shares" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">delegator_shares</span></code><em class="property"><span class="pre">:</span> <span class="pre">terra_sdk.core.numeric.Dec</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.delegator_shares" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.description">
-<code class="sig-name descname">description</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.staking.data.validator.Description" title="terra_sdk.core.staking.data.validator.Description">terra_sdk.core.staking.data.validator.Description</a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#terra_sdk.core.staking.data.validator.Description" title="terra_sdk.core.staking.data.validator.Description"><span class="pre">terra_sdk.core.staking.data.validator.Description</span></a></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.jailed">
-<code class="sig-name descname">jailed</code><em class="property">: bool</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.jailed" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">jailed</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.jailed" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.min_self_delegation">
-<code class="sig-name descname">min_self_delegation</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.min_self_delegation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">min_self_delegation</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.min_self_delegation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.operator_address">
-<code class="sig-name descname">operator_address</code><em class="property">: ValAddress</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.operator_address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">operator_address</span></code><em class="property"><span class="pre">:</span> <span class="pre">ValAddress</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.operator_address" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.status">
-<code class="sig-name descname">status</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.status" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">status</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.status" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.staking.data.validator.Validator.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Validator.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/data/validator.html#Validator.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -672,17 +627,17 @@
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.tokens">
-<code class="sig-name descname">tokens</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.tokens" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tokens</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.tokens" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.unbonding_height">
-<code class="sig-name descname">unbonding_height</code><em class="property">: int</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.unbonding_height" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">unbonding_height</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.unbonding_height" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.data.validator.Validator.unbonding_time">
-<code class="sig-name descname">unbonding_time</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.unbonding_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">unbonding_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.core.staking.data.validator.Validator.unbonding_time" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -694,7 +649,7 @@
 <p>Staking module message types.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.staking.msgs.MsgBeginRedelegate">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.msgs.</code><code class="sig-name descname">MsgBeginRedelegate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_src_address</span></em>, <em class="sig-param"><span class="n">validator_dst_address</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgBeginRedelegate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgBeginRedelegate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_src_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_dst_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgBeginRedelegate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Redelegate staked Luna from <code class="docutils literal notranslate"><span class="pre">validator_src_address</span></code> to <code class="docutils literal notranslate"><span class="pre">valdiator_dst_address</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -708,19 +663,19 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgBeginRedelegate.action">
-<code class="sig-name descname">action</code><em class="property"> = 'begin_redelegate'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'begin_redelegate'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgBeginRedelegate.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'staking/MsgBeginRedelegate'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'staking/MsgBeginRedelegate'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgBeginRedelegate.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.msgs.MsgCreateValidator">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.msgs.</code><code class="sig-name descname">MsgCreateValidator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">commission</span></em>, <em class="sig-param"><span class="n">min_self_delegation</span></em>, <em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em>, <em class="sig-param"><span class="n">pubkey</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgCreateValidator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgCreateValidator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_self_delegation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delegator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pubkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgCreateValidator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a new validator with the Terra protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -737,19 +692,19 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgCreateValidator.action">
-<code class="sig-name descname">action</code><em class="property"> = 'create_validator'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'create_validator'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgCreateValidator.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'staking/MsgCreateValidator'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'staking/MsgCreateValidator'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgCreateValidator.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.msgs.MsgDelegate">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.msgs.</code><code class="sig-name descname">MsgDelegate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgDelegate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgDelegate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgDelegate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delegate Luna to validator at <code class="docutils literal notranslate"><span class="pre">validator_address</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -762,25 +717,25 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgDelegate.action">
-<code class="sig-name descname">action</code><em class="property"> = 'delegate'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'delegate'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgDelegate.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'staking/MsgDelegate'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'staking/MsgDelegate'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgDelegate.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.msgs.MsgEditValidator">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.msgs.</code><code class="sig-name descname">MsgEditValidator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Description</span></em>, <em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">commission_rate</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_self_delegation</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgEditValidator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgEditValidator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_self_delegation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgEditValidator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Revise validator description and configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Description</strong> (<a class="reference internal" href="#terra_sdk.core.staking.data.validator.Description" title="terra_sdk.core.staking.data.validator.Description"><em>Description</em></a>) – updated validator description</p></li>
-<li><p><strong>address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator operator address</p></li>
+<li><p><strong>description</strong> (<a class="reference internal" href="#terra_sdk.core.staking.data.validator.Description" title="terra_sdk.core.staking.data.validator.Description"><em>Description</em></a>) – updated validator description</p></li>
+<li><p><strong>validator_address</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress"><em>ValAddress</em></a>) – validator operator address</p></li>
 <li><p><strong>commission_rates</strong> – new validator commission rate,</p></li>
 <li><p><strong>min_self_delegation</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – new minimum self delegation,</p></li>
 </ul>
@@ -788,19 +743,19 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgEditValidator.action">
-<code class="sig-name descname">action</code><em class="property"> = 'edit_validator'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'edit_validator'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgEditValidator.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'staking/MsgEditValidator'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'staking/MsgEditValidator'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgEditValidator.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.staking.msgs.MsgUndelegate">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.staking.msgs.</code><code class="sig-name descname">MsgUndelegate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delegator_address</span></em>, <em class="sig-param"><span class="n">validator_address</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgUndelegate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.staking.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgUndelegate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delegator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/staking/msgs.html#MsgUndelegate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Undelegate Luna from staking position with <code class="docutils literal notranslate"><span class="pre">validator_address</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -813,12 +768,12 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgUndelegate.action">
-<code class="sig-name descname">action</code><em class="property"> = 'begin_unbonding'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'begin_unbonding'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.staking.msgs.MsgUndelegate.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'staking/MsgUndelegate'</em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'staking/MsgUndelegate'</span></em><a class="headerlink" href="#terra_sdk.core.staking.msgs.MsgUndelegate.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

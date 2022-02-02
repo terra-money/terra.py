@@ -357,7 +357,7 @@
     <span class="k">return</span> <span class="n">ValPubKey</span><span class="p">(</span><span class="n">bech32_encode</span><span class="p">(</span><span class="s2">&quot;terravaloperpub&quot;</span><span class="p">,</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
 
-<span class="k">def</span> <span class="nf">is_valcons_pubkey</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValConsPubKey</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">is_valcons_pubkey</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Checks whether provided string is a properly formatted Terra validator consensus</span>
 <span class="sd">    pubkey.</span>
 
@@ -365,7 +365,7 @@
 <span class="sd">        data (str): string to check</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ValConsPubKey: validator consensus pubkey</span>
+<span class="sd">        bool: whether string is validator consensus pubkey</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">check_prefix_and_length</span><span class="p">(</span><span class="s2">&quot;terravalconspub&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">83</span><span class="p">)</span>
 </pre></div>

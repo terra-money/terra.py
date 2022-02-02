@@ -197,15 +197,17 @@
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">Coins</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.util.contract</span> <span class="kn">import</span> <span class="n">b64_to_dict</span><span class="p">,</span> <span class="n">dict_to_b64</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">dict_to_data</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.remove_none</span> <span class="kn">import</span> <span class="n">remove_none</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;MsgStoreCode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MsgMigrateCode&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgInstantiateContract&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgExecuteContract&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgMigrateContract&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MsgUpdateContractOwner&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MsgUpdateContractAdmin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MsgClearContractAdmin&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -230,41 +232,76 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">],</span> <span class="n">wasm_byte_code</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;wasm_byte_code&quot;</span><span class="p">])</span></div>
 
 
+<div class="viewcode-block" id="MsgMigrateCode"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgMigrateCode">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">MsgMigrateCode</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Upload a new smart contract WASM binary to the blockchain, replacing an existing code ID.</span>
+<span class="sd">    Can only be called once by creator of the contract, and is used for migrating from Col-4 to Col-5.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sender: address of sender</span>
+<span class="sd">        code_id: reference to the code on the blockchain</span>
+<span class="sd">        wasm_byte_code: base64-encoded string containing bytecode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgMigrateCode&quot;</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+
+    <span class="n">sender</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">code_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">wasm_byte_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MsgMigrateCode.to_data"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgMigrateCode.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">])</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">])</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;wasm_byte_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;wasm_byte_code&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgMigrateCode</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">sender</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">],</span>
+            <span class="n">code_id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">],</span>
+            <span class="n">wasm_byte_code</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;wasm_byte_code&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="MsgInstantiateContract"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgInstantiateContract">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
 <span class="k">class</span> <span class="nc">MsgInstantiateContract</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Creates a new instance of a smart contract from existing code on the blockchain.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        owner: address of contract owner</span>
+<span class="sd">        sender: address of sender</span>
+<span class="sd">        admin: address of contract admin</span>
 <span class="sd">        code_id (int): code ID to use for instantiation</span>
-<span class="sd">        init_msg: InitMsg to initialize contract</span>
+<span class="sd">        init_msg (dict): InitMsg to initialize contract</span>
 <span class="sd">        init_coins (Coins): initial amount of coins to be sent to contract</span>
-<span class="sd">        migratable: whether the owner can change contract code IDs&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgInstantiateContract&quot;</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-    <span class="n">owner</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">admin</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">code_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">init_msg</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">init_coins</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
-    <span class="n">migratable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MsgInstantiateContract.to_data"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgInstantiateContract.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">])</span>
-        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_msg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_to_b64</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_msg&quot;</span><span class="p">])</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgInstantiateContract</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">owner</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">],</span>
+            <span class="n">sender</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sender&quot;</span><span class="p">),</span>
+            <span class="n">admin</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;admin&quot;</span><span class="p">),</span>
             <span class="n">code_id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;code_id&quot;</span><span class="p">],</span>
-            <span class="n">init_msg</span><span class="o">=</span><span class="n">b64_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_msg&quot;</span><span class="p">]),</span>
+            <span class="n">init_msg</span><span class="o">=</span><span class="n">remove_none</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_msg&quot;</span><span class="p">]),</span>
             <span class="n">init_coins</span><span class="o">=</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_coins&quot;</span><span class="p">]),</span>
-            <span class="n">migratable</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;migratable&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 
 
@@ -275,7 +312,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        sender: address of sender</span>
 <span class="sd">        contract: address of contract to execute function on</span>
-<span class="sd">        execute_msg: ExecuteMsg (aka. HandleMsg) to pass</span>
+<span class="sd">        execute_msg (dict): ExecuteMsg to pass</span>
 <span class="sd">        coins: coins to be sent, if needed by contract to execute.</span>
 <span class="sd">            Defaults to empty ``Coins()``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -288,18 +325,13 @@
     <span class="n">execute_msg</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">coins</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MsgExecuteContract.to_data"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgExecuteContract.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;execute_msg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_to_b64</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;execute_msg&quot;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span></div>
-
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgExecuteContract</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">sender</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sender&quot;</span><span class="p">],</span>
             <span class="n">contract</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contract&quot;</span><span class="p">],</span>
-            <span class="n">execute_msg</span><span class="o">=</span><span class="n">b64_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;execute_msg&quot;</span><span class="p">]),</span>
+            <span class="n">execute_msg</span><span class="o">=</span><span class="n">remove_none</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;execute_msg&quot;</span><span class="p">)),</span>
             <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;coins&quot;</span><span class="p">]),</span>
         <span class="p">)</span></div>
 
@@ -309,7 +341,7 @@
     <span class="sd">&quot;&quot;&quot;Migrate the contract to a different code ID.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        owner: address of owner</span>
+<span class="sd">        admin: address of contract admin</span>
 <span class="sd">        contract: address of contract to migrate</span>
 <span class="sd">        new_code_id (int): new code ID to migrate to</span>
 <span class="sd">        migrate_msg (dict): MigrateMsg to execute</span>
@@ -318,51 +350,73 @@
     <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgMigrateContract&quot;</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-    <span class="n">owner</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">admin</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">contract</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">new_code_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">migrate_msg</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
 
 <div class="viewcode-block" id="MsgMigrateContract.to_data"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgMigrateContract.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;new_code_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;new_code_id&quot;</span><span class="p">])</span>
-        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;migrate_msg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_to_b64</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;migrate_msg&quot;</span><span class="p">])</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgMigrateContract</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">owner</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">],</span>
+            <span class="n">admin</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">],</span>
             <span class="n">contract</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contract&quot;</span><span class="p">],</span>
             <span class="n">new_code_id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;new_code_id&quot;</span><span class="p">],</span>
-            <span class="n">migrate_msg</span><span class="o">=</span><span class="n">b64_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;migrate_msg&quot;</span><span class="p">]),</span>
+            <span class="n">migrate_msg</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;migrate_msg&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MsgUpdateContractOwner"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgUpdateContractOwner">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
-<span class="k">class</span> <span class="nc">MsgUpdateContractOwner</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Update a smart contract&#39;s owner.</span>
+<div class="viewcode-block" id="MsgUpdateContractAdmin"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgUpdateContractAdmin">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">MsgUpdateContractAdmin</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update a smart contract&#39;s admin.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        owner: address of current owner (sender)</span>
-<span class="sd">        new_owner: address of new owner</span>
+<span class="sd">        owner: address of current admin (sender)</span>
+<span class="sd">        new_owner: address of new admin</span>
 <span class="sd">        contract: address of contract to change</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgUpdateContractOwner&quot;</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgUpdateContractAdmin&quot;</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-    <span class="n">owner</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">new_owner</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">admin</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">new_admin</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">contract</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgUpdateContractOwner</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgUpdateContractAdmin</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">owner</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">],</span>
-            <span class="n">new_owner</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;new_owner&quot;</span><span class="p">],</span>
+            <span class="n">admin</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">],</span>
+            <span class="n">new_admin</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;new_admin&quot;</span><span class="p">],</span>
+            <span class="n">contract</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contract&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MsgClearContractAdmin"><a class="viewcode-back" href="../../../../core_modules/wasm.html#terra_sdk.core.wasm.msgs.MsgClearContractAdmin">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">MsgClearContractAdmin</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Clears the contract&#39;s admin field.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        admin: address of current admin (sender)</span>
+<span class="sd">        contract: address of contract to change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;wasm/MsgClearContractAdmin&quot;</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+
+    <span class="n">admin</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">contract</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgClearContractAdmin</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">admin</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">],</span>
             <span class="n">contract</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contract&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
 </pre></div>

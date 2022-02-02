@@ -16,7 +16,7 @@ You can replace your LCDClient instance with AsyncLCDClient inside a coroutine f
     from terra_sdk.client.lcd import AsyncLCDClient
 
     async def main():
-        terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-4")
+        terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")
         total_supply = await terra.supply.total()
         print(total_supply)
         await terra.session.close() # you must close the session
@@ -34,7 +34,7 @@ session. Here's the same code as above, this time using the ``async with`` const
     from terra_sdk.client.lcd import AsyncLCDClient
 
     async def main():
-        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-4") as terra:
+        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
             total_supply = await terra.supply.total()
             print(total_supply)
 
@@ -58,7 +58,7 @@ are also asychronous and therefore must be awaited.
     recipient = "terra1..."
 
     async def main():
-        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-4") as terra:
+        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
             wallet = terra.wallet(mk)
             account_number = await wallet.account_number()
             tx = await wallet.create_and_sign_tx(
@@ -82,7 +82,7 @@ for more performance. For example:
     from terra_sdk.client.lcd import AsyncLCDClient
 
     async def main():
-        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-4") as terra:
+        async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
             total_supply = await wallet.supply.total()
 
     uvloop.install() 

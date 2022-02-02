@@ -203,8 +203,6 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;vote_hash&quot;</span><span class="p">,</span>
     <span class="s2">&quot;aggregate_vote_hash&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MsgExchangeRatePrevote&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MsgExchangeRateVote&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgDelegateFeedConsent&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgAggregateExchangeRatePrevote&quot;</span><span class="p">,</span>
     <span class="s2">&quot;MsgAggregateExchangeRateVote&quot;</span><span class="p">,</span>
@@ -242,93 +240,6 @@
     <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">salt</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Coins</span><span class="p">(</span><span class="n">exchange_rates</span><span class="p">))</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">sha_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">payload</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">sha_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">40</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="MsgExchangeRatePrevote"><a class="viewcode-back" href="../../../../core_modules/oracle.html#terra_sdk.core.oracle.msgs.MsgExchangeRatePrevote">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
-<span class="k">class</span> <span class="nc">MsgExchangeRatePrevote</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Submit a prevote for the current vote period.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        hash: vote hash</span>
-<span class="sd">        denom: denom for which the prevote is submitted</span>
-<span class="sd">        feeder: delegated feeder account submitting vote</span>
-<span class="sd">        validator: validator for which the prevote is submitted</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;oracle/MsgExchangeRatePrevote&quot;</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="s2">&quot;exchangerateprevote&quot;</span>
-
-    <span class="nb">hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">feeder</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgExchangeRatePrevote</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="nb">hash</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;hash&quot;</span><span class="p">],</span>
-            <span class="n">denom</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;denom&quot;</span><span class="p">],</span>
-            <span class="n">feeder</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;feeder&quot;</span><span class="p">],</span>
-            <span class="n">validator</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator&quot;</span><span class="p">],</span>
-        <span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="MsgExchangeRateVote"><a class="viewcode-back" href="../../../../core_modules/oracle.html#terra_sdk.core.oracle.msgs.MsgExchangeRateVote">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
-<span class="k">class</span> <span class="nc">MsgExchangeRateVote</span><span class="p">(</span><span class="n">Msg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Submit a vote for the current vote period.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        exchange_rate (Dec): current exchange rate of LUNA</span>
-<span class="sd">        salt: salt for vote hash</span>
-<span class="sd">        denom: denom vote corresponds to</span>
-<span class="sd">        feeder: delegated feeder account submitting vote</span>
-<span class="sd">        validator: validator for which the vote is submitted</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;oracle/MsgExchangeRateVote&quot;</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="s2">&quot;exchangeratevote&quot;</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-
-    <span class="n">exchange_rate</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Dec</span><span class="p">)</span>
-    <span class="n">salt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">denom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">feeder</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">validator</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgExchangeRateVote</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">exchange_rate</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;exchange_rate&quot;</span><span class="p">],</span>
-            <span class="n">salt</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;salt&quot;</span><span class="p">],</span>
-            <span class="n">denom</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;denom&quot;</span><span class="p">],</span>
-            <span class="n">feeder</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;feeder&quot;</span><span class="p">],</span>
-            <span class="n">validator</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator&quot;</span><span class="p">],</span>
-        <span class="p">)</span>
-
-<div class="viewcode-block" id="MsgExchangeRateVote.get_vote_hash"><a class="viewcode-back" href="../../../../core_modules/oracle.html#terra_sdk.core.oracle.msgs.MsgExchangeRateVote.get_vote_hash">[docs]</a>    <span class="k">def</span> <span class="nf">get_vote_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Vote hash required for the associated prevote.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            str: vote hash</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">vote_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exchange_rate</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">salt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="MsgExchangeRateVote.get_prevote"><a class="viewcode-back" href="../../../../core_modules/oracle.html#terra_sdk.core.oracle.msgs.MsgExchangeRateVote.get_prevote">[docs]</a>    <span class="k">def</span> <span class="nf">get_prevote</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgExchangeRatePrevote</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Generates the associated :class:`MsgExchangeRatePrevote` object with the</span>
-<span class="sd">        correct prepopulated fields.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            MsgExchangeRatePrevote: associated prevote</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">MsgExchangeRatePrevote</span><span class="p">(</span>
-            <span class="nb">hash</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_vote_hash</span><span class="p">(),</span>
-            <span class="n">denom</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span>
-            <span class="n">feeder</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feeder</span><span class="p">,</span>
-            <span class="n">validator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="p">,</span>
-        <span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="MsgDelegateFeedConsent"><a class="viewcode-back" href="../../../../core_modules/oracle.html#terra_sdk.core.oracle.msgs.MsgDelegateFeedConsent">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>

@@ -198,22 +198,22 @@
 <h1>Numeric Types<a class="headerlink" href="#numeric-types" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="terra_sdk.core.numeric.Numeric">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.numeric.</code><code class="sig-name descname">Numeric</code><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Numeric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.numeric.Numeric" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.numeric.</span></code><code class="sig-name descname"><span class="pre">Numeric</span></code><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Numeric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.numeric.Numeric" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt id="terra_sdk.core.numeric.Numeric.Input">
-<code class="sig-name descname">Input</code><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.Input" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">Input</span></code><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.Input" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of Union[str, int, float, decimal.Decimal, terra_sdk.core.numeric.Dec]</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.numeric.Numeric.Output">
-<code class="sig-name descname">Output</code><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.Output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">Output</span></code><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.Output" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of Union[int, terra_sdk.core.numeric.Dec]</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="terra_sdk.core.numeric.Numeric.parse">
-<em class="property">static </em><code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Numeric.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.parse" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Numeric.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.numeric.Numeric.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the value and coerces it into an <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -248,7 +248,7 @@ they will result in an error when processing.</p>
 <h2>Decimals<a class="headerlink" href="#decimals" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.core.Dec">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.</code><code class="sig-name descname">Dec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.</span></code><code class="sig-name descname"><span class="pre">Dec</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec" title="Permalink to this definition">¶</a></dt>
 <dd><p>BigInt-based Decimal representation with basic arithmetic operations with
 compatible Python numeric types (int, float, Decimal). Does not work with
 <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, <code class="docutils literal notranslate"><span class="pre">Infinity</span></code>, <code class="docutils literal notranslate"><span class="pre">+0</span></code>, <code class="docutils literal notranslate"><span class="pre">-0</span></code>, etc. Serializes as a string with 18 points of
@@ -268,7 +268,7 @@ decimal precision.</p>
 </dl>
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">addend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs addition. <code class="docutils literal notranslate"><span class="pre">addend</span></code> is first converted into Dec.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -285,7 +285,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.div">
-<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.div" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">div</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.div" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs division. <code class="docutils literal notranslate"><span class="pre">divisor</span></code> is first converted into Dec.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -305,7 +305,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.frac">
-<em class="property">property </em><code class="sig-name descname">frac</code><a class="headerlink" href="#terra_sdk.core.Dec.frac" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">frac</span></code><a class="headerlink" href="#terra_sdk.core.Dec.frac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the fractional part of the Dec value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -319,7 +319,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.from_data">
-<em class="property">classmethod </em><code class="sig-name descname">from_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.from_data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.from_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts Dec-formatted string into proper <a class="reference internal" href="#terra_sdk.core.Dec" title="terra_sdk.core.Dec"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dec</span></code></a> object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -330,7 +330,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.ge">
-<code class="sig-name descname">ge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.ge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.ge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">ge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.ge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.ge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check greater than or equal to.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -344,7 +344,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.gt">
-<code class="sig-name descname">gt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.gt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.gt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gt</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.gt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.gt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check greater than.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -358,7 +358,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.le">
-<code class="sig-name descname">le</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.le"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.le" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">le</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.le"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.le" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check less than or equal to.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -372,7 +372,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.lt">
-<code class="sig-name descname">lt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.lt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.lt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">lt</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.lt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.lt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check less than.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -386,7 +386,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.mod">
-<code class="sig-name descname">mod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modulo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.mod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.mod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mod</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modulo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.mod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs modulus. <code class="docutils literal notranslate"><span class="pre">modulo</span></code> is first converted into Dec.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -403,7 +403,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.mul">
-<code class="sig-name descname">mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">multiplier</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.mul" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mul</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiplier</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.mul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.mul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs multiplication. <code class="docutils literal notranslate"><span class="pre">multiplier</span></code> is first converted into Dec.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -420,7 +420,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.one">
-<em class="property">classmethod </em><code class="sig-name descname">one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.one" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">one</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.one" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dec representation of one.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -434,7 +434,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.parity">
-<em class="property">property </em><code class="sig-name descname">parity</code><a class="headerlink" href="#terra_sdk.core.Dec.parity" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">parity</span></code><a class="headerlink" href="#terra_sdk.core.Dec.parity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the parity of the Dec value. Returns -1 if value is below 0, and 1 otherwise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -448,7 +448,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.sub">
-<code class="sig-name descname">sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subtrahend</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.sub" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sub</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtrahend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.sub"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.sub" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs subtraction. <code class="docutils literal notranslate"><span class="pre">subtrahend</span></code> is first converted into Dec.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -465,7 +465,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the object to its JSON-serializable Python data representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -476,7 +476,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.to_short_str">
-<code class="sig-name descname">to_short_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.to_short_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.to_short_str" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_short_str</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.to_short_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.to_short_str" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts to a string, but truncates all unnecessary zeros.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -490,7 +490,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.whole">
-<em class="property">property </em><code class="sig-name descname">whole</code><a class="headerlink" href="#terra_sdk.core.Dec.whole" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">whole</span></code><a class="headerlink" href="#terra_sdk.core.Dec.whole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the integral part of the Dec value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -504,7 +504,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.with_prec">
-<em class="property">classmethod </em><code class="sig-name descname">with_prec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">prec</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.with_prec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.with_prec" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">with_prec</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.with_prec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.with_prec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replicates Cosmos SDK’s <code class="docutils literal notranslate"><span class="pre">Dec.withPreic(i,</span> <span class="pre">prec)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -524,7 +524,7 @@ decimal precision.</p>
 
 <dl class="py method">
 <dt id="terra_sdk.core.Dec.zero">
-<em class="property">classmethod </em><code class="sig-name descname">zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.Dec.zero" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">zero</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/numeric.html#Dec.zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.Dec.zero" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dec representation of zero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

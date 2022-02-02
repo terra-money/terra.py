@@ -35,7 +35,7 @@ This can be done through setting up an LCDClient:
 
     from terra_sdk.client.lcd import LCDClient
 
-    terra = LCDClient(chain_id="columbus-4", url="https://lcd.terra.dev")
+    terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
     print(terra.tendermint.node_info())
 
 

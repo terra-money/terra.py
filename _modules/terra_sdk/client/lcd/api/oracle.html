@@ -193,8 +193,6 @@
 <span class="kn">from</span> <span class="nn">terra_sdk.core.oracle</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">AggregateExchangeRatePrevote</span><span class="p">,</span>
     <span class="n">AggregateExchangeRateVote</span><span class="p">,</span>
-    <span class="n">ExchangeRatePrevote</span><span class="p">,</span>
-    <span class="n">ExchangeRateVote</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.exceptions</span> <span class="kn">import</span> <span class="n">LCDResponseError</span>
 
@@ -204,60 +202,6 @@
 
 
 <span class="k">class</span> <span class="nc">AsyncOracleAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">prevotes</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Fetches active oracle prevotes, filtering by denom, or validator, or both.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            denom (Optional[str], optional): denom.</span>
-<span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            TypeError: if both ``denom`` and ``validator`` are ``None``</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            List[ExchangeRatePrevote]: prevotes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/prevotes/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>
-        <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/prevotes&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/prevotes&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;both denom and validator cannot both be None&quot;</span><span class="p">)</span>
-
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRateVote</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Fetches active oracle votes, filtering by denom, or validator, or both.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            denom (Optional[str], optional): denom.</span>
-<span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            TypeError: if both ``denom`` and ``validator`` are ``None``</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            List[ExchangeRateVote]: votes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/votes/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>
-        <span class="k">elif</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/voters/</span><span class="si">{</span><span class="n">validator</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">denom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/oracle/denoms/</span><span class="si">{</span><span class="n">denom</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">ExchangeRateVote</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;both denom and validator cannot both be None&quot;</span><span class="p">)</span>
-
     <span class="k">async</span> <span class="k">def</span> <span class="nf">exchange_rates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Fetches registered exchange rates of Luna in all available denoms.</span>
 
@@ -279,8 +223,11 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Coin: exchange rate of Luna</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rates</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">exchange_rates</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">rates</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span>
+        <span class="n">rates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exchange_rates</span><span class="p">()</span>
+        <span class="c1"># Types ignored to ensure await isn&#39;t called on non-coroutine in sync version</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">rates</span><span class="p">)</span> <span class="o">!=</span> <span class="n">Coins</span><span class="p">:</span>
+            <span class="n">rates</span> <span class="o">=</span> <span class="k">await</span> <span class="n">rates</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">rates</span><span class="p">[</span><span class="n">denom</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">active_denoms</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Fetches current active denoms.</span>
@@ -362,22 +309,6 @@
 
 
 <div class="viewcode-block" id="OracleAPI"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI">[docs]</a><span class="k">class</span> <span class="nc">OracleAPI</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="p">):</span>
-<div class="viewcode-block" id="OracleAPI.prevotes"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.prevotes">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">prevotes</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">prevotes</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRatePrevote</span><span class="p">]:</span>
-        <span class="k">pass</span></div>
-
-    <span class="n">prevotes</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">prevotes</span><span class="o">.</span><span class="vm">__doc__</span>
-
-<div class="viewcode-block" id="OracleAPI.votes"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.votes">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">votes</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">denom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValAddress</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ExchangeRateVote</span><span class="p">]:</span>
-        <span class="k">pass</span></div>
-
-    <span class="n">votes</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">votes</span><span class="o">.</span><span class="vm">__doc__</span>
-
 <div class="viewcode-block" id="OracleAPI.exchange_rates"><a class="viewcode-back" href="../../../../../core_modules/oracle.html#terra_sdk.client.lcd.api.oracle.OracleAPI.exchange_rates">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncOracleAPI</span><span class="o">.</span><span class="n">exchange_rates</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">exchange_rates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
         <span class="k">pass</span></div>

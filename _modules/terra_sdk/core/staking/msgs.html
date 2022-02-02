@@ -304,8 +304,8 @@
     <span class="sd">&quot;&quot;&quot;Revise validator description and configuration.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        Description: updated validator description</span>
-<span class="sd">        address: validator operator address</span>
+<span class="sd">        description: updated validator description</span>
+<span class="sd">        validator_address: validator operator address</span>
 <span class="sd">        commission_rates: new validator commission rate,</span>
 <span class="sd">        min_self_delegation: new minimum self delegation,</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -315,8 +315,8 @@
     <span class="n">action</span> <span class="o">=</span> <span class="s2">&quot;edit_validator&quot;</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-    <span class="n">Description</span><span class="p">:</span> <span class="n">Description</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="n">address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Description</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">validator_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">commission_rate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dec</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">min_self_delegation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
@@ -326,8 +326,8 @@
         <span class="n">msd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;min_self_delegation&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;min_self_delegation&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="n">cr</span> <span class="o">=</span> <span class="n">Dec</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;commission_rate&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;commission_rate&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">Description</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Description&quot;</span><span class="p">],</span>
-            <span class="n">address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;address&quot;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+            <span class="n">validator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator_address&quot;</span><span class="p">],</span>
             <span class="n">commission_rate</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
             <span class="n">min_self_delegation</span><span class="o">=</span><span class="n">msd</span><span class="p">,</span>
         <span class="p">)</span></div>

@@ -201,10 +201,10 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.api.msgauth.MsgAuthAPI">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.msgauth.</code><code class="sig-name descname">MsgAuthAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/msgauth.html#MsgAuthAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.msgauth.</span></code><code class="sig-name descname"><span class="pre">MsgAuthAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/msgauth.html#MsgAuthAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt id="terra_sdk.client.lcd.api.msgauth.MsgAuthAPI.grants">
-<code class="sig-name descname">grants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">granter</span></em>, <em class="sig-param"><span class="n">grantee</span></em>, <em class="sig-param"><span class="n">msg_type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/msgauth.html#MsgAuthAPI.grants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI.grants" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">grants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">granter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grantee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/msgauth.html#MsgAuthAPI.grants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.msgauth.MsgAuthAPI.grants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches current active message authorization grants.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -231,23 +231,23 @@
 <p>MsgAuth module data types.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.data.Authorization">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.data.</code><code class="sig-name descname">Authorization</code><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#Authorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.Authorization" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.data.</span></code><code class="sig-name descname"><span class="pre">Authorization</span></code><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#Authorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.Authorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for authorization types.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.data.AuthorizationGrant">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.data.</code><code class="sig-name descname">AuthorizationGrant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">authorization</span></em>, <em class="sig-param"><span class="n">expiration</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#AuthorizationGrant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.data.</span></code><code class="sig-name descname"><span class="pre">AuthorizationGrant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">authorization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#AuthorizationGrant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains information about an existing granted authorization between two users.</p>
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.data.AuthorizationGrant.authorization">
-<code class="sig-name descname">authorization</code><em class="property">: <a class="reference internal" href="#terra_sdk.core.msgauth.data.Authorization" title="terra_sdk.core.msgauth.data.Authorization">terra_sdk.core.msgauth.data.Authorization</a></em><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant.authorization" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">authorization</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#terra_sdk.core.msgauth.data.Authorization" title="terra_sdk.core.msgauth.data.Authorization"><span class="pre">terra_sdk.core.msgauth.data.Authorization</span></a></em><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant.authorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grant authorization details.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.data.AuthorizationGrant.expiration">
-<code class="sig-name descname">expiration</code><em class="property">: str</em><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant.expiration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">expiration</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.core.msgauth.data.AuthorizationGrant.expiration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grant expiration.</p>
 </dd></dl>
 
@@ -255,7 +255,7 @@
 
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.data.GenericAuthorization">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.data.</code><code class="sig-name descname">GenericAuthorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grant_msg_type</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#GenericAuthorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.GenericAuthorization" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.data.</span></code><code class="sig-name descname"><span class="pre">GenericAuthorization</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grant_msg_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#GenericAuthorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.GenericAuthorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic type of <a class="reference internal" href="#terra_sdk.core.msgauth.data.Authorization" title="terra_sdk.core.msgauth.data.Authorization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Authorization</span></code></a>, specifying the type of message to allow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -264,14 +264,14 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.data.GenericAuthorization.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'msgauth/GenericAuthorization'</em><a class="headerlink" href="#terra_sdk.core.msgauth.data.GenericAuthorization.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'msgauth/GenericAuthorization'</span></em><a class="headerlink" href="#terra_sdk.core.msgauth.data.GenericAuthorization.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.data.SendAuthorization">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.data.</code><code class="sig-name descname">SendAuthorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spend_limit</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#SendAuthorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.SendAuthorization" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.data.</span></code><code class="sig-name descname"><span class="pre">SendAuthorization</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spend_limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/data.html#SendAuthorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.data.SendAuthorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Type of <a class="reference internal" href="#terra_sdk.core.msgauth.data.Authorization" title="terra_sdk.core.msgauth.data.Authorization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Authorization</span></code></a> for <a class="reference internal" href="bank.html#terra_sdk.core.bank.msgs.MsgSend" title="terra_sdk.core.bank.msgs.MsgSend"><code class="xref py py-class docutils literal notranslate"><span class="pre">MsgSend</span></code></a>,
 which can be parameterized by setting a <code class="docutils literal notranslate"><span class="pre">spend_limit</span></code> allowance for the grantee.</p>
 <dl class="field-list simple">
@@ -281,7 +281,7 @@ which can be parameterized by setting a <code class="docutils literal notranslat
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.data.SendAuthorization.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'msgauth/SendAuthorization'</em><a class="headerlink" href="#terra_sdk.core.msgauth.data.SendAuthorization.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'msgauth/SendAuthorization'</span></em><a class="headerlink" href="#terra_sdk.core.msgauth.data.SendAuthorization.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -292,7 +292,7 @@ which can be parameterized by setting a <code class="docutils literal notranslat
 <p>MsgAuth module message types.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.msgs.MsgExecAuthorized">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.msgs.</code><code class="sig-name descname">MsgExecAuthorized</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grantee</span></em>, <em class="sig-param"><span class="n">msgs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgExecAuthorized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgExecAuthorized" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgExecAuthorized</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grantee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msgs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgExecAuthorized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgExecAuthorized" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a set of messages, exercising an existing authorization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -304,54 +304,42 @@ which can be parameterized by setting a <code class="docutils literal notranslat
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.msgs.MsgExecAuthorized.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'msgauth/MsgExecAuthorized'</em><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgExecAuthorized.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'msgauth/MsgExecAuthorized'</span></em><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgExecAuthorized.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.msgs.MsgGrantAuthorization">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.msgs.</code><code class="sig-name descname">MsgGrantAuthorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">granter</span></em>, <em class="sig-param"><span class="n">grantee</span></em>, <em class="sig-param"><span class="n">authorization</span></em>, <em class="sig-param"><span class="n">period</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgGrantAuthorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgGrantAuthorization" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgGrantAuthorization</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">granter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grantee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grant</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgGrantAuthorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgGrantAuthorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grant an authorization to <code class="docutils literal notranslate"><span class="pre">grantee</span></code> to call messages on behalf of <code class="docutils literal notranslate"><span class="pre">granter</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>granter</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account giving authorization</p></li>
+<li><p><strong>granter</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account granting authorization</p></li>
 <li><p><strong>grantee</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account receiving authorization</p></li>
-<li><p><strong>authorization</strong> (<a class="reference internal" href="#terra_sdk.core.msgauth.data.Authorization" title="terra_sdk.core.msgauth.data.Authorization"><em>Authorization</em></a>) – details of authorization granted</p></li>
-<li><p><strong>period</strong> (<em>int</em>) – timeframe during which the authorization is considered valid</p></li>
+<li><p><strong>grant</strong> (<em>Grant</em>) – pair of authorization, expiration</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="terra_sdk.core.msgauth.msgs.MsgGrantAuthorization.to_data">
-<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgGrantAuthorization.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgGrantAuthorization.to_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts the object to its JSON-serializable Python data representation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.msgauth.msgs.</code><code class="sig-name descname">MsgRevokeAuthorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">granter</span></em>, <em class="sig-param"><span class="n">grantee</span></em>, <em class="sig-param"><span class="n">authorization_msg_type</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgRevokeAuthorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.msgauth.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgRevokeAuthorization</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">granter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grantee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type_url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/msgauth/msgs.html#MsgRevokeAuthorization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove existing authorization grant of the specified message type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>granter</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account removing authorization</p></li>
 <li><p><strong>grantee</strong> (<a class="reference internal" href="../common/strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress"><em>AccAddress</em></a>) – account having authorization removed</p></li>
-<li><p><strong>authorization_msg_type</strong> (<em>str</em>) – type of message to remove authorization for</p></li>
+<li><p><strong>msg_type_url</strong> (<em>str</em>) – type of message to remove authorization for</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'msgauth/MsgRevokeAuthorization'</em><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'msgauth/MsgRevokeAuthorization'</span></em><a class="headerlink" href="#terra_sdk.core.msgauth.msgs.MsgRevokeAuthorization.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

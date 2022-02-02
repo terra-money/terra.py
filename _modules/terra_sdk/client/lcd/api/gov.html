@@ -197,13 +197,16 @@
 
 
 <span class="k">class</span> <span class="nc">AsyncGovAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Proposal</span><span class="p">]:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Proposal</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Fetches all proposals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            options (dict, optional): dictionary containing options. Defaults to {}.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[Proposal]: proposals</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/gov/proposals&quot;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/gov/proposals&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">Proposal</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Proposal</span><span class="p">:</span>

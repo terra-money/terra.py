@@ -205,25 +205,28 @@
 <span class="p">]</span>
 
 
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">DelegationInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="n">delegator_address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">validator_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">shares</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Dec</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="Delegation"><a class="viewcode-back" href="../../../../../core_modules/staking.html#terra_sdk.core.staking.data.delegation.Delegation">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
 <span class="k">class</span> <span class="nc">Delegation</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Contains information about a current delegation pair (``delegator_address``, ``validator_address``)&quot;&quot;&quot;</span>
 
-    <span class="n">delegator_address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">validator_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">shares</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Dec</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+    <span class="n">delegation</span><span class="p">:</span> <span class="n">DelegationInfo</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="n">balance</span><span class="p">:</span> <span class="n">Coin</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coin</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Delegation</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">delegator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;delegator_address&quot;</span><span class="p">],</span>
-            <span class="n">validator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator_address&quot;</span><span class="p">],</span>
-            <span class="n">shares</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;shares&quot;</span><span class="p">],</span>
+            <span class="n">delegation</span><span class="o">=</span><span class="n">DelegationInfo</span><span class="p">(</span>
+                <span class="n">delegator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;delegation&quot;</span><span class="p">][</span><span class="s2">&quot;delegator_address&quot;</span><span class="p">],</span>
+                <span class="n">validator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;delegation&quot;</span><span class="p">][</span><span class="s2">&quot;validator_address&quot;</span><span class="p">],</span>
+                <span class="n">shares</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;delegation&quot;</span><span class="p">][</span><span class="s2">&quot;shares&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
             <span class="n">balance</span><span class="o">=</span><span class="n">Coin</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;balance&quot;</span><span class="p">]),</span>
         <span class="p">)</span></div>
 
@@ -280,13 +283,9 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RedelegationEntry"><a class="viewcode-back" href="../../../../../core_modules/staking.html#terra_sdk.core.staking.data.delegation.RedelegationEntry">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
-<span class="k">class</span> <span class="nc">RedelegationEntry</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Contains information about an active redelegated lot of Luna.&quot;&quot;&quot;</span>
-
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">RedelegationEntryInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
     <span class="n">initial_balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="n">shares_dst</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Dec</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
@@ -295,35 +294,55 @@
     <span class="n">completion_time</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
+
+<div class="viewcode-block" id="RedelegationEntry"><a class="viewcode-back" href="../../../../../core_modules/staking.html#terra_sdk.core.staking.data.delegation.RedelegationEntry">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">RedelegationEntry</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Contains information about an active redelegated lot of Luna.&quot;&quot;&quot;</span>
+
+    <span class="n">redelegation_entry</span><span class="p">:</span> <span class="n">RedelegationEntryInfo</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+    <span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="RedelegationEntry.to_data"><a class="viewcode-back" href="../../../../../core_modules/staking.html#terra_sdk.core.staking.data.delegation.RedelegationEntry.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;creation_height&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">creation_height</span><span class="p">,</span>
-            <span class="s2">&quot;completion_time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">completion_time</span><span class="p">,</span>
-            <span class="s2">&quot;initial_balance&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_balance</span><span class="p">),</span>
+            <span class="s2">&quot;redelegation_entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;initial_balance&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redelegation_entry</span><span class="o">.</span><span class="n">initial_balance</span><span class="p">),</span>
+                <span class="s2">&quot;shares_dst&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redelegation_entry</span><span class="o">.</span><span class="n">shares_dst</span><span class="p">),</span>
+                <span class="s2">&quot;creation_height&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">redelegation_entry</span><span class="o">.</span><span class="n">creation_height</span><span class="p">,</span>
+                <span class="s2">&quot;completion_time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">redelegation_entry</span><span class="o">.</span><span class="n">completion_time</span><span class="p">,</span>
+            <span class="p">},</span>
             <span class="s2">&quot;balance&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">),</span>
-            <span class="s2">&quot;shares_dst&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shares_dst</span><span class="p">),</span>
         <span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RedelegationEntry</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">initial_balance</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;initial_balance&quot;</span><span class="p">],</span>
+            <span class="n">redelegation_entry</span><span class="o">=</span><span class="n">RedelegationEntryInfo</span><span class="p">(</span>
+                <span class="n">initial_balance</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation_entry&quot;</span><span class="p">][</span><span class="s2">&quot;initial_balance&quot;</span><span class="p">],</span>
+                <span class="n">shares_dst</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation_entry&quot;</span><span class="p">][</span><span class="s2">&quot;shares_dst&quot;</span><span class="p">],</span>
+                <span class="n">creation_height</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation_entry&quot;</span><span class="p">][</span><span class="s2">&quot;creation_height&quot;</span><span class="p">]),</span>
+                <span class="n">completion_time</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation_entry&quot;</span><span class="p">][</span><span class="s2">&quot;completion_time&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
             <span class="n">balance</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;balance&quot;</span><span class="p">],</span>
-            <span class="n">shares_dst</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;shares_dst&quot;</span><span class="p">],</span>
-            <span class="n">creation_height</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;creation_height&quot;</span><span class="p">]),</span>
-            <span class="n">completion_time</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;completion_time&quot;</span><span class="p">],</span>
         <span class="p">)</span></div>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">RedelegationInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="n">delegator_address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+    <span class="n">validator_src_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+    <span class="n">validator_dst_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="Redelegation"><a class="viewcode-back" href="../../../../../core_modules/staking.html#terra_sdk.core.staking.data.delegation.Redelegation">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
 <span class="k">class</span> <span class="nc">Redelegation</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Contains informations about a redelgation for delegation tuple (``delegator_address``, ``validator_src_address``, ``validator_dst_address``)&quot;&quot;&quot;</span>
 
-    <span class="n">delegator_address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">validator_src_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">validator_dst_address</span><span class="p">:</span> <span class="n">ValAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">redelegation</span><span class="p">:</span> <span class="n">RedelegationInfo</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="n">entries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RedelegationEntry</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
@@ -332,9 +351,11 @@
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Redelegation</span><span class="p">:</span>
         <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="n">RedelegationEntry</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">re</span><span class="p">)</span> <span class="k">for</span> <span class="n">re</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;entries&quot;</span><span class="p">]]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">delegator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;delegator_address&quot;</span><span class="p">],</span>
-            <span class="n">validator_src_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator_src_address&quot;</span><span class="p">],</span>
-            <span class="n">validator_dst_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;validator_dst_address&quot;</span><span class="p">],</span>
+            <span class="n">redelegation</span><span class="o">=</span><span class="n">RedelegationInfo</span><span class="p">(</span>
+                <span class="n">delegator_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation&quot;</span><span class="p">][</span><span class="s2">&quot;delegator_address&quot;</span><span class="p">],</span>
+                <span class="n">validator_src_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation&quot;</span><span class="p">][</span><span class="s2">&quot;validator_src_address&quot;</span><span class="p">],</span>
+                <span class="n">validator_dst_address</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;redelegation&quot;</span><span class="p">][</span><span class="s2">&quot;validator_dst_address&quot;</span><span class="p">],</span>
+            <span class="p">),</span>
             <span class="n">entries</span><span class="o">=</span><span class="n">entries</span><span class="p">,</span>
         <span class="p">)</span></div>
 </pre></div>

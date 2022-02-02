@@ -267,7 +267,7 @@
     <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthorizationGrant</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">authorization</span><span class="o">=</span><span class="n">Authorization</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;authorization&quot;</span><span class="p">]),</span>
-            <span class="n">expiration</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">],</span>
+            <span class="n">expiration</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration&quot;</span><span class="p">]),</span>
         <span class="p">)</span></div>
 </pre></div>
 

@@ -10,8 +10,7 @@ Introduction
     :align: center
     
 
-Welcome to the official documentation for the Python version of the Terra SDK. The Terra SDK
-is a simple library toolkit for building software that can interacts with the Terra blockchain. 
+Welcome to the official documentation for the Terra Python SDK, a simple library toolkit for building software that interacts with the Terra blockchain. 
 
 Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
 

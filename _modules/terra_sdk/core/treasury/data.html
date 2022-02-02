@@ -210,7 +210,7 @@
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="n">cap</span><span class="p">:</span> <span class="n">Coin</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-    <span class="n">change_max</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">change_rate_max</span><span class="p">:</span> <span class="n">Dec</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PolicyConstraints.clamp"><a class="viewcode-back" href="../../../../core_modules/treasury.html#terra_sdk.core.treasury.data.PolicyConstraints.clamp">[docs]</a>    <span class="k">def</span> <span class="nf">clamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_rate</span><span class="p">:</span> <span class="n">Dec</span><span class="p">,</span> <span class="n">new_rate</span><span class="p">:</span> <span class="n">Dec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dec</span><span class="p">:</span>
@@ -233,11 +233,11 @@
 
         <span class="n">delta</span> <span class="o">=</span> <span class="n">new_rate</span> <span class="o">-</span> <span class="n">prev_rate</span>
         <span class="k">if</span> <span class="n">new_rate</span> <span class="o">&gt;</span> <span class="n">prev_rate</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_max</span><span class="p">:</span>
-                <span class="n">new_rate</span> <span class="o">=</span> <span class="n">prev_rate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_max</span>
+            <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_rate_max</span><span class="p">:</span>
+                <span class="n">new_rate</span> <span class="o">=</span> <span class="n">prev_rate</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_rate_max</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_max</span><span class="p">:</span>
-                <span class="n">new_rate</span> <span class="o">=</span> <span class="n">prev_rate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_max</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_rate_max</span><span class="p">:</span>
+                <span class="n">new_rate</span> <span class="o">=</span> <span class="n">prev_rate</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_rate_max</span>
         <span class="k">return</span> <span class="n">new_rate</span></div>
 
     <span class="nd">@classmethod</span>
@@ -246,7 +246,7 @@
             <span class="n">rate_min</span><span class="o">=</span><span class="n">Dec</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rate_min&quot;</span><span class="p">]),</span>
             <span class="n">rate_max</span><span class="o">=</span><span class="n">Dec</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rate_max&quot;</span><span class="p">]),</span>
             <span class="n">cap</span><span class="o">=</span><span class="n">Coin</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;cap&quot;</span><span class="p">]),</span>
-            <span class="n">change_max</span><span class="o">=</span><span class="n">Dec</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;change_max&quot;</span><span class="p">]),</span>
+            <span class="n">change_rate_max</span><span class="o">=</span><span class="n">Dec</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;change_rate_max&quot;</span><span class="p">]),</span>
         <span class="p">)</span></div>
 </pre></div>
 

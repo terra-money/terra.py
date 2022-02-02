@@ -339,7 +339,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            subtrahend (Union[Coin, Coins]): subtrahend</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subtrahend</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtrahend</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Coin</span><span class="p">,</span> <span class="n">Coins</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coins</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">subtrahend</span><span class="p">)</span>

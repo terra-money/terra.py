@@ -200,10 +200,10 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.api.slashing.SlashingAPI">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.slashing.</code><code class="sig-name descname">SlashingAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.slashing.</span></code><code class="sig-name descname"><span class="pre">SlashingAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt id="terra_sdk.client.lcd.api.slashing.SlashingAPI.parameters">
-<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">parameters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI.parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI.parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches Slashing module parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -217,7 +217,7 @@
 
 <dl class="py method">
 <dt id="terra_sdk.client.lcd.api.slashing.SlashingAPI.signing_infos">
-<code class="sig-name descname">signing_infos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val_cons_pub_key</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI.signing_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI.signing_infos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">signing_infos</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val_cons_pub_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI.signing_infos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI.signing_infos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches signing infos, optionally filtering by validator consensus public key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,7 +240,7 @@
 <p>Slashing module messages types.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.slashing.msgs.MsgUnjail">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.slashing.msgs.</code><code class="sig-name descname">MsgUnjail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/slashing/msgs.html#MsgUnjail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.slashing.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgUnjail</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/slashing/msgs.html#MsgUnjail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempt to unjail a jailed validator (must be submitted by same validator).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -249,12 +249,12 @@
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.slashing.msgs.MsgUnjail.action">
-<code class="sig-name descname">action</code><em class="property"> = 'unjail'</em><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'unjail'</span></em><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.slashing.msgs.MsgUnjail.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'slashing/MsgUnjail'</em><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'slashing/MsgUnjail'</span></em><a class="headerlink" href="#terra_sdk.core.slashing.msgs.MsgUnjail.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

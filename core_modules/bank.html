@@ -200,10 +200,10 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="terra_sdk.client.lcd.api.bank.BankAPI">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.client.lcd.api.bank.</code><code class="sig-name descname">BankAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.bank.</span></code><code class="sig-name descname"><span class="pre">BankAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py method">
 <dt id="terra_sdk.client.lcd.api.bank.BankAPI.balance">
-<code class="sig-name descname">balance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI.balance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI.balance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">balance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/bank.html#BankAPI.balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.bank.BankAPI.balance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches an account’s current balance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,7 +226,7 @@
 <p>Bank module message types.</p>
 <dl class="py class">
 <dt id="terra_sdk.core.bank.msgs.MsgMultiSend">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MsgMultiSend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputs</span></em>, <em class="sig-param"><span class="n">outputs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgMultiSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.bank.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgMultiSend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgMultiSend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows batch-sending between multiple source and destination addresses.
 The total amount of coins in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> must match <code class="docutils literal notranslate"><span class="pre">outputs</span></code>. The transaction
 containing <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code> must contain signatures from all addresses used as inputs.</p>
@@ -251,19 +251,19 @@ containing <code class="docutils literal notranslate"><span class="pre">MsgMulti
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MsgMultiSend.action">
-<code class="sig-name descname">action</code><em class="property"> = 'multisend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'multisend'</span></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MsgMultiSend.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'bank/MsgMultiSend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'bank/MsgMultiSend'</span></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgMultiSend.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.bank.msgs.MsgSend">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MsgSend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">from_address</span></em>, <em class="sig-param"><span class="n">to_address</span></em>, <em class="sig-param"><span class="n">amount</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgSend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.bank.msgs.</span></code><code class="sig-name descname"><span class="pre">MsgSend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MsgSend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sends native Terra assets (Luna or Terra stablecoins) from <code class="docutils literal notranslate"><span class="pre">from_address</span></code> to
 <code class="docutils literal notranslate"><span class="pre">to_address</span></code>.</p>
 <dl class="field-list simple">
@@ -277,19 +277,19 @@ containing <code class="docutils literal notranslate"><span class="pre">MsgMulti
 </dl>
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MsgSend.action">
-<code class="sig-name descname">action</code><em class="property"> = 'send'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">action</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'send'</span></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.action" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MsgSend.type">
-<code class="sig-name descname">type</code><em class="property">: str</em><em class="property"> = 'bank/MsgSend'</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'bank/MsgSend'</span></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MsgSend.type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="terra_sdk.core.bank.msgs.MultiSendIO">
-<em class="property">class </em><code class="sig-prename descclassname">terra_sdk.core.bank.msgs.</code><code class="sig-name descname">MultiSendIO</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">coins</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MultiSendIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.core.bank.msgs.</span></code><code class="sig-name descname"><span class="pre">MultiSendIO</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MultiSendIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
 format:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -300,13 +300,13 @@ format:</p>
 </div>
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MultiSendIO.address">
-<code class="sig-name descname">address</code><em class="property">: AccAddress</em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO.address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">address</span></code><em class="property"><span class="pre">:</span> <span class="pre">AccAddress</span></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO.address" title="Permalink to this definition">¶</a></dt>
 <dd><p>Input / output address.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="terra_sdk.core.bank.msgs.MultiSendIO.coins">
-<code class="sig-name descname">coins</code><em class="property">: <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins">terra_sdk.core.coins.Coins</a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO.coins" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">coins</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><span class="pre">terra_sdk.core.coins.Coins</span></a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendIO.coins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coins to be sent / received.</p>
 </dd></dl>
 
