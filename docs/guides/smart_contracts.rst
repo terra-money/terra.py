@@ -12,6 +12,7 @@ Contract Deployment Example
     from terra_sdk.client.localterra import LocalTerra
     from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract    
     from terra_sdk.core.auth.data.tx import StdFee
+    from terra_sdk.core import Coins
     
     terra = LocalTerra()
     test1 = terra.wallets["test1"]
@@ -25,10 +26,10 @@ Contract Deployment Example
     code_id = store_code_tx_result.logs[0].events_by_type["store_code"]["code_id"][0]
     instantiate = MsgInstantiateContract(
         test1.key.acc_address,
+        test1.key.acc_address,
         code_id,
         {"count": 0},
         {"uluna": 10000000, "ukrw": 1000000},
-        False,
     )
     instantiate_tx = test1.create_and_sign_tx(msgs=[instantiate])
     instantiate_tx_result = terra.tx.broadcast(instantiate_tx)
