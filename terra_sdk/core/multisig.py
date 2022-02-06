@@ -2,17 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import List
 
 import attr
-from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
 
 from terra_sdk.core import SignatureV2
-from terra_sdk.core.bech32 import AccAddress
-from terra_sdk.core.coins import Coins
 from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
-from terra_sdk.core.signature_v2 import Descriptor, Multi as MultiDescriptor
-from terra_sdk.core.tx import CompactBitArray
+from terra_sdk.core.signature_v2 import Descriptor, Single as SingleDescriptor, Multi as MultiDescriptor
+from terra_sdk.core.compact_bit_array import CompactBitArray
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["MultiSignature"]
@@ -45,8 +42,8 @@ class MultiSignature(JSONSerializable):
         self.signatures.insert(new_idx, signature_data)
 
     def append_signature_from_pubkey(self, signature_data: Descriptor, public_key: SimplePublicKey):
-        index = -1
-        for i, v in self.multisig_pubkey.public_keys:
+        index = 0
+        for i, v in enumerate(self.multisig_pubkey.public_keys):
             if v.key == public_key.key:
                 index = i
                 break
@@ -62,5 +59,5 @@ class MultiSignature(JSONSerializable):
 
     def to_signature_descriptor(self) -> Descriptor:
         return Descriptor(
-            MultiDescriptor(bitarray=self.bitarray, signatures=self.signatures)
+            multi=MultiDescriptor(bitarray=self.bitarray, signatures=self.signatures)
         )

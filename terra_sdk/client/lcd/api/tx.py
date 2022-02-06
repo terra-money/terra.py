@@ -54,7 +54,7 @@ class CreateTxOptions:
     fee: Optional[Fee] = attr.ib(default=None)
     memo: Optional[str] = attr.ib(default=None)
     gas: Optional[str] = attr.ib(default=None)
-    gas_prices: Optional[Coins] = attr.ib(default=None)
+    gas_prices: Optional[Coins.Input] = attr.ib(default=None)
     gas_adjustment: Optional[Numeric.Output] = attr.ib(
         default=1, converter=Numeric.parse
     )
@@ -162,7 +162,7 @@ class AsyncTxAPI(BaseAsyncAPI):
                 if seq is None:
                     seq = acc.get_sequence()
                 if pubkey is None:
-                    pubkey = acc.get_pubkey()
+                    pubkey = acc.get_public_key()
             signerData.append(SignerData(seq, pubkey))
 
         # create the fake fee
@@ -233,8 +233,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         simulated = SimulateResponse.from_data(res)
 
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
-
-
 
     # TODO: deprecate
     async def compute_tax(self, tx: Tx) -> Coins:

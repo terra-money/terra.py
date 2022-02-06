@@ -12,10 +12,12 @@ __all__ = [
     "ValConsPubKey",
     "ValPubKey",
     "SignDoc",
+    "CompactBitArray",
     "SignatureV2",
     "MultiSignature",
     "Tx",
-    "TxInfo"
+    "TxInfo",
+    "TxLog"
 ]
 
 from .bech32 import AccAddress, AccPubKey, ValAddress, ValPubKey
@@ -26,4 +28,5 @@ from .public_key import PublicKey, SimplePublicKey, ValConsPubKey, LegacyAminoMu
 from .sign_doc import SignDoc
 from .signature_v2 import SignatureV2
 from .multisig import MultiSignature
-from .tx import Tx, TxInfo
+from .tx import Tx, TxInfo, TxLog, ModeInfo, ModeInfoSingle, ModeInfoMulti
+from .compact_bit_array import CompactBitArray

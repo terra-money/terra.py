@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 import attr
 from terra_proto.cosmos.tx.v1beta1 import SignDoc as SignDoc_pb
 
@@ -71,3 +73,6 @@ class SignDoc(JSONSerializable):
 
     def to_bytes(self) -> bytes:
         return bytes(self.to_proto())
+
+    def to_amino_json(self) -> bytes:
+        return bytes(json.dumps(self.to_amino(), sort_keys=True, separators=(",", ":")), 'utf-8')  # FIXME

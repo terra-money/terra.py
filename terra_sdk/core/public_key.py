@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import base64
 import hashlib
-import binascii
 from abc import ABC, abstractmethod
-from typing import List, Optional, Union
+from typing import List, Union
 
 import attr
 
@@ -13,7 +12,6 @@ from terra_proto.cosmos.crypto.ed25519 import PubKey as ValConsPubKey_pb
 from terra_proto.cosmos.crypto.multisig import LegacyAminoPubKey as LegacyAminoPubKey_pb
 from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
 
-from . import bech32
 from .bech32 import get_bech
 from terra_sdk.util.json import JSONSerializable
 
@@ -117,7 +115,7 @@ class SimplePublicKey(PublicKey):
         return cls(key=data["key"])
 
     def to_proto(self) -> SimplePubKey_pb:
-        return SimplePubKey_pb(key=bytes(self.key))
+        return SimplePubKey_pb(key=self.key)
 
     def get_type(self) -> str:
         return self.type_url
@@ -126,7 +124,9 @@ class SimplePublicKey(PublicKey):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     def encode_amino_pubkey(self) -> bytearray:
-        return bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1) + bytearray(self.key)
+        out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1) + bytearray(self.key)
+        # print("simplepubkey.encodeamino:{}".format(list(out)))
+        return out
 
     def raw_address(self) -> str:
         return address_from_public_key(self.key)
@@ -213,7 +213,8 @@ class LegacyAminoMultisigPublicKey(PublicKey):
 
     def to_proto(self) -> LegacyAminoPubKey_pb:
         return LegacyAminoPubKey_pb(
-            threshold=self.threshold, public_keys=self.public_keys
+            threshold=self.threshold,
+            public_keys=[pk.pack_any() for pk in self.public_keys]
         )
 
     def encode_amino_pubkey(self) -> bytearray:
@@ -226,6 +227,7 @@ class LegacyAminoMultisigPublicKey(PublicKey):
             out.append(0x12)
             out += bytearray(encode_uvarint(len(pkData)))
             out += pkData
+        # print("multi.encodeamino:{}".format(list(out)))
         return out
 
     def pack_any(self) -> Any_pb:
@@ -243,4 +245,4 @@ class LegacyAminoMultisigPublicKey(PublicKey):
 
     def pubkey_address(self) -> str:
         #return bech32.bech32_encode('terrapub', bech32.convertbits(bytes(self.raw_address()), 8, 5))
-        return get_bech("terrapub", self.encode_amino_pubkey())
+        return get_bech("terrapub", str(self.encode_amino_pubkey()))

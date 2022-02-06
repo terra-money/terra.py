@@ -146,7 +146,7 @@ class Key:
             data=Descriptor(
                 SingleDescriptor(
                     mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-                    signature=(self.sign(signDoc.to_amino())),
+                    signature=(self.sign(signDoc.to_amino_json())),
                 )
             ),
             sequence=signDoc.sequence,

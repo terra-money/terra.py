@@ -2,24 +2,27 @@
 
 from __future__ import annotations
 
+import base64
 from typing import Dict, List, Optional
 
 import attr
-from terra_proto.cosmos.tx.signing.v1beta1 import (
-    SignatureDescriptor as SignatureDescriptor_pb,
-)
-from terra_proto.cosmos.tx.signing.v1beta1 import (
-    SignatureDescriptorDataMulti as SignatureDescriptorDataMulti_pb,
-)
-from terra_proto.cosmos.tx.signing.v1beta1 import (
-    SignatureDescriptorDataSingle as SignatureDescriptorDataSingle_pb,
+from terra_proto.cosmos.tx.v1beta1 import (
+    ModeInfoSingle as ModeInfoSingle_pb,
+    ModeInfoMulti as ModeInfoMulti_pb,
 )
 from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
 
-from terra_sdk.core.public_key import PublicKey
-from terra_sdk.core.tx import CompactBitArray
+from .public_key import PublicKey
+from .mode_info import ModeInfo, ModeInfoSingle, ModeInfoMulti
+from .compact_bit_array import CompactBitArray
+
+from terra_proto.cosmos.crypto.multisig.v1beta1 import (
+    MultiSignature as MultiSignature_pb,
+)
 
 __all__ = ["SignatureV2", "Descriptor", "Single", "Multi", "SignMode"]
+
+from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s
@@ -36,6 +39,13 @@ class SignatureV2:
             sequence=data["sequence"],
         )
 
+    def to_data(self) -> dict:
+        return {
+            "public_key": self.public_key.to_data(),
+            "data": self.data.to_data(),
+            "sequence": self.sequence
+        }
+
 
 @attr.s
 class Descriptor:
@@ -44,26 +54,59 @@ class Descriptor:
 
     @classmethod
     def from_data(cls, data: dict) -> Descriptor:
+        s = None
+        m = None
         if data["single"] is not None:
             s = Single.from_data(data["single"])
         if data["multi"] is not None:
             m = Multi.from_data(data["multi"])
         return cls(single=s, multi=m)
 
+    def to_data(self) -> dict:
+        typ = "single" if self.single else "multi"
+        dat = self.single.to_data() if self.single else self.multi.to_data()
+        return {
+            typ: dat
+        }
+
+    def to_mode_info_and_signature(self) -> [ModeInfo, bytes]:
+        if self.single is not None:
+            sig_data = self.single
+            return [
+                ModeInfo(single=ModeInfoSingle(sig_data.mode)),
+                base64.b64encode(sig_data.signature)  # base64.b64decode(sig_data.signature) # FIXME
+            ]
+
+        if self.multi:
+            sig_data = self.multi
+            mode_infos: List[ModeInfo] = []
+            signatures: List[bytes] = []
+            for sig in sig_data.signatures:
+                mode_info, sig_bytes = sig.to_mode_info_and_signature()
+                mode_infos.append(mode_info)
+                signatures.append(sig_bytes)
+            pb = MultiSignature_pb()
+            pb.signatures = signatures
+            return [
+                ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
+                bytes(pb)
+            ]
+
 
 @attr.s
-class Single:
+class Single:  # FIXME: SignModeTo/FromJSON
     mode: SignMode = attr.ib()
     signature: bytes = attr.ib()
-
-    def to_proto(self) -> SignatureDescriptorDataSingle_pb:
-        return SignatureDescriptorDataSingle_pb(
-            mode=self.mode, signature=self.signature
-        )
 
     @classmethod
     def from_data(cls, data: dict) -> Single:
         return cls(mode=data["mode"], signature=data["signature"])
+
+    def to_data(self) -> dict:
+        return {
+            "mode": self.mode,
+            "signature": self.signature
+        }
 
 
 @attr.s
@@ -71,15 +114,15 @@ class Multi:
     bitarray: CompactBitArray = attr.ib()
     signatures: List[Descriptor] = attr.ib()
 
-    def to_proto(self) -> SignatureDescriptorDataMulti_pb:
-        return SignatureDescriptorDataMulti_pb(
-            bitarray=self.bitarray.to_proto(),
-            signatures=[sig.to_proto() for sig in self.signatures],
-        )
-
     @classmethod
     def from_data(cls, data: dict) -> Multi:
         return cls(
             CompactBitArray.from_data(data["bitarray"]),
             [Descriptor.from_data(d) for d in data["signatures"]],
         )
+
+    def to_data(self) -> dict:
+        return {
+            "bitarray": self.bitarray.to_data(),
+            "signatures": [sig.to_data() for sig in self.signatures]
+        }
