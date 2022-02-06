@@ -11,13 +11,13 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
 ]
 description = "The Python SDK for Terra"
-documentation = "https://terra-money.github.io/terra-sdk-python/index.html"
-homepage = "https://github.com/terra-money/terra-sdk-python"
+documentation = "https://terra-money.github.io/terra.py/index.html"
+homepage = "https://github.com/terra-money/terra.py"
 keywords = ["jigu", "blockchain", "terra", "defi", "crypto"]
 license = "MIT"
 packages = [{ include = "terra_sdk" }]
 readme = "README.md"
-repository = "https://github.com/terra-money/terra-sdk-python"
+repository = "https://github.com/terra-money/terra.py"
 version = "2.0.0-beta1"
 
 [tool.poetry.dependencies]
