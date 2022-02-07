@@ -16,7 +16,7 @@ using ``pip`` as follows:
 
 .. code-block:: shell
 
-   $ pip install terra_sdk 
+   $ pip install terra-sdk 
 
 
 .. note:: If you run into problems during installation, you might have a

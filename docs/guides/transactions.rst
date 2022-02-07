@@ -101,10 +101,10 @@ Signing transactions manually
 -----------------------------
 
 Below is the full process of signing a transaction manually that does not use ``Wallet``.
-You will need to build a :class:`StdSignMsg<terra_sdk.core..tx.SignDoc>`, 
+You will need to build a :class:`SignDoc<terra_sdk.core..tx.SignDoc>`, 
 sign it, and add the signatures to an ``StdTx``.
 
-A StdSignMsg contains the information required to build a StdTx:
+A SignDoc contains the information required to build a StdTx:
 
 - **chain_id**: chain ID of blockchain network
 - **account_number**: account number in blockchain
@@ -116,7 +116,7 @@ A StdSignMsg contains the information required to build a StdTx:
 .. code-block:: python
 
     from terra_sdk.client.lcd import LCDClient
-    from terra_sdk.core.auth import StdSignMsg
+    from terra_sdk.core.auth import SignDoc
     from terra_sdk.core.bank import MsgSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
@@ -124,7 +124,7 @@ A StdSignMsg contains the information required to build a StdTx:
     mk = MnemonicKey(mnemonic=MNEMONIC) 
 
     # create tx
-    unsigned_tx = StdSignMsg(
+    unsigned_tx = SignDoc(
         chain_id="columbus-5",
         account_number=23982,
         sequence=12,
@@ -156,9 +156,9 @@ Applying multiple signatures
 ----------------------------
 
 Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
-You must prepare a separate ``StdSignMsg`` for each signer to sign individually, and then
+You must prepare a separate ``SignDoc`` for each signer to sign individually, and then
 combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core..tx.Tx>` object. 
-Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
+Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
 
 .. note::
     In a transaction with multiple signers, the account of the first signature in the
