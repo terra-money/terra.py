@@ -3,7 +3,6 @@ from __future__ import annotations
 from asyncio import AbstractEventLoop, get_event_loop
 from json import JSONDecodeError
 from typing import Optional, Union
-from urllib import parse
 
 import nest_asyncio
 from aiohttp import ClientSession
@@ -37,6 +36,17 @@ from .params import APIParams
 from .wallet import AsyncWallet, Wallet
 
 
+def get_default(chain_id: str) -> [Coins, Numeric]:
+    if chain_id == "columbus-5":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+    if chain_id == "bombay-12":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+    if chain_id == "localterra":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+
+    raise ValueError('chain_id is invalid')
+
+
 class AsyncLCDClient:
     def __init__(
         self,
@@ -57,9 +67,11 @@ class AsyncLCDClient:
 
         self.chain_id = chain_id
         self.url = url
-        self.gas_prices = Coins(gas_prices)
-        self.gas_adjustment = gas_adjustment
         self.last_request_height = None
+
+        default_price, default_adjustment = get_default(chain_id)
+        self.gas_prices = Coins(gas_prices) if gas_prices else default_price
+        self.gas_adjustment = gas_adjustment if gas_adjustment else gas_adjustment
 
         self.auth = AsyncAuthAPI(self)
         self.bank = AsyncBankAPI(self)
@@ -140,7 +152,7 @@ class LCDClient(AsyncLCDClient):
     chain_id: str
     """Chain ID of blockchain network connecting to."""
 
-    gas_prices: Coins
+    gas_prices: Coins.Input
     """Gas prices to use for automatic fee estimation."""
 
     gas_adjustment: Union[str, float, int, Dec]
