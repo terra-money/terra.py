@@ -58,7 +58,7 @@ class CreateTxOptions:
     gas_adjustment: Optional[Numeric.Output] = attr.ib(
         default=1, converter=Numeric.parse
     )
-    fee_denoms: Optional[str] = attr.ib(default=None)
+    fee_denoms: Optional[List[str]] = attr.ib(default=None)
     account_number: Optional[int] = attr.ib(default=None)
     sequence: Optional[int] = attr.ib(default=None)
     timeout_height: Optional[int] = attr.ib(default=None)
@@ -195,9 +195,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         if gas_prices:
             gas_prices_coins = Coins(gas_prices)
             if options.fee_denoms:
-                _fee_denoms: List[
-                    str
-                ] = options.fee_denoms  # satisfy mypy type checking :(
+                _fee_denoms = options.fee_denoms if options.fee_denoms else ['uusd']
                 gas_prices_coins = gas_prices_coins.filter(
                     lambda c: c.denom in _fee_denoms
                 )
@@ -215,12 +213,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             opt.gas_adjustment = gas_adjustment
             gas = str(self.estimate_gas(tx, opt))
 
-        tax_amount = self.compute_tax(tx)
-        fee_amount = (
-            tax_amount.add(gas_prices_coins.mul(gas).to_int_coins())
-            if gas_prices_coins
-            else tax_amount
-        )
+        fee_amount = gas_prices_coins.mul(gas).to_int_coins() if gas_prices_coins else Coins.from_str('0uusd')
 
         return Fee(Numeric.parse(gas), fee_amount, "", "")
 
@@ -233,13 +226,6 @@ class AsyncTxAPI(BaseAsyncAPI):
         simulated = SimulateResponse.from_data(res)
 
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
-
-    # TODO: deprecate
-    async def compute_tax(self, tx: Tx) -> Coins:
-        res = await self._c._post(
-            "/terra/tx/v1beta1/compute_tax", {"tx_bytes": self.encode(tx)}
-        )
-        return Coins.from_data(res.get("tax_amount"))
 
     async def encode(self, tx: Tx) -> str:
         """Encode a Tx to base64 encoded proto string"""
@@ -407,12 +393,6 @@ class TxAPI(AsyncTxAPI):
         pass
 
     estimate_gas.__doc__ = AsyncTxAPI.estimate_gas.__doc__
-
-    @sync_bind(AsyncTxAPI.compute_tax)
-    def compute_tax(self, tx: Tx) -> Coins:
-        pass
-
-    compute_tax.__doc__ = AsyncTxAPI.compute_tax.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
     def encode(self, tx: Tx) -> str:
