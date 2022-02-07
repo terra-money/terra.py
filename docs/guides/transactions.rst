@@ -34,7 +34,7 @@ correspond to the account you intend to sign the transaction with.
     from terra_sdk.key.mnemonic import MnemonicKey
 
     mk = MnemonicKey(mnemonic=MNEMONIC) 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     wallet = terra.wallet(mk)
 
 
@@ -120,12 +120,12 @@ A StdSignMsg contains the information required to build a StdTx:
     from terra_sdk.core.bank import MsgSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     mk = MnemonicKey(mnemonic=MNEMONIC) 
 
     # create tx
     unsigned_tx = StdSignMsg(
-        chain_id="columbus-4",
+        chain_id="columbus-5",
         account_number=23982,
         sequence=12,
         fee=Fee(200000, "120000uluna"),
@@ -171,7 +171,7 @@ Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which va
     from terra_sdk.core.bank import MsgMultiSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-4")
+    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     wallet1 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_1))
     wallet2 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_2))
 
