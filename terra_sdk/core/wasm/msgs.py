@@ -139,42 +139,6 @@ class MsgMigrateCode(Msg):
             wasm_byte_code=proto.wasm_byte_code,
         )
 
-
-@attr.s
-class MsgMigrateCode(Msg):
-    """Upload a new smart contract WASM binary to the blockchain, replacing an existing code ID.
-    Can only be called once by creator of the contract, and is used for migrating from Col-4 to Col-5.
-
-    Args:
-        sender: address of sender
-        code_id: reference to the code on the blockchain
-        wasm_byte_code: base64-encoded string containing bytecode
-    """
-
-    type = "wasm/MsgMigrateCode"
-    """"""
-
-    sender: AccAddress = attr.ib()
-    code_id: int = attr.ib(converter=int)
-    wasm_byte_code: str = attr.ib(converter=str)
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["sender"] = str(d["sender"])
-        d["code_id"] = str(d["code_id"])
-        d["wasm_byte_code"] = str(d["wasm_byte_code"])
-        return {"type": self.type, "value": dict_to_data(d)}
-
-    @classmethod
-    def from_data(cls, data: dict) -> MsgMigrateCode:
-        data = data["value"]
-        return cls(
-            sender=data["sender"],
-            code_id=data["code_id"],
-            wasm_byte_code=data["wasm_byte_code"],
-        )
-
-
 @attr.s
 class MsgInstantiateContract(Msg):
     """Creates a new instance of a smart contract from existing code on the blockchain.
@@ -203,9 +167,9 @@ class MsgInstantiateContract(Msg):
             "type": self.type_amino,
             "value": {
                 "sender": self.sender,
-                "admin": self.admin if self.admin else None,
+                "admin": self.admin,
                 "code_id": str(self.code_id),
-                "init_msg": bytes(json.dumps(self.init_msg), "utf-8"),
+                "init_msg": self.init_msg,
                 "init_coins": self.init_coins.to_amino()
             }
         }
