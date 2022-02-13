@@ -74,7 +74,7 @@ class Descriptor:
             sig_data = self.single
             return [
                 ModeInfo(single=ModeInfoSingle(sig_data.mode)),
-                base64.b64encode(sig_data.signature)  # base64.b64decode(sig_data.signature) # FIXME
+                sig_data.signature
             ]
 
         if self.multi:
@@ -85,12 +85,13 @@ class Descriptor:
                 mode_info, sig_bytes = sig.to_mode_info_and_signature()
                 mode_infos.append(mode_info)
                 signatures.append(sig_bytes)
-            pb = MultiSignature_pb()
-            pb.signatures = signatures
+            pb = MultiSignature_pb(signatures=signatures)
             return [
                 ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
-                bytes(pb)
+                base64.b64encode(bytes(pb))
             ]
+
+        raise ValueError('invalid signature descriptor')
 
 
 @attr.s

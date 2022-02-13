@@ -21,6 +21,8 @@ class Fee(JSONSerializable):
     Args:
         gas (int): gas to use ("gas requested")
         amount (Coins.Input): fee amount
+        payer (AccAddress, optional): address of fee payer
+        granter (AccAddress, optional): address of fee granter 
     """
 
     gas_limit: int = attr.ib(converter=int)

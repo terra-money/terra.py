@@ -27,7 +27,13 @@ __all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions", "CreateTxOptions"]
 
 @attr.s
 class SignerOptions:
-    address: str = attr.ib()
+    """ SignerOptions specifies infomations about signers
+        Args:
+            address (AccAddress): address of the signer
+            sequence (int, optional): nonce of the messages from the signer
+            public_key (PublicKey, optional): signer's PublicKey
+    """
+    address: AccAddress = attr.ib()
     sequence: Optional[int] = attr.ib(default=None)
     public_key: Optional[PublicKey] = attr.ib(default=None)
 
@@ -233,7 +239,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def decode(self, tx: str) -> Tx:
         """Decode base64 encoded proto string to a Tx"""
-        return Tx.from_bytes(base64.b64decode(tx))  # FIXME
+        return Tx.from_bytes(base64.b64decode(tx))
 
     async def hash(self, tx: Tx) -> str:
         """Compute hash for a transaction.

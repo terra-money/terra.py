@@ -3,8 +3,8 @@ from terra_sdk.client.lcd import LCDClient, PaginationOptions
 
 def main():
     terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
-        chain_id="bombay-12",
+        url="https://lcd.terra.dev/",
+        chain_id="columbus-5",
     )
 
     pagOpt = PaginationOptions(limit=2, count_total=True)
@@ -35,14 +35,14 @@ def main():
     # result = terra.gov.tally(5333)
     # print(result)
 
-    # result = terra.gov.deposit_parameters()
-    # print(result)
-    # result = terra.gov.voting_parameters()
-    # print(result)
-    # result = terra.gov.tally_parameters()
-    # print(result)
-    # result = terra.gov.parameters()
-    # print(result)
+    result = terra.gov.deposit_parameters()
+    print(result)
+    result = terra.gov.voting_parameters()
+    print(result)
+    result = terra.gov.tally_parameters()
+    print(result)
+    result = terra.gov.parameters()
+    print(result)
 
 
 main()

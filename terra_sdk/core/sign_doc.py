@@ -12,6 +12,8 @@ from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["SignDoc"]
 
+from terra_sdk.util.remove_none import remove_none
+
 
 @attr.s
 class SignDoc(JSONSerializable):
@@ -75,4 +77,4 @@ class SignDoc(JSONSerializable):
         return bytes(self.to_proto())
 
     def to_amino_json(self) -> bytes:
-        return bytes(json.dumps(self.to_amino(), sort_keys=True, separators=(",", ":")), 'utf-8')  # FIXME
+        return bytes(json.dumps(remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")), 'utf-8')  # FIXME

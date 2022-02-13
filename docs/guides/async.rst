@@ -49,7 +49,8 @@ are also asychronous and therefore must be awaited.
 .. code-block:: python
     :emphasize-lines: 12-13
 
-    import asyncio 
+    import asyncio
+    from terra_sdk.client.lcd.api.tx import CreateTxOptions
     from terra_sdk.client.lcd import AsyncLCDClient
     from terra_sdk.key.mnemonic import MnemonicKey
     from terra_sdk.core import Coins
@@ -62,7 +63,9 @@ are also asychronous and therefore must be awaited.
             wallet = terra.wallet(mk)
             account_number = await wallet.account_number()
             tx = await wallet.create_and_sign_tx(
-                msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
+                CreateTxOptions(
+                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
+                )
             )
     
     asyncio.get_event_loop().run_until_complete(main())

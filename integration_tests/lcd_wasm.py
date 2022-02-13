@@ -12,11 +12,11 @@ def main():
 
     result = terra.wasm.code_info(3)
     print(result)
-    result = terra.wasm.contract_info("terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98")
+    result = terra.wasm.contract_info("terra1p4gg3p2ue6qy2qfuxtrmgv2ec3f4jmgqtazum8")
     print(result)
     result = terra.wasm.contract_query(
-        "terra1cz7j9y80de9e4lsec5qgw9hdy5lh4r45mvdx98",
-        {"all_allowances": {"owner": "terra1zjwrdt4rm69d84m9s9hqsrfuchnaazhxf2ywpc"}},
+        "terra1p4gg3p2ue6qy2qfuxtrmgv2ec3f4jmgqtazum8",
+        {"prices": {}},
     )
     print(result)
     result = terra.wasm.parameters()

@@ -125,7 +125,6 @@ class SimplePublicKey(PublicKey):
 
     def encode_amino_pubkey(self) -> bytearray:
         out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1) + bytearray(self.key)
-        # print("simplepubkey.encodeamino:{}".format(list(out)))
         return out
 
     def raw_address(self) -> str:
@@ -227,7 +226,6 @@ class LegacyAminoMultisigPublicKey(PublicKey):
             out.append(0x12)
             out += bytearray(encode_uvarint(len(pkData)))
             out += pkData
-        # print("multi.encodeamino:{}".format(list(out)))
         return out
 
     def pack_any(self) -> Any_pb:

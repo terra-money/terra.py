@@ -30,19 +30,19 @@ class ModeInfo(JSONSerializable):
     multi: Optional[ModeInfoMulti] = attr.ib(default=None)
 
     def to_data(self) -> dict:
-        return {
-            "single": self.single.to_data() if self.single else None,
-            "multi": self.multi.to_data() if self.multi else None,
-        }
+        if self.single:
+            return {"single": self.single.to_data()}
+        if self.multi:
+            return {"multi": self.multi.to_data()}
+        raise ValueError('ModeInfo should have one of single or multi')
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfo:
-        return cls(
-            ModeInfoSingle.from_data(data.get("single"))
-            if data.get("single")
-            else None,
-            ModeInfoMulti.from_data(data.get("multi")) if data.get("multi") else None,
-        )
+        if data.get("single"):
+            return cls(single=data.get("single"))
+        if data.get("multi"):
+            return cls(multi=data.get("multi"))
+        raise ValueError('ModeInfo should have one of single or multi')
 
     def to_proto(self) -> ModeInfo_pb:
         if self.single:
