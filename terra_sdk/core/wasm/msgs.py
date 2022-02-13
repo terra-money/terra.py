@@ -203,7 +203,7 @@ class MsgInstantiateContract(Msg):
             "type": self.type_amino,
             "value": {
                 "sender": self.sender,
-                "admin": self.admin if self.admin else "",
+                "admin": self.admin if self.admin else None,
                 "code_id": str(self.code_id),
                 "init_msg": bytes(json.dumps(self.init_msg), "utf-8"),
                 "init_coins": self.init_coins.to_amino()
