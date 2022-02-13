@@ -13,9 +13,6 @@ Data
 .. autoclass:: terra_sdk.client.lcd.api.distribution.Rewards
     :members: 
 
-.. autoclass:: terra_sdk.client.lcd.api.distribution.ValidatorRewards
-    :members: 
-
 Messages
 --------
 

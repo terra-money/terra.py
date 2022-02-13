@@ -130,7 +130,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 
 >>> async def main():
       <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
-      total_supply = await terra.supply.total()
+      total_supply = await terra.bank.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
 
@@ -162,7 +162,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
 
 
 ```
->>> from terra_sdk.core.auth import StdFee
+>>> from terra_sdk.core.auth import Fee
 >>> from terra_sdk.core.bank import MsgSend
 
 >>> tx = wallet.create_and_sign_tx(
@@ -172,7 +172,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
             "1000000uluna"    # send 1 luna
         )],
         memo="test transaction!",
-        fee=StdFee(200000, "120000uluna")
+        fee=Fee(200000, "120000uluna")
     )
 ```
 

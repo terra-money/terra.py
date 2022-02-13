@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from typing import Union
 
 import attr
+from terra_proto.cosmos.base.v1beta1 import Coin as Coin_pb
 
 from terra_sdk.util.json import JSONSerializable
 
@@ -60,8 +62,21 @@ class Coin(JSONSerializable):
             return f"{amount_str}{self.denom}"
         return f"{self.amount}{self.denom}"
 
+    def to_amino(self) -> dict:
+        return {"denom": self.denom, "amount": str(self.amount)}
+
     def to_data(self) -> dict:
         return {"denom": self.denom, "amount": str(self.amount)}
+
+    @classmethod
+    def from_proto(cls, proto: Coin_pb) -> Coin:
+        return cls(proto.denom, proto.amount)
+
+    def to_proto(self) -> Coin_pb:
+        coin = Coin_pb()
+        coin.denom = self.denom
+        coin.amount = str(self.amount)
+        return coin
 
     @classmethod
     def from_str(cls, string: str) -> Coin:

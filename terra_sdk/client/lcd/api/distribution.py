@@ -6,7 +6,7 @@ from terra_sdk.core import AccAddress, Coins, ValAddress
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncDistributionAPI", "DistributionAPI", "Rewards", "ValidatorRewards"]
+__all__ = ["AsyncDistributionAPI", "DistributionAPI", "Rewards"]
 
 
 @attr.s
@@ -16,15 +16,6 @@ class Rewards:
 
     total: Coins = attr.ib()
     """Total sum of rewards."""
-
-
-@attr.s
-class ValidatorRewards:
-    self_bond_rewards: Coins = attr.ib()
-    """Rewards for validator accrued from self-delegation."""
-
-    val_commission: Coins = attr.ib()
-    """Rewards for validator accrued from delegation commissions."""
 
 
 class AsyncDistributionAPI(BaseAsyncAPI):
@@ -37,7 +28,9 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             Rewards: delegator rewards
         """
-        res = await self._c._get(f"/distribution/delegators/{delegator}/rewards")
+        res = await self._c._get(
+            f"/cosmos/distribution/v1beta1/delegators/{delegator}/rewards"
+        )
         return Rewards(
             rewards={
                 item["validator_address"]: Coins.from_data(item["reward"] or [])
@@ -46,20 +39,20 @@ class AsyncDistributionAPI(BaseAsyncAPI):
             total=Coins.from_data(res["total"]),
         )
 
-    async def validator_rewards(self, validator: ValAddress) -> ValidatorRewards:
+    async def validator_commission(self, validator: ValAddress) -> Coins:
         """Fetches the commission reward data for a validator.
 
         Args:
             validator (ValAddress): validator operator address
 
         Returns:
-            ValidatorRewards: validator rewards
+            ValidatorCommission: validator rewards
         """
-        res = await self._c._get(f"/distribution/validators/{validator}")
-        return ValidatorRewards(
-            self_bond_rewards=Coins.from_data(res["self_bond_rewards"]),
-            val_commission=Coins.from_data(res["val_commission"]["commission"])
+        res = await self._c._get(
+            f"/cosmos/distribution/v1beta1/validators/{validator}/commission"
         )
+        commission = res["commission"]
+        return Coins.from_data(commission["commission"])
 
     async def withdraw_address(self, delegator: AccAddress) -> AccAddress:
         """Fetches the withdraw address associated with a delegator.
@@ -70,9 +63,10 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             AccAddress: withdraw address
         """
-        return await self._c._get(
-            f"/distribution/delegators/{delegator}/withdraw_address"
+        res = await self._c._get(
+            f"/cosmos/distribution/v1beta1/delegators/{delegator}/withdraw_address"
         )
+        return res.get("withdraw_address")
 
     async def community_pool(self) -> Coins:
         """Fetches the community pool.
@@ -80,8 +74,8 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             Coins: community pool
         """
-        res = await self._c._get("/distribution/community_pool")
-        return Coins.from_data(res)
+        res = await self._c._get("/cosmos/distribution/v1beta1/community_pool")
+        return Coins.from_data(res.get("pool"))
 
     async def parameters(self) -> dict:
         """Fetches the Distribution module parameters.
@@ -89,7 +83,8 @@ class AsyncDistributionAPI(BaseAsyncAPI):
         Returns:
             dict: Distribution module parameters
         """
-        return await self._c._get("/distribution/parameters")
+        res = await self._c._get("/cosmos/distribution/v1beta1/params")
+        return res.get("params")
 
 
 class DistributionAPI(AsyncDistributionAPI):
@@ -99,11 +94,11 @@ class DistributionAPI(AsyncDistributionAPI):
 
     rewards.__doc__ = AsyncDistributionAPI.rewards.__doc__
 
-    @sync_bind(AsyncDistributionAPI.validator_rewards)
-    def validator_rewards(self, validator: ValAddress) -> ValidatorRewards:
+    @sync_bind(AsyncDistributionAPI.validator_commission)
+    def validator_commission(self, validator: ValAddress) -> Coins:
         pass
 
-    validator_rewards.__doc__ = AsyncDistributionAPI.validator_rewards.__doc__
+    validator_commission.__doc__ = AsyncDistributionAPI.validator_commission.__doc__
 
     @sync_bind(AsyncDistributionAPI.withdraw_address)
     def withdraw_address(self, delegator: AccAddress) -> AccAddress:

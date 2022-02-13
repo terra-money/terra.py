@@ -2,9 +2,25 @@
 
 from __future__ import annotations
 
+import base64
 import copy
+import json
+from typing import Optional
 
 import attr
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgClearContractAdmin as MsgClearContractAdmin_pb,
+)
+from terra_proto.terra.wasm.v1beta1 import MsgExecuteContract as MsgExecuteContract_pb
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgInstantiateContract as MsgInstantiateContract_pb,
+)
+from terra_proto.terra.wasm.v1beta1 import MsgMigrateCode as MsgMigrateCode_pb
+from terra_proto.terra.wasm.v1beta1 import MsgMigrateContract as MsgMigrateContract_pb
+from terra_proto.terra.wasm.v1beta1 import MsgStoreCode as MsgStoreCode_pb
+from terra_proto.terra.wasm.v1beta1 import (
+    MsgUpdateContractAdmin as MsgUpdateContractAdmin_pb,
+)
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
@@ -31,16 +47,97 @@ class MsgStoreCode(Msg):
         wasm_byte_code: base64-encoded string containing bytecode
     """
 
-    type = "wasm/MsgStoreCode"
+    type_amino = "wasm/MsgStoreCode"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgStoreCode"
     """"""
 
     sender: AccAddress = attr.ib()
-    wasm_byte_code: str = attr.ib(converter=str)
+    wasm_byte_code: str = attr.ib()
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "sender": self.sender,
+                "wasm_byte_code": self.wasm_byte_code
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
-        data = data["value"]
         return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"])
+
+    def to_proto(self) -> MsgStoreCode_pb:
+        return MsgStoreCode_pb(
+            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code)
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
+        return cls(
+            sender=proto.sender,
+            wasm_byte_code=proto.wasm_byte_code
+        )
+
+
+@attr.s
+class MsgMigrateCode(Msg):
+    """Upload a new smart contract WASM binary to the blockchain, replacing an existing code ID.
+    Can only be called once by creator of the contract, and is used for migrating from Col-4 to Col-5.
+
+    Args:
+        sender: address of sender
+        code_id: reference to the code on the blockchain
+        wasm_byte_code: base64-encoded string containing bytecode
+    """
+
+    type_amino = "wasm/MsgMigrateCode"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgMigrateCode"
+    """"""
+
+    sender: AccAddress = attr.ib()
+    code_id: int = attr.ib(converter=int)
+    wasm_byte_code: str = attr.ib(converter=str)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "sender": self.sender,
+                "code_id": str(self.code_id),
+                "wasm_byte_code": self.wasm_byte_code
+            }
+        }
+
+    def to_data(self) -> dict:
+        d = copy.deepcopy(self.__dict__)
+        d["sender"] = str(d["sender"])
+        d["code_id"] = str(d["code_id"])
+        d["wasm_byte_code"] = str(d["wasm_byte_code"])
+        return {"type": self.type, "value": dict_to_data(d)}
+
+    @classmethod
+    def from_data(cls, data: dict) -> MsgMigrateCode:
+        return cls(
+            sender=data["sender"],
+            code_id=data["code_id"],
+            wasm_byte_code=data["wasm_byte_code"],
+        )
+
+    def to_proto(self) -> MsgMigrateCode_pb:
+        return MsgMigrateCode_pb(
+            sender=self.sender, code_id=self.code_id, wasm_byte_code=self.wasm_byte_code
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgMigrateCode_pb) -> MsgMigrateCode:
+        return cls(
+            sender=proto.sender,
+            code_id=proto.code_id,
+            wasm_byte_code=proto.wasm_byte_code,
+        )
 
 
 @attr.s
@@ -90,14 +187,28 @@ class MsgInstantiateContract(Msg):
         init_coins (Coins): initial amount of coins to be sent to contract
     """
 
-    type = "wasm/MsgInstantiateContract"
+    type_amino = "wasm/MsgInstantiateContract"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgInstantiateContract"
     """"""
 
     sender: AccAddress = attr.ib()
-    admin: AccAddress = attr.ib()
+    admin: Optional[AccAddress] = attr.ib()
     code_id: int = attr.ib(converter=int)
     init_msg: dict = attr.ib()
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "sender": self.sender,
+                "admin": self.admin if self.admin else "",
+                "code_id": str(self.code_id),
+                "init_msg": bytes(json.dumps(self.init_msg), "utf-8"),
+                "init_coins": self.init_coins.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
@@ -106,7 +217,6 @@ class MsgInstantiateContract(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgInstantiateContract:
-        data = data["value"]
         return cls(
             sender=data.get("sender"),
             admin=data.get("admin"),
@@ -114,6 +224,26 @@ class MsgInstantiateContract(Msg):
             init_msg=remove_none(data["init_msg"]),
             init_coins=Coins.from_data(data["init_coins"]),
         )
+
+    def to_proto(self) -> MsgInstantiateContract_pb:
+        return MsgInstantiateContract_pb(
+            sender=self.sender,
+            admin=self.admin,
+            code_id=self.code_id,
+            init_msg=bytes(json.dumps(self.init_msg), "utf-8"),
+            init_coins=self.init_coins.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgInstantiateContract_pb) -> MsgInstantiateContract:
+        return cls(
+            sender=proto.sender,
+            admin=proto.admin,
+            code_id=proto.code_id,
+            init_msg=remove_none(proto.init_msg),
+            init_coins=Coins.from_proto(proto.init_coins),
+        )
+
 
 
 @attr.s
@@ -128,7 +258,9 @@ class MsgExecuteContract(Msg):
             Defaults to empty ``Coins()``
     """
 
-    type = "wasm/MsgExecuteContract"
+    type_amino = "wasm/MsgExecuteContract"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
     """"""
 
     sender: AccAddress = attr.ib()
@@ -136,14 +268,41 @@ class MsgExecuteContract(Msg):
     execute_msg: dict = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "sender": self.sender,
+                "contract": self.contract,
+                "execute_msg": remove_none(self.execute_msg),
+                "coins": self.coins.to_amino()
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
-        data = data["value"]
         return cls(
             sender=data["sender"],
             contract=data["contract"],
             execute_msg=remove_none(data.get("execute_msg")),
             coins=Coins.from_data(data["coins"]),
+        )
+
+    def to_proto(self) -> MsgExecuteContract_pb:
+        return MsgExecuteContract_pb(
+            sender=self.sender,
+            contract=self.contract,
+            execute_msg=bytes(json.dumps(self.execute_msg), "utf-8"),
+            coins=self.coins.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgExecuteContract_pb) -> MsgExecuteContract:
+        return cls(
+            sender=proto.sender,
+            contract=proto.contract,
+            execute_msg=remove_none(proto.execute_msg),
+            coins=Coins.from_proto(proto.coins),
         )
 
 
@@ -158,7 +317,9 @@ class MsgMigrateContract(Msg):
         migrate_msg (dict): MigrateMsg to execute
     """
 
-    type = "wasm/MsgMigrateContract"
+    type_amino = "wasm/MsgMigrateContract"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgMigrateContract"
     """"""
 
     admin: AccAddress = attr.ib()
@@ -166,18 +327,45 @@ class MsgMigrateContract(Msg):
     new_code_id: int = attr.ib(converter=int)
     migrate_msg: dict = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "admin": self.admin,
+                "contract": self.contract,
+                "new_code_id": str(self.new_code_id),
+                "migrate_msg": remove_none(self.migrate_msg)
+            }
+        }
+
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
         return {"type": self.type, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateContract:
-        data = data["value"]
         return cls(
             admin=data["admin"],
             contract=data["contract"],
             new_code_id=data["new_code_id"],
             migrate_msg=data["migrate_msg"],
+        )
+
+    def to_proto(self) -> MsgMigrateContract_pb:
+        return MsgMigrateContract_pb(
+            admin=self.admin,
+            contract=self.contract,
+            new_code_id=self.new_code_id,
+            migrate_msg=bytes(json.dumps(self.migrate_msg), "utf-8"),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgMigrateContract_pb) -> MsgMigrateContract:
+        return cls(
+            admin=proto.admin,
+            contract=proto.contract,
+            new_code_id=proto.new_code_id,
+            migrate_msg=proto.migrate_msg,
         )
 
 
@@ -186,25 +374,49 @@ class MsgUpdateContractAdmin(Msg):
     """Update a smart contract's admin.
 
     Args:
-        owner: address of current admin (sender)
-        new_owner: address of new admin
+        admin: address of current admin (sender)
+        new_admin: address of new admin
         contract: address of contract to change
     """
 
-    type = "wasm/MsgUpdateContractAdmin"
+    type_amino = "wasm/MsgUpdateContractAdmin"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgUpdateContractAdmin"
     """"""
 
     admin: AccAddress = attr.ib()
     new_admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "admin": self.admin,
+                "new_admin": self.new_admin,
+                "contract": self.contract
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgUpdateContractAdmin:
-        data = data["value"]
         return cls(
             admin=data["admin"],
             new_admin=data["new_admin"],
             contract=data["contract"],
+        )
+
+    def to_proto(self) -> MsgUpdateContractAdmin_pb:
+        return MsgUpdateContractAdmin_pb(
+            admin=self.admin, new_admin=self.new_admin, contract=self.contract
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgUpdateContractAdmin_pb) -> MsgUpdateContractAdmin:
+        return cls(
+            admin=proto.admin,
+            new_admin=proto.new_admin,
+            contract=proto.contract,
         )
 
 
@@ -217,16 +429,36 @@ class MsgClearContractAdmin(Msg):
         contract: address of contract to change
     """
 
-    type = "wasm/MsgClearContractAdmin"
+    type_amino = "wasm/MsgClearContractAdmin"
+    """"""
+    type_url = "/terra.wasm.v1beta1.MsgClearContractAdmin"
     """"""
 
     admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "admin": self.admin,
+                "contract": self.contract
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgClearContractAdmin:
-        data = data["value"]
         return cls(
             admin=data["admin"],
             contract=data["contract"],
+        )
+
+    def to_proto(self) -> MsgClearContractAdmin_pb:
+        return MsgClearContractAdmin_pb(admin=self.admin, contract=self.contract)
+
+    @classmethod
+    def from_proto(cls, proto: MsgClearContractAdmin_pb) -> MsgClearContractAdmin:
+        return cls(
+            admin=proto.admin,
+            contract=proto.contract,
         )

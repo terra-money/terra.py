@@ -6,6 +6,7 @@ from typing import Optional, Union
 
 import nest_asyncio
 from aiohttp import ClientSession
+from multidict import CIMultiDict
 
 from terra_sdk.core import Coins, Dec, Numeric
 from terra_sdk.exceptions import LCDResponseError
@@ -14,22 +15,36 @@ from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.url import urljoin
 
 from .api.auth import AsyncAuthAPI, AuthAPI
+from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.bank import AsyncBankAPI, BankAPI
 from .api.distribution import AsyncDistributionAPI, DistributionAPI
+from .api.feegrant import AsyncFeeGrantAPI, FeeGrantAPI
 from .api.gov import AsyncGovAPI, GovAPI
+from .api.ibc import AsyncIbcAPI, IbcAPI
+from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .api.market import AsyncMarketAPI, MarketAPI
 from .api.mint import AsyncMintAPI, MintAPI
-from .api.msgauth import AsyncMsgAuthAPI, MsgAuthAPI
 from .api.oracle import AsyncOracleAPI, OracleAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
-from .api.supply import AsyncSupplyAPI, SupplyAPI
 from .api.tendermint import AsyncTendermintAPI, TendermintAPI
 from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
+from .params import APIParams
 from .wallet import AsyncWallet, Wallet
+
+
+def get_default(chain_id: str) -> [Coins, Numeric]:
+    if chain_id == "columbus-5":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+    if chain_id == "bombay-12":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+    if chain_id == "localterra":
+        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+
+    raise ValueError('chain_id is invalid')
 
 
 class AsyncLCDClient:
@@ -52,24 +67,28 @@ class AsyncLCDClient:
 
         self.chain_id = chain_id
         self.url = url
-        self.gas_prices = Coins(gas_prices)
-        self.gas_adjustment = gas_adjustment
         self.last_request_height = None
+
+        default_price, default_adjustment = get_default(chain_id)
+        self.gas_prices = Coins(gas_prices) if gas_prices else default_price
+        self.gas_adjustment = gas_adjustment if gas_adjustment else gas_adjustment
 
         self.auth = AsyncAuthAPI(self)
         self.bank = AsyncBankAPI(self)
         self.distribution = AsyncDistributionAPI(self)
+        self.feegrant = AsyncFeeGrantAPI(self)
         self.gov = AsyncGovAPI(self)
         self.market = AsyncMarketAPI(self)
         self.mint = AsyncMintAPI(self)
-        self.msgauth = AsyncMsgAuthAPI(self)
+        self.authz = AsyncAuthzAPI(self)
         self.oracle = AsyncOracleAPI(self)
         self.slashing = AsyncSlashingAPI(self)
         self.staking = AsyncStakingAPI(self)
-        self.supply = AsyncSupplyAPI(self)
         self.tendermint = AsyncTendermintAPI(self)
         self.treasury = AsyncTreasuryAPI(self)
         self.wasm = AsyncWasmAPI(self)
+        self.ibc = AsyncIbcAPI(self)
+        self.ibc_transfer = AsyncIbcTransferAPI(self)
         self.tx = AsyncTxAPI(self)
         self.utils = AsyncLCDUtils(self)
 
@@ -82,8 +101,14 @@ class AsyncLCDClient:
         return AsyncWallet(self, key)
 
     async def _get(
-        self, endpoint: str, params: Optional[dict] = None, raw: bool = False
+        self,
+        endpoint: str,
+        params: Optional[Union[APIParams, CIMultiDict, list, dict]] = None,
+        # raw: bool = False
     ):
+        if params and hasattr(params, "to_dict") and callable(getattr(params, "to_dict")):
+            params = params.to_dict()
+
         async with self.session.get(
             urljoin(self.url, endpoint), params=params
         ) as response:
@@ -92,12 +117,12 @@ class AsyncLCDClient:
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
-                raise LCDResponseError(message=result.get("error"), response=response)
+                raise LCDResponseError(message=str(result), response=response)
         self.last_request_height = result.get("height")
-        return result if raw else result["result"]
+        return result  # if raw else result["result"]
 
     async def _post(
-        self, endpoint: str, data: Optional[dict] = None, raw: bool = False
+        self, endpoint: str, data: Optional[dict] = None  # , raw: bool = False
     ):
         async with self.session.post(
             urljoin(self.url, endpoint), json=data and dict_to_data(data)
@@ -107,9 +132,9 @@ class AsyncLCDClient:
             except JSONDecodeError:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
-                raise LCDResponseError(message=result.get("error"), response=response)
+                raise LCDResponseError(message=result.get("message"), response=response)
         self.last_request_height = result.get("height")
-        return result if raw else result["result"]
+        return result  # if raw else result["result"]
 
     async def __aenter__(self):
         return self
@@ -127,7 +152,7 @@ class LCDClient(AsyncLCDClient):
     chain_id: str
     """Chain ID of blockchain network connecting to."""
 
-    gas_prices: Coins
+    gas_prices: Coins.Input
     """Gas prices to use for automatic fee estimation."""
 
     gas_adjustment: Union[str, float, int, Dec]
@@ -148,14 +173,17 @@ class LCDClient(AsyncLCDClient):
     gov: GovAPI
     """:class:`GovAPI<terra_sdk.client.lcd.api.gov.GovAPI>`."""
 
+    feegrant: FeeGrantAPI
+    """:class:`FeeGrant<terra_sdk.client.lcd.api.feegrant.FeeGrantAPI>`."""
+
     market: MarketAPI
     """:class:`MarketAPI<terra_sdk.client.lcd.api.market.MarketAPI>`."""
 
     mint: MintAPI
     """:class:`MintAPI<terra_sdk.client.lcd.api.mint.MintAPI>`."""
 
-    msgauth: MsgAuthAPI
-    """:class:`MsgAuthAPI<terra_sdk.client.lcd.api.msgauth.MsgAuthAPI>`."""
+    authz: AuthzAPI
+    """:class:`AuthzAPI<terra_sdk.client.lcd.api.authz.AuthzAPI>`."""
 
     oracle: OracleAPI
     """:class:`OracleAPI<terra_sdk.client.lcd.api.oracle.OracleAPI>`."""
@@ -165,9 +193,6 @@ class LCDClient(AsyncLCDClient):
 
     staking: StakingAPI
     """:class:`StakingAPI<terra_sdk.client.lcd.api.staking.StakingAPI>`."""
-
-    supply: SupplyAPI
-    """:class:`SupplyAPI<terra_sdk.client.lcd.api.supply.SupplyAPI>`."""
 
     tendermint: TendermintAPI
     """:class:`TendermintAPI<terra_sdk.client.lcd.api.tendermint.TendermintAPI>`."""
@@ -180,6 +205,12 @@ class LCDClient(AsyncLCDClient):
 
     tx: TxAPI
     """:class:`TxAPI<terra_sdk.client.lcd.api.tx.TxAPI>`."""
+
+    ibc: IbcAPI
+    """:class:`IbcAPI<terra_sdk.client.lcd.api.ibc.IbcAPI>`."""
+
+    ibc_transfer: IbcTransferAPI
+    """:class:`IbcTransferAPI<terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI>`."""
 
     def __init__(
         self,
@@ -201,16 +232,18 @@ class LCDClient(AsyncLCDClient):
         self.bank = BankAPI(self)
         self.distribution = DistributionAPI(self)
         self.gov = GovAPI(self)
+        self.feegrant = FeeGrantAPI(self)
         self.market = MarketAPI(self)
         self.mint = MintAPI(self)
-        self.msgauth = MsgAuthAPI(self)
+        self.authz = AuthzAPI(self)
         self.oracle = OracleAPI(self)
         self.slashing = SlashingAPI(self)
         self.staking = StakingAPI(self)
-        self.supply = SupplyAPI(self)
         self.tendermint = TendermintAPI(self)
         self.treasury = TreasuryAPI(self)
         self.wasm = WasmAPI(self)
+        self.ibc = IbcAPI(self)
+        self.ibc_transfer = IbcTransferAPI(self)
         self.tx = TxAPI(self)
         self.utils = LCDUtils(self)
 
@@ -253,6 +286,18 @@ class LCDClient(AsyncLCDClient):
         )
         try:
             result = await super()._post(*args, **kwargs)
+        finally:
+            await self.session.close()
+        return result
+
+    async def _search(self, *args, **kwargs):
+        # session has to be manually created and torn down for each HTTP request in a
+        # synchronous client
+        self.session = ClientSession(
+            headers={"Accept": "application/json"}, loop=self.loop
+        )
+        try:
+            result = await super()._search(*args, **kwargs)
         finally:
             await self.session.close()
         return result

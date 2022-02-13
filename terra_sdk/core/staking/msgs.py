@@ -5,6 +5,15 @@ from __future__ import annotations
 from typing import Optional
 
 import attr
+from terra_proto.cosmos.staking.v1beta1 import (
+    MsgBeginRedelegate as MsgBeginRedelegate_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import (
+    MsgCreateValidator as MsgCreateValidator_pb,
+)
+from terra_proto.cosmos.staking.v1beta1 import MsgDelegate as MsgDelegate_pb
+from terra_proto.cosmos.staking.v1beta1 import MsgEditValidator as MsgEditValidator_pb
+from terra_proto.cosmos.staking.v1beta1 import MsgUndelegate as MsgUndelegate_pb
 
 from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey
 from terra_sdk.core.msg import Msg
@@ -31,7 +40,9 @@ class MsgBeginRedelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to redelegate
     """
 
-    type = "staking/MsgBeginRedelegate"
+    type_amino = "staking/MsgBeginRedelegate"
+    """"""
+    type_url = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
     """"""
     action = "begin_redelegate"
     """"""
@@ -39,16 +50,43 @@ class MsgBeginRedelegate(Msg):
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
     validator_dst_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_src_address": self.validator_src_address,
+                "validator_dst_address": self.validator_dst_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgBeginRedelegate:
-        data = data["value"]
         return cls(
             delegator_address=data["delegator_address"],
             validator_src_address=data["validator_src_address"],
             validator_dst_address=data["validator_dst_address"],
             amount=Coin.from_data(data["amount"]),
+        )
+
+    def to_proto(self) -> MsgBeginRedelegate_pb:
+        return MsgBeginRedelegate_pb(
+            delegator_address=self.delegator_address,
+            validator_src_address=self.validator_src_address,
+            validator_dst_address=self.validator_dst_address,
+            amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgBeginRedelegate_pb) -> MsgBeginRedelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_src_address=proto.validator_src_address,
+            validator_dst_address=proto.validator_dst_address,
+            amount=Coin.from_proto(proto.amount),
         )
 
 
@@ -62,22 +100,48 @@ class MsgDelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to delegate
     """
 
-    type = "staking/MsgDelegate"
+    type_amino = "staking/MsgDelegate"
+    """"""
+    type_url = "/cosmos.staking.v1beta1.MsgDelegate"
     """"""
     action = "delegate"
     """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_address": self.validator_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDelegate:
-        data = data["value"]
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
             amount=Coin.from_data(data["amount"]),
+        )
+
+    def to_proto(self) -> MsgDelegate_pb:
+        return MsgDelegate_pb(
+            delegator_address=self.delegator_address,
+            validator_address=self.validator_address,
+            amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgDelegate_pb) -> MsgDelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            amount=Coin.from_proto(proto.amount),
         )
 
 
@@ -91,22 +155,48 @@ class MsgUndelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to undelegate
     """
 
-    type = "staking/MsgUndelegate"
+    type_amino = "staking/MsgUndelegate"
+    """"""
+    type_url = "/cosmos.staking.v1beta1.MsgUndelegate"
     """"""
     action = "begin_unbonding"
     """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
-    amount: Coin = attr.ib(converter=Coin.parse)  # type: ignore
+    amount: Coin = attr.ib(converter=Coin.parse)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "delegator_address": self.delegator_address,
+                "validator_address": self.validator_address,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUndelegate:
-        data = data["value"]
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
             amount=Coin.from_data(data["amount"]),
+        )
+
+    def to_proto(self) -> MsgUndelegate_pb:
+        return MsgUndelegate_pb(
+            delegator_address=self.delegator_address,
+            validator_address=self.validator_address,
+            amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgUndelegate_pb) -> MsgUndelegate:
+        return cls(
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            amount=Coin.from_proto(proto.amount),
         )
 
 
@@ -123,6 +213,8 @@ class MsgEditValidator(Msg):
 
     type = "staking/MsgEditValidator"
     """"""
+    type_url = "/cosmos.staking.v1beta1.MsgEditValidator"
+    """"""
     action = "edit_validator"
     """"""
 
@@ -133,12 +225,32 @@ class MsgEditValidator(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgEditValidator:
-        data = data["value"]
         msd = int(data["min_self_delegation"]) if data["min_self_delegation"] else None
         cr = Dec(data["commission_rate"]) if data["commission_rate"] else None
         return cls(
             description=data["description"],
             validator_address=data["validator_address"],
+            commission_rate=cr,
+            min_self_delegation=msd,
+        )
+
+    def to_proto(self) -> MsgEditValidator_pb:
+        return MsgEditValidator_pb(
+            description=self.description.to_proto(),
+            validator_address=self.validator_address,
+            commission_rate=str(self.commission_rate) if self.commission_rate else None,
+            min_self_delegation=str(self.min_self_delegation)
+            if self.min_self_delegation
+            else None,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgEditValidator_pb) -> MsgEditValidator:
+        msd = int(proto.min_self_delegation) if proto.min_self_delegation else "0"
+        cr = Dec(proto.commission_rate) if proto.commission_rate else Dec("0")
+        return cls(
+            description=proto.description,
+            validator_address=proto.validator_address,
             commission_rate=cr,
             min_self_delegation=msd,
         )
@@ -160,6 +272,8 @@ class MsgCreateValidator(Msg):
 
     type = "staking/MsgCreateValidator"
     """"""
+    type_url = "/cosmos.staking.v1beta1.MsgCreateValidator"
+    """"""
     action = "create_validator"
     """"""
 
@@ -173,7 +287,6 @@ class MsgCreateValidator(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgCreateValidator:
-        data = data["value"]
         return cls(
             description=Description.from_data(data["description"]),
             commission=CommissionRates.from_data(data["commission"]),
@@ -182,4 +295,27 @@ class MsgCreateValidator(Msg):
             validator_address=data["validator_address"],
             pubkey=data["pubkey"],
             value=Coin.from_data(data["value"]),
+        )
+
+    def to_proto(self) -> MsgCreateValidator_pb:
+        return MsgCreateValidator_pb(
+            description=self.description.to_proto(),
+            commission=self.commission.to_proto(),
+            min_self_delegation=self.min_self_delegation,
+            delegator_address=self.delegator_address,
+            validator_address=self.validator_address,
+            pubkey=self.pubkey.to_proto(),
+            value=self.value.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgCreateValidator_pb) -> MsgCreateValidator:
+        return cls(
+            description=Description.from_proto(proto.description),
+            commission=CommissionRates.from_proto(proto.commission),
+            min_self_delegation=int(proto.min_self_delegation),
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
+            pubkey=proto.pubkey,
+            value=Coin.from_proto(proto.value),
         )

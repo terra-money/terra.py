@@ -1,4 +1,4 @@
-from terra_sdk.core.msgauth import GenericAuthorization, SendAuthorization
+from terra_sdk.core.authz import GenericAuthorization, SendAuthorization
 
 from .base import create_demux
 

@@ -23,8 +23,8 @@ LOCALTERRA_MNEMONICS = {
 LOCALTERRA_DEFAULTS = {
     "url": "http://localhost:1317",
     "chain_id": "localterra",
-    "gas_prices": {"uluna": "0.013199"},
-    "gas_adjustment": 1.4,
+    "gas_prices": {"uusd": "0.15"},
+    "gas_adjustment": 1.75,
 }
 
 

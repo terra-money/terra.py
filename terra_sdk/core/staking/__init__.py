@@ -6,7 +6,7 @@ from .data import (
     Redelegation,
     RedelegationEntry,
     UnbondingDelegation,
-    UnbondingEntry,
+    UnbondingDelegationEntry,
     Validator,
 )
 from .msgs import (
@@ -30,6 +30,6 @@ __all__ = [
     "Redelegation",
     "RedelegationEntry",
     "UnbondingDelegation",
-    "UnbondingEntry",
+    "UnbondingDelegationEntry",
     "Validator",
 ]

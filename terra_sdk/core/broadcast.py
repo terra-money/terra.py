@@ -38,6 +38,12 @@ class BlockTxBroadcastResult(JSONSerializable):
     """If this is present, the transaction failed."""
     codespace: Optional[str] = attr.ib(default=None)
     """Error subspace name: used alongside ``code``."""
+    info: Optional[str] = attr.ib(default=None)
+    """"""
+    data: Optional[str] = attr.ib(default=None)
+    """"""
+    timestamp: Optional[str] = attr.ib(default=None)
+    """timestamp"""
 
     def is_tx_error(self) -> bool:
         """Returns whether the transaction failed."""

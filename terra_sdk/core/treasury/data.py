@@ -5,6 +5,7 @@ from __future__ import annotations
 __all__ = ["PolicyConstraints"]
 
 import attr
+from terra_proto.terra.treasury.v1beta1 import PolicyConstraints as PolicyConstraints_pb
 
 from terra_sdk.core import Coin, Dec
 
@@ -51,6 +52,14 @@ class PolicyConstraints:
                 new_rate = prev_rate - self.change_rate_max
         return new_rate
 
+    def to_amino(self) -> dict:
+        return {
+            "rate_min": str(self.rate_min),
+            "rate_max": str(self.rate_max),
+            "cap": self.cap.to_amino(),
+            "change_rate_max": str(self.change_rate_max)
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> PolicyConstraints:
         return cls(
@@ -58,4 +67,12 @@ class PolicyConstraints:
             rate_max=Dec(data["rate_max"]),
             cap=Coin.from_data(data["cap"]),
             change_rate_max=Dec(data["change_rate_max"]),
+        )
+
+    def to_proto(self) -> PolicyConstraints_pb:
+        return PolicyConstraints_pb(
+            rate_min=str(self.rate_min),
+            rate_max=str(self.rate_max),
+            cap=self.cap.to_proto(),
+            change_rate_max=str(self.change_rate_max),
         )

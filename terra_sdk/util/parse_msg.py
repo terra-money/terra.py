@@ -1,17 +1,17 @@
+from terra_sdk.core.authz import (
+    MsgExecAuthorized,
+    MsgGrantAuthorization,
+    MsgRevokeAuthorization,
+)
 from terra_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 )
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.msgauth import (
-    MsgExecAuthorized,
-    MsgGrantAuthorization,
-    MsgRevokeAuthorization,
-)
 from terra_sdk.core.oracle import (
     MsgAggregateExchangeRatePrevote,
     MsgAggregateExchangeRateVote,
@@ -34,19 +34,41 @@ from terra_sdk.core.wasm import (
     MsgStoreCode,
     MsgUpdateContractAdmin,
 )
+from terra_sdk.core.ibc.msgs import (
+    MsgCreateClient,
+    MsgUpdateClient,
+    MsgUpgradeClient,
+    MsgSubmitMisbehaviour,
+    MsgConnectionOpenInit,
+    MsgConnectionOpenTry,
+    MsgConnectionOpenAck,
+    MsgConnectionOpenConfirm,
+    MsgChannelOpenInit,
+    MsgChannelOpenTry,
+    MsgChannelOpenAck,
+    MsgChannelOpenConfirm,
+    MsgChannelCloseInit,
+    MsgChannelCloseConfirm,
+    MsgRecvPacket,
+    MsgTimeout,
+    MsgAcknowledgement
+)
+from terra_sdk.core.ibc_transfer import (
+    MsgTransfer
+)
 
-from .base import create_demux
+from .base import create_demux, create_demux_proto
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
     MsgFundCommunityPool,
-    MsgModifyWithdrawAddress,
+    MsgSetWithdrawAddress,
     MsgWithdrawDelegationReward,
     MsgWithdrawValidatorCommission,
 ]
 gov_msgs = [MsgDeposit, MsgSubmitProposal, MsgVote]
 market_msgs = [MsgSwap, MsgSwapSend]
-msgauth_msgs = [
+authz_msgs = [
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,
@@ -74,6 +96,29 @@ wasm_msgs = [
     MsgClearContractAdmin,
 ]
 
+ibc_transfer_msgs = [
+    MsgTransfer
+]
+ibc_msgs = [
+    MsgCreateClient,
+    MsgUpdateClient,
+    MsgUpgradeClient,
+    MsgSubmitMisbehaviour,
+    MsgConnectionOpenInit,
+    MsgConnectionOpenTry,
+    MsgConnectionOpenAck,
+    MsgConnectionOpenConfirm,
+    MsgChannelOpenInit,
+    MsgChannelOpenTry,
+    MsgChannelOpenAck,
+    MsgChannelOpenConfirm,
+    MsgChannelCloseInit,
+    MsgChannelCloseConfirm,
+    MsgRecvPacket,
+    MsgTimeout,
+    MsgAcknowledgement
+]
+
 parse_msg = create_demux(
     [
         *bank_msgs,
@@ -84,5 +129,21 @@ parse_msg = create_demux(
         *slashing_msgs,
         *staking_msgs,
         *wasm_msgs,
+        *ibc_msgs,
+        *ibc_transfer_msgs
+    ]
+)
+parse_proto = create_demux_proto(
+    [
+        *bank_msgs,
+        *distribution_msgs,
+        *gov_msgs,
+        *market_msgs,
+        *oracle_msgs,
+        *slashing_msgs,
+        *staking_msgs,
+        *wasm_msgs,
+        *ibc_msgs,
+        *ibc_transfer_msgs
     ]
 )

@@ -1,4 +1,4 @@
-from terra_sdk.core import Dec
+from terra_sdk.core import Dec, Numeric
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -12,7 +12,8 @@ class AsyncMintAPI(BaseAsyncAPI):
         Returns:
             Dec: inflation
         """
-        return Dec(await self._c._get("/minting/inflation"))
+        res = await self._c._get("/cosmos/mint/v1beta1/inflation")
+        return Dec(res.get("inflation"))
 
     async def annual_provisions(self) -> Dec:
         """Fetches the annual provisions.
@@ -20,7 +21,8 @@ class AsyncMintAPI(BaseAsyncAPI):
         Returns:
             Dec: annual provisions
         """
-        return Dec(await self._c._get("/minting/annual-provisions"))
+        res = await self._c._get("/cosmos/mint/v1beta1/annual_provisions")
+        return Dec(res.get("annual_provisions"))
 
     async def parameters(self) -> dict:
         """Fetches the Mint module's parameters.
@@ -28,7 +30,16 @@ class AsyncMintAPI(BaseAsyncAPI):
         Returns:
             dict: Mint module parameters
         """
-        return await self._c._get("/minting/parameters")
+        res = await self._c._get("/cosmos/mint/v1beta1/params")
+        params = res.get("params")
+        return {
+            "mint_denom": params["mint_denom"],
+            "inflation_rate_change": Dec(params["inflation_rate_change"]),
+            "inflation_max": Dec(params["inflation_max"]),
+            "inflation_min": Dec(params["inflation_min"]),
+            "goal_bonded": Dec(params["goal_bonded"]),
+            "blocks_per_year": Numeric.parse(params["blocks_per_year"]),
+        }
 
 
 class MintAPI(AsyncMintAPI):

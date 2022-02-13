@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.terra.market.v1beta1 import MsgSwap as MsgSwap_pb
+from terra_proto.terra.market.v1beta1 import MsgSwapSend as MsgSwapSend_pb
 
 from terra_sdk.core import AccAddress, Coin
 from terra_sdk.core.msg import Msg
@@ -20,7 +22,9 @@ class MsgSwap(Msg):
         ask_denom: denom into which to swap
     """
 
-    type = "market/MsgSwap"
+    type_amino = "market/MsgSwap"
+    """"""
+    type_url = "/terra.market.v1beta1.MsgSwap"
     """"""
     action = "swap"
     """"""
@@ -29,13 +33,37 @@ class MsgSwap(Msg):
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "trader": self.trader,
+                "offer_coin": self.offer_coin.to_amino(),
+                "ask_denom": self.ask_denom
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:
-        data = data["value"]
         return cls(
             trader=data["trader"],
             offer_coin=Coin.from_data(data["offer_coin"]),
             ask_denom=data["ask_denom"],
+        )
+
+    def to_proto(self) -> MsgSwap_pb:
+        return MsgSwap_pb(
+            trader=self.trader,
+            offer_coin=self.offer_coin.to_proto(),
+            ask_denom=self.ask_denom,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgSwap_pb) -> MsgSwap:
+        return cls(
+            trader=proto.trader,
+            offer_coin=Coin.from_proto(proto.offer_coin),
+            ask_denom=proto.ask_denom,
         )
 
 
@@ -50,7 +78,9 @@ class MsgSwapSend(Msg):
         ask_denom: denom into which to swap
     """
 
-    type = "market/MsgSwapSend"
+    type_amino = "market/MsgSwapSend"
+    """"""
+    type_url = "/terra.market.v1beta1.MsgSwapSend"
     """"""
     action = "swapsend"
     """"""
@@ -60,12 +90,40 @@ class MsgSwapSend(Msg):
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "from_address": self.from_address,
+                "to_address": self.to_address,
+                "offer_coin": self.offer_coin.to_amino(),
+                "ask_denom": self.ask_denom
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSwapSend:
-        data = data["value"]
         return cls(
             from_address=data["from_address"],
             to_address=data["to_address"],
             offer_coin=Coin.from_data(data["offer_coin"]),
             ask_denom=data["ask_denom"],
         )
+
+    def to_proto(self) -> MsgSwapSend_pb:
+        return MsgSwapSend_pb(
+            from_address=self.from_address,
+            to_address=self.to_address,
+            offer_coin=self.offer_coin.to_proto(),
+            ask_denom=self.ask_denom,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgSwapSend_pb) -> MsgSwapSend:
+        return cls(
+            from_address=proto.from_address,
+            to_address=proto.to_address,
+            offer_coin=Coin.from_proto(proto.offer_coin),
+            ask_denom=proto.ask_denom,
+        )
+

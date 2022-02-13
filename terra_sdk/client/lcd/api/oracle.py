@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from terra_sdk.core import AccAddress, Coin, Coins, ValAddress
+from terra_sdk.core import AccAddress, Coin, Coins, Dec, Numeric, ValAddress
 from terra_sdk.core.oracle import (
     AggregateExchangeRatePrevote,
     AggregateExchangeRateVote,
@@ -19,9 +19,10 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             Coins: exchange rates of Luna
         """
-        res = await self._c._get("/oracle/denoms/exchange_rates")
+        res = await self._c._get("/terra/oracle/v1beta1/denoms/exchange_rates")
+        rates = res.get("exchange_rates")
         if res:
-            return Coins.from_data(res)
+            return Coins.from_data(rates)
         else:
             return Coins({})
 
@@ -34,11 +35,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             Coin: exchange rate of Luna
         """
-        rates = self.exchange_rates()
-        # Types ignored to ensure await isn't called on non-coroutine in sync version
-        if type(rates) != Coins:
-            rates = await rates  # type: ignore
-        return rates[denom]  # type: ignore
+        res = await self._c._get(f"/terra/oracle/v1beta1/denoms/{denom}/exchange_rate")
+        return Dec(res.get("exchange_rate"))
 
     async def active_denoms(self) -> List[str]:
         """Fetches current active denoms.
@@ -46,7 +44,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             List[str]: active denoms
         """
-        return await self._c._get("/oracle/denoms/actives")
+        res = await self._c._get("/terra/oracle/v1beta1/denoms/actives")
+        return res.get("actives")
 
     async def feeder_address(self, validator: ValAddress) -> AccAddress:
         """Fetches associated feeder address for a validator.
@@ -57,7 +56,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             AccAddress: feeder address
         """
-        return await self._c._get(f"/oracle/voters/{validator}/feeder")
+        res = await self._c._get(f"/terra/oracle/v1beta1/validators/{validator}/feeder")
+        return res.get("feeder_addr")
 
     async def misses(self, validator: ValAddress) -> int:
         """Fetches current value of miss counter for a validator.
@@ -68,7 +68,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             int: current number of misses
         """
-        return int(await self._c._get(f"/oracle/voters/{validator}/miss"))
+        res = await self._c._get(f"terra/oracle/v1beta1/validators/{validator}/miss")
+        return int(res.get("miss_counter"))
 
     async def aggregate_prevote(
         self, validator: ValAddress
@@ -82,13 +83,15 @@ class AsyncOracleAPI(BaseAsyncAPI):
             Optional[AggregateExchangeRatePrevote]: current aggegate prevote (if any).
         """
         try:
-            res = await self._c._get(f"/oracle/voters/{validator}/aggregate_prevote")
+            res = await self._c._get(
+                f"/terra/oracle/v1beta1/validators/{validator}/aggregate_prevote"
+            )
         except LCDResponseError as e:
             if e.response.status == 404:
                 return None
             else:
                 raise e
-        return AggregateExchangeRatePrevote.from_data(res)
+        return AggregateExchangeRatePrevote.from_data(res.get("aggregate_prevote"))
 
     async def aggregate_vote(
         self, validator: ValAddress
@@ -102,13 +105,15 @@ class AsyncOracleAPI(BaseAsyncAPI):
             Optional[AggregateExchangeRatePrevote]: current aggegate vote (if any).
         """
         try:
-            res = await self._c._get(f"/oracle/voters/{validator}/aggregate_vote")
+            res = await self._c._get(
+                f"/terra/oracle/v1beta1/validators/{validator}/aggregate_vote"
+            )
         except LCDResponseError as e:
             if e.response.status == 404:
                 return None
             else:
                 raise e
-        return AggregateExchangeRateVote.from_data(res)
+        return AggregateExchangeRateVote.from_data(res.get("aggregate_vote"))
 
     async def parameters(self) -> dict:
         """Fetches Oracle module parameters.
@@ -116,7 +121,23 @@ class AsyncOracleAPI(BaseAsyncAPI):
         Returns:
             dict: Oracle module parameters
         """
-        return await self._c._get("/oracle/parameters")
+        res = await self._c._get("/terra/oracle/v1beta1/params")
+        params = res.get("params")
+        return {
+            "vote_period": Numeric.parse(params["vote_period"]),
+            "vote_threshold": Dec(params["vote_threshold"]),
+            "reward_band": Dec(params["reward_band"]),
+            "reward_distribution_window": Numeric.parse(
+                params["reward_distribution_window"]
+            ),
+            "whitelist": [
+                {"name": x["name"], "tobin_tax": Dec(x["tobin_tax"])}
+                for x in params["whitelist"]
+            ],
+            "slash_fraction": Dec(params["slash_fraction"]),
+            "slash_window": Numeric.parse(params["slash_window"]),
+            "min_valid_per_window": Dec(params["min_valid_per_window"]),
+        }
 
 
 class OracleAPI(AsyncOracleAPI):

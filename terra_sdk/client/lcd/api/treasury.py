@@ -1,4 +1,7 @@
-from terra_sdk.core import Coin, Coins, Dec
+from typing import Optional
+
+from terra_sdk.core import Coin, Coins, Dec, Numeric
+from terra_sdk.core.treasury import PolicyConstraints
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -15,17 +18,20 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Coin: tax cap
         """
-        res = await self._c._get(f"/treasury/tax_cap/{denom}")
-        return Coin(denom, res)
+        res = await self._c._get(f"/terra/treasury/v1beta1/tax_caps/{denom}")
+        return Coin(denom, res.get("tax_cap"))
 
-    async def tax_rate(self) -> Dec:
+    async def tax_rate(self, height: Optional[int] = None) -> Dec:
         """Fetches the current tax rate.
 
         Returns:
             Dec: tax rate
         """
-        res = await self._c._get("/treasury/tax_rate")
-        return Dec(res)
+        params = None
+        if height is not None:
+            params = {"height": height}
+        res = await self._c._get("/terra/treasury/v1beta1/tax_rate", params)
+        return Dec(res.get("tax_rate"))
 
     async def reward_weight(self) -> Dec:
         """Fetches the current reward rate.
@@ -33,8 +39,8 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Dec: reward weight
         """
-        res = await self._c._get("/treasury/reward_weight")
-        return Dec(res)
+        res = await self._c._get("//terra/treasury/v1beta1/reward_weight")
+        return Dec(res.get("reward_weight"))
 
     async def tax_proceeds(self) -> Coins:
         """Fetches the current tax proceeds.
@@ -42,8 +48,8 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Coins: tax proceeds
         """
-        res = await self._c._get("/treasury/tax_proceeds")
-        return Coins.from_data(res)
+        res = await self._c._get("/terra/treasury/v1beta1/tax_proceeds")
+        return Coins.from_data(res.get("tax_proceeds"))
 
     async def seigniorage_proceeds(self) -> Coin:
         """Fetches the current seigniorage proceeds.
@@ -51,8 +57,8 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Coin: seigniorage proceeds
         """
-        res = await self._c._get("/treasury/seigniorage_proceeds")
-        return Coin("uluna", res)
+        res = await self._c._get("/terra/treasury/v1beta1/seigniorage_proceeds")
+        return Coin("uluna", res.get("seigniorage_proceeds"))
 
     async def parameters(self) -> Coin:
         """Fetches the Treasury module parameters.
@@ -60,8 +66,17 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Coin: Treasury module parameters.
         """
-        res = await self._c._get("/treasury/parameters")
-        return res
+        res = await self._c._get("/terra/treasury/v1beta1/params")
+        params = res.get("params")
+        return {
+            "tax_policy": PolicyConstraints.from_data(params["tax_policy"]),
+            "reward_policy": PolicyConstraints.from_data(params["reward_policy"]),
+            "mining_increment": Dec(params["mining_increment"]),
+            "seigniorage_burden_target": Dec(params["seigniorage_burden_target"]),
+            "window_long": Numeric.parse(params["window_long"]),
+            "window_short": Numeric.parse(params["window_short"]),
+            "window_probation": Numeric.parse(params["window_probation"]),
+        }
 
 
 class TreasuryAPI(AsyncTreasuryAPI):
@@ -72,7 +87,7 @@ class TreasuryAPI(AsyncTreasuryAPI):
     tax_cap.__doc__ = AsyncTreasuryAPI.tax_cap.__doc__
 
     @sync_bind(AsyncTreasuryAPI.tax_rate)
-    def tax_rate(self) -> Dec:
+    def tax_rate(self, height: Optional[int] = None) -> Dec:
         pass
 
     tax_rate.__doc__ = AsyncTreasuryAPI.tax_rate.__doc__

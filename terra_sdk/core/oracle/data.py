@@ -3,6 +3,12 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.terra.oracle.v1beta1 import (
+    AggregateExchangeRatePrevote as AggregateExchangeRatePrevote_pb,
+)
+from terra_proto.terra.oracle.v1beta1 import (
+    AggregateExchangeRateVote as AggregateExchangeRateVote_pb,
+)
 
 from terra_sdk.core import Coin, Coins, ValAddress
 from terra_sdk.util.json import JSONSerializable
@@ -22,6 +28,13 @@ class AggregateExchangeRateVote(JSONSerializable):
 
     voter: ValAddress = attr.ib()
     """Validator that sent the aggregate vote."""
+
+    def to_amino(self) -> dict:
+        tuples = self.exchange_rate_tuples.to_amino()
+        return {
+            "exchange_rate_tuples": [{"denom": x.denom, "exchange_rate":str(x.amount)} for x in tuples],
+            "voter": self.voter
+        }
 
     def to_data(self) -> dict:
         return {
@@ -44,6 +57,15 @@ class AggregateExchangeRateVote(JSONSerializable):
             voter=data["voter"],
         )
 
+    def to_proto(self) -> AggregateExchangeRateVote_pb:
+        return AggregateExchangeRateVote_pb(
+            exchange_rate_tuples=[
+                {"denom": tuple.denom, "exchange_rate": str(tuple.amount)}
+                for tuple in self.exchange_rate_tuples.to_list()
+            ],
+            voter=self.voter,
+        )
+
 
 @attr.s
 class AggregateExchangeRatePrevote(JSONSerializable):
@@ -58,11 +80,18 @@ class AggregateExchangeRatePrevote(JSONSerializable):
     submit_block: int = attr.ib(converter=int)
     """Block height at which the aggregate prevote was submitted."""
 
+    def to_amino(self) -> dict:
+        return {
+            "hash": self.hash,
+            "voter": self.voter,
+            "submit_block": str(self.submit_block)
+        }
+
     def to_data(self) -> dict:
         return {
             "hash": self.hash,
             "voter": self.voter,
-            "submit_block": str(self.submit_block),
+            "submit_block": str(self.submit_block)
         }
 
     @classmethod
@@ -71,4 +100,9 @@ class AggregateExchangeRatePrevote(JSONSerializable):
             hash=data["hash"],
             voter=data["voter"],
             submit_block=int(data["submit_block"]),
+        )
+
+    def to_proto(self) -> AggregateExchangeRatePrevote_pb:
+        return AggregateExchangeRatePrevote_pb(
+            hash=self.hash, voter=self.voter, submit_block=self.submit_block
         )

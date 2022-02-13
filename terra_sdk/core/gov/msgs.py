@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import attr
+from terra_proto.cosmos.gov.v1beta1 import MsgDeposit as MsgDeposit_pb
+from terra_proto.cosmos.gov.v1beta1 import MsgSubmitProposal as MsgSubmitProposal_pb
+from terra_proto.cosmos.gov.v1beta1 import MsgVote as MsgVote_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 
-from .data import Content
+from .data import Content, VoteOption
 
 __all__ = ["MsgSubmitProposal", "MsgDeposit", "MsgVote"]
 
@@ -22,7 +25,9 @@ class MsgSubmitProposal(Msg):
         proposer: proposal submitter
     """
 
-    type = "gov/MsgSubmitProposal"
+    type_amino = "gov/MsgSubmitProposal"
+    """"""
+    type_url = "/cosmos.gov.v1beta1.MsgSubmitProposal"
     """"""
     action = "submit_proposal"
     """"""
@@ -31,16 +36,40 @@ class MsgSubmitProposal(Msg):
     initial_deposit: Coins = attr.ib(converter=Coins)
     proposer: AccAddress = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "content": self.content.to_amino(),
+                "initial_deposit": self.initial_deposit.to_amino(),
+                "proposer": self.proposer
+            }
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
         from terra_sdk.util.parse_content import parse_content
 
-        data = data["value"]
         content = parse_content(data["content"])
         return cls(
             content=content,
             initial_deposit=Coins.from_data(data["initial_deposit"]),
             proposer=data["proposer"],
+        )
+
+    def to_proto(self) -> MsgSubmitProposal_pb:
+        return MsgSubmitProposal_pb(
+            content=self.content.to_proto(),
+            initial_deposit=self.initial_deposit.to_proto(),
+            proposer=self.proposer,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
+        return cls(
+            content=Content.from_proto(proto["content"]),
+            initial_deposit=Coins.from_proto(proto["initial_deposit"]),
+            proposer=proto["proposer"],
         )
 
 
@@ -54,7 +83,9 @@ class MsgDeposit(Msg):
         amount (Coins): amount to deposit
     """
 
-    type = "gov/MsgDeposit"
+    type_amino = "gov/MsgDeposit"
+    """"""
+    type_url = "/cosmos.gov.v1beta1.MsgDeposit"
     """"""
     action = "deposit"
     """"""
@@ -62,6 +93,16 @@ class MsgDeposit(Msg):
     proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "depositor": self.depositor,
+                "amount": self.amount.to_amino()
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -75,11 +116,25 @@ class MsgDeposit(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgDeposit:
-        data = data["value"]
         return cls(
             proposal_id=data["proposal_id"],
             depositor=data["depositor"],
             amount=Coins.from_data(data["amount"]),
+        )
+
+    def to_proto(self) -> MsgDeposit_pb:
+        return MsgDeposit_pb(
+            proposal_id=self.proposal_id,
+            depositor=self.depositor,
+            amount=self.amount.to_proto(),
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgDeposit_pb) -> MsgDeposit:
+        return cls(
+            proposal_id=proto["proposal_id"],
+            depositor=proto["depositor"],
+            amount=Coins.from_proto(proto["amount"]),
         )
 
 
@@ -94,7 +149,9 @@ class MsgVote(Msg):
             :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`,
     """
 
-    type = "gov/MsgVote"
+    type_amino = "gov/MsgVote"
+    """"""
+    type_url = "/cosmos.gov.v1beta1.MsgVote"
     """"""
     action = "vote"
     """"""
@@ -113,8 +170,9 @@ class MsgVote(Msg):
 
     proposal_id: int = attr.ib(converter=int)
     voter: AccAddress = attr.ib()
-    option: str = attr.ib()
+    option: VoteOption = attr.ib()
 
+    """
     @option.validator
     def _check_option(self, attribute, value):
         possible_options = [
@@ -128,6 +186,17 @@ class MsgVote(Msg):
             raise TypeError(
                 f"incorrect value for option: {value}, must be one of: {possible_options}"
             )
+    """
+
+    def to_amino(self) -> dict:
+        return {
+            "type": self.type_amino,
+            "value": {
+                "proposal_id": str(self.proposal_id),
+                "voter": self.voter,
+                "option": self.option.name
+            }
+        }
 
     def to_data(self) -> dict:
         return {
@@ -141,9 +210,21 @@ class MsgVote(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgVote:
-        data = data["value"]
         return cls(
             proposal_id=data["proposal_id"],
             voter=data["voter"],
             option=data["option"],
+        )
+
+    def to_proto(self) -> MsgVote_pb:
+        return MsgVote_pb(
+            proposal_id=self.proposal_id, voter=self.voter, options=self.option
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgVote_pb) -> MsgVote:
+        return cls(
+            proposal_id=proto["proposal_id"],
+            voter=proto["voter"],
+            option=proto["option"],
         )

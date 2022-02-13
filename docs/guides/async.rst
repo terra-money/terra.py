@@ -17,7 +17,7 @@ You can replace your LCDClient instance with AsyncLCDClient inside a coroutine f
 
     async def main():
         terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")
-        total_supply = await terra.supply.total()
+        total_supply = await terra.bank.total()
         print(total_supply)
         await terra.session.close() # you must close the session
 
@@ -35,7 +35,7 @@ session. Here's the same code as above, this time using the ``async with`` const
 
     async def main():
         async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
-            total_supply = await terra.supply.total()
+            total_supply = await terra.bank.total()
             print(total_supply)
 
     asyncio.get_event_loop().run_until_complete(main())
@@ -49,7 +49,8 @@ are also asychronous and therefore must be awaited.
 .. code-block:: python
     :emphasize-lines: 12-13
 
-    import asyncio 
+    import asyncio
+    from terra_sdk.client.lcd.api.tx import CreateTxOptions
     from terra_sdk.client.lcd import AsyncLCDClient
     from terra_sdk.key.mnemonic import MnemonicKey
     from terra_sdk.core import Coins
@@ -62,7 +63,9 @@ are also asychronous and therefore must be awaited.
             wallet = terra.wallet(mk)
             account_number = await wallet.account_number()
             tx = await wallet.create_and_sign_tx(
-                msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
+                CreateTxOptions(
+                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
+                )
             )
     
     asyncio.get_event_loop().run_until_complete(main())
@@ -83,7 +86,7 @@ for more performance. For example:
 
     async def main():
         async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
-            total_supply = await wallet.supply.total()
+            total_supply = await wallet.bank.total()
 
     uvloop.install() 
     asyncio.get_event_loop().run_until_complete(main())
