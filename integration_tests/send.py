@@ -22,7 +22,6 @@ def main():
     print(msg)
     tx = test1.create_and_sign_tx(CreateTxOptions(
         msgs=[msg], gas_prices="0.2uluna", gas_adjustment="1.4",
-        sign_mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON
     ))
     print(tx)
 

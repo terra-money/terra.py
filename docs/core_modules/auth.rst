@@ -28,5 +28,5 @@ Transactions
 Public Key
 ^^^^^^^^^^
 
-.. automodule:: terra_sdk.core.auth.data.public_key
+.. automodule:: terra_sdk.core.public_key
     :members:

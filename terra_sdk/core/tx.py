@@ -191,6 +191,7 @@ class TxBody(JSONSerializable):
 @attr.s
 class AuthInfo(JSONSerializable):
     """AuthInfo
+
     Args:
         signer_infos: information of the signers
         fee: Fee
