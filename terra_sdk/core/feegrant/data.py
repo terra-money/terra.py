@@ -39,15 +39,15 @@ class BasicAllowance(JSONSerializable):
         return {
             "type": self.type_amino,
             "value": {
-                "spend_limit": self.spend_limit.to_amino(),
-                "expiration": to_isoformat(self.expiration)
+                "spend_limit": self.spend_limit.to_amino() if self.spend_limit else None,
+                "expiration": to_isoformat(self.expiration) if self.expiration else None
             }
         }
 
     def to_data(self) -> dict:
         return {
-            "spend_limit": self.spend_limit.to_data(),
-            "expiration": to_isoformat(self.expiration)
+            "spend_limit": self.spend_limit.to_data() if self.spend_limit else None,
+            "expiration": to_isoformat(self.expiration) if self.expiration else None
         }
 
     @classmethod
@@ -56,12 +56,13 @@ class BasicAllowance(JSONSerializable):
         exp = data.get("expiration")
         return cls(
             spend_limit=Coins.from_data(sl) if sl else None,
-            expiration=exp
+            expiration=exp if exp else None
         )
 
     def to_proto(self) -> BasicAllowance_pb:
         return BasicAllowance_pb(
-            spend_limit=self.spend_limit.to_proto(), expiration=self.expiration
+            spend_limit=self.spend_limit.to_proto() if self.spend_limit else [],
+            expiration=self.expiration
         )
 
 
