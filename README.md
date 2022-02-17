@@ -164,8 +164,9 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
 ```
 >>> from terra_sdk.core.auth import Fee
 >>> from terra_sdk.core.bank import MsgSend
+>>> from terra_sdk.client.lcd.api.tx import CreateTxOptions
 
->>> tx = wallet.create_and_sign_tx(
+>>> tx = wallet.create_and_sign_tx(CreateTxOptions(
         msgs=[MsgSend(
             wallet.key.acc_address,
             RECIPIENT,
@@ -173,7 +174,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
         )],
         memo="test transaction!",
         fee=Fee(200000, "120000uluna")
-    )
+    ))
 ```
 
 You should now be able to broadcast your transaction to the network.
