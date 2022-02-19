@@ -131,7 +131,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             TxInfo: transaction info
         """
         res = await self._c._get(f"/cosmos/tx/v1beta1/txs/{tx_hash}")
-        return TxInfo.from_data(res)
+        return TxInfo.from_data(res["tx_response"])
 
     async def create(
         self, signers: List[SignerOptions], options: CreateTxOptions
