@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import re
 from dataclasses import dataclass
 from typing import Union
@@ -49,6 +50,10 @@ class Coin(JSONSerializable):
     def to_int_coin(self) -> Coin:
         """Creates a new :class:`Coin` with an ``int`` amount."""
         return Coin(self.denom, int(self.amount))
+
+    def to_int_ceil_coin(self) -> Coin:
+        """Turns the :class:`coin` into an ``int`` coin with ceiling the amount."""
+        return Coin(self.denom, int(math.ceil(self.amount)))
 
     def to_dec_coin(self) -> Coin:
         """Creates a new :class:`Coin` with a :class:`Dec` amount."""
