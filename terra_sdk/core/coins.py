@@ -149,6 +149,10 @@ class Coins(JSONSerializable, List[Coin_pb]):
         """Creates new set of :class:`Coins` that have ``int`` amounts."""
         return Coins(c.to_int_coin() for c in self)
 
+    def to_int_ceil_coins(self) -> Coins:
+        """Creates a new :class:`Coins` object with all ``int`` coins with ceiling the amount"""
+        return Coins(c.to_int_ceil_coin() for c in self)
+
     def add(self, addend: Union[Coin, Coins]) -> Coins:
         """Performs addition, which combines the sets of Coin objects. Coins of similar denoms
         will be merged into one Coin representing the denom.

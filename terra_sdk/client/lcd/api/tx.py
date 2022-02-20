@@ -1,7 +1,6 @@
 import base64
 import copy
-import urllib.parse
-from typing import List, Optional, Union, Dict
+from typing import List, Optional
 from multidict import CIMultiDict
 import attr
 
@@ -14,11 +13,9 @@ from terra_sdk.core.broadcast import (
     SyncTxBroadcastResult,
 )
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.block import Block
 from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, TxInfo
 from terra_sdk.util.hash import hash_amino
 from terra_sdk.util.json import JSONSerializable
-from . import tendermint
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -47,6 +44,7 @@ class CreateTxOptions:
         fee (Optional[Fee], optional): transaction fee. If ``None``, will be estimated.
             See more on `fee estimation`_.
         memo (str, optional): optional short string to include with transaction.
+        gas (str, optional): gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically
         gas_prices (Coins.Input, optional): gas prices for fee estimation.
         gas_adjustment (Numeric.Input, optional): gas adjustment for fee estimation.
         fee_denoms (List[str], optional): list of denoms to use for fee after estimation.
@@ -62,7 +60,7 @@ class CreateTxOptions:
     gas: Optional[str] = attr.ib(default=None)
     gas_prices: Optional[Coins.Input] = attr.ib(default=None)
     gas_adjustment: Optional[Numeric.Output] = attr.ib(
-        default=1, converter=Numeric.parse
+        default=0, converter=Numeric.parse
     )
     fee_denoms: Optional[List[str]] = attr.ib(default=None)
     account_number: Optional[int] = attr.ib(default=None)
@@ -140,15 +138,8 @@ class AsyncTxAPI(BaseAsyncAPI):
         chain ID, account number, sequence and fee estimation.
 
         Args:
-            sender (AccAddress): transaction sender's account address
-            msgs (List[Msg]): list of messages to include
-            fee (Optional[Fee], optional): fee to use (estimates if empty).
-            memo (str, optional): memo to use. Defaults to "".
-            gas_prices (Optional[Coins.Input], optional): gas prices for fee estimation.
-            gas_adjustment (Optional[Numeric.Input], optional): gas adjustment for fee estimation.
-            fee_denoms (Optional[List[str]], optional): list of denoms to use for gas fee when estimating.
-            account_number (Optional[int], optional): account number to use.
-            sequence (Optional[int], optional): sequence number to use.
+            signers (List[SingerOptions]): options about signers
+            options (CreateTxOptions): options about creating a tx
 
         Returns:
             Tx: unsigned tx
@@ -214,12 +205,12 @@ class AsyncTxAPI(BaseAsyncAPI):
         tx.append_empty_signatures(signers)
 
         gas = options.gas
-        if gas is None or gas == "auto" or gas == 0:
+        if gas is None or gas == "auto" or int(gas) == 0:
             opt = copy.deepcopy(options)
             opt.gas_adjustment = gas_adjustment
             gas = str(self.estimate_gas(tx, opt))
 
-        fee_amount = gas_prices_coins.mul(gas).to_int_coins() if gas_prices_coins else Coins.from_str('0uusd')
+        fee_amount = gas_prices_coins.mul(gas).to_int_ceil_coins() if gas_prices_coins else Coins.from_str('0uusd')
 
         return Fee(Numeric.parse(gas), fee_amount, "", "")
 
