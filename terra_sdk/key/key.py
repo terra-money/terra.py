@@ -3,9 +3,6 @@ import copy
 from typing import Optional
 
 import attr
-from terra_sdk.core.bech32 import get_bech
-
-from terra_sdk.core.mode_info import ModeInfo, ModeInfoSingle
 
 from terra_sdk.core import (
     AccAddress,
@@ -15,7 +12,13 @@ from terra_sdk.core import (
     ValAddress,
     ValPubKey,
 )
-from terra_sdk.core.public_key import PublicKey, address_from_public_key, pubkey_from_public_key
+from terra_sdk.core.bech32 import get_bech
+from terra_sdk.core.mode_info import ModeInfo, ModeInfoSingle
+from terra_sdk.core.public_key import (
+    PublicKey,
+    address_from_public_key,
+    pubkey_from_public_key,
+)
 from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
 from terra_sdk.core.tx import SignerInfo, SignMode, Tx

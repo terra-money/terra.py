@@ -22,11 +22,7 @@ class ParamChange(JSONSerializable):
     value: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {
-            "subspace": self.subspace,
-            "key": self.key,
-            "value": self.value
-        }
+        return {"subspace": self.subspace, "key": self.key, "value": self.value}
 
     @classmethod
     def from_data(cls, data: dict) -> ParamChange:
@@ -62,8 +58,8 @@ class ParameterChangeProposal(JSONSerializable):
             "value": {
                 "title": self.title,
                 "description": self.description,
-                "changes": [change.to_amino() for change in self.changes]
-            }
+                "changes": [change.to_amino() for change in self.changes],
+            },
         }
 
     @classmethod

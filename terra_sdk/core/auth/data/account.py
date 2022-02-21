@@ -8,7 +8,6 @@ from .lazy_graded_vesting_account import LazyGradedVestingAccount
 
 
 class Account(JSONSerializable):
-
     @abstractmethod
     def get_account_number(self) -> int:
         pass

@@ -3,17 +3,22 @@
 from __future__ import annotations
 
 import attr
-from terra_proto.ibc.core.client.v1 import (
-    MsgCreateClient as MsgCreateClient_pb,
-    MsgUpdateClient as MsgUpdateClient_pb,
-    MsgUpgradeClient as MsgUpgradeClient_pb,
-    MsgSubmitMisbehaviour as MsgSubmitMisbehaviour_pb
-)
 from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.ibc.core.client.v1 import MsgCreateClient as MsgCreateClient_pb
+from terra_proto.ibc.core.client.v1 import (
+    MsgSubmitMisbehaviour as MsgSubmitMisbehaviour_pb,
+)
+from terra_proto.ibc.core.client.v1 import MsgUpdateClient as MsgUpdateClient_pb
+from terra_proto.ibc.core.client.v1 import MsgUpgradeClient as MsgUpgradeClient_pb
 
 from terra_sdk.core.msg import Msg
 
-__all__ = ["MsgCreateClient", "MsgUpdateClient", "MsgUpgradeClient", "MsgSubmitMisbehaviour"]
+__all__ = [
+    "MsgCreateClient",
+    "MsgUpdateClient",
+    "MsgUpgradeClient",
+    "MsgSubmitMisbehaviour",
+]
 
 
 @attr.s
@@ -37,14 +42,14 @@ class MsgCreateClient(Msg):
         return cls(
             client_state=data["client_state"],
             consensus_state=data["consensus_state"],
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgCreateClient_pb:
         return MsgCreateClient_pb(
             client_state=Any_pb().from_dict(self.client_state),
             consensus_state=Any_pb().from_dict(self.consensus_state),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -52,7 +57,7 @@ class MsgCreateClient(Msg):
         return cls(
             client_state=proto.client_state.to_dict(),
             consensus_state=proto.consensus_state.to_dict(),
-            signer=proto.signer
+            signer=proto.signer,
         )
 
 
@@ -75,16 +80,14 @@ class MsgUpdateClient(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgUpdateClient:
         return cls(
-            client_id=data["client_id"],
-            header=data["header"],
-            signer=data["signer"]
+            client_id=data["client_id"], header=data["header"], signer=data["signer"]
         )
 
     def to_proto(self) -> MsgUpdateClient_pb:
         return MsgUpdateClient_pb(
             client_id=self.client_id,
             header=Any_pb().from_dict(self.header),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -92,7 +95,7 @@ class MsgUpdateClient(Msg):
         return cls(
             client_id=proto.client_id,
             header=proto.header.to_dict(),
-            signer=proto.signer
+            signer=proto.signer,
         )
 
 
@@ -123,7 +126,7 @@ class MsgUpgradeClient(Msg):
             consensus_state=data["consensus_state"],
             proof_upgrade_client=data["proof_upgrade_client"],
             proof_upgrade_consensus_state=data["proof_upgrade_consensus_state"],
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgUpgradeClient_pb:
@@ -133,7 +136,7 @@ class MsgUpgradeClient(Msg):
             consensus_state=Any_pb().from_dict(self.consensus_state),
             proof_upgrade_client=self.proof_upgrade_client,
             proof_upgrade_consensus_state=self.proof_upgrade_consensus_state,
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -144,7 +147,7 @@ class MsgUpgradeClient(Msg):
             consensus_state=proto.consensus_state.to_dict(),
             proof_upgrade_client=proto.proof_upgrade_client,
             proof_upgrade_consensus_state=proto.proof_upgrade_consensus_state,
-            signer=proto.signer
+            signer=proto.signer,
         )
 
 
@@ -169,14 +172,14 @@ class MsgSubmitMisbehaviour(Msg):
         return cls(
             client_id=data["client_id"],
             misbehaviour=data["misbehaviour"],
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgSubmitMisbehaviour_pb:
         return MsgSubmitMisbehaviour_pb(
             client_id=self.client_id,
             misbehaviour=Any_pb().from_dict(self.misbehaviour),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -184,5 +187,5 @@ class MsgSubmitMisbehaviour(Msg):
         return cls(
             client_id=proto["client_id"],
             misbehaviour=Any_pb().from_dict(proto["misbehaviour"]),
-            signer=proto["signer"]
+            signer=proto["signer"],
         )

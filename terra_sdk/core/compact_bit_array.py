@@ -4,16 +4,13 @@ from __future__ import annotations
 import math
 
 import attr
-
-from terra_sdk.util.json import JSONSerializable
-
 from terra_proto.cosmos.crypto.multisig.v1beta1 import (
     CompactBitArray as CompactBitArray_pb,
 )
 
-__all__ = [
-    "CompactBitArray"
-]
+from terra_sdk.util.json import JSONSerializable
+
+__all__ = ["CompactBitArray"]
 
 
 @attr.s

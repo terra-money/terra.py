@@ -84,10 +84,7 @@ class MsgDelegateFeedConsent(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {
-                "operator": self.operator,
-                "delegate": self.delegate
-            }
+            "value": {"operator": self.operator, "delegate": self.delegate},
         }
 
     @classmethod
@@ -99,10 +96,7 @@ class MsgDelegateFeedConsent(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgDelegateFeedConsent_pb) -> MsgDelegateFeedConsent:
-        return cls(
-            operator=proto.operator,
-            delegate=proto.delegate
-        )
+        return cls(operator=proto.operator, delegate=proto.delegate)
 
 
 @attr.s
@@ -130,8 +124,8 @@ class MsgAggregateExchangeRatePrevote(Msg):
             "value": {
                 "hash": self.hash,
                 "feeder": self.feeder,
-                "validator": self.validator
-            }
+                "validator": self.validator,
+            },
         }
 
     @classmethod
@@ -148,7 +142,9 @@ class MsgAggregateExchangeRatePrevote(Msg):
         )
 
     @classmethod
-    def from_proto(cls, proto: MsgAggregateExchangeRatePrevote_pb) -> MsgAggregateExchangeRatePrevote:
+    def from_proto(
+        cls, proto: MsgAggregateExchangeRatePrevote_pb
+    ) -> MsgAggregateExchangeRatePrevote:
         return cls(
             hash=proto.hash,
             feeder=proto.feeder,
@@ -184,8 +180,8 @@ class MsgAggregateExchangeRateVote(Msg):
                 "exchange_rates": str(self.exchange_rates.to_dec_coins()),
                 "salt": self.salt,
                 "feeder": self.feeder,
-                "validator": self.validator
-            }
+                "validator": self.validator,
+            },
         }
 
     def to_data(self) -> dict:
@@ -211,7 +207,9 @@ class MsgAggregateExchangeRateVote(Msg):
         )
 
     @classmethod
-    def from_proto(cls, proto: MsgAggregateExchangeRateVote_pb) -> MsgAggregateExchangeRateVote:
+    def from_proto(
+        cls, proto: MsgAggregateExchangeRateVote_pb
+    ) -> MsgAggregateExchangeRateVote:
         return cls(
             exchange_rates=Coins.from_proto(proto.exchange_rates),
             salt=proto.salt,

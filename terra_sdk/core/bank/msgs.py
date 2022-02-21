@@ -46,8 +46,8 @@ class MsgSend(Msg):
             "value": {
                 "from_address": self.from_address,
                 "to_address": self.to_address,
-                "amount": self.amount.to_amino()
-            }
+                "amount": self.amount.to_amino(),
+            },
         }
 
     @classmethod
@@ -106,10 +106,7 @@ class MultiSendInput(JSONSerializable):
     """Coins to be sent / received."""
 
     def to_amino(self) -> dict:
-        return {
-            "address": self.address,
-            "coins": self.coins.to_amino()
-        }
+        return {"address": self.address, "coins": self.coins.to_amino()}
 
     def to_data(self) -> dict:
         return {"address": self.address, "coins": self.coins.to_data()}
@@ -149,10 +146,7 @@ class MultiSendOutput(JSONSerializable):
     """Coins to be sent / received."""
 
     def to_amino(self) -> dict:
-        return {
-            "address": self.address,
-            "coins": self.coins.to_amino()
-        }
+        return {"address": self.address, "coins": self.coins.to_amino()}
 
     @classmethod
     def from_data(cls, data: dict):
@@ -227,7 +221,7 @@ class MsgMultiSend(Msg):
             "value": {
                 "inputs": [mi.to_amino() for mi in self.inputs],
                 "outputs": [mo.to_amino() for mo in self.inputs],
-            }
+            },
         }
 
     def to_data(self) -> dict:

@@ -40,8 +40,8 @@ class BaseAccount(JSONSerializable):
                 "address": self.address,
                 "public_key": self.public_key.to_amino(),
                 "account_number": self.account_number,
-                "sequence": self.sequence
-            }
+                "sequence": self.sequence,
+            },
         }
 
     def get_account_number(self) -> int:

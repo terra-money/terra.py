@@ -58,10 +58,7 @@ class MsgStoreCode(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {
-                "sender": self.sender,
-                "wasm_byte_code": self.wasm_byte_code
-            }
+            "value": {"sender": self.sender, "wasm_byte_code": self.wasm_byte_code},
         }
 
     @classmethod
@@ -75,10 +72,7 @@ class MsgStoreCode(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
-        return cls(
-            sender=proto.sender,
-            wasm_byte_code=proto.wasm_byte_code
-        )
+        return cls(sender=proto.sender, wasm_byte_code=proto.wasm_byte_code)
 
 
 @attr.s
@@ -107,8 +101,8 @@ class MsgMigrateCode(Msg):
             "value": {
                 "sender": self.sender,
                 "code_id": str(self.code_id),
-                "wasm_byte_code": self.wasm_byte_code
-            }
+                "wasm_byte_code": self.wasm_byte_code,
+            },
         }
 
     def to_data(self) -> dict:
@@ -171,8 +165,8 @@ class MsgInstantiateContract(Msg):
                 "admin": self.admin,
                 "code_id": str(self.code_id),
                 "init_msg": self.init_msg,
-                "init_coins": self.init_coins.to_amino()
-            }
+                "init_coins": self.init_coins.to_amino(),
+            },
         }
 
     def to_data(self) -> dict:
@@ -239,8 +233,8 @@ class MsgExecuteContract(Msg):
                 "sender": self.sender,
                 "contract": self.contract,
                 "execute_msg": remove_none(self.execute_msg),
-                "coins": self.coins.to_amino()
-            }
+                "coins": self.coins.to_amino(),
+            },
         }
 
     @classmethod
@@ -298,8 +292,8 @@ class MsgMigrateContract(Msg):
                 "admin": self.admin,
                 "contract": self.contract,
                 "new_code_id": str(self.new_code_id),
-                "migrate_msg": remove_none(self.migrate_msg)
-            }
+                "migrate_msg": remove_none(self.migrate_msg),
+            },
         }
 
     def to_data(self) -> dict:
@@ -358,8 +352,8 @@ class MsgUpdateContractAdmin(Msg):
             "value": {
                 "admin": self.admin,
                 "new_admin": self.new_admin,
-                "contract": self.contract
-            }
+                "contract": self.contract,
+            },
         }
 
     @classmethod
@@ -404,10 +398,7 @@ class MsgClearContractAdmin(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {
-                "admin": self.admin,
-                "contract": self.contract
-            }
+            "value": {"admin": self.admin, "contract": self.contract},
         }
 
     @classmethod

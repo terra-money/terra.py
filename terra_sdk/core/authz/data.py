@@ -62,9 +62,7 @@ class SendAuthorization(Authorization):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {
-                "spend_limit": self.spend_limit.to_amino()
-            }
+            "value": {"spend_limit": self.spend_limit.to_amino()},
         }
 
     def to_data(self) -> dict:
@@ -92,12 +90,7 @@ class GenericAuthorization(Authorization):
     msg: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {
-            "type": self.type_amino,
-            "value": {
-                "msg": self.msg()
-            }
-        }
+        return {"type": self.type_amino, "value": {"msg": self.msg()}}
 
     def to_data(self) -> dict:
         return {"@type": self.type_url, "msg": self.msg}
@@ -123,20 +116,20 @@ class AuthorizationGrant(JSONSerializable):
     def to_amino(self) -> dict:
         return {
             "authorization": self.authorization.to_amino(),
-            "expiration": to_isoformat(self.expiration)
+            "expiration": to_isoformat(self.expiration),
         }
 
     def to_data(self) -> dict:
         return {
             "authorization": self.authorization.to_data(),
-            "expiration": to_isoformat(self.expiration)
+            "expiration": to_isoformat(self.expiration),
         }
 
     @classmethod
     def from_data(cls, data: dict) -> AuthorizationGrant:
         return cls(
             authorization=Authorization.from_data(data["authorization"]),
-            expiration=parser.parse(data["expiration"])
+            expiration=parser.parse(data["expiration"]),
         )
 
     def to_proto(self) -> Grant_pb:

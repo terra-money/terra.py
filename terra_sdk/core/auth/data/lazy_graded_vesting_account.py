@@ -73,7 +73,7 @@ class LazyGradedVestingAccount(BaseAccount):
                 "delegated_vesting": self.delegated_vesting.to_amino(),
                 "end_time": str(self.end_time),
                 "vesting_schedules": self.vesting_schedules,
-            }
+            },
         }
 
     def to_data(self) -> dict:

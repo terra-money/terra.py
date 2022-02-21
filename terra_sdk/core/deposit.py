@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import attr
-
 from terra_proto.cosmos.gov.v1beta1 import Deposit as Deposit_pb
 
 from terra_sdk.core import AccAddress

@@ -20,6 +20,7 @@ class TextProposal(JSONSerializable):
         title: proposal title
         description: proposal description
     """
+
     type_amino = "gov/TextProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.TextProposal"
@@ -31,10 +32,7 @@ class TextProposal(JSONSerializable):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {
-                "title": self.title,
-                "description": self.description
-            }
+            "value": {"title": self.title, "description": self.description},
         }
 
     @classmethod

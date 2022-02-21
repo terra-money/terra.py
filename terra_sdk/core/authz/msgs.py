@@ -39,8 +39,8 @@ class MsgExecAuthorized(Msg):
             "type": self.type_amino,
             "value": {
                 "grantee": self.grantee,
-                "msgs": [msg.to_amino() for msg in self.msgs]
-            }
+                "msgs": [msg.to_amino() for msg in self.msgs],
+            },
         }
 
     def to_data(self) -> dict:
@@ -85,8 +85,8 @@ class MsgGrantAuthorization(Msg):
             "value": {
                 "granter": self.granter,
                 "grantee": self.grantee,
-                "grant": self.grant.to_amino()
-            }
+                "grant": self.grant.to_amino(),
+            },
         }
 
     def to_data(self) -> dict:
@@ -140,8 +140,8 @@ class MsgRevokeAuthorization(Msg):
             "value": {
                 "granter": self.granter,
                 "grantee": self.grantee,
-                "msg_type_url": self.msg_type_url
-            }
+                "msg_type_url": self.msg_type_url,
+            },
         }
 
     @classmethod

@@ -38,13 +38,13 @@ from .wallet import AsyncWallet, Wallet
 
 def get_default(chain_id: str) -> [Coins, Numeric]:
     if chain_id == "columbus-5":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
     if chain_id == "bombay-12":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
     if chain_id == "localterra":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
 
-    raise ValueError('chain_id is invalid')
+    raise ValueError("chain_id is invalid")
 
 
 class AsyncLCDClient:
@@ -106,7 +106,11 @@ class AsyncLCDClient:
         params: Optional[Union[APIParams, CIMultiDict, list, dict]] = None,
         # raw: bool = False
     ):
-        if params and hasattr(params, "to_dict") and callable(getattr(params, "to_dict")):
+        if (
+            params
+            and hasattr(params, "to_dict")
+            and callable(getattr(params, "to_dict"))
+        ):
             params = params.to_dict()
 
         async with self.session.get(

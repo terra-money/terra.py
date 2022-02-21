@@ -4,8 +4,8 @@ from __future__ import annotations
 from typing import List
 
 import attr
-from terra_proto.ibc.core.connection.v1 import Version as Version_pb
 from terra_proto.ibc.core.connection.v1 import Counterparty as Counterparty_pb
+from terra_proto.ibc.core.connection.v1 import Version as Version_pb
 
 from terra_sdk.util.json import JSONSerializable
 
@@ -30,16 +30,11 @@ class Version(JSONSerializable):
         )
 
     def to_proto(self) -> Version_pb:
-        return Version_pb(
-            identifier=self.identifier, features=self.features
-        )
+        return Version_pb(identifier=self.identifier, features=self.features)
 
     @classmethod
     def from_proto(cls, proto: Version_pb) -> Version:
-        return cls(
-            identifier=proto.identifier,
-            features=proto.features
-        )
+        return cls(identifier=proto.identifier, features=proto.features)
 
 
 @attr.s
@@ -56,14 +51,14 @@ class Counterparty(JSONSerializable):
         return cls(
             client_id=data["client_id"],
             connection_id=data["client_id"],
-            prefix=data["prefix"]
+            prefix=data["prefix"],
         )
 
     def to_proto(self) -> Counterparty_pb:
         return Counterparty_pb(
             client_id=self.client_id,
             connection_id=self.connection_id,
-            prefix=self.prefix.to_proto()
+            prefix=self.prefix.to_proto(),
         )
 
     @classmethod
@@ -71,5 +66,5 @@ class Counterparty(JSONSerializable):
         return cls(
             client_id=proto.client_id,
             connection_id=proto.connection_id,
-            prefix=MerklePrefix.from_proto(proto.prefix)
+            prefix=MerklePrefix.from_proto(proto.prefix),
         )

@@ -6,7 +6,6 @@ from typing import NewType
 
 from bech32 import bech32_decode, bech32_encode, convertbits
 
-
 __all__ = [
     "AccAddress",
     "ValAddress",
@@ -21,7 +20,7 @@ __all__ = [
     "to_acc_pubkey",
     "to_val_address",
     "to_val_pubkey",
-    "get_bech"
+    "get_bech",
 ]
 
 

@@ -6,15 +6,14 @@ import base64
 from typing import List, Optional
 
 import attr
-from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
-
-from .public_key import PublicKey
-from .mode_info import ModeInfo, ModeInfoSingle, ModeInfoMulti
-from .compact_bit_array import CompactBitArray
-
 from terra_proto.cosmos.crypto.multisig.v1beta1 import (
     MultiSignature as MultiSignature_pb,
 )
+from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
+
+from .compact_bit_array import CompactBitArray
+from .mode_info import ModeInfo, ModeInfoMulti, ModeInfoSingle
+from .public_key import PublicKey
 
 __all__ = ["SignatureV2", "Descriptor", "Single", "Multi", "SignMode"]
 
@@ -37,7 +36,7 @@ class SignatureV2:
         return {
             "public_key": self.public_key.to_data(),
             "data": self.data.to_data(),
-            "sequence": self.sequence
+            "sequence": self.sequence,
         }
 
 
@@ -59,17 +58,12 @@ class Descriptor:
     def to_data(self) -> dict:
         typ = "single" if self.single else "multi"
         dat = self.single.to_data() if self.single else self.multi.to_data()
-        return {
-            typ: dat
-        }
+        return {typ: dat}
 
     def to_mode_info_and_signature(self) -> [ModeInfo, bytes]:
         if self.single is not None:
             sig_data = self.single
-            return [
-                ModeInfo(single=ModeInfoSingle(sig_data.mode)),
-                sig_data.signature
-            ]
+            return [ModeInfo(single=ModeInfoSingle(sig_data.mode)), sig_data.signature]
 
         if self.multi:
             sig_data = self.multi
@@ -82,10 +76,10 @@ class Descriptor:
             pb = MultiSignature_pb(signatures=signatures)
             return [
                 ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
-                base64.b64encode(bytes(pb))
+                base64.b64encode(bytes(pb)),
             ]
 
-        raise ValueError('invalid signature descriptor')
+        raise ValueError("invalid signature descriptor")
 
 
 @attr.s
@@ -98,10 +92,7 @@ class Single:  # FIXME: SignModeTo/FromJSON
         return cls(mode=data["mode"], signature=data["signature"])
 
     def to_data(self) -> dict:
-        return {
-            "mode": self.mode,
-            "signature": self.signature
-        }
+        return {"mode": self.mode, "signature": self.signature}
 
 
 @attr.s
@@ -119,5 +110,5 @@ class Multi:
     def to_data(self) -> dict:
         return {
             "bitarray": self.bitarray.to_data(),
-            "signatures": [sig.to_data() for sig in self.signatures]
+            "signatures": [sig.to_data() for sig in self.signatures],
         }

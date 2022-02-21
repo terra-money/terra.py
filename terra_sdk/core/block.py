@@ -11,7 +11,7 @@ __all__ = [
     "Parts",
     "Version",
     "LastCommit",
-    "Signature"
+    "Signature",
 ]
 
 

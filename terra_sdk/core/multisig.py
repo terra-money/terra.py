@@ -7,9 +7,10 @@ from typing import List
 import attr
 
 from terra_sdk.core import SignatureV2
-from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
-from terra_sdk.core.signature_v2 import Descriptor, Multi as MultiDescriptor
 from terra_sdk.core.compact_bit_array import CompactBitArray
+from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
+from terra_sdk.core.signature_v2 import Descriptor
+from terra_sdk.core.signature_v2 import Multi as MultiDescriptor
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["MultiSignature"]
@@ -42,7 +43,9 @@ class MultiSignature(JSONSerializable):
 
         self.signatures.insert(new_idx, signature_data)
 
-    def append_signature_from_pubkey(self, signature_data: Descriptor, public_key: SimplePublicKey):
+    def append_signature_from_pubkey(
+        self, signature_data: Descriptor, public_key: SimplePublicKey
+    ):
         index = 0
         for i, v in enumerate(self.multisig_pubkey.public_keys):
             if v.key == public_key.key:
