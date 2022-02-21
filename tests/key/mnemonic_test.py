@@ -1,4 +1,7 @@
-from terra_sdk.core.auth import StdFee, StdSignMsg
+from terra_sdk.core import SignDoc
+
+from terra_sdk.core.fee import Fee
+
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.key.mnemonic import MnemonicKey
 
@@ -36,9 +39,9 @@ def test_signature():
         dict(uluna="100000000"),
     )
 
-    fee = StdFee(46467, dict(uluna=698))
+    fee = Fee(46467, dict(uluna=698))
 
-    stdsignmsg = StdSignMsg("columbus-5-testnet", 45, 0, fee, [send], "")
+    stdsignmsg = SignDoc("columbus-5-testnet", 45, 0, fee, [send], "")
     signature = mk.create_signature(stdsignmsg).signature
     assert (
         signature
