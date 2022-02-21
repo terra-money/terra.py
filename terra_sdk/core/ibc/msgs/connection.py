@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Any, List
+from typing import List
 
 import attr
 from terra_proto.ibc.core.connection.v1 import (
@@ -13,7 +13,7 @@ from terra_proto.ibc.core.connection.v1 import (
 )
 from betterproto.lib.google.protobuf import Any as Any_pb
 
-from terra_sdk.core import AccAddress, Coin
+from terra_sdk.core import AccAddress
 from terra_sdk.core.ibc.data import Height
 from terra_sdk.core.ibc.data.connection import Counterparty, Version
 from terra_sdk.core.msg import Msg
@@ -67,8 +67,6 @@ class MsgConnectionOpenInit(Msg):
             delay_period=proto["delay_period"],
             signer=proto["signer"]
         )
-
-
 
 
 @attr.s
@@ -146,6 +144,7 @@ class MsgConnectionOpenTry(Msg):
             signer=proto["signer"]
         )
 
+
 @attr.s
 class MsgConnectionOpenAck(Msg):
     """
@@ -165,7 +164,6 @@ class MsgConnectionOpenAck(Msg):
     proof_consensus: bytes = attr.ib()
     consensus_height: Height = attr.ib()
     signer: str = attr.ib()
-
 
     def to_amino(self):
         raise Exception("Amino not supported")
@@ -215,7 +213,6 @@ class MsgConnectionOpenAck(Msg):
         )
 
 
-
 @attr.s
 class MsgConnectionOpenConfirm(Msg):
     """
@@ -258,4 +255,3 @@ class MsgConnectionOpenConfirm(Msg):
             proof_height=Height.from_proto(proto.proof_height),
             signer=proto.signer
         )
-

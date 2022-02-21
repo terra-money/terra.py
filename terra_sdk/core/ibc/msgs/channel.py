@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional, Any, List
-
 import attr
 from terra_proto.ibc.core.channel.v1 import (
     MsgChannelOpenInit as MsgChannelOpenInit_pb,
@@ -16,7 +14,6 @@ from terra_proto.ibc.core.channel.v1 import (
     MsgAcknowledgement as MsgAcknowledgement_pb,
     MsgTimeout as MsgTimeout_pb
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core.ibc.data.client import Height
 from terra_sdk.core.ibc.data.channel import Channel, Packet
@@ -68,7 +65,6 @@ class MsgChannelOpenInit(Msg):
             channel=Channel.from_proto(proto.port_id),
             signer=proto.signer
         )
-
 
 
 @attr.s
@@ -231,7 +227,6 @@ class MsgChannelOpenConfirm(Msg):
             proof_height=Height.from_proto(proto.proof_height),
             signer=proto.signer
         )
-
 
 
 @attr.s

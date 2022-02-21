@@ -19,7 +19,7 @@ from terra_sdk.util.json import JSONSerializable
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions", "CreateTxOptions"]
+__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions", "CreateTxOptions", "SignerOptions"]
 
 
 @attr.s

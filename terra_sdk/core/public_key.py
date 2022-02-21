@@ -15,18 +15,21 @@ from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
 from .bech32 import get_bech
 from terra_sdk.util.json import JSONSerializable
 
-BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987"+"21"  # with fixed length 21
-BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64"+"20"  # with fixed length 20
+BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987" + "21"  # with fixed length 21
+BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64" + "20"  # with fixed length 20
 BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD = "22c1f7e2"  # without length
 
 
-__all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey", "LegacyAminoMultisigPublicKey"]
+__all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey", "LegacyAminoMultisigPublicKey",
+           "address_from_public_key", "pubkey_from_public_key"]
 
 
 def encode_uvarint(value: Union[int, str]) -> List[int]:
     val = int(str(value))
     if val > 127:
-        raise ValueError('Encoding numbers > 127 is not supported here. Please tell those lazy CosmJS maintainers to port the binary.PutUvarint implementation from the Go standard library and write some tests.')
+        raise ValueError('Encoding numbers > 127 is not supported here. Please tell those lazy CosmJS maintainers to '
+                         'port the binary.PutUvarint implementation from the Go standard library and write some '
+                         'tests.')
     return [val]
 
 
@@ -42,6 +45,7 @@ def pubkey_from_public_key(public_key: PublicKey) -> bytes:
     arr = bytes.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1)
     arr += bytes(public_key.key)
     return bytes(arr)
+
 
 class PublicKey(JSONSerializable, ABC):
     """Data object holding the public key component of an account or signature."""
@@ -59,7 +63,7 @@ class PublicKey(JSONSerializable, ABC):
             return ValConsPubKey.from_proto(proto)
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
             return LegacyAminoMultisigPublicKey.from_proto(proto)
-        raise TypeError(f"could not marshal PublicKey: type is incorrect")
+        raise TypeError("could not marshal PublicKey: type is incorrect")
 
     @classmethod
     def from_data(cls, data: dict):
@@ -70,7 +74,7 @@ class PublicKey(JSONSerializable, ABC):
             return ValConsPubKey.from_data(data)
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
             return LegacyAminoMultisigPublicKey.from_data(data)
-        raise TypeError(f"could not unmarshal PublicKey: type is incorrect")
+        raise TypeError("could not unmarshal PublicKey: type is incorrect")
 
     @abstractmethod
     def pack_any(self) -> Any_pb:
@@ -217,7 +221,7 @@ class LegacyAminoMultisigPublicKey(PublicKey):
         )
 
     def encode_amino_pubkey(self) -> bytearray:
-        if self.threshold > 127 :
+        if self.threshold > 127:
             raise ValueError("threshold over 127 is now supported here")
         out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD)
         out.append(0x08)
@@ -242,5 +246,4 @@ class LegacyAminoMultisigPublicKey(PublicKey):
         return address
 
     def pubkey_address(self) -> str:
-        #return bech32.bech32_encode('terrapub', bech32.convertbits(bytes(self.raw_address()), 8, 5))
         return get_bech("terrapub", str(self.encode_amino_pubkey()))

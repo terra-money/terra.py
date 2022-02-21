@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.util.json import JSONSerializable

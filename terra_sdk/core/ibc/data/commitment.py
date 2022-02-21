@@ -37,7 +37,6 @@ class MerkleRoot(JSONSerializable):
         )
 
 
-
 @attr.s
 class MerklePrefix(JSONSerializable):
     key_prefix: str = attr.ib()

@@ -3,13 +3,9 @@
 from __future__ import annotations
 
 import base64
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 import attr
-from terra_proto.cosmos.tx.v1beta1 import (
-    ModeInfoSingle as ModeInfoSingle_pb,
-    ModeInfoMulti as ModeInfoMulti_pb,
-)
 from terra_proto.cosmos.tx.signing.v1beta1 import SignMode
 
 from .public_key import PublicKey
@@ -21,8 +17,6 @@ from terra_proto.cosmos.crypto.multisig.v1beta1 import (
 )
 
 __all__ = ["SignatureV2", "Descriptor", "Single", "Multi", "SignMode"]
-
-from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s

@@ -1,7 +1,7 @@
 """ibc connection module data objects."""
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 import attr
 from terra_proto.ibc.core.connection.v1 import Version as Version_pb

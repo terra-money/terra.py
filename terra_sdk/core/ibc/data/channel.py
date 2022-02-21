@@ -11,7 +11,6 @@ from terra_proto.ibc.core.channel.v1 import (
     Order,
     State
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core.ibc.data import Height
 from terra_sdk.util.json import JSONSerializable
@@ -49,7 +48,6 @@ class Counterparty(JSONSerializable):
             port_id=proto.port_id,
             channel_id=proto.channel_id,
         )
-
 
 
 @attr.s

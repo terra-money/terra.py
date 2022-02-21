@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional, Any, List
-
 import attr
 from terra_proto.ibc.core.client.v1 import (
     MsgCreateClient as MsgCreateClient_pb,
@@ -98,7 +96,6 @@ class MsgUpdateClient(Msg):
         )
 
 
-
 @attr.s
 class MsgUpgradeClient(Msg):
     """
@@ -183,19 +180,9 @@ class MsgSubmitMisbehaviour(Msg):
         )
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgSubmitMisbehaviour:
-        return cls(
-            client_id=data["client_id"],
-            misbehaviour=data["misbehaviour"],
-            signer=data["signer"]
-        )
-
-    @classmethod
     def from_proto(cls, proto: MsgSubmitMisbehaviour_pb) -> MsgSubmitMisbehaviour:
         return cls(
             client_id=proto["client_id"],
             misbehaviour=Any_pb().from_dict(proto["misbehaviour"]),
             signer=proto["signer"]
         )
-
-

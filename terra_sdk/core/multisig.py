@@ -8,11 +8,12 @@ import attr
 
 from terra_sdk.core import SignatureV2
 from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
-from terra_sdk.core.signature_v2 import Descriptor, Single as SingleDescriptor, Multi as MultiDescriptor
+from terra_sdk.core.signature_v2 import Descriptor, Multi as MultiDescriptor
 from terra_sdk.core.compact_bit_array import CompactBitArray
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["MultiSignature"]
+
 
 @attr.s
 class MultiSignature(JSONSerializable):

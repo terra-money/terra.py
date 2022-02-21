@@ -71,7 +71,6 @@ class SignDoc(JSONSerializable):
             chain_id=self.chain_id,
             account_number=self.account_number,
         )
-        return proto
 
     def to_bytes(self) -> bytes:
         return bytes(self.to_proto())

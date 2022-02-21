@@ -139,6 +139,7 @@ class MsgMigrateCode(Msg):
             wasm_byte_code=proto.wasm_byte_code,
         )
 
+
 @attr.s
 class MsgInstantiateContract(Msg):
     """Creates a new instance of a smart contract from existing code on the blockchain.
@@ -207,7 +208,6 @@ class MsgInstantiateContract(Msg):
             init_msg=remove_none(proto.init_msg),
             init_coins=Coins.from_proto(proto.init_coins),
         )
-
 
 
 @attr.s

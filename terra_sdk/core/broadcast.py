@@ -80,4 +80,4 @@ class AsyncTxBroadcastResult(JSONSerializable):
 
 def is_tx_error(result: Union[BlockTxBroadcastResult, SyncTxBroadcastResult]):
     """Returns whether the transaction failed."""
-    return result.code is not 0
+    return result.code != 0

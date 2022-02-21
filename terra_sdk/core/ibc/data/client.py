@@ -45,6 +45,7 @@ class Height(JSONSerializable):
             revision_height=proto.revision_height,
         )
 
+
 @attr.s
 class IdentifiedClientState(JSONSerializable):
     """
@@ -144,7 +145,6 @@ class ClientConsensusStates(JSONSerializable):
         )
 
 
-
 @attr.s
 class Params(JSONSerializable):
     """
@@ -172,4 +172,3 @@ class Params(JSONSerializable):
         return cls(
             allowed_clients=proto.allowed_clients
         )
-

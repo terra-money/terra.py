@@ -11,7 +11,6 @@ from terra_proto.cosmos.authz.v1beta1 import (
     GenericAuthorization as GenericAuthorization_pb,
 )
 from terra_proto.cosmos.authz.v1beta1 import Grant as Grant_pb
-from terra_proto.cosmos.authz.v1beta1 import GrantAuthorization as GrantAuthorization_pb
 from terra_proto.cosmos.bank.v1beta1 import SendAuthorization as SendAuthorization_pb
 from terra_proto.cosmos.staking.v1beta1 import AuthorizationType
 from terra_proto.cosmos.staking.v1beta1 import (

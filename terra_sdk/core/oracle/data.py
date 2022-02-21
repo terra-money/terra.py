@@ -32,7 +32,7 @@ class AggregateExchangeRateVote(JSONSerializable):
     def to_amino(self) -> dict:
         tuples = self.exchange_rate_tuples.to_amino()
         return {
-            "exchange_rate_tuples": [{"denom": x.denom, "exchange_rate":str(x.amount)} for x in tuples],
+            "exchange_rate_tuples": [{"denom": x.denom, "exchange_rate": str(x.amount)} for x in tuples],
             "voter": self.voter
         }
 

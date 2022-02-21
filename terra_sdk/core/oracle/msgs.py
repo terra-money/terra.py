@@ -105,7 +105,6 @@ class MsgDelegateFeedConsent(Msg):
         )
 
 
-
 @attr.s
 class MsgAggregateExchangeRatePrevote(Msg):
     """Submit an aggregate vote for the current vote period.

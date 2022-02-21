@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 import attr
 from terra_proto.terra.vesting.v1beta1 import (
@@ -10,7 +10,6 @@ from terra_proto.terra.vesting.v1beta1 import (
 )
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.util.json import JSONSerializable
 
 from ...public_key import PublicKey
 from .base_account import BaseAccount

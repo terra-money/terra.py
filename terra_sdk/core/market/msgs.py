@@ -126,4 +126,3 @@ class MsgSwapSend(Msg):
             offer_coin=Coin.from_proto(proto.offer_coin),
             ask_denom=proto.ask_denom,
         )
-

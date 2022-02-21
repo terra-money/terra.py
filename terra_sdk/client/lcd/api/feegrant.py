@@ -1,6 +1,6 @@
 from typing import Optional
 
-from terra_sdk.core import AccAddress, Coins
+from terra_sdk.core import AccAddress
 from terra_sdk.core.feegrant import Allowance
 
 from ..params import APIParams

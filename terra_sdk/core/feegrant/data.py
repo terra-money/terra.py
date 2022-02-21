@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import List, Union, Optional
+from typing import List, Optional
 
 import attr
 from attr import converters
@@ -153,8 +153,7 @@ class AllowedMsgAllowance(JSONSerializable):
         )
 
 
-#Allowance = Union[BasicAllowance, PeriodicAllowance]
-class Allowance:#(BasicAllowance, PeriodicAllowance):
+class Allowance:  # (BasicAllowance, PeriodicAllowance):
 
     @classmethod
     def from_data(cls, data: dict):

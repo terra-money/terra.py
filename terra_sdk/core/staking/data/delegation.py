@@ -207,16 +207,6 @@ class RedelegationEntry(JSONSerializable):
             "balance": str(self.balance)
         }
 
-
-@attr.s
-class RedelegationEntry(JSONSerializable):
-    """Contains information about an active redelegated lot of Luna."""
-
-    redelegation_entry: RedelegationEntryInfo = attr.ib()
-    """"""
-    balance: int = attr.ib(converter=int)
-    """"""
-
     def to_data(self) -> dict:
         return {
             "redelegation_entry": {
@@ -284,16 +274,6 @@ class RedelegationInfo(JSONSerializable):
             validator_src_address=self.validator_src_address,
             validator_dst_address=self.validator_dst_address,
         )
-
-
-@attr.s
-class RedelegationInfo(JSONSerializable):
-    delegator_address: AccAddress = attr.ib()
-    """"""
-    validator_src_address: ValAddress = attr.ib()
-    """"""
-    validator_dst_address: ValAddress = attr.ib()
-    """"""
 
 
 @attr.s
