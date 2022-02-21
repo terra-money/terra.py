@@ -6,7 +6,7 @@ from typing import List
 
 import attr
 
-from terra_sdk.core import SignatureV2
+from terra_sdk.core.signature_v2 import SignatureV2
 from terra_sdk.core.compact_bit_array import CompactBitArray
 from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, SimplePublicKey
 from terra_sdk.core.signature_v2 import Descriptor
