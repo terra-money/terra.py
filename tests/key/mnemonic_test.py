@@ -1,9 +1,11 @@
-from terra_sdk.core import SignDoc
+import base64
 
-from terra_sdk.core.fee import Fee
-
+from terra_sdk.client.lcd.api.tx import SignerOptions, CreateTxOptions
+from terra_sdk.core import SignDoc, Coins
 from terra_sdk.core.bank import MsgSend
+from terra_sdk.core.fee import Fee
 from terra_sdk.key.mnemonic import MnemonicKey
+from terra_sdk.client.lcd.lcdclient import LCDClient
 
 
 def test_derivation():
@@ -29,9 +31,14 @@ def test_random():
 
 
 def test_signature():
+
+    terra = LCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")
+
     mk = MnemonicKey(
         "island relax shop such yellow opinion find know caught erode blue dolphin behind coach tattoo light focus snake common size analyst imitate employ walnut"
     )
+
+    account = terra.wallet(mk)
 
     send = MsgSend(
         mk.acc_address,
@@ -39,11 +46,39 @@ def test_signature():
         dict(uluna="100000000"),
     )
 
-    fee = Fee(46467, dict(uluna=698))
+    tx = terra.tx.create(
+        signers=[
+            SignerOptions(
+                address=mk.acc_address,
+                sequence=0,
+                public_key=account.key.public_key
+            )
+        ],
+        options=CreateTxOptions(
+            msgs=[send],
+            memo="memo",
+            fee=Fee(200000, Coins.from_str("100000uusd"))
+        ),
+    )
 
-    stdsignmsg = SignDoc("columbus-5-testnet", 45, 0, fee, [send], "")
-    signature = mk.create_signature(stdsignmsg).signature
+    signDoc = SignDoc(
+        chain_id=terra.chain_id,
+        account_number=1234,
+        sequence=0,
+        auth_info=tx.auth_info,
+        tx_body=tx.body
+    )
+
+    signature = account.key.create_signature(signDoc)
+    sigBytes = base64.b64encode(signature.data.single.signature)
     assert (
-        signature
-        == "FJKAXRxNB5ruqukhVqZf3S/muZEUmZD10fVmWycdVIxVWiCXXFsUy2VY2jINEOUGNwfrqEZsT2dUfAvWj8obLg=="
+        sigBytes
+        == b"Gtp3/JOeTA9mZJ/ZxM4IwpsFy6Je8kWTRxESBiLHcQl6sU6V2iCL1sSPynm+csF6/K4tf2gMPE89IDVOP5NBHg=="
+    )
+
+    signature_amino = account.key.create_signature_amino(signDoc)
+    sigBytes2 = base64.b64encode(signature_amino.data.single.signature)
+    assert (
+        sigBytes2
+        == b'JiaPpdKCPsf4KW1yW7jkSlwrIuiArKmLoE5JccjoYrliVwCtRIKicDF57n2feWt3wd6kWVzwTxOa2xnXTXqdlg=='
     )
