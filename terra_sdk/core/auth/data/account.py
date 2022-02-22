@@ -20,6 +20,14 @@ class Account(JSONSerializable):
     def get_public_key(self) -> PublicKey:
         pass
 
+
+    @classmethod
+    def from_amino(cls, amino: dict):  # -> Account:
+        if amino["type"] == BaseAccount.type_amino:
+            return BaseAccount.from_amino(amino)
+        else:
+            return LazyGradedVestingAccount.from_amino(amino)
+
     @classmethod
     def from_data(cls, data: dict):  # -> Account:
         if data["@type"] == BaseAccount.type_url:

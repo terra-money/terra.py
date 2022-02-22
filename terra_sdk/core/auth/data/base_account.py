@@ -39,10 +39,20 @@ class BaseAccount(JSONSerializable):
             "value": {
                 "address": self.address,
                 "public_key": self.public_key.to_amino(),
-                "account_number": self.account_number,
-                "sequence": self.sequence,
+                "account_number": str(self.account_number),
+                "sequence": str(self.sequence),
             },
         }
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> BaseAccount:
+        amino = amino["value"]
+        return cls(
+            address=amino["address"],
+            public_key=PublicKey.from_amino(amino["public_key"]),
+            account_number=amino["account_number"],
+            sequence=amino["sequence"]
+        )
 
     def get_account_number(self) -> int:
         return self.account_number

@@ -74,6 +74,17 @@ class PublicKey(JSONSerializable, ABC):
         raise TypeError("could not marshal PublicKey: type is incorrect")
 
     @classmethod
+    def from_amino(cls, amino: dict):
+        type_amino = amino.get("type")
+        if type_amino == SimplePublicKey.type_amino:
+            return SimplePublicKey.from_amino(amino)
+        elif type_amino == ValConsPubKey.type_amino:
+            return ValConsPubKey.from_amino(amino)
+        elif type_amino == LegacyAminoMultisigPublicKey.type_amino:
+            return LegacyAminoMultisigPublicKey.from_amino(amino)
+        raise TypeError("could not marshal PublicKey: type is incorrect")
+
+    @classmethod
     def from_data(cls, data: dict):
         type_url = data["@type"]
         if type_url == SimplePublicKey.type_url:
@@ -123,6 +134,10 @@ class SimplePublicKey(PublicKey):
     def from_data(cls, data: dict) -> SimplePublicKey:
         return cls(key=data["key"])
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> SimplePublicKey:
+        return cls(key=amino["value"])
+
     def to_proto(self) -> SimplePubKey_pb:
         return SimplePubKey_pb(key=self.key)
 
@@ -166,6 +181,10 @@ class ValConsPubKey(PublicKey):
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
         return cls(key=data["key"])
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> ValConsPubKey:
+        return cls(key=amino["value"]["key"])
 
     def get_type(self) -> str:
         return self.type_url
@@ -214,6 +233,13 @@ class LegacyAminoMultisigPublicKey(PublicKey):
     @classmethod
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
         return cls(threshold=data["threshold"], public_keys=data["public_keys"])
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> ValConsPubKey:
+        return cls(
+            threshold=amino["value"]["threshold"],
+            public_keys=[SimplePublicKey.from_amino(pubkey) for pubkey in amino["value"]["public_keys"]]
+        )
 
     def get_type(self) -> str:
         return self.type_url
