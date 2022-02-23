@@ -199,7 +199,7 @@ class Validator(JSONSerializable):
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
             jailed=data.get("jailed"),
-            status=data["status"],
+            status=BondStatus.from_string(data["status"]),
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),

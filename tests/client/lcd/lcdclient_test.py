@@ -5,7 +5,7 @@ from terra_sdk.client.lcd import LCDClient, AsyncLCDClient
 
 
 class TestDoSessionGet(asynctest.TestCase):
-    
+
     @aioresponses()
     def test_makes_request_to_expected_url(self, mocked):
         mocked.get(
