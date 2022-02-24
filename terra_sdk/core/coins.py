@@ -115,6 +115,16 @@ class Coins(JSONSerializable, List[Coin_pb]):
         coins = map(Coin.from_data, data)
         return cls(coins)
 
+    @classmethod
+    def from_amino(cls, amino: list) -> Coins:
+        """Converts list of Coin-amino objects to :class:`Coins`.
+
+        Args:
+            amino (list): list of Coin-data objects
+        """
+        coins = map(Coin.from_data, amino)
+        return cls(coins)
+
     def to_amino(self) -> List[dict]:
         return [coin.to_amino() for coin in self]
 

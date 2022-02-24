@@ -52,8 +52,8 @@ class MsgTransfer(Msg):
                 "sender": self.sender,
                 "receiver": self.receiver,
                 "timeout_height": self.timeout_height.to_amino(),
-                "timeout_timestamp": self.timeout_timestamp
-            }
+                "timeout_timestamp": self.timeout_timestamp,
+            },
         }
 
     @classmethod

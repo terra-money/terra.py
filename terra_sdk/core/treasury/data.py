@@ -57,7 +57,7 @@ class PolicyConstraints:
             "rate_min": str(self.rate_min),
             "rate_max": str(self.rate_max),
             "cap": self.cap.to_amino(),
-            "change_rate_max": str(self.change_rate_max)
+            "change_rate_max": str(self.change_rate_max),
         }
 
     @classmethod

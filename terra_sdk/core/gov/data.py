@@ -38,6 +38,22 @@ Content = Union[
 ]
 
 
+def Content_from_data(data: dict) -> Content:
+    typ = data["@type"]
+    if typ == TextProposal.type_url:
+        return TextProposal.from_data(data)
+    elif typ == CommunityPoolSpendProposal.type_url:
+        return CommunityPoolSpendProposal.from_data(data)
+    elif typ == ParameterChangeProposal.type_url:
+        return ParameterChangeProposal.from_data(data)
+    elif typ == SoftwareUpgradeProposal.type_url:
+        return SoftwareUpgradeProposal.from_data(data)
+    elif typ == CancelSoftwareUpgradeProposal.type_url:
+        return CancelSoftwareUpgradeProposal.from_data(data)
+    else:
+        raise ValueError("content type is invalid")
+
+
 @attr.s
 class TallyResult(JSONSerializable):
     yes: str = attr.ib()
@@ -50,7 +66,7 @@ class TallyResult(JSONSerializable):
             "yes": self.yes,
             "abstain": self.abstain,
             "no": self.no,
-            "no_with_veto": self.no_with_veto
+            "no_with_veto": self.no_with_veto,
         }
 
     @classmethod
@@ -117,22 +133,21 @@ class Proposal(JSONSerializable):
             "deposit_end_time": to_isoformat(self.deposit_end_time),
             "total_deposit": self.total_deposit.to_amino(),
             "voting_start_time": to_isoformat(self.voting_start_time),
-            "voting_end_time": to_isoformat(self.voting_end_time)
-
+            "voting_end_time": to_isoformat(self.voting_end_time),
         }
 
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
         return cls(
             proposal_id=data["proposal_id"],
-            content=Content.from_data(data["content"]),
+            content=Content_from_data(data["content"]),
             status=data["status"],
             final_tally_result=data["final_tally_result"],
-            submit_time=to_isoformat(data["submit_time"]),
-            deposit_end_time=to_isoformat(data["deposit_end_time"]),
+            submit_time=data["submit_time"],
+            deposit_end_time=data["deposit_end_time"],
             total_deposit=Coins.from_data(data["total_deposit"]),
-            voting_start_time=to_isoformat(data["voting_start_time"]),
-            voting_end_time=to_isoformat(data["voting_end_time"])
+            voting_start_time=data["voting_start_time"],
+            voting_end_time=data["voting_end_time"],
         )
 
     def to_proto(self) -> Proposal_pb:
@@ -145,7 +160,7 @@ class Proposal(JSONSerializable):
             deposit_end_time=self.deposit_end_time,
             total_deposit=self.total_deposit.to_proto(),
             voting_start_time=self.voting_start_time,
-            voting_end_time=self.voting_end_time
+            voting_end_time=self.voting_end_time,
         )
 
 
@@ -155,10 +170,7 @@ class WeightedVoteOption(JSONSerializable):
     option: VoteOption = attr.ib(converter=int)
 
     def to_amino(self) -> dict:
-        return {
-            "weight": self.weight,
-            "option": self.option.name
-        }
+        return {"weight": self.weight, "option": self.option.name}
 
     @classmethod
     def from_data(cls, data: dict) -> WeightedVoteOption:
@@ -178,7 +190,7 @@ class Vote(JSONSerializable):
         return {
             "proposal_id": str(self.proposal_id),
             "voter": self.voter,
-            "options": [opt.to_amino() for opt in self.options]
+            "options": [opt.to_amino() for opt in self.options],
         }
 
     @classmethod

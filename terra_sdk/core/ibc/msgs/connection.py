@@ -2,23 +2,34 @@
 
 from __future__ import annotations
 
-from typing import Optional, Any, List
+from typing import List
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.ibc.core.connection.v1 import (
+    MsgConnectionOpenAck as MsgConnectionOpenAck_pb,
+)
+from terra_proto.ibc.core.connection.v1 import (
+    MsgConnectionOpenConfirm as MsgConnectionOpenConfirm_pb,
+)
 from terra_proto.ibc.core.connection.v1 import (
     MsgConnectionOpenInit as MsgConnectionOpenInit_pb,
-    MsgConnectionOpenTry as MsgConnectionOpenTry_pb,
-    MsgConnectionOpenAck as MsgConnectionOpenAck_pb,
-    MsgConnectionOpenConfirm as MsgConnectionOpenConfirm_pb
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.ibc.core.connection.v1 import (
+    MsgConnectionOpenTry as MsgConnectionOpenTry_pb,
+)
 
-from terra_sdk.core import AccAddress, Coin
+from terra_sdk.core import AccAddress
 from terra_sdk.core.ibc.data import Height
 from terra_sdk.core.ibc.data.connection import Counterparty, Version
 from terra_sdk.core.msg import Msg
 
-__all__ = ["MsgConnectionOpenInit", "MsgConnectionOpenTry", "MsgConnectionOpenAck", "MsgConnectionOpenConfirm"]
+__all__ = [
+    "MsgConnectionOpenInit",
+    "MsgConnectionOpenTry",
+    "MsgConnectionOpenAck",
+    "MsgConnectionOpenConfirm",
+]
 
 
 @attr.s
@@ -46,7 +57,7 @@ class MsgConnectionOpenInit(Msg):
             counterparty=Counterparty.from_data(data["counterparty"]),
             version=Version.from_data(data["version"]),
             delay_period=data["delay_period"],
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgConnectionOpenInit_pb:
@@ -55,7 +66,7 @@ class MsgConnectionOpenInit(Msg):
             counterparty=self.counterparty.to_proto(),
             version=self.version.to_proto(),
             delay_period=self.delay_period,
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -65,10 +76,8 @@ class MsgConnectionOpenInit(Msg):
             counterparty=Counterparty.from_proto(proto["counterparty"]),
             version=Version.from_proto(proto["version"]),
             delay_period=proto["delay_period"],
-            signer=proto["signer"]
+            signer=proto["signer"],
         )
-
-
 
 
 @attr.s
@@ -104,13 +113,15 @@ class MsgConnectionOpenTry(Msg):
             client_state=data["client_state"],
             counterparty=Counterparty.from_data(data["counterparty"]),
             delay_period=data["delay_period"],
-            counterparty_versions=[Version.from_data(ver) for ver in data["counterparty_versions"]],
+            counterparty_versions=[
+                Version.from_data(ver) for ver in data["counterparty_versions"]
+            ],
             proof_height=Height.from_data(data["proof_height"]),
             proof_init=data["proof_init"],
             proof_client=data["proof_client"],
             proof_consensus=data["proof_consensus"],
             consensus_height=Height.from_data(data["consensus_height"]),
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgConnectionOpenTry_pb:
@@ -120,13 +131,15 @@ class MsgConnectionOpenTry(Msg):
             client_state=Any_pb().from_dict(self.client_state),
             counterparty=self.counterparty.to_proto(),
             delay_period=self.delay_period,
-            counterparty_versions=[ver.to_proto() for ver in self.counterparty_versions],
+            counterparty_versions=[
+                ver.to_proto() for ver in self.counterparty_versions
+            ],
             proof_height=self.proof_height.to_proto(),
             proof_init=self.proof_init,
             proof_client=self.proof_client,
             proof_consensus=self.proof_consensus,
             consensus_height=self.consensus_height.to_proto(),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -137,14 +150,17 @@ class MsgConnectionOpenTry(Msg):
             client_state=proto["client_state"],
             counterparty=Counterparty.from_proto(proto["counterparty"]),
             delay_period=proto["delay_period"],
-            counterparty_versions=[Version.from_proto(ver) for ver in proto["counterparty_versions"]],
+            counterparty_versions=[
+                Version.from_proto(ver) for ver in proto["counterparty_versions"]
+            ],
             proof_height=Height.from_proto(proto["proof_height"]),
             proof_init=proto["proof_init"],
             proof_client=proto["proof_client"],
             proof_consensus=proto["proof_consensus"],
             consensus_height=Height.from_proto(proto["consensus_height"]),
-            signer=proto["signer"]
+            signer=proto["signer"],
         )
+
 
 @attr.s
 class MsgConnectionOpenAck(Msg):
@@ -166,7 +182,6 @@ class MsgConnectionOpenAck(Msg):
     consensus_height: Height = attr.ib()
     signer: str = attr.ib()
 
-
     def to_amino(self):
         raise Exception("Amino not supported")
 
@@ -182,7 +197,7 @@ class MsgConnectionOpenAck(Msg):
             proof_client=data["proof_client"],
             proof_consensus=data["proof_consensus"],
             consensus_height=Height.from_data(data["consensus_height"]),
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgConnectionOpenAck_pb:
@@ -196,7 +211,7 @@ class MsgConnectionOpenAck(Msg):
             proof_client=self.proof_client,
             proof_consensus=self.proof_consensus,
             consensus_height=self.consensus_height.to_proto(),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -211,15 +226,14 @@ class MsgConnectionOpenAck(Msg):
             proof_client=proto.proof_client,
             proof_consensus=proto.proof_consensus,
             consensus_height=Height.from_proto(proto.consensus_height),
-            signer=proto.signer
+            signer=proto.signer,
         )
-
 
 
 @attr.s
 class MsgConnectionOpenConfirm(Msg):
     """
-     MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of connection state to OPEN on Chain A.
+    MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of connection state to OPEN on Chain A.
     """
 
     type_url = "/ibc.core.connection.v1.MsgConnectionOpenConfirm"
@@ -239,7 +253,7 @@ class MsgConnectionOpenConfirm(Msg):
             connection_id=data["connection_id"],
             proof_ack=data["proof_ack"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"]
+            signer=data["signer"],
         )
 
     def to_proto(self) -> MsgConnectionOpenConfirm_pb:
@@ -247,7 +261,7 @@ class MsgConnectionOpenConfirm(Msg):
             connection_id=self.connection_id,
             proof_ack=self.proof_ack,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer
+            signer=self.signer,
         )
 
     @classmethod
@@ -256,6 +270,5 @@ class MsgConnectionOpenConfirm(Msg):
             connection_id=proto.connection_id,
             proof_ack=proto.proof_ack,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer
+            signer=proto.signer,
         )
-
