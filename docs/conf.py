@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../"))
 
-import sphinx_rtd_theme
+import sphinx_book_theme
 
 # -- Project information -----------------------------------------------------
 
@@ -24,7 +24,7 @@ copyright = "2021, Terraform Labs, PTE."
 author = "Terraform Labs, PTE."
 
 # The full version, including alpha/beta/rc tags
-release = "2.0.0"
+release = "2.0.3"
 
 
 # -- General configuration ---------------------------------------------------
@@ -38,7 +38,7 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
-    "sphinx_rtd_theme",
+    "sphinx_book_theme",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -55,7 +55,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "sphinx_book_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
