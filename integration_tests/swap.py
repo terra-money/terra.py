@@ -2,14 +2,12 @@ import asyncio
 import base64
 from pathlib import Path
 
-from terra_sdk.key.mnemonic import MnemonicKey
-
 from terra_sdk.client.lcd import LCDClient
-
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coins
 from terra_sdk.core.market import MsgSwap
+from terra_sdk.key.mnemonic import MnemonicKey
 
 
 def main():
@@ -27,12 +25,12 @@ def main():
     msg = MsgSwap(
         trader="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
         offer_coin="100000uluna",
-        ask_denom='uusd'
+        ask_denom="uusd",
     )
     print(msg)
-    tx = test1.create_and_sign_tx(CreateTxOptions(
-        msgs=[msg], gas_prices="0.2uluna", gas_adjustment="1.4"
-    ))
+    tx = test1.create_and_sign_tx(
+        CreateTxOptions(msgs=[msg], gas_prices="0.2uluna", gas_adjustment="1.4")
+    )
     print(tx)
 
     result = terra.tx.broadcast(tx)
