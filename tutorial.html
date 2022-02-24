@@ -1,70 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Quickstart &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Quickstart &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage with asyncio" href="guides/async.html" />
     <link rel="prev" title="Introduction" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,19 +35,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
@@ -93,7 +45,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/transactions.html">Building and Signing Transactions</a></li>
@@ -101,102 +53,59 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common/bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_modules/authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/gov.html">Gov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/market.html">Market</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/mint.html">Mint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="core_modules/msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="core_modules/supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="core_modules/treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core_modules/wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Quickstart</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="quickstart">
-<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>All code starting with a <code class="docutils literal notranslate"><span class="pre">$</span></code> is meant to run on your terminal.
@@ -204,10 +113,10 @@ All code starting with a <code class="docutils literal notranslate"><span class=
 like <a class="reference external" href="https://pypi.org/project/ipython/">ipython</a>.</p>
 </div>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <p>Terra SDK can be installed (preferably in a <span class="xref std std-ref">virtualenv</span>)
 using <code class="docutils literal notranslate"><span class="pre">pip</span></code> as follows:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ pip install terra_sdk
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ pip install terra-sdk
 </pre></div>
 </div>
 <div class="admonition note">
@@ -218,7 +127,7 @@ clean environment</span>.</p>
 </div>
 </div>
 <div class="section" id="using-terra-sdk">
-<h2>Using Terra SDK<a class="headerlink" href="#using-terra-sdk" title="Permalink to this headline">¶</a></h2>
+<h2>Using Terra SDK<a class="headerlink" href="#using-terra-sdk" title="Permalink to this headline"></a></h2>
 <p>In order to interact with the Terra blockchain, you’ll need a connection to a Terra node.
 This can be done through setting up an LCDClient:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
@@ -229,7 +138,7 @@ This can be done through setting up an LCDClient:</p>
 </div>
 </div>
 <div class="section" id="getting-blockchain-info">
-<h2>Getting Blockchain Info<a class="headerlink" href="#getting-blockchain-info" title="Permalink to this headline">¶</a></h2>
+<h2>Getting Blockchain Info<a class="headerlink" href="#getting-blockchain-info" title="Permalink to this headline"></a></h2>
 <p>It’s time to start using Terra SDK! Once properly configured, the <code class="docutils literal notranslate"><span class="pre">LCDClient</span></code> instance will allow you
 to interact with the Terra blockchain. Try getting the latest block height:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span><span class="o">.</span><span class="n">tendermint</span><span class="o">.</span><span class="n">block_info</span><span class="p">()[</span><span class="s1">&#39;block&#39;</span><span class="p">][</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span>
@@ -243,50 +152,33 @@ and a number of other features.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="guides/async.html" class="btn btn-neutral float-right" title="Usage with asyncio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="guides/async.html" class="btn btn-neutral float-right" title="Usage with asyncio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

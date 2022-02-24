@@ -1,68 +1,31 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>terra_sdk.key.key &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>terra_sdk.key.key &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,23 +33,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
@@ -94,133 +46,92 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/gov.html">Gov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/market.html">Market</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/mint.html">Mint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
-        
       <li>terra_sdk.key.key</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for terra_sdk.key.key</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">abc</span>
-<span class="kn">import</span> <span class="nn">base64</span>
-<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">bech32</span> <span class="kn">import</span> <span class="n">bech32_encode</span><span class="p">,</span> <span class="n">convertbits</span>
+<span class="kn">import</span> <span class="nn">attr</span>
 
-<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">AccPubKey</span><span class="p">,</span> <span class="n">ValAddress</span><span class="p">,</span> <span class="n">ValPubKey</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdSignature</span><span class="p">,</span> <span class="n">StdSignMsg</span><span class="p">,</span> <span class="n">StdTx</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AccAddress</span><span class="p">,</span>
+    <span class="n">AccPubKey</span><span class="p">,</span>
+    <span class="n">SignatureV2</span><span class="p">,</span>
+    <span class="n">SignDoc</span><span class="p">,</span>
+    <span class="n">ValAddress</span><span class="p">,</span>
+    <span class="n">ValPubKey</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.bech32</span> <span class="kn">import</span> <span class="n">get_bech</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.mode_info</span> <span class="kn">import</span> <span class="n">ModeInfo</span><span class="p">,</span> <span class="n">ModeInfoSingle</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.public_key</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PublicKey</span><span class="p">,</span>
+    <span class="n">address_from_public_key</span><span class="p">,</span>
+    <span class="n">pubkey_from_public_key</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Descriptor</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Single</span> <span class="k">as</span> <span class="n">SingleDescriptor</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">SignerInfo</span><span class="p">,</span> <span class="n">SignMode</span><span class="p">,</span> <span class="n">Tx</span>
 
-<span class="n">BECH32_PUBKEY_DATA_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;eb5ae98721&quot;</span>
-
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="s2">&quot;SignOptions&quot;</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">get_bech</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">convertbits</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;could not parse data: prefix </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">, payload </span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">bech32_encode</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>  <span class="c1"># base64 -&gt; base32</span>
-
-
-<span class="k">def</span> <span class="nf">address_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="n">sha</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
-    <span class="n">rip</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;ripemd160&quot;</span><span class="p">)</span>
-    <span class="n">sha</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
-    <span class="n">rip</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sha</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">rip</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">BECH32_PUBKEY_DATA_PREFIX</span><span class="p">)</span>
-    <span class="n">arr</span> <span class="o">+=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">SignOptions</span><span class="p">:</span>
+    <span class="n">account_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">sign_mode</span><span class="p">:</span> <span class="n">SignMode</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">chain_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="Key"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key">[docs]</a><span class="k">class</span> <span class="nc">Key</span><span class="p">:</span>
@@ -230,7 +141,7 @@
 <span class="sd">        public_key (Optional[bytes]): compressed public key bytes,</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicKey</span><span class="p">]</span>
     <span class="sd">&quot;&quot;&quot;Compressed public key bytes, used to derive :data:`raw_address` and :data:`raw_pubkey`.&quot;&quot;&quot;</span>
 
     <span class="n">raw_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
@@ -320,91 +231,135 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute val_pubkey: missing raw_pubkey&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ValPubKey</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terravaloperpub&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdSignature</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_signature_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signDoc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;signature could not be created: Key instance missing public_key&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SignatureV2</span><span class="p">(</span>
+            <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">Descriptor</span><span class="p">(</span>
+                <span class="n">SingleDescriptor</span><span class="p">(</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_LEGACY_AMINO_JSON</span><span class="p">,</span>
+                    <span class="n">signature</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">to_amino_json</span><span class="p">())),</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signDoc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
 <span class="sd">        and outputs the signature. The signature is only returned, and must be manually added to</span>
-<span class="sd">        the ``signatures`` field of an :class:`StdTx`.</span>
+<span class="sd">        the ``signatures`` field of an :class:`Tx`.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            tx (StdSignMsg): unsigned transaction</span>
+<span class="sd">            signDoc (SignDoc): unsigned transaction</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: if missing ``public_key``</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            StdSignature: signature object</span>
+<span class="sd">            SignatureV2: signature object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;signature could not be created: Key instance missing public_key&quot;</span>
             <span class="p">)</span>
 
-        <span class="n">sig_buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">tx</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">StdSignature</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">sig_buffer</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
-                <span class="s2">&quot;pub_key&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tendermint/PubKeySecp256k1&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
-                <span class="p">},</span>
-            <span class="p">}</span>
+        <span class="c1"># make backup</span>
+        <span class="n">si_backup</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">)</span>
+        <span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">SignerInfo</span><span class="p">(</span>
+                <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span>
+                    <span class="n">single</span><span class="o">=</span><span class="n">ModeInfoSingle</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">)</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">())</span>
+
+        <span class="c1"># restore</span>
+        <span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="n">si_backup</span>
+
+        <span class="k">return</span> <span class="n">SignatureV2</span><span class="p">(</span>
+            <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">Descriptor</span><span class="p">(</span>
+                <span class="n">single</span><span class="o">=</span><span class="n">SingleDescriptor</span><span class="p">(</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">StdSignMsg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StdTx</span><span class="p">:</span>
+<div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">Tx</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">SignOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
-<span class="sd">        and creates a ready-to-broadcast :class:`StdTx` object with the signature applied.</span>
+<span class="sd">        and creates a ready-to-broadcast :class:`Tx` object with the signature applied.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            tx (StdSignMsg): unsigned transaction</span>
+<span class="sd">            tx (Tx): unsigned transaction</span>
+<span class="sd">            options (SignOptions): options for signing</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            StdTx: ready-to-broadcast transaction object</span>
+<span class="sd">            Tx: ready-to-broadcast transaction object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">sig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">StdTx</span><span class="p">(</span><span class="n">tx</span><span class="o">.</span><span class="n">msgs</span><span class="p">,</span> <span class="n">tx</span><span class="o">.</span><span class="n">fee</span><span class="p">,</span> <span class="p">[</span><span class="n">sig</span><span class="p">],</span> <span class="n">tx</span><span class="o">.</span><span class="n">memo</span><span class="p">)</span></div></div>
+
+        <span class="n">signedTx</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+        <span class="n">signDoc</span> <span class="o">=</span> <span class="n">SignDoc</span><span class="p">(</span>
+            <span class="n">chain_id</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
+            <span class="n">account_number</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">account_number</span><span class="p">,</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+            <span class="n">auth_info</span><span class="o">=</span><span class="n">signedTx</span><span class="o">.</span><span class="n">auth_info</span><span class="p">,</span>
+            <span class="n">tx_body</span><span class="o">=</span><span class="n">signedTx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">sign_mode</span> <span class="o">==</span> <span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_LEGACY_AMINO_JSON</span><span class="p">:</span>
+            <span class="n">signature</span><span class="p">:</span> <span class="n">SignatureV2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_signature_amino</span><span class="p">(</span><span class="n">signDoc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">signature</span><span class="p">:</span> <span class="n">SignatureV2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">signDoc</span><span class="p">)</span>
+
+        <span class="n">sigData</span><span class="p">:</span> <span class="n">SingleDescriptor</span> <span class="o">=</span> <span class="n">signature</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">single</span>
+        <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">tx</span><span class="o">.</span><span class="n">signatures</span><span class="p">:</span>
+            <span class="n">signedTx</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+        <span class="n">signedTx</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigData</span><span class="o">.</span><span class="n">signature</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">infos</span> <span class="ow">in</span> <span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">:</span>
+            <span class="n">signedTx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">infos</span><span class="p">)</span>
+        <span class="n">signedTx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">SignerInfo</span><span class="p">(</span>
+                <span class="n">public_key</span><span class="o">=</span><span class="n">signature</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">signature</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span><span class="n">single</span><span class="o">=</span><span class="n">ModeInfoSingle</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">sigData</span><span class="o">.</span><span class="n">mode</span><span class="p">)),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">signedTx</span></div></div>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

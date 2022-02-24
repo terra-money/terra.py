@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>terra_sdk.core.tx &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Terra SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/bech32.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/lcdclient.html">LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/authz.html">Authz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Terra SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>terra_sdk.core.tx</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for terra_sdk.core.tx</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data objects pertaining to building, signing, and parsing Transactions.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.base.abci.v1beta1</span> <span class="kn">import</span> <span class="n">AbciMessageLog</span> <span class="k">as</span> <span class="n">AbciMessageLog_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.base.abci.v1beta1</span> <span class="kn">import</span> <span class="n">Attribute</span> <span class="k">as</span> <span class="n">Attribute_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.base.abci.v1beta1</span> <span class="kn">import</span> <span class="n">StringEvent</span> <span class="k">as</span> <span class="n">StringEvent_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.base.abci.v1beta1</span> <span class="kn">import</span> <span class="n">TxResponse</span> <span class="k">as</span> <span class="n">TxResponse_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.tx.signing.v1beta1</span> <span class="kn">import</span> <span class="n">SignMode</span> <span class="k">as</span> <span class="n">SignMode_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.tx.v1beta1</span> <span class="kn">import</span> <span class="n">AuthInfo</span> <span class="k">as</span> <span class="n">AuthInfo_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.tx.v1beta1</span> <span class="kn">import</span> <span class="n">SignerInfo</span> <span class="k">as</span> <span class="n">SignerInfo_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.tx.v1beta1</span> <span class="kn">import</span> <span class="n">Tx</span> <span class="k">as</span> <span class="n">Tx_pb</span>
+<span class="kn">from</span> <span class="nn">terra_proto.cosmos.tx.v1beta1</span> <span class="kn">import</span> <span class="n">TxBody</span> <span class="k">as</span> <span class="n">TxBody_pb</span>
+
+<span class="kn">from</span> <span class="nn">terra_sdk.core.compact_bit_array</span> <span class="kn">import</span> <span class="n">CompactBitArray</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.fee</span> <span class="kn">import</span> <span class="n">Fee</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.mode_info</span> <span class="kn">import</span> <span class="n">ModeInfo</span><span class="p">,</span> <span class="n">ModeInfoMulti</span><span class="p">,</span> <span class="n">ModeInfoSingle</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.msg</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.public_key</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LegacyAminoMultisigPublicKey</span><span class="p">,</span>
+    <span class="n">PublicKey</span><span class="p">,</span>
+    <span class="n">SimplePublicKey</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">SignatureV2</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.json</span> <span class="kn">import</span> <span class="n">JSONSerializable</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SignMode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AuthInfo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Tx&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TxBody&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TxLog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TxInfo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;parse_tx_logs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SignerInfo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SignerData&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># just alias</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.util.parse_msg</span> <span class="kn">import</span> <span class="n">parse_proto</span>
+
+<span class="n">SignMode</span> <span class="o">=</span> <span class="n">SignMode_pb</span>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">SignerData</span><span class="p">:</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Tx"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.Tx">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">Tx</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data structure for a transaction which can be broadcasted.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        body: the processable content of the transaction</span>
+<span class="sd">        auth_info: the authorization related content of the transaction</span>
+<span class="sd">        signatures: signatures is a list of signatures that matches the length and order of body and auth_info</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">body</span><span class="p">:</span> <span class="n">TxBody</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">auth_info</span><span class="p">:</span> <span class="n">AuthInfo</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Tx.to_data"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.Tx.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;auth_info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="p">],</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx_pb</span><span class="p">:</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">Tx_pb</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">auth_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">signatures</span> <span class="o">=</span> <span class="p">[</span><span class="n">sig</span> <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">proto</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">TxBody</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]),</span>
+            <span class="n">AuthInfo</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;auth_info&quot;</span><span class="p">]),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;signatures&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="n">Tx_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
+        <span class="n">ptx</span> <span class="o">=</span> <span class="n">proto</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">TxBody</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">ptx</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]),</span>
+            <span class="n">AuthInfo</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">ptx</span><span class="p">[</span><span class="s2">&quot;authInfo&quot;</span><span class="p">]),</span>
+            <span class="n">ptx</span><span class="p">[</span><span class="s2">&quot;signatures&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_bytes</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">txb</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Tx_pb</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">txb</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">append_empty_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SignerData</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">signer</span> <span class="ow">in</span> <span class="n">signers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">signer</span><span class="o">.</span><span class="n">public_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">signer</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span> <span class="n">LegacyAminoMultisigPublicKey</span><span class="p">):</span>
+                    <span class="n">signer_info</span> <span class="o">=</span> <span class="n">SignerInfo</span><span class="p">(</span>
+                        <span class="n">public_key</span><span class="o">=</span><span class="n">signer</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+                        <span class="n">sequence</span><span class="o">=</span><span class="n">signer</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                        <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span>
+                            <span class="n">multi</span><span class="o">=</span><span class="n">ModeInfoMulti</span><span class="p">(</span>
+                                <span class="n">CompactBitArray</span><span class="o">.</span><span class="n">from_bits</span><span class="p">(</span>
+                                    <span class="nb">len</span><span class="p">(</span><span class="n">signer</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">public_keys</span><span class="p">)</span>
+                                <span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="p">),</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">signer_info</span> <span class="o">=</span> <span class="n">SignerInfo</span><span class="p">(</span>
+                        <span class="n">public_key</span><span class="o">=</span><span class="n">signer</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+                        <span class="n">sequence</span><span class="o">=</span><span class="n">signer</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                        <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span>
+                            <span class="n">ModeInfoSingle</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">)</span>
+                        <span class="p">),</span>
+                    <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">signer_info</span> <span class="o">=</span> <span class="n">SignerInfo</span><span class="p">(</span>
+                    <span class="n">public_key</span><span class="o">=</span><span class="n">SimplePublicKey</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span>
+                    <span class="n">sequence</span><span class="o">=</span><span class="n">signer</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                    <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span><span class="n">ModeInfoSingle</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">)),</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">signer_info</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clear_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">append_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SignatureV2</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">signatures</span><span class="p">:</span>
+            <span class="n">mode_info</span><span class="p">,</span> <span class="n">sig_bytes</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_mode_info_and_signature</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">sig_bytes</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">SignerInfo</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span> <span class="n">mode_info</span><span class="p">,</span> <span class="n">sig</span><span class="o">.</span><span class="n">sequence</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TxBody"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.TxBody">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">TxBody</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Body of a transaction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        messages: list of messages to include in transaction</span>
+<span class="sd">        memo: transaction memo</span>
+<span class="sd">        timeout_height:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">messages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Msg</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">memo</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">timeout_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TxBody.to_data"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.TxBody.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">],</span>
+            <span class="s2">&quot;memo&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timeout_height&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_height</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_height</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxBody_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">TxBody_pb</span><span class="p">(</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">pack_any</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">],</span>
+            <span class="n">memo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memo</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">timeout_height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout_height</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxBody</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Msg</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;memo&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timeout_height&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="n">TxBody_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxBody</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">parse_proto</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">proto</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]],</span>
+            <span class="n">proto</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span>
+            <span class="n">proto</span><span class="o">.</span><span class="n">timeout_height</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AuthInfo"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.AuthInfo">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">AuthInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;AuthInfo</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        signer_infos: information of the signers</span>
+<span class="sd">        fee: Fee</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">signer_infos</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SignerInfo</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">fee</span><span class="p">:</span> <span class="n">Fee</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">casing</span><span class="p">,</span> <span class="n">include_default_values</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">casing</span><span class="p">,</span> <span class="n">include_default_values</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AuthInfo.to_data"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.AuthInfo.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;signer_infos&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">si</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">],</span>
+            <span class="s2">&quot;fee&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthInfo_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AuthInfo_pb</span><span class="p">(</span>
+            <span class="n">signer_infos</span><span class="o">=</span><span class="p">[</span><span class="n">signer</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span> <span class="k">for</span> <span class="n">signer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">],</span>
+            <span class="n">fee</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fee</span><span class="o">.</span><span class="n">to_proto</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">SignerInfo</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;signer_infos&quot;</span><span class="p">]],</span>
+            <span class="n">Fee</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;fee&quot;</span><span class="p">]),</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="n">TxBody_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">SignerInfo</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">proto</span><span class="p">[</span><span class="s2">&quot;signer_infos&quot;</span><span class="p">]],</span>
+            <span class="n">Fee</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">[</span><span class="s2">&quot;fee&quot;</span><span class="p">]),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SignerInfo"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.SignerInfo">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">SignerInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;SignerInfo</span>
+<span class="sd">    Args:</span>
+<span class="sd">       public_key (PublicKey)</span>
+<span class="sd">       mode_info (ModeInfo)</span>
+<span class="sd">       sequence (int)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">public_key</span><span class="p">:</span> <span class="n">PublicKey</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">mode_info</span><span class="p">:</span> <span class="n">ModeInfo</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SignerInfo.to_data"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.SignerInfo.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;mode_info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode_info</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignerInfo_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SignerInfo_pb</span><span class="p">(</span>
+            <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">pack_any</span><span class="p">(),</span>
+            <span class="n">mode_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode_info</span><span class="o">.</span><span class="n">to_proto</span><span class="p">(),</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignerInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">public_key</span><span class="o">=</span><span class="n">PublicKey</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;public_key&quot;</span><span class="p">]),</span>
+            <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mode_info&quot;</span><span class="p">]),</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="n">SignerInfo_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignerInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">public_key</span><span class="o">=</span><span class="n">PublicKey</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">[</span><span class="s2">&quot;public_key&quot;</span><span class="p">]),</span>
+            <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">[</span><span class="s2">&quot;mode_info&quot;</span><span class="p">]),</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">proto</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">parse_events_by_type</span><span class="p">(</span><span class="n">event_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+    <span class="n">events</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">event_data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+                <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]:</span>
+                <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]][</span><span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">events</span><span class="p">[</span><span class="n">ev</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]][</span><span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">att</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">events</span>
+
+
+<div class="viewcode-block" id="TxLog"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.TxLog">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">TxLog</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Object containing the events of a transaction that is automatically generated when</span>
+<span class="sd">    :class:`TxInfo` or :class:`BlockTxBroadcastResult` objects are read.&quot;&quot;&quot;</span>
+
+    <span class="n">msg_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Number of the message inside the transaction that it was included in.&quot;&quot;&quot;</span>
+
+    <span class="n">log</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;This field may be populated with details of the message&#39;s error, if any.&quot;&quot;&quot;</span>
+
+    <span class="n">events</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Raw event log data&quot;&quot;&quot;</span>
+
+    <span class="n">events_by_type</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Event log data, re-indexed by event type name and attribute type.</span>
+
+<span class="sd">    For instance, the event type may be: ``store_code`` and an attribute key could be</span>
+<span class="sd">    ``code_id``.</span>
+
+<span class="sd">    &gt;&gt;&gt; logs[0].events_by_type[&quot;&lt;event-type&gt;&quot;][&quot;&lt;attribute-key&gt;&quot;]</span>
+<span class="sd">    [&#39;&lt;attribute-value&gt;&#39;, &#39;&lt;attribute-value2&gt;&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__attrs_post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">events_by_type</span> <span class="o">=</span> <span class="n">parse_events_by_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tx_log</span><span class="p">:</span> <span class="n">AbciMessageLog_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxLog</span><span class="p">:</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">tx_log</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">msg_index</span><span class="o">=</span><span class="n">tx_log</span><span class="p">[</span><span class="s2">&quot;msg_index&quot;</span><span class="p">],</span> <span class="n">log</span><span class="o">=</span><span class="n">tx_log</span><span class="p">[</span><span class="s2">&quot;log&quot;</span><span class="p">],</span> <span class="n">events</span><span class="o">=</span><span class="n">events</span><span class="p">)</span></div>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">Attribute</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Attribute_pb</span><span class="p">:</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">Attribute_pb</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">proto</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">attrib</span><span class="p">:</span> <span class="n">Attribute_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Attribute</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">StringEvent</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringEvent_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StringEvent_pb</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">str_event</span><span class="p">:</span> <span class="n">StringEvent_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringEvent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">str_event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">attributes</span><span class="o">=</span><span class="n">str_event</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">parse_tx_logs</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TxLog</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">TxLog</span><span class="p">(</span><span class="n">msg_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">),</span> <span class="n">events</span><span class="o">=</span><span class="n">log</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">log</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">logs</span>
+        <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">parse_tx_logs_proto</span><span class="p">(</span><span class="n">logs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AbciMessageLog_pb</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TxLog</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">TxLog</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">log</span><span class="p">)</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">]</span> <span class="k">if</span> <span class="n">logs</span> <span class="k">else</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="TxInfo"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.TxInfo">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">TxInfo</span><span class="p">(</span><span class="n">JSONSerializable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Holds information pertaining to a transaction which has been included in a block</span>
+<span class="sd">    on the blockchain.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Users are not expected to create this object directly. It is returned by</span>
+<span class="sd">        :meth:`TxAPI.tx_info()&lt;terra_sdk.client.lcd.api.tx.TxAPI.tx_info&gt;`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Block height at which transaction was included.&quot;&quot;&quot;</span>
+
+    <span class="n">txhash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Transaction hash.&quot;&quot;&quot;</span>
+
+    <span class="n">rawlog</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Event log information as a raw JSON-string.&quot;&quot;&quot;</span>
+
+    <span class="n">logs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TxLog</span><span class="p">]]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Event log information.&quot;&quot;&quot;</span>
+
+    <span class="n">gas_wanted</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Gas requested by transaction.&quot;&quot;&quot;</span>
+
+    <span class="n">gas_used</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Actual gas amount used.&quot;&quot;&quot;</span>
+
+    <span class="n">tx</span><span class="p">:</span> <span class="n">Tx</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Transaction object.&quot;&quot;&quot;</span>
+
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Time at which transaction was included.&quot;&quot;&quot;</span>
+
+    <span class="n">code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;If this field is not ``None``, the transaction failed at ``DeliverTx`` stage.&quot;&quot;&quot;</span>
+
+    <span class="n">codespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Error subspace (used alongside ``code``).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TxInfo.to_data"><a class="viewcode-back" href="../../../core_modules/auth.html#terra_sdk.core.tx.TxInfo.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">),</span>
+            <span class="s2">&quot;txhash&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">txhash</span><span class="p">,</span>
+            <span class="s2">&quot;raw_log&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlog</span><span class="p">,</span>
+            <span class="s2">&quot;logs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">log</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;gas_wanted&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_wanted</span><span class="p">),</span>
+            <span class="s2">&quot;gas_used&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gas_used</span><span class="p">),</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="s2">&quot;tx&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span>
+            <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">,</span>
+            <span class="s2">&quot;codespace&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">codespace</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">codespace</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;codespace&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;txhash&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;raw_log&quot;</span><span class="p">],</span>
+            <span class="n">parse_tx_logs</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logs&quot;</span><span class="p">)),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;gas_wanted&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;gas_used&quot;</span><span class="p">],</span>
+            <span class="n">Tx</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;tx&quot;</span><span class="p">]),</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">),</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codespace&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxResponse_pb</span><span class="p">:</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">TxResponse_pb</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">txhash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txhash</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">raw_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlog</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">gas_wanted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gas_wanted</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">gas_used</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gas_used</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">tx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span>
+        <span class="n">proto</span><span class="o">.</span><span class="n">codespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">codespace</span>
+        <span class="k">return</span> <span class="n">proto</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_proto</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="n">TxResponse_pb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TxInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+            <span class="n">txhash</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">txhash</span><span class="p">,</span>
+            <span class="n">rawlog</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">raw_log</span><span class="p">,</span>
+            <span class="n">logs</span><span class="o">=</span><span class="n">parse_tx_logs_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">logs</span><span class="p">),</span>
+            <span class="n">gas_wanted</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">gas_wanted</span><span class="p">,</span>
+            <span class="n">gas_used</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">gas_used</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="n">tx</span><span class="o">=</span><span class="n">Tx</span><span class="o">.</span><span class="n">from_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">tx</span><span class="p">),</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">code</span><span class="p">,</span>
+            <span class="n">codespace</span><span class="o">=</span><span class="n">proto</span><span class="o">.</span><span class="n">codespace</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,70 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Building and Signing Transactions &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Building and Signing Transactions &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Working with Smart Contracts" href="smart_contracts.html" />
     <link rel="prev" title="Usage with asyncio" href="async.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,23 +35,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="async.html">Usage with asyncio</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Building and Signing Transactions</a><ul>
@@ -105,106 +57,63 @@
 <li class="toctree-l1"><a class="reference internal" href="custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/gov.html">Gov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/market.html">Market</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/mint.html">Mint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Building and Signing Transactions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/guides/transactions.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="building-and-signing-transactions">
-<h1>Building and Signing Transactions<a class="headerlink" href="#building-and-signing-transactions" title="Permalink to this headline">¶</a></h1>
+<h1>Building and Signing Transactions<a class="headerlink" href="#building-and-signing-transactions" title="Permalink to this headline"></a></h1>
 <p>If you want to perform a state-changing operation on the Terra blockchain such as
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a <strong>transaction</strong> and broadcast it to the network.</p>
-<p>An <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a> is a data object that represents
+<p>An <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.tx.Tx" title="terra_sdk.core.tx.Tx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a> is a data object that represents
 a transaction. It contains:</p>
 <ul class="simple">
 <li><p><strong>msgs</strong>: a list of state-altering messages</p></li>
@@ -214,7 +123,7 @@ a transaction. It contains:</p>
 </ul>
 <p>Terra SDK provides functions that help create StdTx objects.</p>
 <div class="section" id="using-a-wallet-recommended">
-<h2>Using a Wallet (recommended)<a class="headerlink" href="#using-a-wallet-recommended" title="Permalink to this headline">¶</a></h2>
+<h2>Using a Wallet (recommended)<a class="headerlink" href="#using-a-wallet-recommended" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This method requires an LCDClient instance with a proper node connection. If you
@@ -233,17 +142,21 @@ correspond to the account you intend to sign the transaction with.</p>
 </pre></div>
 </div>
 <p>Once you have your Wallet, you can simply create a StdTx using <code class="xref py py-meth docutils literal notranslate"><span class="pre">Wallet.create_and_sign_tx()</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdFee</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd.api.tx</span> <span class="kn">import</span> <span class="n">CreateTxOptions</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.fee</span> <span class="kn">import</span> <span class="n">Fee</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgSend</span>
 
 <span class="n">tx</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span>
-        <span class="n">wallet</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
-        <span class="n">RECIPIENT</span><span class="p">,</span>
-        <span class="s2">&quot;1000000uluna&quot;</span> <span class="c1"># send 1 luna</span>
-    <span class="p">)],</span>
-    <span class="n">memo</span><span class="o">=</span><span class="s2">&quot;test transaction!&quot;</span><span class="p">,</span>
-    <span class="n">fee</span><span class="o">=</span><span class="n">StdFee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;120000uluna&quot;</span><span class="p">)</span>
+    <span class="n">CreateTxOptions</span><span class="p">(</span>
+        <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span>
+            <span class="n">wallet</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+            <span class="n">RECIPIENT</span><span class="p">,</span>
+            <span class="s2">&quot;1000000uluna&quot;</span> <span class="c1"># send 1 luna</span>
+        <span class="p">)]</span>
+        <span class="p">,</span>
+        <span class="n">memo</span><span class="o">=</span><span class="s2">&quot;test transaction!&quot;</span><span class="p">,</span>
+        <span class="n">fee</span><span class="o">=</span><span class="n">Fee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;120000uluna&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -253,7 +166,7 @@ correspond to the account you intend to sign the transaction with.</p>
 </pre></div>
 </div>
 <div class="section" id="automatic-fee-estimation">
-<h3>Automatic fee estimation<a class="headerlink" href="#automatic-fee-estimation" title="Permalink to this headline">¶</a></h3>
+<h3>Automatic fee estimation<a class="headerlink" href="#automatic-fee-estimation" title="Permalink to this headline"></a></h3>
 <p>If no <code class="docutils literal notranslate"><span class="pre">fee</span></code> parameter is provided for <a class="reference internal" href="../common/keys_wallet.html#terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx" title="terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Wallet.create_and_sign_tx()</span></code></a>,
 the transaction fee will be simulated against the node and populated for you. By default, <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>
 will use the fee estimation parameters of the <code class="docutils literal notranslate"><span class="pre">LCDClient</span></code> used to create it. You can override
@@ -270,7 +183,7 @@ signing account hold a balance. For instance, if the signer has a balance of <co
 the fee reported will be both <code class="docutils literal notranslate"><span class="pre">uusd</span></code> and <code class="docutils literal notranslate"><span class="pre">uluna</span></code>.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">denoms</span></code> argument to restrict the estimated fee to specific denoms.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tx</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tx</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span><span class="n">CreateTxOptions</span><span class="p">(</span>
     <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span>
         <span class="n">wallet</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
         <span class="n">RECIPIENT</span><span class="p">,</span>
@@ -280,55 +193,47 @@ the fee reported will be both <code class="docutils literal notranslate"><span c
 <span class="hll">    <span class="n">gas_prices</span><span class="o">=</span><span class="s2">&quot;0.015uluna,0.11ukrw&quot;</span><span class="p">,</span> <span class="c1"># optional</span>
 </span><span class="hll">    <span class="n">gas_adjustment</span><span class="o">=</span><span class="s2">&quot;1.2&quot;</span><span class="p">,</span> <span class="c1"># optional</span>
 </span><span class="hll">    <span class="n">denoms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ukrw&quot;</span><span class="p">]</span> <span class="c1"># optional</span>
-</span><span class="p">)</span>
+</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="signing-transactions-manually">
-<h2>Signing transactions manually<a class="headerlink" href="#signing-transactions-manually" title="Permalink to this headline">¶</a></h2>
+<h2>Signing transactions manually<a class="headerlink" href="#signing-transactions-manually" title="Permalink to this headline"></a></h2>
 <p>Below is the full process of signing a transaction manually that does not use <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>.
-You will need to build a <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdSignMsg</span></code></a>,
-sign it, and add the signatures to an <code class="docutils literal notranslate"><span class="pre">StdTx</span></code>.</p>
-<p>A StdSignMsg contains the information required to build a StdTx:</p>
+You will need to build a <code class="xref py py-class docutils literal notranslate"><span class="pre">SignDoc</span></code>,
+sign it, and add the signatures to an <code class="docutils literal notranslate"><span class="pre">Tx</span></code>.</p>
+<p>A SignDoc contains the information required to build a StdTx:</p>
 <ul class="simple">
 <li><p><strong>chain_id</strong>: chain ID of blockchain network</p></li>
 <li><p><strong>account_number</strong>: account number in blockchain</p></li>
 <li><p><strong>sequence</strong>: sequence number (# of prior transactions)</p></li>
-<li><p><strong>fee</strong>: the transaction fee paid to network / validators</p></li>
-<li><p><strong>msgs</strong>: list of messages to include</p></li>
-<li><p><strong>memo</strong>: a short string describing transaction (can be empty string)</p></li>
+<li><p><strong>auth_info</strong>: transaction authentication info</p></li>
+<li><p><strong>tx_body</strong>: body of a transaction. containing messages.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdSignMsg</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd.api.tx</span> <span class="kn">import</span> <span class="n">CreateTxOptions</span><span class="p">,</span> <span class="n">SignerOptions</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.sign_doc</span> <span class="kn">import</span> <span class="n">SignDoc</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">AuthInfo</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgSend</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
 <span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
 
-<span class="c1"># create tx</span>
-<span class="n">unsigned_tx</span> <span class="o">=</span> <span class="n">StdSignMsg</span><span class="p">(</span>
-    <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-5&quot;</span><span class="p">,</span>
-    <span class="n">account_number</span><span class="o">=</span><span class="mi">23982</span><span class="p">,</span>
-    <span class="n">sequence</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-    <span class="n">fee</span><span class="o">=</span><span class="n">StdFee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;120000uluna&quot;</span><span class="p">),</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span>
-        <span class="n">mk</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
-        <span class="n">RECIPIENT</span><span class="p">,</span>
-        <span class="s2">&quot;1000000uluna&quot;</span> <span class="c1"># send 1 luna</span>
-    <span class="p">)],</span>
-    <span class="n">memo</span><span class="o">=</span><span class="s2">&quot;test transaction!&quot;</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span>
+    <span class="n">address</span><span class="p">,</span>
+    <span class="s2">&quot;terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v&quot;</span><span class="p">,</span>
+    <span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">100000</span><span class="p">),</span>
 <span class="p">)</span>
+          <span class="n">gas</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span>
+          <span class="n">gas_adjustment</span><span class="o">=</span><span class="mf">1.2</span>
+      <span class="p">)</span>
+  <span class="p">)</span>
 
-<span class="c1"># get signature</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">mk</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">unsigned_tx</span><span class="p">)</span>
+<span class="c1"># create signature</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span>
 
-<span class="c1"># prepopulate stdtx with details</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">unsigned_tx</span><span class="o">.</span><span class="n">to_stdtx</span><span class="p">()</span>
-
-<span class="c1"># apply signature</span>
-<span class="n">tx</span><span class="o">.</span><span class="n">signature</span> <span class="o">=</span> <span class="p">[</span><span class="n">sig</span><span class="p">]</span>
 
 <span class="c1"># broadcast tx</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
@@ -337,18 +242,18 @@ sign it, and add the signatures to an <code class="docutils literal notranslate"
 </div>
 </div>
 <div class="section" id="applying-multiple-signatures">
-<h2>Applying multiple signatures<a class="headerlink" href="#applying-multiple-signatures" title="Permalink to this headline">¶</a></h2>
+<h2>Applying multiple signatures<a class="headerlink" href="#applying-multiple-signatures" title="Permalink to this headline"></a></h2>
 <p>Some messages, such as <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code>, require the transaction to be signed with multiple signatures.
-You must prepare a separate <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code> for each signer to sign individually, and then
-combine them in the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of the final <a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx"><code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code></a> object.
-Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</span></code> should only differ by <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, which vary according to the signing key.</p>
+You must prepare a separate <code class="docutils literal notranslate"><span class="pre">SignDoc</span></code> for each signer to sign individually, and then
+combine them in the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of the final <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object.
+Each <code class="docutils literal notranslate"><span class="pre">SignDoc</span></code> should only differ by <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code>, which vary according to the signing key.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In a transaction with multiple signers, the account of the first signature in the
 <code class="docutils literal notranslate"><span class="pre">StdTx</span></code> is responsible for paying the fee.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.auth</span> <span class="kn">import</span> <span class="n">StdFee</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.fee</span> <span class="kn">import</span> <span class="n">Fee</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgMultiSend</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
 
@@ -368,24 +273,22 @@ Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</sp
 <span class="p">)</span>
 
 <span class="n">msgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">multisend</span><span class="p">]</span>
-<span class="n">fee</span> <span class="o">=</span> <span class="n">StdFee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;12000uluna&quot;</span><span class="p">)</span>
+<span class="n">fee</span> <span class="o">=</span> <span class="n">Fee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;12000uluna&quot;</span><span class="p">)</span>
 <span class="n">memo</span> <span class="o">=</span> <span class="s2">&quot;multisend example&quot;</span>
 
-<span class="c1"># create unsigned_tx #1</span>
-<span class="n">u_tx1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span>
+<span class="n">txOption</span> <span class="o">=</span> <span class="n">CreateTxOptions</span><span class="p">(</span>
     <span class="n">msgs</span><span class="o">=</span><span class="n">msgs</span><span class="p">,</span>
     <span class="n">fee</span><span class="o">=</span><span class="n">fee</span><span class="p">,</span>
     <span class="n">memo</span><span class="o">=</span><span class="n">memo</span>
 <span class="p">)</span>
+
+<span class="c1"># create unsigned_tx #1</span>
+<span class="n">u_tx1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="n">txOption</span><span class="p">)</span>
 
 <span class="n">sig1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">u_tx1</span><span class="p">)</span>
 
 <span class="c1"># create unsigned tx #2</span>
-<span class="n">u_tx2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="n">msgs</span><span class="p">,</span>
-    <span class="n">fee</span><span class="o">=</span><span class="n">fee</span><span class="p">,</span>
-    <span class="n">memo</span><span class="o">=</span><span class="n">memo</span>
-<span class="p">)</span>
+<span class="n">u_tx2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="n">txOption</span><span class="p">)</span>
 
 <span class="n">sig2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">u_tx2</span><span class="p">)</span>
 
@@ -402,7 +305,7 @@ Each <code class="docutils literal notranslate"><span class="pre">StdSignMsg</sp
 </div>
 </div>
 <div class="section" id="signing-multiple-offline-transactions">
-<h2>Signing multiple offline transactions<a class="headerlink" href="#signing-multiple-offline-transactions" title="Permalink to this headline">¶</a></h2>
+<h2>Signing multiple offline transactions<a class="headerlink" href="#signing-multiple-offline-transactions" title="Permalink to this headline"></a></h2>
 <p>In some cases, you may wish to sign and save multiple transactions in
 advance, in order to broadcast them at a later date. To do so, you will
 need to manually update the <strong>sequence</strong> number to override the <code class="docutils literal notranslate"><span class="pre">Wallet</span></code>’s
@@ -411,19 +314,25 @@ blockchain (which will not have been updated).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get first sequence</span>
 <span class="hll"><span class="n">sequence</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">sequence</span><span class="p">()</span>
 </span><span class="n">tx1</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
-<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span>
-</span><span class="p">)</span>
+    <span class="n">CreateTxOptions</span><span class="p">(</span>
+<span class="hll">        <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSend</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
+</span>        <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">tx2</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSwap</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
-<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">1</span>
-</span><span class="p">)</span>
-
+<span class="hll"><span class="n">tx2</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
+</span>    <span class="n">CreateTxOptions</span><span class="p">(</span>
+        <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgSwap</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
+        <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">1</span>
+    <span class="p">)</span>
+<span class="hll"><span class="p">)</span>
+</span>
 <span class="n">tx3</span> <span class="o">=</span> <span class="n">wallet</span><span class="o">.</span><span class="n">create_and_sign_tx</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgExecuteContract</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
-<span class="hll">    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">2</span>
-</span><span class="p">)</span>
+    <span class="n">CreateTxOptions</span><span class="p">(</span>
+        <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">MsgExecuteContract</span><span class="p">(</span><span class="o">...</span><span class="p">)],</span>
+        <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="o">+</span><span class="mi">2</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -431,50 +340,33 @@ blockchain (which will not have been updated).</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="smart_contracts.html" class="btn btn-neutral float-right" title="Working with Smart Contracts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="async.html" class="btn btn-neutral float-left" title="Usage with asyncio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smart_contracts.html" class="btn btn-neutral float-right" title="Working with Smart Contracts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

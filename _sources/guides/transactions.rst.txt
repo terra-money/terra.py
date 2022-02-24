@@ -5,7 +5,7 @@ If you want to perform a state-changing operation on the Terra blockchain such a
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a **transaction** and broadcast it to the network.
 
-An :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` is a data object that represents
+An :class:`StdTx<terra_sdk.core.tx.Tx>` is a data object that represents
 a transaction. It contains:
 
 - **msgs**: a list of state-altering messages
@@ -42,17 +42,21 @@ Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.cre
 
 .. code-block:: python
 
-    from terra_sdk.core.auth import StdFee
+    from terra_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra_sdk.core.fee import Fee
     from terra_sdk.core.bank import MsgSend
 
     tx = wallet.create_and_sign_tx(
-        msgs=[MsgSend(
-            wallet.key.acc_address,
-            RECIPIENT,
-            "1000000uluna" # send 1 luna
-        )],
-        memo="test transaction!",
-        fee=StdFee(200000, "120000uluna")
+        CreateTxOptions(
+            msgs=[MsgSend(
+                wallet.key.acc_address,
+                RECIPIENT,
+                "1000000uluna" # send 1 luna
+            )]
+            ,
+            memo="test transaction!",
+            fee=Fee(200000, "120000uluna")
+        )
     )
 
 And that's it! You should now be able to broadcast your transaction to the network.
@@ -85,7 +89,7 @@ this behavior **per transaction**:
 .. code-block:: python
     :emphasize-lines: 8-10
 
-    tx = wallet.create_and_sign_tx(
+    tx = wallet.create_and_sign_tx(CreateTxOptions(
         msgs=[MsgSend(
             wallet.key.acc_address,
             RECIPIENT,
@@ -95,56 +99,48 @@ this behavior **per transaction**:
         gas_prices="0.015uluna,0.11ukrw", # optional
         gas_adjustment="1.2", # optional
         denoms=["ukrw"] # optional
-    )
+    ))
 
 Signing transactions manually
 -----------------------------
 
 Below is the full process of signing a transaction manually that does not use ``Wallet``.
-You will need to build a :class:`StdSignMsg<terra_sdk.core.auth.data.tx.StdSignMsg>`, 
-sign it, and add the signatures to an ``StdTx``.
+You will need to build a :class:`SignDoc<terra_sdk.core.sign_doc.SignDoc>`,
+sign it, and add the signatures to an ``Tx``.
 
-A StdSignMsg contains the information required to build a StdTx:
+A SignDoc contains the information required to build a StdTx:
 
 - **chain_id**: chain ID of blockchain network
 - **account_number**: account number in blockchain
 - **sequence**: sequence number (# of prior transactions)
-- **fee**: the transaction fee paid to network / validators
-- **msgs**: list of messages to include
-- **memo**: a short string describing transaction (can be empty string)
+- **auth_info**: transaction authentication info
+- **tx_body**: body of a transaction. containing messages.
 
 .. code-block:: python
 
     from terra_sdk.client.lcd import LCDClient
-    from terra_sdk.core.auth import StdSignMsg
+    from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
+    from terra_sdk.core.sign_doc import SignDoc
+    from terra_sdk.core.tx import AuthInfo
     from terra_sdk.core.bank import MsgSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
-    mk = MnemonicKey(mnemonic=MNEMONIC) 
+    mk = MnemonicKey(mnemonic=MNEMONIC)
 
-    # create tx
-    unsigned_tx = StdSignMsg(
-        chain_id="columbus-5",
-        account_number=23982,
-        sequence=12,
-        fee=StdFee(200000, "120000uluna"),
-        msgs=[MsgSend(
-            mk.acc_address,
-            RECIPIENT,
-            "1000000uluna" # send 1 luna
-        )],
-        memo="test transaction!"
+    msg = MsgSend(
+        address,
+        "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        Coins(uluna=100000),
     )
+              gas=200000,
+              gas_adjustment=1.2
+          )
+      )
 
-    # get signature
-    sig = mk.create_signature(unsigned_tx)
+    # create signature
+    sig = key.
 
-    # prepopulate stdtx with details
-    tx = unsigned_tx.to_stdtx()
-
-    # apply signature
-    tx.signature = [sig]
 
     # broadcast tx
     result = terra.tx.broadcast(tx)
@@ -156,9 +152,9 @@ Applying multiple signatures
 ----------------------------
 
 Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
-You must prepare a separate ``StdSignMsg`` for each signer to sign individually, and then
-combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core.auth.data.tx.StdTx>` object. 
-Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
+You must prepare a separate ``SignDoc`` for each signer to sign individually, and then
+combine them in the ``signatures`` field of the final :class:`StdTx<terra_sdk.core..tx.Tx>` object. 
+Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
 
 .. note::
     In a transaction with multiple signers, the account of the first signature in the
@@ -167,7 +163,7 @@ Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which va
 .. code-block:: python
 
     from terra_sdk.client.lcd import LCDClient
-    from terra_sdk.core.auth import StdFee
+    from terra_sdk.core.fee import Fee
     from terra_sdk.core.bank import MsgMultiSend
     from terra_sdk.key.mnemonic import MnemonicKey
 
@@ -187,24 +183,22 @@ Each ``StdSignMsg`` should only differ by ``account`` and ``sequence``, which va
     )
 
     msgs = [multisend]
-    fee = StdFee(200000, "12000uluna")
+    fee = Fee(200000, "12000uluna")
     memo = "multisend example"
 
-    # create unsigned_tx #1
-    u_tx1 = wallet1.create_tx(
+    txOption = CreateTxOptions(
         msgs=msgs,
         fee=fee,
         memo=memo
     )
+
+    # create unsigned_tx #1
+    u_tx1 = wallet1.create_tx(txOption)
 
     sig1 = wallet1.key.create_signature(u_tx1)
 
     # create unsigned tx #2
-    u_tx2 = wallet2.create_tx(
-        msgs=msgs,
-        fee=fee,
-        memo=memo
-    )
+    u_tx2 = wallet2.create_tx(txOption)
 
     sig2 = wallet2.key.create_signature(u_tx2)
 
@@ -234,18 +228,24 @@ blockchain (which will not have been updated).
     # get first sequence
     sequence = wallet.sequence()
     tx1 = wallet.create_and_sign_tx(
-        msgs=[MsgSend(...)],
-        sequence=sequence
+        CreateTxOptions(
+            msgs=[MsgSend(...)],
+            sequence=sequence
+        )
     )
 
     tx2 = wallet.create_and_sign_tx(
-        msgs=[MsgSwap(...)],
-        sequence=sequence+1
+        CreateTxOptions(
+            msgs=[MsgSwap(...)],
+            sequence=sequence+1
+        )
     )
 
     tx3 = wallet.create_and_sign_tx(
-        msgs=[MsgExecuteContract(...)],
-        sequence=sequence+2
+        CreateTxOptions(
+            msgs=[MsgExecuteContract(...)],
+            sequence=sequence+2
+        )
     )
 
 

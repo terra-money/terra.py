@@ -1,70 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Mint &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Mint &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MsgAuth" href="msgauth.html" />
+    <link rel="next" title="Oracle" href="oracle.html" />
     <link rel="prev" title="Market" href="market.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,23 +35,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
@@ -96,18 +48,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gov.html">Gov</a></li>
@@ -116,93 +69,49 @@
 <li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Mint</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/core_modules/mint.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="mint">
-<h1>Mint<a class="headerlink" href="#mint" title="Permalink to this headline">¶</a></h1>
+<h1>Mint<a class="headerlink" href="#mint" title="Permalink to this headline"></a></h1>
 <div class="section" id="api">
-<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline"></a></h2>
 <dl class="py class">
-<dt id="terra_sdk.client.lcd.api.mint.MintAPI">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.mint.</span></code><code class="sig-name descname"><span class="pre">MintAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.api.mint.MintAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.api.mint.</span></span><span class="sig-name descname"><span class="pre">MintAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
-<dt id="terra_sdk.client.lcd.api.mint.MintAPI.annual_provisions">
-<code class="sig-name descname"><span class="pre">annual_provisions</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.annual_provisions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.annual_provisions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.api.mint.MintAPI.annual_provisions">
+<span class="sig-name descname"><span class="pre">annual_provisions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.annual_provisions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.annual_provisions" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches the annual provisions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -215,8 +124,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.api.mint.MintAPI.inflation">
-<code class="sig-name descname"><span class="pre">inflation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.inflation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.inflation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.api.mint.MintAPI.inflation">
+<span class="sig-name descname"><span class="pre">inflation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.inflation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.inflation" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches the current inflation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -229,8 +138,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.api.mint.MintAPI.parameters">
-<code class="sig-name descname"><span class="pre">parameters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.parameters" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.api.mint.MintAPI.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/mint.html#MintAPI.parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.mint.MintAPI.parameters" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches the Mint module’s parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -249,50 +158,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="msgauth.html" class="btn btn-neutral float-right" title="MsgAuth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="market.html" class="btn btn-neutral float-left" title="Market" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="oracle.html" class="btn btn-neutral float-right" title="Oracle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

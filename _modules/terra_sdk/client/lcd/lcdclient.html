@@ -1,68 +1,31 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>terra_sdk.client.lcd.lcdclient &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>terra_sdk.client.lcd.lcdclient &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../../../index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,23 +33,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/transactions.html">Building and Signing Transactions</a></li>
@@ -94,107 +46,67 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../common/strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/lcdclient.html">LCDClient</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../common/exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/gov.html">Gov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/market.html">Market</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/mint.html">Mint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../../../index.html">Module code</a> &raquo;</li>
-        
       <li>terra_sdk.client.lcd.lcdclient</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for terra_sdk.client.lcd.lcdclient</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">AbstractEventLoop</span><span class="p">,</span> <span class="n">get_event_loop</span>
 <span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">nest_asyncio</span>
 <span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span>
+<span class="kn">from</span> <span class="nn">multidict</span> <span class="kn">import</span> <span class="n">CIMultiDict</span>
 
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">Coins</span><span class="p">,</span> <span class="n">Dec</span><span class="p">,</span> <span class="n">Numeric</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.exceptions</span> <span class="kn">import</span> <span class="n">LCDResponseError</span>
@@ -203,22 +115,36 @@
 <span class="kn">from</span> <span class="nn">terra_sdk.util.url</span> <span class="kn">import</span> <span class="n">urljoin</span>
 
 <span class="kn">from</span> <span class="nn">.api.auth</span> <span class="kn">import</span> <span class="n">AsyncAuthAPI</span><span class="p">,</span> <span class="n">AuthAPI</span>
+<span class="kn">from</span> <span class="nn">.api.authz</span> <span class="kn">import</span> <span class="n">AsyncAuthzAPI</span><span class="p">,</span> <span class="n">AuthzAPI</span>
 <span class="kn">from</span> <span class="nn">.api.bank</span> <span class="kn">import</span> <span class="n">AsyncBankAPI</span><span class="p">,</span> <span class="n">BankAPI</span>
 <span class="kn">from</span> <span class="nn">.api.distribution</span> <span class="kn">import</span> <span class="n">AsyncDistributionAPI</span><span class="p">,</span> <span class="n">DistributionAPI</span>
+<span class="kn">from</span> <span class="nn">.api.feegrant</span> <span class="kn">import</span> <span class="n">AsyncFeeGrantAPI</span><span class="p">,</span> <span class="n">FeeGrantAPI</span>
 <span class="kn">from</span> <span class="nn">.api.gov</span> <span class="kn">import</span> <span class="n">AsyncGovAPI</span><span class="p">,</span> <span class="n">GovAPI</span>
+<span class="kn">from</span> <span class="nn">.api.ibc</span> <span class="kn">import</span> <span class="n">AsyncIbcAPI</span><span class="p">,</span> <span class="n">IbcAPI</span>
+<span class="kn">from</span> <span class="nn">.api.ibc_transfer</span> <span class="kn">import</span> <span class="n">AsyncIbcTransferAPI</span><span class="p">,</span> <span class="n">IbcTransferAPI</span>
 <span class="kn">from</span> <span class="nn">.api.market</span> <span class="kn">import</span> <span class="n">AsyncMarketAPI</span><span class="p">,</span> <span class="n">MarketAPI</span>
 <span class="kn">from</span> <span class="nn">.api.mint</span> <span class="kn">import</span> <span class="n">AsyncMintAPI</span><span class="p">,</span> <span class="n">MintAPI</span>
-<span class="kn">from</span> <span class="nn">.api.msgauth</span> <span class="kn">import</span> <span class="n">AsyncMsgAuthAPI</span><span class="p">,</span> <span class="n">MsgAuthAPI</span>
 <span class="kn">from</span> <span class="nn">.api.oracle</span> <span class="kn">import</span> <span class="n">AsyncOracleAPI</span><span class="p">,</span> <span class="n">OracleAPI</span>
 <span class="kn">from</span> <span class="nn">.api.slashing</span> <span class="kn">import</span> <span class="n">AsyncSlashingAPI</span><span class="p">,</span> <span class="n">SlashingAPI</span>
 <span class="kn">from</span> <span class="nn">.api.staking</span> <span class="kn">import</span> <span class="n">AsyncStakingAPI</span><span class="p">,</span> <span class="n">StakingAPI</span>
-<span class="kn">from</span> <span class="nn">.api.supply</span> <span class="kn">import</span> <span class="n">AsyncSupplyAPI</span><span class="p">,</span> <span class="n">SupplyAPI</span>
 <span class="kn">from</span> <span class="nn">.api.tendermint</span> <span class="kn">import</span> <span class="n">AsyncTendermintAPI</span><span class="p">,</span> <span class="n">TendermintAPI</span>
 <span class="kn">from</span> <span class="nn">.api.treasury</span> <span class="kn">import</span> <span class="n">AsyncTreasuryAPI</span><span class="p">,</span> <span class="n">TreasuryAPI</span>
 <span class="kn">from</span> <span class="nn">.api.tx</span> <span class="kn">import</span> <span class="n">AsyncTxAPI</span><span class="p">,</span> <span class="n">TxAPI</span>
 <span class="kn">from</span> <span class="nn">.api.wasm</span> <span class="kn">import</span> <span class="n">AsyncWasmAPI</span><span class="p">,</span> <span class="n">WasmAPI</span>
 <span class="kn">from</span> <span class="nn">.lcdutils</span> <span class="kn">import</span> <span class="n">AsyncLCDUtils</span><span class="p">,</span> <span class="n">LCDUtils</span>
+<span class="kn">from</span> <span class="nn">.params</span> <span class="kn">import</span> <span class="n">APIParams</span>
 <span class="kn">from</span> <span class="nn">.wallet</span> <span class="kn">import</span> <span class="n">AsyncWallet</span><span class="p">,</span> <span class="n">Wallet</span>
+
+
+<span class="k">def</span> <span class="nf">get_default</span><span class="p">(</span><span class="n">chain_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">Coins</span><span class="p">,</span> <span class="n">Numeric</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">chain_id</span> <span class="o">==</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;0.15uusd&quot;</span><span class="p">),</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mf">1.75</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">chain_id</span> <span class="o">==</span> <span class="s2">&quot;bombay-12&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;0.15uusd&quot;</span><span class="p">),</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mf">1.75</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">chain_id</span> <span class="o">==</span> <span class="s2">&quot;localterra&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Coins</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;0.15uusd&quot;</span><span class="p">),</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="mf">1.75</span><span class="p">)]</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;chain_id is invalid&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">AsyncLCDClient</span><span class="p">:</span>
@@ -241,24 +167,28 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">chain_id</span> <span class="o">=</span> <span class="n">chain_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gas_prices</span> <span class="o">=</span> <span class="n">Coins</span><span class="p">(</span><span class="n">gas_prices</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gas_adjustment</span> <span class="o">=</span> <span class="n">gas_adjustment</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">default_price</span><span class="p">,</span> <span class="n">default_adjustment</span> <span class="o">=</span> <span class="n">get_default</span><span class="p">(</span><span class="n">chain_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gas_prices</span> <span class="o">=</span> <span class="n">Coins</span><span class="p">(</span><span class="n">gas_prices</span><span class="p">)</span> <span class="k">if</span> <span class="n">gas_prices</span> <span class="k">else</span> <span class="n">default_price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gas_adjustment</span> <span class="o">=</span> <span class="n">gas_adjustment</span> <span class="k">if</span> <span class="n">gas_adjustment</span> <span class="k">else</span> <span class="n">default_adjustment</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">AsyncAuthAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bank</span> <span class="o">=</span> <span class="n">AsyncBankAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">AsyncDistributionAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feegrant</span> <span class="o">=</span> <span class="n">AsyncFeeGrantAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gov</span> <span class="o">=</span> <span class="n">AsyncGovAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">market</span> <span class="o">=</span> <span class="n">AsyncMarketAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mint</span> <span class="o">=</span> <span class="n">AsyncMintAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">msgauth</span> <span class="o">=</span> <span class="n">AsyncMsgAuthAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">authz</span> <span class="o">=</span> <span class="n">AsyncAuthzAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">oracle</span> <span class="o">=</span> <span class="n">AsyncOracleAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slashing</span> <span class="o">=</span> <span class="n">AsyncSlashingAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">staking</span> <span class="o">=</span> <span class="n">AsyncStakingAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">supply</span> <span class="o">=</span> <span class="n">AsyncSupplyAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tendermint</span> <span class="o">=</span> <span class="n">AsyncTendermintAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">treasury</span> <span class="o">=</span> <span class="n">AsyncTreasuryAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wasm</span> <span class="o">=</span> <span class="n">AsyncWasmAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ibc</span> <span class="o">=</span> <span class="n">AsyncIbcAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ibc_transfer</span> <span class="o">=</span> <span class="n">AsyncIbcTransferAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tx</span> <span class="o">=</span> <span class="n">AsyncTxAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">utils</span> <span class="o">=</span> <span class="n">AsyncLCDUtils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -271,8 +201,18 @@
         <span class="k">return</span> <span class="n">AsyncWallet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">APIParams</span><span class="p">,</span> <span class="n">CIMultiDict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="c1"># raw: bool = False</span>
     <span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">params</span>
+            <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="s2">&quot;to_dict&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="s2">&quot;to_dict&quot;</span><span class="p">))</span>
+        <span class="p">):</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
         <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="n">urljoin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
@@ -281,12 +221,12 @@
             <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">299</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span>
+        <span class="k">return</span> <span class="n">result</span>  <span class="c1"># if raw else result[&quot;result&quot;]</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">_post</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># , raw: bool = False</span>
     <span class="p">):</span>
         <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
             <span class="n">urljoin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">),</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span> <span class="ow">and</span> <span class="n">dict_to_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -296,9 +236,39 @@
             <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">299</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span>
+        <span class="k">return</span> <span class="n">result</span>  <span class="c1"># if raw else result[&quot;result&quot;]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_search</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">events</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">list</span><span class="p">],</span>
+            <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">APIParams</span><span class="p">,</span> <span class="n">CIMultiDict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="c1"># raw: bool = False</span>
+    <span class="p">):</span>
+
+        <span class="n">actual_params</span> <span class="o">=</span> <span class="n">CIMultiDict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;tx.height&quot;</span><span class="p">:</span>
+                <span class="n">actual_params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">actual_params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">=&#39;</span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">actual_params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">urljoin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;/cosmos/tx/v1beta1/txs&quot;</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">actual_params</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">299</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">LCDResponseError</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;height&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_request_height</span>
+        <span class="k">return</span> <span class="n">result</span>  <span class="c1"># if raw else result[&quot;result&quot;]</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -316,7 +286,7 @@
     <span class="n">chain_id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="sd">&quot;&quot;&quot;Chain ID of blockchain network connecting to.&quot;&quot;&quot;</span>
 
-    <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Coins</span>
+    <span class="n">gas_prices</span><span class="p">:</span> <span class="n">Coins</span><span class="o">.</span><span class="n">Input</span>
     <span class="sd">&quot;&quot;&quot;Gas prices to use for automatic fee estimation.&quot;&quot;&quot;</span>
 
     <span class="n">gas_adjustment</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Dec</span><span class="p">]</span>
@@ -337,14 +307,17 @@
     <span class="n">gov</span><span class="p">:</span> <span class="n">GovAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`GovAPI&lt;terra_sdk.client.lcd.api.gov.GovAPI&gt;`.&quot;&quot;&quot;</span>
 
+    <span class="n">feegrant</span><span class="p">:</span> <span class="n">FeeGrantAPI</span>
+    <span class="sd">&quot;&quot;&quot;:class:`FeeGrant&lt;terra_sdk.client.lcd.api.feegrant.FeeGrantAPI&gt;`.&quot;&quot;&quot;</span>
+
     <span class="n">market</span><span class="p">:</span> <span class="n">MarketAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`MarketAPI&lt;terra_sdk.client.lcd.api.market.MarketAPI&gt;`.&quot;&quot;&quot;</span>
 
     <span class="n">mint</span><span class="p">:</span> <span class="n">MintAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`MintAPI&lt;terra_sdk.client.lcd.api.mint.MintAPI&gt;`.&quot;&quot;&quot;</span>
 
-    <span class="n">msgauth</span><span class="p">:</span> <span class="n">MsgAuthAPI</span>
-    <span class="sd">&quot;&quot;&quot;:class:`MsgAuthAPI&lt;terra_sdk.client.lcd.api.msgauth.MsgAuthAPI&gt;`.&quot;&quot;&quot;</span>
+    <span class="n">authz</span><span class="p">:</span> <span class="n">AuthzAPI</span>
+    <span class="sd">&quot;&quot;&quot;:class:`AuthzAPI&lt;terra_sdk.client.lcd.api.authz.AuthzAPI&gt;`.&quot;&quot;&quot;</span>
 
     <span class="n">oracle</span><span class="p">:</span> <span class="n">OracleAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`OracleAPI&lt;terra_sdk.client.lcd.api.oracle.OracleAPI&gt;`.&quot;&quot;&quot;</span>
@@ -354,9 +327,6 @@
 
     <span class="n">staking</span><span class="p">:</span> <span class="n">StakingAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`StakingAPI&lt;terra_sdk.client.lcd.api.staking.StakingAPI&gt;`.&quot;&quot;&quot;</span>
-
-    <span class="n">supply</span><span class="p">:</span> <span class="n">SupplyAPI</span>
-    <span class="sd">&quot;&quot;&quot;:class:`SupplyAPI&lt;terra_sdk.client.lcd.api.supply.SupplyAPI&gt;`.&quot;&quot;&quot;</span>
 
     <span class="n">tendermint</span><span class="p">:</span> <span class="n">TendermintAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`TendermintAPI&lt;terra_sdk.client.lcd.api.tendermint.TendermintAPI&gt;`.&quot;&quot;&quot;</span>
@@ -369,6 +339,12 @@
 
     <span class="n">tx</span><span class="p">:</span> <span class="n">TxAPI</span>
     <span class="sd">&quot;&quot;&quot;:class:`TxAPI&lt;terra_sdk.client.lcd.api.tx.TxAPI&gt;`.&quot;&quot;&quot;</span>
+
+    <span class="n">ibc</span><span class="p">:</span> <span class="n">IbcAPI</span>
+    <span class="sd">&quot;&quot;&quot;:class:`IbcAPI&lt;terra_sdk.client.lcd.api.ibc.IbcAPI&gt;`.&quot;&quot;&quot;</span>
+
+    <span class="n">ibc_transfer</span><span class="p">:</span> <span class="n">IbcTransferAPI</span>
+    <span class="sd">&quot;&quot;&quot;:class:`IbcTransferAPI&lt;terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI&gt;`.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -390,16 +366,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bank</span> <span class="o">=</span> <span class="n">BankAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">DistributionAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gov</span> <span class="o">=</span> <span class="n">GovAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feegrant</span> <span class="o">=</span> <span class="n">FeeGrantAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">market</span> <span class="o">=</span> <span class="n">MarketAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mint</span> <span class="o">=</span> <span class="n">MintAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">msgauth</span> <span class="o">=</span> <span class="n">MsgAuthAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">authz</span> <span class="o">=</span> <span class="n">AuthzAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">oracle</span> <span class="o">=</span> <span class="n">OracleAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slashing</span> <span class="o">=</span> <span class="n">SlashingAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">staking</span> <span class="o">=</span> <span class="n">StakingAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">supply</span> <span class="o">=</span> <span class="n">SupplyAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tendermint</span> <span class="o">=</span> <span class="n">TendermintAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">treasury</span> <span class="o">=</span> <span class="n">TreasuryAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wasm</span> <span class="o">=</span> <span class="n">WasmAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ibc</span> <span class="o">=</span> <span class="n">IbcAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ibc_transfer</span> <span class="o">=</span> <span class="n">IbcTransferAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tx</span> <span class="o">=</span> <span class="n">TxAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">utils</span> <span class="o">=</span> <span class="n">LCDUtils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -444,50 +422,46 @@
             <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># session has to be manually created and torn down for each HTTP request in a</span>
+        <span class="c1"># synchronous client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">ClientSession</span><span class="p">(</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">},</span> <span class="n">loop</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_search</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">result</span></div>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

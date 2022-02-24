@@ -1,70 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Keys &amp; Wallets &mdash; Terra SDK 1.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Keys &amp; Wallets &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Exceptions" href="exceptions.html" />
     <link rel="prev" title="LCDClient" href="../guides/lcdclient.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Terra SDK
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -72,23 +35,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Get Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Quickstart</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Usage Guides</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
@@ -96,9 +48,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SDK Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="strings.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bech32.html">Bech32 Strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeric.html">Numeric Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coin_coins.html">Coin &amp; Coins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/lcdclient.html">LCDClient</a></li>
@@ -111,113 +63,70 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Core Modules Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/authz.html">Authz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/bank.html">Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/distribution.html">Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/gov.html">Gov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/market.html">Market</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/mint.html">Mint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/msgauth.html">MsgAuth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/oracle.html">Oracle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/params.html">Params</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/slashing.html">Slashing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/staking.html">Staking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/supply.html">Supply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../core_modules/treasury.html">Treasury</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Terra SDK</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Keys &amp; Wallets</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/common/keys_wallet.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="keys-wallets">
-<h1>Keys &amp; Wallets<a class="headerlink" href="#keys-wallets" title="Permalink to this headline">¶</a></h1>
+<h1>Keys &amp; Wallets<a class="headerlink" href="#keys-wallets" title="Permalink to this headline"></a></h1>
 <p>A <strong>Key</strong> is an object that provides an abstraction for the agency of signing transactions.</p>
 <div class="section" id="key-abstract">
-<h2>Key (abstract)<a class="headerlink" href="#key-abstract" title="Permalink to this headline">¶</a></h2>
-<p>Implementers of Keys meant for signing should override <a class="reference internal" href="#terra_sdk.key.key.Key.sign" title="terra_sdk.key.key.Key.sign"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.sign()</span></code></a>
+<h2>Key (abstract)<a class="headerlink" href="#key-abstract" title="Permalink to this headline"></a></h2>
+<p>Implementers of Keys meant for signing should override <code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.sign()</span></code>
 or <a class="reference internal" href="#terra_sdk.key.key.Key.create_signature" title="terra_sdk.key.key.Key.create_signature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Key.create_signature()</span></code></a> methods. More details are
 available in <span class="xref std std-ref">guides/custom_key</span>.</p>
 <p>Some properties such as <a class="reference internal" href="#terra_sdk.key.key.Key.acc_address" title="terra_sdk.key.key.Key.acc_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acc_address</span></code></a> and
 <a class="reference internal" href="#terra_sdk.key.key.Key.val_address" title="terra_sdk.key.key.Key.val_address"><code class="xref py py-meth docutils literal notranslate"><span class="pre">val_address</span></code></a> are provided.</p>
 <span class="target" id="module-terra_sdk.key.key"></span><dl class="py class">
-<dt id="terra_sdk.key.key.Key">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.key.key.</span></code><code class="sig-name descname"><span class="pre">Key</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.key.key.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key" title="Permalink to this definition"></a></dt>
 <dd><p>Abstract Key interface, representing an agent with transaction-signing capabilities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>public_key</strong> (<em>Optional</em><em>[</em><em>bytes</em><em>]</em>) – compressed public key bytes,</p>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="terra_sdk.key.key.Key.acc_address">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">acc_address</span></code><a class="headerlink" href="#terra_sdk.key.key.Key.acc_address" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.acc_address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acc_address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><span class="pre">AccAddress</span></a></em><a class="headerlink" href="#terra_sdk.key.key.Key.acc_address" title="Permalink to this definition"></a></dt>
 <dd><p>Terra Bech32 account address. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -227,14 +136,14 @@ available in <span class="xref std std-ref">guides/custom_key</span>.</p>
 <dd class="field-even"><p>account address</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccAddress" title="terra_sdk.core.strings.AccAddress">AccAddress</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress">AccAddress</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="terra_sdk.key.key.Key.acc_pubkey">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">acc_pubkey</span></code><a class="headerlink" href="#terra_sdk.key.key.Key.acc_pubkey" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.acc_pubkey">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acc_pubkey</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.AccPubKey" title="terra_sdk.core.bech32.AccPubKey"><span class="pre">AccPubKey</span></a></em><a class="headerlink" href="#terra_sdk.key.key.Key.acc_pubkey" title="Permalink to this definition"></a></dt>
 <dd><p>Terra Bech32 account pubkey. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -244,20 +153,20 @@ available in <span class="xref std std-ref">guides/custom_key</span>.</p>
 <dd class="field-even"><p>account pubkey</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.AccPubKey" title="terra_sdk.core.strings.AccPubKey">AccPubKey</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.AccPubKey" title="terra_sdk.core.bech32.AccPubKey">AccPubKey</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.key.key.Key.create_signature">
-<code class="sig-name descname"><span class="pre">create_signature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.create_signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.create_signature" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.create_signature">
+<span class="sig-name descname"><span class="pre">create_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signDoc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.create_signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.create_signature" title="Permalink to this definition"></a></dt>
 <dd><p>Signs the transaction with the signing algorithm provided by this Key implementation,
 and outputs the signature. The signature is only returned, and must be manually added to
-the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of an <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code>.</p>
+the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Tx</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><em>StdSignMsg</em></a>) – unsigned transaction</p>
+<dd class="field-odd"><p><strong>signDoc</strong> (<em>SignDoc</em>) – unsigned transaction</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>ValueError</strong> – if missing <code class="docutils literal notranslate"><span class="pre">public_key</span></code></p>
@@ -266,34 +175,34 @@ the <code class="docutils literal notranslate"><span class="pre">signatures</spa
 <dd class="field-odd"><p>signature object</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignature" title="terra_sdk.core.auth.data.tx.StdSignature">StdSignature</a></p>
+<dd class="field-even"><p>SignatureV2</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.key.Key.public_key">
-<code class="sig-name descname"><span class="pre">public_key</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.public_key" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.public_key">
+<span class="sig-name descname"><span class="pre">public_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.public_key.PublicKey" title="terra_sdk.core.public_key.PublicKey"><span class="pre">terra_sdk.core.public_key.PublicKey</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.public_key" title="Permalink to this definition"></a></dt>
 <dd><p>Compressed public key bytes, used to derive <a class="reference internal" href="#terra_sdk.key.key.Key.raw_address" title="terra_sdk.key.key.Key.raw_address"><code class="xref py py-data docutils literal notranslate"><span class="pre">raw_address</span></code></a> and <a class="reference internal" href="#terra_sdk.key.key.Key.raw_pubkey" title="terra_sdk.key.key.Key.raw_pubkey"><code class="xref py py-data docutils literal notranslate"><span class="pre">raw_pubkey</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.key.Key.raw_address">
-<code class="sig-name descname"><span class="pre">raw_address</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_address" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.raw_address">
+<span class="sig-name descname"><span class="pre">raw_address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_address" title="Permalink to this definition"></a></dt>
 <dd><p>Raw Bech32 words of address, used to derive associated account and validator
 operator addresses.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.key.Key.raw_pubkey">
-<code class="sig-name descname"><span class="pre">raw_pubkey</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_pubkey" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.raw_pubkey">
+<span class="sig-name descname"><span class="pre">raw_pubkey</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#terra_sdk.key.key.Key.raw_pubkey" title="Permalink to this definition"></a></dt>
 <dd><p>Raw Bech32 words of pubkey, used to derive associated account and validator
 pubkeys.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.key.key.Key.sign">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">sign</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.sign">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign" title="Permalink to this definition"></a></dt>
 <dd><p>Signs the data payload. An implementation of Key is expected to override this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -312,26 +221,29 @@ pubkeys.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.key.key.Key.sign_tx">
-<code class="sig-name descname"><span class="pre">sign_tx</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign_tx" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.sign_tx">
+<span class="sig-name descname"><span class="pre">sign_tx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.sign_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.sign_tx" title="Permalink to this definition"></a></dt>
 <dd><p>Signs the transaction with the signing algorithm provided by this Key implementation,
-and creates a ready-to-broadcast <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object with the signature applied.</p>
+and creates a ready-to-broadcast <code class="xref py py-class docutils literal notranslate"><span class="pre">Tx</span></code> object with the signature applied.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tx</strong> (<a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg"><em>StdSignMsg</em></a>) – unsigned transaction</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tx</strong> (<a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.tx.Tx" title="terra_sdk.core.tx.Tx"><em>Tx</em></a>) – unsigned transaction</p></li>
+<li><p><strong>options</strong> (<em>SignOptions</em>) – options for signing</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>ready-to-broadcast transaction object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx">StdTx</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.tx.Tx" title="terra_sdk.core.tx.Tx">Tx</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="terra_sdk.key.key.Key.val_address">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">val_address</span></code><a class="headerlink" href="#terra_sdk.key.key.Key.val_address" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.val_address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">val_address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress"><span class="pre">ValAddress</span></a></em><a class="headerlink" href="#terra_sdk.key.key.Key.val_address" title="Permalink to this definition"></a></dt>
 <dd><p>Terra Bech32 validator operator address. Default derivation via <a class="reference internal" href="#terra_sdk.key.key.Key.public_key" title="terra_sdk.key.key.Key.public_key"><code class="xref py py-data docutils literal notranslate"><span class="pre">public_key</span></code></a> is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -341,14 +253,14 @@ and creates a ready-to-broadcast <code class="xref py py-class docutils literal 
 <dd class="field-even"><p>validator operator address</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValAddress" title="terra_sdk.core.strings.ValAddress">ValAddress</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress">ValAddress</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="terra_sdk.key.key.Key.val_pubkey">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">val_pubkey</span></code><a class="headerlink" href="#terra_sdk.key.key.Key.val_pubkey" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="terra_sdk.key.key.Key.val_pubkey">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">val_pubkey</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.ValPubKey" title="terra_sdk.core.bech32.ValPubKey"><span class="pre">ValPubKey</span></a></em><a class="headerlink" href="#terra_sdk.key.key.Key.val_pubkey" title="Permalink to this definition"></a></dt>
 <dd><p>Terra Bech32 validator pubkey. Default derivation via <code class="docutils literal notranslate"><span class="pre">public_key</span></code> is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -358,7 +270,7 @@ and creates a ready-to-broadcast <code class="xref py py-class docutils literal 
 <dd class="field-even"><p>validator pubkey</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="strings.html#terra_sdk.core.strings.ValPubKey" title="terra_sdk.core.strings.ValPubKey">ValPubKey</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="bech32.html#terra_sdk.core.bech32.ValPubKey" title="terra_sdk.core.bech32.ValPubKey">ValPubKey</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -367,10 +279,10 @@ and creates a ready-to-broadcast <code class="xref py py-class docutils literal 
 
 </div>
 <div class="section" id="module-terra_sdk.key.raw">
-<span id="rawkey"></span><h2>RawKey<a class="headerlink" href="#module-terra_sdk.key.raw" title="Permalink to this headline">¶</a></h2>
+<span id="rawkey"></span><h2>RawKey<a class="headerlink" href="#module-terra_sdk.key.raw" title="Permalink to this headline"></a></h2>
 <dl class="py class">
-<dt id="terra_sdk.key.raw.RawKey">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.key.raw.</span></code><code class="sig-name descname"><span class="pre">RawKey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.raw.RawKey">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.key.raw.</span></span><span class="sig-name descname"><span class="pre">RawKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey" title="Permalink to this definition"></a></dt>
 <dd><p>RawKey directly uses a raw (plaintext) private key in memory, and provides
 the implementation for signing with ECDSA on curve Secp256k1.</p>
 <dl class="field-list simple">
@@ -379,8 +291,8 @@ the implementation for signing with ECDSA on curve Secp256k1.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="terra_sdk.key.raw.RawKey.from_hex">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key_hex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.from_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.from_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.raw.RawKey.from_hex">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private_key_hex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.from_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.from_hex" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new RawKey from a hex-encoded private key string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -393,14 +305,14 @@ the implementation for signing with ECDSA on curve Secp256k1.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.raw.RawKey.private_key">
-<code class="sig-name descname"><span class="pre">private_key</span></code><em class="property"><span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#terra_sdk.key.raw.RawKey.private_key" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.raw.RawKey.private_key">
+<span class="sig-name descname"><span class="pre">private_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bytes</span></em><a class="headerlink" href="#terra_sdk.key.raw.RawKey.private_key" title="Permalink to this definition"></a></dt>
 <dd><p>Private key, in bytes.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.key.raw.RawKey.sign">
-<code class="sig-name descname"><span class="pre">sign</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.sign" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.raw.RawKey.sign">
+<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/raw.html#RawKey.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.raw.RawKey.sign" title="Permalink to this definition"></a></dt>
 <dd><p>Signs the data payload using ECDSA and curve Secp256k1 with the private key as
 the signing key.</p>
 <dl class="field-list simple">
@@ -417,10 +329,10 @@ the signing key.</p>
 
 </div>
 <div class="section" id="module-terra_sdk.key.mnemonic">
-<span id="mnemonickey"></span><h2>MnemonicKey<a class="headerlink" href="#module-terra_sdk.key.mnemonic" title="Permalink to this headline">¶</a></h2>
+<span id="mnemonickey"></span><h2>MnemonicKey<a class="headerlink" href="#module-terra_sdk.key.mnemonic" title="Permalink to this headline"></a></h2>
 <dl class="py class">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.key.mnemonic.</span></code><code class="sig-name descname"><span class="pre">MnemonicKey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coin_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">330</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/mnemonic.html#MnemonicKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.key.mnemonic.</span></span><span class="sig-name descname"><span class="pre">MnemonicKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coin_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">330</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/mnemonic.html#MnemonicKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey" title="Permalink to this definition"></a></dt>
 <dd><p>A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -439,8 +351,8 @@ a 24-word mnemonic will be generated.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.account">
-<code class="sig-name descname"><span class="pre">account</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.account" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey.account">
+<span class="sig-name descname"><span class="pre">account</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.account" title="Permalink to this definition"></a></dt>
 <dd><p>account number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -450,8 +362,8 @@ a 24-word mnemonic will be generated.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.coin_type">
-<code class="sig-name descname"><span class="pre">coin_type</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.coin_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey.coin_type">
+<span class="sig-name descname"><span class="pre">coin_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.coin_type" title="Permalink to this definition"></a></dt>
 <dd><p>coin type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -460,9 +372,9 @@ a 24-word mnemonic will be generated.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.hd_path">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">hd_path</span></code><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.hd_path" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey.hd_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hd_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.hd_path" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the BIP32 HD path for key-derivation:</p>
 <p><code class="docutils literal notranslate"><span class="pre">m/44'/COIN_TYPE'/ACCOUNT'/0/INDEX'</span></code></p>
 <dl class="field-list simple">
@@ -476,8 +388,8 @@ a 24-word mnemonic will be generated.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.index">
-<code class="sig-name descname"><span class="pre">index</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.index" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.index" title="Permalink to this definition"></a></dt>
 <dd><p>account index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -487,8 +399,8 @@ a 24-word mnemonic will be generated.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="terra_sdk.key.mnemonic.MnemonicKey.mnemonic">
-<code class="sig-name descname"><span class="pre">mnemonic</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.mnemonic" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.key.mnemonic.MnemonicKey.mnemonic">
+<span class="sig-name descname"><span class="pre">mnemonic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#terra_sdk.key.mnemonic.MnemonicKey.mnemonic" title="Permalink to this definition"></a></dt>
 <dd><p>Mnemonic key phrase associated with the account (space-separated).</p>
 </dd></dl>
 
@@ -496,16 +408,16 @@ a 24-word mnemonic will be generated.</p></li>
 
 </div>
 <div class="section" id="module-terra_sdk.client.lcd.wallet">
-<span id="wallet"></span><h2>Wallet<a class="headerlink" href="#module-terra_sdk.client.lcd.wallet" title="Permalink to this headline">¶</a></h2>
+<span id="wallet"></span><h2>Wallet<a class="headerlink" href="#module-terra_sdk.client.lcd.wallet" title="Permalink to this headline"></a></h2>
 <dl class="py class">
-<dt id="terra_sdk.client.lcd.wallet.Wallet">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.wallet.</span></code><code class="sig-name descname"><span class="pre">Wallet</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lcd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.client.lcd.wallet.</span></span><span class="sig-name descname"><span class="pre">Wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lcd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet" title="Permalink to this definition"></a></dt>
 <dd><p>Wraps around a <code class="xref py py-class docutils literal notranslate"><span class="pre">Key</span></code> implementation and provides transaction building and
 signing functionality. It is recommended to create this object through
 <a class="reference internal" href="../guides/lcdclient.html#terra_sdk.client.lcd.LCDClient.wallet" title="terra_sdk.client.lcd.LCDClient.wallet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">LCDClient.wallet()</span></code></a>.</p>
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.wallet.Wallet.account_number">
-<code class="sig-name descname"><span class="pre">account_number</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.account_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.account_number" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet.account_number">
+<span class="sig-name descname"><span class="pre">account_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.account_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.account_number" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches account number for the account associated with the Key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -515,8 +427,8 @@ signing functionality. It is recommended to create this object through
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.wallet.Wallet.account_number_and_sequence">
-<code class="sig-name descname"><span class="pre">account_number_and_sequence</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.account_number_and_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.account_number_and_sequence" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet.account_number_and_sequence">
+<span class="sig-name descname"><span class="pre">account_number_and_sequence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.account_number_and_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.account_number_and_sequence" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches both account and sequence number associated with the Key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -526,69 +438,47 @@ signing functionality. It is recommended to create this object through
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx">
-<code class="sig-name descname"><span class="pre">create_and_sign_tx</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fee</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_prices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_adjustment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fee_denoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.create_and_sign_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates and signs a <code class="xref py py-class docutils literal notranslate"><span class="pre">StdTx</span></code> object in a single step. This is the recommended
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx">
+<span class="sig-name descname"><span class="pre">create_and_sign_tx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.create_and_sign_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.create_and_sign_tx" title="Permalink to this definition"></a></dt>
+<dd><p>Creates and signs a <code class="xref py py-class docutils literal notranslate"><span class="pre">Tx</span></code> object in a single step. This is the recommended
 method for preparing transaction for immediate signing and broadcastring. The transaction
 is generated exactly as <a class="reference internal" href="#terra_sdk.client.lcd.wallet.Wallet.create_tx" title="terra_sdk.client.lcd.wallet.Wallet.create_tx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_tx()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
-<li><p><strong>fee</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a><em>]</em><em>, </em><em>optional</em>) – transaction fee. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, will be estimated.
-See more on <a href="#id1"><span class="problematic" id="id2">`fee estimation`_</span></a>.</p></li>
-<li><p><strong>memo</strong> (<em>str</em><em>, </em><em>optional</em>) – optional short string to include with transaction.</p></li>
-<li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices for fee estimation.</p></li>
-<li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment for fee estimation.</p></li>
-<li><p><strong>fee_denoms</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – list of denoms to use for fee after estimation.</p></li>
-<li><p><strong>account_number</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – account number (overrides blockchain query if
-provided)</p></li>
-<li><p><strong>sequence</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – sequence (overrides blockchain qu ery if provided)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>options</strong> (<em>CreateTxOptions</em>) – Options to create a tx</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>signed transaction</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdTx" title="terra_sdk.core.auth.data.tx.StdTx">StdTx</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.tx.Tx" title="terra_sdk.core.tx.Tx">Tx</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.wallet.Wallet.create_tx">
-<code class="sig-name descname"><span class="pre">create_tx</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fee</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_prices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gas_adjustment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fee_denoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.create_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.create_tx" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet.create_tx">
+<span class="sig-name descname"><span class="pre">create_tx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.create_tx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.create_tx" title="Permalink to this definition"></a></dt>
 <dd><p>Builds an unsigned transaction object. The <code class="docutils literal notranslate"><span class="pre">Wallet</span></code> will first
 query the blockchain to fetch the latest <code class="docutils literal notranslate"><span class="pre">account</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code> values for the
 account corresponding to its Key, unless the they are both provided. If no <code class="docutils literal notranslate"><span class="pre">fee</span></code>
 parameter is set, automatic fee estimation will be used (see <cite>fee_estimation</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>msgs</strong> (<em>List</em><em>[</em><em>Msg</em><em>]</em>) – list of messages to include</p></li>
-<li><p><strong>fee</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdFee" title="terra_sdk.core.auth.data.tx.StdFee"><em>StdFee</em></a><em>]</em><em>, </em><em>optional</em>) – transaction fee. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, will be estimated.
-See more on <a href="#id3"><span class="problematic" id="id4">`fee estimation`_</span></a>.</p></li>
-<li><p><strong>memo</strong> (<em>str</em><em>, </em><em>optional</em>) – optional short string to include with transaction.</p></li>
-<li><p><strong>gas_prices</strong> (<em>Optional</em><em>[</em><em>Coins.Input</em><em>]</em><em>, </em><em>optional</em>) – gas prices for fee estimation.</p></li>
-<li><p><strong>gas_adjustment</strong> (<em>Optional</em><em>[</em><em>Numeric.Input</em><em>]</em><em>, </em><em>optional</em>) – gas adjustment for fee estimation.</p></li>
-<li><p><strong>fee_denoms</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – list of denoms to use for fee after estimation.</p></li>
-<li><p><strong>account_number</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – account number (overrides blockchain query if
-provided)</p></li>
-<li><p><strong>sequence</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – sequence (overrides blockchain qu ery if provided)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>options</strong> (<em>CreateTxOptions</em>) – Options to create a tx</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>unsigned transaction</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.auth.data.tx.StdSignMsg" title="terra_sdk.core.auth.data.tx.StdSignMsg">StdSignMsg</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../core_modules/auth.html#terra_sdk.core.tx.Tx" title="terra_sdk.core.tx.Tx">Tx</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="terra_sdk.client.lcd.wallet.Wallet.sequence">
-<code class="sig-name descname"><span class="pre">sequence</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.sequence" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="terra_sdk.client.lcd.wallet.Wallet.sequence">
+<span class="sig-name descname"><span class="pre">sequence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/wallet.html#Wallet.sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.wallet.Wallet.sequence" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches the sequence number for the account associated with the Key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -604,50 +494,33 @@ provided)</p></li>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="exceptions.html" class="btn btn-neutral float-right" title="Exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../guides/lcdclient.html" class="btn btn-neutral float-left" title="LCDClient" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exceptions.html" class="btn btn-neutral float-right" title="Exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Terraform Labs, PTE..
-
-    </p>
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>terra_proto.cosmos.tx.signing.v1beta1 &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> Terra SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/bech32.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/lcdclient.html">LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/authz.html">Authz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Terra SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+      <li>terra_proto.cosmos.tx.signing.v1beta1</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for terra_proto.cosmos.tx.signing.v1beta1</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Generated by the protocol buffer compiler.  DO NOT EDIT!</span>
+<span class="c1"># sources: cosmos/tx/signing/v1beta1/signing.proto</span>
+<span class="c1"># plugin: python-betterproto</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">betterproto</span>
+<span class="kn">from</span> <span class="nn">betterproto.grpc.grpclib_server</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
+
+
+<div class="viewcode-block" id="SignMode"><a class="viewcode-back" href="../../../../../core_modules/auth.html#terra_sdk.core.tx.SignMode">[docs]</a><span class="k">class</span> <span class="nc">SignMode</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;SignMode represents a signing mode with its own security guarantees.&quot;&quot;&quot;</span>
+
+    <span class="c1"># SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be</span>
+    <span class="c1"># rejected</span>
+    <span class="n">SIGN_MODE_UNSPECIFIED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is</span>
+    <span class="c1"># verified with raw bytes from Tx</span>
+    <span class="n">SIGN_MODE_DIRECT</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># SIGN_MODE_TEXTUAL is a future signing mode that will verify some human-</span>
+    <span class="c1"># readable textual representation on top of the binary representation from</span>
+    <span class="c1"># SIGN_MODE_DIRECT</span>
+    <span class="n">SIGN_MODE_TEXTUAL</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses</span>
+    <span class="c1"># Amino JSON and will be removed in the future</span>
+    <span class="n">SIGN_MODE_LEGACY_AMINO_JSON</span> <span class="o">=</span> <span class="mi">127</span></div>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SignatureDescriptors</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;SignatureDescriptors wraps multiple SignatureDescriptor&#39;s.&quot;&quot;&quot;</span>
+
+    <span class="c1"># signatures are the signature descriptors</span>
+    <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;SignatureDescriptor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SignatureDescriptor</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SignatureDescriptor is a convenience type which represents the full data</span>
+<span class="sd">    for a signature including the public key of the signer, signing modes and</span>
+<span class="sd">    the signature itself. It is primarily used for coordinating signatures</span>
+<span class="sd">    between clients.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># public_key is the public key of the signer</span>
+    <span class="n">public_key</span><span class="p">:</span> <span class="s2">&quot;betterproto_lib_google_protobuf.Any&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s2">&quot;SignatureDescriptorData&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># sequence is the sequence of the account, which describes the number of</span>
+    <span class="c1"># committed transactions signed by a given address. It is used to prevent</span>
+    <span class="c1"># replay attacks.</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SignatureDescriptorData</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Data represents signature data&quot;&quot;&quot;</span>
+
+    <span class="c1"># single represents a single signer</span>
+    <span class="n">single</span><span class="p">:</span> <span class="s2">&quot;SignatureDescriptorDataSingle&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+    <span class="c1"># multi represents a multisig signer</span>
+    <span class="n">multi</span><span class="p">:</span> <span class="s2">&quot;SignatureDescriptorDataMulti&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SignatureDescriptorDataSingle</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Single is the signature data for a single signer&quot;&quot;&quot;</span>
+
+    <span class="c1"># mode is the signing mode of the single signer</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="s2">&quot;SignMode&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># signature is the raw signature bytes</span>
+    <span class="n">signature</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">bytes_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SignatureDescriptorDataMulti</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Multi is the signature data for a multisig public key&quot;&quot;&quot;</span>
+
+    <span class="c1"># bitarray specifies which keys within the multisig are signing</span>
+    <span class="n">bitarray</span><span class="p">:</span> <span class="s2">&quot;___crypto_multisig_v1_beta1__.CompactBitArray&quot;</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1"># signatures is the signatures of the multi-signature</span>
+    <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;SignatureDescriptorData&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">....crypto.multisig</span> <span class="kn">import</span> <span class="n">v1beta1</span> <span class="k">as</span> <span class="n">___crypto_multisig_v1_beta1__</span>
+<span class="kn">import</span> <span class="nn">betterproto.lib.google.protobuf</span> <span class="k">as</span> <span class="nn">betterproto_lib_google_protobuf</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

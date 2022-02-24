@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>terra_proto.cosmos.gov.v1beta1 &mdash; Terra SDK 2.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Terra SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/async.html">Usage with asyncio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/transactions.html">Building and Signing Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SDK Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/bech32.html">Bech32 Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/numeric.html">Numeric Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/coin_coins.html">Coin &amp; Coins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/lcdclient.html">LCDClient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/keys_wallet.html">Keys &amp; Wallets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../common/exceptions.html">Exceptions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Modules Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/auth.html">Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/authz.html">Authz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/bank.html">Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/gov.html">Gov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/market.html">Market</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/mint.html">Mint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/oracle.html">Oracle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/params.html">Params</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/slashing.html">Slashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/staking.html">Staking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tendermint.html">Tendermint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tx.html">Transactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/wasm.html">WebAssembly</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Terra SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>terra_proto.cosmos.gov.v1beta1</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for terra_proto.cosmos.gov.v1beta1</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Generated by the protocol buffer compiler.  DO NOT EDIT!</span>
+<span class="c1"># sources: cosmos/gov/v1beta1/genesis.proto, cosmos/gov/v1beta1/gov.proto, cosmos/gov/v1beta1/query.proto, cosmos/gov/v1beta1/tx.proto</span>
+<span class="c1"># plugin: python-betterproto</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">betterproto</span>
+<span class="kn">from</span> <span class="nn">betterproto.grpc.grpclib_server</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
+<span class="kn">import</span> <span class="nn">grpclib</span>
+
+
+<div class="viewcode-block" id="VoteOption"><a class="viewcode-back" href="../../../../core_modules/gov.html#terra_sdk.core.gov.data.VoteOption">[docs]</a><span class="k">class</span> <span class="nc">VoteOption</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    VoteOption enumerates the valid vote options for a given governance</span>
+<span class="sd">    proposal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># VOTE_OPTION_UNSPECIFIED defines a no-op vote option.</span>
+    <span class="n">VOTE_OPTION_UNSPECIFIED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># VOTE_OPTION_YES defines a yes vote option.</span>
+    <span class="n">VOTE_OPTION_YES</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># VOTE_OPTION_ABSTAIN defines an abstain vote option.</span>
+    <span class="n">VOTE_OPTION_ABSTAIN</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># VOTE_OPTION_NO defines a no vote option.</span>
+    <span class="n">VOTE_OPTION_NO</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="c1"># VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.</span>
+    <span class="n">VOTE_OPTION_NO_WITH_VETO</span> <span class="o">=</span> <span class="mi">4</span></div>
+
+
+<span class="k">class</span> <span class="nc">ProposalStatus</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;ProposalStatus enumerates the valid statuses of a proposal.&quot;&quot;&quot;</span>
+
+    <span class="c1"># PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status.</span>
+    <span class="n">PROPOSAL_STATUS_UNSPECIFIED</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit</span>
+    <span class="c1"># period.</span>
+    <span class="n">PROPOSAL_STATUS_DEPOSIT_PERIOD</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting</span>
+    <span class="c1"># period.</span>
+    <span class="n">PROPOSAL_STATUS_VOTING_PERIOD</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has</span>
+    <span class="c1"># passed.</span>
+    <span class="n">PROPOSAL_STATUS_PASSED</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="c1"># PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has</span>
+    <span class="c1"># been rejected.</span>
+    <span class="n">PROPOSAL_STATUS_REJECTED</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="c1"># PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has</span>
+    <span class="c1"># failed.</span>
+    <span class="n">PROPOSAL_STATUS_FAILED</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">WeightedVoteOption</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;WeightedVoteOption defines a unit of vote for vote split.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span><span class="p">:</span> <span class="s2">&quot;VoteOption&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TextProposal</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TextProposal defines a standard text proposal whose changes need to be</span>
+<span class="sd">    manually updated in case of approval.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Deposit</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deposit defines an amount deposited by an account address to an active</span>
+<span class="sd">    proposal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Proposal</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proposal defines the core field members of a governance proposal.&quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">content</span><span class="p">:</span> <span class="s2">&quot;betterproto_lib_google_protobuf.Any&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">status</span><span class="p">:</span> <span class="s2">&quot;ProposalStatus&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">final_tally_result</span><span class="p">:</span> <span class="s2">&quot;TallyResult&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">submit_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">deposit_end_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">total_deposit</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">voting_start_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">voting_end_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TallyResult</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;TallyResult defines a standard tally for a governance proposal.&quot;&quot;&quot;</span>
+
+    <span class="n">yes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">abstain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">no</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">no_with_veto</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Vote</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Vote defines a vote on a governance proposal. A Vote consists of a proposal</span>
+<span class="sd">    ID, the voter, and the vote option.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Deprecated: Prefer to use `options` instead. This field is set in queries</span>
+    <span class="c1"># if and only if `len(options) == 1` and that option has weight 1. In all</span>
+    <span class="c1"># other cases, this field will default to VOTE_OPTION_UNSPECIFIED.</span>
+    <span class="n">option</span><span class="p">:</span> <span class="s2">&quot;VoteOption&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;WeightedVoteOption&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">option</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Vote.option is deprecated&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">DepositParams</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DepositParams defines the params for deposits on governance proposals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Minimum deposit for a proposal to enter voting period.</span>
+    <span class="n">min_deposit</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Maximum period for Atom holders to deposit on a proposal. Initial value: 2</span>
+    <span class="c1"># months.</span>
+    <span class="n">max_deposit_period</span><span class="p">:</span> <span class="n">timedelta</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">VotingParams</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;VotingParams defines the params for voting on governance proposals.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Length of the voting period.</span>
+    <span class="n">voting_period</span><span class="p">:</span> <span class="n">timedelta</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TallyParams</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TallyParams defines the params for tallying votes on governance proposals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Minimum percentage of total stake needed to vote for a result to be</span>
+    <span class="c1"># considered valid.</span>
+    <span class="n">quorum</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">bytes_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Minimum proportion of Yes votes for proposal to pass. Default value: 0.5.</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">bytes_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Minimum value of Veto votes to Total votes ratio for proposal to be</span>
+    <span class="c1"># vetoed. Default value: 1/3.</span>
+    <span class="n">veto_threshold</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">bytes_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgSubmitProposal</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MsgSubmitProposal defines an sdk.Msg type that supports submitting</span>
+<span class="sd">    arbitrary proposal Content.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">content</span><span class="p">:</span> <span class="s2">&quot;betterproto_lib_google_protobuf.Any&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">initial_deposit</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">proposer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgSubmitProposalResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MsgSubmitProposalResponse defines the Msg/SubmitProposal response type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgVote</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MsgVote defines a message to cast a vote.&quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">option</span><span class="p">:</span> <span class="s2">&quot;VoteOption&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgVoteResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MsgVoteResponse defines the Msg/Vote response type.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgVoteWeighted</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MsgVoteWeighted defines a message to cast a vote.&quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;WeightedVoteOption&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgVoteWeightedResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgDeposit</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    MsgDeposit defines a message to submit a deposit to an existing proposal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MsgDepositResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MsgDepositResponse defines the Msg/Deposit response type.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryProposalRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryProposalRequest is the request type for the Query/Proposal RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryProposalResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryProposalResponse is the response type for the Query/Proposal RPC</span>
+<span class="sd">    method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposal</span><span class="p">:</span> <span class="s2">&quot;Proposal&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryProposalsRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryProposalsRequest is the request type for the Query/Proposals RPC</span>
+<span class="sd">    method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_status defines the status of the proposals.</span>
+    <span class="n">proposal_status</span><span class="p">:</span> <span class="s2">&quot;ProposalStatus&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># voter defines the voter address for the proposals.</span>
+    <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># depositor defines the deposit addresses from the proposals.</span>
+    <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># pagination defines an optional pagination for the request.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryProposalsResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryProposalsResponse is the response type for the Query/Proposals RPC</span>
+<span class="sd">    method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proposals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Proposal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># pagination defines the pagination in the response.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageResponse&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryVoteRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;QueryVoteRequest is the request type for the Query/Vote RPC method.&quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># voter defines the oter address for the proposals.</span>
+    <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryVoteResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryVoteResponse is the response type for the Query/Vote RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># vote defined the queried vote.</span>
+    <span class="n">vote</span><span class="p">:</span> <span class="s2">&quot;Vote&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryVotesRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryVotesRequest is the request type for the Query/Votes RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># pagination defines an optional pagination for the request.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryVotesResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryVotesResponse is the response type for the Query/Votes RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># votes defined the queried votes.</span>
+    <span class="n">votes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Vote&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># pagination defines the pagination in the response.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageResponse&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryParamsRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryParamsRequest is the request type for the Query/Params RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># params_type defines which parameters to query for, can be one of &quot;voting&quot;,</span>
+    <span class="c1"># &quot;tallying&quot; or &quot;deposit&quot;.</span>
+    <span class="n">params_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryParamsResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryParamsResponse is the response type for the Query/Params RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># voting_params defines the parameters related to voting.</span>
+    <span class="n">voting_params</span><span class="p">:</span> <span class="s2">&quot;VotingParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># deposit_params defines the parameters related to deposit.</span>
+    <span class="n">deposit_params</span><span class="p">:</span> <span class="s2">&quot;DepositParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># tally_params defines the parameters related to tally.</span>
+    <span class="n">tally_params</span><span class="p">:</span> <span class="s2">&quot;TallyParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryDepositRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryDepositRequest is the request type for the Query/Deposit RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># depositor defines the deposit addresses from the proposals.</span>
+    <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryDepositResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryDepositResponse is the response type for the Query/Deposit RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># deposit defines the requested deposit.</span>
+    <span class="n">deposit</span><span class="p">:</span> <span class="s2">&quot;Deposit&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryDepositsRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryDepositsRequest is the request type for the Query/Deposits RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># pagination defines an optional pagination for the request.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryDepositsResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryDepositsResponse is the response type for the Query/Deposits RPC</span>
+<span class="sd">    method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">deposits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Deposit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># pagination defines the pagination in the response.</span>
+    <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageResponse&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryTallyResultRequest</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryTallyResultRequest is the request type for the Query/Tally RPC method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># proposal_id defines the unique id of the proposal.</span>
+    <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QueryTallyResultResponse</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QueryTallyResultResponse is the response type for the Query/Tally RPC</span>
+<span class="sd">    method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># tally defines the requested tally.</span>
+    <span class="n">tally</span><span class="p">:</span> <span class="s2">&quot;TallyResult&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">GenesisState</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;GenesisState defines the gov module&#39;s genesis state.&quot;&quot;&quot;</span>
+
+    <span class="c1"># starting_proposal_id is the ID of the starting proposal.</span>
+    <span class="n">starting_proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">uint64_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># deposits defines all the deposits present at genesis.</span>
+    <span class="n">deposits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Deposit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># votes defines all the votes present at genesis.</span>
+    <span class="n">votes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Vote&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># proposals defines all the proposals present at genesis.</span>
+    <span class="n">proposals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Proposal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c1"># params defines all the paramaters of related to deposit.</span>
+    <span class="n">deposit_params</span><span class="p">:</span> <span class="s2">&quot;DepositParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1"># params defines all the paramaters of related to voting.</span>
+    <span class="n">voting_params</span><span class="p">:</span> <span class="s2">&quot;VotingParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="c1"># params defines all the paramaters of related to tally.</span>
+    <span class="n">tally_params</span><span class="p">:</span> <span class="s2">&quot;TallyParams&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MsgStub</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">ServiceStub</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">submit_proposal</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="s2">&quot;betterproto_lib_google_protobuf.Any&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">initial_deposit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proposer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgSubmitProposalResponse&quot;</span><span class="p">:</span>
+        <span class="n">initial_deposit</span> <span class="o">=</span> <span class="n">initial_deposit</span> <span class="ow">or</span> <span class="p">[]</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">MsgSubmitProposal</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="k">if</span> <span class="n">initial_deposit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">initial_deposit</span> <span class="o">=</span> <span class="n">initial_deposit</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposer</span> <span class="o">=</span> <span class="n">proposer</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/SubmitProposal&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">MsgSubmitProposalResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="s2">&quot;VoteOption&quot;</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgVoteResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">MsgVote</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">voter</span> <span class="o">=</span> <span class="n">voter</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="n">option</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/Vote&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">MsgVoteResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote_weighted</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;WeightedVoteOption&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgVoteWeightedResponse&quot;</span><span class="p">:</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">options</span> <span class="ow">or</span> <span class="p">[]</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">MsgVoteWeighted</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">voter</span> <span class="o">=</span> <span class="n">voter</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/VoteWeighted&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">MsgVoteWeightedResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgDepositResponse&quot;</span><span class="p">:</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span> <span class="ow">or</span> <span class="p">[]</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">MsgDeposit</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">depositor</span> <span class="o">=</span> <span class="n">depositor</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/Deposit&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">MsgDepositResponse</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">QueryStub</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">ServiceStub</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryProposalResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryProposalRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Proposal&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryProposalResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposals</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">proposal_status</span><span class="p">:</span> <span class="s2">&quot;ProposalStatus&quot;</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryProposalsResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryProposalsRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_status</span> <span class="o">=</span> <span class="n">proposal_status</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">voter</span> <span class="o">=</span> <span class="n">voter</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">depositor</span> <span class="o">=</span> <span class="n">depositor</span>
+        <span class="k">if</span> <span class="n">pagination</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">pagination</span> <span class="o">=</span> <span class="n">pagination</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Proposals&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryProposalsResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryVoteResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryVoteRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">voter</span> <span class="o">=</span> <span class="n">voter</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Vote&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryVoteResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryVotesResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryVotesRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="k">if</span> <span class="n">pagination</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">pagination</span> <span class="o">=</span> <span class="n">pagination</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Votes&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryVotesResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">params_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryParamsResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryParamsRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">params_type</span> <span class="o">=</span> <span class="n">params_type</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Params&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryParamsResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryDepositResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryDepositRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">depositor</span> <span class="o">=</span> <span class="n">depositor</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Deposit&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryDepositResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposits</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryDepositsResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryDepositsRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+        <span class="k">if</span> <span class="n">pagination</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">pagination</span> <span class="o">=</span> <span class="n">pagination</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Deposits&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryDepositsResponse</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tally_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryTallyResultResponse&quot;</span><span class="p">:</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QueryTallyResultRequest</span><span class="p">()</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span> <span class="o">=</span> <span class="n">proposal_id</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_unary</span><span class="p">(</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/TallyResult&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">QueryTallyResultResponse</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MsgBase</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">submit_proposal</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="s2">&quot;betterproto_lib_google_protobuf.Any&quot;</span><span class="p">,</span>
+        <span class="n">initial_deposit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]],</span>
+        <span class="n">proposer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgSubmitProposalResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="s2">&quot;VoteOption&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgVoteResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote_weighted</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;WeightedVoteOption&quot;</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgVoteWeightedResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;__base_v1_beta1__.Coin&quot;</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MsgDepositResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_submit_proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+            <span class="s2">&quot;initial_deposit&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">initial_deposit</span><span class="p">,</span>
+            <span class="s2">&quot;proposer&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposer</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">submit_proposal</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_vote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;voter&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">voter</span><span class="p">,</span>
+            <span class="s2">&quot;option&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">option</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_vote_weighted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;voter&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">voter</span><span class="p">,</span>
+            <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">vote_weighted</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;depositor&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">depositor</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__mapping__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/SubmitProposal&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_submit_proposal</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">MsgSubmitProposal</span><span class="p">,</span>
+                <span class="n">MsgSubmitProposalResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/Vote&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_vote</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">MsgVote</span><span class="p">,</span>
+                <span class="n">MsgVoteResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/VoteWeighted&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_vote_weighted</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">MsgVoteWeighted</span><span class="p">,</span>
+                <span class="n">MsgVoteWeightedResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Msg/Deposit&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_deposit</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">MsgDeposit</span><span class="p">,</span>
+                <span class="n">MsgDepositResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">QueryBase</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryProposalResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">proposals</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">proposal_status</span><span class="p">:</span> <span class="s2">&quot;ProposalStatus&quot;</span><span class="p">,</span>
+        <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryProposalsResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">vote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">voter</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryVoteResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryVotesResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryParamsResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">depositor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryDepositResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">deposits</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pagination</span><span class="p">:</span> <span class="s2">&quot;__base_query_v1_beta1__.PageRequest&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryDepositsResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tally_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposal_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;QueryTallyResultResponse&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">GRPCError</span><span class="p">(</span><span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">UNIMPLEMENTED</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_proposal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_proposals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_status&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_status</span><span class="p">,</span>
+            <span class="s2">&quot;voter&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">voter</span><span class="p">,</span>
+            <span class="s2">&quot;depositor&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">depositor</span><span class="p">,</span>
+            <span class="s2">&quot;pagination&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">pagination</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposals</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_vote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;voter&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">voter</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_votes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;pagination&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">pagination</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">votes</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;params_type&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">params_type</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;depositor&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">depositor</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_deposits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+            <span class="s2">&quot;pagination&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">pagination</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">deposits</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__rpc_tally_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">recv_message</span><span class="p">()</span>
+
+        <span class="n">request_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;proposal_id&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">proposal_id</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">tally_result</span><span class="p">(</span><span class="o">**</span><span class="n">request_kwargs</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__mapping__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Proposal&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_proposal</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryProposalRequest</span><span class="p">,</span>
+                <span class="n">QueryProposalResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Proposals&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_proposals</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryProposalsRequest</span><span class="p">,</span>
+                <span class="n">QueryProposalsResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Vote&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_vote</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryVoteRequest</span><span class="p">,</span>
+                <span class="n">QueryVoteResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Votes&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_votes</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryVotesRequest</span><span class="p">,</span>
+                <span class="n">QueryVotesResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Params&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_params</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryParamsRequest</span><span class="p">,</span>
+                <span class="n">QueryParamsResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Deposit&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_deposit</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryDepositRequest</span><span class="p">,</span>
+                <span class="n">QueryDepositResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/Deposits&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_deposits</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryDepositsRequest</span><span class="p">,</span>
+                <span class="n">QueryDepositsResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;/cosmos.gov.v1beta1.Query/TallyResult&quot;</span><span class="p">:</span> <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Handler</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__rpc_tally_result</span><span class="p">,</span>
+                <span class="n">grpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">Cardinality</span><span class="o">.</span><span class="n">UNARY_UNARY</span><span class="p">,</span>
+                <span class="n">QueryTallyResultRequest</span><span class="p">,</span>
+                <span class="n">QueryTallyResultResponse</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">}</span>
+
+
+<span class="kn">from</span> <span class="nn">...base</span> <span class="kn">import</span> <span class="n">v1beta1</span> <span class="k">as</span> <span class="n">__base_v1_beta1__</span>
+<span class="kn">from</span> <span class="nn">...base.query</span> <span class="kn">import</span> <span class="n">v1beta1</span> <span class="k">as</span> <span class="n">__base_query_v1_beta1__</span>
+<span class="kn">import</span> <span class="nn">betterproto.lib.google.protobuf</span> <span class="k">as</span> <span class="nn">betterproto_lib_google_protobuf</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Terraform Labs, PTE..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
