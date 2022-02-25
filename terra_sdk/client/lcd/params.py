@@ -11,11 +11,11 @@ class APIParams(ABC):
         pass
 
     def to_list(self) -> list:
-        l = []
-        d = self.to_dict()
-        for key in d.keys():
-            l.append((key, d.get(key)))
-        return l
+        lst = []
+        dct = self.to_dict()
+        for key in dct.keys():
+            lst.append((key, dct.get(key)))
+        return lst
 
 
 class PaginationOptions(APIParams):

@@ -2,15 +2,14 @@
 
 from __future__ import annotations
 
-import attr
-
 from typing import List, Optional
 
-from terra_sdk.util.json import JSONSerializable
-
+import attr
 from terra_proto.cosmos.tx.v1beta1 import ModeInfo as ModeInfo_pb
 from terra_proto.cosmos.tx.v1beta1 import ModeInfoMulti as ModeInfoMulti_pb
 from terra_proto.cosmos.tx.v1beta1 import ModeInfoSingle as ModeInfoSingle_pb
+
+from terra_sdk.util.json import JSONSerializable
 
 from .compact_bit_array import CompactBitArray
 
@@ -34,7 +33,7 @@ class ModeInfo(JSONSerializable):
             return {"single": self.single.to_data()}
         if self.multi:
             return {"multi": self.multi.to_data()}
-        raise ValueError('ModeInfo should have one of single or multi')
+        raise ValueError("ModeInfo should have one of single or multi")
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfo:
@@ -42,7 +41,7 @@ class ModeInfo(JSONSerializable):
             return cls(single=data.get("single"))
         if data.get("multi"):
             return cls(multi=data.get("multi"))
-        raise ValueError('ModeInfo should have one of single or multi')
+        raise ValueError("ModeInfo should have one of single or multi")
 
     def to_proto(self) -> ModeInfo_pb:
         if self.single:

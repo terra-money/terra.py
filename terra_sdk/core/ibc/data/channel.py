@@ -4,16 +4,13 @@ from __future__ import annotations
 from typing import List
 
 import attr
-from terra_proto.ibc.core.channel.v1 import (
-    Counterparty as Counterparty_pb,
-    Channel as Channel_pb,
-    Packet as Packet_pb,
-    Order,
-    State
-)
-from betterproto.lib.google.protobuf import Any as Any_pb
+from terra_proto.ibc.core.channel.v1 import Channel as Channel_pb
+from terra_proto.ibc.core.channel.v1 import Counterparty as Counterparty_pb
+from terra_proto.ibc.core.channel.v1 import Order
+from terra_proto.ibc.core.channel.v1 import Packet as Packet_pb
+from terra_proto.ibc.core.channel.v1 import State
 
-from terra_sdk.core.ibc.data import Height
+from terra_sdk.core.ibc.data.client import Height
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["Counterparty", "Channel", "Order", "State", "Packet"]
@@ -39,9 +36,7 @@ class Counterparty(JSONSerializable):
         )
 
     def to_proto(self) -> Counterparty_pb:
-        return Counterparty_pb(
-            port_id=self.port_id, channel_id=self.channel_id
-        )
+        return Counterparty_pb(port_id=self.port_id, channel_id=self.channel_id)
 
     @classmethod
     def from_proto(cls, proto: Counterparty_pb) -> Counterparty:
@@ -49,7 +44,6 @@ class Counterparty(JSONSerializable):
             port_id=proto.port_id,
             channel_id=proto.channel_id,
         )
-
 
 
 @attr.s
@@ -76,7 +70,7 @@ class Channel(JSONSerializable):
             ordering=data["ordering"],
             counterparty=Counterparty.from_data(data["counterparty"]),
             connection_hops=data["connection_hops"],
-            version=data["version"]
+            version=data["version"],
         )
 
     def to_proto(self) -> Channel_pb:
@@ -85,7 +79,7 @@ class Channel(JSONSerializable):
             ordering=self.ordering,
             counterparty=self.counterparty.to_proto(),
             connection_hops=self.connection_hops,
-            version=self.version
+            version=self.version,
         )
 
     @classmethod
@@ -95,7 +89,7 @@ class Channel(JSONSerializable):
             ordering=proto.ordering,
             counterparty=Counterparty.from_proto(proto.counterparty),
             connection_hops=proto.connection_hops,
-            version=proto.version
+            version=proto.version,
         )
 
 
@@ -127,7 +121,7 @@ class Packet(JSONSerializable):
             destination_channel=data["destination_channel"],
             data=data["data"],
             timeout_height=Height.from_data(data["timeout_height"]),
-            timeout_timestamp=data["timeout_timestamp"]
+            timeout_timestamp=data["timeout_timestamp"],
         )
 
     def to_proto(self) -> Packet_pb:
@@ -139,7 +133,7 @@ class Packet(JSONSerializable):
             destination_channel=self.destination_channel,
             data=self.data,
             timeout_height=self.timeout_height.to_proto(),
-            timeout_timestamp=self.timeout_timestamp
+            timeout_timestamp=self.timeout_timestamp,
         )
 
     @classmethod
@@ -152,5 +146,5 @@ class Packet(JSONSerializable):
             destination_channel=proto.destination_channel,
             data=proto.data,
             timeout_height=Height.from_proto(proto.timeout_height),
-            timeout_timestamp=proto.timeout_timestamp
+            timeout_timestamp=proto.timeout_timestamp,
         )

@@ -45,9 +45,10 @@ class AsyncGovAPI(BaseAsyncAPI):
     # keep it private
     async def __search_submit_proposal(self, proposal_id: int):
         params = [
-            ("events", f"message.action='/cosmos.gov.v1beta1.MsgSubmitProposal'"),
-            ("events", f"submit_proposal.proposal_id={proposal_id}"),
+            ("message.action", "/cosmos.gov.v1beta1.MsgSubmitProposal"),
+            ("submit_proposal.proposal_id", proposal_id),
         ]
+
         res = await self._c._search(params)
         txs = res.get("txs")
         if txs is None or len(txs) <= 0:
@@ -59,8 +60,8 @@ class AsyncGovAPI(BaseAsyncAPI):
         self, proposal_id: int, params: Optional[APIParams] = None
     ):
         events = [
-            ("events", f"message.action='/cosmos.gov.v1beta1.MsgDeposit'"),
-            ("events", f"proposal_deposit.proposal_id={proposal_id}"),
+            ("message.action", "/cosmos.gov.v1beta1.MsgDeposit"),
+            ("proposal_deposit.proposal_id", proposal_id),
         ]
         if params is not None:
             d = params.to_dict()
@@ -77,13 +78,14 @@ class AsyncGovAPI(BaseAsyncAPI):
         self, proposal_id: int, action: str, params: Optional[APIParams] = None
     ):
         events = [
-            ("events", f"message.action='/cosmos.gov.v1beta1.MsgVote'"),
-            ("events", f"proposal_vote.proposal_id={proposal_id}"),
+            ("message.action", "/cosmos.gov.v1beta1.MsgVote"),
+            ("proposal_vote.proposal_id", proposal_id),
         ]
         if params is not None:
             d = params.to_dict()
             for i in d.keys():
                 events.append((i, d.get(i)))
+
         res = await self._c._search(events)
         txs = res.get("txs")
         if txs is None or len(txs) <= 0:

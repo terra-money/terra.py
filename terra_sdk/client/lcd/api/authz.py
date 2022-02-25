@@ -8,8 +8,6 @@ from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncAuthzAPI", "AuthzAPI"]
 
-from ..params import PaginationOptions
-
 
 class AsyncAuthzAPI(BaseAsyncAPI):
     async def grants(
@@ -36,7 +34,7 @@ class AsyncAuthzAPI(BaseAsyncAPI):
         if msg_type is not None:
             params["msg_type_url"] = msg_type
 
-        res = await self._c._get(f"/cosmos/authz/v1beta1/grants", params)
+        res = await self._c._get("/cosmos/authz/v1beta1/grants", params)
         return [AuthorizationGrant.from_data(x) for x in res["grants"]]
 
 

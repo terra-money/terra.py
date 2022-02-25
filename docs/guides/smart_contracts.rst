@@ -26,6 +26,7 @@ Contract Deployment Example
     code_id = store_code_tx_result.logs[0].events_by_type["store_code"]["code_id"][0]
     instantiate = MsgInstantiateContract(
         test1.key.acc_address,
+        test1.key.acc_address,
         code_id,
         {"count": 0},
         {"uluna": 10000000, "ukrw": 1000000},

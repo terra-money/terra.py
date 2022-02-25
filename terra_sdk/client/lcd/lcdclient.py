@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from asyncio import AbstractEventLoop, get_event_loop
 from json import JSONDecodeError
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 import nest_asyncio
 from aiohttp import ClientSession
@@ -38,13 +38,13 @@ from .wallet import AsyncWallet, Wallet
 
 def get_default(chain_id: str) -> [Coins, Numeric]:
     if chain_id == "columbus-5":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
     if chain_id == "bombay-12":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
     if chain_id == "localterra":
-        return [Coins.from_str('0.15uusd'), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
 
-    raise ValueError('chain_id is invalid')
+    raise ValueError("chain_id is invalid")
 
 
 class AsyncLCDClient:
@@ -106,7 +106,11 @@ class AsyncLCDClient:
         params: Optional[Union[APIParams, CIMultiDict, list, dict]] = None,
         # raw: bool = False
     ):
-        if params and hasattr(params, "to_dict") and callable(getattr(params, "to_dict")):
+        if (
+            params
+            and hasattr(params, "to_dict")
+            and callable(getattr(params, "to_dict"))
+        ):
             params = params.to_dict()
 
         async with self.session.get(
@@ -118,7 +122,7 @@ class AsyncLCDClient:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
                 raise LCDResponseError(message=str(result), response=response)
-        self.last_request_height = result.get("height")
+        self.last_request_height = result.get("height") if result else self.last_request_height
         return result  # if raw else result["result"]
 
     async def _post(
@@ -133,7 +137,37 @@ class AsyncLCDClient:
                 raise LCDResponseError(message=str(response.reason), response=response)
             if not 200 <= response.status < 299:
                 raise LCDResponseError(message=result.get("message"), response=response)
-        self.last_request_height = result.get("height")
+        self.last_request_height = result.get("height") if result else self.last_request_height
+        return result  # if raw else result["result"]
+
+    async def _search(
+            self,
+            events: List[list],
+            params: Optional[Union[APIParams, CIMultiDict, list, dict]] = None,
+            # raw: bool = False
+    ):
+
+        actual_params = CIMultiDict()
+
+        for event in events:
+            if event[0] == "tx.height":
+                actual_params.add("events", f"{event[0]}={event[1]}")
+            else:
+                actual_params.add("events", f"{event[0]}='{event[1]}'")
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
+        async with self.session.get(
+                urljoin(self.url, "/cosmos/tx/v1beta1/txs"), params=actual_params
+        ) as response:
+            try:
+                result = await response.json(content_type=None)
+            except JSONDecodeError:
+                raise LCDResponseError(message=str(response.reason), response=response)
+            if not 200 <= response.status < 299:
+                raise LCDResponseError(message=str(result), response=response)
+        self.last_request_height = result.get("height") if result else self.last_request_height
         return result  # if raw else result["result"]
 
     async def __aenter__(self):

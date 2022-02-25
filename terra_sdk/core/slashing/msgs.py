@@ -28,12 +28,7 @@ class MsgUnjail(Msg):
     address: ValAddress = attr.ib()
 
     def to_amino(self) -> dict:
-        return {
-            "type": self.type_amino,
-            "value": {
-                "address": self.address
-            }
-        }
+        return {"type": self.type_amino, "value": {"address": self.address}}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgUnjail:

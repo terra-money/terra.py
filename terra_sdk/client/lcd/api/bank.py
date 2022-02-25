@@ -19,15 +19,17 @@ class AsyncBankAPI(BaseAsyncAPI):
 
         Returns:
             Coins: balance
+            Pagination: pagination info
         """
         res = await self._c._get(f"/cosmos/bank/v1beta1/balances/{address}", params)
         return Coins.from_data(res["balances"]), res.get("pagination")
 
-    async def total(self, params: Optional[APIParams] = None) -> Coins:
+    async def total(self, params: Optional[APIParams] = None) -> (Coins, dict):
         """Fetches the current total supply of all tokens.
 
         Returns:
             Coins: total supply
+            Pagination: pagination info
         """
         res = await self._c._get("/cosmos/bank/v1beta1/supply", params)
         return Coins.from_data(res.get("supply")), res.get("pagination")
@@ -35,13 +37,13 @@ class AsyncBankAPI(BaseAsyncAPI):
 
 class BankAPI(AsyncBankAPI):
     @sync_bind(AsyncBankAPI.balance)
-    def balance(self, address: AccAddress, params: Optional[APIParams] = None) -> Coins:
+    def balance(self, address: AccAddress, params: Optional[APIParams] = None) -> (Coins, dict):
         pass
 
     balance.__doc__ = AsyncBankAPI.balance.__doc__
 
     @sync_bind(AsyncBankAPI.total)
-    def total(self) -> Coins:
+    def total(self) -> (Coins, dict):
         pass
 
     total.__doc__ = AsyncBankAPI.total.__doc__

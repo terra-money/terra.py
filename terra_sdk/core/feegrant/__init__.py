@@ -1,4 +1,4 @@
-from .data import AllowedMsgAllowance, BasicAllowance, PeriodicAllowance, Allowance
+from .data import Allowance, AllowedMsgAllowance, BasicAllowance, PeriodicAllowance
 from .msgs import MsgGrantAllowance, MsgRevokeAllowance
 
 __all__ = [

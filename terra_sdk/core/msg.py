@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from abc import abstractmethod
-
 from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.util.base import BaseTerraData
