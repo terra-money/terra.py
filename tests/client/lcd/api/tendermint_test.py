@@ -18,7 +18,7 @@ def test_validator_set_with_height():
 
 def test_node_info():
     result = terra.tendermint.node_info()
-    print(result)
+    assert(result["default_node_info"]["network"] == 'bombay-12')
 
 
 def test_block_info():
