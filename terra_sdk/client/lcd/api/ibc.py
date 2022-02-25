@@ -1,3 +1,5 @@
+from terra_sdk.core import Coin, Dec
+
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncIbcAPI", "IbcAPI"]
@@ -11,7 +13,8 @@ class AsyncIbcAPI(BaseAsyncAPI):
             List: allowed clients
         """
         res = await self._c._get("/ibc/client/v1/params")
-        return res["params"]
+        params = res["params"]
+        return params["allowed_clients"]
 
     # TODO: functions for clients, connections and channels
 

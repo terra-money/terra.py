@@ -51,8 +51,8 @@ class MsgSetWithdrawAddress(Msg):
             "type": self.type_amino,
             "value": {
                 "delegator_address": self.delegator_address,
-                "withdraw_address": self.withdraw_address,
-            },
+                "withdraw_address": self.withdraw_address
+            }
         }
 
     def to_data(self) -> dict:
@@ -107,37 +107,35 @@ class MsgWithdrawDelegationReward(Msg):
             "type": self.type_amino,
             "value": {
                 "delegator_address": self.delegator_address,
-                "withdraw_address": self.withdraw_address,
-            },
+                "withdraw_address": self.withdraw_address
+            }
         }
 
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
             "delegator_address": self.delegator_address,
-            "withdraw_address": self.withdraw_address,
+            "withdraw_address": self.withdraw_address
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
         return cls(
             delegator_address=data["delegator_address"],
-            validator_address=data["validator_address"],
+            validator_address=data["validator_address"]
         )
 
     def to_proto(self) -> MsgWithdrawDelegatorReward_pb:
         return MsgWithdrawDelegatorReward_pb(
             delegator_address=self.delegator_address,
-            validator_address=self.validator_address,
+            validator_address=self.validator_address
         )
 
     @classmethod
-    def from_proto(
-        cls, data: MsgWithdrawDelegatorReward_pb
-    ) -> MsgWithdrawDelegationReward:
+    def from_proto(cls, data: MsgWithdrawDelegatorReward_pb) -> MsgWithdrawDelegationReward:
         return cls(
             delegator_address=data["delegator_address"],
-            validator_address=data["validator_address"],
+            validator_address=data["validator_address"]
         )
 
 
@@ -161,7 +159,9 @@ class MsgWithdrawValidatorCommission(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {"validator_address": self.validator_address},
+            "value": {
+                "validator_address": self.validator_address
+            }
         }
 
     def to_data(self) -> dict:
@@ -177,9 +177,7 @@ class MsgWithdrawValidatorCommission(Msg):
         )
 
     @classmethod
-    def from_proto(
-        cls, data: MsgWithdrawValidatorCommission_pb
-    ) -> MsgWithdrawValidatorCommission:
+    def from_proto(cls, data: MsgWithdrawValidatorCommission_pb) -> MsgWithdrawValidatorCommission:
         return cls(validator_address=data["validator_address"])
 
 
@@ -203,7 +201,10 @@ class MsgFundCommunityPool(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {"depositor": self.depositor, "amount": self.amount.to_amino()},
+            "value": {
+                "depositor": self.depositor,
+                "amount": self.amount.to_amino()
+            }
         }
 
     def to_data(self) -> dict:

@@ -54,7 +54,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 test: ## runs tests
-	poetry run pytest --cov=terra_sdk
+	poetry run pytest
 
 qa: ## runs static analysis with mypy and flake8
 	poetry run flake8 terra_sdk

@@ -23,7 +23,6 @@ from terra_sdk.client.lcd.api.tx import CreateTxOptions
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core.bank import MsgMultiSend, MsgSend, MultiSendInput, MultiSendOutput
 from terra_sdk.core.tx import SignMode
-from terra_sdk.key.mnemonic import MnemonicKey
 from terra_sdk.util.json import JSONSerializable
 
 """ untested
@@ -37,14 +36,8 @@ from terra_sdk.core.public_key import SimplePublicKey
 
 
 def main():
-    terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
-        chain_id="bombay-12",
-    )
-    key = MnemonicKey(
-        mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
-    )
-    test1 = terra.wallet(key=key)
+    terra = LocalTerra()
+    test1 = terra.wallets["test1"]
 
     msg = MsgSend(
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
@@ -69,15 +62,12 @@ def main():
     ]
     msgMulti = MsgMultiSend(inputs, outputs)
 
-    opt = CreateTxOptions(
-        msgs=[msg, msgMulti], memo="send test", gas_adjustment=1.5, gas_prices="1uluna"
-    )
+    opt = CreateTxOptions(msgs=[msg, msgMulti], memo="send test", gas_adjustment=1.5, gas_prices='1uluna')
     # tx = test1.create_tx(opt)
     tx = test1.create_and_sign_tx(opt)
     print("SIGNED TX", tx)
 
     result = terra.tx.broadcast(tx)
     print(f"RESULT:{result}")
-
 
 main()

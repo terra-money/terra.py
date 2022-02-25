@@ -1,6 +1,8 @@
-from typing import List
+from typing import Optional, List
 
 import attr
+
+from terra_sdk.core import PublicKey
 
 __all__ = [
     "BlockInfo",
@@ -11,7 +13,7 @@ __all__ = [
     "Parts",
     "Version",
     "LastCommit",
-    "Signature",
+    "Signature"
 ]
 
 
@@ -59,7 +61,15 @@ class Header:
 @attr.s
 class Signature:
     block_id_flag: int = attr.ib(converter=int)
-    validator_address: str = attr.ib()
+    validator_addrress: str = attr.ib()
+    timestamp: str = attr.ib()
+    signature: str = attr.ib()
+
+
+@attr.s
+class Signature:
+    block_id_flag: int = attr.ib(converter=int)
+    validator_addrress: str = attr.ib()
     timestamp: str = attr.ib()
     signature: str = attr.ib()
 

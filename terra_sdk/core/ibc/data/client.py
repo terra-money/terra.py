@@ -4,28 +4,18 @@ from __future__ import annotations
 from typing import List
 
 import attr
-from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.ibc.core.client.v1 import (
-    ClientConsensusStates as ClientConsensusStates_pb,
-)
-from terra_proto.ibc.core.client.v1 import (
-    ConsensusStateWithHeight as ConsensusStateWithHeight_pb,
-)
-from terra_proto.ibc.core.client.v1 import Height as Height_pb
-from terra_proto.ibc.core.client.v1 import (
+    Height as Height_pb,
     IdentifiedClientState as IdentifiedClientState_pb,
+    ClientConsensusStates as ClientConsensusStates_pb,
+    ConsensusStateWithHeight as ConsensusStateWithHeight_pb,
+    Params as Params_pb
 )
-from terra_proto.ibc.core.client.v1 import Params as Params_pb
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.util.json import JSONSerializable
 
-__all__ = [
-    "Height",
-    "IdentifiedClientState",
-    "ConsensusStateWithHeight",
-    "ClientConsensusStates",
-    "Params",
-]
+__all__ = ["Height", "IdentifiedClientState", "ConsensusStateWithHeight", "ClientConsensusStates", "Params"]
 
 
 @attr.s
@@ -55,7 +45,6 @@ class Height(JSONSerializable):
             revision_height=proto.revision_height,
         )
 
-
 @attr.s
 class IdentifiedClientState(JSONSerializable):
     """
@@ -72,19 +61,20 @@ class IdentifiedClientState(JSONSerializable):
     def from_data(cls, data: dict) -> IdentifiedClientState:
         return cls(
             client_id=data["client_id"],
-            consensus_state=Any_pb().from_dict(data["client_state"]),
+            consensus_state=Any_pb().from_dict(data["client_state"])
         )
 
     def to_proto(self) -> IdentifiedClientState_pb:
         return IdentifiedClientState_pb(
             client_id=self.client_id,
-            client_state=Any_pb().from_dict(self.consensus_state),
+            client_state=Any_pb().from_dict(self.consensus_state)
         )
 
     @classmethod
     def from_proto(cls, proto: IdentifiedClientState_pb) -> IdentifiedClientState:
         return cls(
-            client_id=proto.client_id, consensus_state=proto.client_state.to_dict()
+            client_id=proto.client_id,
+            consensus_state=proto.client_state.to_dict()
         )
 
 
@@ -104,17 +94,21 @@ class ConsensusStateWithHeight(JSONSerializable):
     def from_data(cls, data: dict) -> ConsensusStateWithHeight:
         return cls(
             height=data["height"],
-            consensus_state=Any_pb().from_dict(data["consensus_state"]),
+            consensus_state=Any_pb().from_dict(data["consensus_state"])
         )
 
     def to_proto(self) -> ConsensusStateWithHeight_pb:
         return ConsensusStateWithHeight_pb(
-            height=self.height, consensus_state=Any_pb().from_dict(self.consensus_state)
+            height=self.height,
+            consensus_state=Any_pb().from_dict(self.consensus_state)
         )
 
     @classmethod
     def from_proto(cls, proto: ConsensusStateWithHeight_pb) -> ConsensusStateWithHeight:
-        return cls(height=proto.height, consensus_state=proto.consensus_state.to_dict())
+        return cls(
+            height=proto.height,
+            consensus_state=proto.consensus_state.to_dict()
+        )
 
 
 @attr.s
@@ -133,27 +127,22 @@ class ClientConsensusStates(JSONSerializable):
     def from_data(cls, data: dict) -> ClientConsensusStates:
         return cls(
             client_id=data["client_id"],
-            consensus_states=[
-                ConsensusStateWithHeight.from_data(state)
-                for state in data["consensus_states"]
-            ],
+            consensus_states=[ConsensusStateWithHeight.from_data(state) for state in data["consensus_states"]]
         )
 
     def to_proto(self) -> ClientConsensusStates_pb:
         return ClientConsensusStates_pb(
             client_id=self.client_id,
-            consensus_states=[state.to_proto for state in self.consensus_states],
+            consensus_states=[state.to_proto for state in self.consensus_states]
         )
 
     @classmethod
     def from_proto(cls, proto: ClientConsensusStates_pb) -> ClientConsensusStates:
         return cls(
             client_id=proto.client_id,
-            consensus_states=[
-                ConsensusStateWithHeight.from_proto(state)
-                for state in proto.consensus_states
-            ],
+            consensus_states=[ConsensusStateWithHeight.from_proto(state) for state in proto.consensus_states]
         )
+
 
 
 @attr.s
@@ -169,11 +158,18 @@ class Params(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Params:
-        return cls(allowed_clients=data["allowed_clients"])
+        return cls(
+            allowed_clients=data["allowed_clients"]
+        )
 
     def to_proto(self) -> Params_pb:
-        return Params_pb(allowed_clients=self.allowed_clients)
+        return Params_pb(
+            allowed_clients=self.allowed_clients
+        )
 
     @classmethod
     def from_proto(cls, proto: Params_pb) -> Params:
-        return cls(allowed_clients=proto.allowed_clients)
+        return cls(
+            allowed_clients=proto.allowed_clients
+        )
+

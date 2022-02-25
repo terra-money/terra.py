@@ -30,7 +30,7 @@ class Plan(JSONSerializable):
             "height": self.height,
             "info": self.info,
             "time": to_isoformat(self.time) if self.time else None,
-            "upgrade_client_state": self.upgrade_client_state,
+            "upgrade_client_state": self.upgrade_client_state
         }
 
     @classmethod

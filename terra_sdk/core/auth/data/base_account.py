@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 
 import attr
 from terra_proto.cosmos.auth.v1beta1 import BaseAccount as BaseAccount_pb
 
-from ....core import AccAddress
+from ....core import AccAddress, Coins
 from ....util.json import JSONSerializable
 from ...public_key import PublicKey
 
@@ -39,20 +39,10 @@ class BaseAccount(JSONSerializable):
             "value": {
                 "address": self.address,
                 "public_key": self.public_key.to_amino(),
-                "account_number": str(self.account_number),
-                "sequence": str(self.sequence),
-            },
+                "account_number": self.account_number,
+                "sequence": self.sequence
+            }
         }
-
-    @classmethod
-    def from_amino(cls, amino: dict) -> BaseAccount:
-        amino = amino["value"]
-        return cls(
-            address=amino["address"],
-            public_key=PublicKey.from_amino(amino["public_key"]),
-            account_number=amino["account_number"],
-            sequence=amino["sequence"]
-        )
 
     def get_account_number(self) -> int:
         return self.account_number

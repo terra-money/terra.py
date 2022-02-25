@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import base64
+import attr
+
 from typing import Dict, List, Optional
 
-import attr
 from terra_proto.cosmos.base.abci.v1beta1 import AbciMessageLog as AbciMessageLog_pb
 from terra_proto.cosmos.base.abci.v1beta1 import Attribute as Attribute_pb
 from terra_proto.cosmos.base.abci.v1beta1 import StringEvent as StringEvent_pb
@@ -16,17 +17,13 @@ from terra_proto.cosmos.tx.v1beta1 import SignerInfo as SignerInfo_pb
 from terra_proto.cosmos.tx.v1beta1 import Tx as Tx_pb
 from terra_proto.cosmos.tx.v1beta1 import TxBody as TxBody_pb
 
+from terra_sdk.core.signature_v2 import SignatureV2
 from terra_sdk.core.compact_bit_array import CompactBitArray
 from terra_sdk.core.fee import Fee
-from terra_sdk.core.mode_info import ModeInfo, ModeInfoMulti, ModeInfoSingle
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.public_key import (
-    LegacyAminoMultisigPublicKey,
-    PublicKey,
-    SimplePublicKey,
-)
-from terra_sdk.core.signature_v2 import SignatureV2
+from terra_sdk.core.public_key import LegacyAminoMultisigPublicKey, PublicKey, SimplePublicKey
 from terra_sdk.util.json import JSONSerializable
+from terra_sdk.core.mode_info import ModeInfo, ModeInfoSingle, ModeInfoMulti
 
 __all__ = [
     "SignMode",
@@ -441,7 +438,7 @@ class TxInfo(JSONSerializable):
             parse_tx_logs(data.get("logs")),
             data["gas_wanted"],
             data["gas_used"],
-            Tx.from_data(data["tx"]),
+            Tx.from_data(data['tx']),
             data["timestamp"],
             data.get("code"),
             data.get("codespace"),

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import List, Optional
+from typing import List, Union, Optional
 
 import attr
 from attr import converters
@@ -30,9 +30,7 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: Optional[datetime] = attr.ib(
-        converter=converters.optional(parser.parse)
-    )
+    expiration: Optional[datetime] = attr.ib(converter=converters.optional(parser.parse))
 
     type_amino = "feegrant/BasicAllowance"
     type_url = "/cosmos.feegrant.v1beta1.BasicAllowance"
@@ -41,19 +39,15 @@ class BasicAllowance(JSONSerializable):
         return {
             "type": self.type_amino,
             "value": {
-                "spend_limit": self.spend_limit.to_amino()
-                if self.spend_limit
-                else None,
-                "expiration": to_isoformat(self.expiration)
-                if self.expiration
-                else None,
-            },
+                "spend_limit": self.spend_limit.to_amino() if self.spend_limit else None,
+                "expiration": to_isoformat(self.expiration) if self.expiration else None
+            }
         }
 
     def to_data(self) -> dict:
         return {
             "spend_limit": self.spend_limit.to_data() if self.spend_limit else None,
-            "expiration": to_isoformat(self.expiration) if self.expiration else None,
+            "expiration": to_isoformat(self.expiration) if self.expiration else None
         }
 
     @classmethod
@@ -62,13 +56,13 @@ class BasicAllowance(JSONSerializable):
         exp = data.get("expiration")
         return cls(
             spend_limit=Coins.from_data(sl) if sl else None,
-            expiration=exp if exp else None,
+            expiration=exp if exp else None
         )
 
     def to_proto(self) -> BasicAllowance_pb:
         return BasicAllowance_pb(
             spend_limit=self.spend_limit.to_proto() if self.spend_limit else [],
-            expiration=self.expiration,
+            expiration=self.expiration
         )
 
 
@@ -98,8 +92,8 @@ class PeriodicAllowance(JSONSerializable):
                 "period": str(self.period),
                 "period_spend_limit": self.period_spend_limit.to_amino(),
                 "period_can_spend": self.period_can_spend.to_amino(),
-                "period_reset": to_isoformat(self.period_reset),
-            },
+                "period_reset": to_isoformat(self.period_reset)
+            }
         }
 
     @classmethod
@@ -141,8 +135,8 @@ class AllowedMsgAllowance(JSONSerializable):
             "type": self.type_amino,
             "value": {
                 "allowance": self.allowance.to_amino(),
-                "allowed_messages": self.allowed_messages,
-            },
+                "allowed_messages": self.allowed_messages
+            }
         }
 
     @classmethod
@@ -159,7 +153,9 @@ class AllowedMsgAllowance(JSONSerializable):
         )
 
 
-class Allowance:  # (BasicAllowance, PeriodicAllowance):
+#Allowance = Union[BasicAllowance, PeriodicAllowance]
+class Allowance:#(BasicAllowance, PeriodicAllowance):
+
     @classmethod
     def from_data(cls, data: dict):
         if data.get("@type") == BasicAllowance.type_url:

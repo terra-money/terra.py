@@ -6,38 +6,27 @@ from abc import ABC, abstractmethod
 from typing import List, Union
 
 import attr
+
 from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.crypto.ed25519 import PubKey as ValConsPubKey_pb
 from terra_proto.cosmos.crypto.multisig import LegacyAminoPubKey as LegacyAminoPubKey_pb
 from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
 
+from .bech32 import get_bech
 from terra_sdk.util.json import JSONSerializable
 
-from .bech32 import get_bech
-
-BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987" + "21"  # with fixed length 21
-BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64" + "20"  # with fixed length 20
+BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987"+"21"  # with fixed length 21
+BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64"+"20"  # with fixed length 20
 BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD = "22c1f7e2"  # without length
 
 
-__all__ = [
-    "PublicKey",
-    "SimplePublicKey",
-    "ValConsPubKey",
-    "LegacyAminoMultisigPublicKey",
-    "address_from_public_key",
-    "pubkey_from_public_key",
-]
+__all__ = ["PublicKey", "SimplePublicKey", "ValConsPubKey", "LegacyAminoMultisigPublicKey"]
 
 
 def encode_uvarint(value: Union[int, str]) -> List[int]:
     val = int(str(value))
     if val > 127:
-        raise ValueError(
-            "Encoding numbers > 127 is not supported here. Please tell those lazy CosmJS maintainers to "
-            "port the binary.PutUvarint implementation from the Go standard library and write some "
-            "tests."
-        )
+        raise ValueError('Encoding numbers > 127 is not supported here. Please tell those lazy CosmJS maintainers to port the binary.PutUvarint implementation from the Go standard library and write some tests.')
     return [val]
 
 
@@ -53,7 +42,6 @@ def pubkey_from_public_key(public_key: PublicKey) -> bytes:
     arr = bytes.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1)
     arr += bytes(public_key.key)
     return bytes(arr)
-
 
 class PublicKey(JSONSerializable, ABC):
     """Data object holding the public key component of an account or signature."""
@@ -71,18 +59,7 @@ class PublicKey(JSONSerializable, ABC):
             return ValConsPubKey.from_proto(proto)
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
             return LegacyAminoMultisigPublicKey.from_proto(proto)
-        raise TypeError("could not marshal PublicKey: type is incorrect")
-
-    @classmethod
-    def from_amino(cls, amino: dict):
-        type_amino = amino.get("type")
-        if type_amino == SimplePublicKey.type_amino:
-            return SimplePublicKey.from_amino(amino)
-        elif type_amino == ValConsPubKey.type_amino:
-            return ValConsPubKey.from_amino(amino)
-        elif type_amino == LegacyAminoMultisigPublicKey.type_amino:
-            return LegacyAminoMultisigPublicKey.from_amino(amino)
-        raise TypeError("could not marshal PublicKey: type is incorrect")
+        raise TypeError(f"could not marshal PublicKey: type is incorrect")
 
     @classmethod
     def from_data(cls, data: dict):
@@ -93,7 +70,7 @@ class PublicKey(JSONSerializable, ABC):
             return ValConsPubKey.from_data(data)
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
             return LegacyAminoMultisigPublicKey.from_data(data)
-        raise TypeError("could not unmarshal PublicKey: type is incorrect")
+        raise TypeError(f"could not unmarshal PublicKey: type is incorrect")
 
     @abstractmethod
     def pack_any(self) -> Any_pb:
@@ -125,7 +102,10 @@ class SimplePublicKey(PublicKey):
     key: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {"type": self.type_amino, "value": self.key}
+        return {
+            "type": self.type_amino,
+            "value": self.key
+        }
 
     def to_data(self) -> dict:
         return {"key": self.key}
@@ -133,10 +113,6 @@ class SimplePublicKey(PublicKey):
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
         return cls(key=data["key"])
-
-    @classmethod
-    def from_amino(cls, amino: dict) -> SimplePublicKey:
-        return cls(key=amino["value"])
 
     def to_proto(self) -> SimplePubKey_pb:
         return SimplePubKey_pb(key=self.key)
@@ -148,9 +124,7 @@ class SimplePublicKey(PublicKey):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     def encode_amino_pubkey(self) -> bytearray:
-        out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1) + bytearray(
-            self.key
-        )
+        out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1) + bytearray(self.key)
         return out
 
     def raw_address(self) -> str:
@@ -173,7 +147,10 @@ class ValConsPubKey(PublicKey):
     key: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {"type": self.type_amino, "value": self.key}
+        return {
+            "type": self.type_amino,
+            "value": self.key
+        }
 
     def to_data(self) -> dict:
         return {"key": self.key}
@@ -181,10 +158,6 @@ class ValConsPubKey(PublicKey):
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
         return cls(key=data["key"])
-
-    @classmethod
-    def from_amino(cls, amino: dict) -> ValConsPubKey:
-        return cls(key=amino["value"]["key"])
 
     def get_type(self) -> str:
         return self.type_url
@@ -223,8 +196,8 @@ class LegacyAminoMultisigPublicKey(PublicKey):
             "type": self.type_amino,
             "value": {
                 "threshold": str(self.threshold),
-                "pubkeys": [pubkey.to_amino() for pubkey in self.public_keys],
-            },
+                "pubkeys": [pubkey.to_amino() for pubkey in self.public_keys]
+            }
         }
 
     def to_data(self) -> dict:
@@ -234,24 +207,17 @@ class LegacyAminoMultisigPublicKey(PublicKey):
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
         return cls(threshold=data["threshold"], public_keys=data["public_keys"])
 
-    @classmethod
-    def from_amino(cls, amino: dict) -> ValConsPubKey:
-        return cls(
-            threshold=amino["value"]["threshold"],
-            public_keys=[SimplePublicKey.from_amino(pubkey) for pubkey in amino["value"]["public_keys"]]
-        )
-
     def get_type(self) -> str:
         return self.type_url
 
     def to_proto(self) -> LegacyAminoPubKey_pb:
         return LegacyAminoPubKey_pb(
             threshold=self.threshold,
-            public_keys=[pk.pack_any() for pk in self.public_keys],
+            public_keys=[pk.pack_any() for pk in self.public_keys]
         )
 
     def encode_amino_pubkey(self) -> bytearray:
-        if self.threshold > 127:
+        if self.threshold > 127 :
             raise ValueError("threshold over 127 is now supported here")
         out = bytearray.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD)
         out.append(0x08)
@@ -276,4 +242,5 @@ class LegacyAminoMultisigPublicKey(PublicKey):
         return address
 
     def pubkey_address(self) -> str:
+        #return bech32.bech32_encode('terrapub', bech32.convertbits(bytes(self.raw_address()), 8, 5))
         return get_bech("terrapub", str(self.encode_amino_pubkey()))

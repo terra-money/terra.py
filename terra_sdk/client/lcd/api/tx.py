@@ -1,9 +1,10 @@
 import base64
 import copy
 from typing import List, Optional
-
-import attr
 from multidict import CIMultiDict
+import attr
+
+from ..params import APIParams
 
 from terra_sdk.core import AccAddress, Coins, Dec, Numeric, PublicKey
 from terra_sdk.core.broadcast import (
@@ -16,27 +17,19 @@ from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, T
 from terra_sdk.util.hash import hash_amino
 from terra_sdk.util.json import JSONSerializable
 
-from ..params import APIParams
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = [
-    "AsyncTxAPI",
-    "TxAPI",
-    "BroadcastOptions",
-    "CreateTxOptions",
-    "SignerOptions",
-]
+__all__ = ["AsyncTxAPI", "TxAPI", "BroadcastOptions", "CreateTxOptions"]
 
 
 @attr.s
 class SignerOptions:
-    """SignerOptions specifies infomations about signers
-    Args:
-        address (AccAddress): address of the signer
-        sequence (int, optional): nonce of the messages from the signer
-        public_key (PublicKey, optional): signer's PublicKey
+    """ SignerOptions specifies infomations about signers
+        Args:
+            address (AccAddress): address of the signer
+            sequence (int, optional): nonce of the messages from the signer
+            public_key (PublicKey, optional): signer's PublicKey
     """
-
     address: AccAddress = attr.ib()
     sequence: Optional[int] = attr.ib(default=None)
     public_key: Optional[PublicKey] = attr.ib(default=None)
@@ -61,7 +54,6 @@ class CreateTxOptions:
         timeout_height (int, optional):  specifies a block timeout height to prevent the tx from being committed past a certain height.
         sign_mode: (SignMode, optional): SignMode.SIGN_MODE_DIRECT by default. multisig needs SignMode.SIGN_MODE_LEGACY_AMINO_JSON.
     """
-
     msgs: List[Msg] = attr.ib()
     fee: Optional[Fee] = attr.ib(default=None)
     memo: Optional[str] = attr.ib(default=None)
@@ -200,7 +192,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         if gas_prices:
             gas_prices_coins = Coins(gas_prices)
             if options.fee_denoms:
-                _fee_denoms = options.fee_denoms if options.fee_denoms else ["uusd"]
+                _fee_denoms = options.fee_denoms if options.fee_denoms else ['uusd']
                 gas_prices_coins = gas_prices_coins.filter(
                     lambda c: c.denom in _fee_denoms
                 )
@@ -218,11 +210,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             opt.gas_adjustment = gas_adjustment
             gas = str(self.estimate_gas(tx, opt))
 
-        fee_amount = (
-            gas_prices_coins.mul(gas).to_int_ceil_coins()
-            if gas_prices_coins
-            else Coins.from_str("0uusd")
-        )
+        fee_amount = gas_prices_coins.mul(gas).to_int_ceil_coins() if gas_prices_coins else Coins.from_str('0uusd')
 
         return Fee(Numeric.parse(gas), fee_amount, "", "")
 
@@ -324,9 +312,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             codespace=res.get("codespace"),
         )
 
-    async def search(
-        self, events: List[list], params: Optional[APIParams] = None
-    ) -> dict:
+    async def search(self, events: List[list], params: Optional[APIParams] = None) -> dict:
         """Searches for transactions given criteria.
 
         Args:
@@ -351,7 +337,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         res = await self._c._get("/cosmos/tx/v1beta1/txs", actual_params)
         return {
             "txs": [TxInfo.from_data(tx) for tx in res.get("tx_responses")],
-            "pagination": res.get("pagination"),
+            "pagination": res.get("pagination")
         }
 
     async def tx_infos_by_height(self, height: Optional[int] = None) -> List[TxInfo]:

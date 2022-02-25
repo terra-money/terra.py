@@ -24,7 +24,6 @@ class MsgGrantAllowance(Msg):
     MsgGrantAllowance adds permission for Grantee to spend up to Allowance
     of fees from the account of Granter.
     """
-
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     allowance: Allowance = attr.ib()
@@ -40,8 +39,8 @@ class MsgGrantAllowance(Msg):
             "value": {
                 "granter": self.granter,
                 "grantee": self.grantee,
-                "allowance": self.allowance.to_amino(),
-            },
+                "allowance": self.allowance.to_amino()
+            }
         }
 
     @classmethod
@@ -56,7 +55,7 @@ class MsgGrantAllowance(Msg):
         return MsgGrantAllowance_pb(
             granter=self.granter,
             grantee=self.grantee,
-            allowance=self.allowance.to_proto(),
+            allowance=self.allowance.to_proto()
         )
 
 
@@ -75,7 +74,10 @@ class MsgRevokeAllowance(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {"granter": self.granter, "grantee": self.grantee},
+            "value": {
+                "granter": self.granter,
+                "grantee": self.grantee
+            }
         }
 
     @classmethod

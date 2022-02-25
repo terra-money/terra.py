@@ -30,12 +30,10 @@ class SignDoc(JSONSerializable):
             "chain_id": self.chain_id,
             "account_number": str(self.account_number),
             "sequence": str(self.sequence),
-            "timeout_height": str(tx.timeout_height)
-            if (tx.timeout_height and tx.timeout_height != 0)
-            else None,
+            "timeout_height": str(tx.timeout_height) if (tx.timeout_height and tx.timeout_height != 0) else None,
             "fee": auth.fee.to_amino(),
             "msgs": [msg.to_amino() for msg in tx.messages],
-            "memo": tx.memo if tx.memo else "",
+            "memo": tx.memo if tx.memo else ""
         }
 
     @classmethod
@@ -73,14 +71,10 @@ class SignDoc(JSONSerializable):
             chain_id=self.chain_id,
             account_number=self.account_number,
         )
+        return proto
 
     def to_bytes(self) -> bytes:
         return bytes(self.to_proto())
 
     def to_amino_json(self) -> bytes:
-        return bytes(
-            json.dumps(
-                remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")
-            ),
-            "utf-8",
-        )  # FIXME
+        return bytes(json.dumps(remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")), 'utf-8')  # FIXME

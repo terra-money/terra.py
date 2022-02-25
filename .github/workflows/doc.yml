@@ -27,9 +27,9 @@ jobs:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.8
 
       - name: Setup Poetry
         uses: Gr1N/setup-poetry@v4

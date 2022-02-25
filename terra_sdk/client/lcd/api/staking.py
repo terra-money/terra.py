@@ -1,3 +1,4 @@
+import copy
 from typing import List, Optional
 
 import attr
@@ -227,7 +228,7 @@ class AsyncStakingAPI(BaseAsyncAPI):
             "pagination"
         )
 
-    async def validators(self, params: Optional[APIParams] = None) -> (List[Validator], dict):
+    async def validators(self, params: Optional[APIParams]) -> (List[Validator], dict):
         """Fetch information of all validators.
 
         Returns:

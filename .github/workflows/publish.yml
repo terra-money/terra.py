@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
-        poetry-version: ['1.1.10']
+        python-version: [3.7, 3.8, 3.9]
+        poetry-version: [1.1.10]
         os: [ubuntu-18.04]
     runs-on: ${{ matrix.os }}
     steps:
@@ -26,8 +26,5 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: poetry-check
         run: poetry check
-      - name: poetry-build
-        run: poetry build
       - name: poetry-publish
-        if: matrix.python-version == '3.10'
         run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}

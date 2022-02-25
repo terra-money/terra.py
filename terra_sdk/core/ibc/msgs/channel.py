@@ -2,37 +2,30 @@
 
 from __future__ import annotations
 
-import attr
-from terra_proto.ibc.core.channel.v1 import MsgAcknowledgement as MsgAcknowledgement_pb
-from terra_proto.ibc.core.channel.v1 import (
-    MsgChannelCloseConfirm as MsgChannelCloseConfirm_pb,
-)
-from terra_proto.ibc.core.channel.v1 import (
-    MsgChannelCloseInit as MsgChannelCloseInit_pb,
-)
-from terra_proto.ibc.core.channel.v1 import MsgChannelOpenAck as MsgChannelOpenAck_pb
-from terra_proto.ibc.core.channel.v1 import (
-    MsgChannelOpenConfirm as MsgChannelOpenConfirm_pb,
-)
-from terra_proto.ibc.core.channel.v1 import MsgChannelOpenInit as MsgChannelOpenInit_pb
-from terra_proto.ibc.core.channel.v1 import MsgChannelOpenTry as MsgChannelOpenTry_pb
-from terra_proto.ibc.core.channel.v1 import MsgRecvPacket as MsgRecvPacket_pb
-from terra_proto.ibc.core.channel.v1 import MsgTimeout as MsgTimeout_pb
+from typing import Optional, Any, List
 
-from terra_sdk.core.ibc.data.channel import Channel, Packet
+import attr
+from terra_proto.ibc.core.channel.v1 import (
+    MsgChannelOpenInit as MsgChannelOpenInit_pb,
+    MsgChannelOpenTry as MsgChannelOpenTry_pb,
+    MsgChannelOpenAck as MsgChannelOpenAck_pb,
+    MsgChannelOpenConfirm as MsgChannelOpenConfirm_pb,
+    MsgChannelCloseInit as MsgChannelCloseInit_pb,
+    MsgChannelCloseConfirm as MsgChannelCloseConfirm_pb,
+    MsgRecvPacket as MsgRecvPacket_pb,
+    MsgAcknowledgement as MsgAcknowledgement_pb,
+    MsgTimeout as MsgTimeout_pb
+)
+from betterproto.lib.google.protobuf import Any as Any_pb
+
 from terra_sdk.core.ibc.data.client import Height
+from terra_sdk.core.ibc.data.channel import Channel, Packet
 from terra_sdk.core.msg import Msg
 
 __all__ = [
-    "MsgChannelOpenInit",
-    "MsgChannelOpenTry",
-    "MsgChannelOpenAck",
-    "MsgChannelOpenConfirm",
-    "MsgChannelCloseInit",
-    "MsgChannelCloseConfirm",
-    "MsgRecvPacket",
-    "MsgTimeout",
-    "MsgAcknowledgement",
+    "MsgChannelOpenInit", "MsgChannelOpenTry", "MsgChannelOpenAck", "MsgChannelOpenConfirm",
+    "MsgChannelCloseInit", "MsgChannelCloseConfirm",
+    "MsgRecvPacket", "MsgTimeout", "MsgAcknowledgement"
 ]
 
 
@@ -58,12 +51,14 @@ class MsgChannelOpenInit(Msg):
         return cls(
             port_id=data["port_id"],
             channel=Channel.from_data(data["port_id"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelOpenInit_pb:
         return MsgChannelOpenInit_pb(
-            port_id=self.port_id, channel=self.channel.to_proto(), signer=self.signer
+            port_id=self.port_id,
+            channel=self.channel.to_proto(),
+            signer=self.signer
         )
 
     @classmethod
@@ -71,8 +66,9 @@ class MsgChannelOpenInit(Msg):
         return cls(
             port_id=proto.port_id,
             channel=Channel.from_proto(proto.port_id),
-            signer=proto.signer,
+            signer=proto.signer
         )
+
 
 
 @attr.s
@@ -105,7 +101,7 @@ class MsgChannelOpenTry(Msg):
             counterparty_version=data["counterparty_version"],
             proof_init=data["proof_init"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelOpenTry_pb:
@@ -116,7 +112,7 @@ class MsgChannelOpenTry(Msg):
             counterparty_version=self.counterparty_version,
             proof_init=self.proof_init,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -128,7 +124,7 @@ class MsgChannelOpenTry(Msg):
             counterparty_version=proto.counterparty_version,
             proof_init=proto.proof_init,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )
 
 
@@ -161,7 +157,7 @@ class MsgChannelOpenAck(Msg):
             counterparty_version=data["counterparty_version"],
             proof_try=data["proof_try"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelOpenAck_pb:
@@ -172,7 +168,7 @@ class MsgChannelOpenAck(Msg):
             counterparty_version=self.counterparty_version,
             proof_try=self.proof_try,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -184,7 +180,7 @@ class MsgChannelOpenAck(Msg):
             counterparty_version=proto.counterparty_version,
             proof_try=proto.proof_try,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )
 
 
@@ -214,7 +210,7 @@ class MsgChannelOpenConfirm(Msg):
             channel_id=data["channel_id"],
             proof_ack=data["proof_ack"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelOpenConfirm_pb:
@@ -223,7 +219,7 @@ class MsgChannelOpenConfirm(Msg):
             channel_id=self.channel_id,
             proof_ack=self.proof_ack,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -233,13 +229,15 @@ class MsgChannelOpenConfirm(Msg):
             channel_id=proto.channel_id,
             proof_ack=proto.proof_ack,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )
+
 
 
 @attr.s
 class MsgChannelCloseInit(Msg):
-    """ """
+    """
+    """
 
     type_url = "/ibc.core.channel.v1.MsgChannelCloseInit"
     """"""
@@ -256,18 +254,22 @@ class MsgChannelCloseInit(Msg):
         return cls(
             port_id=data["port_id"],
             channel_id=data["channel_id"],
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelCloseInit_pb:
         return MsgChannelCloseInit_pb(
-            port_id=self.port_id, channel_id=self.channel_id, signer=self.signer
+            port_id=self.port_id,
+            channel_id=self.channel_id,
+            signer=self.signer
         )
 
     @classmethod
     def from_proto(cls, proto: MsgChannelOpenInit_pb) -> MsgChannelCloseInit:
         return cls(
-            port_id=proto.port_id, channel_id=proto.channel_id, signer=proto.signer
+            port_id=proto.port_id,
+            channel_id=proto.channel_id,
+            signer=proto.signer
         )
 
 
@@ -297,7 +299,7 @@ class MsgChannelCloseConfirm(Msg):
             channel_id=data["channel_id"],
             proof_init=data["proof_init"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgChannelCloseConfirm_pb:
@@ -306,7 +308,7 @@ class MsgChannelCloseConfirm(Msg):
             channel_id=self.channel_id,
             proof_init=self.proof_init,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -316,7 +318,7 @@ class MsgChannelCloseConfirm(Msg):
             channel_id=proto.channel_id,
             proof_init=proto.proof_init,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )
 
 
@@ -343,7 +345,7 @@ class MsgRecvPacket(Msg):
             packet=Packet.from_data(data["packet"]),
             proof_commitment=data["proof_commitment"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgRecvPacket_pb:
@@ -351,7 +353,7 @@ class MsgRecvPacket(Msg):
             packet=self.packet.to_proto(),
             proof_commitment=self.proof_commitment,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -360,7 +362,7 @@ class MsgRecvPacket(Msg):
             packet=Packet.from_proto(proto.packet),
             proof_commitment=proto.proof_commitment,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )
 
 
@@ -389,7 +391,7 @@ class MsgTimeout(Msg):
             proof_unreceived=data["proof_unreceived"],
             proof_height=Height.from_data(data["proof_height"]),
             next_sequence_recv=data["next_sequence_recv"],
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgTimeout_pb:
@@ -398,7 +400,7 @@ class MsgTimeout(Msg):
             proof_unreceived=self.proof_unreceived,
             proof_height=self.proof_height.to_proto(),
             next_sequence_recv=self.next_sequence_recv,
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -408,7 +410,7 @@ class MsgTimeout(Msg):
             proof_unreceived=proto.proof_unreceived,
             proof_height=Height.from_proto(proto.proof_height),
             next_sequence_recv=proto.next_sequence_recv,
-            signer=proto.signer,
+            signer=proto.signer
         )
 
 
@@ -437,7 +439,7 @@ class MsgAcknowledgement(Msg):
             acknowledgement=data["acknowledgement"],
             proof_acked=data["proof_acked"],
             proof_height=Height.from_data(data["proof_height"]),
-            signer=data["signer"],
+            signer=data["signer"]
         )
 
     def to_proto(self) -> MsgAcknowledgement_pb:
@@ -446,7 +448,7 @@ class MsgAcknowledgement(Msg):
             acknowledgement=self.acknowledgement,
             proof_acked=self.proof_acked,
             proof_height=self.proof_height.to_proto(),
-            signer=self.signer,
+            signer=self.signer
         )
 
     @classmethod
@@ -456,5 +458,5 @@ class MsgAcknowledgement(Msg):
             acknowledgement=proto.acknowledgement,
             proof_acked=proto.proof_acked,
             proof_height=Height.from_proto(proto.proof_height),
-            signer=proto.signer,
+            signer=proto.signer
         )

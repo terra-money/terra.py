@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, List, Optional
 
 import attr
 from terra_proto.cosmos.tx.v1beta1 import Fee as Fee_pb
@@ -22,7 +22,7 @@ class Fee(JSONSerializable):
         gas (int): gas to use ("gas requested")
         amount (Coins.Input): fee amount
         payer (AccAddress, optional): address of fee payer
-        granter (AccAddress, optional): address of fee granter
+        granter (AccAddress, optional): address of fee granter 
     """
 
     gas_limit: int = attr.ib(converter=int)
@@ -31,7 +31,10 @@ class Fee(JSONSerializable):
     granter: Optional[AccAddress] = attr.ib(default=None)
 
     def to_amino(self) -> dict:
-        return {"gas": str(self.gas_limit), "amount": self.amount.to_amino()}
+        return {
+            "gas": str(self.gas_limit),
+            "amount": self.amount.to_amino()
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> Fee:

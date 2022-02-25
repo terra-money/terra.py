@@ -62,9 +62,7 @@ def main():
     ]
     msgMulti = MsgMultiSend(inputs, outputs)
 
-    opt = CreateTxOptions(
-        msgs=[msg, msgMulti], memo="send test", timeout_height=110, gas_adjustment=1.5
-    )
+    opt = CreateTxOptions(msgs=[msg, msgMulti], memo="send test", timeout_height=110, gas_adjustment=1.5)
     # tx = test1.create_tx(opt)
     tx = test1.create_and_sign_tx(opt)
     print("SIGNED TX", tx)
@@ -76,6 +74,7 @@ def main():
     print(f"encoded:{encoded}")
     decoded = terra.tx.decode(encoded)
     print(f"encoded:{decoded}")
+
 
 
 main()

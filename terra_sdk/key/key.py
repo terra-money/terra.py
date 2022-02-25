@@ -1,8 +1,11 @@
 import abc
+import base64
 import copy
+import hashlib
 from typing import Optional
 
 import attr
+from bech32 import bech32_encode, convertbits
 
 from terra_sdk.core import (
     AccAddress,
@@ -12,16 +15,17 @@ from terra_sdk.core import (
     ValAddress,
     ValPubKey,
 )
-from terra_sdk.core.bech32 import get_bech
-from terra_sdk.core.mode_info import ModeInfo, ModeInfoSingle
-from terra_sdk.core.public_key import (
-    PublicKey,
-    address_from_public_key,
-    pubkey_from_public_key,
-)
+from terra_sdk.core.public_key import PublicKey, get_bech, address_from_public_key, pubkey_from_public_key
 from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
-from terra_sdk.core.tx import SignerInfo, SignMode, Tx
+from terra_sdk.core.tx import ModeInfo, ModeInfoSingle, SignerInfo, SignMode, Tx
+
+from terra_sdk.core.public_key import (
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1,
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519,
+    BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD
+)
+
 
 __all__ = ["Key", "SignOptions"]
 

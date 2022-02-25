@@ -24,7 +24,7 @@ copyright = "2021, Terraform Labs, PTE."
 author = "Terraform Labs, PTE."
 
 # The full version, including alpha/beta/rc tags
-release = "2.0.3"
+release = "2.0.0"
 
 
 # -- General configuration ---------------------------------------------------

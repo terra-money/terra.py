@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional, Union
 
 from dateutil import parser
@@ -31,7 +32,9 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             "address": info["address"],
             "start_height": Numeric.parse(info["start_height"]),
             "index_offset": Numeric.parse(info["index_offset"]),
-            "jailed_until": parser.parse(info["jailed_until"]),
+            "jailed_until": parser.parse(
+                info["jailed_until"]
+            ),
             "tombstoned": bool(info["tombstoned"]),
             "missed_blocks_counter": Numeric.parse(info["missed_blocks_counter"]),
         }

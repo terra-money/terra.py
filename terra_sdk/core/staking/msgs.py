@@ -59,8 +59,8 @@ class MsgBeginRedelegate(Msg):
                 "delegator_address": self.delegator_address,
                 "validator_src_address": self.validator_src_address,
                 "validator_dst_address": self.validator_dst_address,
-                "amount": self.amount.to_amino(),
-            },
+                "amount": self.amount.to_amino()
+            }
         }
 
     @classmethod
@@ -117,8 +117,8 @@ class MsgDelegate(Msg):
             "value": {
                 "delegator_address": self.delegator_address,
                 "validator_address": self.validator_address,
-                "amount": self.amount.to_amino(),
-            },
+                "amount": self.amount.to_amino()
+            }
         }
 
     @classmethod
@@ -172,8 +172,8 @@ class MsgUndelegate(Msg):
             "value": {
                 "delegator_address": self.delegator_address,
                 "validator_address": self.validator_address,
-                "amount": self.amount.to_amino(),
-            },
+                "amount": self.amount.to_amino()
+            }
         }
 
     @classmethod

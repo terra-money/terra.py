@@ -35,8 +35,8 @@ class SoftwareUpgradeProposal(JSONSerializable):
             "value": {
                 "title": self.title,
                 "description": self.description,
-                "plan": self.plan.to_amino() if self.plan else None,
-            },
+                "plan": self.plan.to_amino() if self.plan else None
+            }
         }
 
     @classmethod
@@ -69,7 +69,7 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
             "value": {
                 "title": self.title,
                 "description": self.description,
-            },
+            }
         }
 
     @classmethod

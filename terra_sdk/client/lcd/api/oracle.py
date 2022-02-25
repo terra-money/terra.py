@@ -105,9 +105,8 @@ class AsyncOracleAPI(BaseAsyncAPI):
             Optional[AggregateExchangeRatePrevote]: current aggegate vote (if any).
         """
         try:
-            # FIXME: valdiators is not mistyped here. it comes from proto in core. we can fix this after core fixed.
             res = await self._c._get(
-                f"/terra/oracle/v1beta1/valdiators/{validator}/aggregate_vote"
+                f"/terra/oracle/v1beta1/validators/{validator}/aggregate_vote"
             )
         except LCDResponseError as e:
             if e.response.status == 404:
