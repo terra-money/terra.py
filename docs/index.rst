@@ -65,6 +65,7 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     core_modules/tendermint
     core_modules/tx
     core_modules/wasm
+    core_modules/ibc_transfer
 
 
 
