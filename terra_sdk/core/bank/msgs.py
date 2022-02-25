@@ -101,7 +101,7 @@ class MultiSendInput(JSONSerializable):
     """Input / output address."""
 
     coins: Coins = attr.ib(converter=Coins)
-    """Coins to be sent / received."""
+    """Coins to be sent."""
 
     def to_amino(self) -> dict:
         return {
@@ -141,7 +141,7 @@ class MultiSendOutput(JSONSerializable):
     """Input / output address."""
 
     coins: Coins = attr.ib(converter=Coins)
-    """Coins to be sent / received."""
+    """Coins to be received."""
 
     def to_amino(self) -> dict:
         return {
