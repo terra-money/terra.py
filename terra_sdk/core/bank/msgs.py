@@ -91,12 +91,9 @@ class MultiSendInput(JSONSerializable):
     """Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
     format:
 
-    .. code-block:: python
-
-        {
-           "address": "terra1...",
-           "coins": "123456789uusd"
-        }
+    Args:
+         address (AccAddress): from_address
+         coins (Coins): amount to send from the address
     """
 
     address: AccAddress = attr.ib()
@@ -131,12 +128,9 @@ class MultiSendOutput(JSONSerializable):
     """Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
     format:
 
-    .. code-block:: python
-
-        {
-           "address": "terra1...",
-           "coins": "123456789uusd"
-        }
+    Args:
+         address (AccAddress): to_address
+         coins (Coins): amount to receive
     """
 
     address: AccAddress = attr.ib()
@@ -186,23 +180,9 @@ class MsgMultiSend(Msg):
     The total amount of coins in ``inputs`` must match ``outputs``. The transaction
     containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.
 
-    The ``inputs`` and ``output`` arguments should be of the form:
-
-    .. code-block:: python
-
-        [{
-            "address": "terra1...",
-            "coins": "123456789uusd"
-        },
-        {
-            "address": "terra12...",
-            "coins": "2983298ukrw,21323uusd"
-        }]
-
-
     Args:
-        inputs (List[MultiSendIO]): senders and amounts
-        outputs (List[MultiSendIO]): recipients and amounts
+        inputs (List[MultiSendInput]): senders and amounts
+        outputs (List[MultiSendOutput]): recipients and amounts
     """
 
     type_amino = "bank/MsgMultiSend"
