@@ -111,6 +111,10 @@ class PublicKey(JSONSerializable, ABC):
     def encode_amino_pubkey(self) -> bytes:
         pass
 
+    @abstractmethod
+    def to_amino(self) -> dict:
+        pass
+
 
 @attr.s
 class SimplePublicKey(PublicKey):

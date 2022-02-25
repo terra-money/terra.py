@@ -23,7 +23,7 @@ def test_node_info():
 
 def test_block_info():
     result = terra.tendermint.block_info()
-    print(result)
+    print(result['block']['header']['height'])
 
 
 def test_block_info_with_height():

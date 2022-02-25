@@ -83,4 +83,4 @@ class SignDoc(JSONSerializable):
                 remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")
             ),
             "utf-8",
-        )  # FIXME
+        )
