@@ -1,7 +1,7 @@
 Usage with asyncio
 ==================
     
-If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient.
+You can use AsyncLCDClient to make asynchronous, non-blocking LCD requests.
 The interface is similar to LCDClient, except the module and wallet API functions must be awaited.
 
 Async module APIs
