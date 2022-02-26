@@ -32,11 +32,7 @@ class ParamChange(JSONSerializable):
         return ParamChange_pb(subspace=self.subspace, key=self.key, value=self.value)
 
     def to_data(self) -> dict:
-        return {
-            "subspace": self.subspace,
-            "key": self.key,
-            "value": self.value
-        }
+        return {"subspace": self.subspace, "key": self.key, "value": self.value}
 
 
 @attr.s
@@ -88,5 +84,5 @@ class ParameterChangeProposal(JSONSerializable):
         return {
             "title": self.title,
             "description": self.description,
-            "changes": [ change.to_data() for change in self.changes]
+            "changes": [change.to_data() for change in self.changes],
         }

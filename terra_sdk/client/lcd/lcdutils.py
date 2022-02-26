@@ -39,7 +39,10 @@ class AsyncLCDUtils(BaseAsyncAPI):
         next_key = ""
         while True:
             from terra_sdk.client.lcd import PaginationOptions
-            validators, pag = await BaseAsyncAPI._try_await(self._c.staking.validators(PaginationOptions(key=next_key)))
+
+            validators, pag = await BaseAsyncAPI._try_await(
+                self._c.staking.validators(PaginationOptions(key=next_key))
+            )
             validator_set: Dict[str, Any] = reduce(
                 index_by_pub_key, validator_set_response["validators"], {}
             )

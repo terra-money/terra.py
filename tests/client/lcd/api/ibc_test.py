@@ -8,4 +8,4 @@ terra = LCDClient(
 
 def test_parameters():
     result = terra.ibc.parameters()
-    assert(result.get("allowed_clients"))
+    assert result.get("allowed_clients")

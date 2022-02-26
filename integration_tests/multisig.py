@@ -77,7 +77,7 @@ def main():
     print(tx.to_proto())
 
     print("-" * 32)
-    print(tx.to_data())
+    print(tx.to_proto().SerializeToString())
     print("-" * 32)
     result = terra.tx.broadcast(tx)
     print(result)

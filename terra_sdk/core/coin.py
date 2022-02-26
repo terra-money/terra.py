@@ -230,3 +230,12 @@ class Coin(JSONSerializable):
             data (dict): data object
         """
         return cls(data["denom"], data["amount"])
+
+    @classmethod
+    def from_amino(cls, data: dict) -> Coin:
+        """Deserializes a :class:`Coin` object from its amino-codec representation.
+
+        Args:
+            data (dict): data object
+        """
+        return cls(data["denom"], data["amount"])

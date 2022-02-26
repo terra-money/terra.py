@@ -1,11 +1,11 @@
 import base64
 
-from terra_sdk.client.lcd.api.tx import SignerOptions, CreateTxOptions
-from terra_sdk.core import SignDoc, Coins
+from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
+from terra_sdk.client.lcd.lcdclient import LCDClient
+from terra_sdk.core import Coins, SignDoc
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.core.fee import Fee
 from terra_sdk.key.mnemonic import MnemonicKey
-from terra_sdk.client.lcd.lcdclient import LCDClient
 
 
 def test_derivation():
@@ -49,15 +49,11 @@ def test_signature():
     tx = terra.tx.create(
         signers=[
             SignerOptions(
-                address=mk.acc_address,
-                sequence=0,
-                public_key=account.key.public_key
+                address=mk.acc_address, sequence=0, public_key=account.key.public_key
             )
         ],
         options=CreateTxOptions(
-            msgs=[send],
-            memo="memo",
-            fee=Fee(200000, Coins.from_str("100000uusd"))
+            msgs=[send], memo="memo", fee=Fee(200000, Coins.from_str("100000uusd"))
         ),
     )
 
@@ -66,7 +62,7 @@ def test_signature():
         account_number=1234,
         sequence=0,
         auth_info=tx.auth_info,
-        tx_body=tx.body
+        tx_body=tx.body,
     )
 
     signature = account.key.create_signature(signDoc)
@@ -80,5 +76,5 @@ def test_signature():
     sigBytes2 = base64.b64encode(signature_amino.data.single.signature)
     assert (
         sigBytes2
-        == b'JiaPpdKCPsf4KW1yW7jkSlwrIuiArKmLoE5JccjoYrliVwCtRIKicDF57n2feWt3wd6kWVzwTxOa2xnXTXqdlg=='
+        == b"JiaPpdKCPsf4KW1yW7jkSlwrIuiArKmLoE5JccjoYrliVwCtRIKicDF57n2feWt3wd6kWVzwTxOa2xnXTXqdlg=="
     )

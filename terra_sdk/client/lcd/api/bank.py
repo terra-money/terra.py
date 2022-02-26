@@ -37,7 +37,9 @@ class AsyncBankAPI(BaseAsyncAPI):
 
 class BankAPI(AsyncBankAPI):
     @sync_bind(AsyncBankAPI.balance)
-    def balance(self, address: AccAddress, params: Optional[APIParams] = None) -> (Coins, dict):
+    def balance(
+        self, address: AccAddress, params: Optional[APIParams] = None
+    ) -> (Coins, dict):
         pass
 
     balance.__doc__ = AsyncBankAPI.balance.__doc__

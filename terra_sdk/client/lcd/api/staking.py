@@ -227,7 +227,9 @@ class AsyncStakingAPI(BaseAsyncAPI):
             "pagination"
         )
 
-    async def validators(self, params: Optional[APIParams] = None) -> (List[Validator], dict):
+    async def validators(
+        self, params: Optional[APIParams] = None
+    ) -> (List[Validator], dict):
         """Fetch information of all validators.
 
         Returns:

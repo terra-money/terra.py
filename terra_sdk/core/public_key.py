@@ -26,7 +26,7 @@ __all__ = [
     "ValConsPubKey",
     "LegacyAminoMultisigPublicKey",
     "address_from_public_key",
-    "pubkey_from_public_key",
+    "amino_pubkey_from_public_key",
 ]
 
 
@@ -49,7 +49,7 @@ def address_from_public_key(public_key: PublicKey) -> bytes:
     return rip.digest()
 
 
-def pubkey_from_public_key(public_key: PublicKey) -> bytes:
+def amino_pubkey_from_public_key(public_key: PublicKey) -> bytes:
     arr = bytes.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1)
     arr += bytes(public_key.key)
     return bytes(arr)
@@ -132,11 +132,11 @@ class SimplePublicKey(PublicKey):
         return {"type": self.type_amino, "value": self.key}
 
     def to_data(self) -> dict:
-        return {"key": self.key}
+        return {"@type": self.type_url, "key": self.key}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
-        return cls(key=data["key"])
+        return cls(key=base64.b64decode(data["key"]))
 
     @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
@@ -180,7 +180,7 @@ class ValConsPubKey(PublicKey):
         return {"type": self.type_amino, "value": self.key}
 
     def to_data(self) -> dict:
-        return {"key": self.key}
+        return {"@type": self.type_url, "key": self.key}
 
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
@@ -232,17 +232,24 @@ class LegacyAminoMultisigPublicKey(PublicKey):
         }
 
     def to_data(self) -> dict:
-        return {"threshold": self.threshold, "public_keys": self.public_keys}
+        return {
+            "@type": self.type_url,
+            "threshold": self.threshold,
+            "public_keys": self.public_keys,
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
         return cls(threshold=data["threshold"], public_keys=data["public_keys"])
 
     @classmethod
-    def from_amino(cls, amino: dict) -> ValConsPubKey:
+    def from_amino(cls, amino: dict) -> LegacyAminoMultisigPublicKey:
         return cls(
             threshold=amino["value"]["threshold"],
-            public_keys=[SimplePublicKey.from_amino(pubkey) for pubkey in amino["value"]["public_keys"]]
+            public_keys=[
+                SimplePublicKey.from_amino(pubkey)
+                for pubkey in amino["value"]["public_keys"]
+            ],
         )
 
     def get_type(self) -> str:

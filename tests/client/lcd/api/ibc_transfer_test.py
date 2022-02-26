@@ -8,5 +8,5 @@ terra = LCDClient(
 
 def test_parameters():
     result = terra.ibc_transfer.parameters()
-    assert(result.get("send_enabled"))
-    assert(result.get("receive_enabled"))
+    assert result.get("send_enabled")
+    assert result.get("receive_enabled")

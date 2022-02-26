@@ -1,4 +1,3 @@
-import json
 from typing import Optional
 
 from ._base import BaseAsyncAPI, sync_bind
@@ -16,7 +15,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
         res = await self._c._get("/cosmos/base/tendermint/v1beta1/node_info")
         return {
             "default_node_info": res["default_node_info"],
-            "application_version": res["application_version"""]
+            "application_version": res["application_version" ""],
         }
 
     async def syncing(self) -> bool:

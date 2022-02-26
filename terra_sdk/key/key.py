@@ -7,21 +7,22 @@ import attr
 from terra_sdk.core import (
     AccAddress,
     AccPubKey,
+    ModeInfo,
+    ModeInfoSingle,
     SignatureV2,
     SignDoc,
     ValAddress,
-    ValPubKey, ModeInfoSingle, ModeInfo,
+    ValPubKey,
 )
 from terra_sdk.core.bech32 import get_bech
-from terra_sdk.core.mode_info import ModeInfo, ModeInfoSingle
 from terra_sdk.core.public_key import (
     PublicKey,
     address_from_public_key,
-    pubkey_from_public_key,
+    amino_pubkey_from_public_key,
 )
 from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
-from terra_sdk.core.tx import SignerInfo, SignMode, Tx, AuthInfo
+from terra_sdk.core.tx import AuthInfo, SignerInfo, SignMode, Tx
 
 __all__ = ["Key", "SignOptions"]
 
@@ -58,7 +59,7 @@ class Key:
         self.public_key = public_key
         if public_key:
             self.raw_address = address_from_public_key(public_key)
-            self.raw_pubkey = pubkey_from_public_key(public_key)
+            self.raw_pubkey = amino_pubkey_from_public_key(public_key)
 
     @abc.abstractmethod
     def sign(self, payload: bytes) -> bytes:
@@ -205,7 +206,11 @@ class Key:
             Tx: ready-to-broadcast transaction object
         """
 
-        signedTx = Tx(body=tx.body, auth_info=AuthInfo(signer_infos=[], fee=tx.auth_info.fee), signatures=[])
+        signedTx = Tx(
+            body=tx.body,
+            auth_info=AuthInfo(signer_infos=[], fee=tx.auth_info.fee),
+            signatures=[],
+        )
         signDoc = SignDoc(
             chain_id=options.chain_id,
             account_number=options.account_number,

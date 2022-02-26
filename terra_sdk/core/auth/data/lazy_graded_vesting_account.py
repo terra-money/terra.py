@@ -95,16 +95,23 @@ class LazyGradedVestingAccount(BaseAccount):
         amino = amino["value"]
         return cls(
             address=amino["address"],
-            public_key=PublicKey.from_amino(amino["public_key"]) if amino["public_key"] else None,
+            public_key=PublicKey.from_amino(amino["public_key"])
+            if amino["public_key"]
+            else None,
             account_number=amino["account_number"],
             sequence=amino["sequence"],
-            original_vesting=Coins.from_amino(amino["original_vesting"]) if amino["original_vesting"] else None,
-            delegated_free=Coins.from_amino(amino["delegated_free"]) if amino["delegated_free"] else None,
-            delegated_vesting=Coins.from_amino(amino["delegated_vesting"]) if amino["delegated_vesting"] else None,
+            original_vesting=Coins.from_amino(amino["original_vesting"])
+            if amino["original_vesting"]
+            else None,
+            delegated_free=Coins.from_amino(amino["delegated_free"])
+            if amino["delegated_free"]
+            else None,
+            delegated_vesting=Coins.from_amino(amino["delegated_vesting"])
+            if amino["delegated_vesting"]
+            else None,
             end_time=amino["end_time"],
             vesting_schedules=amino["vesting_schedules"],
         )
-
 
     @classmethod
     def from_data(cls, data: dict) -> LazyGradedVestingAccount:

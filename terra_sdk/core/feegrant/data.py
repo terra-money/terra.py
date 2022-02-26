@@ -166,3 +166,17 @@ class Allowance:  # (BasicAllowance, PeriodicAllowance):
             return BasicAllowance.from_data(data)
         else:
             return PeriodicAllowance.from_data(data)
+
+    @classmethod
+    def from_amino(cls, data: dict):
+        if data.get("type") == BasicAllowance.type_amino:
+            return BasicAllowance.from_amino(data)
+        else:
+            return PeriodicAllowance.from_amino(data)
+
+    @classmethod
+    def from_proto(cls, data: dict):
+        if data.get("@type") == BasicAllowance.type_url:
+            return BasicAllowance.from_proto(data)
+        else:
+            return PeriodicAllowance.from_proto(data)
