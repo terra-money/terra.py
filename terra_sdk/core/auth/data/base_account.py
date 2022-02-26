@@ -57,7 +57,7 @@ class BaseAccount(JSONSerializable):
         return {
             "@type": self.type_url,
             "address": self.address,
-            "public_key": self.public_key and self.public_key.to_data(),
+            "pub_key": self.public_key and self.public_key.to_data(),
             "account_number": str(self.account_number),
             "sequence": str(self.sequence),
         }
@@ -66,8 +66,8 @@ class BaseAccount(JSONSerializable):
     def from_data(cls, data: dict) -> BaseAccount:
         return cls(
             address=data["address"],
-            public_key=data.get("public_key")
-            and PublicKey.from_data(data["public_key"]),
+            public_key=data.get("pub_key")
+            and PublicKey.from_data(data["pub_key"]),
             account_number=data.get("account_number") or 0,
             sequence=data.get("sequence") or 0,
         )
