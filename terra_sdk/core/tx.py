@@ -137,7 +137,7 @@ class Tx(JSONSerializable):
     def append_signatures(self, signatures: List[SignatureV2]):
         for sig in signatures:
             mode_info, sig_bytes = sig.data.to_mode_info_and_signature()
-            self.signatures.append(base64.b64decode(sig_bytes))
+            self.signatures.append(base64.b64encode(sig_bytes))
             self.auth_info.signer_infos.append(
                 SignerInfo(sig.public_key, mode_info, sig.sequence)
             )

@@ -77,4 +77,9 @@ class SignDoc(JSONSerializable):
         return bytes(self.to_proto())
 
     def to_amino_json(self) -> bytes:
-        return bytes(json.dumps(remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")), 'utf-8')  # FIXME
+        return bytes(
+            json.dumps(
+                remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")
+            ),
+            "utf-8",
+        )

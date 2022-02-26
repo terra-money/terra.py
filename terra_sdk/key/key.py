@@ -1,11 +1,8 @@
 import abc
-import base64
 import copy
-import hashlib
 from typing import Optional
 
 import attr
-from bech32 import bech32_encode, convertbits
 
 from terra_sdk.core import (
     AccAddress,
@@ -13,19 +10,12 @@ from terra_sdk.core import (
     SignatureV2,
     SignDoc,
     ValAddress,
-    ValPubKey,
+    ValPubKey, ModeInfoSingle, ModeInfo,
 )
 from terra_sdk.core.public_key import PublicKey, get_bech, address_from_public_key, pubkey_from_public_key
 from terra_sdk.core.signature_v2 import Descriptor
 from terra_sdk.core.signature_v2 import Single as SingleDescriptor
-from terra_sdk.core.tx import ModeInfo, ModeInfoSingle, SignerInfo, SignMode, Tx
-
-from terra_sdk.core.public_key import (
-    BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1,
-    BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519,
-    BECH32_AMINO_PUBKEY_DATA_PREFIX_MULTISIG_THRESHOLD
-)
-
+from terra_sdk.core.tx import SignerInfo, SignMode, Tx, AuthInfo
 
 __all__ = ["Key", "SignOptions"]
 
@@ -209,7 +199,7 @@ class Key:
             Tx: ready-to-broadcast transaction object
         """
 
-        signedTx = copy.deepcopy(tx)
+        signedTx = Tx(body=tx.body, auth_info=AuthInfo(signer_infos=[], fee=tx.auth_info.fee), signatures=[])
         signDoc = SignDoc(
             chain_id=options.chain_id,
             account_number=options.account_number,
