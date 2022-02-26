@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 import attr
 from terra_proto.terra.vesting.v1beta1 import (
@@ -10,7 +10,6 @@ from terra_proto.terra.vesting.v1beta1 import (
 )
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.util.json import JSONSerializable
 
 from ...public_key import PublicKey
 from .base_account import BaseAccount
@@ -74,7 +73,7 @@ class LazyGradedVestingAccount(BaseAccount):
                 "delegated_vesting": self.delegated_vesting.to_amino(),
                 "end_time": str(self.end_time),
                 "vesting_schedules": self.vesting_schedules,
-            }
+            },
         }
 
     def to_data(self) -> dict:
@@ -90,6 +89,22 @@ class LazyGradedVestingAccount(BaseAccount):
             "end_time": str(self.end_time),
             "vesting_schedules": self.vesting_schedules,
         }
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> LazyGradedVestingAccount:
+        amino = amino["value"]
+        return cls(
+            address=amino["address"],
+            public_key=PublicKey.from_amino(amino["public_key"]) if amino["public_key"] else None,
+            account_number=amino["account_number"],
+            sequence=amino["sequence"],
+            original_vesting=Coins.from_amino(amino["original_vesting"]) if amino["original_vesting"] else None,
+            delegated_free=Coins.from_amino(amino["delegated_free"]) if amino["delegated_free"] else None,
+            delegated_vesting=Coins.from_amino(amino["delegated_vesting"]) if amino["delegated_vesting"] else None,
+            end_time=amino["end_time"],
+            vesting_schedules=amino["vesting_schedules"],
+        )
+
 
     @classmethod
     def from_data(cls, data: dict) -> LazyGradedVestingAccount:

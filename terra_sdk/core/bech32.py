@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import NewType, Union
+from typing import NewType
 
 from bech32 import bech32_decode, bech32_encode, convertbits
-
-#from .public_key import ValConsPubKey
 
 __all__ = [
     "AccAddress",
@@ -22,7 +20,7 @@ __all__ = [
     "to_acc_pubkey",
     "to_val_address",
     "to_val_pubkey",
-    "get_bech"
+    "get_bech",
 ]
 
 
@@ -50,10 +48,10 @@ AccPubKey.__doc__ = """Terra Bech32 Account Address -- type alias of str."""
 ValPubKey = NewType("ValPubKey", str)
 ValPubKey.__doc__ = """Terra Bech32 Validator PubKey -- type alias of str."""
 
-#ValConsPubKey = NewType("ValConsPubKey", str)
-#ValConsPubKey.__doc__ = (
+# ValConsPubKey = NewType("ValConsPubKey", str)
+# ValConsPubKey.__doc__ = (
 #  """Terra Bech32 Validator Conensus PubKey -- type alias of str."""
-#)
+# )
 
 
 def is_acc_address(data: str) -> bool:

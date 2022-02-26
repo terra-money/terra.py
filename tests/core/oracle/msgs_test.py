@@ -3,7 +3,7 @@ from terra_sdk.core.oracle import MsgAggregateExchangeRateVote, MsgDelegateFeedC
 
 def test_deserializes_msg_delegate_feed_consent_examples(load_msg_examples):
     examples = load_msg_examples(
-        MsgDelegateFeedConsent.type, "./MsgDelegateFeedConsent.data.json"
+        MsgDelegateFeedConsent.type_url, "./MsgDelegateFeedConsent.data.json"
     )
     for example in examples:
         assert MsgDelegateFeedConsent.from_data(example).to_data() == example

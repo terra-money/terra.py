@@ -35,7 +35,7 @@ class CommissionRates(JSONSerializable):
         return {
             "rate": str(self.rate),
             "max_rate": str(self.max_rate),
-            "max_change_rate": str(self.max_change_rate)
+            "max_change_rate": str(self.max_change_rate),
         }
 
     @classmethod
@@ -67,7 +67,7 @@ class Commission(JSONSerializable):
     def to_amino(self) -> dict:
         return {
             "commission_rates": self.commission_rates.to_amino(),
-            "update_time": to_isoformat(self.update_time)
+            "update_time": to_isoformat(self.update_time),
         }
 
     @classmethod
@@ -111,7 +111,7 @@ class Description(JSONSerializable):
             "identity": self.identity,
             "website": self.website,
             "details": self.details,
-            "security_contact": self.security_contact
+            "security_contact": self.security_contact,
         }
 
     @classmethod
@@ -183,7 +183,7 @@ class Validator(JSONSerializable):
             "unbonding_height": str(self.unbonding_height),
             "unbonding_time": to_isoformat(self.unbonding_time),
             "commission": self.commission.to_amino(),
-            "min_self_delegation": str(self.min_self_delegation)
+            "min_self_delegation": str(self.min_self_delegation),
         }
 
     def to_data(self) -> dict:
@@ -199,7 +199,7 @@ class Validator(JSONSerializable):
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
             jailed=data.get("jailed"),
-            status=data["status"],
+            status=BondStatus.from_string(data["status"]),
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),

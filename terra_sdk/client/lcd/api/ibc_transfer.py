@@ -1,5 +1,3 @@
-from terra_sdk.core import Coin, Dec
-
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncIbcTransferAPI", "IbcTransferAPI"]
