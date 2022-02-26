@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>terra_sdk.client.lcd.api.authz &mdash; Terra SDK 2.0.3 documentation</title>
+  <title>terra_sdk.client.lcd.api.ibc_transfer &mdash; Terra SDK 2.0.3 documentation</title>
       <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -89,7 +89,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../../../index.html">Module code</a> &raquo;</li>
-      <li>terra_sdk.client.lcd.api.authz</li>
+      <li>terra_sdk.client.lcd.api.ibc_transfer</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -98,59 +98,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for terra_sdk.client.lcd.api.authz</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+  <h1>Source code for terra_sdk.client.lcd.api.ibc_transfer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
 
-<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">AccAddress</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.authz</span> <span class="kn">import</span> <span class="n">AuthorizationGrant</span>
-
-<span class="kn">from</span> <span class="nn">..params</span> <span class="kn">import</span> <span class="n">APIParams</span>
-<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
-
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AsyncAuthzAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;AuthzAPI&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AsyncIbcTransferAPI&quot;</span><span class="p">,</span> <span class="s2">&quot;IbcTransferAPI&quot;</span><span class="p">]</span>
 
 
-<span class="k">class</span> <span class="nc">AsyncAuthzAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">grants</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">granter</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
-        <span class="n">grantee</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
-        <span class="n">msg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">AuthorizationGrant</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Fetches current active message authorization grants.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            granter (AccAddress): granter account address</span>
-<span class="sd">            grantee (AccAddress): grantee account address</span>
-<span class="sd">            msg_type (Optional[str], optional): message type.</span>
+<span class="k">class</span> <span class="nc">AsyncIbcTransferAPI</span><span class="p">(</span><span class="n">BaseAsyncAPI</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the IbcTransfer module&#39;s parameters.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            List[AuthorizationGrant]: message authorization grants matching criteria</span>
+<span class="sd">            dict: IbcTransfer module parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;granter&quot;</span><span class="p">:</span> <span class="n">granter</span><span class="p">,</span>
-            <span class="s2">&quot;grantee&quot;</span><span class="p">:</span> <span class="n">grantee</span><span class="p">,</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/ibc/apps/transfer/v1/params&quot;</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;send_enabled&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;send_enabled&quot;</span><span class="p">]),</span>
+            <span class="s2">&quot;receive_enabled&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;receive_enabled&quot;</span><span class="p">]),</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;msg_type_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg_type</span>
-
-        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/authz/v1beta1/grants&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">AuthorizationGrant</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;grants&quot;</span><span class="p">]]</span>
 
 
-<div class="viewcode-block" id="AuthzAPI"><a class="viewcode-back" href="../../../../../core_modules/authz.html#terra_sdk.client.lcd.api.authz.AuthzAPI">[docs]</a><span class="k">class</span> <span class="nc">AuthzAPI</span><span class="p">(</span><span class="n">AsyncAuthzAPI</span><span class="p">):</span>
-<div class="viewcode-block" id="AuthzAPI.grants"><a class="viewcode-back" href="../../../../../core_modules/authz.html#terra_sdk.client.lcd.api.authz.AuthzAPI.grants">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncAuthzAPI</span><span class="o">.</span><span class="n">grants</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">grants</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">granter</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
-        <span class="n">grantee</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span>
-        <span class="n">msg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">AuthorizationGrant</span><span class="p">]:</span>
+<div class="viewcode-block" id="IbcTransferAPI"><a class="viewcode-back" href="../../../../../core_modules/ibc_transfer.html#terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI">[docs]</a><span class="k">class</span> <span class="nc">IbcTransferAPI</span><span class="p">(</span><span class="n">AsyncIbcTransferAPI</span><span class="p">):</span>
+<div class="viewcode-block" id="IbcTransferAPI.parameters"><a class="viewcode-back" href="../../../../../core_modules/ibc_transfer.html#terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI.parameters">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncIbcTransferAPI</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="k">pass</span></div>
 
-    <span class="n">grants</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncAuthzAPI</span><span class="o">.</span><span class="n">grants</span><span class="o">.</span><span class="vm">__doc__</span></div>
+    <span class="n">parameters</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncIbcTransferAPI</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="vm">__doc__</span></div>
 </pre></div>
 
            </div>

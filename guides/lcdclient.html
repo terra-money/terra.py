@@ -79,6 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -117,7 +118,7 @@
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span><span class="o">.</span><span class="n">tendermint</span><span class="o">.</span><span class="n">node_info</span><span class="p">()[</span><span class="s1">&#39;node_info&#39;</span><span class="p">][</span><span class="s1">&#39;network&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">terra</span><span class="o">.</span><span class="n">tendermint</span><span class="o">.</span><span class="n">node_info</span><span class="p">()[</span><span class="s1">&#39;default_node_info&#39;</span><span class="p">][</span><span class="s1">&#39;network&#39;</span><span class="p">]</span>
 <span class="go">&#39;columbus-5&#39;</span>
 </pre></div>
 </div>
@@ -231,8 +232,8 @@ are useful for easily creating and signing transactions.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="terra_sdk.client.lcd.LCDClient.ibc_transfer">
-<span class="sig-name descname"><span class="pre">ibc_transfer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI</span></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.ibc_transfer" title="Permalink to this definition"></a></dt>
-<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">IbcTransferAPI</span></code>.</p>
+<span class="sig-name descname"><span class="pre">ibc_transfer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../core_modules/ibc_transfer.html#terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI" title="terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI"><span class="pre">terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI</span></a></em><a class="headerlink" href="#terra_sdk.client.lcd.LCDClient.ibc_transfer" title="Permalink to this definition"></a></dt>
+<dd><p><a class="reference internal" href="../core_modules/ibc_transfer.html#terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI" title="terra_sdk.client.lcd.api.ibc_transfer.IbcTransferAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">IbcTransferAPI</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">

@@ -118,32 +118,46 @@ A SignDoc contains the information required to build a StdTx:
 
 .. code-block:: python
 
-    from terra_sdk.client.lcd import LCDClient
     from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
-    from terra_sdk.core.sign_doc import SignDoc
-    from terra_sdk.core.tx import AuthInfo
+    from terra_sdk.client.lcd import LCDClient
     from terra_sdk.core.bank import MsgSend
+    from terra_sdk.core.tx import SignMode
+    from terra_sdk.key.key import SignOptions
     from terra_sdk.key.mnemonic import MnemonicKey
+    from terra_sdk.core import Coin, Coins
 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
-    mk = MnemonicKey(mnemonic=MNEMONIC)
+    key = MnemonicKey(mnemonic=MNEMONIC)
 
     msg = MsgSend(
-        address,
+        key.acc_address,
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
-        Coins(uluna=100000),
+        Coins(uluna=30000),
     )
-              gas=200000,
-              gas_adjustment=1.2
-          )
-      )
 
-    # create signature
-    sig = key.
+    tx_opt = CreateTxOptions(
+        msgs=[msg], memo="send test", gas_adjustment=1.5
+    )
 
+    signer_opt = SignerOptions(
+        address=key.acc_address,
+    )
+
+    acc_info = terra.auth.account_info(key.acc_address)
+
+    sign_opt = SignOptions(
+        account_number=acc_info.account_number,
+        sequence=acc_info.sequence,
+        sign_mode=SignMode.SIGN_MODE_DIRECT,
+        chain_id='columbus-5'
+    )
+
+    tx = terra.tx.create([signer_opt], tx_opt)
+
+    signed_tx = key.sign_tx(tx, sign_opt)
 
     # broadcast tx
-    result = terra.tx.broadcast(tx)
+    result = terra.tx.broadcast(signed_tx)
     print(result)
 
 
@@ -166,49 +180,64 @@ Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary 
     from terra_sdk.core.fee import Fee
     from terra_sdk.core.bank import MsgMultiSend
     from terra_sdk.key.mnemonic import MnemonicKey
+    from terra_sdk.core.bank import MsgMultiSend, MultiSendInput, MultiSendOutput
 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     wallet1 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_1))
     wallet2 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_2))
 
-    multisend = MsgMultiSend(
-        inputs=[
-            {"address": wallet1.key.acc_address, "coins": "12000uusd,11000uluna"},
-            {"address": wallet2.key.acc_address, "coins": "11000ukrw,10000uluna"}
-        ],
-        outputs=[
-            {"address": wallet1.key.acc_address, "coins": "11000ukrw,10000uluna"},
-            {"address": wallet2.key.acc_address, "coins": "12000uusd,11000uluna"}
-        ]    
+    inputs = [
+        MultiSendInput(
+            address=wallet1.key.acc_address,
+            coins=Coins(uluna=10000),
+        ),
+        MultiSendInput(
+            address=wallet2.key.acc_address,
+            coins=Coins(uluna=20000),
+        )
+    ]
+    outputs = [
+        MultiSendOutput(
+            address=wallet1.key.acc_address,
+            coins=Coins(uluna=20000),
+        ),
+        MultiSendOutput(
+            address=wallet2.key.acc_address,
+            coins=Coins(uluna=10000),
+        ),
+    ]
+
+    msg = MsgMultiSend(inputs, outputs)
+
+    opt = CreateTxOptions(
+        msgs=[msg]
     )
 
-    msgs = [multisend]
-    fee = Fee(200000, "12000uluna")
-    memo = "multisend example"
+    tx = terra.tx.create(
+        [SignerOptions(address=wallet1.key.acc_address), SignerOptions(address=wallet2.key.acc_address)], opt)
 
-    txOption = CreateTxOptions(
-        msgs=msgs,
-        fee=fee,
-        memo=memo
+    info1 = wallet1.account_number_and_sequence()
+    info2 = wallet2.account_number_and_sequence()
+
+    signdoc1 = SignDoc(
+        chain_id=terra.chain_id,
+        account_number=info1["account_number"],
+        sequence=info1["sequence"],
+        auth_info=tx.auth_info,
+        tx_body=tx.body,
     )
 
-    # create unsigned_tx #1
-    u_tx1 = wallet1.create_tx(txOption)
+    signdoc2 = SignDoc(
+        chain_id=terra.chain_id,
+        account_number=info2["account_number"],
+        sequence=info2["sequence"],
+        auth_info=tx.auth_info,
+        tx_body=tx.body,
+    )
+    sig1 = wallet1.key.create_signature_amino(signdoc1)
+    sig2 = wallet2.key.create_signature_amino(signdoc2)
+    tx.append_signatures([sig1, sig2])
 
-    sig1 = wallet1.key.create_signature(u_tx1)
-
-    # create unsigned tx #2
-    u_tx2 = wallet2.create_tx(txOption)
-
-    sig2 = wallet2.key.create_signature(u_tx2)
-
-    # build stdtx
-    tx = u_tx1.to_stdtx()
-
-    # apply signatures
-    tx.signatures = [sig1, sig2]
-
-    # broadcast tx
     result = terra.tx.broadcast(tx)
     print(result)
 

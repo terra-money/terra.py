@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -240,7 +241,7 @@
     <span class="k">def</span> <span class="nf">append_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SignatureV2</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">signatures</span><span class="p">:</span>
             <span class="n">mode_info</span><span class="p">,</span> <span class="n">sig_bytes</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_mode_info_and_signature</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">sig_bytes</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">sig_bytes</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">SignerInfo</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span> <span class="n">mode_info</span><span class="p">,</span> <span class="n">sig</span><span class="o">.</span><span class="n">sequence</span><span class="p">)</span>
             <span class="p">)</span></div>

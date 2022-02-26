@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -209,6 +210,10 @@
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">encode_amino_pubkey</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="k">pass</span></div>
 
 

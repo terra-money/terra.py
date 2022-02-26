@@ -77,6 +77,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -155,22 +156,11 @@ Pagination: pagination info</p>
 <dd><p>Allows batch-sending between multiple source and destination addresses.
 The total amount of coins in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> must match <code class="docutils literal notranslate"><span class="pre">outputs</span></code>. The transaction
 containing <code class="docutils literal notranslate"><span class="pre">MsgMultiSend</span></code> must contain signatures from all addresses used as inputs.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> arguments should be of the form:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
-    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789uusd&quot;</span>
-<span class="p">},</span>
-<span class="p">{</span>
-    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra12...&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;2983298ukrw,21323uusd&quot;</span>
-<span class="p">}]</span>
-</pre></div>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> (<em>List</em><em>[</em><em>MultiSendIO</em><em>]</em>) – senders and amounts</p></li>
-<li><p><strong>outputs</strong> (<em>List</em><em>[</em><em>MultiSendIO</em><em>]</em>) – recipients and amounts</p></li>
+<li><p><strong>inputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#terra_sdk.core.bank.msgs.MultiSendInput" title="terra_sdk.core.bank.msgs.MultiSendInput"><em>MultiSendInput</em></a><em>]</em>) – senders and amounts</p></li>
+<li><p><strong>outputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#terra_sdk.core.bank.msgs.MultiSendOutput" title="terra_sdk.core.bank.msgs.MultiSendOutput"><em>MultiSendOutput</em></a><em>]</em>) – recipients and amounts</p></li>
 </ul>
 </dd>
 </dl>
@@ -249,12 +239,14 @@ containing <code class="docutils literal notranslate"><span class="pre">MsgMulti
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.core.bank.msgs.</span></span><span class="sig-name descname"><span class="pre">MultiSendInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MultiSendInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendInput" title="Permalink to this definition"></a></dt>
 <dd><p>Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
 format:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789uusd&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – from_address</p></li>
+<li><p><strong>coins</strong> (<a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to send from the address</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="terra_sdk.core.bank.msgs.MultiSendInput.address">
 <span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><span class="pre">AccAddress</span></a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendInput.address" title="Permalink to this definition"></a></dt>
@@ -264,7 +256,7 @@ format:</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="terra_sdk.core.bank.msgs.MultiSendInput.coins">
 <span class="sig-name descname"><span class="pre">coins</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><span class="pre">terra_sdk.core.coins.Coins</span></a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendInput.coins" title="Permalink to this definition"></a></dt>
-<dd><p>Coins to be sent / received.</p>
+<dd><p>Coins to be sent.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -285,12 +277,14 @@ format:</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">terra_sdk.core.bank.msgs.</span></span><span class="sig-name descname"><span class="pre">MultiSendOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/bank/msgs.html#MultiSendOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendOutput" title="Permalink to this definition"></a></dt>
 <dd><p>Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the
 format:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;terra1...&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;123456789uusd&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – to_address</p></li>
+<li><p><strong>coins</strong> (<a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><em>Coins</em></a>) – amount to receive</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="terra_sdk.core.bank.msgs.MultiSendOutput.address">
 <span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><span class="pre">AccAddress</span></a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendOutput.address" title="Permalink to this definition"></a></dt>
@@ -300,7 +294,7 @@ format:</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="terra_sdk.core.bank.msgs.MultiSendOutput.coins">
 <span class="sig-name descname"><span class="pre">coins</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../common/coin_coins.html#terra_sdk.core.coins.Coins" title="terra_sdk.core.coins.Coins"><span class="pre">terra_sdk.core.coins.Coins</span></a></em><a class="headerlink" href="#terra_sdk.core.bank.msgs.MultiSendOutput.coins" title="Permalink to this definition"></a></dt>
-<dd><p>Coins to be sent / received.</p>
+<dd><p>Coins to be received.</p>
 </dd></dl>
 
 <dl class="py method">

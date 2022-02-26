@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -191,19 +192,16 @@
     <span class="sd">&quot;&quot;&quot;Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the</span>
 <span class="sd">    format:</span>
 
-<span class="sd">    .. code-block:: python</span>
-
-<span class="sd">        {</span>
-<span class="sd">           &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">           &quot;coins&quot;: &quot;123456789uusd&quot;</span>
-<span class="sd">        }</span>
+<span class="sd">    Args:</span>
+<span class="sd">         address (AccAddress): from_address</span>
+<span class="sd">         coins (Coins): amount to send from the address</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;Input / output address.&quot;&quot;&quot;</span>
 
     <span class="n">coins</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;Coins to be sent / received.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Coins to be sent.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">to_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">coins</span><span class="o">.</span><span class="n">to_amino</span><span class="p">()}</span>
@@ -231,19 +229,16 @@
     <span class="sd">&quot;&quot;&quot;Organizes data for MsgMultiSend input/outputs. Expects data to be provided in the</span>
 <span class="sd">    format:</span>
 
-<span class="sd">    .. code-block:: python</span>
-
-<span class="sd">        {</span>
-<span class="sd">           &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">           &quot;coins&quot;: &quot;123456789uusd&quot;</span>
-<span class="sd">        }</span>
+<span class="sd">    Args:</span>
+<span class="sd">         address (AccAddress): to_address</span>
+<span class="sd">         coins (Coins): amount to receive</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;Input / output address.&quot;&quot;&quot;</span>
 
     <span class="n">coins</span><span class="p">:</span> <span class="n">Coins</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">Coins</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;Coins to be sent / received.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Coins to be received.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">to_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">coins</span><span class="o">.</span><span class="n">to_amino</span><span class="p">()}</span>
@@ -286,23 +281,9 @@
 <span class="sd">    The total amount of coins in ``inputs`` must match ``outputs``. The transaction</span>
 <span class="sd">    containing ``MsgMultiSend`` must contain signatures from all addresses used as inputs.</span>
 
-<span class="sd">    The ``inputs`` and ``output`` arguments should be of the form:</span>
-
-<span class="sd">    .. code-block:: python</span>
-
-<span class="sd">        [{</span>
-<span class="sd">            &quot;address&quot;: &quot;terra1...&quot;,</span>
-<span class="sd">            &quot;coins&quot;: &quot;123456789uusd&quot;</span>
-<span class="sd">        },</span>
-<span class="sd">        {</span>
-<span class="sd">            &quot;address&quot;: &quot;terra12...&quot;,</span>
-<span class="sd">            &quot;coins&quot;: &quot;2983298ukrw,21323uusd&quot;</span>
-<span class="sd">        }]</span>
-
-
 <span class="sd">    Args:</span>
-<span class="sd">        inputs (List[MultiSendIO]): senders and amounts</span>
-<span class="sd">        outputs (List[MultiSendIO]): recipients and amounts</span>
+<span class="sd">        inputs (List[MultiSendInput]): senders and amounts</span>
+<span class="sd">        outputs (List[MultiSendOutput]): recipients and amounts</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">type_amino</span> <span class="o">=</span> <span class="s2">&quot;bank/MsgMultiSend&quot;</span>

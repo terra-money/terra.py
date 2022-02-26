@@ -82,6 +82,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -211,32 +212,46 @@ sign it, and add the signatures to an <code class="docutils literal notranslate"
 <li><p><strong>auth_info</strong>: transaction authentication info</p></li>
 <li><p><strong>tx_body</strong>: body of a transaction. containing messages.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd.api.tx</span> <span class="kn">import</span> <span class="n">CreateTxOptions</span><span class="p">,</span> <span class="n">SignerOptions</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.sign_doc</span> <span class="kn">import</span> <span class="n">SignDoc</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">AuthInfo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">terra_sdk.client.lcd.api.tx</span> <span class="kn">import</span> <span class="n">CreateTxOptions</span><span class="p">,</span> <span class="n">SignerOptions</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.client.lcd</span> <span class="kn">import</span> <span class="n">LCDClient</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgSend</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">SignMode</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.key.key</span> <span class="kn">import</span> <span class="n">SignOptions</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="n">Coin</span><span class="p">,</span> <span class="n">Coins</span>
 
 <span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
-<span class="n">mk</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC</span><span class="p">)</span>
 
 <span class="n">msg</span> <span class="o">=</span> <span class="n">MsgSend</span><span class="p">(</span>
-    <span class="n">address</span><span class="p">,</span>
+    <span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
     <span class="s2">&quot;terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v&quot;</span><span class="p">,</span>
-    <span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">100000</span><span class="p">),</span>
+    <span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">30000</span><span class="p">),</span>
 <span class="p">)</span>
-          <span class="n">gas</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span>
-          <span class="n">gas_adjustment</span><span class="o">=</span><span class="mf">1.2</span>
-      <span class="p">)</span>
-  <span class="p">)</span>
 
-<span class="c1"># create signature</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span>
+<span class="n">tx_opt</span> <span class="o">=</span> <span class="n">CreateTxOptions</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">msg</span><span class="p">],</span> <span class="n">memo</span><span class="o">=</span><span class="s2">&quot;send test&quot;</span><span class="p">,</span> <span class="n">gas_adjustment</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="p">)</span>
 
+<span class="n">signer_opt</span> <span class="o">=</span> <span class="n">SignerOptions</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">acc_info</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">account_info</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">)</span>
+
+<span class="n">sign_opt</span> <span class="o">=</span> <span class="n">SignOptions</span><span class="p">(</span>
+    <span class="n">account_number</span><span class="o">=</span><span class="n">acc_info</span><span class="o">.</span><span class="n">account_number</span><span class="p">,</span>
+    <span class="n">sequence</span><span class="o">=</span><span class="n">acc_info</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+    <span class="n">sign_mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">,</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="s1">&#39;columbus-5&#39;</span>
+<span class="p">)</span>
+
+<span class="n">tx</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="n">signer_opt</span><span class="p">],</span> <span class="n">tx_opt</span><span class="p">)</span>
+
+<span class="n">signed_tx</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">sign_tx</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">sign_opt</span><span class="p">)</span>
 
 <span class="c1"># broadcast tx</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">signed_tx</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -256,49 +271,64 @@ Each <code class="docutils literal notranslate"><span class="pre">SignDoc</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.fee</span> <span class="kn">import</span> <span class="n">Fee</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgMultiSend</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.key.mnemonic</span> <span class="kn">import</span> <span class="n">MnemonicKey</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.bank</span> <span class="kn">import</span> <span class="n">MsgMultiSend</span><span class="p">,</span> <span class="n">MultiSendInput</span><span class="p">,</span> <span class="n">MultiSendOutput</span>
 
 <span class="n">terra</span> <span class="o">=</span> <span class="n">LCDClient</span><span class="p">(</span><span class="s2">&quot;https://lcd.terra.dev&quot;</span><span class="p">,</span> <span class="s2">&quot;columbus-5&quot;</span><span class="p">)</span>
 <span class="n">wallet1</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC_1</span><span class="p">))</span>
 <span class="n">wallet2</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">wallet</span><span class="p">(</span><span class="n">MnemonicKey</span><span class="p">(</span><span class="n">mnemonic</span><span class="o">=</span><span class="n">MNEMONIC_2</span><span class="p">))</span>
 
-<span class="n">multisend</span> <span class="o">=</span> <span class="n">MsgMultiSend</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;12000uusd,11000uluna&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;11000ukrw,10000uluna&quot;</span><span class="p">}</span>
-    <span class="p">],</span>
-    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;11000ukrw,10000uluna&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="s2">&quot;coins&quot;</span><span class="p">:</span> <span class="s2">&quot;12000uusd,11000uluna&quot;</span><span class="p">}</span>
-    <span class="p">]</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">MultiSendInput</span><span class="p">(</span>
+        <span class="n">address</span><span class="o">=</span><span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+        <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">10000</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">MultiSendInput</span><span class="p">(</span>
+        <span class="n">address</span><span class="o">=</span><span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+        <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">20000</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">MultiSendOutput</span><span class="p">(</span>
+        <span class="n">address</span><span class="o">=</span><span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+        <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">20000</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">MultiSendOutput</span><span class="p">(</span>
+        <span class="n">address</span><span class="o">=</span><span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+        <span class="n">coins</span><span class="o">=</span><span class="n">Coins</span><span class="p">(</span><span class="n">uluna</span><span class="o">=</span><span class="mi">10000</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MsgMultiSend</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">CreateTxOptions</span><span class="p">(</span>
+    <span class="n">msgs</span><span class="o">=</span><span class="p">[</span><span class="n">msg</span><span class="p">]</span>
 <span class="p">)</span>
 
-<span class="n">msgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">multisend</span><span class="p">]</span>
-<span class="n">fee</span> <span class="o">=</span> <span class="n">Fee</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="s2">&quot;12000uluna&quot;</span><span class="p">)</span>
-<span class="n">memo</span> <span class="o">=</span> <span class="s2">&quot;multisend example&quot;</span>
+<span class="n">tx</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">SignerOptions</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">),</span> <span class="n">SignerOptions</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">)],</span> <span class="n">opt</span><span class="p">)</span>
 
-<span class="n">txOption</span> <span class="o">=</span> <span class="n">CreateTxOptions</span><span class="p">(</span>
-    <span class="n">msgs</span><span class="o">=</span><span class="n">msgs</span><span class="p">,</span>
-    <span class="n">fee</span><span class="o">=</span><span class="n">fee</span><span class="p">,</span>
-    <span class="n">memo</span><span class="o">=</span><span class="n">memo</span>
+<span class="n">info1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">account_number_and_sequence</span><span class="p">()</span>
+<span class="n">info2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">account_number_and_sequence</span><span class="p">()</span>
+
+<span class="n">signdoc1</span> <span class="o">=</span> <span class="n">SignDoc</span><span class="p">(</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="n">terra</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
+    <span class="n">account_number</span><span class="o">=</span><span class="n">info1</span><span class="p">[</span><span class="s2">&quot;account_number&quot;</span><span class="p">],</span>
+    <span class="n">sequence</span><span class="o">=</span><span class="n">info1</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">],</span>
+    <span class="n">auth_info</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="p">,</span>
+    <span class="n">tx_body</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># create unsigned_tx #1</span>
-<span class="n">u_tx1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="n">txOption</span><span class="p">)</span>
+<span class="n">signdoc2</span> <span class="o">=</span> <span class="n">SignDoc</span><span class="p">(</span>
+    <span class="n">chain_id</span><span class="o">=</span><span class="n">terra</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
+    <span class="n">account_number</span><span class="o">=</span><span class="n">info2</span><span class="p">[</span><span class="s2">&quot;account_number&quot;</span><span class="p">],</span>
+    <span class="n">sequence</span><span class="o">=</span><span class="n">info2</span><span class="p">[</span><span class="s2">&quot;sequence&quot;</span><span class="p">],</span>
+    <span class="n">auth_info</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="p">,</span>
+    <span class="n">tx_body</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">sig1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature_amino</span><span class="p">(</span><span class="n">signdoc1</span><span class="p">)</span>
+<span class="n">sig2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature_amino</span><span class="p">(</span><span class="n">signdoc2</span><span class="p">)</span>
+<span class="n">tx</span><span class="o">.</span><span class="n">append_signatures</span><span class="p">([</span><span class="n">sig1</span><span class="p">,</span> <span class="n">sig2</span><span class="p">])</span>
 
-<span class="n">sig1</span> <span class="o">=</span> <span class="n">wallet1</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">u_tx1</span><span class="p">)</span>
-
-<span class="c1"># create unsigned tx #2</span>
-<span class="n">u_tx2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="n">txOption</span><span class="p">)</span>
-
-<span class="n">sig2</span> <span class="o">=</span> <span class="n">wallet2</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">create_signature</span><span class="p">(</span><span class="n">u_tx2</span><span class="p">)</span>
-
-<span class="c1"># build stdtx</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">u_tx1</span><span class="o">.</span><span class="n">to_stdtx</span><span class="p">()</span>
-
-<span class="c1"># apply signatures</span>
-<span class="n">tx</span><span class="o">.</span><span class="n">signatures</span> <span class="o">=</span> <span class="p">[</span><span class="n">sig1</span><span class="p">,</span> <span class="n">sig2</span><span class="p">]</span>
-
-<span class="c1"># broadcast tx</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">terra</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>

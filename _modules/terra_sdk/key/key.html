@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -110,7 +111,7 @@
     <span class="n">SignatureV2</span><span class="p">,</span>
     <span class="n">SignDoc</span><span class="p">,</span>
     <span class="n">ValAddress</span><span class="p">,</span>
-    <span class="n">ValPubKey</span><span class="p">,</span>
+    <span class="n">ValPubKey</span><span class="p">,</span> <span class="n">ModeInfoSingle</span><span class="p">,</span> <span class="n">ModeInfo</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bech32</span> <span class="kn">import</span> <span class="n">get_bech</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.mode_info</span> <span class="kn">import</span> <span class="n">ModeInfo</span><span class="p">,</span> <span class="n">ModeInfoSingle</span>
@@ -121,7 +122,7 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Descriptor</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Single</span> <span class="k">as</span> <span class="n">SingleDescriptor</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">SignerInfo</span><span class="p">,</span> <span class="n">SignMode</span><span class="p">,</span> <span class="n">Tx</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">SignerInfo</span><span class="p">,</span> <span class="n">SignMode</span><span class="p">,</span> <span class="n">Tx</span><span class="p">,</span> <span class="n">AuthInfo</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="s2">&quot;SignOptions&quot;</span><span class="p">]</span>
 
@@ -305,7 +306,7 @@
 <span class="sd">            Tx: ready-to-broadcast transaction object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">signedTx</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+        <span class="n">signedTx</span> <span class="o">=</span> <span class="n">Tx</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">auth_info</span><span class="o">=</span><span class="n">AuthInfo</span><span class="p">(</span><span class="n">signer_infos</span><span class="o">=</span><span class="p">[],</span> <span class="n">fee</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">fee</span><span class="p">),</span> <span class="n">signatures</span><span class="o">=</span><span class="p">[])</span>
         <span class="n">signDoc</span> <span class="o">=</span> <span class="n">SignDoc</span><span class="p">(</span>
             <span class="n">chain_id</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
             <span class="n">account_number</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">account_number</span><span class="p">,</span>

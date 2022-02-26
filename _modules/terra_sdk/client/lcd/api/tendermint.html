@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tendermint.html">Tendermint</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/tx.html">Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/wasm.html">WebAssembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../core_modules/ibc_transfer.html">IBC-Transfer</a></li>
 </ul>
 
         </div>
@@ -98,7 +99,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for terra_sdk.client.lcd.api.tendermint</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
 
@@ -112,7 +114,11 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: node information</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/base/tendermint/v1beta1/node_info&quot;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/base/tendermint/v1beta1/node_info&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;default_node_info&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;default_node_info&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;application_version&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;application_version&quot;&quot;&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">syncing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Fetches whether the curent connect node is syncing with the network.</span>
