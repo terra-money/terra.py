@@ -115,6 +115,10 @@ class PublicKey(JSONSerializable, ABC):
     def to_amino(self) -> dict:
         pass
 
+    @abstractmethod
+    def to_data(self) -> dict:
+        pass
+
 
 @attr.s
 class SimplePublicKey(PublicKey):
@@ -132,7 +136,7 @@ class SimplePublicKey(PublicKey):
         return {"type": self.type_amino, "value": self.key}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "key": self.key}
+        return {"@type": self.type_url, "key": base64.b64encode(self.key)}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
@@ -157,7 +161,7 @@ class SimplePublicKey(PublicKey):
         )
         return out
 
-    def raw_address(self) -> str:
+    def raw_address(self) -> bytes:
         return address_from_public_key(self.key)
 
     def address(self) -> str:

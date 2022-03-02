@@ -141,7 +141,8 @@ class Tx(JSONSerializable):
     def append_signatures(self, signatures: List[SignatureV2]):
         for sig in signatures:
             mode_info, sig_bytes = sig.data.to_mode_info_and_signature()
-            self.signatures.append(base64.b64decode(sig_bytes))
+            self.signatures.append(sig_bytes)
+            # self.signatures.append(base64.b64decode(sig_bytes))
             self.auth_info.signer_infos.append(
                 SignerInfo(sig.public_key, mode_info, sig.sequence)
             )
@@ -165,7 +166,7 @@ class TxBody(JSONSerializable):
         return {
             "messages": [m.to_data() for m in self.messages],
             "memo": self.memo if self.memo else "",
-            "timeout_height": self.timeout_height if self.timeout_height else 0,
+            "timeout_height": self.timeout_height if self.timeout_height else "0",
         }
 
     def to_proto(self) -> TxBody_pb:

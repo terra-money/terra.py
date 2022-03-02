@@ -76,7 +76,7 @@ class Descriptor:
             pb = MultiSignature_pb(signatures=signatures)
             return [
                 ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
-                base64.b64encode(bytes(pb)),
+                bytes(pb) # base64.b64encode(bytes(pb)),
             ]
 
         raise ValueError("invalid signature descriptor")
