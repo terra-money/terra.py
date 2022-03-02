@@ -216,7 +216,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         if gas is None or gas == "auto" or int(gas) == 0:
             opt = copy.deepcopy(options)
             opt.gas_adjustment = gas_adjustment
-            gas = str(self.estimate_gas(tx, opt))
+            gas = str(await super()._try_await(self.estimate_gas(tx, opt)))
 
         fee_amount = (
             gas_prices_coins.mul(gas).to_int_ceil_coins()
@@ -230,7 +230,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         gas_adjustment = options.gas_adjustment if options else self._c.gas_adjustment
 
         res = await self._c._post(
-            "/cosmos/tx/v1beta1/simulate", {"tx_bytes": self.encode(tx)}
+            "/cosmos/tx/v1beta1/simulate", {"tx_bytes": await super()._try_await(self.encode(tx))}
         )
         simulated = SimulateResponse.from_data(res)
 
@@ -259,7 +259,7 @@ class AsyncTxAPI(BaseAsyncAPI):
     async def _broadcast(
         self, tx: Tx, mode: str, options: BroadcastOptions = None
     ) -> dict:
-        data = {"tx_bytes": self.encode(tx), "mode": mode}
+        data = {"tx_bytes": await super()._try_await(self.encode(tx)), "mode": mode}
         return await self._c._post("/cosmos/tx/v1beta1/txs", data)  # , raw=True)
 
     async def broadcast_sync(

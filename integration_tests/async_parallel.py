@@ -13,7 +13,7 @@ async def with_sem(aw, sem):
 
 async def main():
     terra = AsyncLCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")
-    validators = await terra.staking.validators()
+    validators, _ = await terra.staking.validators()
     validator_addresses = [v.operator_address for v in validators]
 
     sem = asyncio.Semaphore(2)  # 2 continuous connections
