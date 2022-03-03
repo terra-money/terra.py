@@ -894,6 +894,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "types-python-dateutil"
+version = "2.8.9"
+description = "Typing stubs for python-dateutil"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.1.1"
 description = "Backported and Experimental Type Hints for Python 3.6+"
@@ -974,7 +982,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "164f75656945efd639d1560a4897ec7257a163996773aaa8e6c3039f8d1dc87f"
+content-hash = "a17ee121a25226332475fa4d571e7bdeba1e2ab13e2dc63a51e6dd38507f194a"
 
 [metadata.files]
 aiohttp = [
@@ -1669,6 +1677,10 @@ typed-ast = [
     {file = "typed_ast-1.5.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:f290617f74a610849bd8f5514e34ae3d09eafd521dceaa6cf68b3f4414266d4e"},
     {file = "typed_ast-1.5.2-cp39-cp39-win_amd64.whl", hash = "sha256:df05aa5b241e2e8045f5f4367a9f6187b09c4cdf8578bb219861c4e27c443db5"},
     {file = "typed_ast-1.5.2.tar.gz", hash = "sha256:525a2d4088e70a9f75b08b3f87a51acc9cde640e19cc523c7e41aa355564ae27"},
+]
+types-python-dateutil = [
+    {file = "types-python-dateutil-2.8.9.tar.gz", hash = "sha256:90f95a6b6d4faba359287f17a2cae511ccc9d4abc89b01969bdac1185815c05d"},
+    {file = "types_python_dateutil-2.8.9-py3-none-any.whl", hash = "sha256:d60db7f5d40ce85ce54e7fb14e4157daf33e24f5a4bfb5f44ee7a5b790dfabd0"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.1.1-py3-none-any.whl", hash = "sha256:21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"},
