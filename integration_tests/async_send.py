@@ -1,12 +1,13 @@
+import asyncio
+
+import uvloop
+
 from terra_sdk.client.lcd import AsyncLCDClient
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
 from terra_sdk.core import Coins
 from terra_sdk.core.bank import MsgSend
 from terra_sdk.key.mnemonic import MnemonicKey
 
-import asyncio
-
-import uvloop
 
 async def with_sem(aw, sem):
     async with sem:
@@ -32,7 +33,7 @@ async def main():
             msgs=[msg],
             gas_prices="0.15uluna",
             gas="63199",  # gas="auto", gas_adjustment=1.1
-            fee_denoms=["uluna"]
+            fee_denoms=["uluna"],
         )
     )
     print(tx)
@@ -44,5 +45,3 @@ async def main():
 
 uvloop.install()
 asyncio.run(main())
-
-

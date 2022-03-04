@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import List
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.params.v1beta1 import ParamChange as ParamChange_pb
 from terra_proto.cosmos.params.v1beta1 import (
     ParameterChangeProposal as ParameterChangeProposal_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.util.json import JSONSerializable
 

@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.distribution.v1beta1 import (
     CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.util.json import JSONSerializable

@@ -1,11 +1,12 @@
-from pathlib import Path
 import asyncio
+from pathlib import Path
+
 import uvloop
 
 from terra_sdk.client.lcd import AsyncLCDClient
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
-from terra_sdk.key.mnemonic import MnemonicKey
 from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
+from terra_sdk.key.mnemonic import MnemonicKey
 from terra_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
 
@@ -13,7 +14,9 @@ async def main():
     terra = AsyncLCDClient(url="http://localhost:1317", chain_id="localterra")
     terra.gas_prices = "1uluna"
     # test1 = terra.wallets["test1"]
-    acc = MnemonicKey(mnemonic="rotice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius")
+    acc = MnemonicKey(
+        mnemonic="rotice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
+    )
     test1 = terra.wallet(acc)
 
     store_code_tx = await test1.create_and_sign_tx(

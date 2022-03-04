@@ -58,7 +58,7 @@ class CommissionRates(JSONSerializable):
         return cls(
             rate=proto.rate,
             max_rate=proto.max_rate,
-            max_change_rate=proto.max_change_rate
+            max_change_rate=proto.max_change_rate,
         )
 
 

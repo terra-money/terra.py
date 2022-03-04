@@ -1,8 +1,8 @@
 """feegrant module data objects."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
 from abc import ABC, abstractmethod
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 import attr
@@ -159,7 +159,7 @@ class PeriodicAllowance(JSONSerializable):
             period=proto.period.seconds(),
             period_spend_limit=proto.period_spend_limit,
             period_can_spend=proto.period_can_spend,
-            period_reset=proto.period_reset
+            period_reset=proto.period_reset,
         )
 
 
@@ -201,7 +201,6 @@ class AllowedMsgAllowance(JSONSerializable):
 
 
 class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
-
     @property
     @abstractmethod
     def type_url(self):

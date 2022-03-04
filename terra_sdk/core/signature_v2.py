@@ -74,7 +74,11 @@ class Descriptor:
                 signatures.append(sig_bytes)
             pb = MultiSignature_pb(signatures=signatures)
             return [
-                ModeInfo(multi=ModeInfoMulti(bitarray=sig_data.bitarray, mode_infos=mode_infos)),
+                ModeInfo(
+                    multi=ModeInfoMulti(
+                        bitarray=sig_data.bitarray, mode_infos=mode_infos
+                    )
+                ),
                 bytes(pb),  # base64.b64encode(bytes(pb)),
             ]
 
