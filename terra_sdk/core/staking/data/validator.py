@@ -53,6 +53,14 @@ class CommissionRates(JSONSerializable):
             max_change_rate=str(self.max_change_rate),
         )
 
+    @classmethod
+    def from_proto(cls, proto: CommissionRates_pb) -> CommissionRates:
+        return cls(
+            rate=proto.rate,
+            max_rate=proto.max_rate,
+            max_change_rate=proto.max_change_rate
+        )
+
 
 @attr.s
 class Commission(JSONSerializable):

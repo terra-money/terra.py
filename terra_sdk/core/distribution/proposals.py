@@ -6,6 +6,7 @@ import attr
 from terra_proto.cosmos.distribution.v1beta1 import (
     CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.util.json import JSONSerializable
@@ -70,3 +71,6 @@ class CommunityPoolSpendProposal(JSONSerializable):
             recipient=self.recipient,
             amount=self.amount.to_proto(),
         )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

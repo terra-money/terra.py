@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 from terra_sdk.core.public_key import PublicKey
 from terra_sdk.util.json import JSONSerializable
@@ -7,7 +7,7 @@ from .base_account import BaseAccount
 from .lazy_graded_vesting_account import LazyGradedVestingAccount
 
 
-class Account(JSONSerializable):
+class Account(JSONSerializable, ABC):
     @abstractmethod
     def get_account_number(self) -> int:
         pass

@@ -59,13 +59,14 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Args:
             delegator (Optional[AccAddress], optional): delegator account address.
             validator (Optional[ValAddress], optional): validator operator address.
-            params (Optional[APIParams], optional): api parameters
+            params (APIParams, optional): additional params for the API like pagination
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
 
         Returns:
             List[Delegation]: delegations
+            dict: pagination info
         """
         if delegator is not None and validator is not None:
             res = await self._c._get(
@@ -121,13 +122,14 @@ class AsyncStakingAPI(BaseAsyncAPI):
         Args:
             delegator (Optional[AccAddress], optional): delegator account address.
             validator (Optional[ValAddress], optional): validator operator address.
-            params (Optional[APIParams], optional): api parameters
+            params (APIParams, optional): additional params for the API like pagination
 
         Raises:
             TypeError: if both ``delegator`` and ``validator`` are ``None``.
 
         Returns:
             List[UnbondingDelegation]: undelegations
+            dict: pagination info
         """
         if delegator is not None and validator is not None:
             res = await self._c._get(
@@ -186,10 +188,11 @@ class AsyncStakingAPI(BaseAsyncAPI):
             delegator (Optional[AccAddress], optional): delegator account address.
             validator_src (Optional[ValAddress], optional): source validator operator address (from).
             validator_dst (Optional[ValAddress], optional): dest. validator operator address (to).
-            params (Optional[APIParams], optional): api parameters
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             List[Redelegation]: redelegations
+            dict: pagination info
         """
 
         # _params = RedelegationsOptions(src_validator_addr=validator_src, dst_validator_addr=validator_dst)
@@ -216,9 +219,11 @@ class AsyncStakingAPI(BaseAsyncAPI):
 
         Args:
             delegator (AccAddress): delegator account address
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             List[Validator]: currently bonded validators
+            dict: pagination info
         """
         res = await self._c._get(
             f"/cosmos/staking/v1beta1/delegators/{delegator}/validators", params
@@ -232,8 +237,12 @@ class AsyncStakingAPI(BaseAsyncAPI):
     ) -> (List[Validator], dict):
         """Fetch information of all validators.
 
+        Args:
+            params (APIParams, optional): additional params for the API like pagination
+
         Returns:
             List[Validator]: validator informations
+            dict: pagination info
         """
         res = await self._c._get("/cosmos/staking/v1beta1/validators", params)
         return [Validator.from_data(d) for d in res.get("validators")], res.get(

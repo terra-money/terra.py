@@ -22,7 +22,8 @@ class AsyncAuthzAPI(BaseAsyncAPI):
         Args:
             granter (AccAddress): granter account address
             grantee (AccAddress): grantee account address
-            msg_type (Optional[str], optional): message type.
+            msg_type (str, optional): message type.
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             List[AuthorizationGrant]: message authorization grants matching criteria

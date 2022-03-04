@@ -41,8 +41,12 @@ class AsyncSlashingAPI(BaseAsyncAPI):
     ) -> (Union[List[dict], dict], dict):
         """Fetches all signing info.
 
+        Args:
+            params (APIParams, optional): additional params for the API like pagination
+
         Returns:
             Union[List[dict], dict]: signing infos
+            dict: pagination info
         """
         res = await self._c._get("/cosmos/slashing/v1beta1/signing_infos", params)
         infos = res["info"]

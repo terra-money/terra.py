@@ -1,5 +1,4 @@
 import abc
-import base64
 import copy
 from typing import Optional
 
@@ -144,9 +143,9 @@ class Key:
             data=Descriptor(
                 SingleDescriptor(
                     mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-                    signature=(self.sign(sign_doc.to_amino_json()))   # ww multisig
+                    signature=(self.sign(sign_doc.to_amino_json()))
                     # signature=base64.b64encode(self.sign(sign_doc.to_amino_json()))
-        )
+                )
             ),
             sequence=sign_doc.sequence,
         )

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 from typing import List, Optional
 
 import attr
@@ -75,8 +74,8 @@ class Descriptor:
                 signatures.append(sig_bytes)
             pb = MultiSignature_pb(signatures=signatures)
             return [
-                ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
-                bytes(pb) # base64.b64encode(bytes(pb)),
+                ModeInfo(multi=ModeInfoMulti(bitarray=sig_data.bitarray, mode_infos=mode_infos)),
+                bytes(pb),  # base64.b64encode(bytes(pb)),
             ]
 
         raise ValueError("invalid signature descriptor")

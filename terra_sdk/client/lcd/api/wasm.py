@@ -51,7 +51,7 @@ class AsyncWasmAPI(BaseAsyncAPI):
 
         Args:
             contract_address (str): contract address
-            query_msg (dict): QueryMsg to run
+            query (dict): QueryMsg to run
 
         Returns:
             Any: results of query

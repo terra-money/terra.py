@@ -9,6 +9,7 @@ from terra_proto.cosmos.params.v1beta1 import ParamChange as ParamChange_pb
 from terra_proto.cosmos.params.v1beta1 import (
     ParameterChangeProposal as ParameterChangeProposal_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.util.json import JSONSerializable
 
@@ -86,3 +87,6 @@ class ParameterChangeProposal(JSONSerializable):
             "description": self.description,
             "changes": [change.to_data() for change in self.changes],
         }
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

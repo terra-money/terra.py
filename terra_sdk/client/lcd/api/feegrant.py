@@ -17,6 +17,7 @@ class AsyncFeeGrantAPI(BaseAsyncAPI):
 
         Args:
             address (AccAddress): grantee address
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             Allowances[]: granted allowances
@@ -46,6 +47,7 @@ class AsyncFeeGrantAPI(BaseAsyncAPI):
         Args:
             granter (AccAddress): granter is the address of the user granting an allowance of their funds.
             grantee (AccAddress): grantee is the address of the user being granted an allowance of another user’s funds.
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             Allowance: granted allowance

@@ -13,6 +13,7 @@ from terra_proto.cosmos.upgrade.v1beta1 import (
 from terra_proto.cosmos.upgrade.v1beta1 import (
     SoftwareUpgradeProposal as SoftwareUpgradeProposal_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core.upgrade.plan import Plan
 from terra_sdk.util.json import JSONSerializable
@@ -52,6 +53,9 @@ class SoftwareUpgradeProposal(JSONSerializable):
             title=self.title, description=self.description, plan=self.plan.to_proto()
         )
 
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
+
 
 @attr.s
 class CancelSoftwareUpgradeProposal(JSONSerializable):
@@ -80,3 +84,6 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
         return CancelSoftwareUpgradeProposal_pb(
             title=self.title, description=self.description
         )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

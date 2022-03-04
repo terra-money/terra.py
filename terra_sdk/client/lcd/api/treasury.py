@@ -24,6 +24,9 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
     async def tax_rate(self, height: Optional[int] = None) -> Dec:
         """Fetches the current tax rate.
 
+        Args:
+            height (int, optional): block height to query
+
         Returns:
             Dec: tax rate
         """

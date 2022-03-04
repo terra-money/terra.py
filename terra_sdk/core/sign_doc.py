@@ -80,8 +80,6 @@ class SignDoc(JSONSerializable):
     def to_amino_json(self) -> bytes:
         amino = self.to_amino()
         return bytes(
-            json.dumps(
-                remove_none(amino), sort_keys=True, separators=(",", ":")
-            ),
+            json.dumps(remove_none(amino), sort_keys=True, separators=(",", ":")),
             "utf-8",
         )

@@ -7,7 +7,7 @@ from terra_sdk.core.gov.data import Vote
 
 from ._base import BaseAsyncAPI, sync_bind
 
-__all__ = ["AsyncGovAPI", "GovAPI"]
+__all__ = ["AsyncGovAPI", "GovAPI", "ProposalStatus"]
 
 from ..params import APIParams
 
@@ -15,16 +15,24 @@ from ..params import APIParams
 class AsyncGovAPI(BaseAsyncAPI):
     async def proposals(
         self, options: dict = {}, params: Optional[APIParams] = None
-    ) -> (List[Proposal], dict):
+    ) -> [List[Proposal], dict]:
         """Fetches all proposals.
-
         Args:
-            options (dict, optional): dictionary containing options. Defaults to {}.
-            params (APIParams): parameters for pagination, optional
+            options (dict, optional): dictionary containing options. Defaults to {}. you can use one or more below:
+                {
+                    "proposal_status": terra_sdk.core.gov.ProposalStatus (int)
+                    "voter": voter address (str),
+                    "depositor": depositor address(str)
+                }
+                example) {"proposal_status":1, "depositor":"terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp"}
+
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             List[Proposal]: proposals
         """
+        if params is not None:
+            options.update(params.to_dict())
         res = await self._c._get("/cosmos/gov/v1beta1/proposals", options)
         return [Proposal.from_data(d) for d in res.get("proposals")], res.get(
             "pagination"
@@ -114,7 +122,7 @@ class AsyncGovAPI(BaseAsyncAPI):
 
         Args:
             proposal_id (int): proposal ID
-            params (APIParams): parameters for pagination, optional
+            params (APIParams, optional): additional params for the API like pagination
         """
 
         proposal = self.proposal(proposal_id)
@@ -142,7 +150,7 @@ class AsyncGovAPI(BaseAsyncAPI):
 
         Args:
             proposal_id (int): proposal ID
-            params (APIParams): parameters for pagination, optional
+            params (APIParams, optional): additional params for the API like pagination
         """
 
         proposal = self.proposal(proposal_id)
