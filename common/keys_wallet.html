@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -161,13 +162,13 @@ available in <span class="xref std std-ref">guides/custom_key</span>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="terra_sdk.key.key.Key.create_signature">
-<span class="sig-name descname"><span class="pre">create_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signDoc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.create_signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.create_signature" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sign_doc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/key/key.html#Key.create_signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.key.key.Key.create_signature" title="Permalink to this definition"></a></dt>
 <dd><p>Signs the transaction with the signing algorithm provided by this Key implementation,
 and outputs the signature. The signature is only returned, and must be manually added to
 the <code class="docutils literal notranslate"><span class="pre">signatures</span></code> field of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Tx</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>signDoc</strong> (<em>SignDoc</em>) – unsigned transaction</p>
+<dd class="field-odd"><p><strong>sign_doc</strong> (<em>SignDoc</em>) – unsigned transaction</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>ValueError</strong> – if missing <code class="docutils literal notranslate"><span class="pre">public_key</span></code></p>

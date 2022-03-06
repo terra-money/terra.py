@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -317,7 +318,7 @@
         <span class="k">if</span> <span class="n">gas</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">gas</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">opt</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
             <span class="n">opt</span><span class="o">.</span><span class="n">gas_adjustment</span> <span class="o">=</span> <span class="n">gas_adjustment</span>
-            <span class="n">gas</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimate_gas</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">opt</span><span class="p">))</span>
+            <span class="n">gas</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimate_gas</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">opt</span><span class="p">)))</span>
 
         <span class="n">fee_amount</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">gas_prices_coins</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span><span class="o">.</span><span class="n">to_int_ceil_coins</span><span class="p">()</span>
@@ -331,7 +332,8 @@
         <span class="n">gas_adjustment</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">gas_adjustment</span> <span class="k">if</span> <span class="n">options</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">gas_adjustment</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span>
-            <span class="s2">&quot;/cosmos/tx/v1beta1/simulate&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;tx_bytes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tx</span><span class="p">)}</span>
+            <span class="s2">&quot;/cosmos/tx/v1beta1/simulate&quot;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">&quot;tx_bytes&quot;</span><span class="p">:</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tx</span><span class="p">))},</span>
         <span class="p">)</span>
         <span class="n">simulated</span> <span class="o">=</span> <span class="n">SimulateResponse</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
@@ -360,7 +362,7 @@
     <span class="k">async</span> <span class="k">def</span> <span class="nf">_broadcast</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">Tx</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">BroadcastOptions</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tx_bytes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tx</span><span class="p">),</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">mode</span><span class="p">}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tx_bytes&quot;</span><span class="p">:</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_try_await</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tx</span><span class="p">)),</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">mode</span><span class="p">}</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span><span class="s2">&quot;/cosmos/tx/v1beta1/txs&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>  <span class="c1"># , raw=True)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">broadcast_sync</span><span class="p">(</span>

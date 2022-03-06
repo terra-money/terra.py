@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -147,11 +148,15 @@
 <span class="sig-name descname"><span class="pre">signing_infos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/slashing.html#SlashingAPI.signing_infos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.slashing.SlashingAPI.signing_infos" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches all signing info.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>signing infos</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Union[List[dict], dict]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>signing infos
+dict: pagination info</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[List[dict], dict]</p>
 </dd>
 </dl>
 </dd></dl>

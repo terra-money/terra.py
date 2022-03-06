@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -223,7 +224,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            amino (list): list of Coin-data objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">coins</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Coin</span><span class="o">.</span><span class="n">from_data</span><span class="p">,</span> <span class="n">amino</span><span class="p">)</span>
+        <span class="n">coins</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">Coin</span><span class="o">.</span><span class="n">from_amino</span><span class="p">,</span> <span class="n">amino</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">to_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>

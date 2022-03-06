@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -160,6 +161,20 @@ argument is first coerced to either an <code class="docutils literal notranslate
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin">Coin</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="terra_sdk.core.coin.Coin.from_amino">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_amino</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/core/coin.html#Coin.from_amino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.core.coin.Coin.from_amino" title="Permalink to this definition"></a></dt>
+<dd><p>Deserializes a <a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a> object from its amino-codec representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – data object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#terra_sdk.core.coin.Coin" title="terra_sdk.core.coin.Coin"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coin</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

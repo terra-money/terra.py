@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -122,10 +123,14 @@
 <dd><p>Fetches the list of validators a delegator is currently delegating to.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delegator</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – delegator account address</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delegator</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – delegator account address</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>currently bonded validators</p>
+<dd class="field-even"><p>currently bonded validators
+dict: pagination info</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.validator.Validator" title="terra_sdk.core.staking.data.validator.Validator">Validator</a>]</p>
@@ -162,14 +167,15 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>delegator</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a><em>]</em><em>, </em><em>optional</em>) – delegator account address.</p></li>
 <li><p><strong>validator</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress"><em>ValAddress</em></a><em>]</em><em>, </em><em>optional</em>) – validator operator address.</p></li>
-<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>APIParams</em><em>]</em><em>, </em><em>optional</em>) – api parameters</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>TypeError</strong> – if both <code class="docutils literal notranslate"><span class="pre">delegator</span></code> and <code class="docutils literal notranslate"><span class="pre">validator</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>delegations</p>
+<dd class="field-odd"><p>delegations
+dict: pagination info</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.delegation.Delegation" title="terra_sdk.core.staking.data.delegation.Delegation">Delegation</a>]</p>
@@ -215,11 +221,12 @@
 <li><p><strong>delegator</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a><em>]</em><em>, </em><em>optional</em>) – delegator account address.</p></li>
 <li><p><strong>validator_src</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress"><em>ValAddress</em></a><em>]</em><em>, </em><em>optional</em>) – source validator operator address (from).</p></li>
 <li><p><strong>validator_dst</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress"><em>ValAddress</em></a><em>]</em><em>, </em><em>optional</em>) – dest. validator operator address (to).</p></li>
-<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>APIParams</em><em>]</em><em>, </em><em>optional</em>) – api parameters</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>redelegations</p>
+<dd class="field-even"><p>redelegations
+dict: pagination info</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.delegation.Redelegation" title="terra_sdk.core.staking.data.delegation.Redelegation">Redelegation</a>]</p>
@@ -256,14 +263,15 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>delegator</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a><em>]</em><em>, </em><em>optional</em>) – delegator account address.</p></li>
 <li><p><strong>validator</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.ValAddress" title="terra_sdk.core.bech32.ValAddress"><em>ValAddress</em></a><em>]</em><em>, </em><em>optional</em>) – validator operator address.</p></li>
-<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>APIParams</em><em>]</em><em>, </em><em>optional</em>) – api parameters</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>TypeError</strong> – if both <code class="docutils literal notranslate"><span class="pre">delegator</span></code> and <code class="docutils literal notranslate"><span class="pre">validator</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>undelegations</p>
+<dd class="field-odd"><p>undelegations
+dict: pagination info</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.delegation.UnbondingDelegation" title="terra_sdk.core.staking.data.delegation.UnbondingDelegation">UnbondingDelegation</a>]</p>
@@ -293,11 +301,15 @@
 <span class="sig-name descname"><span class="pre">validators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/terra_sdk/client/lcd/api/staking.html#StakingAPI.validators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#terra_sdk.client.lcd.api.staking.StakingAPI.validators" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch information of all validators.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>validator informations</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.validator.Validator" title="terra_sdk.core.staking.data.validator.Validator">Validator</a>]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validator informations
+dict: pagination info</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#terra_sdk.core.staking.data.validator.Validator" title="terra_sdk.core.staking.data.validator.Validator">Validator</a>]</p>
 </dd>
 </dl>
 </dd></dl>

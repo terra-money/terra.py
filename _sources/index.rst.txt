@@ -27,6 +27,7 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     guides/async
     guides/transactions
     guides/smart_contracts
+    guides/pagination
     guides/custom_key
     guides/troubleshooting
 

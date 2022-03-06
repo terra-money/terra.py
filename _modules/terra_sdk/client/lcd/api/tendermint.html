@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -99,8 +100,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for terra_sdk.client.lcd.api.tendermint</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">BaseAsyncAPI</span><span class="p">,</span> <span class="n">sync_bind</span>
 
@@ -117,7 +117,7 @@
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/base/tendermint/v1beta1/node_info&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;default_node_info&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;default_node_info&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;application_version&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;application_version&quot;&quot;&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;application_version&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;application_version&quot;</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
         <span class="p">}</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">syncing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -134,7 +134,7 @@
         <span class="sd">&quot;&quot;&quot;Fetches the validator set for a height. If no height is given, defaults to latest.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            height (Optional[int], optional): block height.</span>
+<span class="sd">            height (int, optional): block height.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: validator set</span>
@@ -146,7 +146,7 @@
         <span class="sd">&quot;&quot;&quot;Fetches the block information for a given height. If no height is given, defaults to latest block.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            height (Optional[int], optional): block height.</span>
+<span class="sd">            height (int, optional): block height.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: block info</span>

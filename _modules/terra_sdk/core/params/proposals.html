@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -106,6 +107,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">from</span> <span class="nn">betterproto.lib.google.protobuf</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">Any_pb</span>
 <span class="kn">from</span> <span class="nn">terra_proto.cosmos.params.v1beta1</span> <span class="kn">import</span> <span class="n">ParamChange</span> <span class="k">as</span> <span class="n">ParamChange_pb</span>
 <span class="kn">from</span> <span class="nn">terra_proto.cosmos.params.v1beta1</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ParameterChangeProposal</span> <span class="k">as</span> <span class="n">ParameterChangeProposal_pb</span><span class="p">,</span>
@@ -133,11 +135,7 @@
         <span class="k">return</span> <span class="n">ParamChange_pb</span><span class="p">(</span><span class="n">subspace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subspace</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ParamChange.to_data"><a class="viewcode-back" href="../../../../core_modules/params.html#terra_sdk.core.params.proposals.ParamChange.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;subspace&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subspace</span><span class="p">,</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="p">}</span></div></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;subspace&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subspace</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span></div></div>
 
 
 <div class="viewcode-block" id="ParameterChangeProposal"><a class="viewcode-back" href="../../../../core_modules/params.html#terra_sdk.core.params.proposals.ParameterChangeProposal">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
@@ -189,8 +187,11 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
             <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-            <span class="s2">&quot;changes&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">change</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">changes</span><span class="p">]</span>
-        <span class="p">}</span></div></div>
+            <span class="s2">&quot;changes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">change</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">changes</span><span class="p">],</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">pack_any</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Any_pb</span><span class="p">(</span><span class="n">type_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_url</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()))</span></div>
 </pre></div>
 
            </div>

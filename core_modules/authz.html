@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -121,7 +122,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>granter</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – granter account address</p></li>
 <li><p><strong>grantee</strong> (<a class="reference internal" href="../common/bech32.html#terra_sdk.core.bech32.AccAddress" title="terra_sdk.core.bech32.AccAddress"><em>AccAddress</em></a>) – grantee account address</p></li>
-<li><p><strong>msg_type</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – message type.</p></li>
+<li><p><strong>msg_type</strong> (<em>str</em><em>, </em><em>optional</em>) – message type.</p></li>
+<li><p><strong>params</strong> (<a class="reference internal" href="../guides/pagination.html#terra_sdk.client.lcd.params.APIParams" title="terra_sdk.client.lcd.params.APIParams"><em>APIParams</em></a><em>, </em><em>optional</em>) – additional params for the API like pagination</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

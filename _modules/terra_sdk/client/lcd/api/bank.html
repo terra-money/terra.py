@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -117,6 +118,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            address (AccAddress): account address</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Coins: balance</span>
@@ -130,7 +132,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Coins: total supply</span>
-<span class="sd">            Pagination: pagination info</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/bank/v1beta1/supply&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Coins</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;supply&quot;</span><span class="p">)),</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pagination&quot;</span><span class="p">)</span>
@@ -138,7 +140,9 @@
 
 <div class="viewcode-block" id="BankAPI"><a class="viewcode-back" href="../../../../../core_modules/bank.html#terra_sdk.client.lcd.api.bank.BankAPI">[docs]</a><span class="k">class</span> <span class="nc">BankAPI</span><span class="p">(</span><span class="n">AsyncBankAPI</span><span class="p">):</span>
 <div class="viewcode-block" id="BankAPI.balance"><a class="viewcode-back" href="../../../../../core_modules/bank.html#terra_sdk.client.lcd.api.bank.BankAPI.balance">[docs]</a>    <span class="nd">@sync_bind</span><span class="p">(</span><span class="n">AsyncBankAPI</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">Coins</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">AccAddress</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">Coins</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
     <span class="n">balance</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">AsyncBankAPI</span><span class="o">.</span><span class="n">balance</span><span class="o">.</span><span class="vm">__doc__</span>

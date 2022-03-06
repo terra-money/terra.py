@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -160,13 +161,14 @@
 <span class="sd">        Args:</span>
 <span class="sd">            delegator (Optional[AccAddress], optional): delegator account address.</span>
 <span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
-<span class="sd">            params (Optional[APIParams], optional): api parameters</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            TypeError: if both ``delegator`` and ``validator`` are ``None``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[Delegation]: delegations</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">delegator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
@@ -222,13 +224,14 @@
 <span class="sd">        Args:</span>
 <span class="sd">            delegator (Optional[AccAddress], optional): delegator account address.</span>
 <span class="sd">            validator (Optional[ValAddress], optional): validator operator address.</span>
-<span class="sd">            params (Optional[APIParams], optional): api parameters</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            TypeError: if both ``delegator`` and ``validator`` are ``None``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[UnbondingDelegation]: undelegations</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">delegator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
@@ -287,10 +290,11 @@
 <span class="sd">            delegator (Optional[AccAddress], optional): delegator account address.</span>
 <span class="sd">            validator_src (Optional[ValAddress], optional): source validator operator address (from).</span>
 <span class="sd">            validator_dst (Optional[ValAddress], optional): dest. validator operator address (to).</span>
-<span class="sd">            params (Optional[APIParams], optional): api parameters</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[Redelegation]: redelegations</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># _params = RedelegationsOptions(src_validator_addr=validator_src, dst_validator_addr=validator_dst)</span>
@@ -317,9 +321,11 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            delegator (AccAddress): delegator account address</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[Validator]: currently bonded validators</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;/cosmos/staking/v1beta1/delegators/</span><span class="si">{</span><span class="n">delegator</span><span class="si">}</span><span class="s2">/validators&quot;</span><span class="p">,</span> <span class="n">params</span>
@@ -328,11 +334,17 @@
             <span class="s2">&quot;pagination&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">validators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="n">Validator</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">validators</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">APIParams</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="n">Validator</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Fetch information of all validators.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List[Validator]: validator informations</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/staking/v1beta1/validators&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">Validator</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validators&quot;</span><span class="p">)],</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>

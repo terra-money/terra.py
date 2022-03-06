@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -127,12 +128,38 @@
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcd</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">account_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;account_number&quot;</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">account_number</span><span class="p">,</span> <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">sequence</span><span class="p">}</span>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcd</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">CreateTxOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
+        <span class="n">sigOpt</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">SignerOptions</span><span class="p">(</span>
+                <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">acc_address</span><span class="p">,</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcd</span><span class="o">.</span><span class="n">tx</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">sigOpt</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_and_sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
-        <span class="n">tx</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">sign_tx</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">create_and_sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">CreateTxOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
+        <span class="n">account_number</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">account_number</span>
+        <span class="n">sequence</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">sequence</span>
+        <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_number_and_sequence</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">account_number</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;account_number&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sequence</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">)</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">sign_tx</span><span class="p">(</span>
+            <span class="n">tx</span><span class="o">=</span><span class="p">(</span><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_tx</span><span class="p">(</span><span class="n">options</span><span class="p">)),</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">SignOptions</span><span class="p">(</span>
+                <span class="n">account_number</span><span class="o">=</span><span class="n">account_number</span><span class="p">,</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="p">,</span>
+                <span class="n">chain_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcd</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
+                <span class="n">sign_mode</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">sign_mode</span>
+                <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">sign_mode</span>
+                <span class="k">else</span> <span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
 
 
 <div class="viewcode-block" id="Wallet"><a class="viewcode-back" href="../../../../common/keys_wallet.html#terra_sdk.client.lcd.wallet.Wallet">[docs]</a><span class="k">class</span> <span class="nc">Wallet</span><span class="p">:</span>

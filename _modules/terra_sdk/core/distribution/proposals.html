@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -104,6 +105,7 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">from</span> <span class="nn">betterproto.lib.google.protobuf</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">Any_pb</span>
 <span class="kn">from</span> <span class="nn">terra_proto.cosmos.distribution.v1beta1</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">CommunityPoolSpendProposal</span> <span class="k">as</span> <span class="n">CommunityPoolSpendProposal_pb</span><span class="p">,</span>
 <span class="p">)</span>
@@ -170,7 +172,10 @@
             <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
             <span class="n">recipient</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">recipient</span><span class="p">,</span>
             <span class="n">amount</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="o">.</span><span class="n">to_proto</span><span class="p">(),</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pack_any</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any_pb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Any_pb</span><span class="p">(</span><span class="n">type_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_url</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_proto</span><span class="p">()))</span></div>
 </pre></div>
 
            </div>

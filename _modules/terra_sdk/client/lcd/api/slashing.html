@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -142,8 +143,12 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">dict</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Fetches all signing info.</span>
 
+<span class="sd">        Args:</span>
+<span class="sd">            params (APIParams, optional): additional params for the API like pagination</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            Union[List[dict], dict]: signing infos</span>
+<span class="sd">            dict: pagination info</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/cosmos/slashing/v1beta1/signing_infos&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="n">infos</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span>

@@ -43,6 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/async.html">Usage with asyncio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/transactions.html">Building and Signing Transactions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/smart_contracts.html">Working with Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guides/pagination.html">Usage with Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/custom_key.html">Implementing a Custom Key</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../guides/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -108,21 +109,22 @@
 <span class="kn">from</span> <span class="nn">terra_sdk.core</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">AccAddress</span><span class="p">,</span>
     <span class="n">AccPubKey</span><span class="p">,</span>
+    <span class="n">ModeInfo</span><span class="p">,</span>
+    <span class="n">ModeInfoSingle</span><span class="p">,</span>
     <span class="n">SignatureV2</span><span class="p">,</span>
     <span class="n">SignDoc</span><span class="p">,</span>
     <span class="n">ValAddress</span><span class="p">,</span>
-    <span class="n">ValPubKey</span><span class="p">,</span> <span class="n">ModeInfoSingle</span><span class="p">,</span> <span class="n">ModeInfo</span><span class="p">,</span>
+    <span class="n">ValPubKey</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.bech32</span> <span class="kn">import</span> <span class="n">get_bech</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.mode_info</span> <span class="kn">import</span> <span class="n">ModeInfo</span><span class="p">,</span> <span class="n">ModeInfoSingle</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.public_key</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">PublicKey</span><span class="p">,</span>
     <span class="n">address_from_public_key</span><span class="p">,</span>
-    <span class="n">pubkey_from_public_key</span><span class="p">,</span>
+    <span class="n">amino_pubkey_from_public_key</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Descriptor</span>
 <span class="kn">from</span> <span class="nn">terra_sdk.core.signature_v2</span> <span class="kn">import</span> <span class="n">Single</span> <span class="k">as</span> <span class="n">SingleDescriptor</span>
-<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">SignerInfo</span><span class="p">,</span> <span class="n">SignMode</span><span class="p">,</span> <span class="n">Tx</span><span class="p">,</span> <span class="n">AuthInfo</span>
+<span class="kn">from</span> <span class="nn">terra_sdk.core.tx</span> <span class="kn">import</span> <span class="n">AuthInfo</span><span class="p">,</span> <span class="n">SignerInfo</span><span class="p">,</span> <span class="n">SignMode</span><span class="p">,</span> <span class="n">Tx</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="s2">&quot;SignOptions&quot;</span><span class="p">]</span>
 
@@ -155,11 +157,11 @@
 <span class="sd">    pubkeys.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PublicKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="o">=</span> <span class="n">public_key</span>
         <span class="k">if</span> <span class="n">public_key</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">raw_address</span> <span class="o">=</span> <span class="n">address_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span> <span class="o">=</span> <span class="n">pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span> <span class="o">=</span> <span class="n">amino_pubkey_from_public_key</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Key.sign"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.sign">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -232,7 +234,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not compute val_pubkey: missing raw_pubkey&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ValPubKey</span><span class="p">(</span><span class="n">get_bech</span><span class="p">(</span><span class="s2">&quot;terravaloperpub&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_pubkey</span><span class="o">.</span><span class="n">hex</span><span class="p">()))</span>
 
-    <span class="k">def</span> <span class="nf">create_signature_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signDoc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_signature_amino</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sign_doc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;signature could not be created: Key instance missing public_key&quot;</span>
@@ -243,19 +245,20 @@
             <span class="n">data</span><span class="o">=</span><span class="n">Descriptor</span><span class="p">(</span>
                 <span class="n">SingleDescriptor</span><span class="p">(</span>
                     <span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_LEGACY_AMINO_JSON</span><span class="p">,</span>
-                    <span class="n">signature</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">to_amino_json</span><span class="p">())),</span>
+                    <span class="n">signature</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">to_amino_json</span><span class="p">()))</span>
+                    <span class="c1"># signature=base64.b64encode(self.sign(sign_doc.to_amino_json()))</span>
                 <span class="p">)</span>
             <span class="p">),</span>
-            <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signDoc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
+<div class="viewcode-block" id="Key.create_signature"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.create_signature">[docs]</a>    <span class="k">def</span> <span class="nf">create_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sign_doc</span><span class="p">:</span> <span class="n">SignDoc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignatureV2</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Signs the transaction with the signing algorithm provided by this Key implementation,</span>
 <span class="sd">        and outputs the signature. The signature is only returned, and must be manually added to</span>
 <span class="sd">        the ``signatures`` field of an :class:`Tx`.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            signDoc (SignDoc): unsigned transaction</span>
+<span class="sd">            sign_doc (SignDoc): unsigned transaction</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: if missing ``public_key``</span>
@@ -269,20 +272,20 @@
             <span class="p">)</span>
 
         <span class="c1"># make backup</span>
-        <span class="n">si_backup</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">)</span>
-        <span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">si_backup</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span><span class="p">)</span>
+        <span class="n">sign_doc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">SignerInfo</span><span class="p">(</span>
                 <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
-                <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
                 <span class="n">mode_info</span><span class="o">=</span><span class="n">ModeInfo</span><span class="p">(</span>
                     <span class="n">single</span><span class="o">=</span><span class="n">ModeInfoSingle</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">)</span>
                 <span class="p">),</span>
             <span class="p">)</span>
         <span class="p">]</span>
-        <span class="n">signature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">signDoc</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">())</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">())</span>
 
         <span class="c1"># restore</span>
-        <span class="n">signDoc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="n">si_backup</span>
+        <span class="n">sign_doc</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">signer_infos</span> <span class="o">=</span> <span class="n">si_backup</span>
 
         <span class="k">return</span> <span class="n">SignatureV2</span><span class="p">(</span>
             <span class="n">public_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span>
@@ -291,7 +294,7 @@
                     <span class="n">mode</span><span class="o">=</span><span class="n">SignMode</span><span class="o">.</span><span class="n">SIGN_MODE_DIRECT</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span>
                 <span class="p">)</span>
             <span class="p">),</span>
-            <span class="n">sequence</span><span class="o">=</span><span class="n">signDoc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+            <span class="n">sequence</span><span class="o">=</span><span class="n">sign_doc</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Key.sign_tx"><a class="viewcode-back" href="../../../common/keys_wallet.html#terra_sdk.key.key.Key.sign_tx">[docs]</a>    <span class="k">def</span> <span class="nf">sign_tx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tx</span><span class="p">:</span> <span class="n">Tx</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">SignOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tx</span><span class="p">:</span>
@@ -306,7 +309,11 @@
 <span class="sd">            Tx: ready-to-broadcast transaction object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">signedTx</span> <span class="o">=</span> <span class="n">Tx</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">auth_info</span><span class="o">=</span><span class="n">AuthInfo</span><span class="p">(</span><span class="n">signer_infos</span><span class="o">=</span><span class="p">[],</span> <span class="n">fee</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">fee</span><span class="p">),</span> <span class="n">signatures</span><span class="o">=</span><span class="p">[])</span>
+        <span class="n">signedTx</span> <span class="o">=</span> <span class="n">Tx</span><span class="p">(</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+            <span class="n">auth_info</span><span class="o">=</span><span class="n">AuthInfo</span><span class="p">(</span><span class="n">signer_infos</span><span class="o">=</span><span class="p">[],</span> <span class="n">fee</span><span class="o">=</span><span class="n">tx</span><span class="o">.</span><span class="n">auth_info</span><span class="o">.</span><span class="n">fee</span><span class="p">),</span>
+            <span class="n">signatures</span><span class="o">=</span><span class="p">[],</span>
+        <span class="p">)</span>
         <span class="n">signDoc</span> <span class="o">=</span> <span class="n">SignDoc</span><span class="p">(</span>
             <span class="n">chain_id</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">chain_id</span><span class="p">,</span>
             <span class="n">account_number</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">account_number</span><span class="p">,</span>
