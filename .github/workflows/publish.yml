@@ -29,5 +29,4 @@ jobs:
       - name: poetry-build
         run: poetry build
       - name: poetry-publish
-        if: matrix.python-version == '3.10'
         run: poetry publish --no-interaction  --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
