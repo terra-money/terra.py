@@ -25,9 +25,14 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: poetry-check
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
         run: poetry check
       - name: poetry-build
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
         run: poetry build
       - name: poetry-publish
-        if: matrix.python-version == '3.10'
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
         run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
