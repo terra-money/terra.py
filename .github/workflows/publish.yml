@@ -29,4 +29,4 @@ jobs:
       - name: poetry-build
         run: poetry build
       - name: poetry-publish
-        run: poetry publish --no-interaction  --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
