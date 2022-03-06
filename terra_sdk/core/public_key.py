@@ -129,6 +129,10 @@ class PublicKey(JSONSerializable, ABC):
     def to_data(self) -> dict:
         pass
 
+    @abstractmethod
+    def to_proto(self):
+        pass
+
 
 @attr.s
 class SimplePublicKey(PublicKey):

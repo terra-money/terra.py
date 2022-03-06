@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import json
 from typing import Dict, List, Optional
 
 import attr
@@ -322,6 +323,14 @@ class TxLog(JSONSerializable):
     def from_proto(cls, tx_log: AbciMessageLog_pb) -> TxLog:
         events = [event for event in tx_log["events"]]
         return cls(msg_index=tx_log["msg_index"], log=tx_log["log"], events=events)
+
+    def to_proto(self) -> AbciMessageLog_pb:
+        str_events = List
+        for event in self.events:
+            str_events.append(json.dumps(event))
+        return AbciMessageLog_pb(
+            msg_index=self.msg_index, log=self.log, events=str_events
+        )
 
 
 @attr.s
