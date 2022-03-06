@@ -55,7 +55,7 @@ class Key:
     pubkeys.
     """
 
-    def __init__(self, public_key: Optional[bytes] = None):
+    def __init__(self, public_key: Optional[PublicKey] = None):
         self.public_key = public_key
         if public_key:
             self.raw_address = address_from_public_key(public_key)
@@ -132,7 +132,7 @@ class Key:
             raise ValueError("could not compute val_pubkey: missing raw_pubkey")
         return ValPubKey(get_bech("terravaloperpub", self.raw_pubkey.hex()))
 
-    def create_signature_amino(self, signDoc: SignDoc) -> SignatureV2:
+    def create_signature_amino(self, sign_doc: SignDoc) -> SignatureV2:
         if self.public_key is None:
             raise ValueError(
                 "signature could not be created: Key instance missing public_key"
@@ -143,19 +143,20 @@ class Key:
             data=Descriptor(
                 SingleDescriptor(
                     mode=SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-                    signature=(self.sign(signDoc.to_amino_json())),
+                    signature=(self.sign(sign_doc.to_amino_json()))
+                    # signature=base64.b64encode(self.sign(sign_doc.to_amino_json()))
                 )
             ),
-            sequence=signDoc.sequence,
+            sequence=sign_doc.sequence,
         )
 
-    def create_signature(self, signDoc: SignDoc) -> SignatureV2:
+    def create_signature(self, sign_doc: SignDoc) -> SignatureV2:
         """Signs the transaction with the signing algorithm provided by this Key implementation,
         and outputs the signature. The signature is only returned, and must be manually added to
         the ``signatures`` field of an :class:`Tx`.
 
         Args:
-            signDoc (SignDoc): unsigned transaction
+            sign_doc (SignDoc): unsigned transaction
 
         Raises:
             ValueError: if missing ``public_key``
@@ -169,20 +170,20 @@ class Key:
             )
 
         # make backup
-        si_backup = copy.deepcopy(signDoc.auth_info.signer_infos)
-        signDoc.auth_info.signer_infos = [
+        si_backup = copy.deepcopy(sign_doc.auth_info.signer_infos)
+        sign_doc.auth_info.signer_infos = [
             SignerInfo(
                 public_key=self.public_key,
-                sequence=signDoc.sequence,
+                sequence=sign_doc.sequence,
                 mode_info=ModeInfo(
                     single=ModeInfoSingle(mode=SignMode.SIGN_MODE_DIRECT)
                 ),
             )
         ]
-        signature = self.sign(signDoc.to_bytes())
+        signature = self.sign(sign_doc.to_bytes())
 
         # restore
-        signDoc.auth_info.signer_infos = si_backup
+        sign_doc.auth_info.signer_infos = si_backup
 
         return SignatureV2(
             public_key=self.public_key,
@@ -191,7 +192,7 @@ class Key:
                     mode=SignMode.SIGN_MODE_DIRECT, signature=signature
                 )
             ),
-            sequence=signDoc.sequence,
+            sequence=sign_doc.sequence,
         )
 
     def sign_tx(self, tx: Tx, options: SignOptions) -> Tx:

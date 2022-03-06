@@ -7,6 +7,7 @@ __all__ = ["SoftwareUpgradeProposal", "CancelSoftwareUpgradeProposal"]
 from typing import Optional
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.upgrade.v1beta1 import (
     CancelSoftwareUpgradeProposal as CancelSoftwareUpgradeProposal_pb,
 )
@@ -49,8 +50,13 @@ class SoftwareUpgradeProposal(JSONSerializable):
 
     def to_proto(self) -> SoftwareUpgradeProposal_pb:
         return SoftwareUpgradeProposal_pb(
-            title=self.title, description=self.description, plan=self.plan.to_proto()
+            title=self.title,
+            description=self.description,
+            plan=(self.plan.to_proto() if self.plan else None),
         )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
 
 @attr.s
@@ -80,3 +86,6 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
         return CancelSoftwareUpgradeProposal_pb(
             title=self.title, description=self.description
         )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

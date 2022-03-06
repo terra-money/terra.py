@@ -32,7 +32,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
         """Fetches the validator set for a height. If no height is given, defaults to latest.
 
         Args:
-            height (Optional[int], optional): block height.
+            height (int, optional): block height.
 
         Returns:
             dict: validator set
@@ -44,7 +44,7 @@ class AsyncTendermintAPI(BaseAsyncAPI):
         """Fetches the block information for a given height. If no height is given, defaults to latest block.
 
         Args:
-            height (Optional[int], optional): block height.
+            height (int, optional): block height.
 
         Returns:
             dict: block info

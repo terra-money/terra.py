@@ -26,12 +26,38 @@ class AsyncWallet:
         res = await self.lcd.auth.account_info(self.key.acc_address)
         return {"account_number": res.account_number, "sequence": res.sequence}
 
-    async def create_tx(self, *args, **kwargs) -> Tx:
-        return await self.lcd.tx.create(self.key.acc_address, *args, **kwargs)
+    async def create_tx(self, options: CreateTxOptions) -> Tx:
+        sigOpt = [
+            SignerOptions(
+                address=self.key.acc_address,
+                sequence=options.sequence,
+                public_key=self.key.public_key,
+            )
+        ]
+        return await self.lcd.tx.create(sigOpt, options)
 
-    async def create_and_sign_tx(self, *args, **kwargs) -> Tx:
-        tx = await self.create_tx(*args, **kwargs)
-        return self.key.sign_tx(tx)
+    async def create_and_sign_tx(self, options: CreateTxOptions) -> Tx:
+        account_number = options.account_number
+        sequence = options.sequence
+        if account_number is None or sequence is None:
+            res = await self.account_number_and_sequence()
+            if account_number is None:
+                account_number = res.get("account_number")
+            if sequence is None:
+                sequence = res.get("sequence")
+        options.sequence = sequence
+        options.account_number = account_number
+        return self.key.sign_tx(
+            tx=(await self.create_tx(options)),
+            options=SignOptions(
+                account_number=account_number,
+                sequence=sequence,
+                chain_id=self.lcd.chain_id,
+                sign_mode=options.sign_mode
+                if options.sign_mode
+                else SignMode.SIGN_MODE_DIRECT,
+            ),
+        )
 
 
 class Wallet:

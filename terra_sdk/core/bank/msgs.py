@@ -200,7 +200,7 @@ class MsgMultiSend(Msg):
             "type": self.type_amino,
             "value": {
                 "inputs": [mi.to_amino() for mi in self.inputs],
-                "outputs": [mo.to_amino() for mo in self.inputs],
+                "outputs": [mo.to_amino() for mo in self.outputs],
             },
         }
 

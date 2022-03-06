@@ -40,8 +40,8 @@ def main():
     terra = LocalTerra()
     wallet1 = terra.wallets["test1"]
     wallet2 = terra.wallets["test2"]
-    info1 = wallet1.account_number_and_sequence()
-    info2 = wallet2.account_number_and_sequence()
+    info1 = terra.auth.account_info(wallet1.key.acc_address)
+    info2 = terra.auth.account_info(wallet2.key.acc_address)
 
     inputs = [
         MultiSendInput(
@@ -51,7 +51,7 @@ def main():
         MultiSendInput(
             address=wallet2.key.acc_address,
             coins=Coins(uluna=20000),
-        )
+        ),
     ]
     outputs = [
         MultiSendOutput(
@@ -66,36 +66,32 @@ def main():
 
     msg = MsgMultiSend(inputs, outputs)
 
-    opt = CreateTxOptions(
-        msgs=[msg]
-    )
+    opt = CreateTxOptions(msgs=[msg], memo="memo", gas_prices="0.38uluna")
 
     tx = terra.tx.create(
-        [SignerOptions(
-            address=wallet1.key.acc_address,
-            sequence=info1["sequence"],
-            public_key=wallet1.key.public_key
-        ), SignerOptions(
-            address=wallet2.key.acc_address,
-            sequence = info2["sequence"],
-            public_key = wallet2.key.public_key
-        )],
-        opt
+        [
+            SignerOptions(
+                address=wallet1.key.acc_address, public_key=info1.get_public_key()
+            ),
+            SignerOptions(
+                address=wallet2.key.acc_address, public_key=info2.get_public_key()
+            ),
+        ],
+        opt,
     )
-
 
     signdoc1 = SignDoc(
         chain_id=terra.chain_id,
-        account_number=info1["account_number"],
-        sequence=info1["sequence"],
+        account_number=info1.get_account_number(),
+        sequence=info1.get_sequence(),
         auth_info=tx.auth_info,
         tx_body=tx.body,
     )
 
     signdoc2 = SignDoc(
         chain_id=terra.chain_id,
-        account_number=info2["account_number"],
-        sequence=info2["sequence"],
+        account_number=info2.get_account_number(),
+        sequence=info2.get_sequence(),
         auth_info=tx.auth_info,
         tx_body=tx.body,
     )
@@ -103,7 +99,8 @@ def main():
     sig2 = wallet2.key.create_signature_amino(signdoc2)
     tx.append_signatures([sig1, sig2])
 
-    print(msg.to_amino())
+    print("=======================")
+    print(tx.to_data())
 
     result = terra.tx.broadcast(tx)
     print(f"RESULT:{result}")

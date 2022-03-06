@@ -16,6 +16,7 @@ class AsyncBankAPI(BaseAsyncAPI):
 
         Args:
             address (AccAddress): account address
+            params (APIParams, optional): additional params for the API like pagination
 
         Returns:
             Coins: balance
@@ -29,7 +30,7 @@ class AsyncBankAPI(BaseAsyncAPI):
 
         Returns:
             Coins: total supply
-            Pagination: pagination info
+            params (APIParams, optional): additional params for the API like pagination
         """
         res = await self._c._get("/cosmos/bank/v1beta1/supply", params)
         return Coins.from_data(res.get("supply")), res.get("pagination")

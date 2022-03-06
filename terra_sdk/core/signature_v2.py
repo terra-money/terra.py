@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-import base64
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import attr
 from terra_proto.cosmos.crypto.multisig.v1beta1 import (
@@ -60,7 +59,7 @@ class Descriptor:
         dat = self.single.to_data() if self.single else self.multi.to_data()
         return {typ: dat}
 
-    def to_mode_info_and_signature(self) -> [ModeInfo, bytes]:
+    def to_mode_info_and_signature(self) -> Tuple[ModeInfo, bytes]:
         if self.single is not None:
             sig_data = self.single
             return [ModeInfo(single=ModeInfoSingle(sig_data.mode)), sig_data.signature]
@@ -75,8 +74,12 @@ class Descriptor:
                 signatures.append(sig_bytes)
             pb = MultiSignature_pb(signatures=signatures)
             return [
-                ModeInfo(multi=ModeInfoMulti(sig_data.bitarray, mode_infos)),
-                base64.b64encode(bytes(pb)),
+                ModeInfo(
+                    multi=ModeInfoMulti(
+                        bitarray=sig_data.bitarray, mode_infos=mode_infos
+                    )
+                ),
+                bytes(pb),  # base64.b64encode(bytes(pb)),
             ]
 
         raise ValueError("invalid signature descriptor")

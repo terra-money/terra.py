@@ -1,7 +1,8 @@
 """feegrant module data objects."""
 from __future__ import annotations
 
-import datetime
+from abc import ABC, abstractmethod
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 import attr
@@ -57,6 +58,16 @@ class BasicAllowance(JSONSerializable):
         }
 
     @classmethod
+    def from_amino(cls, amino: dict) -> BasicAllowance:
+        data = amino.get("value")
+        sl = data.get("spend_limit") or None
+        exp = data.get("expiration") or None
+        return cls(
+            spend_limit=Coins.from_amino(sl) if sl else None,
+            expiration=exp if exp else None,
+        )
+
+    @classmethod
     def from_data(cls, data: dict) -> BasicAllowance:
         sl = data.get("spend_limit")
         exp = data.get("expiration")
@@ -69,6 +80,15 @@ class BasicAllowance(JSONSerializable):
         return BasicAllowance_pb(
             spend_limit=self.spend_limit.to_proto() if self.spend_limit else [],
             expiration=self.expiration,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: BasicAllowance_pb) -> BasicAllowance:
+        sl = proto.spend_limit
+        exp = proto.expiration
+        return cls(
+            spend_limit=Coins.from_proto(sl) if sl else None,
+            expiration=exp if exp else None,
         )
 
 
@@ -103,6 +123,17 @@ class PeriodicAllowance(JSONSerializable):
         }
 
     @classmethod
+    def from_amino(cls, amino: dict) -> PeriodicAllowance:
+        data = amino.get("value")
+        return cls(
+            basic=BasicAllowance.from_amino(data.get("basic")),
+            period=int(data.get("period")),
+            period_spend_limit=Coins.from_amino(data.get("period_spend_limit")),
+            period_can_spend=Coins.from_amino(data.get("period_can_spend")),
+            period_reset=data.get("period_reset"),
+        )
+
+    @classmethod
     def from_data(cls, data: dict) -> PeriodicAllowance:
         return cls(
             basic=BasicAllowance.from_data(data["basic"]),
@@ -115,10 +146,20 @@ class PeriodicAllowance(JSONSerializable):
     def to_proto(self) -> PeriodicAllowance_pb:
         return PeriodicAllowance_pb(
             basic=self.basic.to_proto(),
-            period=self.period,
+            period=timedelta(seconds=self.period),
             period_spend_limit=self.period_spend_limit.to_proto(),
             period_can_spend=self.period_can_spend.to_proto(),
             period_reset=self.period_reset,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: PeriodicAllowance_pb) -> PeriodicAllowance:
+        return cls(
+            basic=BasicAllowance.from_proto(proto.basic),
+            period=proto.period.seconds(),
+            period_spend_limit=proto.period_spend_limit,
+            period_can_spend=proto.period_can_spend,
+            period_reset=proto.period_reset,
         )
 
 
@@ -159,7 +200,29 @@ class AllowedMsgAllowance(JSONSerializable):
         )
 
 
-class Allowance:  # (BasicAllowance, PeriodicAllowance):
+class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
+    @property
+    @abstractmethod
+    def type_url(self):
+        pass
+
+    @property
+    @abstractmethod
+    def type_amino(self):
+        pass
+
+    @abstractmethod
+    def to_amino(self) -> dict:
+        pass
+
+    @abstractmethod
+    def to_data(self) -> dict:
+        pass
+
+    @abstractmethod
+    def to_proto(self) -> dict:
+        pass
+
     @classmethod
     def from_data(cls, data: dict):
         if data.get("@type") == BasicAllowance.type_url:

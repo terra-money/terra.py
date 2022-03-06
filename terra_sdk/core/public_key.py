@@ -58,6 +58,16 @@ def amino_pubkey_from_public_key(public_key: PublicKey) -> bytes:
 class PublicKey(JSONSerializable, ABC):
     """Data object holding the public key component of an account or signature."""
 
+    @property
+    @abstractmethod
+    def type_url(self):
+        pass
+
+    @property
+    @abstractmethod
+    def type_amino(self):
+        pass
+
     @abstractmethod
     def get_type(self) -> str:
         return self.type_url
@@ -115,6 +125,14 @@ class PublicKey(JSONSerializable, ABC):
     def to_amino(self) -> dict:
         pass
 
+    @abstractmethod
+    def to_data(self) -> dict:
+        pass
+
+    @abstractmethod
+    def to_proto(self):
+        pass
+
 
 @attr.s
 class SimplePublicKey(PublicKey):
@@ -132,11 +150,11 @@ class SimplePublicKey(PublicKey):
         return {"type": self.type_amino, "value": self.key}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "key": self.key}
+        return {"@type": self.type_url, "key": base64.b64encode(self.key)}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
-        return cls(key=base64.b64decode(data["key"]))
+        return cls(key=data["key"])
 
     @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
@@ -157,7 +175,7 @@ class SimplePublicKey(PublicKey):
         )
         return out
 
-    def raw_address(self) -> str:
+    def raw_address(self) -> bytes:
         return address_from_public_key(self.key)
 
     def address(self) -> str:

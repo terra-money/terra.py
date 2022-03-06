@@ -31,7 +31,7 @@ class SignDoc(JSONSerializable):
             "account_number": str(self.account_number),
             "sequence": str(self.sequence),
             "timeout_height": str(tx.timeout_height)
-            if (tx.timeout_height and tx.timeout_height != 0)
+            if (tx.timeout_height is not None and tx.timeout_height != 0)
             else None,
             "fee": auth.fee.to_amino(),
             "msgs": [msg.to_amino() for msg in tx.messages],
@@ -78,9 +78,8 @@ class SignDoc(JSONSerializable):
         return bytes(self.to_proto())
 
     def to_amino_json(self) -> bytes:
+        amino = self.to_amino()
         return bytes(
-            json.dumps(
-                remove_none(self.to_amino()), sort_keys=True, separators=(",", ":")
-            ),
+            json.dumps(remove_none(amino), sort_keys=True, separators=(",", ":")),
             "utf-8",
         )

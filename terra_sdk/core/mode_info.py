@@ -47,14 +47,14 @@ class ModeInfo(JSONSerializable):
         if self.single:
             return ModeInfo_pb(single=self.single.to_proto())
         else:
-            return ModeInfo_pb(multi=self.multi.to_proto())
+            return ModeInfo_pb(multi=(self.multi.to_proto() if self.multi else None))
 
     @classmethod
     def from_proto(cls, proto: ModeInfo_pb) -> ModeInfo:
-        if proto["single"]:
-            return ModeInfo(single=ModeInfoSingle.from_proto(proto["single"]))
+        if proto.single is not None:
+            return ModeInfo(single=ModeInfoSingle.from_proto(proto.single))
         else:
-            return ModeInfo(multi=ModeInfoMulti.from_proto(proto["multi"]))
+            return ModeInfo(multi=ModeInfoMulti.from_proto(proto.multi))
 
 
 @attr.s
@@ -84,13 +84,22 @@ class ModeInfoMulti(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfoMulti:
-        return cls(data["bitarray"], data["mode_infos"])
+        return cls(
+            CompactBitArray.from_data(data["bitarray"]),
+            [ModeInfo.from_data(d) for d in data["mode_infos"]],
+        )
+
+    def to_data(self) -> dict:
+        return {
+            "bitarray": self.bitarray.to_data(),
+            "mode_infos": [mi.to_data() for mi in self.mode_infos],
+        }
 
     def to_proto(self) -> ModeInfoMulti_pb:
-        proto = ModeInfoMulti_pb()
-        proto.bitarray = self.bitarray.to_proto()
-        proto.mode_infos = [mi.to_proto() for mi in self.mode_infos]
-        return proto
+        return ModeInfoMulti_pb(
+            bitarray=self.bitarray.to_proto(),
+            mode_infos=[mi.to_proto() for mi in self.mode_infos],
+        )
 
     @classmethod
     def from_proto(cls, proto: ModeInfoMulti_pb) -> ModeInfoMulti:
