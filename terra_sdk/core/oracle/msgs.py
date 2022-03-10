@@ -211,7 +211,7 @@ class MsgAggregateExchangeRateVote(Msg):
         cls, proto: MsgAggregateExchangeRateVote_pb
     ) -> MsgAggregateExchangeRateVote:
         return cls(
-            exchange_rates=Coins.from_proto(proto.exchange_rates),
+            exchange_rates=Coins.from_str(proto.exchange_rates),
             salt=proto.salt,
             feeder=proto.feeder,
             validator=proto.validator,

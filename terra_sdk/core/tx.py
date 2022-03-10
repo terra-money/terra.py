@@ -91,16 +91,17 @@ class Tx(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: Tx_pb) -> Tx:
-        ptx = proto.to_dict()
         return cls(
-            TxBody.from_proto(ptx["body"]),
-            AuthInfo.from_proto(ptx["authInfo"]),
-            ptx["signatures"],
+            TxBody.from_proto(proto.body),
+            AuthInfo.from_proto(proto.auth_info),
+            proto.signatures
         )
 
     @classmethod
-    def from_bytes(cls, txb: bytes) -> Tx_pb:
-        return Tx_pb().parse(txb)
+    def from_bytes(cls, txb: bytes) -> Tx:
+        proto = Tx_pb().parse(txb)
+        c = cls.from_proto(proto)
+        return c
 
     def append_empty_signatures(self, signers: List[SignerData]):
         for signer in signers:
@@ -188,7 +189,7 @@ class TxBody(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: TxBody_pb) -> TxBody:
         return cls(
-            [parse_proto(m) for m in proto["messages"]],
+            [parse_proto(m) for m in proto.messages],
             proto.memo,
             proto.timeout_height,
         )
@@ -229,10 +230,10 @@ class AuthInfo(JSONSerializable):
         )
 
     @classmethod
-    def from_proto(cls, proto: TxBody_pb) -> AuthInfo:
+    def from_proto(cls, proto: AuthInfo_pb) -> AuthInfo:
         return cls(
-            [SignerInfo.from_proto(m) for m in proto["signer_infos"]],
-            Fee.from_proto(proto["fee"]),
+            [SignerInfo.from_proto(m) for m in proto.signer_infos],
+            Fee.from_proto(proto.fee),
         )
 
 
@@ -274,9 +275,9 @@ class SignerInfo(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: SignerInfo_pb) -> SignerInfo:
         return cls(
-            public_key=PublicKey.from_proto(proto["public_key"]),
-            mode_info=ModeInfo.from_proto(proto["mode_info"]),
-            sequence=proto["sequence"],
+            public_key=PublicKey.from_proto(proto.public_key),
+            mode_info=ModeInfo.from_proto(proto.mode_info),
+            sequence=proto.sequence,
         )
 
 

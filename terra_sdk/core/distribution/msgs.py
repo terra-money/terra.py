@@ -21,7 +21,7 @@ from terra_sdk.core.msg import Msg
 
 __all__ = [
     "MsgSetWithdrawAddress",
-    "MsgWithdrawDelegationReward",
+    "MsgWithdrawDelegatorReward",
     "MsgWithdrawValidatorCommission",
     "MsgFundCommunityPool",
 ]
@@ -84,7 +84,7 @@ class MsgSetWithdrawAddress(Msg):
 
 
 @attr.s
-class MsgWithdrawDelegationReward(Msg):
+class MsgWithdrawDelegatorReward(Msg):
     """Withdraw rewards for a delegation specified by a (delegator, validator) pair.
 
     Args:
@@ -119,7 +119,7 @@ class MsgWithdrawDelegationReward(Msg):
         }
 
     @classmethod
-    def from_data(cls, data: dict) -> MsgWithdrawDelegationReward:
+    def from_data(cls, data: dict) -> MsgWithdrawDelegatorReward:
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
@@ -134,7 +134,7 @@ class MsgWithdrawDelegationReward(Msg):
     @classmethod
     def from_proto(
         cls, data: MsgWithdrawDelegatorReward_pb
-    ) -> MsgWithdrawDelegationReward:
+    ) -> MsgWithdrawDelegatorReward:
         return cls(
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],

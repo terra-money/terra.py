@@ -59,6 +59,14 @@ class MsgGrantAllowance(Msg):
             allowance=self.allowance.to_proto(),
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgGrantAllowance_pb) -> MsgGrantAllowance:
+        return cls(
+            granter=proto.granter,
+            grantee=proto.grantee,
+            allowance=Allowance.from_proto(proto.allowance),
+        )
+
 
 @attr.s
 class MsgRevokeAllowance(Msg):
@@ -84,3 +92,7 @@ class MsgRevokeAllowance(Msg):
 
     def to_proto(self) -> MsgRevokeAllowance_pb:
         return MsgRevokeAllowance_pb(granter=self.granter, grantee=self.grantee)
+
+    @classmethod
+    def from_proto(cls, proto: MsgRevokeAllowance_pb) -> MsgRevokeAllowance:
+        return cls(granter=proto.granter, grantee=proto.grantee)

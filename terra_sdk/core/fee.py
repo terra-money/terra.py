@@ -61,10 +61,10 @@ class Fee(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: Fee_pb) -> Fee:
         return cls(
-            gas_limit=proto["gas_limit"],
-            amount=Coins.from_proto(proto["amount"]),
-            payer=proto["payer"],
-            granter=proto["granter"],
+            gas_limit=proto.gas_limit,
+            amount=Coins.from_proto(proto.amount),
+            payer=proto.payer,
+            granter=proto.granter,
         )
 
     @property

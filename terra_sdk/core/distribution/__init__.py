@@ -1,7 +1,7 @@
 from .msgs import (
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
-    MsgWithdrawDelegationReward,
+    MsgWithdrawDelegatorReward,
     MsgWithdrawValidatorCommission,
 )
 from .proposals import CommunityPoolSpendProposal
@@ -9,7 +9,7 @@ from .proposals import CommunityPoolSpendProposal
 __all__ = [
     "MsgFundCommunityPool",
     "MsgSetWithdrawAddress",
-    "MsgWithdrawDelegationReward",
+    "MsgWithdrawDelegatorReward",
     "MsgWithdrawValidatorCommission",
     "CommunityPoolSpendProposal",
 ]

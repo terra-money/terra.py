@@ -19,6 +19,7 @@ from terra_proto.cosmos.staking.v1beta1 import (
 from terra_proto.cosmos.staking.v1beta1 import (
     StakeAuthorizationValidators as StakeAuthorizationValidators_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coin, Coins
 from terra_sdk.util.base import BaseTerraData
@@ -42,6 +43,12 @@ class Authorization(BaseTerraData):
         from terra_sdk.util.parse_authorization import parse_authorization
 
         return parse_authorization(data)
+
+    @staticmethod
+    def from_proto(proto: Any_pb) -> Authorization:
+        from terra_sdk.util.parse_authorization import parse_authorization_proto
+
+        return parse_authorization_proto(proto)
 
 
 @attr.s
@@ -75,6 +82,10 @@ class SendAuthorization(Authorization):
     def to_proto(self) -> SendAuthorization_pb:
         return SendAuthorization_pb(spend_limit=self.spend_limit.to_proto())
 
+    @classmethod
+    def from_proto(cls, proto: SendAuthorization_pb) -> SendAuthorization:
+        return cls(spend_limit=Coins.from_proto(proto.spend_limit))
+
 
 @attr.s
 class GenericAuthorization(Authorization):
@@ -101,6 +112,10 @@ class GenericAuthorization(Authorization):
 
     def to_proto(self) -> GenericAuthorization_pb:
         return GenericAuthorization_pb(msg=self.msg)
+
+    @classmethod
+    def from_proto(cls, proto: GenericAuthorization_pb) -> GenericAuthorization:
+        return cls(msg=proto.msg)
 
 
 @attr.s
@@ -138,6 +153,13 @@ class AuthorizationGrant(JSONSerializable):
             expiration=self.expiration,
         )
 
+    @classmethod
+    def from_proto(cls, proto: Grant_pb) -> AuthorizationGrant:
+        return cls(
+            authorization=Authorization.from_proto(proto.authorization),
+            expiration=parser.parse(proto.expiration),
+        )
+
 
 @attr.s
 class StakeAuthorizationValidators(JSONSerializable):
@@ -155,6 +177,10 @@ class StakeAuthorizationValidators(JSONSerializable):
 
     def to_proto(self):
         return StakeAuthorizationValidators_pb(address=self.address)
+
+    @classmethod
+    def from_proto(cls, proto: StakeAuthorizationValidators_pb) -> StakeAuthorizationValidators:
+        return cls(address=proto.address)
 
 
 @attr.s
@@ -199,4 +225,19 @@ class StakeAuthorization(Authorization):
             max_tokens=self.max_tokens.to_proto() if self.max_tokens else None,
             allow_list=self.allow_list.to_proto() if self.allow_list else None,
             deny_list=self.deny_list.to_proto() if self.deny_list else None,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: StakeAuthorization_pb) -> StakeAuthorization:
+        return StakeAuthorization(
+            authorization_type=proto.authorization_type,
+            max_tokens=Coins.from_proto(proto.max_tokens)
+            if proto.max_tokens
+            else None,
+            allow_list=StakeAuthorizationValidators.from_proto(proto.allow_list)
+            if proto.allow_list
+            else None,
+            deny_list=StakeAuthorizationValidators.from_proto(proto.deny_list)
+            if proto.deny_list
+            else None,
         )
