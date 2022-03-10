@@ -4,7 +4,7 @@ from terra_sdk.core import Coin, Coins
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
-    MsgWithdrawDelegationReward,
+    MsgWithdrawDelegatorReward,
     MsgWithdrawValidatorCommission,
 )
 
@@ -25,7 +25,7 @@ def main():
     msgWCom = MsgWithdrawValidatorCommission(
         validator_address="terravaloper1dcegyrekltswvyy0xy69ydgxn9x8x32zdy3ua5"
     )
-    msgWDel = MsgWithdrawDelegationReward(
+    msgWDel = MsgWithdrawDelegatorReward(
         delegator_address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
         validator_address="terravaloper1dcegyrekltswvyy0xy69ydgxn9x8x32zdy3ua5",
     )
