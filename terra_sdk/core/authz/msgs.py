@@ -65,6 +65,14 @@ class MsgExecAuthorized(Msg):
             grantee=proto.grantee, msgs=[Msg.from_proto(md) for md in proto.msgs]
         )
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgExecAuthorized:
+        value = amino["value"]
+        return cls(
+            grantee=value["grantee"],
+            msgs=[Msg.from_amino(msg) for msg in value["msgs"]]
+        )
+
 
 @attr.s
 class MsgGrantAuthorization(Msg):
