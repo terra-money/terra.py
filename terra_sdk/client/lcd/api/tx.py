@@ -276,6 +276,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             SyncTxBroadcastResult: result
         """
         res = await self._broadcast(tx, "BROADCAST_MODE_SYNC", options)
+        res = res.get("tx_response")
         return SyncTxBroadcastResult(
             txhash=res.get("txhash"),
             raw_log=res.get("raw_log"),
@@ -296,6 +297,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             AsyncTxBroadcastResult: result
         """
         res = await self._broadcast(tx, "BROADCAST_MODE_ASYNC", options)
+        res = res.get("tx_response")
         return AsyncTxBroadcastResult(
             txhash=res.get("txhash"),
         )
