@@ -136,6 +136,15 @@ class MsgGrantAuthorization(Msg):
             grant=AuthorizationGrant.from_proto(proto.grant)
         )
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgGrantAuthorization:
+        value = amino["value"]
+        return cls(
+            grantee=value["grantee"],
+            granter=value["granter"],
+            grant=AuthorizationGrant.from_amino(value["grant"])
+        )
+
 
 @attr.s
 class MsgRevokeAuthorization(Msg):
@@ -164,6 +173,14 @@ class MsgRevokeAuthorization(Msg):
                 "grantee": self.grantee,
                 "msg_type_url": self.msg_type_url,
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "msg_type_url": self.msg_type_url,
         }
 
     @classmethod

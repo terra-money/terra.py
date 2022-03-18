@@ -36,3 +36,12 @@ def create_demux_proto(inputs: [str, List]) -> Callable[[Dict[str, Any]], Any]:
         return table[data.type_url](data.value)
 
     return from_proto
+
+
+def create_demux_amino(inputs: List) -> Callable[[Dict[str, Any]], Any]:
+    table = {i.type_amino: i.from_amino for i in inputs}
+
+    def from_amino(data: dict):
+        return table[data["type"]](data)
+
+    return from_amino

@@ -187,7 +187,7 @@ class MsgAggregateExchangeRateVote(Msg):
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
         d["exchange_rates"] = str(self.exchange_rates.to_dec_coins())
-        return {"type": self.type, "value": dict_to_data(d)}
+        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgAggregateExchangeRateVote:

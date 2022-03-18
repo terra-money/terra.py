@@ -39,6 +39,12 @@ class Authorization(BaseTerraData):
     """Base class for authorization types."""
 
     @staticmethod
+    def from_amino(amino: dict) -> Authorization:
+        from terra_sdk.util.parse_authorization import parse_authorization_amino
+
+        return parse_authorization_amino(amino)
+
+    @staticmethod
     def from_data(data: dict) -> Authorization:
         from terra_sdk.util.parse_authorization import parse_authorization
 
@@ -86,6 +92,12 @@ class SendAuthorization(Authorization):
     def from_proto(cls, proto: SendAuthorization_pb) -> SendAuthorization:
         return cls(spend_limit=Coins.from_proto(proto.spend_limit))
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> SendAuthorization:
+        value = amino["value"]
+        return cls(spend_limit=Coins.from_amino(value["spend_limit"]))
+
+
 
 @attr.s
 class GenericAuthorization(Authorization):
@@ -116,6 +128,11 @@ class GenericAuthorization(Authorization):
     @classmethod
     def from_proto(cls, proto: GenericAuthorization_pb) -> GenericAuthorization:
         return cls(msg=proto.msg)
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> SendAuthorization:
+        value = amino["value"]
+        return cls(msg=value["msg"])
 
 
 @attr.s
@@ -158,6 +175,14 @@ class AuthorizationGrant(JSONSerializable):
         return cls(
             authorization=Authorization.from_proto(proto.authorization),
             expiration=parser.parse(proto.expiration),
+        )
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> AuthorizationGrant:
+        value = amino["value"]
+        return cls(
+            authorization=Authorization.from_amino(amino["authorization"]),
+            expiration=amino["expiration"]
         )
 
 

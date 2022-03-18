@@ -46,6 +46,14 @@ class MsgSubmitProposal(Msg):
             },
         }
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "content": self.content.to_data(),
+            "initial_deposit": self.initial_deposit.to_data(),
+            "proposer": self.proposer
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
         from terra_sdk.util.parse_content import parse_content
@@ -108,12 +116,10 @@ class MsgDeposit(Msg):
 
     def to_data(self) -> dict:
         return {
-            "type": self.type,
-            "value": {
-                "proposal_id": str(self.proposal_id),
-                "depositor": self.depositor,
-                "amount": self.amount.to_data(),
-            },
+            "@type": self.type_url,
+            "proposal_id": str(self.proposal_id),
+            "depositor": self.depositor,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -197,16 +203,6 @@ class MsgVote(Msg):
                 "proposal_id": str(self.proposal_id),
                 "voter": self.voter,
                 "option": self.option.name,
-            },
-        }
-
-    def to_data(self) -> dict:
-        return {
-            "type": self.type,
-            "value": {
-                "proposal_id": str(self.proposal_id),
-                "voter": self.voter,
-                "option": self.option,
             },
         }
 

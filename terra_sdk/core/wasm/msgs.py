@@ -111,7 +111,7 @@ class MsgMigrateCode(Msg):
         d["sender"] = str(d["sender"])
         d["code_id"] = str(d["code_id"])
         d["wasm_byte_code"] = str(d["wasm_byte_code"])
-        return {"type": self.type, "value": dict_to_data(d)}
+        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateCode:
@@ -173,7 +173,7 @@ class MsgInstantiateContract(Msg):
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
         d["code_id"] = str(d["code_id"])
-        return {"type": self.type, "value": dict_to_data(d)}
+        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgInstantiateContract:
@@ -300,7 +300,7 @@ class MsgMigrateContract(Msg):
 
     def to_data(self) -> dict:
         d = copy.deepcopy(self.__dict__)
-        return {"type": self.type, "value": dict_to_data(d)}
+        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateContract:
