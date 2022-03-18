@@ -75,12 +75,13 @@ class PublicKey(JSONSerializable, ABC):
     @classmethod
     def from_proto(cls, proto: Any_pb):
         type_url = proto.type_url
+        value = proto.value
         if type_url == SimplePublicKey.type_url:
-            return SimplePublicKey.from_proto(proto)
+            return SimplePublicKey.from_proto(SimplePubKey_pb().parse(value))
         elif type_url == ValConsPubKey.type_url:
-            return ValConsPubKey.from_proto(proto)
+            return ValConsPubKey.from_proto(ValConsPubKey_pb().parse(value))
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
-            return LegacyAminoMultisigPublicKey.from_proto(proto)
+            return LegacyAminoMultisigPublicKey.from_proto(LegacyAminoPubKey_pb().parse(value))
         raise TypeError("could not marshal PublicKey: type is incorrect")
 
     @classmethod
@@ -157,6 +158,10 @@ class SimplePublicKey(PublicKey):
         return cls(key=data["key"])
 
     @classmethod
+    def from_proto(cls, proto: SimplePubKey_pb) -> SimplePublicKey:
+        return cls(key=proto.key)
+
+    @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
         return cls(key=amino["value"])
 
@@ -207,6 +212,10 @@ class ValConsPubKey(PublicKey):
     @classmethod
     def from_amino(cls, amino: dict) -> ValConsPubKey:
         return cls(key=amino["value"]["key"])
+
+    @classmethod
+    def from_proto(cls, proto: ValConsPubKey_pb) -> ValConsPubKey:
+        return cls(key=proto.key)
 
     def get_type(self) -> str:
         return self.type_url
@@ -259,6 +268,11 @@ class LegacyAminoMultisigPublicKey(PublicKey):
     @classmethod
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
         return cls(threshold=data["threshold"], public_keys=data["public_keys"])
+
+    @classmethod
+    def from_proto(cls, proto: LegacyAminoPubKey_pb) -> LegacyAminoMultisigPublicKey:
+        return cls(threshold=proto.threshold, public_keys=[SimplePublicKey.from_proto(pk) for pk in proto.public_keys])
+
 
     @classmethod
     def from_amino(cls, amino: dict) -> LegacyAminoMultisigPublicKey:

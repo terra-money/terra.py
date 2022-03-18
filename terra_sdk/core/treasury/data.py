@@ -8,10 +8,11 @@ import attr
 from terra_proto.terra.treasury.v1beta1 import PolicyConstraints as PolicyConstraints_pb
 
 from terra_sdk.core import Coin, Dec
+from terra_sdk.util.json import JSONSerializable
 
 
 @attr.s
-class PolicyConstraints:
+class PolicyConstraints(JSONSerializable):
     """Contains information about tax reward or reward weight
     policy constraints.
     """

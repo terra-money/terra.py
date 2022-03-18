@@ -73,7 +73,7 @@ class ModeInfoSingle(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: ModeInfoSingle_pb) -> ModeInfoSingle:
-        mode = SignMode.from_string(proto["mode"])
+        mode = SignMode(proto.mode)
         return cls(mode=mode)
 
 

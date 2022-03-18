@@ -46,6 +46,14 @@ class MsgSubmitProposal(Msg):
             },
         }
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "content": self.content.to_data(),
+            "initial_deposit": self.initial_deposit.to_data(),
+            "proposer": self.proposer
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgSubmitProposal:
         from terra_sdk.util.parse_content import parse_content
@@ -66,8 +74,10 @@ class MsgSubmitProposal(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
+        from terra_sdk.util.parse_content import parse_content_proto
+        content = parse_content_proto(proto.content)
         return cls(
-            content=Content.from_proto(proto["content"]),
+            content=content,
             initial_deposit=Coins.from_proto(proto["initial_deposit"]),
             proposer=proto["proposer"],
         )
@@ -106,12 +116,10 @@ class MsgDeposit(Msg):
 
     def to_data(self) -> dict:
         return {
-            "type": self.type,
-            "value": {
-                "proposal_id": str(self.proposal_id),
-                "depositor": self.depositor,
-                "amount": self.amount.to_data(),
-            },
+            "@type": self.type_url,
+            "proposal_id": str(self.proposal_id),
+            "depositor": self.depositor,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -198,16 +206,6 @@ class MsgVote(Msg):
             },
         }
 
-    def to_data(self) -> dict:
-        return {
-            "type": self.type,
-            "value": {
-                "proposal_id": str(self.proposal_id),
-                "voter": self.voter,
-                "option": self.option,
-            },
-        }
-
     @classmethod
     def from_data(cls, data: dict) -> MsgVote:
         return cls(
@@ -224,7 +222,7 @@ class MsgVote(Msg):
     @classmethod
     def from_proto(cls, proto: MsgVote_pb) -> MsgVote:
         return cls(
-            proposal_id=proto["proposal_id"],
-            voter=proto["voter"],
-            option=proto["option"],
+            proposal_id=proto.proposal_id,
+            voter=proto.voter,
+            option=proto.option
         )

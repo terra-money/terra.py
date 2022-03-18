@@ -59,6 +59,20 @@ class MsgExecAuthorized(Msg):
     def to_proto(self) -> MsgExec_pb:
         return MsgExec_pb(grantee=self.grantee, msgs=[m.pack_any() for m in self.msgs])
 
+    @classmethod
+    def from_proto(cls, proto: MsgExec_pb) -> MsgExecAuthorized:
+        return cls(
+            grantee=proto.grantee, msgs=[Msg.from_proto(md) for md in proto.msgs]
+        )
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgExecAuthorized:
+        value = amino["value"]
+        return cls(
+            grantee=value["grantee"],
+            msgs=[Msg.from_amino(msg) for msg in value["msgs"]]
+        )
+
 
 @attr.s
 class MsgGrantAuthorization(Msg):
@@ -114,6 +128,23 @@ class MsgGrantAuthorization(Msg):
             granter=self.granter, grantee=self.grantee, grant=self.grant.to_proto()
         )
 
+    @classmethod
+    def from_proto(cls, proto: MsgGrant_pb) -> MsgGrantAuthorization:
+        return cls(
+            granter=proto.granter,
+            grantee=proto.grantee,
+            grant=AuthorizationGrant.from_proto(proto.grant)
+        )
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgGrantAuthorization:
+        value = amino["value"]
+        return cls(
+            grantee=value["grantee"],
+            granter=value["granter"],
+            grant=AuthorizationGrant.from_amino(value["grant"])
+        )
+
 
 @attr.s
 class MsgRevokeAuthorization(Msg):
@@ -144,6 +175,14 @@ class MsgRevokeAuthorization(Msg):
             },
         }
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "msg_type_url": self.msg_type_url,
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgRevokeAuthorization:
         return cls(
@@ -155,4 +194,12 @@ class MsgRevokeAuthorization(Msg):
     def to_proto(self) -> MsgRevoke_pb:
         return MsgRevoke_pb(
             granter=self.granter, grantee=self.grantee, msg_type_url=self.msg_type_url
+        )
+
+    @classmethod
+    def from_proto(cls, proto: MsgRevoke_pb) -> MsgRevokeAuthorization:
+        return cls(
+            granter=proto.granter,
+            grantee=proto.grantee,
+            msg_type_url=proto.msg_type_url,
         )

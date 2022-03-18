@@ -69,6 +69,14 @@ class TallyResult(JSONSerializable):
             "no_with_veto": self.no_with_veto,
         }
 
+    def to_data(self) -> dict:
+        return {
+            "yes": self.yes,
+            "abstain": self.abstain,
+            "no": self.no,
+            "no_with_veto": self.no_with_veto,
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> TallyResult:
         return cls(
@@ -172,6 +180,9 @@ class WeightedVoteOption(JSONSerializable):
     def to_amino(self) -> dict:
         return {"weight": self.weight, "option": self.option.name}
 
+    def to_data(self) -> dict:
+        return {"weight": self.weight, "option": self.option.name}
+
     @classmethod
     def from_data(cls, data: dict) -> WeightedVoteOption:
         return cls(option=data["option"], weight=data["weight"])
@@ -191,6 +202,13 @@ class Vote(JSONSerializable):
             "proposal_id": str(self.proposal_id),
             "voter": self.voter,
             "options": [opt.to_amino() for opt in self.options],
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "proposal_id": str(self.proposal_id),
+            "voter": self.voter,
+            "options": [opt.to_data() for opt in self.options],
         }
 
     @classmethod

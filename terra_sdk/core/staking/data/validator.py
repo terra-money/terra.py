@@ -38,6 +38,13 @@ class CommissionRates(JSONSerializable):
             "max_change_rate": str(self.max_change_rate),
         }
 
+    def to_data(self) -> dict:
+        return {
+            "rate": self.rate.to_data(),
+            "max_rate": self.max_rate.to_data(),
+            "max_change_rate": self.max_change_rate.to_data(),
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> CommissionRates:
         return cls(
@@ -78,6 +85,12 @@ class Commission(JSONSerializable):
             "update_time": to_isoformat(self.update_time),
         }
 
+    def to_amino(self) -> dict:
+        return {
+            "commission_rates": self.commission_rates.to_data(),
+            "update_time": to_isoformat(self.update_time),
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> Commission:
         return cls(
@@ -114,6 +127,15 @@ class Description(JSONSerializable):
     security_contact: str = attr.ib(default="")
 
     def to_amino(self) -> dict:
+        return {
+            "moniker": self.moniker,
+            "identity": self.identity,
+            "website": self.website,
+            "details": self.details,
+            "security_contact": self.security_contact,
+        }
+
+    def to_data(self) -> dict:
         return {
             "moniker": self.moniker,
             "identity": self.identity,

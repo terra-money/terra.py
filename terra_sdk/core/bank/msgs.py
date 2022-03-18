@@ -69,9 +69,9 @@ class MsgSend(Msg):
     @classmethod
     def from_proto(cls, proto: MsgSend_pb) -> MsgSend:
         return cls(
-            from_address=proto["from_address"],
-            to_address=proto["to_address"],
-            amount=Coins.from_proto(proto["amount"]),
+            from_address=proto.from_address,
+            to_address=proto.to_address,
+            amount=Coins.from_proto(proto.amount),
         )
 
     def to_proto(self) -> MsgSend_pb:
