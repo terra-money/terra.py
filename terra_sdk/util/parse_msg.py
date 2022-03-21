@@ -61,6 +61,9 @@ from terra_sdk.core.feegrant import (
     MsgGrantAllowance,
     MsgRevokeAllowance
 )
+from terra_sdk.core.crisis import (
+    MsgVerifyInvariant
+)
 
 # proto
 from terra_proto.cosmos.authz.v1beta1 import MsgExec as MsgExec_pb
@@ -157,6 +160,7 @@ from terra_proto.terra.wasm.v1beta1 import MsgStoreCode as MsgStoreCode_pb
 from terra_proto.terra.wasm.v1beta1 import (
     MsgUpdateContractAdmin as MsgUpdateContractAdmin_pb,
 )
+from terra_proto.cosmos.crisis.v1beta1 import MsgVerifyInvariant as MsgVerifyInvariant_pb
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
@@ -219,6 +223,9 @@ ibc_msgs = [
     MsgTimeout,
     MsgAcknowledgement,
 ]
+crisis_msgs = [
+    MsgVerifyInvariant
+]
 
 parse_msg = create_demux(
     [
@@ -234,6 +241,7 @@ parse_msg = create_demux(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
+        *crisis_msgs
     ]
 )
 
@@ -312,6 +320,9 @@ ibc_protos = [
     [MsgTimeout.type_url, MsgTimeout_pb],
     [MsgAcknowledgement.type_url, MsgAcknowledgement_pb],
 ]
+crisis_protos = [
+    [MsgVerifyInvariant.type_url, MsgVerifyInvariant_pb]
+]
 
 parse_proto = create_demux_proto(
     [
@@ -327,5 +338,6 @@ parse_proto = create_demux_proto(
         *wasm_protos,
         *ibc_protos,
         *ibc_transfer_protos,
+        *crisis_protos,
     ]
 )
