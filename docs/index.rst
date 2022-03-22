@@ -55,6 +55,7 @@ Unfamiliar with Terra? → `Check out Terra Docs <https://docs.terra.money>`_
     core_modules/auth
     core_modules/authz
     core_modules/bank
+    core_modules/crisis
     core_modules/distribution
     core_modules/gov
     core_modules/market
