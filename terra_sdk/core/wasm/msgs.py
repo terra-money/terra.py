@@ -5,7 +5,7 @@ from __future__ import annotations
 import base64
 import copy
 import json
-from typing import Optional
+from typing import Optional, Union
 
 import attr
 from terra_proto.terra.wasm.v1beta1 import (
@@ -224,7 +224,7 @@ class MsgExecuteContract(Msg):
 
     sender: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
-    execute_msg: dict = attr.ib()
+    execute_msg: Union[dict,str] = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
     def to_amino(self) -> dict:
