@@ -146,7 +146,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         chain ID, account number, sequence and fee estimation.
 
         Args:
-            signers (List[SingerOptions]): options about signers
+            signers (List[SignerOptions]): options about signers
             options (CreateTxOptions): options about creating a tx
 
         Returns:
