@@ -95,7 +95,7 @@ class WasmAPI(AsyncWasmAPI):
     contract_info.__doc__ = AsyncWasmAPI.contract_info.__doc__
 
     @sync_bind(AsyncWasmAPI.contract_query)
-    def contract_query(self, contract_address: str, query_msg: dict) -> Any:
+    def contract_query(self, contract_address: str, query: Union[dict, str]) -> Any:
         pass
 
     contract_query.__doc__ = AsyncWasmAPI.contract_query.__doc__
