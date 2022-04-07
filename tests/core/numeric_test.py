@@ -1,6 +1,6 @@
-import pytest
-
 from terra_sdk.core import Dec
+from decimal import Decimal
+import pytest
 
 
 def test_deserializes():
@@ -87,3 +87,19 @@ def test_cosmos_arithmetic(d1, d2, mul, quo, add, sub):
     assert d1 + d2 == add
     assert d1.sub(d2) == sub
     assert d1 - d2 == sub
+
+
+def test_decimal_fraction():
+    v1 = Decimal("1.001") / Decimal("1.01")
+    v2 = Decimal("1.001") / Dec("1.01")
+    v3 = Dec("1.001") / Decimal("1.01")
+    v4 = Dec("1.001") / Dec("1.01")
+    expected = Decimal("0.9910891089108910891089108911")
+    # compare calculated Decimal from outside with Dec from inside
+    assert v1 == v2
+    assert v1 == v3
+    assert v1 == v4
+    # compare predefined Decimal with Dec
+    assert expected == v2
+    assert expected == v3
+    assert expected == v4

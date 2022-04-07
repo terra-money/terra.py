@@ -11,15 +11,15 @@ from terra_sdk.util.json import JSONSerializable
 DEC_NUM_DIGITS = 18
 """Number of digits for Decimal."""
 
-DEC_ONE = 10**DEC_NUM_DIGITS
+DEC_ONE = 10 ** DEC_NUM_DIGITS
 DEC_PATTERN = re.compile(r"^(\-)?(\d+)(\.(\d+))?\Z")
 
 __all__ = ["DEC_NUM_DIGITS", "Dec", "Numeric"]
 
 
 def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
-    if isinstance(arg, int):
-        return arg * DEC_ONE
+    if isinstance(arg, int) or isinstance(arg, Decimal):
+        return int(arg * DEC_ONE)
     if isinstance(arg, float):
         arg = str("%f" % arg)
     if isinstance(arg, str):
@@ -33,10 +33,6 @@ def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
         if parts.group(1):
             result *= -1
         return result
-    elif isinstance(arg, Decimal):
-        whole = int(arg)
-        fraction = int(arg % 1)
-        return int((whole * DEC_ONE) + (fraction * DEC_ONE))
     else:
         raise TypeError(
             f"Unable to parse Dec integer representation from given argument {arg}"
