@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from terra_proto.cosmos.crisis.v1beta1 import MsgVerifyInvariant as MsgVerifyInvariant_pb
+from terra_proto.cosmos.crisis.v1beta1 import (
+    MsgVerifyInvariant as MsgVerifyInvariant_pb,
+)
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
@@ -16,7 +18,7 @@ import attr
 
 @attr.s
 class MsgVerifyInvariant(Msg):
-    """ MsgVerifyInvariant represents a message to verify a particular invariance.
+    """MsgVerifyInvariant represents a message to verify a particular invariance.
 
     Args:
         sender: address of the sender
@@ -34,21 +36,14 @@ class MsgVerifyInvariant(Msg):
     invariant_route: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {
-            "type": self.type_amino,
-            "value": {
-                "sender": self.sender,
-                "invariant_module_name": self.invariant_module_name,
-                "invariant_route": self.invariant_route
-            },
-        }
+        raise Exception("MsgVerifyInvarant is not allowed to send")
 
     @classmethod
     def from_data(cls, data: dict) -> MsgVerifyInvariant:
         return cls(
             sender=data["sender"],
             invariant_module_name=data["invariant_module_name"],
-            invariant_route=data["invariant_route"]
+            invariant_route=data["invariant_route"],
         )
 
     def to_data(self) -> dict:
@@ -56,7 +51,7 @@ class MsgVerifyInvariant(Msg):
             "@type": self.type_url,
             "sender": self.sender,
             "invariant_module_name": self.invariant_module_name,
-            "invariant_route": self.invariant_route
+            "invariant_route": self.invariant_route,
         }
 
     @classmethod
@@ -64,15 +59,11 @@ class MsgVerifyInvariant(Msg):
         return cls(
             sender=proto.sender,
             invariant_module_name=proto.invariant_module_name,
-            invariant_route=proto.invariant_route
+            invariant_route=proto.invariant_route,
         )
 
     def to_proto(self) -> MsgVerifyInvariant_pb:
-        return MsgVerifyInvariant_pb(
-            sender=self.sender,
-            invariant_module_name=self.invariant_module_name,
-            invariant_route=self.invariant_route
-        )
+        raise Exception("MsgVerifyInvarant is not allowed to send")
 
     @classmethod
     def unpack_any(cls, any: Any) -> MsgVerifyInvariant:
