@@ -310,7 +310,10 @@ class Dec(JSONSerializable):
         return Dec(divisor).div(self)
 
     def __floordiv__(self, divisor):
-        return self.div(int(divisor))
+        return Dec(chop_precision_and_round(self.div(divisor).sub(0.5)._i))
+
+    def __rfloordiv__(self, divisor):
+        return Dec(chop_precision_and_round(divisor / self.sub(0.5)._i))
 
     def mod(self, modulo: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs modulus. ``modulo`` is first converted into Dec.
@@ -321,7 +324,7 @@ class Dec(JSONSerializable):
         Returns:
             Dec: modulus
         """
-        return self.sub(self.div(modulo).mul(self))
+        return self.sub(self.__floordiv__(modulo).mul(modulo))
 
     def __mod__(self, modulo) -> Dec:
         return self.mod(modulo)
