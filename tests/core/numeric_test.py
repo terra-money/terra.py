@@ -121,3 +121,19 @@ def test_decimal_sign():
     # assert negate operator works
     assert abs(Dec("-1")) == 1
     assert abs(Dec("1")) == 1
+
+
+def test_divide():
+    assert (Dec(2) / Dec(3)) > 0
+    assert (Dec(2).__rtruediv__(Dec(3))) > 0
+    assert (Dec(2) // Dec(3)) == 0
+    assert (Dec(2).__rfloordiv__(Dec(3))) == 0
+    assert (Dec(2).div(Dec(3))) > 0  # works like truediv
+
+
+def test_modulo():
+    # Decs have to work similar to Decimal
+    assert (Dec(2) % Dec(3)) == 2
+    assert (Dec(3) % Dec(2)) == 1
+    assert (Dec(2) % Dec(1)) == 0
+    assert (Dec("32") % Dec("1")) == 0
