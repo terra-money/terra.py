@@ -103,3 +103,21 @@ def test_decimal_fraction():
     assert expected == v2
     assert expected == v3
     assert expected == v4
+
+
+def test_decimal_sign():
+    # assert + unary operator works
+    assert +Dec("1") == 1
+    assert +Dec("-1") == -1
+    # assert + implies a copy
+    d1 = Dec("1")
+    d2 = +d1
+    d3 = -d1
+    assert id(d1) is not id(d2)
+    assert id(d1) is not id(d3)
+    # assert - unary operator works
+    assert -Dec("-1") == 1
+    assert -Dec("1") == -1
+    # assert negate operator works
+    assert abs(Dec("-1")) == 1
+    assert abs(Dec("1")) == 1

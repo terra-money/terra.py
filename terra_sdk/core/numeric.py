@@ -337,7 +337,8 @@ class Dec(JSONSerializable):
         return x
 
     def __pos__(self) -> Dec:
-        return abs(self)
+        # __pos__ implies a copy
+        return Dec(self)
 
     @classmethod
     def from_data(cls, data: str) -> Dec:
