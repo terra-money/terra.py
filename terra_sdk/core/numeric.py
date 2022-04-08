@@ -287,6 +287,7 @@ class Dec(JSONSerializable):
 
     def div(self, divisor: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs division. ``divisor`` is first converted into Dec.
+        It works like truediv('/')
 
         Args:
             divisor (Union[str, int, float, Decimal, Dec]): divisor
