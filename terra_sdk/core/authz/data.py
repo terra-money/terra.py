@@ -30,6 +30,7 @@ __all__ = [
     "Authorization",
     "SendAuthorization",
     "GenericAuthorization",
+    "StakeAuthorization",
     "AuthorizationGrant",
     "AuthorizationType",
 ]
@@ -211,9 +212,10 @@ class StakeAuthorizationValidators(JSONSerializable):
 @attr.s
 class StakeAuthorization(Authorization):
     authorization_type: AuthorizationType = attr.ib()
-    max_tokens: Optional[Coin] = attr.ib(converter=Coin.parse, default=None)
+    max_tokens: Optional[Coin] = attr.ib(default=None)
     allow_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
     deny_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
+
 
     type_url = "/cosmos.staking.v1beta1.StakeAuthorization"
 
@@ -233,15 +235,9 @@ class StakeAuthorization(Authorization):
     def from_data(cls, data: dict) -> StakeAuthorization:
         return StakeAuthorization(
             authorization_type=data["authorization_type"],
-            max_tokens=Coins.from_data(data["max_tokens"])
-            if data.get("max_tokens")
-            else None,
-            allow_list=StakeAuthorizationValidators.from_data(data["allow_list"])
-            if data.get("allow_list")
-            else None,
-            deny_list=StakeAuthorizationValidators.from_data(data["deny_list"])
-            if data.get("deny_list")
-            else None,
+            max_tokens=(Coins.from_data(data["max_tokens"]) if data.get("max_tokens") is not None else None),
+            allow_list=StakeAuthorizationValidators.from_data(data["allow_list"]) if data.get("allow_list") else None,
+            deny_list=StakeAuthorizationValidators.from_data(data["deny_list"]) if data.get("deny_list") else None,
         )
 
     def to_proto(self) -> StakeAuthorization_pb:
@@ -256,13 +252,7 @@ class StakeAuthorization(Authorization):
     def from_proto(cls, proto: StakeAuthorization_pb) -> StakeAuthorization:
         return StakeAuthorization(
             authorization_type=proto.authorization_type,
-            max_tokens=Coins.from_proto(proto.max_tokens)
-            if proto.max_tokens
-            else None,
-            allow_list=StakeAuthorizationValidators.from_proto(proto.allow_list)
-            if proto.allow_list
-            else None,
-            deny_list=StakeAuthorizationValidators.from_proto(proto.deny_list)
-            if proto.deny_list
-            else None,
+            max_tokens=Coins.from_proto(proto.max_tokens) if proto.max_tokens else None,
+            allow_list=StakeAuthorizationValidators.from_proto(proto.allow_list) if proto.allow_list else None,
+            deny_list=StakeAuthorizationValidators.from_proto(proto.deny_list) if proto.deny_list else None,
         )
