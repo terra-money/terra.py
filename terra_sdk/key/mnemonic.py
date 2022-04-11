@@ -69,5 +69,6 @@ class MnemonicKey(RawKey):
 
         super().__init__(child.PrivateKey())
         self.mnemonic = mnemonic
+        self.coin_type = coin_type
         self.account = account
         self.index = index
