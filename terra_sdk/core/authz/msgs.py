@@ -113,7 +113,6 @@ class MsgGrantAuthorization(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAuthorization:
-        data = data["value"]
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
