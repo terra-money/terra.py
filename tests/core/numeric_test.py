@@ -1,6 +1,6 @@
-import pytest
-
 from terra_sdk.core import Dec
+from decimal import Decimal
+import pytest
 
 
 def test_deserializes():
@@ -87,3 +87,53 @@ def test_cosmos_arithmetic(d1, d2, mul, quo, add, sub):
     assert d1 + d2 == add
     assert d1.sub(d2) == sub
     assert d1 - d2 == sub
+
+
+def test_decimal_fraction():
+    v1 = Decimal("1.001") / Decimal("1.01")
+    v2 = Decimal("1.001") / Dec("1.01")
+    v3 = Dec("1.001") / Decimal("1.01")
+    v4 = Dec("1.001") / Dec("1.01")
+    expected = Decimal("0.9910891089108910891089108911")
+    # compare calculated Decimal from outside with Dec from inside
+    assert v1 == v2
+    assert v1 == v3
+    assert v1 == v4
+    # compare predefined Decimal with Dec
+    assert expected == v2
+    assert expected == v3
+    assert expected == v4
+
+
+def test_decimal_sign():
+    # assert + unary operator works
+    assert +Dec("1") == 1
+    assert +Dec("-1") == -1
+    # assert + implies a copy
+    d1 = Dec("1")
+    d2 = +d1
+    d3 = -d1
+    assert id(d1) is not id(d2)
+    assert id(d1) is not id(d3)
+    # assert - unary operator works
+    assert -Dec("-1") == 1
+    assert -Dec("1") == -1
+    # assert negate operator works
+    assert abs(Dec("-1")) == 1
+    assert abs(Dec("1")) == 1
+
+
+def test_divide():
+    assert (Dec(2) / Dec(3)) > 0
+    assert (Dec(2).__rtruediv__(Dec(3))) > 0
+    assert (Dec(2) // Dec(3)) == 0
+    assert (Dec(2).__rfloordiv__(Dec(3))) == 0
+    assert (Dec(2).div(Dec(3))) > 0  # works like truediv
+
+
+def test_modulo():
+    # Decs have to work similar to Decimal
+    assert (Dec(2) % Dec(3)) == 2
+    assert (Dec(3) % Dec(2)) == 1
+    assert (Dec(2) % Dec(1)) == 0
+    assert (Dec("32") % Dec("1")) == 0

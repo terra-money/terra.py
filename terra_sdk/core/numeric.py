@@ -11,15 +11,15 @@ from terra_sdk.util.json import JSONSerializable
 DEC_NUM_DIGITS = 18
 """Number of digits for Decimal."""
 
-DEC_ONE = 10**DEC_NUM_DIGITS
+DEC_ONE = 10 ** DEC_NUM_DIGITS
 DEC_PATTERN = re.compile(r"^(\-)?(\d+)(\.(\d+))?\Z")
 
 __all__ = ["DEC_NUM_DIGITS", "Dec", "Numeric"]
 
 
 def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
-    if isinstance(arg, int):
-        return arg * DEC_ONE
+    if isinstance(arg, int) or isinstance(arg, Decimal):
+        return int(arg * DEC_ONE)
     if isinstance(arg, float):
         arg = str("%f" % arg)
     if isinstance(arg, str):
@@ -33,10 +33,6 @@ def convert_to_dec_bignum(arg: Union[str, int, float, Decimal]):
         if parts.group(1):
             result *= -1
         return result
-    elif isinstance(arg, Decimal):
-        whole = int(arg)
-        fraction = int(arg % 1)
-        return int((whole * DEC_ONE) + (fraction * DEC_ONE))
     else:
         raise TypeError(
             f"Unable to parse Dec integer representation from given argument {arg}"
@@ -291,6 +287,7 @@ class Dec(JSONSerializable):
 
     def div(self, divisor: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs division. ``divisor`` is first converted into Dec.
+        It works like truediv('/')
 
         Args:
             divisor (Union[str, int, float, Decimal, Dec]): divisor
@@ -314,7 +311,10 @@ class Dec(JSONSerializable):
         return Dec(divisor).div(self)
 
     def __floordiv__(self, divisor):
-        return self.div(int(divisor))
+        return Dec(chop_precision_and_round(self.div(divisor).sub(0.5)._i))
+
+    def __rfloordiv__(self, divisor):
+        return Dec(chop_precision_and_round(divisor / self.sub(0.5)._i))
 
     def mod(self, modulo: Union[str, int, float, Decimal, Dec]) -> Dec:
         """Performs modulus. ``modulo`` is first converted into Dec.
@@ -325,7 +325,7 @@ class Dec(JSONSerializable):
         Returns:
             Dec: modulus
         """
-        return self.sub(self.div(modulo).mul(self))
+        return self.sub(self.__floordiv__(modulo).mul(modulo))
 
     def __mod__(self, modulo) -> Dec:
         return self.mod(modulo)
@@ -341,7 +341,8 @@ class Dec(JSONSerializable):
         return x
 
     def __pos__(self) -> Dec:
-        return abs(self)
+        # __pos__ implies a copy
+        return Dec(self)
 
     @classmethod
     def from_data(cls, data: str) -> Dec:
