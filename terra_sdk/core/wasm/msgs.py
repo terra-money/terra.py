@@ -5,7 +5,7 @@ from __future__ import annotations
 import base64
 import copy
 import json
-from typing import Optional
+from typing import Optional, Union
 
 import attr
 from terra_proto.terra.wasm.v1beta1 import (
@@ -37,6 +37,12 @@ __all__ = [
     "MsgUpdateContractAdmin",
     "MsgClearContractAdmin",
 ]
+
+
+def parse_msg(msg: Union[dict, str, bytes]) -> dict:
+    if type(msg) is dict:
+        return msg
+    return json.loads(msg)
 
 
 @attr.s
@@ -143,7 +149,7 @@ class MsgInstantiateContract(Msg):
         sender: address of sender
         admin: address of contract admin
         code_id (int): code ID to use for instantiation
-        init_msg (dict): InitMsg to initialize contract
+        init_msg (dict|str): InitMsg to initialize contract
         init_coins (Coins): initial amount of coins to be sent to contract
     """
 
@@ -155,7 +161,7 @@ class MsgInstantiateContract(Msg):
     sender: AccAddress = attr.ib()
     admin: Optional[AccAddress] = attr.ib()
     code_id: int = attr.ib(converter=int)
-    init_msg: dict = attr.ib()
+    init_msg: Union[dict, str] = attr.ib()
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
     def to_amino(self) -> dict:
@@ -165,7 +171,7 @@ class MsgInstantiateContract(Msg):
                 "sender": self.sender,
                 "admin": self.admin,
                 "code_id": str(self.code_id),
-                "init_msg": self.init_msg,
+                "init_msg": remove_none(self.init_msg),
                 "init_coins": self.init_coins.to_amino(),
             },
         }
@@ -181,7 +187,7 @@ class MsgInstantiateContract(Msg):
             sender=data.get("sender"),
             admin=data.get("admin"),
             code_id=data["code_id"],
-            init_msg=remove_none(data["init_msg"]),
+            init_msg=parse_msg(data["init_msg"]),
             init_coins=Coins.from_data(data["init_coins"]),
         )
 
@@ -200,7 +206,7 @@ class MsgInstantiateContract(Msg):
             sender=proto.sender,
             admin=proto.admin,
             code_id=proto.code_id,
-            init_msg=remove_none(proto.init_msg),
+            init_msg=parse_msg(proto.init_msg),
             init_coins=Coins.from_proto(proto.init_coins),
         )
 
@@ -212,7 +218,7 @@ class MsgExecuteContract(Msg):
     Args:
         sender: address of sender
         contract: address of contract to execute function on
-        execute_msg (dict): ExecuteMsg to pass
+        execute_msg (dict|str): ExecuteMsg to pass
         coins: coins to be sent, if needed by contract to execute.
             Defaults to empty ``Coins()``
     """
@@ -224,7 +230,7 @@ class MsgExecuteContract(Msg):
 
     sender: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
-    execute_msg: dict = attr.ib()
+    execute_msg: Union[dict, str] = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
     def to_amino(self) -> dict:
@@ -243,7 +249,7 @@ class MsgExecuteContract(Msg):
         return cls(
             sender=data["sender"],
             contract=data["contract"],
-            execute_msg=remove_none(data.get("execute_msg")),
+            execute_msg=parse_msg(data["execute_msg"]),
             coins=Coins.from_data(data["coins"]),
         )
 
@@ -261,7 +267,7 @@ class MsgExecuteContract(Msg):
         return cls(
             sender=proto.sender,
             contract=proto.contract,
-            execute_msg=remove_none(proto.execute_msg),
+            execute_msg=parse_msg(proto.execute_msg),
             coins=Coins.from_proto(proto.coins),
         )
 
@@ -274,7 +280,7 @@ class MsgMigrateContract(Msg):
         admin: address of contract admin
         contract: address of contract to migrate
         new_code_id (int): new code ID to migrate to
-        migrate_msg (dict): MigrateMsg to execute
+        migrate_msg (dict|str): MigrateMsg to execute
     """
 
     type_amino = "wasm/MsgMigrateContract"
@@ -285,7 +291,7 @@ class MsgMigrateContract(Msg):
     admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
     new_code_id: int = attr.ib(converter=int)
-    migrate_msg: dict = attr.ib()
+    migrate_msg: Union[dict, str] = attr.ib()
 
     def to_amino(self) -> dict:
         return {
@@ -308,7 +314,7 @@ class MsgMigrateContract(Msg):
             admin=data["admin"],
             contract=data["contract"],
             new_code_id=data["new_code_id"],
-            migrate_msg=data["migrate_msg"],
+            migrate_msg=parse_msg(data["migrate_msg"]),
         )
 
     def to_proto(self) -> MsgMigrateContract_pb:
@@ -325,7 +331,7 @@ class MsgMigrateContract(Msg):
             admin=proto.admin,
             contract=proto.contract,
             new_code_id=proto.new_code_id,
-            migrate_msg=proto.migrate_msg,
+            migrate_msg=parse_msg(proto.migrate_msg),
         )
 
 

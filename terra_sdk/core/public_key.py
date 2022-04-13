@@ -81,7 +81,9 @@ class PublicKey(JSONSerializable, ABC):
         elif type_url == ValConsPubKey.type_url:
             return ValConsPubKey.from_proto(ValConsPubKey_pb().parse(value))
         elif type_url == LegacyAminoMultisigPublicKey.type_url:
-            return LegacyAminoMultisigPublicKey.from_proto(LegacyAminoPubKey_pb().parse(value))
+            return LegacyAminoMultisigPublicKey.from_proto(
+                LegacyAminoPubKey_pb().parse(value)
+            )
         raise TypeError("could not marshal PublicKey: type is incorrect")
 
     @classmethod
@@ -159,14 +161,14 @@ class SimplePublicKey(PublicKey):
 
     @classmethod
     def from_proto(cls, proto: SimplePubKey_pb) -> SimplePublicKey:
-        return cls(key=proto.key)
+        return cls(key=proto.to_dict().get("value"))
 
     @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
         return cls(key=amino["value"])
 
     def to_proto(self) -> SimplePubKey_pb:
-        return SimplePubKey_pb(key=self.key)
+        return SimplePubKey_pb(key=base64.b64decode(self.key))
 
     def get_type(self) -> str:
         return self.type_url
@@ -271,8 +273,10 @@ class LegacyAminoMultisigPublicKey(PublicKey):
 
     @classmethod
     def from_proto(cls, proto: LegacyAminoPubKey_pb) -> LegacyAminoMultisigPublicKey:
-        return cls(threshold=proto.threshold, public_keys=[SimplePublicKey.from_proto(pk) for pk in proto.public_keys])
-
+        return cls(
+            threshold=proto.threshold,
+            public_keys=[SimplePublicKey.from_proto(pk) for pk in proto.public_keys],
+        )
 
     @classmethod
     def from_amino(cls, amino: dict) -> LegacyAminoMultisigPublicKey:

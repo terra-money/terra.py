@@ -72,5 +72,14 @@ class CommunityPoolSpendProposal(JSONSerializable):
             amount=self.amount.to_proto(),
         )
 
+    @classmethod
+    def from_proto(cls, proto: CommunityPoolSpendProposal_pb) -> CommunityPoolSpendProposal:
+        return cls(
+            title=proto.title,
+            description=proto.description,
+            recipient=proto.recipient,
+            amount=Coins.from_proto(proto.amount),
+        )
+
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

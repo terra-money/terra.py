@@ -374,9 +374,8 @@ class AsyncTxAPI(BaseAsyncAPI):
         res = await self._c._get(f"/cosmos/base/tendermint/v1beta1/blocks/{x}")
 
         txs = res.get("block").get("data").get("txs")
-        if len(txs) <= 0:
-            return []
-        return [self.decode(tx) for tx in txs]
+        hashes = map(hash_amino, txs)
+        return [i for i in map(self.tx_info, hashes)]
 
 
 class TxAPI(AsyncTxAPI):
@@ -461,3 +460,4 @@ class TxAPI(AsyncTxAPI):
         pass
 
     tx_infos_by_height.__doc__ = AsyncTxAPI.tx_infos_by_height.__doc__
+

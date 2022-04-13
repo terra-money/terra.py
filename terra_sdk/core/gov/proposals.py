@@ -44,3 +44,10 @@ class TextProposal(JSONSerializable):
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
+
+    @classmethod
+    def from_proto(cls, proto: TextProposal_pb):
+        return cls(
+            title=proto.title,
+            description=proto.description
+        )

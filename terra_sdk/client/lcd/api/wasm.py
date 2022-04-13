@@ -1,6 +1,6 @@
 import base64
 import json
-from typing import Any
+from typing import Any, Union
 
 from terra_sdk.core import Numeric
 
@@ -46,7 +46,7 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "init_msg": contract_info["init_msg"],
         }
 
-    async def contract_query(self, contract_address: str, query: dict) -> Any:
+    async def contract_query(self, contract_address: str, query: Union[dict, str]) -> Any:
         """Runs a QueryMsg on a contract.
 
         Args:
@@ -95,7 +95,7 @@ class WasmAPI(AsyncWasmAPI):
     contract_info.__doc__ = AsyncWasmAPI.contract_info.__doc__
 
     @sync_bind(AsyncWasmAPI.contract_query)
-    def contract_query(self, contract_address: str, query_msg: dict) -> Any:
+    def contract_query(self, contract_address: str, query: Union[dict, str]) -> Any:
         pass
 
     contract_query.__doc__ = AsyncWasmAPI.contract_query.__doc__

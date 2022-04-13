@@ -1,13 +1,12 @@
 """Gov module data types."""
 
 from __future__ import annotations
-
 import copy
 from datetime import datetime
 from typing import List, Union
-
 import attr
 from dateutil import parser
+
 from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 from terra_proto.cosmos.gov.v1beta1 import Vote as Vote_pb
@@ -15,44 +14,11 @@ from terra_proto.cosmos.gov.v1beta1 import VoteOption
 from terra_proto.cosmos.gov.v1beta1 import WeightedVoteOption as WeightedVoteOption_pb
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.core.distribution import CommunityPoolSpendProposal
-from terra_sdk.core.params import ParameterChangeProposal
-from terra_sdk.core.upgrade import (
-    CancelSoftwareUpgradeProposal,
-    SoftwareUpgradeProposal,
-)
 from terra_sdk.util.json import JSONSerializable, dict_to_data
-
-from .proposals import TextProposal
+from terra_sdk.util.converter import to_isoformat
+from terra_sdk.util.parse_content import parse_content, Content
 
 __all__ = ["Proposal", "Content", "VoteOption", "WeightedVoteOption"]
-
-from ...util.converter import to_isoformat
-
-Content = Union[
-    TextProposal,
-    CommunityPoolSpendProposal,
-    ParameterChangeProposal,
-    SoftwareUpgradeProposal,
-    CancelSoftwareUpgradeProposal,
-]
-
-
-def Content_from_data(data: dict) -> Content:
-    typ = data["@type"]
-    if typ == TextProposal.type_url:
-        return TextProposal.from_data(data)
-    elif typ == CommunityPoolSpendProposal.type_url:
-        return CommunityPoolSpendProposal.from_data(data)
-    elif typ == ParameterChangeProposal.type_url:
-        return ParameterChangeProposal.from_data(data)
-    elif typ == SoftwareUpgradeProposal.type_url:
-        return SoftwareUpgradeProposal.from_data(data)
-    elif typ == CancelSoftwareUpgradeProposal.type_url:
-        return CancelSoftwareUpgradeProposal.from_data(data)
-    else:
-        raise ValueError("content type is invalid")
-
 
 @attr.s
 class TallyResult(JSONSerializable):
@@ -148,7 +114,7 @@ class Proposal(JSONSerializable):
     def from_data(cls, data: dict) -> Proposal:
         return cls(
             proposal_id=data["proposal_id"],
-            content=Content_from_data(data["content"]),
+            content=parse_content(data["content"]),
             status=data["status"],
             final_tally_result=data["final_tally_result"],
             submit_time=data["submit_time"],
