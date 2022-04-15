@@ -58,6 +58,14 @@ class SoftwareUpgradeProposal(JSONSerializable):
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
+    @classmethod
+    def from_proto(cls, proto: SoftwareUpgradeProposal_pb) -> SoftwareUpgradeProposal:
+        return cls(
+            title=proto.title,
+            description=proto.description,
+            plan=Plan.from_proto(proto.plan) if proto.plan else None,
+        )
+
 
 @attr.s
 class CancelSoftwareUpgradeProposal(JSONSerializable):
@@ -89,3 +97,8 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
+
+    @classmethod
+    def from_proto(cls, proto: CancelSoftwareUpgradeProposal_pb) -> CancelSoftwareUpgradeProposal:
+        return cls(title=proto.title, description=proto.description)
+
