@@ -38,9 +38,9 @@ class ModeInfo(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> ModeInfo:
         if data.get("single"):
-            return cls(single=data.get("single"))
+            return cls(single=ModeInfoSingle.from_data(data.get("single")))
         if data.get("multi"):
-            return cls(multi=data.get("multi"))
+            return cls(multi=ModeInfoMulti.from_data(data.get("multi")))
         raise ValueError("ModeInfo should have one of single or multi")
 
     def to_proto(self) -> ModeInfo_pb:

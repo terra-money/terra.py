@@ -72,7 +72,7 @@ class Tx(JSONSerializable):
         return {
             "body": self.body.to_data(),
             "auth_info": self.auth_info.to_data(),
-            "signatures": [base64.b64encode(sig).decode() for sig in self.signatures],
+            "signatures": [base64.b64encode(sig).decode('ascii') for sig in self.signatures],
         }
 
     def to_proto(self) -> Tx_pb:
@@ -87,7 +87,7 @@ class Tx(JSONSerializable):
         return cls(
             TxBody.from_data(data["body"]),
             AuthInfo.from_data(data["auth_info"]),
-            data["signatures"],
+            [base64.b64decode(sig) for sig in data["signatures"]],
         )
 
     @classmethod

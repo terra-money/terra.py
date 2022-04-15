@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import List
 
 from terra_proto.cosmos.bank.v1beta1 import Input as Input_pb
 from terra_proto.cosmos.bank.v1beta1 import MsgMultiSend as MsgMultiSend_pb
@@ -90,6 +90,7 @@ class MsgSend(Msg):
     def unpack_proto(cls, any_pb: Any_pb):
         return cls.from_proto(cls.prototype().parse(any_pb.value))
     """
+
 
 @attr.s
 class MultiSendInput(JSONSerializable):
