@@ -45,6 +45,7 @@ class MsgChannelOpenInit(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelOpenInit"
     """"""
+    prototype = MsgChannelOpenInit_pb
 
     port_id: str = attr.ib()
     channel: Channel = attr.ib()
@@ -84,6 +85,7 @@ class MsgChannelOpenTry(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelOpenTry"
     """"""
+    prototype = MsgChannelOpenTry_pb
 
     port_id: str = attr.ib()
     previous_channel_id: str = attr.ib()
@@ -140,6 +142,7 @@ class MsgChannelOpenAck(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelOpenAck"
     """"""
+    prototype = MsgChannelOpenAck_pb
 
     port_id: str = attr.ib()
     channel_id: str = attr.ib()
@@ -197,6 +200,7 @@ class MsgChannelOpenConfirm(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelOpenConfirm"
     """"""
+    prototype = MsgChannelOpenConfirm_pb
 
     port_id: str = attr.ib()
     channel_id: str = attr.ib()
@@ -243,6 +247,7 @@ class MsgChannelCloseInit(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelCloseInit"
     """"""
+    prototype = MsgChannelCloseInit_pb
 
     port_id: str = attr.ib()
     channel_id: str = attr.ib()
@@ -280,6 +285,7 @@ class MsgChannelCloseConfirm(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgChannelCloseConfirm"
     """"""
+    prototype = MsgChannelCloseConfirm_pb
 
     port_id: str = attr.ib()
     channel_id: str = attr.ib()
@@ -328,6 +334,7 @@ class MsgRecvPacket(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgRecvPacket"
     """"""
+    prototype = MsgRecvPacket_pb
 
     packet: Packet = attr.ib()
     proof_commitment: bytes = attr.ib()
@@ -372,6 +379,7 @@ class MsgTimeout(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgTimeout"
     """"""
+    prototype = MsgTimeout_pb
 
     packet: Packet = attr.ib()
     proof_unreceived: bytes = attr.ib()
@@ -420,6 +428,7 @@ class MsgAcknowledgement(Msg):
 
     type_url = "/ibc.core.channel.v1.MsgAcknowledgement"
     """"""
+    prototype = MsgAcknowledgement_pb
 
     packet: Packet = attr.ib()
     acknowledgement: bytes = attr.ib()

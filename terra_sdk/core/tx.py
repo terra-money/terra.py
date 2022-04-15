@@ -7,6 +7,7 @@ import json
 from typing import Dict, List, Optional
 
 import attr
+from betterproto.lib.google.protobuf import Any
 from terra_proto.cosmos.base.abci.v1beta1 import AbciMessageLog as AbciMessageLog_pb
 from terra_proto.cosmos.base.abci.v1beta1 import Attribute as Attribute_pb
 from terra_proto.cosmos.base.abci.v1beta1 import StringEvent as StringEvent_pb
@@ -189,7 +190,7 @@ class TxBody(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: TxBody_pb) -> TxBody:
         return cls(
-            [parse_proto(m) for m in proto.messages],
+            [Msg.unpack_any(m) for m in proto.messages],
             proto.memo,
             proto.timeout_height,
         )

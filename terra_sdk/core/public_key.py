@@ -147,13 +147,13 @@ class SimplePublicKey(PublicKey):
     type_url = "/cosmos.crypto.secp256k1.PubKey"
     """Normal signature public key type."""
 
-    key: str = attr.ib()
+    key: bytes = attr.ib()
 
     def to_amino(self) -> dict:
         return {"type": self.type_amino, "value": self.key}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "key": base64.b64encode(self.key)}
+        return {"@type": self.type_url, "key": self.key}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
@@ -161,14 +161,14 @@ class SimplePublicKey(PublicKey):
 
     @classmethod
     def from_proto(cls, proto: SimplePubKey_pb) -> SimplePublicKey:
-        return cls(key=proto.to_dict().get("value"))
+        return cls(key=proto.key)
 
     @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
         return cls(key=amino["value"])
 
     def to_proto(self) -> SimplePubKey_pb:
-        return SimplePubKey_pb(key=base64.b64decode(self.key))
+        return SimplePubKey_pb(key=self.key)
 
     def get_type(self) -> str:
         return self.type_url
@@ -183,7 +183,7 @@ class SimplePublicKey(PublicKey):
         return out
 
     def raw_address(self) -> bytes:
-        return address_from_public_key(self.key)
+        return address_from_public_key(self)
 
     def address(self) -> str:
         return get_bech("terra", self.raw_address())
@@ -191,7 +191,7 @@ class SimplePublicKey(PublicKey):
 
 @attr.s
 class ValConsPubKey(PublicKey):
-    """Data object holding the public key component of an validator's account or signature."""
+    """Data object holding the public key component of a validator's account or signature."""
 
     type_amino = "tendermint/PubKeyEd25519"
     """"""

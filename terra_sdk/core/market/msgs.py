@@ -28,6 +28,7 @@ class MsgSwap(Msg):
     """"""
     action = "swap"
     """"""
+    prototype = MsgSwap_pb
 
     trader: AccAddress = attr.ib()
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
@@ -84,6 +85,7 @@ class MsgSwapSend(Msg):
     """"""
     action = "swapsend"
     """"""
+    prototype = MsgSwapSend_pb
 
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()

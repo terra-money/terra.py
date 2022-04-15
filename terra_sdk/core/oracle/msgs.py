@@ -77,6 +77,7 @@ class MsgDelegateFeedConsent(Msg):
     """"""
     action = "delegatefeeder"
     """"""
+    prototype = MsgDelegateFeedConsent_pb
 
     operator: ValAddress = attr.ib()
     delegate: AccAddress = attr.ib()
@@ -113,6 +114,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRatePrevote"
     """"""
+    prototype = MsgAggregateExchangeRatePrevote_pb
 
     hash: str = attr.ib()
     feeder: AccAddress = attr.ib()
@@ -167,6 +169,7 @@ class MsgAggregateExchangeRateVote(Msg):
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRateVote"
     """"""
+    prototype = MsgAggregateExchangeRateVote_pb
 
     exchange_rates: Coins = attr.ib(converter=Coins)
     salt: str = attr.ib()
