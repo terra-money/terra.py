@@ -1,6 +1,8 @@
 """Some useful base classes to inherit from."""
 from abc import abstractmethod
 from typing import Any, Callable, Dict, List
+
+import attr
 from betterproto.lib.google.protobuf import Any as Any_pb
 from betterproto import Message
 
@@ -13,7 +15,9 @@ class BaseTerraData(JSONSerializable, Message):
     type_url: str
 
     def to_data(self) -> dict:
-        return {"type": self.type_url, "value": dict_to_data(self.__dict__)}
+        data = dict_to_data(attr.asdict(self))
+        data.update({"@type": self.type_url})
+        return data
 
     @abstractmethod
     def to_proto(self):
