@@ -7,6 +7,7 @@ import json
 from typing import Dict, List, Optional
 
 import attr
+from betterproto.lib.google.protobuf import Any
 from terra_proto.cosmos.base.abci.v1beta1 import AbciMessageLog as AbciMessageLog_pb
 from terra_proto.cosmos.base.abci.v1beta1 import Attribute as Attribute_pb
 from terra_proto.cosmos.base.abci.v1beta1 import StringEvent as StringEvent_pb
@@ -71,7 +72,7 @@ class Tx(JSONSerializable):
         return {
             "body": self.body.to_data(),
             "auth_info": self.auth_info.to_data(),
-            "signatures": [base64.b64encode(sig).decode() for sig in self.signatures],
+            "signatures": [base64.b64encode(sig).decode('ascii') for sig in self.signatures],
         }
 
     def to_proto(self) -> Tx_pb:
@@ -86,7 +87,7 @@ class Tx(JSONSerializable):
         return cls(
             TxBody.from_data(data["body"]),
             AuthInfo.from_data(data["auth_info"]),
-            data["signatures"],
+            [base64.b64decode(sig) for sig in data["signatures"]],
         )
 
     @classmethod
@@ -189,7 +190,7 @@ class TxBody(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: TxBody_pb) -> TxBody:
         return cls(
-            [parse_proto(m) for m in proto.messages],
+            [Msg.unpack_any(m) for m in proto.messages],
             proto.memo,
             proto.timeout_height,
         )
@@ -447,14 +448,14 @@ class TxInfo(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
         return cls(
-            data["height"],
-            data["txhash"],
-            data["raw_log"],
+            data.get("height"),
+            data.get("txhash"),
+            data.get("raw_log"),
             parse_tx_logs(data.get("logs")),
-            data["gas_wanted"],
-            data["gas_used"],
-            Tx.from_data(data["tx"]),
-            data["timestamp"],
+            data.get("gas_wanted"),
+            data.get("gas_used"),
+            Tx.from_data(data.get("tx")),
+            data.get("timestamp"),
             data.get("code"),
             data.get("codespace"),
         )

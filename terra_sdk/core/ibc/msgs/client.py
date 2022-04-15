@@ -29,6 +29,7 @@ class MsgCreateClient(Msg):
 
     type_url = "/ibc.core.client.v1.MsgCreateClient"
     """"""
+    prototype = MsgCreateClient_pb
 
     client_state: dict = attr.ib()
     consensus_state: dict = attr.ib()
@@ -69,6 +70,7 @@ class MsgUpdateClient(Msg):
 
     type_url = "/ibc.core.client.v1.MsgUpdateClient"
     """"""
+    prototype = MsgUpdateClient_pb
 
     client_id: str = attr.ib()
     header: dict = attr.ib()
@@ -107,6 +109,7 @@ class MsgUpgradeClient(Msg):
 
     type_url = "/ibc.core.client.v1.MsgUpgradeClient"
     """"""
+    prototype = MsgUpgradeClient_pb
 
     client_id: str = attr.ib()
     client_state: dict = attr.ib()
@@ -159,6 +162,7 @@ class MsgSubmitMisbehaviour(Msg):
 
     type_url = "/ibc.core.client.v1.MsgSubmitMisbehaviour"
     """"""
+    prototype = MsgSubmitMisbehaviour_pb
 
     client_id: str = attr.ib()
     misbehaviour: dict = attr.ib()

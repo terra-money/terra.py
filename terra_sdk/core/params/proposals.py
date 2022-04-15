@@ -35,6 +35,15 @@ class ParamChange(JSONSerializable):
     def to_data(self) -> dict:
         return {"subspace": self.subspace, "key": self.key, "value": self.value}
 
+    @classmethod
+    def from_proto(cls, proto: ParamChange_pb) -> ParamChange:
+        return cls(
+            subspace=proto.subspace,
+            key=proto.key,
+            value=proto.value
+        )
+
+
 
 @attr.s
 class ParameterChangeProposal(JSONSerializable):
@@ -87,6 +96,15 @@ class ParameterChangeProposal(JSONSerializable):
             "description": self.description,
             "changes": [change.to_data() for change in self.changes],
         }
+
+    @classmethod
+    def from_proto(cls, proto: ParameterChangeProposal_pb) -> ParameterChangeProposal:
+        return cls(
+            title=proto.title,
+            description=proto.description,
+            changes=[ParamChange.from_proto(change) for change in proto.changes],
+        )
+
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))

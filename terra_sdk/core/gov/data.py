@@ -1,9 +1,8 @@
 """Gov module data types."""
 
 from __future__ import annotations
-import copy
 from datetime import datetime
-from typing import List, Union
+from typing import List
 import attr
 from dateutil import parser
 
@@ -14,11 +13,12 @@ from terra_proto.cosmos.gov.v1beta1 import VoteOption
 from terra_proto.cosmos.gov.v1beta1 import WeightedVoteOption as WeightedVoteOption_pb
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.util.json import JSONSerializable, dict_to_data
+from terra_sdk.util.json import JSONSerializable
 from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.parse_content import parse_content, Content
 
 __all__ = ["Proposal", "Content", "VoteOption", "WeightedVoteOption"]
+
 
 @attr.s
 class TallyResult(JSONSerializable):
@@ -91,11 +91,6 @@ class Proposal(JSONSerializable):
 
     voting_end_time: datetime = attr.ib(converter=parser.parse)
     """Time at which voting period ended, or will end."""
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["id"] = str(d["id"])
-        return dict_to_data(d)
 
     def to_amino(self) -> dict:
         return {

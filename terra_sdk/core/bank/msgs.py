@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import List
 
 from terra_proto.cosmos.bank.v1beta1 import Input as Input_pb
 from terra_proto.cosmos.bank.v1beta1 import MsgMultiSend as MsgMultiSend_pb
 from terra_proto.cosmos.bank.v1beta1 import MsgSend as MsgSend_pb
 from terra_proto.cosmos.bank.v1beta1 import Output as Output_pb
+
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
@@ -81,9 +83,13 @@ class MsgSend(Msg):
         proto.amount = [c.to_proto() for c in self.amount]
         return proto
 
+    prototype = MsgSend_pb
+
+    """
     @classmethod
-    def unpack_any(cls, any: Any) -> MsgSend:
-        return MsgSend.from_proto(any)
+    def unpack_proto(cls, any_pb: Any_pb):
+        return cls.from_proto(cls.prototype().parse(any_pb.value))
+    """
 
 
 @attr.s
@@ -191,6 +197,7 @@ class MsgMultiSend(Msg):
     """"""
     action = "multisend"
     """"""
+    prototype = MsgMultiSend_pb
 
     inputs: List[MultiSendInput] = attr.ib(converter=convert_input_list)
     outputs: List[MultiSendOutput] = attr.ib(converter=convert_output_list)
@@ -230,3 +237,7 @@ class MsgMultiSend(Msg):
             inputs=[i.to_proto() for i in self.inputs],
             outputs=[o.to_proto() for o in self.outputs],
         )
+
+    @classmethod
+    def unpack_any(cls, any_pb: Any_pb) -> MsgMultiSend:
+        return cls.from_proto(MsgMultiSend_pb().parse(any_pb))

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 import hashlib
 
 import attr
@@ -18,7 +17,6 @@ from terra_proto.terra.oracle.v1beta1 import (
 
 from terra_sdk.core import AccAddress, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.json import dict_to_data
 
 __all__ = [
     "vote_hash",
@@ -77,6 +75,7 @@ class MsgDelegateFeedConsent(Msg):
     """"""
     action = "delegatefeeder"
     """"""
+    prototype = MsgDelegateFeedConsent_pb
 
     operator: ValAddress = attr.ib()
     delegate: AccAddress = attr.ib()
@@ -113,6 +112,7 @@ class MsgAggregateExchangeRatePrevote(Msg):
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRatePrevote"
     """"""
+    prototype = MsgAggregateExchangeRatePrevote_pb
 
     hash: str = attr.ib()
     feeder: AccAddress = attr.ib()
@@ -167,6 +167,7 @@ class MsgAggregateExchangeRateVote(Msg):
     """"""
     type_url = "/terra.oracle.v1beta1.MsgAggregateExchangeRateVote"
     """"""
+    prototype = MsgAggregateExchangeRateVote_pb
 
     exchange_rates: Coins = attr.ib(converter=Coins)
     salt: str = attr.ib()
@@ -185,17 +186,26 @@ class MsgAggregateExchangeRateVote(Msg):
         }
 
     def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["exchange_rates"] = str(self.exchange_rates.to_dec_coins())
-        return {"type": self.type_url, "value": dict_to_data(d)}
+        return {
+            "@type": self.type_url,
+            "exchange_rates": self.exchange_rates.to_dec_coins().to_data(),
+            "salt": self.salt,
+            "feeder": self.feeder,
+            "validator": self.validator
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgAggregateExchangeRateVote:
+        rates = data.get("exchange_rates")
+        if type(rates) is str:
+            rates = Coins.from_str(rates)
+        else:
+            rates = Coins.from_data(rates)
         return cls(
-            exchange_rates=Coins.from_str(data["exchange_rates"]),
-            salt=data["salt"],
-            feeder=data["feeder"],
-            validator=data["validator"],
+            exchange_rates=rates,
+            salt=data.get("salt"),
+            feeder=data.get("feeder"),
+            validator=data.get("validator"),
         )
 
     def to_proto(self) -> MsgAggregateExchangeRateVote_pb:

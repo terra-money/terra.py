@@ -13,7 +13,7 @@ from terra_proto.cosmos.staking.v1beta1 import Validator as Validator_pb
 
 from terra_sdk.core import Dec, ValAddress, ValConsPubKey
 from terra_sdk.util.converter import to_isoformat
-from terra_sdk.util.json import JSONSerializable, dict_to_data
+from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["CommissionRates", "Commission", "Description", "Validator", "BondStatus"]
 
@@ -215,13 +215,6 @@ class Validator(JSONSerializable):
             "commission": self.commission.to_amino(),
             "min_self_delegation": str(self.min_self_delegation),
         }
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["min_self_delegation"] = str(d["min_self_delegation"])
-        d["tokens"] = str(d["tokens"])
-        d["unbonding_height"] = str(d["unbonding_height"])
-        return dict_to_data(d)
 
     @classmethod
     def from_data(cls, data: dict) -> Validator:

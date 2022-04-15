@@ -40,6 +40,7 @@ class MsgConnectionOpenInit(Msg):
 
     type_url = "/ibc.core.connection.v1.MsgConnectionOpenInit"
     """"""
+    prototype = MsgConnectionOpenInit_pb
 
     client_id: str = attr.ib()
     counterparty: Counterparty = attr.ib()
@@ -88,6 +89,7 @@ class MsgConnectionOpenTry(Msg):
 
     type_url = "/ibc.core.connection.v1.MsgConnectionOpenTry"
     """"""
+    prototype = MsgConnectionOpenTry_pb
 
     client_id: str = attr.ib()
     previous_connection_id: str = attr.ib()
@@ -170,6 +172,7 @@ class MsgConnectionOpenAck(Msg):
 
     type_url = "/ibc.core.connection.v1.MsgConnectionOpenAck"
     """"""
+    prototype = MsgConnectionOpenAck_pb
 
     connection_id: str = attr.ib()
     counterparty_connection_id: str = attr.ib()
@@ -238,6 +241,7 @@ class MsgConnectionOpenConfirm(Msg):
 
     type_url = "/ibc.core.connection.v1.MsgConnectionOpenConfirm"
     """"""
+    prototype = MsgConnectionOpenConfirm_pb
 
     def to_amino(self):
         raise Exception("Amino not supported")

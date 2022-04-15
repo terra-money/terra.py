@@ -19,7 +19,13 @@ class Msg(BaseTerraData):
         return parse_msg(data)
 
     @staticmethod
-    def from_proto(data: dict) -> Msg:
+    def from_proto(proto: any) -> Msg:
         from terra_sdk.util.parse_msg import parse_proto
 
-        return parse_proto(data)
+        return parse_proto(proto)
+
+    @staticmethod
+    def unpack_any(any_pb: Any_pb) -> Msg:
+        from terra_sdk.util.parse_msg import parse_unpack_any
+
+        return parse_unpack_any(any_pb)

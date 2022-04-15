@@ -30,6 +30,7 @@ class MsgVerifyInvariant(Msg):
     """"""
     type_url = "/cosmos.crisis.v1beta1.MsgVerifyInvariant"
     """"""
+    prototype = MsgVerifyInvariant_pb
 
     sender: AccAddress = attr.ib()
     invariant_module_name: str = attr.ib()

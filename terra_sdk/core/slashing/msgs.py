@@ -24,6 +24,7 @@ class MsgUnjail(Msg):
     """"""
     action = "unjail"
     """"""
+    prototype = MsgUnjail_pb
 
     address: ValAddress = attr.ib()
 

@@ -9,6 +9,8 @@ from terra_proto.cosmos.authz.v1beta1 import MsgExec as MsgExec_pb
 from terra_proto.cosmos.authz.v1beta1 import MsgGrant as MsgGrant_pb
 from terra_proto.cosmos.authz.v1beta1 import MsgRevoke as MsgRevoke_pb
 
+from betterproto.lib.google.protobuf import Any as Any_pb
+
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
 
@@ -30,6 +32,7 @@ class MsgExecAuthorized(Msg):
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgExec"
     """"""
+    prototype = MsgExec_pb
 
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
@@ -73,6 +76,10 @@ class MsgExecAuthorized(Msg):
             msgs=[Msg.from_amino(msg) for msg in value["msgs"]]
         )
 
+    @classmethod
+    def unpack_any(cls, any_pb: Any_pb) -> MsgExecAuthorized:
+        return cls.from_proto(MsgExec_pb().parse(any_pb.value))
+
 
 @attr.s
 class MsgGrantAuthorization(Msg):
@@ -88,6 +95,7 @@ class MsgGrantAuthorization(Msg):
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgGrant"
     """"""
+    prototype = MsgGrant_pb
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
@@ -159,6 +167,7 @@ class MsgRevokeAuthorization(Msg):
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgRevoke"
     """"""
+    prototype = MsgRevoke_pb
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
