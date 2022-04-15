@@ -448,14 +448,14 @@ class TxInfo(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> TxInfo:
         return cls(
-            data["height"],
-            data["txhash"],
-            data["raw_log"],
+            data.get("height"),
+            data.get("txhash"),
+            data.get("raw_log"),
             parse_tx_logs(data.get("logs")),
-            data["gas_wanted"],
-            data["gas_used"],
-            Tx.from_data(data["tx"]),
-            data["timestamp"],
+            data.get("gas_wanted"),
+            data.get("gas_used"),
+            Tx.from_data(data.get("tx")),
+            data.get("timestamp"),
             data.get("code"),
             data.get("codespace"),
         )

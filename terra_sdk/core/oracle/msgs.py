@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 import hashlib
 
 import attr
@@ -16,9 +15,8 @@ from terra_proto.terra.oracle.v1beta1 import (
     MsgDelegateFeedConsent as MsgDelegateFeedConsent_pb,
 )
 
-from terra_sdk.core import AccAddress, Coins, Dec, ValAddress, Coin
+from terra_sdk.core import AccAddress, Coins, Dec, ValAddress
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.json import dict_to_data
 
 __all__ = [
     "vote_hash",

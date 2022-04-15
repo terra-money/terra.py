@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import base64
-import copy
 import json
 from typing import Optional, Union
 
@@ -25,7 +24,6 @@ from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
-from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.remove_none import remove_none
 
 __all__ = [
@@ -114,13 +112,6 @@ class MsgMigrateCode(Msg):
             },
         }
 
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["sender"] = str(d["sender"])
-        d["code_id"] = str(d["code_id"])
-        d["wasm_byte_code"] = str(d["wasm_byte_code"])
-        return {"type": self.type_url, "value": dict_to_data(d)}
-
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateCode:
         return cls(
@@ -178,11 +169,6 @@ class MsgInstantiateContract(Msg):
                 "init_coins": self.init_coins.to_amino(),
             },
         }
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        d["code_id"] = str(d["code_id"])
-        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgInstantiateContract:
@@ -308,10 +294,6 @@ class MsgMigrateContract(Msg):
                 "migrate_msg": remove_none(self.migrate_msg),
             },
         }
-
-    def to_data(self) -> dict:
-        d = copy.deepcopy(self.__dict__)
-        return {"type": self.type_url, "value": dict_to_data(d)}
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMigrateContract:
