@@ -253,7 +253,6 @@ class MsgExecuteContract(Msg):
 
     @classmethod
     def from_proto(cls, proto: Any_pb) -> MsgExecuteContract:
-        proto = MsgExecuteContract_pb.parse(proto.value)
         return cls(
             sender=proto.sender,
             contract=proto.contract,
