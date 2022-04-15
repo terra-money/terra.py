@@ -30,10 +30,10 @@ def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:
 
 
 def create_demux_proto(inputs: [str, List]) -> Callable[[Dict[str, Any]], Any]:
-    table = {i[0]: i[1]().parse for i in inputs}
+    table = dict(inputs)
 
     def from_proto(data: Any_pb):
-        return table[data.type_url](data.value)
+        return table[data.type_url]().parse(data.value)
 
     return from_proto
 
