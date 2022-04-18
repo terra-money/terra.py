@@ -238,7 +238,7 @@ class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
             return PeriodicAllowance.from_amino(data)
 
     @classmethod
-    def from_proto(cls, data: dict):
+    def from_proto(cls, data: any):
         if data.get("@type") == BasicAllowance.type_url:
             return BasicAllowance.from_proto(data)
         else:

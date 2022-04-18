@@ -21,14 +21,14 @@ class MerkleRoot(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> MerkleRoot:
-        return cls(hash=base64.b64decode(data["hash"]))
+        return cls(hash=(data["hash"]))
 
     def to_proto(self) -> MerkleRoot_pb:
-        return MerkleRoot_pb(hash=base64.b64encode(self.hash))
+        return MerkleRoot_pb(hash=base64.b64decode(self.hash))
 
     @classmethod
     def from_proto(cls, proto: MerkleRoot_pb) -> MerkleRoot:
-        return cls(hash=base64.b64decode(proto.hash))
+        return cls(hash=base64.b64encode(proto.hash).decode())
 
 
 @attr.s
@@ -40,11 +40,11 @@ class MerklePrefix(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> MerklePrefix:
-        return cls(key_prefix=base64.b64decode(data["key_prefix"]))
+        return cls(key_prefix=data["key_prefix"])
 
     def to_proto(self) -> MerklePrefix_pb:
-        return MerklePrefix_pb(key_prefix=base64.b64encode(self.key_prefix))
+        return MerklePrefix_pb(key_prefix=base64.b64decode(self.key_prefix))
 
     @classmethod
     def from_proto(cls, proto: MerklePrefix_pb) -> MerklePrefix:
-        return cls(key_prefix=base64.b64decode(proto.key_prefix))
+        return cls(key_prefix=base64.b64encode(proto.key_prefix).decode())

@@ -78,7 +78,7 @@ class MsgStoreCode(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
-        return cls(sender=proto.sender, wasm_byte_code=proto.wasm_byte_code)
+        return cls(sender=proto.sender, wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode())
 
 
 @attr.s
@@ -122,7 +122,7 @@ class MsgMigrateCode(Msg):
 
     def to_proto(self) -> MsgMigrateCode_pb:
         return MsgMigrateCode_pb(
-            sender=self.sender, code_id=self.code_id, wasm_byte_code=self.wasm_byte_code
+            sender=self.sender, code_id=self.code_id, wasm_byte_code=base64.b64decode(self.wasm_byte_code)
         )
 
     @classmethod
@@ -130,7 +130,7 @@ class MsgMigrateCode(Msg):
         return cls(
             sender=proto.sender,
             code_id=proto.code_id,
-            wasm_byte_code=proto.wasm_byte_code,
+            wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode(),
         )
 
 

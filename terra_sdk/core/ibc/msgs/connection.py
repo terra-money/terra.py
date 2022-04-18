@@ -177,7 +177,7 @@ class MsgConnectionOpenAck(Msg):
     connection_id: str = attr.ib()
     counterparty_connection_id: str = attr.ib()
     version: Version = attr.ib()
-    client_state: dict = attr.ib()
+    client_state: any = attr.ib()
     proof_height: Height = attr.ib()
     proof_try: bytes = attr.ib()
     proof_client: bytes = attr.ib()

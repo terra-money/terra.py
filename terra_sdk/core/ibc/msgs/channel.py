@@ -71,7 +71,7 @@ class MsgChannelOpenInit(Msg):
     def from_proto(cls, proto: MsgChannelOpenInit_pb) -> MsgChannelOpenInit:
         return cls(
             port_id=proto.port_id,
-            channel=Channel.from_proto(proto.port_id),
+            channel=Channel.from_proto(proto.channel),
             signer=proto.signer,
         )
 

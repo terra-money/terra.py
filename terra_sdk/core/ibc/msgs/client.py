@@ -65,7 +65,7 @@ class MsgCreateClient(Msg):
 @attr.s
 class MsgUpdateClient(Msg):
     """
-    MsgUpdateClient defines an sdk.Msg to update a IBC client state using the given header.
+    MsgUpdateClient defines a sdk.Msg to update an IBC client state using the given header.
     """
 
     type_url = "/ibc.core.client.v1.MsgUpdateClient"
@@ -157,7 +157,7 @@ class MsgUpgradeClient(Msg):
 @attr.s
 class MsgSubmitMisbehaviour(Msg):
     """
-    MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for light client misbehaviour.
+    MsgSubmitMisbehaviour defines a sdk.Msg type that submits Evidence for light client misbehaviour.
     """
 
     type_url = "/ibc.core.client.v1.MsgSubmitMisbehaviour"
@@ -165,7 +165,7 @@ class MsgSubmitMisbehaviour(Msg):
     prototype = MsgSubmitMisbehaviour_pb
 
     client_id: str = attr.ib()
-    misbehaviour: dict = attr.ib()
+    misbehaviour: any = attr.ib()
     signer: str = attr.ib()
 
     def to_amino(self):

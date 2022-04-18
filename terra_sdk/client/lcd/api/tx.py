@@ -11,8 +11,9 @@ from terra_sdk.core.broadcast import (
     BlockTxBroadcastResult,
     SyncTxBroadcastResult,
 )
+from terra_sdk.core.fee import Fee
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, TxInfo
+from terra_sdk.core.tx import AuthInfo, SignerData, SignMode, Tx, TxBody, TxInfo
 from terra_sdk.util.hash import hash_amino
 from terra_sdk.util.json import JSONSerializable
 
@@ -127,7 +128,7 @@ class SimulateResponse(JSONSerializable):
 
 
 class AsyncTxAPI(BaseAsyncAPI):
-    async def tx_info(self, tx_hash: str) -> Tx:
+    async def tx_info(self, tx_hash: str) -> TxInfo:
         """Fetches information for an included transaction given a tx hash.
 
         Args:
@@ -155,7 +156,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         opt = copy.deepcopy(options)
 
-        signerData: List[SignerData] = []
+        signer_data: List[SignerData] = []
         for signer in signers:
             seq = signer.sequence
             pubkey = signer.public_key
@@ -168,16 +169,16 @@ class AsyncTxAPI(BaseAsyncAPI):
                     seq = acc.get_sequence()
                 if pubkey is None:
                     pubkey = acc.get_public_key()
-            signerData.append(SignerData(seq, pubkey))
+            signer_data.append(SignerData(seq, pubkey))
 
         # create the fake fee
         if opt.fee is None:
-            opt.fee = await BaseAsyncAPI._try_await(self.estimate_fee(signerData, opt))
+            opt.fee = await BaseAsyncAPI._try_await(self.estimate_fee(signer_data, opt))
 
         return Tx(
             TxBody(opt.msgs, opt.memo or "", opt.timeout_height or 0),
             AuthInfo([], opt.fee),
-            "",
+            [],
         )
 
     async def estimate_fee(
@@ -239,7 +240,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def encode(self, tx: Tx) -> str:
         """Encode a Tx to base64 encoded proto string"""
-        return base64.b64encode(tx.to_proto().SerializeToString()).decode()
+        return base64.b64encode(bytes(tx.to_proto())).decode()
 
     async def decode(self, tx: str) -> Tx:
         """Decode base64 encoded proto string to a Tx"""
@@ -254,7 +255,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             str: transaction hash
         """
-        amino = await self.encode(tx)
+        amino = self.encode(tx)
         return hash_amino(amino)
 
     async def _broadcast(
@@ -375,7 +376,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         txs = res.get("block").get("data").get("txs")
         hashes = map(hash_amino, txs)
-        return [i for i in map(self.tx_info, hashes)]
+        return [await self.tx_info(tx_hash) for tx_hash in hashes]
 
 
 class TxAPI(AsyncTxAPI):
@@ -460,4 +461,3 @@ class TxAPI(AsyncTxAPI):
         pass
 
     tx_infos_by_height.__doc__ = AsyncTxAPI.tx_infos_by_height.__doc__
-
