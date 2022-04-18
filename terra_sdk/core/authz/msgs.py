@@ -60,7 +60,7 @@ class MsgExecAuthorized(Msg):
         )
 
     def to_proto(self) -> MsgExec_pb:
-        return MsgExec_pb(grantee=self.grantee, msgs=[m.pack_any() for m in self.msgs])
+        return MsgExec_pb(grantee=self.grantee, msgs=[m.to_proto() for m in self.msgs])
 
     @classmethod
     def from_proto(cls, proto: MsgExec_pb) -> MsgExecAuthorized:

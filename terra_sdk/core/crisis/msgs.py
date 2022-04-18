@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Any
-
 from terra_proto.cosmos.crisis.v1beta1 import (
     MsgVerifyInvariant as MsgVerifyInvariant_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
@@ -67,5 +66,5 @@ class MsgVerifyInvariant(Msg):
         raise Exception("MsgVerifyInvarant is not allowed to send")
 
     @classmethod
-    def unpack_any(cls, any: Any) -> MsgVerifyInvariant:
+    def unpack_any(cls, any: Any_pb) -> MsgVerifyInvariant:
         return MsgVerifyInvariant.from_proto(any)

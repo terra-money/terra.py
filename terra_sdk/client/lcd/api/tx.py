@@ -239,7 +239,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
     async def encode(self, tx: Tx) -> str:
         """Encode a Tx to base64 encoded proto string"""
-        return base64.b64encode(tx.to_proto().SerializeToString()).decode()
+        return base64.b64encode(bytes(tx.to_proto())).decode()
 
     async def decode(self, tx: str) -> Tx:
         """Decode base64 encoded proto string to a Tx"""
@@ -254,7 +254,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             str: transaction hash
         """
-        amino = await self.encode(tx)
+        amino = self.encode(tx)
         return hash_amino(amino)
 
     async def _broadcast(

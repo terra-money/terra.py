@@ -57,6 +57,12 @@ class Authorization(BaseTerraData):
 
         return parse_authorization_proto(proto)
 
+    @staticmethod
+    def unpack_any(proto: Any_pb) -> Authorization:
+        from terra_sdk.util.parse_authorization import parse_authorization_unpack_any
+
+        return parse_authorization_unpack_any(proto)
+
 
 @attr.s
 class SendAuthorization(Authorization):
@@ -72,6 +78,8 @@ class SendAuthorization(Authorization):
     type_url = "/cosmos.bank.v1beta1.SendAuthorization"
 
     spend_limit: Coins = attr.ib(converter=Coins)
+
+    prototype = SendAuthorization_pb
 
     def to_amino(self) -> dict:
         return {
@@ -111,6 +119,8 @@ class GenericAuthorization(Authorization):
     """"""
     type_url = "/cosmos.authz.v1beta1.GenericAuthorization"
 
+    prototype = GenericAuthorization_pb
+
     msg: str = attr.ib()
 
     def to_amino(self) -> dict:
@@ -143,7 +153,7 @@ class AuthorizationGrant(JSONSerializable):
     authorization: Authorization = attr.ib()
     """Grant authorization details."""
 
-    expiration: datetime = attr.ib(converter=parser.parse)
+    expiration: datetime = attr.ib()
     """Grant expiration."""
 
     def to_amino(self) -> dict:
@@ -174,8 +184,8 @@ class AuthorizationGrant(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: Grant_pb) -> AuthorizationGrant:
         return cls(
-            authorization=Authorization.from_proto(proto.authorization),
-            expiration=parser.parse(proto.expiration),
+            authorization=Authorization.unpack_any(proto.authorization),
+            expiration=proto.expiration,
         )
 
     @classmethod
@@ -216,8 +226,9 @@ class StakeAuthorization(Authorization):
     allow_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
     deny_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
 
-
     type_url = "/cosmos.staking.v1beta1.StakeAuthorization"
+
+    prototype = StakeAuthorization_pb
 
     def to_amino(self):
         raise Exception("Amino not supported")

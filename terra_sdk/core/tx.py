@@ -76,11 +76,11 @@ class Tx(JSONSerializable):
         }
 
     def to_proto(self) -> Tx_pb:
-        proto = Tx_pb()
-        proto.body = self.body.to_proto()
-        proto.auth_info = self.auth_info.to_proto()
-        proto.signatures = [sig for sig in self.signatures]
-        return proto
+        return Tx_pb(
+            body=self.body.to_proto(),
+            auth_info=self.auth_info.to_proto(),
+            signatures=self.signatures
+        )
 
     @classmethod
     def from_data(cls, data: dict) -> Tx:
