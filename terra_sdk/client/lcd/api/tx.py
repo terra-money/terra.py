@@ -11,8 +11,9 @@ from terra_sdk.core.broadcast import (
     BlockTxBroadcastResult,
     SyncTxBroadcastResult,
 )
+from terra_sdk.core.fee import Fee
 from terra_sdk.core.msg import Msg
-from terra_sdk.core.tx import AuthInfo, Fee, SignerData, SignMode, Tx, TxBody, TxInfo
+from terra_sdk.core.tx import AuthInfo, SignerData, SignMode, Tx, TxBody, TxInfo
 from terra_sdk.util.hash import hash_amino
 from terra_sdk.util.json import JSONSerializable
 
@@ -460,4 +461,3 @@ class TxAPI(AsyncTxAPI):
         pass
 
     tx_infos_by_height.__doc__ = AsyncTxAPI.tx_infos_by_height.__doc__
-

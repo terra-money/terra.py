@@ -35,6 +35,7 @@ __all__ = [
     "AuthorizationType",
 ]
 
+
 class Authorization(BaseTerraData):
     """Base class for authorization types."""
 
@@ -109,13 +110,12 @@ class SendAuthorization(Authorization):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
 
-
 @attr.s
 class GenericAuthorization(Authorization):
     """Generic type of :class:`Authorization`, specifying the type of message to allow.
 
     Args:
-        grant_msg_type: type of message allowed by authorization"""
+        msg: type of message allowed by authorization"""
 
     type_amino = "msgauth/GenericAuthorization"
     """"""
@@ -126,7 +126,7 @@ class GenericAuthorization(Authorization):
     msg: str = attr.ib()
 
     def to_amino(self) -> dict:
-        return {"type": self.type_amino, "value": {"msg": self.msg()}}
+        return {"type": self.type_amino, "value": {"msg": self.msg}}
 
     def to_data(self) -> dict:
         return {"@type": self.type_url, "msg": self.msg}
@@ -143,7 +143,7 @@ class GenericAuthorization(Authorization):
         return cls(msg=proto.msg)
 
     @classmethod
-    def from_amino(cls, amino: dict) -> SendAuthorization:
+    def from_amino(cls, amino: dict) -> GenericAuthorization:
         value = amino["value"]
         return cls(msg=value["msg"])
 
@@ -197,8 +197,8 @@ class AuthorizationGrant(JSONSerializable):
     def from_amino(cls, amino: dict) -> AuthorizationGrant:
         value = amino["value"]
         return cls(
-            authorization=Authorization.from_amino(amino["authorization"]),
-            expiration=amino["expiration"]
+            authorization=Authorization.from_amino(value["authorization"]),
+            expiration=value["expiration"]
         )
 
 
@@ -251,7 +251,7 @@ class StakeAuthorization(Authorization):
     def from_data(cls, data: dict) -> StakeAuthorization:
         return StakeAuthorization(
             authorization_type=data["authorization_type"],
-            max_tokens=(Coins.from_data(data["max_tokens"]) if data.get("max_tokens") is not None else None),
+            max_tokens=(Coin.from_data(data["max_tokens"]) if data.get("max_tokens") is not None else None),
             allow_list=StakeAuthorizationValidators.from_data(data["allow_list"]) if data.get("allow_list") else None,
             deny_list=StakeAuthorizationValidators.from_data(data["deny_list"]) if data.get("deny_list") else None,
         )
@@ -268,7 +268,7 @@ class StakeAuthorization(Authorization):
     def from_proto(cls, proto: StakeAuthorization_pb) -> StakeAuthorization:
         return StakeAuthorization(
             authorization_type=proto.authorization_type,
-            max_tokens=Coins.from_proto(proto.max_tokens) if proto.max_tokens else None,
+            max_tokens=Coin.from_proto(proto.max_tokens) if proto.max_tokens else None,
             allow_list=StakeAuthorizationValidators.from_proto(proto.allow_list) if proto.allow_list else None,
             deny_list=StakeAuthorizationValidators.from_proto(proto.deny_list) if proto.deny_list else None,
         )
