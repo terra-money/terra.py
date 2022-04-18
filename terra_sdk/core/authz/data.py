@@ -35,7 +35,6 @@ __all__ = [
     "AuthorizationType",
 ]
 
-
 class Authorization(BaseTerraData):
     """Base class for authorization types."""
 
@@ -106,6 +105,9 @@ class SendAuthorization(Authorization):
         value = amino["value"]
         return cls(spend_limit=Coins.from_amino(value["spend_limit"]))
 
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
+
 
 
 @attr.s
@@ -145,6 +147,9 @@ class GenericAuthorization(Authorization):
         value = amino["value"]
         return cls(msg=value["msg"])
 
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
+
 
 @attr.s
 class AuthorizationGrant(JSONSerializable):
@@ -177,7 +182,7 @@ class AuthorizationGrant(JSONSerializable):
 
     def to_proto(self) -> Grant_pb:
         return Grant_pb(
-            authorization=self.authorization.to_proto(),
+            authorization=self.authorization.pack_any(),
             expiration=self.expiration,
         )
 
@@ -267,3 +272,6 @@ class StakeAuthorization(Authorization):
             allow_list=StakeAuthorizationValidators.from_proto(proto.allow_list) if proto.allow_list else None,
             deny_list=StakeAuthorizationValidators.from_proto(proto.deny_list) if proto.deny_list else None,
         )
+
+    def pack_any(self) -> Any_pb:
+        return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
