@@ -78,7 +78,7 @@ class IdentifiedClientState(JSONSerializable):
     def to_proto(self) -> IdentifiedClientState_pb:
         return IdentifiedClientState_pb(
             client_id=self.client_id,
-            client_state=Any_pb().from_dict(self.consensus_state),
+            client_state=Any_pb().from_dict(self.client_state),
         )
 
     @classmethod
@@ -94,7 +94,7 @@ class ConsensusStateWithHeight(JSONSerializable):
     ConsensusStateWithHeight defines a consensus state with an additional height field.
     """
 
-    height: str = attr.ib()
+    height: Height = attr.ib()
     consensus_state: dict = attr.ib()
 
     def to_amino(self):
@@ -109,12 +109,12 @@ class ConsensusStateWithHeight(JSONSerializable):
 
     def to_proto(self) -> ConsensusStateWithHeight_pb:
         return ConsensusStateWithHeight_pb(
-            height=self.height, consensus_state=Any_pb().from_dict(self.consensus_state)
+            height=self.height.to_proto(), consensus_state=Any_pb().from_dict(self.consensus_state)
         )
 
     @classmethod
     def from_proto(cls, proto: ConsensusStateWithHeight_pb) -> ConsensusStateWithHeight:
-        return cls(height=proto.height, consensus_state=proto.consensus_state.to_dict())
+        return cls(height=Height.from_proto(proto.height), consensus_state=proto.consensus_state.to_dict())
 
 
 @attr.s
@@ -142,7 +142,7 @@ class ClientConsensusStates(JSONSerializable):
     def to_proto(self) -> ClientConsensusStates_pb:
         return ClientConsensusStates_pb(
             client_id=self.client_id,
-            consensus_states=[state.to_proto for state in self.consensus_states],
+            consensus_states=[state.to_proto() for state in self.consensus_states],
         )
 
     @classmethod

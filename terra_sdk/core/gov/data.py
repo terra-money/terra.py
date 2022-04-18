@@ -6,7 +6,7 @@ from typing import List
 import attr
 from dateutil import parser
 
-from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
+from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb, ProposalStatus
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 from terra_proto.cosmos.gov.v1beta1 import Vote as Vote_pb
 from terra_proto.cosmos.gov.v1beta1 import VoteOption
@@ -17,7 +17,7 @@ from terra_sdk.util.json import JSONSerializable
 from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.parse_content import parse_content, Content
 
-__all__ = ["Proposal", "Content", "VoteOption", "WeightedVoteOption"]
+__all__ = ["Proposal", "Content", "VoteOption", "WeightedVoteOption", "ProposalStatus"]
 
 
 @attr.s
@@ -123,7 +123,7 @@ class Proposal(JSONSerializable):
         return Proposal_pb(
             proposal_id=self.proposal_id,
             content=self.content.pack_any(),
-            status=self.status,
+            status=ProposalStatus.from_str(self.status),
             final_tally_result=self.final_tally_result.to_proto(),
             submit_time=self.submit_time,
             deposit_end_time=self.deposit_end_time,

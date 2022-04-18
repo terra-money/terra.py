@@ -29,7 +29,7 @@ __all__ = [
 
 @attr.s
 class MsgSetWithdrawAddress(Msg):
-    """Modify the Withdraw Address of a delegator.
+    """Modify Withdraw Address of a delegator.
 
     Args:
         delegator_address: delegator

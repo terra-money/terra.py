@@ -66,5 +66,5 @@ class MsgVerifyInvariant(Msg):
         raise Exception("MsgVerifyInvarant is not allowed to send")
 
     @classmethod
-    def unpack_any(cls, any: Any_pb) -> MsgVerifyInvariant:
-        return MsgVerifyInvariant.from_proto(any)
+    def unpack_any(cls, any_pb: Any_pb) -> MsgVerifyInvariant:
+        return MsgVerifyInvariant.from_proto(any_pb)

@@ -128,7 +128,7 @@ class SimulateResponse(JSONSerializable):
 
 
 class AsyncTxAPI(BaseAsyncAPI):
-    async def tx_info(self, tx_hash: str) -> Tx:
+    async def tx_info(self, tx_hash: str) -> TxInfo:
         """Fetches information for an included transaction given a tx hash.
 
         Args:
@@ -156,7 +156,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         opt = copy.deepcopy(options)
 
-        signerData: List[SignerData] = []
+        signer_data: List[SignerData] = []
         for signer in signers:
             seq = signer.sequence
             pubkey = signer.public_key
@@ -169,16 +169,16 @@ class AsyncTxAPI(BaseAsyncAPI):
                     seq = acc.get_sequence()
                 if pubkey is None:
                     pubkey = acc.get_public_key()
-            signerData.append(SignerData(seq, pubkey))
+            signer_data.append(SignerData(seq, pubkey))
 
         # create the fake fee
         if opt.fee is None:
-            opt.fee = await BaseAsyncAPI._try_await(self.estimate_fee(signerData, opt))
+            opt.fee = await BaseAsyncAPI._try_await(self.estimate_fee(signer_data, opt))
 
         return Tx(
             TxBody(opt.msgs, opt.memo or "", opt.timeout_height or 0),
             AuthInfo([], opt.fee),
-            "",
+            [],
         )
 
     async def estimate_fee(
@@ -376,7 +376,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         txs = res.get("block").get("data").get("txs")
         hashes = map(hash_amino, txs)
-        return [i for i in map(self.tx_info, hashes)]
+        return [await self.tx_info(tx_hash) for tx_hash in hashes]
 
 
 class TxAPI(AsyncTxAPI):

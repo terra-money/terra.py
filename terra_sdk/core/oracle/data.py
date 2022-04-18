@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import attr
 from terra_proto.terra.oracle.v1beta1 import (
-    AggregateExchangeRatePrevote as AggregateExchangeRatePrevote_pb,
+    AggregateExchangeRatePrevote as AggregateExchangeRatePrevote_pb, ExchangeRateTuple as ExchangeRateTuple_pb,
 )
 from terra_proto.terra.oracle.v1beta1 import (
     AggregateExchangeRateVote as AggregateExchangeRateVote_pb,
@@ -48,7 +48,7 @@ class AggregateExchangeRateVote(JSONSerializable):
         }
 
     @classmethod
-    def from_data(cls, data) -> AggregateExchangeRateVote:
+    def from_data(cls, data: dict) -> AggregateExchangeRateVote:
         return cls(
             exchange_rate_tuples=Coins(
                 [
@@ -62,10 +62,21 @@ class AggregateExchangeRateVote(JSONSerializable):
     def to_proto(self) -> AggregateExchangeRateVote_pb:
         return AggregateExchangeRateVote_pb(
             exchange_rate_tuples=[
-                {"denom": tuple.denom, "exchange_rate": str(tuple.amount)}
-                for tuple in self.exchange_rate_tuples.to_list()
+                ExchangeRateTuple_pb(t.denom, t.amount) for t in self.exchange_rate_tuples.to_list()
             ],
             voter=self.voter,
+        )
+
+    @classmethod
+    def from_proto(cls, proto: AggregateExchangeRateVote_pb) -> AggregateExchangeRateVote:
+        return cls(
+            exchange_rate_tuples=Coins(
+                [
+                    Coin(d["denom"], d["exchange_rate"])
+                    for d in proto.exchange_rate_tuples
+                ],
+            ),
+            voter=proto.voter
         )
 
 
