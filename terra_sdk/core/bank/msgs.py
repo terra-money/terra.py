@@ -26,8 +26,8 @@ class MsgSend(Msg):
     ``to_address``.
 
     Args:
-        from_address: sender
-        to_address: recipient
+        from_address (AccAddress): sender
+        to_address (AccAddress): recipient
         amount (Coins): coins to send
     """
 
