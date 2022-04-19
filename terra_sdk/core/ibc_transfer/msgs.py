@@ -34,6 +34,7 @@ class MsgTransfer(Msg):
     type_url = "/ibc.applications.transfer.v1.MsgTransfer"
     """"""
     prototype = MsgTransfer_pb
+    """"""
 
     source_port: str = attr.ib()
     source_channel: str = attr.ib()

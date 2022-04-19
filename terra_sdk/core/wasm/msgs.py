@@ -57,6 +57,7 @@ class MsgStoreCode(Msg):
     type_url = "/terra.wasm.v1beta1.MsgStoreCode"
     """"""
     prototype = MsgStoreCode_pb
+    """"""
 
     sender: AccAddress = attr.ib()
     wasm_byte_code: str = attr.ib()
@@ -97,6 +98,7 @@ class MsgMigrateCode(Msg):
     type_url = "/terra.wasm.v1beta1.MsgMigrateCode"
     """"""
     prototype = MsgMigrateCode_pb
+    """"""
 
     sender: AccAddress = attr.ib()
     code_id: int = attr.ib(converter=int)
@@ -151,6 +153,7 @@ class MsgInstantiateContract(Msg):
     type_url = "/terra.wasm.v1beta1.MsgInstantiateContract"
     """"""
     prototype = MsgInstantiateContract_pb
+    """"""
 
     sender: AccAddress = attr.ib()
     admin: Optional[AccAddress] = attr.ib()
@@ -217,6 +220,7 @@ class MsgExecuteContract(Msg):
     type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
     """"""
     prototype = MsgExecuteContract_pb
+    """"""
 
     sender: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
@@ -277,6 +281,7 @@ class MsgMigrateContract(Msg):
     type_url = "/terra.wasm.v1beta1.MsgMigrateContract"
     """"""
     prototype = MsgMigrateContract_pb
+    """"""
 
     admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
@@ -336,6 +341,7 @@ class MsgUpdateContractAdmin(Msg):
     type_url = "/terra.wasm.v1beta1.MsgUpdateContractAdmin"
     """"""
     prototype = MsgUpdateContractAdmin_pb
+    """"""
 
     admin: AccAddress = attr.ib()
     new_admin: AccAddress = attr.ib()
@@ -387,6 +393,7 @@ class MsgClearContractAdmin(Msg):
     type_url = "/terra.wasm.v1beta1.MsgClearContractAdmin"
     """"""
     prototype = MsgClearContractAdmin_pb
+    """"""
 
     admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()

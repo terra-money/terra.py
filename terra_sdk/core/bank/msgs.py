@@ -36,6 +36,8 @@ class MsgSend(Msg):
     """"""
     action = "send"
     """"""
+    prototype = MsgSend_pb
+    """"""
 
     from_address: AccAddress = attr.ib()
     to_address: AccAddress = attr.ib()
@@ -81,14 +83,6 @@ class MsgSend(Msg):
         proto.to_address = self.to_address
         proto.amount = [c.to_proto() for c in self.amount]
         return proto
-
-    prototype = MsgSend_pb
-
-    """
-    @classmethod
-    def unpack_proto(cls, any_pb: Any_pb):
-        return cls.from_proto(cls.prototype().parse(any_pb.value))
-    """
 
 
 @attr.s
@@ -197,6 +191,7 @@ class MsgMultiSend(Msg):
     action = "multisend"
     """"""
     prototype = MsgMultiSend_pb
+    """"""
 
     inputs: List[MultiSendInput] = attr.ib(converter=convert_input_list)
     outputs: List[MultiSendOutput] = attr.ib(converter=convert_output_list)

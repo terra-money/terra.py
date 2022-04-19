@@ -76,10 +76,12 @@ class SendAuthorization(Authorization):
     type_amino = "msgauth/SendAuthorization"
     """"""
     type_url = "/cosmos.bank.v1beta1.SendAuthorization"
+    """"""
+    prototype = SendAuthorization_pb
+    """"""
 
     spend_limit: Coins = attr.ib(converter=Coins)
 
-    prototype = SendAuthorization_pb
 
     def to_amino(self) -> dict:
         return {
@@ -120,8 +122,9 @@ class GenericAuthorization(Authorization):
     type_amino = "msgauth/GenericAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.GenericAuthorization"
-
+    """"""
     prototype = GenericAuthorization_pb
+    """"""
 
     msg: str = attr.ib()
 
@@ -232,8 +235,9 @@ class StakeAuthorization(Authorization):
     deny_list: Optional[StakeAuthorizationValidators] = attr.ib(default=None)
 
     type_url = "/cosmos.staking.v1beta1.StakeAuthorization"
-
+    """"""
     prototype = StakeAuthorization_pb
+    """"""
 
     def to_amino(self):
         raise Exception("Amino not supported")

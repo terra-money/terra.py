@@ -34,6 +34,7 @@ class MsgGrantAllowance(Msg):
     type_url = "/cosmos.feegrant.v1beta1.MsgGrantAllowance"
     """"""
     prototype = MsgGrantAllowance_pb
+    """"""
 
     def to_amino(self) -> dict:
         return {
@@ -81,6 +82,7 @@ class MsgRevokeAllowance(Msg):
     type_url = "/cosmos.feegrant.v1beta1.MsgRevokeAllowance"
     """"""
     prototype = MsgRevokeAllowance_pb
+    """"""
 
     def to_amino(self) -> dict:
         return {
