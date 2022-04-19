@@ -1,12 +1,6 @@
 Crisis
 ======
 
-Data
-----
-
-.. automodule:: terra_sdk.core.crisis.data
-    :members:
-
 Messages
 --------
 

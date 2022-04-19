@@ -59,9 +59,9 @@ class Tx(JSONSerializable):
     """Data structure for a transaction which can be broadcasted.
 
     Args:
-        body: the processable content of the transaction
-        auth_info: the authorization related content of the transaction
-        signatures: signatures is a list of signatures that matches the length and order of body and auth_info
+        body (TxBody): the processable content of the transaction
+        auth_info (AuthInfo): the authorization related content of the transaction
+        signatures (List[bytes]): signatures is a list of signatures that matches the length and order of body and auth_info
     """
 
     body: TxBody = attr.ib()
