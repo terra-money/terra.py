@@ -32,6 +32,7 @@ class MsgSubmitProposal(Msg):
     action = "submit_proposal"
     """"""
     prototype = MsgSubmitProposal_pb
+    """"""
 
     content: Content = attr.ib()
     initial_deposit: Coins = attr.ib(converter=Coins)
@@ -101,6 +102,7 @@ class MsgDeposit(Msg):
     action = "deposit"
     """"""
     prototype = MsgDeposit_pb
+    """"""
 
     proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
@@ -165,6 +167,7 @@ class MsgVote(Msg):
     action = "vote"
     """"""
     prototype = MsgVote_pb
+    """"""
 
     EMPTY = "Empty"
     """Encodes an empty vote option."""

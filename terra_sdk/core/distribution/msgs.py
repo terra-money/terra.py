@@ -43,6 +43,7 @@ class MsgSetWithdrawAddress(Msg):
     action = "set_withdraw_address"
     """"""
     prototype = MsgSetWithdrawAddress_pb
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
@@ -100,6 +101,7 @@ class MsgWithdrawDelegatorReward(Msg):
     action = "withdraw_delegation_reward"
     """"""
     prototype = MsgWithdrawDelegatorReward_pb
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -158,6 +160,7 @@ class MsgWithdrawValidatorCommission(Msg):
     action = "withdraw_validator_commission"
     """"""
     prototype = MsgWithdrawValidatorCommission_pb
+    """"""
 
     validator_address: ValAddress = attr.ib()
 
@@ -200,6 +203,7 @@ class MsgFundCommunityPool(Msg):
     type_url = "/cosmos.distribution.v1beta1.MsgFundCommunityPool"
     """"""
     prototype = MsgFundCommunityPool_pb
+    """"""
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)

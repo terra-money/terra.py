@@ -47,6 +47,7 @@ class MsgBeginRedelegate(Msg):
     action = "begin_redelegate"
     """"""
     prototype = MsgBeginRedelegate_pb
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_src_address: ValAddress = attr.ib()
@@ -108,6 +109,7 @@ class MsgDelegate(Msg):
     action = "delegate"
     """"""
     prototype = MsgDelegate_pb
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -164,6 +166,7 @@ class MsgUndelegate(Msg):
     action = "begin_unbonding"
     """"""
     prototype = MsgUndelegate_pb
+    """"""
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -221,6 +224,7 @@ class MsgEditValidator(Msg):
     action = "edit_validator"
     """"""
     prototype = MsgEditValidator_pb
+    """"""
 
     description: Description = attr.ib()
     validator_address: ValAddress = attr.ib()
@@ -281,6 +285,7 @@ class MsgCreateValidator(Msg):
     action = "create_validator"
     """"""
     prototype = MsgCreateValidator_pb
+    """"""
 
     description: Description = attr.ib()
     commission: CommissionRates = attr.ib()

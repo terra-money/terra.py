@@ -33,6 +33,7 @@ class MsgExecAuthorized(Msg):
     type_url = "/cosmos.authz.v1beta1.MsgExec"
     """"""
     prototype = MsgExec_pb
+    """"""
 
     grantee: AccAddress = attr.ib()
     msgs: List[Msg] = attr.ib()
@@ -96,6 +97,7 @@ class MsgGrantAuthorization(Msg):
     type_url = "/cosmos.authz.v1beta1.MsgGrant"
     """"""
     prototype = MsgGrant_pb
+    """"""
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
@@ -168,6 +170,7 @@ class MsgRevokeAuthorization(Msg):
     type_url = "/cosmos.authz.v1beta1.MsgRevoke"
     """"""
     prototype = MsgRevoke_pb
+    """"""
 
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
