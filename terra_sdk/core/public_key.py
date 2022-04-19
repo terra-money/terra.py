@@ -157,7 +157,7 @@ class SimplePublicKey(PublicKey):
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
-        return cls(key=data["key"])
+        return cls(key=base64.b64decode(data["key"]))
 
     @classmethod
     def from_proto(cls, proto: SimplePubKey_pb) -> SimplePublicKey:
@@ -165,7 +165,7 @@ class SimplePublicKey(PublicKey):
 
     @classmethod
     def from_amino(cls, amino: dict) -> SimplePublicKey:
-        return cls(key=amino["value"])
+        return cls(key=base64.b64decode(amino["value"]))
 
     def to_proto(self) -> SimplePubKey_pb:
         return SimplePubKey_pb(key=self.key)
@@ -209,11 +209,11 @@ class ValConsPubKey(PublicKey):
 
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
-        return cls(key=data["key"])
+        return cls(key=base64.b64decode(data["key"]))
 
     @classmethod
     def from_amino(cls, amino: dict) -> ValConsPubKey:
-        return cls(key=amino["value"]["key"])
+        return cls(key=base64.b64decode(amino["value"]["key"]))
 
     @classmethod
     def from_proto(cls, proto: ValConsPubKey_pb) -> ValConsPubKey:
@@ -269,7 +269,12 @@ class LegacyAminoMultisigPublicKey(PublicKey):
 
     @classmethod
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
-        return cls(threshold=data["threshold"], public_keys=data["public_keys"])
+        return cls(
+            threshold=data["threshold"],
+            public_keys=[
+                PublicKey.from_data(pubkey) for pubkey in data["public_keys"]
+            ]
+        )
 
     @classmethod
     def from_proto(cls, proto: LegacyAminoPubKey_pb) -> LegacyAminoMultisigPublicKey:
