@@ -22,7 +22,7 @@ class MsgSubmitProposal(Msg):
     Args:
         content (Content): type of proposal
         initial_deposit (Coins): initial deposit for proposal made by proposer
-        proposer: proposal submitter
+        proposer (AccAddress): proposal submitter
     """
 
     type_amino = "gov/MsgSubmitProposal"
@@ -89,8 +89,8 @@ class MsgDeposit(Msg):
     """Deposit funds for an active deposit-stage proposal.
 
     Args:
-        proposal_id: proposal number to deposit for
-        depositor: account making deposit
+        proposal_id (int): proposal number to deposit for
+        depositor (AccAddress): account making deposit
         amount (Coins): amount to deposit
     """
 
@@ -153,10 +153,9 @@ class MsgVote(Msg):
     """Vote for an active voting-stage proposal.
 
     Args:
-        proposal_id: proposal to vote for
-        voter: account casting vote
-        option: vote option (must be one of: :data:`MsgVote.ABSTAIN`,
-            :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`,
+        proposal_id (int): proposal to vote for
+        voter (AccAddress): account casting vote
+        option (VoteOption): vote option (must be one of: :data:`MsgVote.ABSTAIN`, :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`),
     """
 
     type_amino = "gov/MsgVote"
