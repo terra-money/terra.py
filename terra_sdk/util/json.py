@@ -12,6 +12,8 @@ def to_data(x: Any) -> Any:
         return x.to_data()
     if isinstance(x, int):
         return str(x)
+    if isinstance(x, datetime):
+        return to_isoformat(x)
     if isinstance(x, list):
         return [to_data(g) for g in x]
     if isinstance(x, dict):
@@ -24,6 +26,8 @@ def to_amino(x: Any) -> Any:
         return x.to_amino()
     if isinstance(x, list):
         return [to_data(g) for g in x]
+    if isinstance(x, datetime):
+        return to_isoformat(x)
     if isinstance(x, dict):
         return dict_to_amino(x)
     if isinstance(x, int):

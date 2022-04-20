@@ -126,10 +126,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            grant=AuthorizationGrant(
-                authorization=Authorization.from_data(data["grant"]["authorization"]),
-                expiration=str(data["grant"]["expiration"]),
-            ),
+            grant=AuthorizationGrant.from_data(data["grant"])
         )
 
     def to_proto(self) -> MsgGrant_pb:

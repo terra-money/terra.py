@@ -112,11 +112,11 @@ class Proposal(JSONSerializable):
             content=parse_content(data["content"]),
             status=data["status"],
             final_tally_result=data["final_tally_result"],
-            submit_time=data["submit_time"],
-            deposit_end_time=data["deposit_end_time"],
+            submit_time=parser.parse(data["submit_time"]),
+            deposit_end_time=parser.parse(data["deposit_end_time"]),
             total_deposit=Coins.from_data(data["total_deposit"]),
-            voting_start_time=data["voting_start_time"],
-            voting_end_time=data["voting_end_time"],
+            voting_start_time=parser.parse(data["voting_start_time"]),
+            voting_end_time=parser.parse(data["voting_end_time"]),
         )
 
     def to_proto(self) -> Proposal_pb:
