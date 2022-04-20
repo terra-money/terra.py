@@ -21,9 +21,19 @@ class CompactBitArray(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> CompactBitArray:
-        return cls(
-            data["extra_bits_stored"], bytearray(base64.b64decode(data["elems"]))
-        )
+        return cls(data["extra_bits_stored"], bytearray(base64.b64decode(data["elems"])))
+
+    def to_data(self) -> dict:
+        return {
+            "extra_bits_stored": self.extra_bits_stored,
+            "elems": base64.b64encode(self.elems)
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "extra_bits_stored": self.extra_bits_stored,
+            "elems": base64.b64encode(self.elems).decode()
+        }
 
     @classmethod
     def from_proto(cls, proto: CompactBitArray_pb) -> CompactBitArray:

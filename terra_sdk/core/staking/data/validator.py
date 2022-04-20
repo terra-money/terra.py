@@ -95,7 +95,7 @@ class Commission(JSONSerializable):
     def from_data(cls, data: dict) -> Commission:
         return cls(
             commission_rates=CommissionRates.from_data(data["commission_rates"]),
-            update_time=data["update_time"],
+            update_time=parser.parse(data["update_time"]),
         )
 
     def to_proto(self) -> Commission_pb:

@@ -201,7 +201,7 @@ class AuthorizationGrant(JSONSerializable):
         value = amino["value"]
         return cls(
             authorization=Authorization.from_amino(value["authorization"]),
-            expiration=value["expiration"]
+            expiration=parser.parse(value["expiration"])
         )
 
 
