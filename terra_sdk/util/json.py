@@ -16,6 +16,8 @@ def to_data(x: Any) -> Any:
         return [to_data(g) for g in x]
     if isinstance(x, dict):
         return dict_to_data(x)
+    if isinstance(x, datetime):
+        return to_isoformat(x)
     return x
 
 
