@@ -1,5 +1,6 @@
 """CompactBitArray types related to multisig."""
 from __future__ import annotations
+import base64
 
 import math
 
@@ -20,7 +21,9 @@ class CompactBitArray(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> CompactBitArray:
-        return cls(data["extra_bits_stored"], bytearray(data["elems"]))
+        return cls(
+            data["extra_bits_stored"], bytearray(base64.b64decode(data["elems"]))
+        )
 
     @classmethod
     def from_proto(cls, proto: CompactBitArray_pb) -> CompactBitArray:
