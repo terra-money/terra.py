@@ -62,11 +62,11 @@ class ModeInfoSingle(JSONSerializable):
     mode: SignMode = attr.ib()
 
     def to_data(self) -> dict:
-        return {"mode": self.mode}
+        return {"mode": self.mode.name}
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfoSingle:
-        return cls(data["mode"])
+        return cls(SignMode[data["mode"]])
 
     def to_proto(self) -> ModeInfoSingle_pb:
         return ModeInfoSingle_pb(mode=self.mode)

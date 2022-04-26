@@ -8,7 +8,7 @@ from terra_sdk.util.converter import to_isoformat
 
 
 def to_data(x: Any) -> Any:
-    if "to_data" in dir(x):
+    if hasattr(x, "to_data"):
         return x.to_data()
     if isinstance(x, int):
         return str(x)
@@ -50,7 +50,7 @@ def dict_to_data(d: dict) -> dict:
 class JSONSerializable(ABC):
     def to_data(self) -> Any:
         """Converts the object to its JSON-serializable Python data representation."""
-        pass  # return dict_to_data(copy.deepcopy(self.__dict__))
+        return dict_to_data(copy.deepcopy(self.__dict__))
 
     def to_json(self) -> str:
         """Marshals the object into a stringified JSON serialization. Keys are first sorted

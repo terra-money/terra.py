@@ -150,10 +150,10 @@ class SimplePublicKey(PublicKey):
     key: bytes = attr.ib()
 
     def to_amino(self) -> dict:
-        return {"type": self.type_amino, "value": self.key}
+        return {"type": self.type_amino, "value": base64.b64encode(self.key)}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "key": self.key}
+        return {"@type": self.type_url, "key": base64.b64encode(self.key)}
 
     @classmethod
     def from_data(cls, data: dict) -> SimplePublicKey:
@@ -186,7 +186,7 @@ class SimplePublicKey(PublicKey):
         return address_from_public_key(self)
 
     def address(self) -> str:
-        return get_bech("terra", self.raw_address())
+        return get_bech("terra", self.raw_address().hex())
 
 
 @attr.s
@@ -199,13 +199,13 @@ class ValConsPubKey(PublicKey):
     type_url = "/cosmos.crypto.ed25519.PubKey"
     """an ed25519 tendermint public key type."""
 
-    key: str = attr.ib()
+    key: bytes = attr.ib()
 
     def to_amino(self) -> dict:
-        return {"type": self.type_amino, "value": self.key}
+        return {"type": self.type_amino, "value": base64.b64encode(self.key)}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "key": self.key}
+        return {"@type": self.type_url, "key": base64.b64encode(self.key)}
 
     @classmethod
     def from_data(cls, data: dict) -> ValConsPubKey:
@@ -213,11 +213,11 @@ class ValConsPubKey(PublicKey):
 
     @classmethod
     def from_amino(cls, amino: dict) -> ValConsPubKey:
-        return cls(key=base64.b64decode(amino["value"]["key"]))
+        return cls(key=base64.b64decode(amino["value"]))
 
     @classmethod
     def from_proto(cls, proto: ValConsPubKey_pb) -> ValConsPubKey:
-        return cls(key=proto.key)
+        return cls(key=base64.b64decode(proto.key))
 
     def get_type(self) -> str:
         return self.type_url
@@ -231,11 +231,11 @@ class ValConsPubKey(PublicKey):
     def encode_amino_pubkey(self) -> bytes:
         return bytes.fromhex(BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519) + bytes(self.key)
 
-    def raw_address(self) -> str:
-        return address_from_public_key(self.key)
+    def raw_address(self) -> bytes:
+        return address_from_public_key(self)
 
     def address(self) -> str:
-        return get_bech("terravalcons", self.raw_address())
+        return get_bech("terravalcons", self.raw_address().hex())
 
 
 @attr.s

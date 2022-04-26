@@ -163,19 +163,19 @@ class TxBody(JSONSerializable):
 
     messages: List[Msg] = attr.ib()
     memo: Optional[str] = attr.ib(default="")
-    timeout_height: Optional[int] = attr.ib(default=None)
+    timeout_height: int = attr.ib(default=0, converter=int)  # TxBody_pb.timeout_height is int
 
     def to_data(self) -> dict:
         return {
             "messages": [m.to_data() for m in self.messages],
-            "memo": self.memo if self.memo else "",
-            "timeout_height": self.timeout_height if self.timeout_height else "0",
+            "memo": self.memo,
+            "timeout_height": self.timeout_height,
         }
 
     def to_proto(self) -> TxBody_pb:
         return TxBody_pb(
             messages=[m.pack_any() for m in self.messages],
-            memo=self.memo or "",
+            memo=self.memo,
             timeout_height=self.timeout_height,
         )
 
@@ -184,7 +184,7 @@ class TxBody(JSONSerializable):
         return cls(
             [Msg.from_data(m) for m in data["messages"]],
             data["memo"],
-            data["timeout_height"],
+            data["timeout_height"] if data["timeout_height"] else 0,
         )
 
     @classmethod
@@ -323,11 +323,11 @@ class TxLog(JSONSerializable):
 
     @classmethod
     def from_proto(cls, tx_log: AbciMessageLog_pb) -> TxLog:
-        events = [event for event in tx_log["events"]]
-        return cls(msg_index=tx_log["msg_index"], log=tx_log["log"], events=events)
+        events = [json.loads(event) for event in tx_log.events]
+        return cls(msg_index=tx_log.msg_index, log=tx_log.log, events=events)
 
     def to_proto(self) -> AbciMessageLog_pb:
-        str_events = List
+        str_events = []
         for event in self.events:
             str_events.append(json.dumps(event))
         return AbciMessageLog_pb(
@@ -433,15 +433,6 @@ class TxInfo(JSONSerializable):
             "code": self.code,
             "codespace": self.codespace,
         }
-
-        if not self.logs:
-            del data["logs"]
-
-        if not self.code:
-            del data["code"]
-
-        if not self.codespace:
-            del data["codespace"]
 
         return data
 
