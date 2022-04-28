@@ -255,7 +255,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         Returns:
             str: transaction hash
         """
-        amino = await self.encode(tx)
+        amino = await super()._try_await(self.encode(tx))
         return hash_amino(amino)
 
     async def _broadcast(
