@@ -99,10 +99,10 @@ class BaseVestingAccount(JSONSerializable):
     def from_proto(cls, proto: BaseVestingAccount_pb) -> BaseVestingAccount:
         return cls(
             base_account=BaseAccount.from_proto(proto.base_account),
-            original_vesting=Coins.from_proto(proto["original_vesting"]),
-            delegated_free=Coins.from_proto(proto["delegated_free"]),
-            delegated_vesting=Coins.from_proto(proto["delegated_vesting"]),
-            end_time=proto["end_time"],
+            original_vesting=Coins.from_proto(proto.original_vesting),
+            delegated_free=Coins.from_proto(proto.delegated_free),
+            delegated_vesting=Coins.from_proto(proto.delegated_vesting),
+            end_time=proto.end_time,
         )
 
     def to_proto(self) -> BaseVestingAccount_pb:

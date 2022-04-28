@@ -37,7 +37,7 @@ class CompactBitArray(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: CompactBitArray_pb) -> CompactBitArray:
-        return cls(proto["extra_bits_stored"], bytearray(proto.elems))
+        return cls(proto.extra_bits_stored, bytearray(proto.elems))
 
     def to_proto(self) -> CompactBitArray_pb:
         return CompactBitArray_pb(

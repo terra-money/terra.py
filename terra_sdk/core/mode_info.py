@@ -104,6 +104,6 @@ class ModeInfoMulti(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: ModeInfoMulti_pb) -> ModeInfoMulti:
         return cls(
-            CompactBitArray.from_proto(proto["bitarray"]),
-            ModeInfo_pb.from_proto(proto["mode_infos"]),
+            CompactBitArray.from_proto(proto.bitarray),
+            ModeInfo_pb.from_proto(proto.mode_infos),
         )
