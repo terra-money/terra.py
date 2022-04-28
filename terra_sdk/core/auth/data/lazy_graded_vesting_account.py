@@ -178,7 +178,7 @@ class LazyGradedVestingAccount(BaseAccount):
                 proto.base_vesting_account
             ),
             vesting_schedules=[
-                VestingSchedule.from_proto(vs) for vs in proto["vesting_schedules"]
+                VestingSchedule.from_proto(vs) for vs in proto.vesting_schedules
             ],
         )
 

@@ -80,8 +80,8 @@ class MsgSubmitProposal(Msg):
         content = parse_content_proto(proto.content)
         return cls(
             content=content,
-            initial_deposit=Coins.from_proto(proto["initial_deposit"]),
-            proposer=proto["proposer"],
+            initial_deposit=Coins.from_proto(proto.initial_deposit),
+            proposer=proto.proposer,
         )
 
 
@@ -144,9 +144,9 @@ class MsgDeposit(Msg):
     @classmethod
     def from_proto(cls, proto: MsgDeposit_pb) -> MsgDeposit:
         return cls(
-            proposal_id=proto["proposal_id"],
-            depositor=proto["depositor"],
-            amount=Coins.from_proto(proto["amount"]),
+            proposal_id=proto.proposal_id,
+            depositor=proto.depositor,
+            amount=Coins.from_proto(proto.amount),
         )
 
 

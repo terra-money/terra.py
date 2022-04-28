@@ -193,7 +193,7 @@ class MsgSubmitMisbehaviour(Msg):
     @classmethod
     def from_proto(cls, proto: MsgSubmitMisbehaviour_pb) -> MsgSubmitMisbehaviour:
         return cls(
-            client_id=proto["client_id"],
-            misbehaviour=Any_pb().from_dict(proto["misbehaviour"]),
-            signer=proto["signer"],
+            client_id=proto.client_id,
+            misbehaviour=Any_pb().from_dict(proto.misbehaviour),
+            signer=proto.signer,
         )
