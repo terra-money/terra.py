@@ -15,8 +15,10 @@ from terra_proto.cosmos.feegrant.v1beta1 import BasicAllowance as BasicAllowance
 from terra_proto.cosmos.feegrant.v1beta1 import (
     PeriodicAllowance as PeriodicAllowance_pb,
 )
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import Coins
+from terra_sdk.util.base import create_demux_unpack_any, create_demux_proto
 from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.json import JSONSerializable
 
@@ -31,12 +33,16 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: Optional[datetime] = attr.ib(
-        converter=converters.optional(parser.parse)
+    expiration: datetime = attr.ib(
+        converter=parser.parse
     )
 
     type_amino = "feegrant/BasicAllowance"
+    """"""
     type_url = "/cosmos.feegrant.v1beta1.BasicAllowance"
+    """"""
+    prototype = BasicAllowance_pb
+    """"""
 
     def to_amino(self) -> dict:
         return {
@@ -85,10 +91,9 @@ class BasicAllowance(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: BasicAllowance_pb) -> BasicAllowance:
         sl = proto.spend_limit
-        exp = proto.expiration
         return cls(
             spend_limit=Coins.from_proto(sl) if sl else None,
-            expiration=exp if exp else None,
+            expiration=to_isoformat(proto.expiration)
         )
 
 
@@ -108,6 +113,8 @@ class PeriodicAllowance(JSONSerializable):
     type_amino = "feegrant/PeriodicAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.PeriodicAllowance"
+    """"""
+    prototype = PeriodicAllowance_pb
     """"""
 
     def to_amino(self) -> dict:
@@ -159,7 +166,7 @@ class PeriodicAllowance(JSONSerializable):
             period=proto.period.seconds(),
             period_spend_limit=proto.period_spend_limit,
             period_can_spend=proto.period_can_spend,
-            period_reset=proto.period_reset,
+            period_reset=to_isoformat(proto.period_reset),
         )
 
 
@@ -238,8 +245,8 @@ class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
             return PeriodicAllowance.from_amino(data)
 
     @classmethod
-    def from_proto(cls, data: any):
-        if data.get("@type") == BasicAllowance.type_url:
-            return BasicAllowance.from_proto(data)
-        else:
-            return PeriodicAllowance.from_proto(data)
+    def from_proto(cls, proto: Any_pb):
+        return parse_allowance_unpack_any(proto)
+
+
+parse_allowance_unpack_any = create_demux_unpack_any([BasicAllowance, PeriodicAllowance])
