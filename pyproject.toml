@@ -62,6 +62,7 @@ types-python-dateutil = "^2.8.9"
 [tool.pytest.ini_options]
 addopts = "-ra -q"
 minversion = "6.0"
+asyncio_mode = "auto"
 
 [tool.flake8]
 max-line-length = 88

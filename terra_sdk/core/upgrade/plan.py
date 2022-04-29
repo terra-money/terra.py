@@ -8,8 +8,9 @@ from datetime import datetime
 from typing import Any, Optional
 
 import attr
+from attr import converters
 from betterproto.lib.google.protobuf import Any as Any_pb
-from dateutil.parser import parse
+from dateutil import parser
 from terra_proto.cosmos.upgrade.v1beta1 import Plan as Plan_pb
 
 from terra_sdk.util.converter import to_isoformat
@@ -21,7 +22,7 @@ class Plan(JSONSerializable):
     name: str = attr.ib()
     height: str = attr.ib()
     info: str = attr.ib()
-    time: Optional[datetime] = attr.ib(default=None, converter=parse)
+    time: Optional[datetime] = attr.ib(default=None, converter=converters.optional(parser.parse))
     upgrade_client_state: Optional[Any] = attr.ib(default=None)
 
     def to_amino(self) -> dict:
@@ -37,7 +38,7 @@ class Plan(JSONSerializable):
     def from_data(cls, data: dict) -> Plan:
         return cls(
             name=data["name"],
-            time=parse(data["time"]) if data.get("time") else None,
+            time=data["time"] if data.get("time") else None,
             height=data["height"],
             info=data["info"],
             upgrade_client_state=data["upgrade_client_state"] if data.get("upgrade_client_state") else None,
@@ -59,7 +60,7 @@ class Plan(JSONSerializable):
     def from_proto(cls, proto: Plan_pb) -> Plan:
         return cls(
             name=proto.name,
-            time=parse(proto.time) if proto.time else None,
+            time=proto.time if proto.time else None,
             height=proto.height,
             info=proto.info,
             upgrade_client_state=Any_pb().parse(proto.upgrade_client_state) if proto.upgraded_client_state else None,
