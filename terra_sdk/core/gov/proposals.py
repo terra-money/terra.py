@@ -25,6 +25,8 @@ class TextProposal(JSONSerializable):
     """"""
     type_url = "/cosmos.gov.v1beta1.TextProposal"
     """"""
+    prototype = TextProposal_pb
+    """"""
 
     title: str = attr.ib()
     description: str = attr.ib()

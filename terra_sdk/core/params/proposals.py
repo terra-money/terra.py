@@ -60,6 +60,8 @@ class ParameterChangeProposal(JSONSerializable):
     """"""
     type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""
+    prototype = ParameterChangeProposal_pb
+    """"""
 
     title: str = attr.ib()
     description: str = attr.ib()

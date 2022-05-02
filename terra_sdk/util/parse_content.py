@@ -18,7 +18,7 @@ from terra_proto.cosmos.upgrade.v1beta1 import (
 )
 from terra_proto.ibc.core.client.v1 import ClientUpdateProposal as ClientUpdateProposal_pb
 
-from .base import create_demux, create_demux_proto
+from .base import create_demux, create_demux_proto, create_demux_unpack_any
 
 Content = Union[
     TextProposal,
@@ -50,6 +50,18 @@ parse_content_proto = create_demux_proto(
         ClientUpdateProposal
     ]
 )
+
+parse_content_unpack_any = create_demux_unpack_any(
+    [
+        CommunityPoolSpendProposal,
+        TextProposal,
+        ParameterChangeProposal,
+        SoftwareUpgradeProposal,
+        CancelSoftwareUpgradeProposal,
+        ClientUpdateProposal
+    ]
+)
+
 """
 parse_content_proto = create_demux_proto(
     [

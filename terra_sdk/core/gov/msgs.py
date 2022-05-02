@@ -76,8 +76,8 @@ class MsgSubmitProposal(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
-        from terra_sdk.util.parse_content import parse_content_proto
-        content = parse_content_proto(proto.content)
+        from terra_sdk.util.parse_content import parse_content_unpack_any
+        content = parse_content_unpack_any(proto.content)
         return cls(
             content=content,
             initial_deposit=Coins.from_proto(proto.initial_deposit),
