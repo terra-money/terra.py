@@ -10,7 +10,6 @@ class Msg(BaseTerraData):
         raise NotImplementedError
 
     def pack_any(self) -> Any_pb:
-        proto = self.to_proto()
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     @staticmethod
