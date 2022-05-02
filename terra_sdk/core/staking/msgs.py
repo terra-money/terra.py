@@ -15,7 +15,7 @@ from terra_proto.cosmos.staking.v1beta1 import MsgDelegate as MsgDelegate_pb
 from terra_proto.cosmos.staking.v1beta1 import MsgEditValidator as MsgEditValidator_pb
 from terra_proto.cosmos.staking.v1beta1 import MsgUndelegate as MsgUndelegate_pb
 
-from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey
+from terra_sdk.core import AccAddress, Coin, Dec, ValAddress, ValConsPubKey, PublicKey
 from terra_sdk.core.msg import Msg
 
 from .data import CommissionRates, Description
@@ -289,7 +289,7 @@ class MsgCreateValidator(Msg):
 
     description: Description = attr.ib()
     commission: CommissionRates = attr.ib()
-    min_self_delegation: int = attr.ib()
+    min_self_delegation: str = attr.ib()
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
     pubkey: ValConsPubKey = attr.ib()
@@ -314,7 +314,7 @@ class MsgCreateValidator(Msg):
             min_self_delegation=self.min_self_delegation,
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
-            pubkey=self.pubkey.to_proto(),
+            pubkey=self.pubkey.pack_any(),
             value=self.value.to_proto(),
         )
 
@@ -323,9 +323,9 @@ class MsgCreateValidator(Msg):
         return cls(
             description=Description.from_proto(proto.description),
             commission=CommissionRates.from_proto(proto.commission),
-            min_self_delegation=int(proto.min_self_delegation),
+            min_self_delegation=proto.min_self_delegation,
             delegator_address=proto.delegator_address,
             validator_address=proto.validator_address,
-            pubkey=proto.pubkey,
+            pubkey=PublicKey.unpack_any(proto.pubkey),
             value=Coin.from_proto(proto.value),
         )

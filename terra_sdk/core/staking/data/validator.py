@@ -163,6 +163,16 @@ class Description(JSONSerializable):
             security_contact=self.security_contact,
         )
 
+    @classmethod
+    def from_proto(cls, proto: Description_pb) -> Description:
+        return cls(
+            proto.moniker,
+            proto.identity,
+            proto.website,
+            proto.details,
+            proto.security_contact,
+        )
+
 
 @attr.s
 class Validator(JSONSerializable):

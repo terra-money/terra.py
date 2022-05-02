@@ -14,6 +14,7 @@ from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
 from terra_sdk.util.json import JSONSerializable
 
 from .bech32 import get_bech
+from ..util.base import create_demux_unpack_any
 
 BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987" + "21"  # with fixed length 21
 BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64" + "20"  # with fixed length 20
@@ -108,6 +109,12 @@ class PublicKey(JSONSerializable, ABC):
             return LegacyAminoMultisigPublicKey.from_data(data)
         raise TypeError("could not unmarshal PublicKey: type is incorrect")
 
+    @classmethod
+    def unpack_any(cls, any_pb: Any_pb):
+        unpack = create_demux_unpack_any(
+            [SimplePublicKey, ValConsPubKey, LegacyAminoMultisigPublicKey])
+        return unpack(any_pb)
+
     @abstractmethod
     def pack_any(self) -> Any_pb:
         raise NotImplementedError
@@ -143,9 +150,10 @@ class SimplePublicKey(PublicKey):
 
     type_amino = "tendermint/PubKeySecp256k1"
     """"""
-
     type_url = "/cosmos.crypto.secp256k1.PubKey"
     """Normal signature public key type."""
+    prototype = SimplePubKey_pb
+    """"""
 
     key: bytes = attr.ib()
 
@@ -195,9 +203,10 @@ class ValConsPubKey(PublicKey):
 
     type_amino = "tendermint/PubKeyEd25519"
     """"""
-
     type_url = "/cosmos.crypto.ed25519.PubKey"
     """an ed25519 tendermint public key type."""
+    prototype = ValConsPubKey_pb
+    """"""
 
     key: bytes = attr.ib()
 
@@ -217,7 +226,7 @@ class ValConsPubKey(PublicKey):
 
     @classmethod
     def from_proto(cls, proto: ValConsPubKey_pb) -> ValConsPubKey:
-        return cls(key=base64.b64decode(proto.key))
+        return cls(key=proto.key)
 
     def get_type(self) -> str:
         return self.type_url
@@ -244,9 +253,10 @@ class LegacyAminoMultisigPublicKey(PublicKey):
 
     type_amino = "tendermint/PubKeyMultisigThreshold"
     """"""
-
     type_url = "/cosmos.crypto.multisig.LegacyAminoPubKey"
     """Multisig public key type."""
+    prototype = LegacyAminoPubKey_pb
+    """"""
 
     threshold: int = attr.ib(converter=int)
     public_keys: List[SimplePublicKey] = attr.ib(factory=list)
@@ -280,7 +290,7 @@ class LegacyAminoMultisigPublicKey(PublicKey):
     def from_proto(cls, proto: LegacyAminoPubKey_pb) -> LegacyAminoMultisigPublicKey:
         return cls(
             threshold=proto.threshold,
-            public_keys=[SimplePublicKey.from_proto(pk) for pk in proto.public_keys],
+            public_keys=[PublicKey.unpack_any(pk) for pk in proto.public_keys],
         )
 
     @classmethod
