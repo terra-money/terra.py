@@ -137,11 +137,11 @@ class MsgWithdrawDelegatorReward(Msg):
 
     @classmethod
     def from_proto(
-        cls, data: MsgWithdrawDelegatorReward_pb
+        cls, proto: MsgWithdrawDelegatorReward_pb
     ) -> MsgWithdrawDelegatorReward:
         return cls(
-            delegator_address=data["delegator_address"],
-            validator_address=data["validator_address"],
+            delegator_address=proto.delegator_address,
+            validator_address=proto.validator_address,
         )
 
 

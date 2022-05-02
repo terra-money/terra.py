@@ -29,6 +29,8 @@ class CommunityPoolSpendProposal(JSONSerializable):
     """"""
     type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
     """"""
+    prototype = CommunityPoolSpendProposal_pb
+    """"""
 
     title: str = attr.ib()
     description: str = attr.ib()

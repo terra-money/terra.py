@@ -276,7 +276,7 @@ class SignerInfo(JSONSerializable):
     @classmethod
     def from_proto(cls, proto: SignerInfo_pb) -> SignerInfo:
         return cls(
-            public_key=PublicKey.from_proto(proto.public_key),
+            public_key=PublicKey.unpack_any(proto.public_key),
             mode_info=ModeInfo.from_proto(proto.mode_info),
             sequence=proto.sequence,
         )

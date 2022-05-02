@@ -29,6 +29,8 @@ class SoftwareUpgradeProposal(JSONSerializable):
     """"""
     type_url = "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal"
     """"""
+    prototype = SoftwareUpgradeProposal_pb
+    """"""
 
     def to_amino(self) -> dict:
         return {
@@ -75,6 +77,8 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
     type_amino = "upgrade/CancelSoftwareUpgradeProposal"
     """"""
     type_url = "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal"
+    """"""
+    prototype = CancelSoftwareUpgradeProposal_pb
     """"""
 
     def to_amino(self) -> dict:

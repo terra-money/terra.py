@@ -20,6 +20,8 @@ class ClientUpdateProposal(JSONSerializable):
     """"""
     type_url = "/ibc.core.client.v1.ClientUpdateProposal"
     """"""
+    prototype = ClientUpdateProposal_pb
+    """"""
 
     title: str = attr.ib()
     description: str = attr.ib()
