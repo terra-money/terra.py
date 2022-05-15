@@ -68,4 +68,4 @@ class MsgVerifyInvariant(Msg):
 
     @classmethod
     def unpack_any(cls, any_pb: Any_pb) -> MsgVerifyInvariant:
-        return MsgVerifyInvariant.from_proto(any_pb)
+        return cls.from_proto(MsgVerifyInvariant_pb().parse(any_pb.value))

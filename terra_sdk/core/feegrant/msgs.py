@@ -36,6 +36,15 @@ class MsgGrantAllowance(Msg):
     prototype = MsgGrantAllowance_pb
     """"""
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgGrantAllowance:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            granter=amino["value"]["granter"],
+            grantee=amino["value"]["grantee"],
+            allowance=Allowance.from_amino(amino["value"]["allowance"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -44,6 +53,13 @@ class MsgGrantAllowance(Msg):
                 "grantee": self.grantee,
                 "allowance": self.allowance.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "allowance": self.allowance.to_data(),
         }
 
     @classmethod
@@ -84,10 +100,24 @@ class MsgRevokeAllowance(Msg):
     prototype = MsgRevokeAllowance_pb
     """"""
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgRevokeAllowance:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            granter=amino["value"]["granter"],
+            grantee=amino["value"]["grantee"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
             "value": {"granter": self.granter, "grantee": self.grantee},
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "granter": self.granter,
+            "grantee": self.grantee,
         }
 
     @classmethod

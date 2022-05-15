@@ -54,6 +54,16 @@ class MsgBeginRedelegate(Msg):
     validator_dst_address: ValAddress = attr.ib()
     amount: Coin = attr.ib(converter=Coin.parse)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgBeginRedelegate:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            delegator_address=amino["value"]["delegator_address"],
+            validator_src_address=amino["value"]["validator_src_address"],
+            validator_dst_address=amino["value"]["validator_dst_address"],
+            amount=Coin.from_amino(amino["value"]["amount"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -63,6 +73,14 @@ class MsgBeginRedelegate(Msg):
                 "validator_dst_address": self.validator_dst_address,
                 "amount": self.amount.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "delegator_address": self.delegator_address,
+            "validator_src_address": self.validator_src_address,
+            "validator_dst_address": self.validator_dst_address,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -115,6 +133,15 @@ class MsgDelegate(Msg):
     validator_address: ValAddress = attr.ib()
     amount: Coin = attr.ib(converter=Coin.parse)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgDelegate:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            delegator_address=amino["value"]["delegator_address"],
+            validator_address=amino["value"]["validator_address"],
+            amount=Coin.from_amino(amino["value"]["amount"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -123,6 +150,13 @@ class MsgDelegate(Msg):
                 "validator_address": self.validator_address,
                 "amount": self.amount.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "delegator_address": self.delegator_address,
+            "validator_address": self.validator_address,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -172,6 +206,15 @@ class MsgUndelegate(Msg):
     validator_address: ValAddress = attr.ib()
     amount: Coin = attr.ib(converter=Coin.parse)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgUndelegate:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            delegator_address=amino["value"]["delegator_address"],
+            validator_address=amino["value"]["validator_address"],
+            amount=Coin.from_amino(amino["value"]["amount"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -180,6 +223,13 @@ class MsgUndelegate(Msg):
                 "validator_address": self.validator_address,
                 "amount": self.amount.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "delegator_address": self.delegator_address,
+            "validator_address": self.validator_address,
+            "amount": self.amount.to_data(),
         }
 
     @classmethod
@@ -231,12 +281,20 @@ class MsgEditValidator(Msg):
     commission_rate: Optional[Dec] = attr.ib(default=None)
     min_self_delegation: Optional[int] = attr.ib(default=None)
 
+    def to_data(self) -> dict:
+        return {
+            "description": self.description.to_data(),
+            "validator_address": self.validator_address,
+            "commission_rate": self.commission_rate,
+            "min_self_delegation": self.min_self_delegation,
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgEditValidator:
         msd = int(data["min_self_delegation"]) if data["min_self_delegation"] else None
         cr = Dec(data["commission_rate"]) if data["commission_rate"] else None
         return cls(
-            description=data["description"],
+            description=Description.from_data(data["description"]),
             validator_address=data["validator_address"],
             commission_rate=cr,
             min_self_delegation=msd,
@@ -295,15 +353,26 @@ class MsgCreateValidator(Msg):
     pubkey: ValConsPubKey = attr.ib()
     value: Coin = attr.ib(converter=Coin.parse)  # type: ignore
 
+    def to_data(self) -> dict:
+        return {
+            "description": self.description.to_data(),
+            "commission": self.commission.to_data(),
+            "min_self_delegation": self.min_self_delegation,
+            "delegator_address": self.delegator_address,
+            "validator_address": self.validator_address,
+            "pubkey": self.pubkey.to_data(),
+            "value": self.value.to_data(),
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgCreateValidator:
         return cls(
             description=Description.from_data(data["description"]),
             commission=CommissionRates.from_data(data["commission"]),
-            min_self_delegation=int(data["min_self_delegation"]),
+            min_self_delegation=data["min_self_delegation"],
             delegator_address=data["delegator_address"],
             validator_address=data["validator_address"],
-            pubkey=data["pubkey"],
+            pubkey=ValConsPubKey.from_data(data["pubkey"]),
             value=Coin.from_data(data["value"]),
         )
 

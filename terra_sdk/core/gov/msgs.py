@@ -38,6 +38,18 @@ class MsgSubmitProposal(Msg):
     initial_deposit: Coins = attr.ib(converter=Coins)
     proposer: AccAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgSubmitProposal:
+        assert cls.type_amino == amino["type"]
+        from terra_sdk.util.parse_content import parse_content
+
+        content = parse_content(amino["value"]["content"])
+        return cls(
+            content=content,
+            initial_deposit=Coins.from_amino(amino["value"]["initial_deposit"]),
+            proposer=amino["value"]["proposer"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -107,6 +119,15 @@ class MsgDeposit(Msg):
     proposal_id: int = attr.ib(converter=int)
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgDeposit:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            proposal_id=amino["value"]["proposal_id"],
+            depositor=amino["value"]["depositor"],
+            amount=Coins.from_amino(amino["value"]["amount"]),
+        )
 
     def to_amino(self) -> dict:
         return {
@@ -200,6 +221,15 @@ class MsgVote(Msg):
                 f"incorrect value for option: {value}, must be one of: {possible_options}"
             )
     """
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgVote:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            proposal_id=amino["value"]["proposal_id"],
+            voter=amino["value"]["voter"],
+            option=amino["value"]["option"],
+        )
 
     def to_amino(self) -> dict:
         return {

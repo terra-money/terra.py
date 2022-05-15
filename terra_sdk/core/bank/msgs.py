@@ -43,6 +43,15 @@ class MsgSend(Msg):
     to_address: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgSend:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            from_address=amino["value"]["from_address"],
+            to_address=amino["value"]["to_address"],
+            amount=Coins.from_amino(amino["value"]["amount"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -101,6 +110,13 @@ class MultiSendInput(JSONSerializable):
     coins: Coins = attr.ib(converter=Coins)
     """Coins to be sent."""
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MultiSendInput:
+        return cls(
+            address=amino["value"]["address"],
+            coins=Coins.from_amino(amino["value"]["coins"]),
+        )
+
     def to_amino(self) -> dict:
         return {"address": self.address, "coins": self.coins.to_amino()}
 
@@ -137,6 +153,13 @@ class MultiSendOutput(JSONSerializable):
 
     coins: Coins = attr.ib(converter=Coins)
     """Coins to be received."""
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MultiSendOutput:
+        return cls(
+            address=amino["value"]["address"],
+            coins=Coins.from_amino(amino["value"]["coins"]),
+        )
 
     def to_amino(self) -> dict:
         return {"address": self.address, "coins": self.coins.to_amino()}
@@ -196,6 +219,14 @@ class MsgMultiSend(Msg):
     inputs: List[MultiSendInput] = attr.ib(converter=convert_input_list)
     outputs: List[MultiSendOutput] = attr.ib(converter=convert_output_list)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgMultiSend:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            inputs=[MultiSendInput.from_amino(x) for x in amino["value"]["inputs"]],
+            outputs=[MultiSendOutput.from_amino(x) for x in amino["value"]["outputs"]],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -234,4 +265,4 @@ class MsgMultiSend(Msg):
 
     @classmethod
     def unpack_any(cls, any_pb: Any_pb) -> MsgMultiSend:
-        return cls.from_proto(MsgMultiSend_pb().parse(any_pb))
+        return cls.from_proto(MsgMultiSend_pb().parse(any_pb.value))

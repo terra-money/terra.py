@@ -48,6 +48,14 @@ class MsgSetWithdrawAddress(Msg):
     delegator_address: AccAddress = attr.ib()
     withdraw_address: AccAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgSetWithdrawAddress:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            delegator_address=amino["value"]["delegator_address"],
+            withdraw_address=amino["value"]["withdraw_address"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -78,10 +86,10 @@ class MsgSetWithdrawAddress(Msg):
         )
 
     @classmethod
-    def from_proto(cls, data: MsgSetWithdrawAddress_pb) -> MsgSetWithdrawAddress:
+    def from_proto(cls, proto: MsgSetWithdrawAddress_pb) -> MsgSetWithdrawAddress:
         return cls(
-            delegator_address=data["delegator_address"],
-            withdraw_address=data["withdraw_address"],
+            delegator_address=proto.delegator_address,
+            withdraw_address=proto.withdraw_address,
         )
 
 
@@ -105,6 +113,14 @@ class MsgWithdrawDelegatorReward(Msg):
 
     delegator_address: AccAddress = attr.ib()
     validator_address: ValAddress = attr.ib()
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgWithdrawDelegatorReward:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            delegator_address=amino["value"]["delegator_address"],
+            validator_address=amino["value"]["validator_address"],
+        )
 
     def to_amino(self) -> dict:
         return {
@@ -164,6 +180,11 @@ class MsgWithdrawValidatorCommission(Msg):
 
     validator_address: ValAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgWithdrawValidatorCommission:
+        assert cls.type_amino == amino["type"]
+        return cls(validator_address=amino["value"]["validator_address"])
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -184,9 +205,9 @@ class MsgWithdrawValidatorCommission(Msg):
 
     @classmethod
     def from_proto(
-        cls, data: MsgWithdrawValidatorCommission_pb
+        cls, proto: MsgWithdrawValidatorCommission_pb
     ) -> MsgWithdrawValidatorCommission:
-        return cls(validator_address=data["validator_address"])
+        return cls(validator_address=proto.validator_address)
 
 
 @attr.s
@@ -207,6 +228,14 @@ class MsgFundCommunityPool(Msg):
 
     depositor: AccAddress = attr.ib()
     amount: Coins = attr.ib(converter=Coins)
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgFundCommunityPool:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            depositor=amino["value"]["depositor"],
+            amount=Coins.from_amino(amino["value"]["amount"]),
+        )
 
     def to_amino(self) -> dict:
         return {
@@ -231,5 +260,5 @@ class MsgFundCommunityPool(Msg):
         )
 
     @classmethod
-    def from_proto(cls, data: MsgFundCommunityPool_pb) -> MsgFundCommunityPool:
-        return cls(depositor=data["depositor"], amount=Coins.from_proto(data["amount"]))
+    def from_proto(cls, proto: MsgFundCommunityPool_pb) -> MsgFundCommunityPool:
+        return cls(depositor=proto.depositor, amount=Coins.from_proto(proto.amount))

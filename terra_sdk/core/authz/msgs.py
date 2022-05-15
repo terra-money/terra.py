@@ -66,7 +66,7 @@ class MsgExecAuthorized(Msg):
     @classmethod
     def from_proto(cls, proto: MsgExec_pb) -> MsgExecAuthorized:
         return cls(
-            grantee=proto.grantee, msgs=[Msg.from_proto(md) for md in proto.msgs]
+            grantee=proto.grantee, msgs=[Msg.unpack_any(md) for md in proto.msgs]
         )
 
     @classmethod
@@ -172,6 +172,15 @@ class MsgRevokeAuthorization(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
     msg_type_url: str = attr.ib()
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgRevokeAuthorization:
+        value = amino["value"]
+        return cls(
+            granter=value["granter"],
+            grantee=value["grantee"],
+            msg_type_url=value["msg_type_url"]
+        )
 
     def to_amino(self) -> dict:
         return {

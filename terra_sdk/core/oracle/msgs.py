@@ -81,10 +81,24 @@ class MsgDelegateFeedConsent(Msg):
     operator: ValAddress = attr.ib()
     delegate: AccAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgDelegateFeedConsent:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            operator=amino["value"]["operator"],
+            delegate=amino["value"]["delegate"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
             "value": {"operator": self.operator, "delegate": self.delegate},
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "operator": self.operator,
+            "delegate": self.delegate,
         }
 
     @classmethod
@@ -120,6 +134,15 @@ class MsgAggregateExchangeRatePrevote(Msg):
     feeder: AccAddress = attr.ib()
     validator: ValAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgAggregateExchangeRatePrevote:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            hash=amino["value"]["hash"],
+            feeder=amino["value"]["feeder"],
+            validator=amino["value"]["validator"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -128,6 +151,13 @@ class MsgAggregateExchangeRatePrevote(Msg):
                 "feeder": self.feeder,
                 "validator": self.validator,
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "hash": self.hash,
+            "feeder": self.feeder,
+            "validator": self.validator,
         }
 
     @classmethod
@@ -176,6 +206,21 @@ class MsgAggregateExchangeRateVote(Msg):
     salt: str = attr.ib()
     feeder: AccAddress = attr.ib()
     validator: ValAddress = attr.ib()
+
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgAggregateExchangeRateVote:
+        assert cls.type_amino == amino["type"]
+        rates = amino["value"].get("exchange_rates")
+        if type(rates) is str:
+            rates = Coins.from_str(rates)
+        else:
+            rates = Coins.from_amino(rates)
+        return cls(
+            exchange_rates=rates,
+            salt=amino["value"].get("salt"),
+            feeder=amino["value"].get("feeder"),
+            validator=amino["value"].get("validator"),
+        )
 
     def to_amino(self) -> dict:
         return {

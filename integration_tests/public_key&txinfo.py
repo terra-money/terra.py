@@ -77,10 +77,10 @@ async def main():
                 print(tx_from_data)
                 print(tx_from_proto)
 
-        encoded_tx = await terra.tx.encode(tx_from_proto)
-        print(f'encoded_tx==encoded_tx {encoded_tx == encoded_tx}')
+        new_encoded_tx = await terra.tx.encode(tx_from_proto)
+        print(f'new_encoded_tx==encoded_tx {new_encoded_tx == encoded_tx}')
         # print(new_encoded_tx)
-        decoded_tx = await terra.tx.decode(encoded_tx)
+        decoded_tx = await terra.tx.decode(new_encoded_tx)
         print(f'decoded_tx==tx_from_proto {decoded_tx == tx_from_proto}\n')
 
         # Test `Tx`, `TxLog` and `TxInfo`

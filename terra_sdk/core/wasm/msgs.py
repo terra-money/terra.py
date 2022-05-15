@@ -62,6 +62,14 @@ class MsgStoreCode(Msg):
     sender: AccAddress = attr.ib()
     wasm_byte_code: str = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgStoreCode:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            sender=amino["value"]["sender"],
+            wasm_byte_code=amino["value"]["wasm_byte_code"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -71,6 +79,12 @@ class MsgStoreCode(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
         return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"])
+
+    def to_data(self) -> dict:
+        return {
+            "sender": self.sender,
+            "wasm_byte_code": self.wasm_byte_code,
+        }
 
     def to_proto(self) -> MsgStoreCode_pb:
         return MsgStoreCode_pb(
@@ -104,6 +118,15 @@ class MsgMigrateCode(Msg):
     code_id: int = attr.ib(converter=int)
     wasm_byte_code: str = attr.ib(converter=str)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgMigrateCode:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            sender=amino["value"]["sender"],
+            code_id=amino["value"]["code_id"],
+            wasm_byte_code=amino["value"]["wasm_byte_code"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -121,6 +144,13 @@ class MsgMigrateCode(Msg):
             code_id=data["code_id"],
             wasm_byte_code=data["wasm_byte_code"],
         )
+
+    def to_data(self) -> dict:
+        return {
+            "sender": self.sender,
+            "code_id": str(self.code_id),
+            "wasm_byte_code": self.wasm_byte_code,
+        }
 
     def to_proto(self) -> MsgMigrateCode_pb:
         return MsgMigrateCode_pb(
@@ -161,6 +191,17 @@ class MsgInstantiateContract(Msg):
     init_msg: Union[dict, str] = attr.ib()
     init_coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgInstantiateContract:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            sender=amino["value"]["sender"],
+            admin=amino["value"]["admin"],
+            code_id=amino["value"]["code_id"],
+            init_msg=amino["value"]["init_msg"],
+            init_coins=Coins.from_amino(amino["value"]["init_coins"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -171,6 +212,15 @@ class MsgInstantiateContract(Msg):
                 "init_msg": remove_none(self.init_msg),
                 "init_coins": self.init_coins.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "sender": self.sender,
+            "admin": self.admin,
+            "code_id": str(self.code_id),
+            "init_msg": remove_none(self.init_msg),
+            "init_coins": self.init_coins.to_data(),
         }
 
     @classmethod
@@ -227,6 +277,16 @@ class MsgExecuteContract(Msg):
     execute_msg: Union[dict, str] = attr.ib()
     coins: Coins = attr.ib(converter=Coins, factory=Coins)
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgExecuteContract:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            sender=amino["value"]["sender"],
+            contract=amino["value"]["contract"],
+            execute_msg=parse_msg(amino["value"]["execute_msg"]),
+            coins=Coins.from_amino(amino["value"]["coins"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -236,6 +296,14 @@ class MsgExecuteContract(Msg):
                 "execute_msg": remove_none(self.execute_msg),
                 "coins": self.coins.to_amino(),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "sender": self.sender,
+            "contract": self.contract,
+            "execute_msg": remove_none(self.execute_msg),
+            "coins": self.coins.to_data(),
         }
 
     @classmethod
@@ -288,6 +356,16 @@ class MsgMigrateContract(Msg):
     new_code_id: int = attr.ib(converter=int)
     migrate_msg: Union[dict, str] = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgMigrateContract:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            admin=amino["value"]["admin"],
+            contract=amino["value"]["contract"],
+            new_code_id=amino["value"]["new_code_id"],
+            migrate_msg=parse_msg(amino["value"]["migrate_msg"]),
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -297,6 +375,14 @@ class MsgMigrateContract(Msg):
                 "new_code_id": str(self.new_code_id),
                 "migrate_msg": remove_none(self.migrate_msg),
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "admin": self.admin,
+            "contract": self.contract,
+            "new_code_id": str(self.new_code_id),
+            "migrate_msg": remove_none(self.migrate_msg),
         }
 
     @classmethod
@@ -347,6 +433,15 @@ class MsgUpdateContractAdmin(Msg):
     new_admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgUpdateContractAdmin:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            admin=amino["value"]["admin"],
+            new_admin=amino["value"]["new_admin"],
+            contract=amino["value"]["contract"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -355,6 +450,13 @@ class MsgUpdateContractAdmin(Msg):
                 "new_admin": self.new_admin,
                 "contract": self.contract,
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "admin": self.admin,
+            "new_admin": self.new_admin,
+            "contract": self.contract,
         }
 
     @classmethod
@@ -398,10 +500,24 @@ class MsgClearContractAdmin(Msg):
     admin: AccAddress = attr.ib()
     contract: AccAddress = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgClearContractAdmin:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            admin=amino["value"]["admin"],
+            contract=amino["value"]["contract"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
             "value": {"admin": self.admin, "contract": self.contract},
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "admin": self.admin,
+            "contract": self.contract,
         }
 
     @classmethod

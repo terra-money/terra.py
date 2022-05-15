@@ -35,6 +35,15 @@ class MsgSwap(Msg):
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgSwap:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            trader=amino["value"]["trader"],
+            offer_coin=Coin.from_amino(amino["value"]["offer_coin"]),
+            ask_denom=amino["value"]["ask_denom"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -43,6 +52,13 @@ class MsgSwap(Msg):
                 "offer_coin": self.offer_coin.to_amino(),
                 "ask_denom": self.ask_denom,
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "trader": self.trader,
+            "offer_coin": self.offer_coin.to_data(),
+            "ask_denom": self.ask_denom,
         }
 
     @classmethod
@@ -94,6 +110,16 @@ class MsgSwapSend(Msg):
     offer_coin: Coin = attr.ib(converter=Coin.parse)  # type: ignore
     ask_denom: str = attr.ib()
 
+    @classmethod
+    def from_amino(cls, amino: dict) -> MsgSwapSend:
+        assert cls.type_amino == amino["type"]
+        return cls(
+            from_address=amino["value"]["from_address"],
+            to_address=amino["value"]["to_address"],
+            offer_coin=Coin.from_amino(amino["value"]["offer_coin"]),
+            ask_denom=amino["value"]["ask_denom"],
+        )
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -103,6 +129,14 @@ class MsgSwapSend(Msg):
                 "offer_coin": self.offer_coin.to_amino(),
                 "ask_denom": self.ask_denom,
             },
+        }
+
+    def to_data(self) -> dict:
+        return {
+            "from_address": self.from_address,
+            "to_address": self.to_address,
+            "offer_coin": self.offer_coin.to_data(),
+            "ask_denom": self.ask_denom,
         }
 
     @classmethod
