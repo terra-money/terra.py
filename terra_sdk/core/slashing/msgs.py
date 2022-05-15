@@ -49,4 +49,4 @@ class MsgUnjail(Msg):
 
     @classmethod
     def from_proto(cls, proto: MsgUnjail_pb) -> MsgUnjail:
-        return cls(address=proto.address)
+        return cls(address=proto.validator_addr)
