@@ -13,20 +13,6 @@ def index_by_pub_key(m: Dict[str, Any], o: Any):
 
 
 class AsyncLCDUtils(BaseAsyncAPI):
-    async def calculate_tax(self, coin: Union[Coin, str, dict]) -> Coin:
-        """Calculates the tax that would be applied for the Coin if sent.
-
-        Args:
-            coin (Union[Coin, str, dict]): coin to be sent
-
-        Returns:
-            Coin: tax to be paid
-        """
-        coin = Coin.parse(coin)
-        rate = await BaseAsyncAPI._try_await(self._c.treasury.tax_rate())
-        cap = await BaseAsyncAPI._try_await(self._c.treasury.tax_cap(coin.denom))
-        return Coin(coin.denom, min(ceil(coin.amount * rate), cap.amount))
-
     async def validators_with_voting_power(self) -> Dict[str, dict]:
         """Gets current validators and merges their voting power from the validator set query.
 
@@ -63,14 +49,7 @@ class AsyncLCDUtils(BaseAsyncAPI):
 
 
 class LCDUtils(AsyncLCDUtils):
-    @sync_bind(AsyncLCDUtils.calculate_tax)
-    def calculate_tax(self, coin: Union[Coin, str, dict]) -> Coin:
-        pass
-
-    calculate_tax.__doc__ = AsyncLCDUtils.calculate_tax.__doc__
-
     @sync_bind(AsyncLCDUtils.validators_with_voting_power)
     async def validators_with_voting_power(self) -> Dict[str, dict]:
         pass
 
-    validators_with_voting_power.__doc__ = AsyncLCDUtils.calculate_tax.__doc__

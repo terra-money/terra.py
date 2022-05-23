@@ -34,12 +34,6 @@ from terra_sdk.core.ibc.msgs import (
     MsgUpgradeClient,
 )
 from terra_sdk.core.ibc_transfer import MsgTransfer
-from terra_sdk.core.market import MsgSwap, MsgSwapSend
-from terra_sdk.core.oracle import (
-    MsgAggregateExchangeRatePrevote,
-    MsgAggregateExchangeRateVote,
-    MsgDelegateFeedConsent,
-)
 from terra_sdk.core.slashing import MsgUnjail
 from terra_sdk.core.staking import (
     MsgBeginRedelegate,
@@ -73,16 +67,10 @@ distribution_msgs = [
     MsgWithdrawValidatorCommission,
 ]
 gov_msgs = [MsgDeposit, MsgSubmitProposal, MsgVote]
-market_msgs = [MsgSwap, MsgSwapSend]
 authz_msgs = [
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,
-]
-oracle_msgs = [
-    MsgAggregateExchangeRatePrevote,
-    MsgAggregateExchangeRateVote,
-    MsgDelegateFeedConsent,
 ]
 slashing_msgs = [MsgUnjail]
 staking_msgs = [
@@ -137,8 +125,6 @@ parse_msg = create_demux(
         *distribution_msgs,
         *feegrant_msgs,
         *gov_msgs,
-        *market_msgs,
-        *oracle_msgs,
         *slashing_msgs,
         *staking_msgs,
         *wasm_msgs,
@@ -155,8 +141,6 @@ parse_proto = create_demux_proto(
         *distribution_msgs,
         *feegrant_msgs,
         *gov_msgs,
-        *market_msgs,
-        *oracle_msgs,
         *slashing_msgs,
         *staking_msgs,
         *wasm_msgs,
@@ -174,8 +158,6 @@ parse_unpack_any = create_demux_unpack_any(
         *distribution_msgs,
         *feegrant_msgs,
         *gov_msgs,
-        *market_msgs,
-        *oracle_msgs,
         *slashing_msgs,
         *staking_msgs,
         *wasm_msgs,
