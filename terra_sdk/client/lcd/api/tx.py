@@ -201,7 +201,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         if gas_prices:
             gas_prices_coins = Coins(gas_prices)
             if options.fee_denoms:
-                _fee_denoms = options.fee_denoms if options.fee_denoms else ["uusd"]
+                _fee_denoms = options.fee_denoms if options.fee_denoms else ["uluna"]
                 gas_prices_coins = gas_prices_coins.filter(
                     lambda c: c.denom in _fee_denoms
                 )
