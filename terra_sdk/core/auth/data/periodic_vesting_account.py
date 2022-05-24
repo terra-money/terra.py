@@ -67,7 +67,7 @@ class Period(JSONSerializable):
 
 @attr.s
 class PeriodicVestingAccount(BaseAccount):
-    """Stores information about an account with lazy graded vesting."""
+    """Stores information about an account with periodic vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
     start_time : int = attr.ib()

@@ -24,7 +24,7 @@ __all__ = ["ContinuousVestingAccount"]
 
 @attr.s
 class ContinuousVestingAccount(BaseAccount):
-    """Stores information about an account with lazy graded vesting."""
+    """Stores information about an account with continuous vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
     start_time : int = attr.ib()

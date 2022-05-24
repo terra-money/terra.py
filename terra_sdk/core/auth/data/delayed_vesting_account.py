@@ -24,7 +24,7 @@ __all__ = ["DelayedVestingAccount"]
 
 @attr.s
 class DelayedVestingAccount(BaseAccount):
-    """Stores information about an account with lazy graded vesting."""
+    """Stores information about an account with delayed vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
     start_time : int = attr.ib()
@@ -59,7 +59,7 @@ class DelayedVestingAccount(BaseAccount):
         return DelayedVestingAccount_pb(
             base_vesting_account=self.base_vesting_account.to_proto(),
         )
-        
+
     @classmethod
     def from_amino(cls, amino: dict) -> DelayedVestingAccount:
         amino = amino["value"]

@@ -1,6 +1,8 @@
 from .data import (
     Account,
-    LazyGradedVestingAccount,
+    DelayedVestingAccount,
+    ContinuousVestingAccount,
+    PeriodicVestingAccount,
     PublicKey,
     TxInfo,
     TxLog,
@@ -9,7 +11,9 @@ from .data import (
 
 __all__ = [
     "Account",
-    "LazyGradedVestingAccount",
+    "ContinuousVestingAccount",
+    "DelayedVestingAccount",
+    "PeriodicVestingAccount",
     "TxLog",
     "TxInfo",
     "PublicKey",
