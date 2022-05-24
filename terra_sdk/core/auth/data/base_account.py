@@ -18,7 +18,7 @@ __all__ = ["BaseAccount"]
 class BaseAccount(JSONSerializable):
     """Stores information about an account."""
 
-    type_amino = "core/Account"
+    type_amino = "cosmos-sdk/BaseAccount"
     type_url = "/cosmos.auth.v1beta1.BaseAccount"
 
     address: AccAddress = attr.ib()
