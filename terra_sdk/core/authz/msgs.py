@@ -28,7 +28,7 @@ class MsgExecAuthorized(Msg):
         msg (List[Msg]): list of messages to execute using authorization grant
     """
 
-    type_amino = "msgauth/MsgExecAuthorized"
+    type_amino = "cosmos-sdk/MsgExecAuthorized"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgExec"
     """"""
@@ -92,7 +92,7 @@ class MsgGrantAuthorization(Msg):
         grant: pair of authorization, expiration
     """
 
-    type_amino = "msgauth/MsgGrantAuthorization"
+    type_amino = "cosmos-sdk/MsgGrantAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgGrant"
     """"""
@@ -162,7 +162,7 @@ class MsgRevokeAuthorization(Msg):
         msg_type_url: type of message to remove authorization for
     """
 
-    type_amino = "msgauth/MsgRevokeAuthorization"
+    type_amino = "cosmos-sdk/MsgRevokeAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgRevoke"
     """"""
