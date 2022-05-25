@@ -25,7 +25,7 @@ class CommunityPoolSpendProposal(JSONSerializable):
         amount (Coins): amount to spend from community pool
     """
 
-    type_amino = "distribution/CommunityPoolSpendProposal"
+    type_amino = "cosmos-sdk/CommunityPoolSpendProposal"
     """"""
     type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
     """"""

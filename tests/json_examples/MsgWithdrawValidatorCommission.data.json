@@ -110,14 +110,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -324,13 +324,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -538,13 +538,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -752,13 +752,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -966,14 +966,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
@@ -1177,13 +1177,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -1391,13 +1391,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -1605,14 +1605,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -1819,13 +1819,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -2033,13 +2033,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -2247,14 +2247,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgeks28",
                 "validator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65"
               }
@@ -2461,13 +2461,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdur03x"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdn0jp4",
                 "validator_address": "terravaloper1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdur03x"
@@ -2675,13 +2675,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -2889,13 +2889,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -3103,13 +3103,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -3317,13 +3317,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -3531,13 +3531,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -3745,13 +3745,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -3959,13 +3959,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -4173,14 +4173,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jkqr2vfg4krfd4zwmsf7elfj07cjuzss3qsmhm",
                 "validator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g"
               }
@@ -4384,13 +4384,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -4598,13 +4598,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -4812,13 +4812,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -5026,14 +5026,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1fjuvyccn8hfmn5r7wc2t3kwqy09zzp6tya55yu",
                 "validator_address": "terravaloper1fjuvyccn8hfmn5r7wc2t3kwqy09zzp6tyjcf50"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1fjuvyccn8hfmn5r7wc2t3kwqy09zzp6tyjcf50"
               }
@@ -5240,14 +5240,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -5454,13 +5454,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -5668,13 +5668,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -5882,13 +5882,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -6096,13 +6096,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -6310,13 +6310,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -6524,14 +6524,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -6738,13 +6738,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -6952,14 +6952,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1kgddca7qj96z0qcxr2c45z73cfl0c75pael9y2",
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
@@ -7166,13 +7166,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -7380,14 +7380,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1h0d5kq5p64jcyqysvja3h2gysxnfudk9h73fnn",
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
@@ -7591,13 +7591,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -7805,14 +7805,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1ltwln4yqytkfzn6868xazlhg7vlzdcf96sgcjr",
                 "validator_address": "terravaloper1ltwln4yqytkfzn6868xazlhg7vlzdcf96ly9zs"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1ltwln4yqytkfzn6868xazlhg7vlzdcf96ly9zs"
               }
@@ -8016,14 +8016,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1khfcg09plqw84jxy5e7fj6ag4s2r9wqsg5jt4x",
                 "validator_address": "terravaloper1khfcg09plqw84jxy5e7fj6ag4s2r9wqsgm7k94"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1khfcg09plqw84jxy5e7fj6ag4s2r9wqsgm7k94"
               }
@@ -8230,13 +8230,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -8427,14 +8427,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
@@ -8628,14 +8628,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1tusfpgvjrplqg2fm7wacy4slzjmnzswcfn9puj",
                 "validator_address": "terravaloper1tusfpgvjrplqg2fm7wacy4slzjmnzswcfufuvp"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1tusfpgvjrplqg2fm7wacy4slzjmnzswcfufuvp"
               }
@@ -8842,14 +8842,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra16jsypha5lv6e3mc24veqzfw3rznfqu92dmteem",
                 "validator_address": "terravaloper16jsypha5lv6e3mc24veqzfw3rznfqu92d58yfg"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper16jsypha5lv6e3mc24veqzfw3rznfqu92d58yfg"
               }
@@ -9053,13 +9053,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -9267,14 +9267,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -9481,13 +9481,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -9695,13 +9695,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -9909,14 +9909,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1h0d5kq5p64jcyqysvja3h2gysxnfudk9h73fnn",
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
@@ -10120,13 +10120,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -10334,13 +10334,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -10548,14 +10548,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1kgddca7qj96z0qcxr2c45z73cfl0c75pael9y2",
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
@@ -10762,14 +10762,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -10976,13 +10976,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -11190,13 +11190,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -11404,13 +11404,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -11618,13 +11618,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -11832,14 +11832,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -12046,13 +12046,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -12260,14 +12260,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1h0d5kq5p64jcyqysvja3h2gysxnfudk9h73fnn",
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
@@ -12471,14 +12471,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -12685,14 +12685,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgeks28",
                 "validator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65"
               }
@@ -12899,13 +12899,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdur03x"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdn0jp4",
                 "validator_address": "terravaloper1v5hrqlv8dqgzvy0pwzqzg0gxy899rm4kdur03x"
@@ -13113,13 +13113,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -13327,14 +13327,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1lda78gzrjx0rsadtdk0zn4v7awtz6m9lrzcyjk",
                 "validator_address": "terravaloper1lda78gzrjx0rsadtdk0zn4v7awtz6m9lrd5ez9"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1lda78gzrjx0rsadtdk0zn4v7awtz6m9lrd5ez9"
               }
@@ -13538,13 +13538,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -13752,13 +13752,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -13949,14 +13949,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
@@ -14150,13 +14150,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -14364,14 +14364,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1d0vfj9zvxfgcm4yt4ze4u35mvhj57eg2knxyxl",
                 "validator_address": "terravaloper1d0vfj9zvxfgcm4yt4ze4u35mvhj57eg2ku2ekv"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1d0vfj9zvxfgcm4yt4ze4u35mvhj57eg2ku2ekv"
               }
@@ -14578,13 +14578,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -14792,13 +14792,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -15006,13 +15006,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -15220,13 +15220,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -15434,14 +15434,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -15648,13 +15648,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -15862,13 +15862,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -16076,13 +16076,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -16290,14 +16290,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1kgddca7qj96z0qcxr2c45z73cfl0c75pael9y2",
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1kgddca7qj96z0qcxr2c45z73cfl0c75paknc5e"
               }
@@ -16504,13 +16504,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -16718,14 +16718,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1h0d5kq5p64jcyqysvja3h2gysxnfudk9h73fnn",
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
@@ -16929,14 +16929,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1h0d5kq5p64jcyqysvja3h2gysxnfudk9h73fnn",
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1h0d5kq5p64jcyqysvja3h2gysxnfudk9h3a5rq"
               }
@@ -17140,13 +17140,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -17354,13 +17354,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -17568,13 +17568,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -17782,14 +17782,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -17996,13 +17996,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -18210,13 +18210,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -18424,13 +18424,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -18638,13 +18638,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -18835,14 +18835,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5"
               }
@@ -19036,13 +19036,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -19250,13 +19250,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -19464,14 +19464,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jkqr2vfg4krfd4zwmsf7elfj07cjuzss3qsmhm",
                 "validator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g"
               }
@@ -19658,14 +19658,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra175hhkyxmkp8hf2zrzka7cnn7lk6mudtv4nsp2x",
                 "validator_address": "terravaloper175hhkyxmkp8hf2zrzka7cnn7lk6mudtv4uuu64"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper175hhkyxmkp8hf2zrzka7cnn7lk6mudtv4uuu64"
               }
@@ -19856,14 +19856,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1khfcg09plqw84jxy5e7fj6ag4s2r9wqsg5jt4x",
                 "validator_address": "terravaloper1khfcg09plqw84jxy5e7fj6ag4s2r9wqsgm7k94"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1khfcg09plqw84jxy5e7fj6ag4s2r9wqsgm7k94"
               }
@@ -20070,14 +20070,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -20284,14 +20284,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra16jsypha5lv6e3mc24veqzfw3rznfqu92dmteem",
                 "validator_address": "terravaloper16jsypha5lv6e3mc24veqzfw3rznfqu92d58yfg"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper16jsypha5lv6e3mc24veqzfw3rznfqu92d58yfg"
               }
@@ -20495,14 +20495,14 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1pc0gs3n6803x7jqe9m7etegmyx29xw38aj9vvd",
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
             },
             {
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1pc0gs3n6803x7jqe9m7etegmyx29xw38aaf3u7"
               }
@@ -20709,13 +20709,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1jyjg55hzsh0f4xymy0kuuan30pp4q75ru0h35c",
                 "validator_address": "terravaloper1jyjg55hzsh0f4xymy0kuuan30pp4q75ruqmvyt"
@@ -20923,13 +20923,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
@@ -21137,13 +21137,13 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-              "type": "distribution/MsgWithdrawValidatorCommission",
+              "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
               "value": {
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
               }
             },
             {
-              "type": "distribution/MsgWithdrawDelegationReward",
+              "type": "cosmos-sdk/MsgWithdrawDelegationReward",
               "value": {
                 "delegator_address": "terra1sym8gyehrdsm03vdc44rg9sflg8zeuqwfd3384",
                 "validator_address": "terravaloper1sym8gyehrdsm03vdc44rg9sflg8zeuqwfzavhx"
