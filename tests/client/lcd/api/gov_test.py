@@ -18,7 +18,7 @@ def test_proposals_with_pagination():
     result = terra.gov.proposals(PaginationOptions(limit=2))
     assert result is not None
 
-
+# ToDo : check when proposal added
 def test_proposal():
     result = terra.gov.proposal(5368)
     assert result is not None
@@ -53,7 +53,7 @@ def test_proposal():
 #     result = terra.gov.votes(5368, pagOpt)
 #     assert(result is not None)
 
-
+# ToDo : check when proposal added
 def test_tally():
     result = terra.gov.tally(5368)
     assert result is not None

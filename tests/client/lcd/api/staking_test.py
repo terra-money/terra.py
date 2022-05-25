@@ -53,6 +53,7 @@ def test_unbonding():
     # assert(result is not None)
 
 
+# ToDo : check testnet
 def test_validators():
     _pagOpt = PaginationOptions(limit=3, count_total=True, reverse=False)
     result = terra.staking.validators(_pagOpt)

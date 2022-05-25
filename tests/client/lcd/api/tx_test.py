@@ -8,7 +8,7 @@ terra = LCDClient(
 
 pagOpt = PaginationOptions(limit=2, count_total=True)
 
-
+# ToDo : fix it properly with testnet
 def test_tx_info():
     result = terra.tx.tx_info(
         "7AB5550F54A1B6B8A480C6B870DFFB1E94D6DB7579F9620E4172525476B8BBA2"
@@ -16,6 +16,7 @@ def test_tx_info():
     assert result is not None
 
 
+# ToDo : fix it properly with testnet
 def test_search():
     result = terra.tx.search(
         [
@@ -23,8 +24,9 @@ def test_search():
             ("message.sender", "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v"),
         ]
     )
+
     assert result is not None
-    assert len(result) > 0
+    assert len(result["txs"]) > 0
 
 
 def test_tx_infos_by_height():
@@ -33,5 +35,5 @@ def test_tx_infos_by_height():
 
 
 def test_tx_infos_by_height_with_height():
-    result = terra.tx.tx_infos_by_height(7549440)
+    result = terra.tx.tx_infos_by_height(1)
     assert result is not None

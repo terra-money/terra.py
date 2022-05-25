@@ -15,11 +15,3 @@ def test_allowances():
     )
     assert result is not None
     assert len(result) == 0
-
-
-# def test_allowance():
-#     result = terra.feegrant.allowance(
-#         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
-#         "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
-#    )
-#     assert(result is not None)

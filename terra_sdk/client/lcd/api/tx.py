@@ -222,7 +222,7 @@ class AsyncTxAPI(BaseAsyncAPI):
         fee_amount = (
             gas_prices_coins.mul(gas).to_int_ceil_coins()
             if gas_prices_coins
-            else Coins.from_str("0uusd")
+            else Coins.from_str("0uluna")
         )
 
         return Fee(Numeric.parse(gas), fee_amount, "", "")
