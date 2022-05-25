@@ -30,7 +30,7 @@ class MsgSend(Msg):
         amount (Coins): coins to send
     """
 
-    type_amino = "bank/MsgSend"
+    type_amino = "cosmos-sdk/MsgSend"
     """"""
     type_url = "/cosmos.bank.v1beta1.MsgSend"
     """"""
@@ -184,7 +184,7 @@ class MsgMultiSend(Msg):
         outputs (List[MultiSendOutput]): recipients and amounts
     """
 
-    type_amino = "bank/MsgMultiSend"
+    type_amino = "cosmos-sdk/MsgMultiSend"
     """"""
     type_url = "/cosmos.bank.v1beta1.MsgMultiSend"
     """"""
