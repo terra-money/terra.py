@@ -35,6 +35,18 @@ class AsyncBankAPI(BaseAsyncAPI):
         res = await self._c._get("/cosmos/bank/v1beta1/supply", params)
         return Coins.from_data(res.get("supply")), res.get("pagination")
 
+    async def spendable_balances(
+        self, address: AccAddress, params: Optional[APIParams] = None
+    ) -> (Coins, dict):
+        """Queries the spenable balance of all coins for a single account
+
+        Returns:
+            Coins: spendable balance
+            params (APIParams, optional): additional params for the API like pagination
+        """
+        res = await self._c._get(f"/cosmos/bank/v1beta1/spendable_balances/{address}", params)
+        return Coins.from_data(res.get("balances")), res.get("pagination")
+
 
 class BankAPI(AsyncBankAPI):
     @sync_bind(AsyncBankAPI.balance)
@@ -49,4 +61,10 @@ class BankAPI(AsyncBankAPI):
     def total(self) -> (Coins, dict):
         pass
 
+    @sync_bind(AsyncBankAPI.spendable_balances)
+    def spendable_balances(self) -> (Coins, dict):
+        pass
+
+    balance.__doc__ = AsyncBankAPI.balance.__doc__
     total.__doc__ = AsyncBankAPI.total.__doc__
+    spendable_balances.__doc__ = AsyncBankAPI.spendable_balances.__doc__

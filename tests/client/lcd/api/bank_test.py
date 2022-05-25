@@ -11,7 +11,7 @@ pagOpt = PaginationOptions(limit=2, count_total=True)
 
 def test_balance():
     result, _ = terra.bank.balance(
-        address="terra1vk20anceu6h9s00d27pjlvslz3avetkvnph7p8"
+        address="terra1rk6tvacasnnyssfnn00zl7wz43pjnpn7vayqv6"
     )
     assert result.to_data()
     assert result.get("uluna").amount > 0
@@ -19,16 +19,27 @@ def test_balance():
 
 def test_balance_with_pagination():
     result, _ = terra.bank.balance(
-        address="terra1vk20anceu6h9s00d27pjlvslz3avetkvnph7p8", params=pagOpt
+        address="terra1rk6tvacasnnyssfnn00zl7wz43pjnpn7vayqv6", params=pagOpt
     )
+
     assert result.to_data()
+    assert result.get("uluna").amount > 0
 
 
 def test_total():
     result, _ = terra.bank.total()
+    
     assert result.to_data()
 
 
 def test_total_with_pagination():
     result, _ = terra.bank.total(pagOpt)
+
+    assert result.to_data()
+
+def test_spendable_balances():
+    result, _ = terra.bank.spendable_balances(
+        address="terra1rk6tvacasnnyssfnn00zl7wz43pjnpn7vayqv6"
+    )
+
     assert result.to_data()
