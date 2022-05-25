@@ -2,10 +2,9 @@ from terra_sdk.client.lcd import LCDClient
 from terra_sdk.core.bech32 import is_acc_address
 
 terra = LCDClient(
-    url="https://bombay-lcd.terra.dev/",
-    chain_id="bombay-12",
+    url="https://pisco-lcd.terra.dev/",
+    chain_id="pisco-1",
 )
-
 
 def test_rewards():
     result = terra.distribution.rewards("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")

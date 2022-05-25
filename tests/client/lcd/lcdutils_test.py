@@ -1,6 +1,9 @@
 from terra_sdk.client.lcd import LCDClient
 
-terra = LCDClient(chain_id="bombay-12", url="https://bombay-lcd.terra.dev")
+terra = LCDClient(
+    url="https://pisco-lcd.terra.dev/",
+    chain_id="pisco-1",
+)
 
 
 def test_validators_with_voting_power():

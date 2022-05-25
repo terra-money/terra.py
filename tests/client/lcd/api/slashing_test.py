@@ -1,9 +1,10 @@
 from terra_sdk.client.lcd import LCDClient, PaginationOptions
 
 terra = LCDClient(
-    url="https://bombay-lcd.terra.dev/",
-    chain_id="bombay-12",
+    url="https://pisco-lcd.terra.dev/",
+    chain_id="pisco-1",
 )
+
 
 pagopt = PaginationOptions(limit=3, count_total=True, reverse=True)
 

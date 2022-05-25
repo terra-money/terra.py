@@ -32,7 +32,7 @@ def test_random():
 
 def test_signature():
 
-    terra = LCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")
+    terra = LCDClient(url="https://pisco-lcd.terra.dev", chain_id="pisco-1")
 
     mk = MnemonicKey(
         "island relax shop such yellow opinion find know caught erode blue dolphin behind coach tattoo light focus snake common size analyst imitate employ walnut"
