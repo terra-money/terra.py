@@ -23,11 +23,10 @@ __all__ = ["DelayedVestingAccount"]
 
 
 @attr.s
-class DelayedVestingAccount(BaseAccount):
+class DelayedVestingAccount():
     """Stores information about an account with delayed vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
-    start_time : int = attr.ib()
 
     type_amino = "cosmos-sdk/DelayedVestingAccount"
     type_url = "/cosmos.vesting.v1beta1.DelayedVestingAccount"
@@ -64,13 +63,15 @@ class DelayedVestingAccount(BaseAccount):
     def from_amino(cls, amino: dict) -> DelayedVestingAccount:
         amino = amino["value"]
         return cls(
-            base_vesting_account=BaseVestingAccount.from_amino(
-                amino["base_vesting_account"]
-            )
+            base_vesting_account=BaseVestingAccount.from_amino({
+                "type" : BaseVestingAccount.type_amino,
+                "value": amino["base_vesting_account"]
+            })
         )
 
     @classmethod
     def from_data(cls, data: dict) -> DelayedVestingAccount:
+        data = data["value"]
         return cls(
             base_vesting_account=BaseVestingAccount.from_data(
                 data["base_vesting_account"]

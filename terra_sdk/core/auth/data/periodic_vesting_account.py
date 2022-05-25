@@ -28,13 +28,13 @@ class Period(JSONSerializable):
 
     def to_amino(self) -> dict:
         return {
-            "start_time": str(self.start_time),
+            "length": str(self.length),
             "amount": self.amount.to_amino(),
         }
 
     def to_data(self) -> dict:
         return {
-            "length": self.length,
+            "length": str(self.length),
             "amount": self.amount.to_data(),
         }
 
@@ -66,7 +66,7 @@ class Period(JSONSerializable):
         )
 
 @attr.s
-class PeriodicVestingAccount(BaseAccount):
+class PeriodicVestingAccount():
     """Stores information about an account with periodic vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
@@ -114,9 +114,10 @@ class PeriodicVestingAccount(BaseAccount):
     def from_amino(cls, amino: dict) -> PeriodicVestingAccount:
         amino = amino["value"]
         return cls(
-            base_vesting_account=BaseVestingAccount.from_amino(
-                amino["base_vesting_account"]
-            ),
+            base_vesting_account=BaseVestingAccount.from_amino({
+                "type" : BaseVestingAccount.type_amino,
+                "value": amino["base_vesting_account"]
+            }),
             start_time=amino["start_time"],
             vesting_periods=[
                 Period.from_amino(vp) for vp in amino["vesting_periods"]
@@ -125,12 +126,13 @@ class PeriodicVestingAccount(BaseAccount):
 
     @classmethod
     def from_data(cls, data: dict) -> PeriodicVestingAccount:
+        data = data["value"]
         return cls(
             base_vesting_account=BaseVestingAccount.from_data(
                 data["base_vesting_account"]
             ),
             start_time=data["start_time"],
-            versting_periods=[
+            vesting_periods=[
                 Period.from_data(vp) for vp in data["vesting_periods"]
             ]
         )
@@ -142,7 +144,7 @@ class PeriodicVestingAccount(BaseAccount):
                 proto.base_vesting_account
             ),
             start_time=proto.start_time,
-            versting_periods=[
+            vesting_periods=[
                 Period.from_proto(vs) for vs in proto.vesting_periods
             ]
         )

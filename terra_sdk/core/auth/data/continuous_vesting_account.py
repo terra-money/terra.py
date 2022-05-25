@@ -23,7 +23,7 @@ __all__ = ["ContinuousVestingAccount"]
 
 
 @attr.s
-class ContinuousVestingAccount(BaseAccount):
+class ContinuousVestingAccount():
     """Stores information about an account with continuous vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
@@ -75,6 +75,7 @@ class ContinuousVestingAccount(BaseAccount):
 
     @classmethod
     def from_data(cls, data: dict) -> ContinuousVestingAccount:
+        data = data["value"]
         return cls(
             base_vesting_account=BaseVestingAccount.from_data(
                 data["base_vesting_account"]

@@ -36,7 +36,7 @@
           ]
         },
         {
-          "length": 500000,
+          "length": "500000",
           "amount": [
             {
               "denom": "uluna",

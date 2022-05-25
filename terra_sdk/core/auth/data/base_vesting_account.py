@@ -34,8 +34,8 @@ class BaseVestingAccount(JSONSerializable):
     end_time: int = attr.ib(converter=int)
     """"""
 
-    type_amino = "core/BaseVestingAccount"
-    type_url = "/terra.vesting.v1beta1.BaseVestingAccount"
+    type_amino = "cosmos-sdk/BaseVestingAccount"
+    type_url = "/cosmos.vesting.v1beta1.BaseVestingAccount"
 
     def get_sequence(self) -> int:
         return self.base_account.get_sequence()
@@ -61,7 +61,7 @@ class BaseVestingAccount(JSONSerializable):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "base_accont": self.base_account.to_data(),
+            "base_account": self.base_account.to_data(),
             "original_vesting": self.original_vesting.to_data(),
             "delegated_free": self.delegated_free.to_data(),
             "delegated_vesting": self.delegated_vesting.to_data(),
@@ -70,9 +70,11 @@ class BaseVestingAccount(JSONSerializable):
 
     @classmethod
     def from_amino(cls, amino: dict) -> BaseVestingAccount:
-        amino = amino["value"]
+        amino = amino["value"] if "value" in amino else amino
         return cls(
-            base_account=BaseAccount.from_amino(amino["base_account"]),
+            base_account=BaseAccount.from_amino(
+                amino["base_account"]
+            ),
             original_vesting=Coins.from_amino(amino["original_vesting"])
             if amino["original_vesting"]
             else None,

@@ -73,7 +73,7 @@ class SendAuthorization(Authorization):
         spend_limit (Coins.Input): coins representing allowance of grant
     """
 
-    type_amino = "msgauth/SendAuthorization"
+    type_amino = "cosmos-sdk/SendAuthorization"
     """"""
     type_url = "/cosmos.bank.v1beta1.SendAuthorization"
     """"""
@@ -119,7 +119,7 @@ class GenericAuthorization(Authorization):
     Args:
         msg: type of message allowed by authorization"""
 
-    type_amino = "msgauth/GenericAuthorization"
+    type_amino = "cosmos-sdk/GenericAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.GenericAuthorization"
     """"""
