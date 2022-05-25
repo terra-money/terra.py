@@ -8,7 +8,6 @@ def test_deserializes_account_example(load_json_examples):
         assert target["type"] == example["type"]
         assert target["value"]== example["value"]
 
-
 def test_deserializes_continuous_vesting_account_example(load_json_examples):
     examples = load_json_examples("./ContinuousVestingAccount.data.json")
     for example in examples:
@@ -16,18 +15,12 @@ def test_deserializes_continuous_vesting_account_example(load_json_examples):
         assert target["type"] == example["type"]
         assert target["value"]["start_time"] == example["value"]["start_time"]
 
-        target = ContinuousVestingAccount.from_data(example).to_data()
-        assert target["@type"] == ContinuousVestingAccount.type_url
-        assert target["start_time"] == example["value"]["start_time"]
 
 def test_deserializes_delayed_vesting_account_example(load_json_examples):
     examples = load_json_examples("./DelayedVestingAccount.data.json")
     for example in examples:
         target = DelayedVestingAccount.from_amino(example).to_amino()
         assert target["type"] == example["type"]
-
-        target = DelayedVestingAccount.from_data(example).to_data()
-        assert target["@type"] == DelayedVestingAccount.type_url
 
 
 def test_deserializes_periodic_vesting_account_example(load_json_examples):
@@ -37,8 +30,3 @@ def test_deserializes_periodic_vesting_account_example(load_json_examples):
         assert target["type"] == example["type"]
         assert target["value"]["start_time"] == example["value"]["start_time"]
         assert target["value"]["vesting_periods"] == example["value"]["vesting_periods"]
-
-        target = PeriodicVestingAccount.from_data(example).to_data()
-        assert target["@type"] == PeriodicVestingAccount.type_url
-        assert target["start_time"] == example["value"]["start_time"]
-        assert target["vesting_periods"] == example["value"]["vesting_periods"]

@@ -1,5 +1,6 @@
 from .data import (
     BaseAccount,
+    Account,
     DelayedVestingAccount,
     ContinuousVestingAccount,
     PeriodicVestingAccount,
@@ -10,6 +11,7 @@ from .data import (
 )
 
 __all__ = [
+    "Account",
     "BaseAccount",
     "ContinuousVestingAccount",
     "DelayedVestingAccount",

@@ -71,7 +71,6 @@ class DelayedVestingAccount():
 
     @classmethod
     def from_data(cls, data: dict) -> DelayedVestingAccount:
-        data = data["value"]
         return cls(
             base_vesting_account=BaseVestingAccount.from_data(
                 data["base_vesting_account"]
