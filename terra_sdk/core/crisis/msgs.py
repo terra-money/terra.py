@@ -25,7 +25,7 @@ class MsgVerifyInvariant(Msg):
         invariant_route: route to veriryf
     """
 
-    type_amino = "crisis/MsgVerifyInvariant"
+    type_amino = "cosmos-sdk/MsgVerifyInvariant"
     """"""
     type_url = "/cosmos.crisis.v1beta1.MsgVerifyInvariant"
     """"""
