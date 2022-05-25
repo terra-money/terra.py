@@ -21,7 +21,7 @@ class TextProposal(JSONSerializable):
         description: proposal description
     """
 
-    type_amino = "gov/TextProposal"
+    type_amino = "cosmos-sdk/TextProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.TextProposal"
     """"""

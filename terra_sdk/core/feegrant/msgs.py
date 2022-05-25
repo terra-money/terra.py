@@ -29,7 +29,7 @@ class MsgGrantAllowance(Msg):
     grantee: AccAddress = attr.ib()
     allowance: Allowance = attr.ib()
 
-    type_amino = "feegrant/MsgGrantAllowance"
+    type_amino = "cosmos-sdk/MsgGrantAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.MsgGrantAllowance"
     """"""
@@ -77,7 +77,7 @@ class MsgRevokeAllowance(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
 
-    type_amino = "feegrant/MsgRevokeAllowance"
+    type_amino = "cosmos-sdk/MsgRevokeAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.MsgRevokeAllowance"
     """"""

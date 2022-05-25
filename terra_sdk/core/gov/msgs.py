@@ -25,7 +25,7 @@ class MsgSubmitProposal(Msg):
         proposer (AccAddress): proposal submitter
     """
 
-    type_amino = "gov/MsgSubmitProposal"
+    type_amino = "cosmos-sdk/MsgSubmitProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgSubmitProposal"
     """"""
@@ -95,7 +95,7 @@ class MsgDeposit(Msg):
         amount (Coins): amount to deposit
     """
 
-    type_amino = "gov/MsgDeposit"
+    type_amino = "cosmos-sdk/MsgDeposit"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgDeposit"
     """"""
@@ -160,7 +160,7 @@ class MsgVote(Msg):
         option (VoteOption): vote option (must be one of: :data:`MsgVote.ABSTAIN`, :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`),
     """
 
-    type_amino = "gov/MsgVote"
+    type_amino = "cosmos-sdk/MsgVote"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgVote"
     """"""

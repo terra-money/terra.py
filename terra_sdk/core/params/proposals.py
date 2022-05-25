@@ -56,7 +56,7 @@ class ParameterChangeProposal(JSONSerializable):
         change (List[ParamChange]): list of parameter changes
     """
 
-    type_amino = "params/ParameterChangeProposal"
+    type_amino = "cosmos-sdk/ParameterChangeProposal"
     """"""
     type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""

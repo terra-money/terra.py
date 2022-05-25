@@ -37,7 +37,7 @@ class BasicAllowance(JSONSerializable):
         converter=parser.parse
     )
 
-    type_amino = "feegrant/BasicAllowance"
+    type_amino = "cosmos-sdk/BasicAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.BasicAllowance"
     """"""
@@ -110,7 +110,7 @@ class PeriodicAllowance(JSONSerializable):
     period_can_spend: Coins = attr.ib(converter=Coins)
     period_reset: datetime = attr.ib(converter=parser.parse)
 
-    type_amino = "feegrant/PeriodicAllowance"
+    type_amino = "cosmos-sdk/PeriodicAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.PeriodicAllowance"
     """"""
@@ -179,7 +179,7 @@ class AllowedMsgAllowance(JSONSerializable):
     allowance: Allowance = attr.ib()
     allowed_messages: List[str] = attr.ib(converter=list)
 
-    type_amino = "feegrant/AllowedMsgAllowance"
+    type_amino = "cosmos-sdk/AllowedMsgAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.AllowedMsgAllowance"
     """"""

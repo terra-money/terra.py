@@ -27,7 +27,7 @@ class BaseTerraData(JSONSerializable, Message):
 # data demux
 def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:
     table = {i.type_url: i.from_data for i in inputs}
-
+    
     def from_data(data: dict):
         return table[data["@type"]](data)
 
