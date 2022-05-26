@@ -69,21 +69,21 @@ class MsgStoreCode(Msg):
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {"sender": self.sender, "wasm_byte_code": self.wasm_byte_code, "instantiate_permission" : self.instantiate_permission},
+            "value": {"sender": self.sender, "wasm_byte_code": self.wasm_byte_code, "instantiate_permission" : self.instantiate_permission.to_amino()},
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
-        return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"],instantiate_permission=data["instantiate_permission"] )
+        return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"],instantiate_permission=AccessConfig.from_data(data["instantiate_permission"]))
 
     def to_proto(self) -> MsgStoreCode_pb:
         return MsgStoreCode_pb(
-            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code), instantiate_permission = self.instantiate_permission
+            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code), instantiate_permission = self.instantiate_permission.to_proto()
         )
 
     @classmethod
     def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
-        return cls(sender=proto.sender, wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode(), instantiate_permission=proto.instantiate_permission)
+        return cls(sender=proto.sender, wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode(), instantiate_permission=AccessConfig.from_proto(proto.instantiate_permission))
 
 @attr.s
 class MsgInstantiateContract(Msg):
