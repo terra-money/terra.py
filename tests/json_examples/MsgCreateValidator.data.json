@@ -79,7 +79,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "“june”"
@@ -193,7 +193,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "mosaic"
@@ -307,7 +307,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "DELIGHT-testnet",
@@ -424,7 +424,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "block42"
@@ -538,7 +538,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "Terran Stakers"
@@ -652,7 +652,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "Figment",
@@ -768,7 +768,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "dextrac-bombay"
@@ -882,7 +882,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgCreateValidator",
+                "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
                     "moniker": "blocksteady"

@@ -81,7 +81,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra13l60v64a02x44n8ts9q5ft8xuppmu3uxalu437",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -248,7 +248,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e5ncelsh4qhqt3s97vn43hxlhmt7zd43yszdnf",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -415,7 +415,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1ygpx28kpah6vmlqczg329xqn7uljp3765dv5j3",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -582,7 +582,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1z9c76qv2efuz644ffpesh2wsz00nkp389fv4td",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -749,7 +749,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1wyhlxg3qk2dxw776a4pvyr77yslxj2p7lx4n97",
               "validator_address": "terravaloper1jkqr2vfg4krfd4zwmsf7elfj07cjuzss30ux8g",
@@ -916,7 +916,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1nl2vrxr0qzzy4pd9m2mw0q0tvwcxe2mg8shaad",
               "validator_address": "terravaloper1c6gve6zhye5690563wxmvns7mugz6plu4aj7d3",
@@ -1083,7 +1083,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sy89uqedt83au06mqql5cyma02pnxhvkqmjngm",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -1250,7 +1250,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sy89uqedt83au06mqql5cyma02pnxhvkqmjngm",
               "validator_address": "terravaloper1kprce6kc08a6l03gzzh99hfpazfjeczfpzkkau",
@@ -1417,7 +1417,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sy89uqedt83au06mqql5cyma02pnxhvkqmjngm",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -1584,7 +1584,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sy89uqedt83au06mqql5cyma02pnxhvkqmjngm",
               "validator_address": "terravaloper1t0z9y2p26qzsh06f2l2kn2v8hqtkyd33s409ey",
@@ -1751,7 +1751,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1fx8jh0qym2wpp4ng04vlfmmwz8jdy2ce5y7d55",
               "validator_address": "terravaloper144l7c3uph5a7h62xd8u5et3rqvj3dqtvvka2fu",
@@ -1918,7 +1918,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1u6r30yhxg0pccqjmg2mfjnktnth9tlwfm3vj5w",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -2073,7 +2073,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1twevg63seyjzen3mt7kk7a68n558gj6atdupr5",
               "validator_address": "terravaloper1twevg63seyjzen3mt7kk7a68n558gj6atzsun8",
@@ -2213,7 +2213,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
               "validator_address": "terravaloper1rf9xakxf97a49qa5svsf7yypjswzkutqfhnpn5",
@@ -2368,7 +2368,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1a6a7qzqc8xg8j5pxcnl62crvdhuvwqtygfupdv",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -2535,7 +2535,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1a6a7qzqc8xg8j5pxcnl62crvdhuvwqtygfupdv",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -2702,7 +2702,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1h77gzryshx02v3vlmky32ug0ewx4m5jsdrly69",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -2869,7 +2869,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1h77gzryshx02v3vlmky32ug0ewx4m5jsdrly69",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -3036,7 +3036,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1em2lad2n3z33f335llfna5nwjvryg2fn3gzqe7",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -3203,7 +3203,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra186ym2wg09yxvneu4armqp4ceal8qake2d0lmal",
               "validator_address": "terravaloper1kprce6kc08a6l03gzzh99hfpazfjeczfpzkkau",
@@ -3370,7 +3370,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1lfsfr74datwg6p7h0rfuyhlvj6k7dsmlrr0tmh",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -3537,7 +3537,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1lfsfr74datwg6p7h0rfuyhlvj6k7dsmlrr0tmh",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -3704,7 +3704,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1uapkqhcck7a03qzspt8982dmxwatxztlj3nsde",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -3871,7 +3871,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1m8lvnh4zju4zcjh34rjhyyuyjk4m79536jf2tm",
               "validator_address": "terravaloper1lda78gzrjx0rsadtdk0zn4v7awtz6m9lrd5ez9",
@@ -4035,7 +4035,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1ejqnt875xpjhgkrxdxs8lecjp2euh3vlqzjtwr",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -4202,7 +4202,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e0cnvq2m3t2n7hqrtmadheen2hjvjglght8e0u",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -4369,7 +4369,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1c9w5snjunchrt73q9sq3gkgjdvfykjj9flapyj",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -4536,7 +4536,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1nv3y2tx5x2dtu4xkpp3pzcjl938uk7kmhqukry",
               "validator_address": "terravaloper1kprce6kc08a6l03gzzh99hfpazfjeczfpzkkau",
@@ -4703,7 +4703,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1aan3e7t7p48kupsy3w7jlh0clyfpu7fcl0ztsg",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -4870,7 +4870,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1q23cdqfeam24w6uuua87kh5cs28hu4wml044gt",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -5037,7 +5037,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1s8dpted9wcqnwvddfg3k4s895ckezdvfws4xul",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -5204,7 +5204,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1jd2yth3zl2vez34q4m0wxngaazwy0e8csxuucd",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -5371,7 +5371,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra17fqhjf4xzn03ygdjaf8m7zmdeug09ttpexeuyv",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -5538,7 +5538,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra19nk9x4l6tju6q30nwulelrvkjp288etj824m90",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -5705,7 +5705,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra19nk9x4l6tju6q30nwulelrvkjp288etj824m90",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -5872,7 +5872,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1kelxam7ekhyfqzw3eku3f58axlevf4au9g0f3w",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -6039,7 +6039,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1ccmhu2x3zz6s983kdp2xmu0ywcjnd5szemkd2u",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -6206,7 +6206,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e5ncelsh4qhqt3s97vn43hxlhmt7zd43yszdnf",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -6373,7 +6373,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e0cnvq2m3t2n7hqrtmadheen2hjvjglght8e0u",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -6540,7 +6540,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1agas4ulmg9s6j0wy43xp7drkq3tdk4e67wjqr0",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -6707,7 +6707,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra13l60v64a02x44n8ts9q5ft8xuppmu3uxalu437",
               "validator_address": "terravaloper1kprce6kc08a6l03gzzh99hfpazfjeczfpzkkau",
@@ -6874,7 +6874,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1396z0lq2wdqllsgjtr5g5cxugext6hvag32aty",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -7041,7 +7041,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra162t3yqa2mywtvmr6qv22hayjytzqckzylk5lck",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -7208,7 +7208,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1pc6ytgynrlglv5unn9t93u73gmt4ghvcrlqq2q",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -7375,7 +7375,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra19nsz3fsvd36uwfpgxf25hws6nx03z92797sjue",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -7542,7 +7542,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1y9fm7lt8h6pzz554p232txf58kxf57t869n9t8",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -7709,7 +7709,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1q23cdqfeam24w6uuua87kh5cs28hu4wml044gt",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -7876,7 +7876,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1x6drt9lruyl8waxzqprjxppkd4feh407npchgc",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -8043,7 +8043,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1u6r30yhxg0pccqjmg2mfjnktnth9tlwfm3vj5w",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -8210,7 +8210,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1u6r30yhxg0pccqjmg2mfjnktnth9tlwfm3vj5w",
               "validator_address": "terravaloper1jsdfyz8uhw2nd7cl45709w40r268phmvxam8eh",
@@ -8377,7 +8377,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sntq3x0yy3vvmpd9uu5w5sjmjuj90lvck3q5dh",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -8544,7 +8544,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1y6w7uj4ykezwq7e82fkm5dw7s5rsatdvmd2y76",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -8711,7 +8711,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra13l60v64a02x44n8ts9q5ft8xuppmu3uxalu437",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -8878,7 +8878,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1gzcwdmagpqrxu2hcefs5mec9yc5htktk9hpkzx",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -9033,7 +9033,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sjp2km67p97wjtz9lmt2ldzkut05hmxc8qvtcm",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -9188,7 +9188,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1ydjntynf3zhlv2fwh54cxh37q0qc5ax3zfmajf",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -9343,7 +9343,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1nhca0n6uhxru7j4u9a026c2j5jpaadw5q4em4w",
               "validator_address": "terravaloper163phlen6dn7sp9khhjar2gqqx6kga0ly8d7h9g",
@@ -9444,7 +9444,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1k4ef8m95t7eq522evmmuzvfkpla04pezmne0w9",
               "validator_address": "terravaloper1k4ef8m95t7eq522evmmuzvfkpla04pezmu4j7k",
@@ -9554,7 +9554,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1k4ef8m95t7eq522evmmuzvfkpla04pezmne0w9",
               "validator_address": "terravaloper1k4ef8m95t7eq522evmmuzvfkpla04pezmu4j7k",
@@ -9718,7 +9718,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1dsw98jp8a69m99yy4xu33rn07fqlfzea84fdp5",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -9831,7 +9831,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1dsw98jp8a69m99yy4xu33rn07fqlfzea84fdp5",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -9944,7 +9944,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra192w2pfqf5nlvqhaagl38k38xqmjargw9ynp9gn",
               "validator_address": "terravaloper1yad8pjqp93gvwkxa2aa5mh4vctzfs37ekjxr4s",
@@ -10111,7 +10111,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1md2z3kpgr9dsdnklh796kh2lu09kfcjw7vk57n",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -10278,7 +10278,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1kwdkdchypdunxfaqgft5rlggh4d22vnsn56trf",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -10445,7 +10445,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1md2z3kpgr9dsdnklh796kh2lu09kfcjw7vk57n",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -10600,7 +10600,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1f2z4q5kdelhfk7xq3xmxzlhp6ntrtzu659pl0s",
               "validator_address": "terravaloper175hhkyxmkp8hf2zrzka7cnn7lk6mudtv4uuu64",
@@ -10755,7 +10755,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra137fh378avra3r3law4a5g4t845yy0upd9d0tm0",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -10922,7 +10922,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1f9wjf3taxmq2srsxhrna456fz98nllkeaw4sgr",
               "validator_address": "terravaloper1c6gve6zhye5690563wxmvns7mugz6plu4aj7d3",
@@ -11089,7 +11089,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1nl2vrxr0qzzy4pd9m2mw0q0tvwcxe2mg8shaad",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -11256,7 +11256,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e4jspgz5fteppglvy4a0xxn3uqlejsswysy3qa",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -11423,7 +11423,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra12lsxcykm4d784n2ee974khr7u7asqzk8twyvv2",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -11590,7 +11590,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra172d0w9stk9xluq3dy2vmtgth8574ce5ql7hc5r",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -11757,7 +11757,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra172d0w9stk9xluq3dy2vmtgth8574ce5ql7hc5r",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -11924,7 +11924,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1e0cnvq2m3t2n7hqrtmadheen2hjvjglght8e0u",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -12091,7 +12091,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1w66epwzf2j0jctjcrwuq2stng4wnl4uehgexrp",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -12258,7 +12258,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra158anadyymv4umc33jmhekpuxqvz46exrqqlrpy",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -12425,7 +12425,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1tenhsekaqndrjgsrdrqc2fs9je4vxkqpazrsjy",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -12592,7 +12592,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra186ym2wg09yxvneu4armqp4ceal8qake2d0lmal",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -12759,7 +12759,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1yhaeprzm4f6htjcdvlwj60etqqg0skdklfx8dj",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -12926,7 +12926,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra13l7dfqutcg5ffevdx3gr3v7cu9fr65tgx38wyx",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13093,7 +13093,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1k7endpavu7875lfmxzmvkndvlrfqvkwt69uu99",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13206,7 +13206,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1k7endpavu7875lfmxzmvkndvlrfqvkwt69uu99",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13265,7 +13265,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1k7endpavu7875lfmxzmvkndvlrfqvkwt69uu99",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13378,7 +13378,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra126pwqwszfyhpmdcuzt5evmpgc0ynn6wevrk9el",
               "validator_address": "terravaloper144l7c3uph5a7h62xd8u5et3rqvj3dqtvvka2fu",
@@ -13545,7 +13545,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sjp2km67p97wjtz9lmt2ldzkut05hmxc8qvtcm",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13658,7 +13658,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sjp2km67p97wjtz9lmt2ldzkut05hmxc8qvtcm",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -13771,7 +13771,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1sjp2km67p97wjtz9lmt2ldzkut05hmxc8qvtcm",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -13938,7 +13938,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1uwjf55qayjrkt0pgw8w06rsrlqy7jnpfu46uz2",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -14105,7 +14105,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1c2aqpxs9k2h53z34vgzn9wwdeuz6ldj467fs58",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -14272,7 +14272,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1tmd0t803aywdhwuee45e0n0cl4x2d6fp6fjvtd",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -14439,7 +14439,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1tmd0t803aywdhwuee45e0n0cl4x2d6fp6fjvtd",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -14606,7 +14606,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1hdtms4r6gvc4twz6ykp7qlajm5nd8r6u2h79v8",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -14773,7 +14773,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1hdtms4r6gvc4twz6ykp7qlajm5nd8r6u2h79v8",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -14940,7 +14940,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra150r7kdq9k95vr0lq9g90z4r7wtsct07uv3qhj9",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",
@@ -15107,7 +15107,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra150r7kdq9k95vr0lq9g90z4r7wtsct07uv3qhj9",
               "validator_address": "terravaloper1aw0znxtlq0wrayyz7wppz3qnw94hfrmnnrcxja",
@@ -15274,7 +15274,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra150r7kdq9k95vr0lq9g90z4r7wtsct07uv3qhj9",
               "validator_address": "terravaloper15zcjduavxc5mkp8qcqs9eyhwlqwdlrzy6jln3m",
@@ -15441,7 +15441,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra150r7kdq9k95vr0lq9g90z4r7wtsct07uv3qhj9",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -15608,7 +15608,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1gu88yqvg9mq79308n6d9qf9mf8y0uv7t84ewzf",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -15775,7 +15775,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1nn2zkrnpl3mjjmay7v39mlw8sw8cw0gjpfnvwp",
               "validator_address": "terravaloper1p54hc4yy2ajg67j645dn73w3378j6k05vmx9r9",
@@ -15942,7 +15942,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "delegator_address": "terra1vgqf97wjyrzuetc8d98633k06lndzmw5xvv7cw",
               "validator_address": "terravaloper1hg70rkal5d86fl57k0gc7de0rrk4klgs59r7jc",

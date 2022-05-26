@@ -260,7 +260,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -432,7 +432,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgBeginRedelegate",
+            "type": "cosmos-sdk/MsgBeginRedelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -741,7 +741,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgBeginRedelegate",
+            "type": "cosmos-sdk/MsgBeginRedelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -886,7 +886,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgBeginRedelegate",
+            "type": "cosmos-sdk/MsgBeginRedelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -1063,7 +1063,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgBeginRedelegate",
+            "type": "cosmos-sdk/MsgBeginRedelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -1240,7 +1240,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgBeginRedelegate",
+            "type": "cosmos-sdk/MsgBeginRedelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -1385,7 +1385,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgDelegate",
+            "type": "cosmos-sdk/MsgDelegate",
             "value": {
               "amount": {
                 "denom": "uluna",
@@ -1504,7 +1504,7 @@
         },
         "msg": [
           {
-            "type": "staking/MsgUndelegate",
+            "type": "cosmos-sdk/MsgUndelegate",
             "value": {
               "amount": {
                 "denom": "uluna",

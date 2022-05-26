@@ -40,7 +40,7 @@ class MsgBeginRedelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to redelegate
     """
 
-    type_amino = "staking/MsgBeginRedelegate"
+    type_amino = "cosmos-sdk/MsgBeginRedelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
     """"""
@@ -102,7 +102,7 @@ class MsgDelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to delegate
     """
 
-    type_amino = "staking/MsgDelegate"
+    type_amino = "cosmos-sdk/MsgDelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgDelegate"
     """"""
@@ -159,7 +159,7 @@ class MsgUndelegate(Msg):
         amount (Union[str, dict, Coin]): coin (LUNA) to undelegate
     """
 
-    type_amino = "staking/MsgUndelegate"
+    type_amino = "cosmos-sdk/MsgUndelegate"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgUndelegate"
     """"""
@@ -217,7 +217,7 @@ class MsgEditValidator(Msg):
         min_self_delegation: new minimum self delegation,
     """
 
-    type = "staking/MsgEditValidator"
+    type = "cosmos-sdk/MsgEditValidator"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgEditValidator"
     """"""
@@ -278,7 +278,7 @@ class MsgCreateValidator(Msg):
         value (Coin.Input): initial amount of Luna toi self-delegate
     """
 
-    type = "staking/MsgCreateValidator"
+    type = "cosmos-sdk/MsgCreateValidator"
     """"""
     type_url = "/cosmos.staking.v1beta1.MsgCreateValidator"
     """"""
