@@ -1,5 +1,5 @@
 from terra_sdk.client.lcd import LCDClient, PaginationOptions
-
+from terra_sdk.exceptions import LCDResponseError
 terra = LCDClient(
     url="https://pisco-lcd.terra.dev/",
     chain_id="pisco-1",
@@ -18,45 +18,46 @@ def test_proposals_with_pagination():
     result = terra.gov.proposals(PaginationOptions(limit=2))
     assert result is not None
 
-# ToDo : check when proposal added
-def test_proposal():
-    result = terra.gov.proposal(5368)
-    assert result is not None
+
+# Add proper proposal id for test
+# def test_proposal():
+#     result = terra.gov.proposal(3)
+#     assert result is not None
 
 
-# public lcd requires tx.height
+# # public lcd requires tx.height
 # def test_proposer():
-#     result = terra.gov.proposer(5368)
+#     result = terra.gov.proposer(3)
 #     assert(result is not None)
 
 
-# public lcd requires tx.height
+# # public lcd requires tx.height
 # def test_deposits():
-#    result = terra.gov.deposits(5368)
+#    result = terra.gov.deposits(3)
 #    assert(result is not None)
 
 
-# public lcd requires tx.height
+# # public lcd requires tx.height
 # def test_deposits_with_pagination():
-#     result = terra.gov.deposits(5368, params=pagOpt)
+#     result = terra.gov.deposits(3, params=pagOpt)
 #     assert(result is not None)
 
 
-# public lcd requires tx.height
+# # public lcd requires tx.height
 # def test_votes():
-#     result = terra.gov.votes(5368)
+#     result = terra.gov.votes(3)
 #     assert(result is not None)
 
 
-# public lcd requires tx.height
+# # public lcd requires tx.height
 # def test_votes_with_pagination():
-#     result = terra.gov.votes(5368, pagOpt)
+#     result = terra.gov.votes(3, pagOpt)
 #     assert(result is not None)
 
-# ToDo : check when proposal added
-def test_tally():
-    result = terra.gov.tally(5368)
-    assert result is not None
+
+# def test_tally():
+#     result = terra.gov.tally(3)
+#     assert result is not None
 
 
 def test_deposit_parameters():

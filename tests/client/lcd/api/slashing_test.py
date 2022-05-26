@@ -18,10 +18,9 @@ def test_signing_infos_with_pagination():
     result, _ = terra.slashing.signing_infos(pagopt)
     assert result is not None
 
-# ToDo : check testnet
 def test_signing_info():
     result = terra.slashing.signing_info(
-        "terravalcons1lcjwqqp8sk86laggdagvk2lez0v3helfztsarh"
+        "terravalcons1qp67nk6gwqvnh95rwytpfwatcjtuxx4rhdnz6k"
     )
     assert result is not None
 
