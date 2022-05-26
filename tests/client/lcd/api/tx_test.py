@@ -8,25 +8,28 @@ terra = LCDClient(
 
 pagOpt = PaginationOptions(limit=2, count_total=True)
 
-# ToDo : fix it properly with testnet
+
 def test_tx_info():
     result = terra.tx.tx_info(
-        "7AB5550F54A1B6B8A480C6B870DFFB1E94D6DB7579F9620E4172525476B8BBA2"
+        "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
     )
+
     assert result is not None
+    assert result.txhash == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
+    
 
 
-# ToDo : fix it properly with testnet
 def test_search():
     result = terra.tx.search(
         [
-            ("tx.height", 7549440),
-            ("message.sender", "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v"),
+            ("tx.height", 42508),
+            ("message.sender", "terra1h8ljdmae7lx05kjj79c9ekscwsyjd3yr8wyvdn"),
         ]
     )
 
-    assert result is not None
     assert len(result["txs"]) > 0
+    assert result["txs"][0].txhash == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
+    
 
 
 def test_tx_infos_by_height():
