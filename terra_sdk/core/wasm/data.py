@@ -19,6 +19,27 @@ __all__ = [
     "AccessTypeParam"
 ]
 
+
+def convert_access_type_from_json(access_type : str) -> AccessType :
+    if access_type == 'Everybody' :
+        return AccessType.ACCESS_TYPE_EVERYBODY
+    elif access_type == 'Nobody'   :
+        return AccessType.ACCESS_TYPE_NOBODY
+    elif access_type == 'OnlyAddress' :
+        return AccessType.ACCESS_TYPE_ONLY_ADDRESS
+    elif access_type == 'Unspecified' :
+        return AccessType.ACCESS_TYPE_UNSPECIFIED
+
+def convert_access_type_to_json(access_type : AccessType) -> str :
+    if access_type == AccessType.ACCESS_TYPE_EVERYBODY :
+        return 'Everybody' 
+    elif access_type == AccessType.ACCESS_TYPE_NOBODY   :
+        return 'Nobody'
+    elif access_type == AccessType.ACCESS_TYPE_ONLY_ADDRESS :
+        return 'OnlyAddress'
+    elif access_type == AccessType.ACCESS_TYPE_UNSPECIFIED :
+        return 'Unspecified'
+
 @attr.s
 class AccessConfig(JSONSerializable):
     
@@ -30,10 +51,16 @@ class AccessConfig(JSONSerializable):
 
     def to_amino(self) -> dict:
         return {
-            "permission": self.permission,
+            "permission": convert_access_type_to_json(self.permission),
             "address": self.address
         }
     
+    def to_data(self) -> dict:
+        return {
+            "permission": convert_access_type_to_json(self.permission),
+            "address": self.address
+        } 
+
     def to_proto(self) -> AccessConfig_pb:
         return AccessConfig_pb(
             permission=self.permission,
@@ -43,7 +70,7 @@ class AccessConfig(JSONSerializable):
     @classmethod
     def from_data(cls, data:dict) -> AccessConfig:
         return cls(
-            permission=AccessType[data["permission"]] ,
+            permission=convert_access_type_from_json(data["permission"]) ,
             address=data["address"]
         )
     
@@ -66,27 +93,28 @@ class AccessConfigUpdate(JSONSerializable):
     def to_amino(self) -> dict:
         return {
             "code_id": self.code_id,
-            "instantiate_permission": self.instantiate_permission
+            "instantiate_permission": self.instantiate_permission.to_amino()
         }
+        
     
-    def to_proto(self) -> AccessConfig_pb:
-        return AccessConfig_pb(
+    def to_proto(self) -> AccessConfigUpdate_pb:
+        return AccessConfigUpdate_pb(
             code_id=self.code_id,
-            instantiate_permission=self.instantiate_permission
+            instantiate_permission=self.instantiate_permission.to_proto()
         )
 
     @classmethod
     def from_data(cls, data:dict) -> AccessConfigUpdate:
         return cls(
             code_id=data["code_id"],
-            instantiate_permission=data["instantiate_permission"]
+            instantiate_permission=AccessConfig.from_data(data["instantiate_permission"]) if "instantiate_permission" in data else None
         )
     
     @classmethod
     def from_proto(cls, proto: AccessConfigUpdate_pb) -> AccessConfigUpdate:
         return cls(
             code_id=proto.code_id,
-            instantiate_permission=proto.instantiate_permission
+            instantiate_permission=AccessConfig.from_proto(proto.instantiate_permission) if proto.instantiate_permission else None
         )
 
 @attr.s
@@ -96,18 +124,18 @@ class AccessTypeParam(JSONSerializable):
 
     def to_amino(self) -> dict:
         return {
-            "value": self.value,
+            "value": convert_access_type_to_json(self.value),
         }
     
     def to_proto(self) -> AccessTypeParam_pb:
         return AccessTypeParam_pb(
-            value=self.value,
+            value= self.value,
         )
 
     @classmethod
     def from_data(cls, data:dict) -> AccessTypeParam:
         return cls(
-            value=data["value"],
+            value= convert_access_type_from_json(data["value"]),
         )
     
     @classmethod
