@@ -25,7 +25,7 @@ class SoftwareUpgradeProposal(JSONSerializable):
     description: str = attr.ib()
     plan: Optional[Plan] = attr.ib()
 
-    type_amino = "upgrade/SoftwareUpgradeProposal"
+    type_amino = "cosmos-sdk/SoftwareUpgradeProposal"
     """"""
     type_url = "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal"
     """"""
@@ -74,7 +74,7 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
     title: str = attr.ib()
     description: str = attr.ib()
 
-    type_amino = "upgrade/CancelSoftwareUpgradeProposal"
+    type_amino = "cosmos-sdk/CancelSoftwareUpgradeProposal"
     """"""
     type_url = "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal"
     """"""

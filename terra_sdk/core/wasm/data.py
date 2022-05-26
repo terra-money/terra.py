@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from terra_proto.cosmwasm.wasm.v1 import (
     AccessType,
     AccessConfigUpdate as AccessConfigUpdate_pb,
@@ -11,12 +13,11 @@ from terra_sdk.util.json import JSONSerializable
 from terra_sdk.core.msg import Msg
 
 __all__ = [
+    "AccessType",
     "AccessConfig",
     "AccessConfigUpdate",
     "AccessTypeParam"
 ]
-
-
 
 @attr.s
 class AccessConfig(JSONSerializable):
@@ -42,7 +43,7 @@ class AccessConfig(JSONSerializable):
     @classmethod
     def from_data(cls, data:dict) -> AccessConfig:
         return cls(
-            permission=data["permission"],
+            permission=AccessType[data["permission"]] ,
             address=data["address"]
         )
     

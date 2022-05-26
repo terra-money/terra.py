@@ -26,6 +26,7 @@ from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
+from terra_sdk.core.wasm.data import AccessConfig, AccessTypeParam
 from terra_sdk.util.remove_none import remove_none
 
 __all__ = [
@@ -44,7 +45,6 @@ def parse_msg(msg: Union[dict, str, bytes]) -> dict:
     return json.loads(msg)
 
 
-# ToDo : Add instantiate_permission
 @attr.s
 class MsgStoreCode(Msg):
     """Upload a new smart contract WASM binary to the blockchain.
@@ -64,25 +64,26 @@ class MsgStoreCode(Msg):
 
     sender: AccAddress = attr.ib()
     wasm_byte_code: str = attr.ib()
+    instantiate_permission: AccessConfig = attr.ib()
 
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
-            "value": {"sender": self.sender, "wasm_byte_code": self.wasm_byte_code},
+            "value": {"sender": self.sender, "wasm_byte_code": self.wasm_byte_code, "instantiate_permission" : self.instantiate_permission},
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgStoreCode:
-        return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"])
+        return cls(sender=data["sender"], wasm_byte_code=data["wasm_byte_code"],instantiate_permission=data["instantiate_permission"] )
 
     def to_proto(self) -> MsgStoreCode_pb:
         return MsgStoreCode_pb(
-            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code)
+            sender=self.sender, wasm_byte_code=base64.b64decode(self.wasm_byte_code), instantiate_permission = self.instantiate_permission
         )
 
     @classmethod
     def from_proto(cls, proto: MsgStoreCode_pb) -> MsgStoreCode:
-        return cls(sender=proto.sender, wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode())
+        return cls(sender=proto.sender, wasm_byte_code=base64.b64encode(proto.wasm_byte_code).decode(), instantiate_permission=proto.instantiate_permission)
 
 @attr.s
 class MsgInstantiateContract(Msg):
