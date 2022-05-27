@@ -19,12 +19,13 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             dict: code information
         """
-        res = await self._c._get(f"/terra/wasm/v1beta1/codes/{code_id}")
+        res = await self._c._get(f"/cosmwasm/wasm/v1/code/{code_id}")
         code_info = res.get("code_info")
         return {
             "code_id": Numeric.parse(code_info["code_id"]),
-            "code_hash": code_info["code_hash"],
+            "data_hash": code_info["data_hash"],
             "creator": code_info["creator"],
+            "instantiate_permission" : code_info["instantiate_permission"]
         }
 
     async def contract_info(self, contract_address: str) -> dict:
@@ -36,14 +37,18 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             dict: contract information
         """
-        res = await self._c._get(f"/terra/wasm/v1beta1/contracts/{contract_address}")
+        res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}")
         contract_info = res.get("contract_info")
+        contract_address = res.get("address")
         return {
             "code_id": Numeric.parse(contract_info["code_id"]),
-            "address": contract_info["address"],
+            "address": contract_address,
             "creator": contract_info["creator"],
             "admin": contract_info.get("admin", None),
-            "init_msg": contract_info["init_msg"],
+            # "init_msg": contract_info["init_msg"], (TODO: init_msg have to retrieve it from history)
+            "label": contract_info.get("label", None),
+            # "created" : contract_info.get("created", None), (TODO : AbsoluteTxPosition)
+            "ibc_port_id": contract_info.get("ibc_port_id", None),
         }
 
     async def contract_query(self, contract_address: str, query: Union[dict, str]) -> Any:
@@ -56,15 +61,13 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             Any: results of query
         """
-        params = {
-            "query_msg": base64.b64encode(json.dumps(query).encode("utf-8")).decode(
+        query_msg = (base64.b64encode(json.dumps(query).encode("utf-8")).decode(
                 "utf-8"
-            )
-        }
+            ))
         res = await self._c._get(
-            f"/terra/wasm/v1beta1/contracts/{contract_address}/store", params
+            f"/cosmwasm/wasm/v1/contract/{contract_address}/smart/{query_msg}"
         )
-        return res.get("query_result")
+        return res.get("data")
 
     async def parameters(self) -> dict:
         """Fetches the Wasm module parameters.
@@ -72,12 +75,10 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             dict: Wasm module parameters
         """
-        res = await self._c._get("/terra/wasm/v1beta1/params")
-        params = res.get("params")
+        res = await self._c._get("/cosmwasm/wasm/v1/codes/pinned")
+        params = res.get("code_ids")
         return {
-            "max_contract_size": Numeric.parse(params["max_contract_size"]),
-            "max_contract_gas": Numeric.parse(params["max_contract_gas"]),
-            "max_contract_msg_size": Numeric.parse(params["max_contract_msg_size"]),
+            "code_ids": params,
         }
 
 

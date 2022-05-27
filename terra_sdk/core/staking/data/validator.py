@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 from datetime import datetime
+from typing import Union
 
 import attr
 from dateutil import parser
@@ -17,6 +18,26 @@ from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["CommissionRates", "Commission", "Description", "Validator", "BondStatus"]
 
+
+def convert_bond_status_to_json(status :BondStatus) -> str :
+    if status == BondStatus.BOND_STATUS_UNSPECIFIED:
+        return "BOND_STATUS_UNSPECIFIED"
+    elif status == BondStatus.BOND_STATUS_UNBONDED:
+        return "BOND_STATUS_UNBONDED"
+    elif status == BondStatus.BOND_STATUS_UNBONDING:
+        return "BOND_STATUS_UNBONDING"
+    elif status == BondStatus.BOND_STATUS_BONDED:
+        return "BOND_STATUS_BONDED"
+
+def convert_bond_status_from_json(status : str) -> BondStatus :
+    if status == 0 or status == "BOND_STATUS_UNSPECIFIED":
+        return BondStatus.BOND_STATUS_UNSPECIFIED
+    elif status == 1 or status == "BOND_STATUS_UNBONDED":
+        return BondStatus.BOND_STATUS_UNBONDED
+    elif status == 2 or status == "BOND_STATUS_UNBONDING":
+        return BondStatus.BOND_STATUS_UNBONDING
+    elif status == 3 or status == "BOND_STATUS_BONDED":
+        return BondStatus.BOND_STATUS_BONDED
 
 @attr.s
 class CommissionRates(JSONSerializable):
@@ -214,9 +235,24 @@ class Validator(JSONSerializable):
     def to_amino(self) -> dict:
         return {
             "operator_address": self.operator_address,
-            "consensus_pubkey": self.consensus_pubkey.to_amino(),
+            "consensus_pubkey": self.consensus_pubkey,
             "jailed": self.jailed,
             "status": self.status,
+            "tokens": str(self.tokens),
+            "delegator_shares": str(self.delegator_shares),
+            "description": self.description.to_amino(),
+            "unbonding_height": str(self.unbonding_height),
+            "unbonding_time": to_isoformat(self.unbonding_time),
+            "commission": self.commission.to_amino(),
+            "min_self_delegation": str(self.min_self_delegation),
+        }
+    
+    def to_data(self) -> dict:
+        return {
+            "operator_address": self.operator_address,
+            "consensus_pubkey": self.consensus_pubkey,
+            "jailed": self.jailed,
+            "status": convert_bond_status_to_json(self.status),
             "tokens": str(self.tokens),
             "delegator_shares": str(self.delegator_shares),
             "description": self.description.to_amino(),
@@ -232,7 +268,7 @@ class Validator(JSONSerializable):
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
             jailed=data.get("jailed"),
-            status=BondStatus.from_string(data["status"]),
+            status=convert_bond_status_from_json(data["status"]),
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),
