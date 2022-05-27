@@ -69,12 +69,12 @@ def test_signature():
     sigBytes = base64.b64encode(signature.data.single.signature)
     assert (
         sigBytes
-        == b"Gtp3/JOeTA9mZJ/ZxM4IwpsFy6Je8kWTRxESBiLHcQl6sU6V2iCL1sSPynm+csF6/K4tf2gMPE89IDVOP5NBHg=="
+        == b"nkdJ8hDsmXWM9PqpvD8/+jBi9wpvibsNmhY0xS+pEOxirPOifJDy+PzH1sopI3WJso8GA10ssro31IeXBKJZtQ=="
     )
 
     signature_amino = account.key.create_signature_amino(signDoc)
     sigBytes2 = base64.b64encode(signature_amino.data.single.signature)
     assert (
         sigBytes2
-        == b"JiaPpdKCPsf4KW1yW7jkSlwrIuiArKmLoE5JccjoYrliVwCtRIKicDF57n2feWt3wd6kWVzwTxOa2xnXTXqdlg=="
+        == b"R/ENAqynVYia7N8Vq1MdIMnRpn/moZN1Ql2Wof0mg09qJ+WVvfS64DHwtnhKvMMXPuh4IcHxDCJ63QKoAUulCA=="
     )

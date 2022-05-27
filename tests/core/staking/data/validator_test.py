@@ -6,7 +6,7 @@ def test_deserializes():
         "operator_address": "terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65",
         "consensus_pubkey": "terravalconspub1zcjduepqtcng29gnnhs8sv6dvv7cc0szyg3mu3tzzzjsw5x3x6pwgd2uqkkqes8fs5",
         "jailed": False,
-        "status": 2,
+        "status": "BOND_STATUS_UNBONDING",
         "tokens": "111401100001",
         "delegator_shares": "111401100001.000000000000000000",
         "description": {
@@ -24,7 +24,7 @@ def test_deserializes():
                 "max_rate": "0.250000000000000000",
                 "max_change_rate": "0.010000000000000000",
             },
-            "update_time": "2019-12-01T03:28:34.024363013Z",
+            "update_time": "2019-12-01T03:28:34.024363Z",
         },
         "min_self_delegation": "1",
     }
