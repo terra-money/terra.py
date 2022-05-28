@@ -33,7 +33,7 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: datetime = attr.ib(
+    expiration: Optional[datetime] = attr.ib(
         converter=parser.parse
     )
 
@@ -184,6 +184,7 @@ class AllowedMsgAllowance(JSONSerializable):
     type_url = "/cosmos.feegrant.v1beta1.AllowedMsgAllowance"
     """"""
 
+    prototype = AllowedMsgAllowance_pb
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -192,6 +193,14 @@ class AllowedMsgAllowance(JSONSerializable):
                 "allowed_messages": self.allowed_messages,
             },
         }
+
+    @classmethod
+    def from_amino(cls, data: dict) -> AllowedMsgAllowance:
+        allowance = data["allowance"]
+        return cls(
+            allowance=Allowance.from_amino(allowance),
+            allowed_messages=data["allowed_messages"],
+        )
 
     @classmethod
     def from_data(cls, data: dict) -> AllowedMsgAllowance:
@@ -206,6 +215,12 @@ class AllowedMsgAllowance(JSONSerializable):
             allowance=self.allowance.to_proto(), allowed_messages=self.allowed_messages
         )
 
+    @classmethod
+    def from_proto(cls, proto: AllowedMsgAllowance_pb) -> AllowedMsgAllowance:
+        return cls(
+            allowance=BasicAllowance.from_proto(proto.allowance),
+            allowed_messages=proto.allowed_messages            
+        )
 
 class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
     @property
@@ -234,19 +249,23 @@ class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
     def from_data(cls, data: dict):
         if data.get("@type") == BasicAllowance.type_url:
             return BasicAllowance.from_data(data)
-        else:
+        elif data.get("@type") == PeriodicAllowance.type_url:
             return PeriodicAllowance.from_data(data)
+        elif data.get("@type") == AllowedMsgAllowance.type_url:
+            return AllowedMsgAllowance.from_data(data)
 
     @classmethod
     def from_amino(cls, data: dict):
         if data.get("type") == BasicAllowance.type_amino:
             return BasicAllowance.from_amino(data)
-        else:
+        elif data.get("type") == PeriodicAllowance.type_amino:
             return PeriodicAllowance.from_amino(data)
+        elif data.get("type") == AllowedMsgAllowance.type_amino:
+            return AllowedMsgAllowance.from_amino(data)
 
     @classmethod
     def from_proto(cls, proto: Any_pb):
         return parse_allowance_unpack_any(proto)
 
 
-parse_allowance_unpack_any = create_demux_unpack_any([BasicAllowance, PeriodicAllowance])
+parse_allowance_unpack_any = create_demux_unpack_any([BasicAllowance, PeriodicAllowance,AllowedMsgAllowance])
