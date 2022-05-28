@@ -96,9 +96,9 @@ this behavior **per transaction**:
             "1000000uluna" # send 1 luna
         )],
         memo="test transaction!",
-        gas_prices="0.015uluna,0.11ukrw", # optional
+        gas_prices="0.015uluna", # optional
         gas_adjustment="1.2", # optional
-        denoms=["ukrw"] # optional
+        denoms=["uluna"] # optional
     ))
 
 Signing transactions manually
