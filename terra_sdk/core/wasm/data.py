@@ -228,7 +228,7 @@ class HistoryEntry(JSONSerializable):
         return {
             "operation": convert_history_operation_type_to_json(self.operation),
             "code_id": self.code_id,
-            "updated": self.updated.to_amino(),
+            "updated": self.updated.to_data(),
             "msg": self.msg            
         }
     
@@ -245,7 +245,7 @@ class HistoryEntry(JSONSerializable):
         return cls(
             operation=convert_history_operation_type_from_json(data["operation"]),
             code_id=data["code_id"],
-            updated=AbsoluteTxPosition.from_data(data["updated"]),
+            updated=AbsoluteTxPosition.from_data(data["updated"]) if data["updated"] else None,
             msg=data["msg"],
         )
     
