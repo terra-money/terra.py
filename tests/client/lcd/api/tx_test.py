@@ -15,8 +15,10 @@ def test_tx_info():
     )
 
     assert result is not None
-    assert result.txhash == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
-    
+    assert (
+        result.txhash
+        == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
+    )
 
 
 def test_search():
@@ -28,8 +30,10 @@ def test_search():
     )
 
     assert len(result["txs"]) > 0
-    assert result["txs"][0].txhash == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
-    
+    assert (
+        result["txs"][0].txhash
+        == "10C4732BAE613ACCEF490D19B8B9647EC3D26B6E8F1AB1277201035FE86552A4"
+    )
 
 
 def test_tx_infos_by_height():

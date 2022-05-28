@@ -40,8 +40,8 @@ class TextProposal(JSONSerializable):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "title" : self.title,
-            "description" : self.description
+            "title": self.title,
+            "description": self.description,
         }
 
     @classmethod
@@ -56,7 +56,4 @@ class TextProposal(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TextProposal_pb):
-        return cls(
-            title=proto.title,
-            description=proto.description
-        )
+        return cls(title=proto.title, description=proto.description)

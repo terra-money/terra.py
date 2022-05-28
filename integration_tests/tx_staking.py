@@ -1,5 +1,6 @@
 import base64
 
+from terra_sdk.client.lcd import LCDClient
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
 from terra_sdk.core import Coin, Coins
 from terra_sdk.core.staking import (
@@ -12,7 +13,6 @@ from terra_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_sdk.key.mnemonic import MnemonicKey
-from terra_sdk.client.lcd import LCDClient
 
 
 def main():
@@ -21,10 +21,14 @@ def main():
         chain_id="pisco-1",
     )
 
-    mk1 = MnemonicKey(mnemonic="nut praise glare false post crane clinic nothing happy effort loyal point parent few series task base maximum insect glass twice inflict tragic cancel")
-    mk2 = MnemonicKey(mnemonic="invite tape senior armor tragic punch actor then patrol mother version impact floor begin fitness tool street lava evidence lemon oval width soda actual")
+    mk1 = MnemonicKey(
+        mnemonic="nut praise glare false post crane clinic nothing happy effort loyal point parent few series task base maximum insect glass twice inflict tragic cancel"
+    )
+    mk2 = MnemonicKey(
+        mnemonic="invite tape senior armor tragic punch actor then patrol mother version impact floor begin fitness tool street lava evidence lemon oval width soda actual"
+    )
 
-    test1 = terra.wallet(mk1) 
+    test1 = terra.wallet(mk1)
     validator1_address = "terravaloper1thuj2a8sgtxr7z3gr39egng3syqqwas4hmvvlg"
     validator2_address = "terravaloper1q33jd4t8788ckkq8u935wtxstjnphcsdne3gud"
     """

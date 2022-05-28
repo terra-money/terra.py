@@ -72,14 +72,16 @@ class Tx(JSONSerializable):
         return {
             "body": self.body.to_data(),
             "auth_info": self.auth_info.to_data(),
-            "signatures": [base64.b64encode(sig).decode('ascii') for sig in self.signatures],
+            "signatures": [
+                base64.b64encode(sig).decode("ascii") for sig in self.signatures
+            ],
         }
 
     def to_proto(self) -> Tx_pb:
         return Tx_pb(
             body=self.body.to_proto(),
             auth_info=self.auth_info.to_proto(),
-            signatures=self.signatures
+            signatures=self.signatures,
         )
 
     @classmethod
@@ -95,7 +97,7 @@ class Tx(JSONSerializable):
         return cls(
             TxBody.from_proto(proto.body),
             AuthInfo.from_proto(proto.auth_info),
-            proto.signatures
+            proto.signatures,
         )
 
     @classmethod
@@ -163,7 +165,9 @@ class TxBody(JSONSerializable):
 
     messages: List[Msg] = attr.ib()
     memo: Optional[str] = attr.ib(default="")
-    timeout_height: int = attr.ib(default=0, converter=int)  # TxBody_pb.timeout_height is int
+    timeout_height: int = attr.ib(
+        default=0, converter=int
+    )  # TxBody_pb.timeout_height is int
 
     def to_data(self) -> dict:
         return {

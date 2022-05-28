@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from terra_proto.cosmwasm.wasm.v1 import AccessType
+
 from terra_sdk.client.lcd.api.tx import CreateTxOptions
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coins
@@ -8,9 +10,6 @@ from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgS
 from terra_sdk.core.wasm.data import AccessConfig
 from terra_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
-from terra_proto.cosmwasm.wasm.v1 import (
-    AccessType
-)
 
 def main():
     terra = LocalTerra()
@@ -23,7 +22,7 @@ def main():
                 MsgStoreCode(
                     test1.key.acc_address,
                     read_file_as_b64(Path(__file__).parent / "./contract.wasm"),
-                    AccessConfig(AccessType.ACCESS_TYPE_EVERYBODY,"")
+                    AccessConfig(AccessType.ACCESS_TYPE_EVERYBODY, ""),
                 )
             ],
             gas_adjustment=1.75,
@@ -44,7 +43,7 @@ def main():
                     code_id,
                     "testlabel",
                     {"count": 10},
-                    "10uluna"
+                    "10uluna",
                 )
             ],
             gas_prices="10uluna",

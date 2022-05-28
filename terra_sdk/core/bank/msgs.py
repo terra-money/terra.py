@@ -4,12 +4,11 @@ from __future__ import annotations
 
 from typing import List
 
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.bank.v1beta1 import Input as Input_pb
 from terra_proto.cosmos.bank.v1beta1 import MsgMultiSend as MsgMultiSend_pb
 from terra_proto.cosmos.bank.v1beta1 import MsgSend as MsgSend_pb
 from terra_proto.cosmos.bank.v1beta1 import Output as Output_pb
-
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
@@ -116,10 +115,7 @@ class MultiSendInput(JSONSerializable):
         return cls(address=proto.address, coins=Coins.from_proto(proto.coins))
 
     def to_proto(self) -> Input_pb:
-        return Input_pb(
-            address=self.address,
-            coins=self.coins.to_proto()
-        )
+        return Input_pb(address=self.address, coins=self.coins.to_proto())
 
 
 @attr.s
@@ -153,10 +149,7 @@ class MultiSendOutput(JSONSerializable):
         return cls(address=proto.address, coins=Coins.from_proto(proto.coins))
 
     def to_proto(self) -> Output_pb:
-        return Output_pb(
-            address=self.address,
-            coins=self.coins.to_proto()
-        )
+        return Output_pb(address=self.address, coins=self.coins.to_proto())
 
 
 def convert_input_list(data: list) -> List[MultiSendInput]:

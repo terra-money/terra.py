@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import attr
 from betterproto.lib.google.protobuf import Any as Any_pb
-from terra_proto.ibc.core.client.v1 import ClientUpdateProposal as ClientUpdateProposal_pb
+from terra_proto.ibc.core.client.v1 import (
+    ClientUpdateProposal as ClientUpdateProposal_pb,
+)
 
 __all__ = ["ClientUpdateProposal"]
 
@@ -35,7 +37,7 @@ class ClientUpdateProposal(JSONSerializable):
                 "title": self.title,
                 "description": self.description,
                 "subject_client_id": self.subject_client_id,
-                "substitute_client_id": self.substitute_client_id
+                "substitute_client_id": self.substitute_client_id,
             },
         }
 
@@ -45,7 +47,7 @@ class ClientUpdateProposal(JSONSerializable):
             title=data["title"],
             description=data["description"],
             subject_client_id=data["subject_client_id"],
-            substitute_client_id=data["substitute_client_id"]
+            substitute_client_id=data["substitute_client_id"],
         )
 
     def to_proto(self) -> ClientUpdateProposal_pb:
@@ -53,7 +55,7 @@ class ClientUpdateProposal(JSONSerializable):
             title=self.title,
             description=self.description,
             subject_client_id=self.subject_client_id,
-            substitute_client_id=self.substitute_client_id
+            substitute_client_id=self.substitute_client_id,
         )
 
     @classmethod
@@ -62,9 +64,8 @@ class ClientUpdateProposal(JSONSerializable):
             title=proto.title,
             description=proto.description,
             subject_client_id=proto.subject_client_id,
-            substitute_client_id=proto.substitute_client_id
+            substitute_client_id=proto.substitute_client_id,
         )
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
-

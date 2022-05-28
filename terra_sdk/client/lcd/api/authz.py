@@ -53,7 +53,9 @@ class AsyncAuthzAPI(BaseAsyncAPI):
             List[AuthorizationGrant]: message authorization grants matching criteria
         """
 
-        res = await self._c._get(f"/cosmos/authz/v1beta1/grants/granter/{granter}", params)
+        res = await self._c._get(
+            f"/cosmos/authz/v1beta1/grants/granter/{granter}", params
+        )
         return [AuthorizationGrant.from_data(x) for x in res["grants"]]
 
     async def grantee(
@@ -71,8 +73,11 @@ class AsyncAuthzAPI(BaseAsyncAPI):
             List[AuthorizationGrant]: message authorization grants matching criteria
         """
 
-        res = await self._c._get(f"/cosmos/authz/v1beta1/grants/grantee/{grantee}", params)
+        res = await self._c._get(
+            f"/cosmos/authz/v1beta1/grants/grantee/{grantee}", params
+        )
         return [AuthorizationGrant.from_data(x) for x in res["grants"]]
+
 
 class AuthzAPI(AsyncAuthzAPI):
     @sync_bind(AsyncAuthzAPI.grants)
@@ -84,7 +89,6 @@ class AuthzAPI(AsyncAuthzAPI):
         params: Optional[APIParams] = None,
     ) -> List[AuthorizationGrant]:
         pass
-
 
     @sync_bind(AsyncAuthzAPI.granter)
     def granter(

@@ -38,9 +38,7 @@ class BaseAccount(JSONSerializable):
             "type": self.type_amino,
             "value": {
                 "address": self.address,
-                "public_key": self.public_key.to_amino()
-                if self.public_key
-                else None,
+                "public_key": self.public_key.to_amino() if self.public_key else None,
                 "account_number": str(self.account_number),
                 "sequence": str(self.sequence),
             },
@@ -51,8 +49,8 @@ class BaseAccount(JSONSerializable):
         amino = amino["value"] if "value" in amino else amino
         return cls(
             address=amino["address"],
-            public_key=PublicKey.from_amino(amino["public_key"]) 
-            if amino["public_key"]  
+            public_key=PublicKey.from_amino(amino["public_key"])
+            if amino["public_key"]
             else None,
             account_number=amino["account_number"],
             sequence=amino["sequence"],

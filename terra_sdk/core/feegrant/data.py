@@ -7,6 +7,7 @@ from typing import List, Optional
 
 import attr
 from attr import converters
+from betterproto.lib.google.protobuf import Any as Any_pb
 from dateutil import parser
 from terra_proto.cosmos.feegrant.v1beta1 import (
     AllowedMsgAllowance as AllowedMsgAllowance_pb,
@@ -15,10 +16,9 @@ from terra_proto.cosmos.feegrant.v1beta1 import BasicAllowance as BasicAllowance
 from terra_proto.cosmos.feegrant.v1beta1 import (
     PeriodicAllowance as PeriodicAllowance_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import Coins
-from terra_sdk.util.base import create_demux_unpack_any, create_demux_proto
+from terra_sdk.util.base import create_demux_proto, create_demux_unpack_any
 from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.json import JSONSerializable
 
@@ -33,9 +33,7 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: Optional[datetime] = attr.ib(
-        converter=parser.parse
-    )
+    expiration: Optional[datetime] = attr.ib(converter=parser.parse)
 
     type_amino = "cosmos-sdk/BasicAllowance"
     """"""
@@ -94,7 +92,7 @@ class BasicAllowance(JSONSerializable):
         sl = proto.spend_limit
         return cls(
             spend_limit=Coins.from_proto(sl) if sl else None,
-            expiration=to_isoformat(proto.expiration)
+            expiration=to_isoformat(proto.expiration),
         )
 
 
@@ -186,6 +184,7 @@ class AllowedMsgAllowance(JSONSerializable):
     """"""
 
     prototype = AllowedMsgAllowance_pb
+
     def to_amino(self) -> dict:
         return {
             "type": self.type_amino,
@@ -220,8 +219,9 @@ class AllowedMsgAllowance(JSONSerializable):
     def from_proto(cls, proto: AllowedMsgAllowance_pb) -> AllowedMsgAllowance:
         return cls(
             allowance=BasicAllowance.from_proto(proto.allowance),
-            allowed_messages=proto.allowed_messages            
+            allowed_messages=proto.allowed_messages,
         )
+
 
 class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
     @property
@@ -269,4 +269,6 @@ class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
         return parse_allowance_unpack_any(proto)
 
 
-parse_allowance_unpack_any = create_demux_unpack_any([BasicAllowance, PeriodicAllowance,AllowedMsgAllowance])
+parse_allowance_unpack_any = create_demux_unpack_any(
+    [BasicAllowance, PeriodicAllowance, AllowedMsgAllowance]
+)

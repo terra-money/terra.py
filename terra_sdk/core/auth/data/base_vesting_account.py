@@ -72,9 +72,7 @@ class BaseVestingAccount(JSONSerializable):
     def from_amino(cls, amino: dict) -> BaseVestingAccount:
         amino = amino["value"] if "value" in amino else amino
         return cls(
-            base_account=BaseAccount.from_amino(
-                amino["base_account"]
-            ),
+            base_account=BaseAccount.from_amino(amino["base_account"]),
             original_vesting=Coins.from_amino(amino["original_vesting"])
             if amino["original_vesting"]
             else None,

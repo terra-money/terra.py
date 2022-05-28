@@ -44,7 +44,7 @@ def main():
     #     mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
     # )
     # test1 = terra.wallet(key=key)
-    test1=terra.wallets["test1"]
+    test1 = terra.wallets["test1"]
 
     msg = MsgSend(
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
@@ -68,7 +68,7 @@ def main():
         ),
     ]
     msgMulti = MsgMultiSend(inputs, outputs)
-    
+
     opt = CreateTxOptions(
         msgs=[msg, msgMulti], memo="send test", gas_adjustment=1.5, gas_prices="1uluna"
     )

@@ -1,14 +1,14 @@
 """Data objects pertaining to accounts."""
 
 from __future__ import annotations
-from itertools import starmap
 
+from itertools import starmap
 from typing import List
 
 import attr
+from terra_proto.cosmos.vesting.v1beta1 import Period as Period_pb
 from terra_proto.cosmos.vesting.v1beta1 import (
     PeriodicVestingAccount as PeriodicVestingAccount_pb,
-    Period as Period_pb
 )
 
 from terra_sdk.core import Coins
@@ -23,8 +23,8 @@ __all__ = ["Period", "PeriodicVestingAccount"]
 
 @attr.s
 class Period(JSONSerializable):
-    length : int = attr.ib(converter=int)
-    amount : Coins = attr.ib(converter=Coins)
+    length: int = attr.ib(converter=int)
+    amount: Coins = attr.ib(converter=Coins)
 
     def to_amino(self) -> dict:
         return {
@@ -39,39 +39,30 @@ class Period(JSONSerializable):
         }
 
     def to_proto(self) -> Period_pb:
-        return Period_pb(
-            length=self.length,
-            amount=self.amount.to_proto()
-        )
+        return Period_pb(length=self.length, amount=self.amount.to_proto())
 
     @classmethod
     def from_amino(cls, amino: dict) -> Period:
         return cls(
-            length=int(amino["length"]),
-            amount=Coins.from_amino(amino["amount"])
+            length=int(amino["length"]), amount=Coins.from_amino(amino["amount"])
         )
 
     @classmethod
     def from_data(cls, data: dict) -> Period:
-        return cls(
-            length=data["length"],
-            amount=Coins.from_data(data["amount"])
-        )
+        return cls(length=data["length"], amount=Coins.from_data(data["amount"]))
 
     @classmethod
     def from_proto(cls, proto: Period_pb) -> Period:
-        return cls(
-            length=proto.length,
-            amount=Coins.from_proto(proto.amount)
-        )
+        return cls(length=proto.length, amount=Coins.from_proto(proto.amount))
+
 
 @attr.s
-class PeriodicVestingAccount():
+class PeriodicVestingAccount:
     """Stores information about an account with periodic vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
-    start_time : int = attr.ib()
-    vesting_periods : List[Period] = attr.ib()
+    start_time: int = attr.ib()
+    vesting_periods: List[Period] = attr.ib()
 
     type_amino = "cosmos-sdk/PeriodicVestingAccount"
     type_url = "/cosmos.vesting.v1beta1.PeriodicVestingAccount"
@@ -90,8 +81,8 @@ class PeriodicVestingAccount():
             "type": self.type_amino,
             "value": {
                 "base_vesting_account": self.base_vesting_account.to_amino(),
-                "start_time" : str(self.start_time),
-                "vesting_periods" : [vp.to_amino() for vp in self.vesting_periods]
+                "start_time": str(self.start_time),
+                "vesting_periods": [vp.to_amino() for vp in self.vesting_periods],
             },
         }
 
@@ -99,29 +90,29 @@ class PeriodicVestingAccount():
         return {
             "@type": self.type_url,
             "base_vesting_account": self.base_vesting_account.to_data(),
-            "start_time" : str(self.start_time),
-            "vesting_periods" : [vp.to_data() for vp in self.vesting_periods]
+            "start_time": str(self.start_time),
+            "vesting_periods": [vp.to_data() for vp in self.vesting_periods],
         }
 
     def to_proto(self) -> PeriodicVestingAccount_pb:
         return PeriodicVestingAccount_pb(
             base_vesting_account=self.base_vesting_account.to_proto(),
             start_time=self.start_time,
-            vesting_periods=[vp.to_proto for vp in self.vesting_periods]
+            vesting_periods=[vp.to_proto for vp in self.vesting_periods],
         )
 
     @classmethod
     def from_amino(cls, amino: dict) -> PeriodicVestingAccount:
         amino = amino["value"]
         return cls(
-            base_vesting_account=BaseVestingAccount.from_amino({
-                "type" : BaseVestingAccount.type_amino,
-                "value": amino["base_vesting_account"]
-            }),
+            base_vesting_account=BaseVestingAccount.from_amino(
+                {
+                    "type": BaseVestingAccount.type_amino,
+                    "value": amino["base_vesting_account"],
+                }
+            ),
             start_time=amino["start_time"],
-            vesting_periods=[
-                Period.from_amino(vp) for vp in amino["vesting_periods"]
-            ]
+            vesting_periods=[Period.from_amino(vp) for vp in amino["vesting_periods"]],
         )
 
     @classmethod
@@ -131,9 +122,7 @@ class PeriodicVestingAccount():
                 data["base_vesting_account"]
             ),
             start_time=data["start_time"],
-            vesting_periods=[
-                Period.from_data(vp) for vp in data["vesting_periods"]
-            ]
+            vesting_periods=[Period.from_data(vp) for vp in data["vesting_periods"]],
         )
 
     @classmethod
@@ -143,9 +132,5 @@ class PeriodicVestingAccount():
                 proto.base_vesting_account
             ),
             start_time=proto.start_time,
-            vesting_periods=[
-                Period.from_proto(vs) for vs in proto.vesting_periods
-            ]
+            vesting_periods=[Period.from_proto(vs) for vs in proto.vesting_periods],
         )
-
-    

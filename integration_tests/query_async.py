@@ -1,7 +1,8 @@
 import asyncio
-import uvloop
 import base64
 from pathlib import Path
+
+import uvloop
 
 from terra_sdk.client.lcd import AsyncLCDClient
 from terra_sdk.core import Coins

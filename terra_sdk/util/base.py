@@ -3,8 +3,8 @@ from abc import abstractmethod
 from typing import Any, Callable, Dict, List
 
 import attr
-from betterproto.lib.google.protobuf import Any as Any_pb
 from betterproto import Message
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from .json import JSONSerializable, dict_to_data
 
@@ -27,7 +27,7 @@ class BaseTerraData(JSONSerializable, Message):
 # data demux
 def create_demux(inputs: List) -> Callable[[Dict[str, Any]], Any]:
     table = {i.type_url: i.from_data for i in inputs}
-    
+
     def from_data(data: dict):
         return table[data["@type"]](data)
 

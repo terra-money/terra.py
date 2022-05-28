@@ -22,7 +22,9 @@ class Plan(JSONSerializable):
     name: str = attr.ib()
     height: str = attr.ib()
     info: str = attr.ib()
-    time: Optional[datetime] = attr.ib(default=None, converter=converters.optional(parser.parse))
+    time: Optional[datetime] = attr.ib(
+        default=None, converter=converters.optional(parser.parse)
+    )
     upgrade_client_state: Optional[Any] = attr.ib(default=None)
 
     def to_amino(self) -> dict:
@@ -41,7 +43,9 @@ class Plan(JSONSerializable):
             time=data["time"] if data.get("time") else None,
             height=data["height"],
             info=data["info"],
-            upgrade_client_state=data["upgrade_client_state"] if data.get("upgrade_client_state") else None,
+            upgrade_client_state=data["upgrade_client_state"]
+            if data.get("upgrade_client_state")
+            else None,
         )
 
     def to_proto(self) -> Plan_pb:
@@ -63,5 +67,7 @@ class Plan(JSONSerializable):
             time=proto.time if proto.time else None,
             height=proto.height,
             info=proto.info,
-            upgrade_client_state=Any_pb().parse(proto.upgrade_client_state) if proto.upgraded_client_state else None,
+            upgrade_client_state=Any_pb().parse(proto.upgrade_client_state)
+            if proto.upgraded_client_state
+            else None,
         )

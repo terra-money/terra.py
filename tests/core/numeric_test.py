@@ -1,6 +1,8 @@
-from terra_sdk.core import Dec
 from decimal import Decimal
+
 import pytest
+
+from terra_sdk.core import Dec
 
 
 def test_deserializes():

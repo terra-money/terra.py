@@ -1,9 +1,10 @@
 import base64
 import json
-from typing import Any, Union, List
+from typing import Any, List, Union
 
 from terra_sdk.core import Numeric
 from terra_sdk.core.wasm.data import AbsoluteTxPosition, HistoryEntry
+
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncWasmAPI", "WasmAPI"]
@@ -25,8 +26,9 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "code_id": Numeric.parse(code_info["code_id"]),
             "data_hash": code_info["data_hash"],
             "creator": code_info["creator"],
-            "instantiate_permission" : code_info["instantiate_permission"]
+            "instantiate_permission": code_info["instantiate_permission"],
         }
+
     async def contract_history(self, contract_address: str) -> List[HistoryEntry]:
         """Fetches contract history.
 
@@ -36,8 +38,10 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             List[HistoryEntry]: contract histories
         """
-        
-        res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}/history")
+
+        res = await self._c._get(
+            f"/cosmwasm/wasm/v1/contract/{contract_address}/history"
+        )
 
         return [HistoryEntry.from_data(entry) for entry in res["entries"]]
 
@@ -61,11 +65,15 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "admin": contract_info.get("admin", None),
             "label": contract_info.get("label", None),
             "init_msg": history_entries[0].msg,
-            "created" : AbsoluteTxPosition.from_data(contract_info.get("created")) if contract_info.get("created", None) else None, 
+            "created": AbsoluteTxPosition.from_data(contract_info.get("created"))
+            if contract_info.get("created", None)
+            else None,
             "ibc_port_id": contract_info.get("ibc_port_id", None),
         }
 
-    async def contract_query(self, contract_address: str, query: Union[dict, str]) -> Any:
+    async def contract_query(
+        self, contract_address: str, query: Union[dict, str]
+    ) -> Any:
         """Runs a QueryMsg on a contract.
 
         Args:
@@ -75,15 +83,12 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             Any: results of query
         """
-        query_msg = (base64.b64encode(json.dumps(query).encode("utf-8")).decode(
-                "utf-8"
-            ))
+        query_msg = base64.b64encode(json.dumps(query).encode("utf-8")).decode("utf-8")
         res = await self._c._get(
             f"/cosmwasm/wasm/v1/contract/{contract_address}/smart/{query_msg}"
         )
         return res.get("data")
 
-    
     async def pinned_codes(self) -> dict:
         """Fetches the Wasm module pinned codes.
 

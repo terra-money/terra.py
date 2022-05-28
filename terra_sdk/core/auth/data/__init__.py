@@ -16,5 +16,5 @@ __all__ = [
     "BaseAccount",
     "ContinuousVestingAccount",
     "DelayedVestingAccount",
-    "PeriodicVestingAccount"
+    "PeriodicVestingAccount",
 ]

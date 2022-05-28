@@ -44,7 +44,9 @@ class AsyncBankAPI(BaseAsyncAPI):
             Coins: spendable balance
             params (APIParams, optional): additional params for the API like pagination
         """
-        res = await self._c._get(f"/cosmos/bank/v1beta1/spendable_balances/{address}", params)
+        res = await self._c._get(
+            f"/cosmos/bank/v1beta1/spendable_balances/{address}", params
+        )
         return Coins.from_data(res.get("balances")), res.get("pagination")
 
 

@@ -25,7 +25,7 @@ class AsyncLCDUtils(BaseAsyncAPI):
         next_key = ""
         while True:
             from terra_sdk.client.lcd import PaginationOptions
-            
+
             validators, pag = await BaseAsyncAPI._try_await(
                 self._c.staking.validators(PaginationOptions(key=next_key))
             )
@@ -52,4 +52,3 @@ class LCDUtils(AsyncLCDUtils):
     @sync_bind(AsyncLCDUtils.validators_with_voting_power)
     async def validators_with_voting_power(self) -> Dict[str, dict]:
         pass
-

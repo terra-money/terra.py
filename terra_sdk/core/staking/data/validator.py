@@ -19,7 +19,7 @@ from terra_sdk.util.json import JSONSerializable
 __all__ = ["CommissionRates", "Commission", "Description", "Validator", "BondStatus"]
 
 
-def convert_bond_status_to_json(status :BondStatus) -> str :
+def convert_bond_status_to_json(status: BondStatus) -> str:
     if status == BondStatus.BOND_STATUS_UNSPECIFIED:
         return "BOND_STATUS_UNSPECIFIED"
     elif status == BondStatus.BOND_STATUS_UNBONDED:
@@ -29,7 +29,8 @@ def convert_bond_status_to_json(status :BondStatus) -> str :
     elif status == BondStatus.BOND_STATUS_BONDED:
         return "BOND_STATUS_BONDED"
 
-def convert_bond_status_from_json(status : str) -> BondStatus :
+
+def convert_bond_status_from_json(status: str) -> BondStatus:
     if status == 0 or status == "BOND_STATUS_UNSPECIFIED":
         return BondStatus.BOND_STATUS_UNSPECIFIED
     elif status == 1 or status == "BOND_STATUS_UNBONDED":
@@ -38,6 +39,7 @@ def convert_bond_status_from_json(status : str) -> BondStatus :
         return BondStatus.BOND_STATUS_UNBONDING
     elif status == 3 or status == "BOND_STATUS_BONDED":
         return BondStatus.BOND_STATUS_BONDED
+
 
 @attr.s
 class CommissionRates(JSONSerializable):
@@ -246,7 +248,7 @@ class Validator(JSONSerializable):
             "commission": self.commission.to_amino(),
             "min_self_delegation": str(self.min_self_delegation),
         }
-    
+
     def to_data(self) -> dict:
         return {
             "operator_address": self.operator_address,

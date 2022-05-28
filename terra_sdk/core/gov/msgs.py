@@ -53,7 +53,7 @@ class MsgSubmitProposal(Msg):
             "@type": self.type_url,
             "content": self.content.to_data(),
             "initial_deposit": self.initial_deposit.to_data(),
-            "proposer": self.proposer
+            "proposer": self.proposer,
         }
 
     @classmethod
@@ -77,6 +77,7 @@ class MsgSubmitProposal(Msg):
     @classmethod
     def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
         from terra_sdk.util.parse_content import parse_content_unpack_any
+
         content = parse_content_unpack_any(proto.content)
         return cls(
             content=content,
@@ -227,7 +228,5 @@ class MsgVote(Msg):
     @classmethod
     def from_proto(cls, proto: MsgVote_pb) -> MsgVote:
         return cls(
-            proposal_id=proto.proposal_id,
-            voter=proto.voter,
-            option=proto.option
+            proposal_id=proto.proposal_id, voter=proto.voter, option=proto.option
         )

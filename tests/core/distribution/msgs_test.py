@@ -5,7 +5,6 @@ from terra_sdk.core.distribution import (
 )
 
 
-
 def test_deserializes_msg_modify_withdraw_address_examples(load_msg_examples):
     examples = load_msg_examples(
         MsgSetWithdrawAddress.type_amino, "./MsgModifyWithdrawAddress.data.json"
@@ -35,5 +34,5 @@ def test_deserializes_msg_withdraw_validator_commission_examples(load_msg_exampl
     )
     for example in examples:
         target = MsgWithdrawValidatorCommission.from_data(example["value"]).to_data()
-        
+
         assert target["validator_address"] == example["value"]["validator_address"]

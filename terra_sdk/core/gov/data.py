@@ -1,21 +1,23 @@
 """Gov module data types."""
 
 from __future__ import annotations
+
 from datetime import datetime
 from typing import List
+
 import attr
 from dateutil import parser
-
-from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb, ProposalStatus
+from terra_proto.cosmos.gov.v1beta1 import Proposal as Proposal_pb
+from terra_proto.cosmos.gov.v1beta1 import ProposalStatus
 from terra_proto.cosmos.gov.v1beta1 import TallyResult as TallyResult_pb
 from terra_proto.cosmos.gov.v1beta1 import Vote as Vote_pb
 from terra_proto.cosmos.gov.v1beta1 import VoteOption
 from terra_proto.cosmos.gov.v1beta1 import WeightedVoteOption as WeightedVoteOption_pb
 
 from terra_sdk.core import AccAddress, Coins
-from terra_sdk.util.json import JSONSerializable
 from terra_sdk.util.converter import to_isoformat
-from terra_sdk.util.parse_content import parse_content, Content
+from terra_sdk.util.json import JSONSerializable
+from terra_sdk.util.parse_content import Content, parse_content
 
 __all__ = ["Proposal", "Content", "VoteOption", "WeightedVoteOption", "ProposalStatus"]
 

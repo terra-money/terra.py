@@ -103,6 +103,7 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     @classmethod
-    def from_proto(cls, proto: CancelSoftwareUpgradeProposal_pb) -> CancelSoftwareUpgradeProposal:
+    def from_proto(
+        cls, proto: CancelSoftwareUpgradeProposal_pb
+    ) -> CancelSoftwareUpgradeProposal:
         return cls(title=proto.title, description=proto.description)
-

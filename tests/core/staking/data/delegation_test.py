@@ -1,6 +1,5 @@
 from terra_sdk.core.staking import Delegation, Redelegation, UnbondingDelegation
 
-
 # TODO: fix datetime parsing error
 # def test_deserialize_unbonding_delegation_examples(load_json_examples):
 #     examples = load_json_examples("./UnbondingDelegation.data.json")

@@ -6,7 +6,7 @@ from terra_sdk.util.json import JSONSerializable
 from .base_account import BaseAccount
 from .continuous_vesting_account import ContinuousVestingAccount
 from .delayed_vesting_account import DelayedVestingAccount
-from .periodic_vesting_account  import PeriodicVestingAccount
+from .periodic_vesting_account import PeriodicVestingAccount
 
 
 class Account(JSONSerializable, ABC):

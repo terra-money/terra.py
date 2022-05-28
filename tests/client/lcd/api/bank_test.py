@@ -28,7 +28,7 @@ def test_balance_with_pagination():
 
 def test_total():
     result, _ = terra.bank.total()
-    
+
     assert result.to_data()
 
 
@@ -36,6 +36,7 @@ def test_total_with_pagination():
     result, _ = terra.bank.total(pagOpt)
 
     assert result.to_data()
+
 
 def test_spendable_balances():
     result, _ = terra.bank.spendable_balances(

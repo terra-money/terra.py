@@ -1,8 +1,8 @@
 """Data objects pertaining to accounts."""
 
 from __future__ import annotations
-from itertools import starmap
 
+from itertools import starmap
 from typing import List
 
 import attr
@@ -20,10 +20,8 @@ from .base_vesting_account import BaseVestingAccount
 __all__ = ["DelayedVestingAccount"]
 
 
-
-
 @attr.s
-class DelayedVestingAccount():
+class DelayedVestingAccount:
     """Stores information about an account with delayed vesting."""
 
     base_vesting_account: BaseVestingAccount = attr.ib()
@@ -63,10 +61,12 @@ class DelayedVestingAccount():
     def from_amino(cls, amino: dict) -> DelayedVestingAccount:
         amino = amino["value"]
         return cls(
-            base_vesting_account=BaseVestingAccount.from_amino({
-                "type" : BaseVestingAccount.type_amino,
-                "value": amino["base_vesting_account"]
-            })
+            base_vesting_account=BaseVestingAccount.from_amino(
+                {
+                    "type": BaseVestingAccount.type_amino,
+                    "value": amino["base_vesting_account"],
+                }
+            )
         )
 
     @classmethod
@@ -84,5 +84,3 @@ class DelayedVestingAccount():
                 proto.base_vesting_account
             )
         )
-
-    

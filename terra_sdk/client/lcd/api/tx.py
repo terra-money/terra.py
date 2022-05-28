@@ -376,7 +376,9 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         txs = res.get("block").get("data").get("txs")
         hashes = [hash_amino(tx) for tx in txs]
-        return [await BaseAsyncAPI._try_await(self.tx_info(tx_hash)) for tx_hash in hashes]
+        return [
+            await BaseAsyncAPI._try_await(self.tx_info(tx_hash)) for tx_hash in hashes
+        ]
 
 
 class TxAPI(AsyncTxAPI):

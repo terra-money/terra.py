@@ -1,4 +1,9 @@
-from terra_sdk.core.auth import BaseAccount, DelayedVestingAccount, ContinuousVestingAccount, PeriodicVestingAccount
+from terra_sdk.core.auth import (
+    BaseAccount,
+    ContinuousVestingAccount,
+    DelayedVestingAccount,
+    PeriodicVestingAccount,
+)
 
 
 def test_deserializes_account_example(load_json_examples):
@@ -6,7 +11,8 @@ def test_deserializes_account_example(load_json_examples):
     for example in examples:
         target = BaseAccount.from_amino(example).to_amino()
         assert target["type"] == example["type"]
-        assert target["value"]== example["value"]
+        assert target["value"] == example["value"]
+
 
 def test_deserializes_continuous_vesting_account_example(load_json_examples):
     examples = load_json_examples("./ContinuousVestingAccount.data.json")

@@ -5,6 +5,7 @@ terra = LCDClient(
     chain_id="pisco-1",
 )
 
+
 def test_validator_set():
     result = terra.tendermint.validator_set()
     print(result)
@@ -13,7 +14,10 @@ def test_validator_set():
 def test_validator_set_with_height():
     result = terra.tendermint.validator_set(1)
 
-    assert result["validators"][0]["address"] == "terravalcons15m2dkstenqhjefq4c95jrug402v27tug3ymwwv"
+    assert (
+        result["validators"][0]["address"]
+        == "terravalcons15m2dkstenqhjefq4c95jrug402v27tug3ymwwv"
+    )
 
 
 def test_node_info():
@@ -30,9 +34,8 @@ def test_block_info():
 def test_block_info_with_height():
     result = terra.tendermint.block_info(1)
     print(result)
-    
+
 
 def test_syncing():
     result = terra.tendermint.syncing()
     print(result)
-

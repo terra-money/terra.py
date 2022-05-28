@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.crisis.v1beta1 import (
     MsgVerifyInvariant as MsgVerifyInvariant_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg

@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.feegrant.v1beta1 import (
     MsgGrantAllowance as MsgGrantAllowance_pb,
 )
 from terra_proto.cosmos.feegrant.v1beta1 import (
     MsgRevokeAllowance as MsgRevokeAllowance_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
+
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
 
@@ -45,7 +46,7 @@ class MsgGrantAllowance(Msg):
                 "allowance": self.allowance.to_amino(),
             },
         }
-    
+
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
@@ -61,7 +62,7 @@ class MsgGrantAllowance(Msg):
             grantee=data["grantee"],
             allowance=Allowance.from_data(data["allowance"]),
         )
-        
+
     def to_proto(self) -> MsgGrantAllowance_pb:
         return MsgGrantAllowance_pb(
             granter=self.granter,

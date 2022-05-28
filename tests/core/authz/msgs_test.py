@@ -1,4 +1,5 @@
 from math import expm1
+
 from terra_sdk.core.authz import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
@@ -27,7 +28,7 @@ def test_deserializes_msg_grant_authorization_examples(load_json_examples):
 
 def test_deserializes_msg_revoke_authorization_examples(load_json_examples):
     examples = load_json_examples("./MsgRevokeAuthorization.data.json")
-   
+
     for example in examples:
         target = MsgRevokeAuthorization.from_data(example).to_data()
 

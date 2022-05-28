@@ -11,7 +11,7 @@ from terra_sdk.util.json import JSONSerializable
 DEC_NUM_DIGITS = 18
 """Number of digits for Decimal."""
 
-DEC_ONE = 10 ** DEC_NUM_DIGITS
+DEC_ONE = 10**DEC_NUM_DIGITS
 DEC_PATTERN = re.compile(r"^(\-)?(\d+)(\.(\d+))?\Z")
 
 __all__ = ["DEC_NUM_DIGITS", "Dec", "Numeric"]

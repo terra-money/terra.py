@@ -1,7 +1,13 @@
 from typing import Union
 
 from terra_sdk.core import AccAddress
-from terra_sdk.core.auth import Account, BaseAccount, ContinuousVestingAccount, DelayedVestingAccount, PeriodicVestingAccount
+from terra_sdk.core.auth import (
+    Account,
+    BaseAccount,
+    ContinuousVestingAccount,
+    DelayedVestingAccount,
+    PeriodicVestingAccount,
+)
 
 from ._base import BaseAsyncAPI, sync_bind
 
@@ -11,7 +17,12 @@ __all__ = ["AsyncAuthAPI", "AuthAPI"]
 class AsyncAuthAPI(BaseAsyncAPI):
     async def account_info(
         self, address: AccAddress
-    ) -> Union[BaseAccount, ContinuousVestingAccount, DelayedVestingAccount, PeriodicVestingAccount]:
+    ) -> Union[
+        BaseAccount,
+        ContinuousVestingAccount,
+        DelayedVestingAccount,
+        PeriodicVestingAccount,
+    ]:
         """Fetches the account information.
 
         Args:
@@ -28,7 +39,12 @@ class AuthAPI(AsyncAuthAPI):
     @sync_bind(AsyncAuthAPI.account_info)
     def account_info(
         self, address: AccAddress
-    ) -> Union[BaseAccount, ContinuousVestingAccount, DelayedVestingAccount, PeriodicVestingAccount]:
+    ) -> Union[
+        BaseAccount,
+        ContinuousVestingAccount,
+        DelayedVestingAccount,
+        PeriodicVestingAccount,
+    ]:
         pass
 
     account_info.__doc__ = AsyncAuthAPI.account_info.__doc__

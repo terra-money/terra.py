@@ -21,11 +21,12 @@ from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coin, Coins
 from terra_sdk.core.bank import MsgSend
+from terra_sdk.core.feegrant.data import Allowance, BasicAllowance
+from terra_sdk.core.feegrant.msgs import MsgGrantAllowance, MsgRevokeAllowance
 from terra_sdk.core.tx import SignMode
 from terra_sdk.key.key import SignOptions
 from terra_sdk.key.mnemonic import MnemonicKey
-from terra_sdk.core.feegrant.data import Allowance, BasicAllowance
-from terra_sdk.core.feegrant.msgs import MsgGrantAllowance, MsgRevokeAllowance
+
 
 def main():
     terra = LocalTerra()
@@ -38,9 +39,9 @@ def main():
     test2_address = test2.key.acc_address
 
     msg = MsgGrantAllowance(
-        granter = test1_address,
-        grantee = test2_address,
-        allowance = BasicAllowance(None, "2020-02-02T07:58:20Z")
+        granter=test1_address,
+        grantee=test2_address,
+        allowance=BasicAllowance(None, "2020-02-02T07:58:20Z"),
     )
 
     opt = CreateTxOptions(

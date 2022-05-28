@@ -1,5 +1,3 @@
-from .base import create_demux, create_demux_proto, create_demux_unpack_any
-
 # core msgs
 from terra_sdk.core.authz import (
     MsgExecAuthorized,
@@ -7,12 +5,14 @@ from terra_sdk.core.authz import (
     MsgRevokeAuthorization,
 )
 from terra_sdk.core.bank import MsgMultiSend, MsgSend
+from terra_sdk.core.crisis import MsgVerifyInvariant
 from terra_sdk.core.distribution import (
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,
     MsgWithdrawValidatorCommission,
 )
+from terra_sdk.core.feegrant import MsgGrantAllowance, MsgRevokeAllowance
 from terra_sdk.core.gov.msgs import MsgDeposit, MsgSubmitProposal, MsgVote
 from terra_sdk.core.ibc.msgs import (
     MsgAcknowledgement,
@@ -43,20 +43,15 @@ from terra_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_sdk.core.wasm import (
-    MsgStoreCode,
-    MsgInstantiateContract,
+    MsgClearAdmin,
     MsgExecuteContract,
+    MsgInstantiateContract,
     MsgMigrateContract,
+    MsgStoreCode,
     MsgUpdateAdmin,
-    MsgClearAdmin
 )
-from terra_sdk.core.feegrant import (
-    MsgGrantAllowance,
-    MsgRevokeAllowance
-)
-from terra_sdk.core.crisis import (
-    MsgVerifyInvariant
-)
+
+from .base import create_demux, create_demux_proto, create_demux_unpack_any
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
@@ -85,12 +80,9 @@ wasm_msgs = [
     MsgExecuteContract,
     MsgMigrateContract,
     MsgUpdateAdmin,
-    MsgClearAdmin
+    MsgClearAdmin,
 ]
-feegrant_msgs = [
-    MsgGrantAllowance,
-    MsgRevokeAllowance
-]
+feegrant_msgs = [MsgGrantAllowance, MsgRevokeAllowance]
 
 ibc_transfer_msgs = [MsgTransfer]
 ibc_msgs = [
@@ -112,9 +104,7 @@ ibc_msgs = [
     MsgTimeout,
     MsgAcknowledgement,
 ]
-crisis_msgs = [
-    MsgVerifyInvariant
-]
+crisis_msgs = [MsgVerifyInvariant]
 
 parse_msg = create_demux(
     [
@@ -128,7 +118,7 @@ parse_msg = create_demux(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
     ]
 )
 
@@ -144,7 +134,7 @@ parse_proto = create_demux_proto(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
     ]
 )
 
@@ -161,6 +151,6 @@ parse_unpack_any = create_demux_unpack_any(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
     ]
 )

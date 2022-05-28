@@ -5,6 +5,7 @@ terra = LCDClient(
     chain_id="pisco-1",
 )
 
+
 def test_inflation():
     result = terra.mint.inflation()
     print(result.to_data())

@@ -6,6 +6,7 @@ terra = LCDClient(
     chain_id="pisco-1",
 )
 
+
 def test_rewards():
     result = terra.distribution.rewards("terra1mzhc9gvfyh9swxed7eaxn2d6zzc3msgftk4w9e")
     assert result.total.to_data()

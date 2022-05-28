@@ -75,7 +75,9 @@ class CommunityPoolSpendProposal(JSONSerializable):
         )
 
     @classmethod
-    def from_proto(cls, proto: CommunityPoolSpendProposal_pb) -> CommunityPoolSpendProposal:
+    def from_proto(
+        cls, proto: CommunityPoolSpendProposal_pb
+    ) -> CommunityPoolSpendProposal:
         return cls(
             title=proto.title,
             description=proto.description,
