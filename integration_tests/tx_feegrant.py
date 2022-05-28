@@ -36,36 +36,22 @@ def main():
     test2 = terra.wallets["test2"]
     test1_address = test1.key.acc_address
     test2_address = test2.key.acc_address
-    # msg = MsgSend(
-    #     key.acc_address,
-    #     "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
-    #     Coins(uluna=30000),
-    # )
+
     msg = MsgGrantAllowance(
         granter = test1_address,
         grantee = test2_address,
         allowance = BasicAllowance(None, "2020-02-02T07:58:20Z")
     )
 
-    tx_opt = CreateTxOptions(msgs=[msg], memo="send test", gas_adjustment=1.5)
-
-    signer_opt = SignerOptions(address=key.acc_address)
-
-    acc_info = terra.auth.account_info(key.acc_address)
-
-    sign_opt = SignOptions(
-        account_number=acc_info.account_number,
-        sequence=acc_info.sequence,
-        sign_mode=SignMode.SIGN_MODE_DIRECT,
-        chain_id="localterra",
+    opt = CreateTxOptions(
+        msgs=[msg], memo="send test", gas_adjustment=1.5, gas_prices="1uluna"
     )
+    # tx = test1.create_tx(opt)
+    tx = test1.create_and_sign_tx(opt)
+    print("SIGNED TX", tx)
 
-    tx = terra.tx.create([signer_opt], tx_opt)
-
-    signed_tx = key.sign_tx(tx, sign_opt)
-
-    result = terra.tx.broadcast(signed_tx)
-    print(result)
+    result = terra.tx.broadcast(tx)
+    print(f"RESULT:{result}")
 
 
 main()

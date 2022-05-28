@@ -12,7 +12,7 @@ from terra_sdk.util.contract import get_code_id
 async def main():
     terra = AsyncLCDClient(
         url="https://pisco-lcd.terra.dev/",
-        chain_id="columbus-5",
+        chain_id="pisco-1",
     )
 
     result = await terra.tx.tx_infos_by_height(None)
