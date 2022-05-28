@@ -53,7 +53,7 @@ def test_signature():
             )
         ],
         options=CreateTxOptions(
-            msgs=[send], memo="memo", fee=Fee(200000, Coins.from_str("100000uusd"))
+            msgs=[send], memo="memo", fee=Fee(200000, Coins.from_str("100000uluna"))
         ),
     )
 

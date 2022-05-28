@@ -35,7 +35,7 @@ def main():
         delegator_address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
         validator_address="terravalcons1mgp3028ry5wf464r3s6gyptgmngrpnelhkuyvm",
         pubkey=ValConsPubKey(),
-        value="10000000uusd"
+        value="10000000uluna"
     )
 
     tx = test1.create_and_sign_tx(CreateTxOptions(msgs=[msgCV]))

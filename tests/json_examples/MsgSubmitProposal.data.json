@@ -1477,7 +1477,7 @@
               }],
               "fee": {
                   "amount": [{
-                      "denom": "uusd",
+                      "denom": "uluna",
                       "amount": "1351"
                   }],
                   "gas": "90066"

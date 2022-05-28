@@ -11,7 +11,7 @@ chain_id = 'pisco-1'
 gas_prices = requests.get('https://pisco-fcd.terra.dev/v1/txs/gas_prices').json()
 terra = AsyncLCDClient(chain_id=chain_id,
                        url=light_clinet_address,
-                       gas_prices=Coins(uusd=gas_prices['uusd']),
+                       gas_prices=Coins(uluna=gas_prices['uluna']),
                        gas_adjustment=1.2)
 
 
