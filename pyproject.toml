@@ -34,7 +34,7 @@ boltons = "^21.0.0"
 nest-asyncio = "^1.5.4"
 attrs = "^21.4.0"
 wrapt = "^1.13.3"
-terra-proto = "1.1.0b2"
+terra-proto = "1.1.0"
 
 [tool.poetry.dev-dependencies]
 aioresponses = "^0.7.2"
