@@ -771,7 +771,7 @@
                 "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
-                    "moniker": "dextrac-bombay"
+                    "moniker": "dextrac-pisco"
                   },
                   "commission": {
                     "rate": "0.100000000000000000",

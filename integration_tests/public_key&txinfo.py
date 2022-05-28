@@ -6,9 +6,9 @@ from terra_sdk.key.key import Key
 from terra_sdk.util import hash
 import requests, asyncio
 
-light_clinet_address = 'https://bombay-lcd.terra.dev'
-chain_id = 'bombay-12'
-gas_prices = requests.get('https://bombay-fcd.terra.dev/v1/txs/gas_prices').json()
+light_clinet_address = 'https://pisco-lcd.terra.dev'
+chain_id = 'pisco-1'
+gas_prices = requests.get('https://pisco-fcd.terra.dev/v1/txs/gas_prices').json()
 terra = AsyncLCDClient(chain_id=chain_id,
                        url=light_clinet_address,
                        gas_prices=Coins(uusd=gas_prices['uusd']),

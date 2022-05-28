@@ -23,6 +23,7 @@ from terra_sdk.core.ibc.data.channel import Channel, Packet
 from terra_sdk.core.ibc.data.client import Height
 from terra_sdk.core.msg import Msg
 
+# TODO: support MsgTimeoutClose
 __all__ = [
     "MsgChannelOpenInit",
     "MsgChannelOpenTry",

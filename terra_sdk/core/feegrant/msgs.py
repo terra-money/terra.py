@@ -45,6 +45,14 @@ class MsgGrantAllowance(Msg):
                 "allowance": self.allowance.to_amino(),
             },
         }
+    
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "allowance": self.allowance.to_data(),
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAllowance:

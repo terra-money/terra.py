@@ -11,7 +11,7 @@ from terra_sdk.util.contract import get_code_id
 
 async def main():
     terra = AsyncLCDClient(
-        url="https://bombay-lcd.terra.dev/",
+        url="https://pisco-lcd.terra.dev/",
         chain_id="columbus-5",
     )
 

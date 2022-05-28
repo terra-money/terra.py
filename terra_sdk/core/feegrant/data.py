@@ -59,6 +59,7 @@ class BasicAllowance(JSONSerializable):
 
     def to_data(self) -> dict:
         return {
+            "@type": self.type_url,
             "spend_limit": self.spend_limit.to_data() if self.spend_limit else None,
             "expiration": to_isoformat(self.expiration) if self.expiration else None,
         }
