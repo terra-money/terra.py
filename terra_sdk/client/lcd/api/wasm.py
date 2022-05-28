@@ -1,9 +1,9 @@
 import base64
 import json
-from typing import Any, Union
+from typing import Any, Union, List
 
 from terra_sdk.core import Numeric
-
+from terra_sdk.core.wasm.data import AbsoluteTxPosition, HistoryEntry
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncWasmAPI", "WasmAPI"]
@@ -27,6 +27,19 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "creator": code_info["creator"],
             "instantiate_permission" : code_info["instantiate_permission"]
         }
+    async def contract_history(self, contract_address: str) -> List[HistoryEntry]:
+        """Fetches contract history.
+
+        Args:
+            contract_address (str): contract address
+
+        Returns:
+            List[HistoryEntry]: contract histories
+        """
+        
+        entries, _  = await self._c._get(f"/cosmwasm/wasm/v1/contract/${contract_address}/history")
+        
+        return [HistoryEntry.from_data(entry) for entry in entries]
 
     async def contract_info(self, contract_address: str) -> dict:
         """Fetches information about an instantiated contract.
@@ -40,14 +53,15 @@ class AsyncWasmAPI(BaseAsyncAPI):
         res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}")
         contract_info = res.get("contract_info")
         contract_address = res.get("address")
+        history_entries = await self.contract_history(contract_address)
         return {
             "code_id": Numeric.parse(contract_info["code_id"]),
             "address": contract_address,
             "creator": contract_info["creator"],
             "admin": contract_info.get("admin", None),
-            # "init_msg": contract_info["init_msg"], (TODO: init_msg have to retrieve it from history)
             "label": contract_info.get("label", None),
-            # "created" : contract_info.get("created", None), (TODO : AbsoluteTxPosition)
+            "init_msg": history_entries[0].msg,
+            "created" : AbsoluteTxPosition.from_data(contract_info.get("created")) if contract_info.get("created", None) else None, 
             "ibc_port_id": contract_info.get("ibc_port_id", None),
         }
 
@@ -106,3 +120,9 @@ class WasmAPI(AsyncWasmAPI):
         pass
 
     parameters.__doc__ = AsyncWasmAPI.parameters.__doc__
+
+    @sync_bind(AsyncWasmAPI.contract_history)
+    def contract_history(self, contract_address: str) -> List[HistoryEntry]:
+        pass
+
+    parameters.__doc__ = AsyncWasmAPI.contract_history.__doc__

@@ -1,11 +1,16 @@
 from __future__ import annotations
+import json
 
 from terra_proto.cosmwasm.wasm.v1 import (
     AccessType,
     AccessConfigUpdate as AccessConfigUpdate_pb,
     AccessTypeParam as AccessTypeParam_pb,
-    AccessConfig as AccessConfig_pb
+    AccessConfig as AccessConfig_pb,
+    AbsoluteTxPosition as AbsoluteTxPosition_pb,
+    ContractCodeHistoryEntry as HistoryEntry_pb,
+    ContractCodeHistoryOperationType
 )
+from typing import List, Optional, Union
 import attr
 from terra_sdk.core.bech32 import AccAddress
 
@@ -19,7 +24,12 @@ __all__ = [
     "AccessTypeParam"
 ]
 
+def parse_msg(msg: Union[dict, str, bytes]) -> dict:
+    if type(msg) is dict:
+        return msg
+    return json.loads(msg)
 
+# Check why type.name is different 
 def convert_access_type_from_json(access_type : str) -> AccessType :
     if access_type == 'Everybody' :
         return AccessType.ACCESS_TYPE_EVERYBODY
@@ -32,13 +42,33 @@ def convert_access_type_from_json(access_type : str) -> AccessType :
 
 def convert_access_type_to_json(access_type : AccessType) -> str :
     if access_type == AccessType.ACCESS_TYPE_EVERYBODY :
-        return 'Everybody' 
+        return AccessType.ACCESS_TYPE_EVERYBODY.name 
     elif access_type == AccessType.ACCESS_TYPE_NOBODY   :
-        return 'Nobody'
+        return AccessType.ACCESS_TYPE_NOBODY.name
     elif access_type == AccessType.ACCESS_TYPE_ONLY_ADDRESS :
-        return 'OnlyAddress'
+        return AccessType.ACCESS_TYPE_ONLY_ADDRESS.name
     elif access_type == AccessType.ACCESS_TYPE_UNSPECIFIED :
-        return 'Unspecified'
+        return AccessType.ACCESS_TYPE_UNSPECIFIED.name
+
+def convert_history_operation_type_to_json(operation_type : str) -> ContractCodeHistoryOperationType :
+    if operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS.name
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT.name
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE.name
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED.name
+
+def convert_history_operation_type_from_json(operation_type : ContractCodeHistoryOperationType) -> str :
+    if operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS.name :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT.name :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE.name :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE
+    elif operation_type == ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED.name :
+        return ContractCodeHistoryOperationType.CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED
 
 @attr.s
 class AccessConfig(JSONSerializable):
@@ -142,4 +172,88 @@ class AccessTypeParam(JSONSerializable):
     def from_proto(cls, proto: AccessTypeParam_pb) -> AccessTypeParam:
         return cls(
             value=proto.value
+        )
+
+
+@attr.s
+class AbsoluteTxPosition(JSONSerializable):
+    block_height: int= attr.ib()
+    tx_index: int = attr.ib()
+    """"""
+
+    def to_amino(self):
+        return {
+            "block_height": self.block_height,
+            "tx_index": self.tx_index
+        }
+    
+    def to_proto(self) -> AbsoluteTxPosition_pb:
+        return AbsoluteTxPosition_pb(
+            block_height=self.block_height,
+            tx_index=self.tx_index
+        )
+
+    @classmethod
+    def from_data(cls, data:dict) -> AbsoluteTxPosition:
+        return cls(
+            block_height=data["block_height"],
+            tx_index=data["tx_index"]
+        )
+    
+    @classmethod
+    def from_proto(cls, proto: AbsoluteTxPosition_pb) -> AbsoluteTxPosition:
+        return cls(
+            block_height=proto.block_height,
+            tx_index=proto.tx_index
+        )
+
+
+@attr.s
+class HistoryEntry(JSONSerializable):
+    operation: ContractCodeHistoryOperationType = attr.ib()
+    code_id: int = attr.ib()
+    updated: Optional[AbsoluteTxPosition] = attr.ib()
+    msg: Union[str, dict] = attr.ib()
+    """"""
+
+    def to_amino(self):
+        return {
+            "operation": convert_history_operation_type_to_json(self.operation),
+            "code_id": self.code_id,
+            "updated": self.updated.to_amino(),
+            "msg": self.msg
+        }
+    
+    def to_data(self):
+        return {
+            "operation": convert_history_operation_type_to_json(self.operation),
+            "code_id": self.code_id,
+            "updated": self.updated.to_amino(),
+            "msg": self.msg            
+        }
+    
+    def to_proto(self) -> HistoryEntry_pb:
+        return HistoryEntry_pb(
+            operation= self.operation,
+            code_id= self.code_id,
+            updated= self.updated,
+            msg=bytes(json.dumps(self.msg), "utf-8"),
+        )
+
+    @classmethod
+    def from_data(cls, data:dict) -> HistoryEntry:
+        return cls(
+            operation=convert_history_operation_type_from_json(data["operation"]),
+            code_id=data["code_id"],
+            updated=AbsoluteTxPosition.from_data(data["updated"]),
+            msg=data["msg"],
+        )
+    
+    @classmethod
+    def from_proto(cls, proto: HistoryEntry_pb) -> HistoryEntry:
+        return cls(
+            operation=proto.operation,
+            code_id=proto.code_id,
+            updated=AbsoluteTxPosition.from_proto(proto.updated),
+            msg=parse_msg(proto.msg),
         )
