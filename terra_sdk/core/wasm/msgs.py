@@ -207,16 +207,16 @@ class MsgExecuteContract(Msg):
             sender=self.sender,
             contract=self.contract,
             msg=bytes(json.dumps(self.msg), "utf-8"),
-            coins=self.coins.to_proto(),
+            funds=self.coins.to_proto(),
         )
 
     @classmethod
-    def from_proto(cls, proto: Any_pb) -> MsgExecuteContract:
+    def from_proto(cls, proto: MsgExecuteContract_pb) -> MsgExecuteContract:
         return cls(
             sender=proto.sender,
             contract=proto.contract,
             msg=parse_msg(proto.msg),
-            coins=Coins.from_proto(proto.coins),
+            coins=(proto.funds),
         )
 
 

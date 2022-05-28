@@ -29,7 +29,6 @@ def parse_msg(msg: Union[dict, str, bytes]) -> dict:
         return msg
     return json.loads(msg)
 
-# Check why type.name is different 
 def convert_access_type_from_json(access_type : str) -> AccessType :
     if access_type == 'Everybody' :
         return AccessType.ACCESS_TYPE_EVERYBODY

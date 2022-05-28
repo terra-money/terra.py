@@ -5,8 +5,12 @@ from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coins
 from terra_sdk.core.fee import Fee
 from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
+from terra_sdk.core.wasm.data import AccessConfig
 from terra_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
+from terra_proto.cosmwasm.wasm.v1 import (
+    AccessType
+)
 
 def main():
     terra = LocalTerra()
@@ -19,6 +23,7 @@ def main():
                 MsgStoreCode(
                     test1.key.acc_address,
                     read_file_as_b64(Path(__file__).parent / "./contract.wasm"),
+                    AccessConfig(AccessType.ACCESS_TYPE_EVERYBODY,"")
                 )
             ],
             gas_adjustment=1.75,
@@ -34,7 +39,12 @@ def main():
         CreateTxOptions(
             msgs=[
                 MsgInstantiateContract(
-                    test1.key.acc_address, test1.key.acc_address, code_id, {"count": 10}
+                    test1.key.acc_address,
+                    test1.key.acc_address,
+                    code_id,
+                    "testlabel",
+                    {"count": 10},
+                    "10uluna"
                 )
             ],
             gas_prices="10uluna",
@@ -47,6 +57,7 @@ def main():
     contract_address = get_contract_address(instantiate_tx_result)
     # """
     # contract_address = "terra1e8d3cw4j0k5fm9gw03jzh9xzhzyz99pa8tphd8"
+    print("contract_address = ", contract_address)
     result = terra.wasm.contract_query(contract_address, {"get_count": {}})
     print("get_count1: ", result)
     execute_tx = test1.create_and_sign_tx(
@@ -61,7 +72,6 @@ def main():
             gas_adjustment=1.75,
         )
     )
-    #                {"uluna": 1000},
 
     execute_tx_result = terra.tx.broadcast(execute_tx)
     print(execute_tx_result)
