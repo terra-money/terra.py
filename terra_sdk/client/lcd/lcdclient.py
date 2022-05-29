@@ -34,7 +34,7 @@ from .wallet import AsyncWallet, Wallet
 
 
 def get_default(chain_id: str) -> [Coins, Numeric]:
-    if chain_id == "pheonix-1":
+    if chain_id == "phoenix-1":
         return [Coins.from_str("0.15uluna"), Numeric.parse(1.75)]
     if chain_id == "pisco-1":
         return [Coins.from_str("0.15uluna"), Numeric.parse(1.75)]
