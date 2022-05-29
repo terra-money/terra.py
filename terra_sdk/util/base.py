@@ -3,8 +3,8 @@ from abc import abstractmethod
 from typing import Any, Callable, Dict, List
 
 import attr
-from betterproto.lib.google.protobuf import Any as Any_pb
 from betterproto import Message
+from betterproto.lib.google.protobuf import Any as Any_pb
 
 from .json import JSONSerializable, dict_to_data
 

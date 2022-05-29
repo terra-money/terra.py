@@ -25,7 +25,7 @@ class SoftwareUpgradeProposal(JSONSerializable):
     description: str = attr.ib()
     plan: Optional[Plan] = attr.ib()
 
-    type_amino = "upgrade/SoftwareUpgradeProposal"
+    type_amino = "cosmos-sdk/SoftwareUpgradeProposal"
     """"""
     type_url = "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal"
     """"""
@@ -74,7 +74,7 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
     title: str = attr.ib()
     description: str = attr.ib()
 
-    type_amino = "upgrade/CancelSoftwareUpgradeProposal"
+    type_amino = "cosmos-sdk/CancelSoftwareUpgradeProposal"
     """"""
     type_url = "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal"
     """"""
@@ -103,6 +103,7 @@ class CancelSoftwareUpgradeProposal(JSONSerializable):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     @classmethod
-    def from_proto(cls, proto: CancelSoftwareUpgradeProposal_pb) -> CancelSoftwareUpgradeProposal:
+    def from_proto(
+        cls, proto: CancelSoftwareUpgradeProposal_pb
+    ) -> CancelSoftwareUpgradeProposal:
         return cls(title=proto.title, description=proto.description)
-

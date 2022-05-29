@@ -63,29 +63,17 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
-                      "content": {
-                          "type": "params/ParameterChangeProposal",
-                          "value": {
-                              "title": "Shorten gov params",
-                              "description": "Decrease gov deposit \u0026 voting period to a hour",
-                              "changes": [{
-                                  "subspace": "gov",
-                                  "key": "depositparams",
-                                  "value": "{\"max_deposit_period\":\"3600000000000\", \"min_deposit\": [{\"denom\": \"uluna\", \"amount\": \"10000000\"}]}"
-                              }, {
-                                  "subspace": "gov",
-                                  "key": "votingparams",
-                                  "value": "{\"voting_period\":\"3600000000000\"}"
-                              }]
-                          }
-                      },
-                      "initial_deposit": [{
-                          "denom": "uluna",
-                          "amount": "512000000"
-                      }],
-                      "proposer": "terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv"
+                    "content": {
+                        "type": "cosmos-sdk/TextProposal",
+                        "value": {
+                            "title": "x",
+                            "description": "x"
+                        }
+                    },
+                    "initial_deposit": [],
+                    "proposer": "terra1ncjcu6ja6pmrexj35up2483cynzxn38y3jdfg7"
                   }
               }],
               "fee": {
@@ -203,10 +191,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "test"
@@ -326,10 +314,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "proposal",
                               "description": "proposal"
@@ -449,10 +437,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "title",
                               "description": "description"
@@ -572,10 +560,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "test"
@@ -700,25 +688,17 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
-                      "content": {
-                          "type": "params/ParameterChangeProposal",
-                          "value": {
-                              "title": "Shorten staking params",
-                              "description": "Decrease staking unbond time period to 5 minutes",
-                              "changes": [{
-                                  "subspace": "staking",
-                                  "key": "UnbondingTime",
-                                  "value": "\"300000000000\""
-                              }]
-                          }
-                      },
-                      "initial_deposit": [{
-                          "denom": "uluna",
-                          "amount": "512000000"
-                      }],
-                      "proposer": "terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv"
+                    "content": {
+                        "type": "cosmos-sdk/TextProposal",
+                        "value": {
+                            "title": "x",
+                            "description": "x"
+                        }
+                    },
+                    "initial_deposit": [],
+                    "proposer": "terra1ncjcu6ja6pmrexj35up2483cynzxn38y3jdfg7"
                   }
               }],
               "fee": {
@@ -836,10 +816,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "x",
                               "description": "x"
@@ -959,10 +939,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "don't deposit",
                               "description": "cc"
@@ -1087,7 +1067,7 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
                           "type": "distribution/CommunityPoolSpendProposal",
@@ -1223,10 +1203,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "new proposal",
                               "description": "new"
@@ -1351,10 +1331,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "d",
                               "description": "d"
@@ -1482,10 +1462,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "2",
                               "description": "2"
@@ -1497,7 +1477,7 @@
               }],
               "fee": {
                   "amount": [{
-                      "denom": "uusd",
+                      "denom": "uluna",
                       "amount": "1351"
                   }],
                   "gas": "90066"
@@ -1610,10 +1590,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "3",
                               "description": "3"
@@ -1743,10 +1723,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "test"
@@ -1876,10 +1856,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "test"
@@ -2012,10 +1992,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "test"
@@ -2148,7 +2128,7 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
                           "type": "distribution/CommunityPoolSpendProposal",
@@ -2286,10 +2266,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test proposal",
                               "description": "Yo."
@@ -2460,10 +2440,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test proposal",
                               "description": "Yo."
@@ -2476,10 +2456,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test proposal",
                               "description": "Yo."
@@ -2677,10 +2657,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -2693,10 +2673,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7206,10 +7186,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7222,10 +7202,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7238,10 +7218,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7254,10 +7234,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7270,10 +7250,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7286,10 +7266,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7302,10 +7282,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7318,10 +7298,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7334,10 +7314,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7350,10 +7330,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7366,10 +7346,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7382,10 +7362,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7398,10 +7378,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7414,10 +7394,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7430,10 +7410,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7446,10 +7426,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7462,10 +7442,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7478,10 +7458,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7494,10 +7474,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7510,10 +7490,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7526,10 +7506,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7542,10 +7522,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7558,10 +7538,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7574,10 +7554,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7590,10 +7570,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7606,10 +7586,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7622,10 +7602,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7638,10 +7618,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7654,10 +7634,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7670,10 +7650,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7686,10 +7666,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7702,10 +7682,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7718,10 +7698,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7734,10 +7714,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7750,10 +7730,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7766,10 +7746,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7782,10 +7762,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7798,10 +7778,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7814,10 +7794,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7830,10 +7810,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7846,10 +7826,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7862,10 +7842,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7878,10 +7858,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7894,10 +7874,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7910,10 +7890,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7926,10 +7906,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7942,10 +7922,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7958,10 +7938,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7974,10 +7954,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -7990,10 +7970,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8006,10 +7986,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8022,10 +8002,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8038,10 +8018,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8054,10 +8034,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8070,10 +8050,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8086,10 +8066,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8102,10 +8082,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8118,10 +8098,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8134,10 +8114,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8150,10 +8130,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8166,10 +8146,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8182,10 +8162,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8198,10 +8178,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8214,10 +8194,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8230,10 +8210,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8246,10 +8226,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8262,10 +8242,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8278,10 +8258,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8294,10 +8274,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8310,10 +8290,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8326,10 +8306,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8342,10 +8322,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8358,10 +8338,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8374,10 +8354,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8390,10 +8370,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8406,10 +8386,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8422,10 +8402,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8438,10 +8418,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8454,10 +8434,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8470,10 +8450,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8486,10 +8466,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8502,10 +8482,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8518,10 +8498,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8534,10 +8514,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8550,10 +8530,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8566,10 +8546,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8582,10 +8562,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8598,10 +8578,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8614,10 +8594,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8630,10 +8610,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8646,10 +8626,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8662,10 +8642,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8678,10 +8658,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8694,10 +8674,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8710,10 +8690,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8726,10 +8706,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8742,10 +8722,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8758,10 +8738,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8774,10 +8754,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -8790,10 +8770,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "HEEEEYYY",
                               "description": "Yo."
@@ -15949,10 +15929,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -15965,10 +15945,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -15981,10 +15961,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -15997,10 +15977,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16013,10 +15993,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16029,10 +16009,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16045,10 +16025,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16061,10 +16041,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16077,10 +16057,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16093,10 +16073,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16109,10 +16089,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16125,10 +16105,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16141,10 +16121,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16157,10 +16137,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16173,10 +16153,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16189,10 +16169,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16205,10 +16185,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16221,10 +16201,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16237,10 +16217,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16253,10 +16233,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16269,10 +16249,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16285,10 +16265,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16301,10 +16281,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16317,10 +16297,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16333,10 +16313,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16349,10 +16329,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16365,10 +16345,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16381,10 +16361,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16397,10 +16377,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16413,10 +16393,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16429,10 +16409,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16445,10 +16425,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16461,10 +16441,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16477,10 +16457,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16493,10 +16473,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16509,10 +16489,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16525,10 +16505,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16541,10 +16521,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16557,10 +16537,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16573,10 +16553,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16589,10 +16569,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16605,10 +16585,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16621,10 +16601,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16637,10 +16617,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16653,10 +16633,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16669,10 +16649,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16685,10 +16665,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16701,10 +16681,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16717,10 +16697,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16733,10 +16713,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16749,10 +16729,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16765,10 +16745,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16781,10 +16761,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16797,10 +16777,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16813,10 +16793,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16829,10 +16809,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16845,10 +16825,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16861,10 +16841,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16877,10 +16857,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16893,10 +16873,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16909,10 +16889,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16925,10 +16905,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16941,10 +16921,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16957,10 +16937,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16973,10 +16953,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -16989,10 +16969,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17005,10 +16985,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17021,10 +17001,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17037,10 +17017,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17053,10 +17033,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17069,10 +17049,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17085,10 +17065,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17101,10 +17081,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17117,10 +17097,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17133,10 +17113,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17149,10 +17129,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17165,10 +17145,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17181,10 +17161,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17197,10 +17177,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17213,10 +17193,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17229,10 +17209,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17245,10 +17225,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17261,10 +17241,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17277,10 +17257,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17293,10 +17273,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17309,10 +17289,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17325,10 +17305,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17341,10 +17321,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17357,10 +17337,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17373,10 +17353,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17389,10 +17369,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17405,10 +17385,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17421,10 +17401,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17437,10 +17417,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17453,10 +17433,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17469,10 +17449,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17485,10 +17465,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17501,10 +17481,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17517,10 +17497,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -17533,10 +17513,10 @@
                       "proposer": "terra1r905nrynarf25c0076kw44l9w4nl65ua0frgxd"
                   }
               }, {
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "Watup",
                               "description": "Yo."
@@ -20334,10 +20314,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "1"
@@ -20459,10 +20439,10 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
                       "content": {
-                          "type": "gov/TextProposal",
+                          "type": "cosmos-sdk/TextProposal",
                           "value": {
                               "title": "test",
                               "description": "1"
@@ -20592,25 +20572,17 @@
           "type": "core/StdTx",
           "value": {
               "msg": [{
-                  "type": "gov/MsgSubmitProposal",
+                  "type": "cosmos-sdk/MsgSubmitProposal",
                   "value": {
-                      "content": {
-                          "type": "params/ParameterChangeProposal",
-                          "value": {
-                              "title": "Staking Param Change",
-                              "description": "Update Max Validators",
-                              "changes": [{
-                                  "subspace": "staking",
-                                  "key": "MaxValidators",
-                                  "value": "105"
-                              }]
-                          }
-                      },
-                      "initial_deposit": [{
-                          "denom": "uluna",
-                          "amount": "512000000"
-                      }],
-                      "proposer": "terra1vk20anceu6h9s00d27pjlvslz3avetkvnph7p8"
+                    "content": {
+                        "type": "cosmos-sdk/TextProposal",
+                        "value": {
+                            "title": "x",
+                            "description": "x"
+                        }
+                    },
+                    "initial_deposit": [],
+                    "proposer": "terra1ncjcu6ja6pmrexj35up2483cynzxn38y3jdfg7"
                   }
               }],
               "fee": {

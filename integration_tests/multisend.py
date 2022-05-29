@@ -4,12 +4,9 @@ import lcd_authz
 import lcd_bank
 import lcd_distribution
 import lcd_gov
-import lcd_market
 import lcd_mint
-import lcd_oracle
 import lcd_slashing
 import lcd_wasm
-import lcd_treasury
 import lcd_tendermint
 import lcd_ibc
 import lcd_ibc_transfer
@@ -38,13 +35,16 @@ from terra_sdk.core.public_key import SimplePublicKey
 
 def main():
     terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
-        chain_id="bombay-12",
+        url="https://pisco-lcd.terra.dev/",
+        chain_id="pisco-1",
     )
-    key = MnemonicKey(
-        mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
-    )
-    test1 = terra.wallet(key=key)
+    terra = LocalTerra()
+
+    # key = MnemonicKey(
+    #     mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"
+    # )
+    # test1 = terra.wallet(key=key)
+    test1 = terra.wallets["test1"]
 
     msg = MsgSend(
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",

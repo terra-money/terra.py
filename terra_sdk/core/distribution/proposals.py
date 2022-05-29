@@ -25,7 +25,7 @@ class CommunityPoolSpendProposal(JSONSerializable):
         amount (Coins): amount to spend from community pool
     """
 
-    type_amino = "distribution/CommunityPoolSpendProposal"
+    type_amino = "cosmos-sdk/CommunityPoolSpendProposal"
     """"""
     type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
     """"""
@@ -75,7 +75,9 @@ class CommunityPoolSpendProposal(JSONSerializable):
         )
 
     @classmethod
-    def from_proto(cls, proto: CommunityPoolSpendProposal_pb) -> CommunityPoolSpendProposal:
+    def from_proto(
+        cls, proto: CommunityPoolSpendProposal_pb
+    ) -> CommunityPoolSpendProposal:
         return cls(
             title=proto.title,
             description=proto.description,

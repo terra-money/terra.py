@@ -12,7 +12,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgUndelegate",
+          "type": "cosmos-sdk/MsgUndelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -50,7 +50,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgBeginRedelegate",
+          "type": "cosmos-sdk/MsgBeginRedelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -123,7 +123,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgBeginRedelegate",
+          "type": "cosmos-sdk/MsgBeginRedelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -162,7 +162,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgBeginRedelegate",
+          "type": "cosmos-sdk/MsgBeginRedelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -201,7 +201,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgBeginRedelegate",
+          "type": "cosmos-sdk/MsgBeginRedelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -240,7 +240,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgBeginRedelegate",
+          "type": "cosmos-sdk/MsgBeginRedelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -279,7 +279,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgDelegate",
+          "type": "cosmos-sdk/MsgDelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -317,7 +317,7 @@
       },
       "msg": [
         {
-          "type": "staking/MsgUndelegate",
+          "type": "cosmos-sdk/MsgUndelegate",
           "value": {
             "amount": {
               "denom": "uluna",
@@ -649,7 +649,7 @@
             "salt": "c14d",
             "feeder": "terra12jpzzmwthrljcvm48adncspxtchazkl8vjmrvx",
             "validator": "terravaloper12jpzzmwthrljcvm48adncspxtchazkl8vah7u4",
-            "exchange_rates": "8.444600837546301809uaud,7.87538286300179853ucad,5.843490852602432395uchf,41.019720621289331227ucny,39.773205309945039236udkk,5.346325786228119405ueur,4.589770250441121376ugbp,49.406679132299480807uhkd,471.752005662686875765uinr,700.210161597909223602ujpy,7431.353406090453487737ukrw,18111.773805051941337692umnt,54.5008197399319342unok,4.416843270832664683usdr,54.479203867480877115usek,8.538269618167549184usgd,200.018873080448240793uthb,6.362271791427802472uusd"
+            "exchange_rates": "8.444600837546301809uaud,7.87538286300179853ucad,5.843490852602432395uchf,41.019720621289331227ucny,39.773205309945039236udkk,5.346325786228119405ueur,4.589770250441121376ugbp,49.406679132299480807uhkd,471.752005662686875765uinr,700.210161597909223602ujpy,7431.353406090453487737ukrw,18111.773805051941337692umnt,54.5008197399319342unok,4.416843270832664683usdr,54.479203867480877115usek,8.538269618167549184usgd,200.018873080448240793uthb,6.362271791427802472uluna"
           }
         },
         {

@@ -36,7 +36,7 @@ class MsgSetWithdrawAddress(Msg):
         withdraw_address: new withdraw address
     """
 
-    type_amino = "distribution/MsgSetWithdrawAddress"
+    type_amino = "cosmos-sdk/MsgModifyWithdrawAddress"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
     """"""
@@ -94,7 +94,7 @@ class MsgWithdrawDelegatorReward(Msg):
         validator_address: validator
     """
 
-    type_amino = "distribution/MsgWithdrawDelegationReward"
+    type_amino = "cosmos-sdk/MsgWithdrawDelegationReward"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
     """"""
@@ -153,7 +153,7 @@ class MsgWithdrawValidatorCommission(Msg):
         validator_address: validator operator address
     """
 
-    type_amino = "distribution/MsgWithdrawValidatorCommission"
+    type_amino = "cosmos-sdk/MsgWithdrawValidatorCommission"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
     """"""
@@ -198,7 +198,7 @@ class MsgFundCommunityPool(Msg):
         amount (Coins): amount to fund community pool with
     """
 
-    type_amino = "distribution/MsgFundCommunityPool"
+    type_amino = "cosmos-sdk/MsgFundCommunityPool"
     """"""
     type_url = "/cosmos.distribution.v1beta1.MsgFundCommunityPool"
     """"""

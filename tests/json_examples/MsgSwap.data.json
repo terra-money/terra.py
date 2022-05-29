@@ -2025,7 +2025,7 @@
                       "type": "swap",
                       "attributes": [{
                               "key": "offer",
-                              "value": "1000000uusd"
+                              "value": "1000000uluna"
                           },
                           {
                               "key": "trader",
@@ -2049,7 +2049,7 @@
                           },
                           {
                               "key": "amount",
-                              "value": "1000000uusd"
+                              "value": "1000000uluna"
                           },
                           {
                               "key": "recipient",
@@ -2073,7 +2073,7 @@
                       "value": {
                           "trader": "terra15vh8gka6p2pgjv4kc7uu060heythp2feqyfkkm",
                           "offer_coin": {
-                              "denom": "uusd",
+                              "denom": "uluna",
                               "amount": "1000000"
                           },
                           "ask_denom": "ukrw"
@@ -2121,7 +2121,7 @@
                   "type": "swap",
                   "attributes": [{
                           "key": "offer",
-                          "value": "1000000uusd"
+                          "value": "1000000uluna"
                       },
                       {
                           "key": "trader",
@@ -2145,7 +2145,7 @@
                       },
                       {
                           "key": "amount",
-                          "value": "1000000uusd"
+                          "value": "1000000uluna"
                       },
                       {
                           "key": "recipient",
@@ -3022,7 +3022,7 @@
                       "type": "swap",
                       "attributes": [{
                               "key": "offer",
-                              "value": "1586733047uusd"
+                              "value": "1586733047uluna"
                           },
                           {
                               "key": "trader",
@@ -3046,7 +3046,7 @@
                           },
                           {
                               "key": "amount",
-                              "value": "1586733047uusd"
+                              "value": "1586733047uluna"
                           },
                           {
                               "key": "recipient",
@@ -3070,7 +3070,7 @@
                       "value": {
                           "trader": "terra1t2a44r52qgtfhpwe8f9q7jvlk9u32vd54geny3",
                           "offer_coin": {
-                              "denom": "uusd",
+                              "denom": "uluna",
                               "amount": "1586733047"
                           },
                           "ask_denom": "uluna"
@@ -3118,7 +3118,7 @@
                   "type": "swap",
                   "attributes": [{
                           "key": "offer",
-                          "value": "1586733047uusd"
+                          "value": "1586733047uluna"
                       },
                       {
                           "key": "trader",
@@ -3142,7 +3142,7 @@
                       },
                       {
                           "key": "amount",
-                          "value": "1586733047uusd"
+                          "value": "1586733047uluna"
                       },
                       {
                           "key": "recipient",

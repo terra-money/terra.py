@@ -5,11 +5,10 @@ from __future__ import annotations
 from typing import List
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.authz.v1beta1 import MsgExec as MsgExec_pb
 from terra_proto.cosmos.authz.v1beta1 import MsgGrant as MsgGrant_pb
 from terra_proto.cosmos.authz.v1beta1 import MsgRevoke as MsgRevoke_pb
-
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
@@ -28,7 +27,7 @@ class MsgExecAuthorized(Msg):
         msg (List[Msg]): list of messages to execute using authorization grant
     """
 
-    type_amino = "msgauth/MsgExecAuthorized"
+    type_amino = "cosmos-sdk/MsgExecAuthorized"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgExec"
     """"""
@@ -74,7 +73,7 @@ class MsgExecAuthorized(Msg):
         value = amino["value"]
         return cls(
             grantee=value["grantee"],
-            msgs=[Msg.from_amino(msg) for msg in value["msgs"]]
+            msgs=[Msg.from_amino(msg) for msg in value["msgs"]],
         )
 
     @classmethod
@@ -92,7 +91,7 @@ class MsgGrantAuthorization(Msg):
         grant: pair of authorization, expiration
     """
 
-    type_amino = "msgauth/MsgGrantAuthorization"
+    type_amino = "cosmos-sdk/MsgGrantAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgGrant"
     """"""
@@ -126,7 +125,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=data["granter"],
             grantee=data["grantee"],
-            grant=AuthorizationGrant.from_data(data["grant"])
+            grant=AuthorizationGrant.from_data(data["grant"]),
         )
 
     def to_proto(self) -> MsgGrant_pb:
@@ -139,7 +138,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             granter=proto.granter,
             grantee=proto.grantee,
-            grant=AuthorizationGrant.from_proto(proto.grant)
+            grant=AuthorizationGrant.from_proto(proto.grant),
         )
 
     @classmethod
@@ -148,7 +147,7 @@ class MsgGrantAuthorization(Msg):
         return cls(
             grantee=value["grantee"],
             granter=value["granter"],
-            grant=AuthorizationGrant.from_amino(value["grant"])
+            grant=AuthorizationGrant.from_amino(value["grant"]),
         )
 
 
@@ -162,7 +161,7 @@ class MsgRevokeAuthorization(Msg):
         msg_type_url: type of message to remove authorization for
     """
 
-    type_amino = "msgauth/MsgRevokeAuthorization"
+    type_amino = "cosmos-sdk/MsgRevokeAuthorization"
     """"""
     type_url = "/cosmos.authz.v1beta1.MsgRevoke"
     """"""

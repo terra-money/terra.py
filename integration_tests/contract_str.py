@@ -52,11 +52,7 @@ def main():
     execute_tx = test1.create_and_sign_tx(
         CreateTxOptions(
             msgs=[
-                MsgExecuteContract(
-                    test1.key.acc_address,
-                    contract_address,
-                    "increment" 
-                )
+                MsgExecuteContract(test1.key.acc_address, contract_address, "increment")
             ],
             gas_adjustment=1.75,
         )

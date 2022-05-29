@@ -29,7 +29,7 @@ Contract Deployment Example
         test1.key.acc_address,
         code_id,
         {"count": 0},
-        {"uluna": 10000000, "ukrw": 1000000},
+        {"uluna": 10000000},
         False,
     )
     instantiate_tx = test1.create_and_sign_tx(CreateTxOptions(msgs=[instantiate]))

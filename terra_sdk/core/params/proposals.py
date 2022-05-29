@@ -37,12 +37,7 @@ class ParamChange(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: ParamChange_pb) -> ParamChange:
-        return cls(
-            subspace=proto.subspace,
-            key=proto.key,
-            value=proto.value
-        )
-
+        return cls(subspace=proto.subspace, key=proto.key, value=proto.value)
 
 
 @attr.s
@@ -56,7 +51,7 @@ class ParameterChangeProposal(JSONSerializable):
         change (List[ParamChange]): list of parameter changes
     """
 
-    type_amino = "params/ParameterChangeProposal"
+    type_amino = "cosmos-sdk/ParameterChangeProposal"
     """"""
     type_url = "/cosmos.params.v1beta1.ParameterChangeProposal"
     """"""
@@ -106,7 +101,6 @@ class ParameterChangeProposal(JSONSerializable):
             description=proto.description,
             changes=[ParamChange.from_proto(change) for change in proto.changes],
         )
-
 
     def pack_any(self) -> Any_pb:
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
