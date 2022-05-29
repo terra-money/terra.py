@@ -41,7 +41,7 @@ def main():
     msg = MsgGrantAllowance(
         granter=test1_address,
         grantee=test2_address,
-        allowance=BasicAllowance(None, "2020-02-02T07:58:20Z"),
+        allowance=BasicAllowance(None, "2020-02-02T07:58:20.000Z"),
     )
 
     opt = CreateTxOptions(
@@ -52,7 +52,21 @@ def main():
     print("SIGNED TX", tx)
 
     result = terra.tx.broadcast(tx)
-    print(f"RESULT:{result}")
+    print(f"GRANT RESULT:{result}")
 
+    msg = MsgRevokeAllowance(
+            granter=test1_address,
+            grantee=test2_address,
+            )
+
+    opt = CreateTxOptions(
+        msgs=[msg], memo="send test", gas_adjustment=1.5, gas_prices="1uluna"
+    )
+    # tx = test1.create_tx(opt)
+    tx = test1.create_and_sign_tx(opt)
+    print("SIGNED TX", tx)
+
+    result = terra.tx.broadcast(tx)
+    print(f"REVOKE RESULT:{result}")
 
 main()
