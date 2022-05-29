@@ -67,7 +67,7 @@ class MsgGrantAllowance(Msg):
         return MsgGrantAllowance_pb(
             granter=self.granter,
             grantee=self.grantee,
-            allowance=self.allowance.to_proto(),
+            allowance=Allowance.pack_any(self.allowance),
         )
 
     @classmethod
@@ -75,7 +75,7 @@ class MsgGrantAllowance(Msg):
         return cls(
             granter=proto.granter,
             grantee=proto.grantee,
-            allowance=Allowance.from_proto(proto.allowance),
+            allowance=Allowance.unpack_any(proto.allowance),
         )
 
 
