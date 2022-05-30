@@ -83,7 +83,9 @@ class BasicAllowance(JSONSerializable):
 
     def to_proto(self) -> BasicAllowance_pb:
         return BasicAllowance_pb(
-            spend_limit=self.spend_limit.to_proto() if (self.spend_limit and len(self.spend_limit)>0) else None,
+            spend_limit=self.spend_limit.to_proto()
+            if (self.spend_limit and len(self.spend_limit) > 0)
+            else None,
             expiration=self.expiration,
         )
 
@@ -212,7 +214,8 @@ class AllowedMsgAllowance(JSONSerializable):
 
     def to_proto(self) -> AllowedMsgAllowance_pb:
         return AllowedMsgAllowance_pb(
-            allowance=Allowance.pack_any(self.allowance), allowed_messages=self.allowed_messages
+            allowance=Allowance.pack_any(self.allowance),
+            allowed_messages=self.allowed_messages,
         )
 
     @classmethod
@@ -265,7 +268,9 @@ class Allowance(JSONSerializable, ABC):  # (BasicAllowance, PeriodicAllowance):
             return AllowedMsgAllowance.from_amino(data)
 
     @classmethod
-    def pack_any(cls, proto: Union[BasicAllowance, PeriodicAllowance, AllowedMsgAllowance]) -> Any_pb:
+    def pack_any(
+        cls, proto: Union[BasicAllowance, PeriodicAllowance, AllowedMsgAllowance]
+    ) -> Any_pb:
         return Any_pb(type_url=proto.type_url, value=bytes(proto.to_proto()))
 
     @classmethod

@@ -24,7 +24,7 @@ def test_deserializes():
                 "max_rate": "0.250000000000000000",
                 "max_change_rate": "0.010000000000000000",
             },
-            "update_time": "2019-12-01T03:28:34.024363Z",
+            "update_time": "2019-12-01T03:28:34.024Z",
         },
         "min_self_delegation": "1",
     }

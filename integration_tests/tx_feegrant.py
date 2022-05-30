@@ -55,9 +55,9 @@ def main():
     print(f"GRANT RESULT:{result}")
 
     msg = MsgRevokeAllowance(
-            granter=test1_address,
-            grantee=test2_address,
-            )
+        granter=test1_address,
+        grantee=test2_address,
+    )
 
     opt = CreateTxOptions(
         msgs=[msg], memo="send test", gas_adjustment=1.5, gas_prices="1uluna"
@@ -68,5 +68,6 @@ def main():
 
     result = terra.tx.broadcast(tx)
     print(f"REVOKE RESULT:{result}")
+
 
 main()
