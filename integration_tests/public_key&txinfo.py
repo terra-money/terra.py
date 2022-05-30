@@ -76,8 +76,9 @@ async def main():
         print(f"ValConsPubKey.address: {val_pubkey.address()}\n")
 
         # Test `AsyncTxAPI`{encode, decode, hash}
-        bi = await terra.tendermint.block_info(8787462)
+        bi = await terra.tendermint.block_info(90000)
         # for encoded_tx in bi["block"]["data"]["txs"]:
+        print(bi)
         encoded_tx = bi["block"]["data"]["txs"][0]
         txhash = hash.hash_amino(encoded_tx)
         # print(txhash)
@@ -107,7 +108,7 @@ async def main():
         print(f"decoded_tx==tx_from_proto {decoded_tx == tx_from_proto}\n")
 
         # Test `Tx`, `TxLog` and `TxInfo`
-        txhash_og = "FB1A18E18078173DC90A80EB2843CD94DC3ACC1E61BAAD1CCDB92AA666FA14E3"
+        txhash_og = "3DAC0887F6ABD43C417B394A03B611104F313CC6B6C6A763A92FF8F184675D9B"
         tx_og = await terra.tx.tx_info(txhash_og)
         data = tx_og.to_data()
         tx = TxInfo.from_data(data)
