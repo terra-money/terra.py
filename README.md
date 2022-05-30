@@ -71,20 +71,15 @@ Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
 <sub>**NOTE:** _All code starting with a `$` is meant to run on your terminal (a bash prompt). All code starting with a `>>>` is meant to run in a python interpreter, like <a href="https://pypi.org/project/ipython/">ipython</a>._</sub>
 
 Terra SDK can be installed (preferably in a `virtual environment` from PyPI using `pip`) as follows:
-
-❗ terra.py 3.x.x can connect only terra 2.0 chains. If you want to interact with terra classic, you have to use terra-sdk 2.x.x
   
 ```
-# install 2.0.6 for terra classic
-$ pip install terra-sdk==2.0.6
-
-# install 3.0.0 for terra 2.0
 $ pip install -U terra_sdk
 ```
 
-
 <sub>_You might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>
-
+  
+❗ If you want to communicate with Terra Classic, use terra-sdk==2.x
+  
 ## Dependencies
 
 Terra SDK uses <a href="https://python-poetry.org/">Poetry</a> to manage dependencies. To get set up with all the required dependencies, run:
