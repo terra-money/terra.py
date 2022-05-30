@@ -72,7 +72,7 @@ Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
 
 Terra SDK can be installed (preferably in a `virtual environment` from PyPI using `pip`) as follows:
 
-❗ terra.py can connect only terra 2.0 network. If you want to communicate with terra classic (1.0), you have to use terra-sdk==2.0.6
+❗ terra.py 3.x.x can connect only terra 2.0 chains. If you want to interact with terra classic, you have to use terra-sdk 2.x.x
   
 ```
 # install 2.0.6 for terra classic
