@@ -9,6 +9,7 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10"
 ]
 description = "The Python SDK for Terra"
 documentation = "https://terra-money.github.io/terra.py/index.html"
@@ -18,7 +19,7 @@ license = "MIT"
 packages = [{ include = "terra_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra.py"
-version = "2.0.6"
+version = "3.0.0"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.8.1"
