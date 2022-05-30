@@ -72,9 +72,16 @@ Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
 
 Terra SDK can be installed (preferably in a `virtual environment` from PyPI using `pip`) as follows:
 
+❗ terra.py can connect only terra 2.0 network. If you want to communicate with terra classic (1.0), you have to use terra-sdk==2.0.6
+  
 ```
+# install 2.0.6 for terra classic
+$ pip install terra-sdk==2.0.6
+
+# install 3.0.0 for terra 2.0
 $ pip install -U terra_sdk
 ```
+
 
 <sub>_You might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>
 
@@ -106,12 +113,6 @@ $ make qa && make format
 <br/>
 
 # Usage Examples
-
-`!` terra.py can connect only terra 2.0 network. If you want to communicate with terra classic (1.0), you have to use terra-sdk==2.0.6
-
-```
-$ `pip install terra-sdk==2.0.6`.
-```
 
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
 The following examples are provided to help you get started. Use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
