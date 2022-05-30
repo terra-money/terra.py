@@ -189,7 +189,7 @@ class RedelegationEntryInfo(JSONSerializable):
             initial_balance=data["initial_balance"],
             shares_dst=Dec.from_data(data("shares_dst")),
             creation_height=data["creation_height"],
-            completion_time=data["completion_time"]
+            completion_time=data["completion_time"],
         )
 
     def to_data(self) -> dict:

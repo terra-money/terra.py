@@ -62,9 +62,9 @@ def get_contract_address(
         str: extracted contract address
     """
     if tx_result.logs:
-        contract_address = tx_result.logs[msg_index].events_by_type[
-            "instantiate_contract"
-        ]["contract_address"][0]
+        contract_address = tx_result.logs[msg_index].events_by_type["wasm"][
+            "_contract_address"
+        ][0]
         return AccAddress(contract_address)
     else:
         raise ValueError("could not parse code id -- tx logs are empty.")

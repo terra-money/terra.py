@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import attr
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.feegrant.v1beta1 import (
     MsgGrantAllowance as MsgGrantAllowance_pb,
 )
@@ -29,7 +30,7 @@ class MsgGrantAllowance(Msg):
     grantee: AccAddress = attr.ib()
     allowance: Allowance = attr.ib()
 
-    type_amino = "feegrant/MsgGrantAllowance"
+    type_amino = "cosmos-sdk/MsgGrantAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.MsgGrantAllowance"
     """"""
@@ -46,6 +47,14 @@ class MsgGrantAllowance(Msg):
             },
         }
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "granter": self.granter,
+            "grantee": self.grantee,
+            "allowance": self.allowance.to_data(),
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAllowance:
         return cls(
@@ -58,7 +67,7 @@ class MsgGrantAllowance(Msg):
         return MsgGrantAllowance_pb(
             granter=self.granter,
             grantee=self.grantee,
-            allowance=self.allowance.to_proto(),
+            allowance=Allowance.pack_any(self.allowance),
         )
 
     @classmethod
@@ -66,7 +75,7 @@ class MsgGrantAllowance(Msg):
         return cls(
             granter=proto.granter,
             grantee=proto.grantee,
-            allowance=Allowance.from_proto(proto.allowance),
+            allowance=Allowance.unpack_any(proto.allowance),
         )
 
 
@@ -77,7 +86,7 @@ class MsgRevokeAllowance(Msg):
     granter: AccAddress = attr.ib()
     grantee: AccAddress = attr.ib()
 
-    type_amino = "feegrant/MsgRevokeAllowance"
+    type_amino = "cosmos-sdk/MsgRevokeAllowance"
     """"""
     type_url = "/cosmos.feegrant.v1beta1.MsgRevokeAllowance"
     """"""

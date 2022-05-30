@@ -32,7 +32,7 @@ def test_random():
 
 def test_signature():
 
-    terra = LCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")
+    terra = LCDClient(url="https://pisco-lcd.terra.dev", chain_id="pisco-1")
 
     mk = MnemonicKey(
         "island relax shop such yellow opinion find know caught erode blue dolphin behind coach tattoo light focus snake common size analyst imitate employ walnut"
@@ -53,7 +53,7 @@ def test_signature():
             )
         ],
         options=CreateTxOptions(
-            msgs=[send], memo="memo", fee=Fee(200000, Coins.from_str("100000uusd"))
+            msgs=[send], memo="memo", fee=Fee(200000, Coins.from_str("100000uluna"))
         ),
     )
 
@@ -69,12 +69,12 @@ def test_signature():
     sigBytes = base64.b64encode(signature.data.single.signature)
     assert (
         sigBytes
-        == b"Gtp3/JOeTA9mZJ/ZxM4IwpsFy6Je8kWTRxESBiLHcQl6sU6V2iCL1sSPynm+csF6/K4tf2gMPE89IDVOP5NBHg=="
+        == b"3zTLdy+PLc0CFPyVt4idBTQ/gwYLJ4G5z+R+tTHRz8lMy3oYwGWv+tZbxIJDfrAgpEM+YO8sO5LsjYmH5khpOQ=="
     )
 
     signature_amino = account.key.create_signature_amino(signDoc)
     sigBytes2 = base64.b64encode(signature_amino.data.single.signature)
     assert (
         sigBytes2
-        == b"JiaPpdKCPsf4KW1yW7jkSlwrIuiArKmLoE5JccjoYrliVwCtRIKicDF57n2feWt3wd6kWVzwTxOa2xnXTXqdlg=="
+        == b"4Udg3FbCLAVd5vxrI5EY5Dv6A9DXKarRzD8bamE36qsH1JoelXbmf1pg0GRG4CkxySfAlDfHdCsK8FOGv9fCNA=="
     )

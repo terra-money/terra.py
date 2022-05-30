@@ -22,13 +22,10 @@ from .api.feegrant import AsyncFeeGrantAPI, FeeGrantAPI
 from .api.gov import AsyncGovAPI, GovAPI
 from .api.ibc import AsyncIbcAPI, IbcAPI
 from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
-from .api.market import AsyncMarketAPI, MarketAPI
 from .api.mint import AsyncMintAPI, MintAPI
-from .api.oracle import AsyncOracleAPI, OracleAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
 from .api.tendermint import AsyncTendermintAPI, TendermintAPI
-from .api.treasury import AsyncTreasuryAPI, TreasuryAPI
 from .api.tx import AsyncTxAPI, TxAPI
 from .api.wasm import AsyncWasmAPI, WasmAPI
 from .lcdutils import AsyncLCDUtils, LCDUtils
@@ -37,12 +34,12 @@ from .wallet import AsyncWallet, Wallet
 
 
 def get_default(chain_id: str) -> [Coins, Numeric]:
-    if chain_id == "columbus-5":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
-    if chain_id == "bombay-12":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
+    if chain_id == "phoenix-1":
+        return [Coins.from_str("0.15uluna"), Numeric.parse(1.75)]
+    if chain_id == "pisco-1":
+        return [Coins.from_str("0.15uluna"), Numeric.parse(1.75)]
     if chain_id == "localterra":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
+        return [Coins.from_str("0.15uluna"), Numeric.parse(1.75)]
 
     raise ValueError("chain_id is invalid")
 
@@ -78,14 +75,11 @@ class AsyncLCDClient:
         self.distribution = AsyncDistributionAPI(self)
         self.feegrant = AsyncFeeGrantAPI(self)
         self.gov = AsyncGovAPI(self)
-        self.market = AsyncMarketAPI(self)
         self.mint = AsyncMintAPI(self)
         self.authz = AsyncAuthzAPI(self)
-        self.oracle = AsyncOracleAPI(self)
         self.slashing = AsyncSlashingAPI(self)
         self.staking = AsyncStakingAPI(self)
         self.tendermint = AsyncTendermintAPI(self)
-        self.treasury = AsyncTreasuryAPI(self)
         self.wasm = AsyncWasmAPI(self)
         self.ibc = AsyncIbcAPI(self)
         self.ibc_transfer = AsyncIbcTransferAPI(self)
@@ -151,7 +145,7 @@ class AsyncLCDClient:
         # raw: bool = False
     ):
 
-        actual_params = CIMultiDict()
+        actual_params : CIMultiDict = CIMultiDict()
 
         for event in events:
             if event[0] == "tx.height":
@@ -216,17 +210,11 @@ class LCDClient(AsyncLCDClient):
     feegrant: FeeGrantAPI
     """:class:`FeeGrant<terra_sdk.client.lcd.api.feegrant.FeeGrantAPI>`."""
 
-    market: MarketAPI
-    """:class:`MarketAPI<terra_sdk.client.lcd.api.market.MarketAPI>`."""
-
     mint: MintAPI
     """:class:`MintAPI<terra_sdk.client.lcd.api.mint.MintAPI>`."""
 
     authz: AuthzAPI
     """:class:`AuthzAPI<terra_sdk.client.lcd.api.authz.AuthzAPI>`."""
-
-    oracle: OracleAPI
-    """:class:`OracleAPI<terra_sdk.client.lcd.api.oracle.OracleAPI>`."""
 
     slashing: SlashingAPI
     """:class:`SlashingAPI<terra_sdk.client.lcd.api.slashing.SlashingAPI>`."""
@@ -236,9 +224,6 @@ class LCDClient(AsyncLCDClient):
 
     tendermint: TendermintAPI
     """:class:`TendermintAPI<terra_sdk.client.lcd.api.tendermint.TendermintAPI>`."""
-
-    treasury: TreasuryAPI
-    """:class:`TreasuryAPI<terra_sdk.client.lcd.api.treasury.TreasuryAPI>`."""
 
     wasm: WasmAPI
     """:class:`WasmAPI<terra_sdk.client.lcd.api.wasm.WasmAPI>`."""
@@ -273,14 +258,11 @@ class LCDClient(AsyncLCDClient):
         self.distribution = DistributionAPI(self)
         self.gov = GovAPI(self)
         self.feegrant = FeeGrantAPI(self)
-        self.market = MarketAPI(self)
         self.mint = MintAPI(self)
         self.authz = AuthzAPI(self)
-        self.oracle = OracleAPI(self)
         self.slashing = SlashingAPI(self)
         self.staking = StakingAPI(self)
         self.tendermint = TendermintAPI(self)
-        self.treasury = TreasuryAPI(self)
         self.wasm = WasmAPI(self)
         self.ibc = IbcAPI(self)
         self.ibc_transfer = IbcTransferAPI(self)

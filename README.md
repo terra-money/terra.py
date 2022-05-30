@@ -107,6 +107,12 @@ $ make qa && make format
 
 # Usage Examples
 
+`!` terra.py can connect only terra 2.0 network. If you want to communicate with terra classic (1.0), you have to use terra-sdk==2.0.6
+
+```
+$ `pip install terra-sdk==2.0.6`.
+```
+
 Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
 The following examples are provided to help you get started. Use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
 
@@ -114,7 +120,7 @@ In order to interact with the Terra blockchain, you'll need a connection to a Te
 
 ```
 >>> from terra_sdk.client.lcd import LCDClient
->>> terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
+>>> terra = LCDClient(chain_id="phoenix-1", url="https://phoenix-lcd.terra.dev")
 ```
 
 ## Getting Blockchain Information
@@ -136,7 +142,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 >>> from terra_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
+      <strong>terra = AsyncLCDClient("https://phoenix-lcd.terra.dev", "phoenix-1")</strong>
       total_supply = await terra.bank.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
@@ -162,7 +168,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 >>> from terra_sdk.key.mnemonic import MnemonicKey
 
 >>> mk = MnemonicKey(mnemonic=MNEMONIC)
->>> terra = LCDClient("https://lcd.terra.dev", "columbus-5")
+>>> terra = LCDClient("https://phoenix-lcd.terra.dev", "phoenix-1")
 >>> wallet = terra.wallet(mk)
 ```
 

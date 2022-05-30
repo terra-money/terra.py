@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from terra_sdk.core import Coins, Dec
 from terra_sdk.core.deposit import Deposit
@@ -242,7 +242,7 @@ class AsyncGovAPI(BaseAsyncAPI):
 
 class GovAPI(AsyncGovAPI):
     @sync_bind(AsyncGovAPI.proposals)
-    def proposals(self, params: Optional[APIParams] = None) -> (List[Proposal], dict):
+    def proposals(self, params: Optional[APIParams] = None) -> Tuple[List[Proposal], dict]:
         pass
 
     proposals.__doc__ = AsyncGovAPI.proposals.__doc__

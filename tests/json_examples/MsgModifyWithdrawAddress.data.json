@@ -43,7 +43,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
               "withdraw_address": "terra1t849fxw7e8ney35mxemh4h3ayea4zf77dslwna"
@@ -131,7 +131,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
               "withdraw_address": "terra1t849fxw7e8ney35mxemh4h3ayea4zf77dslwna"
@@ -219,7 +219,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1rf9xakxf97a49qa5svsf7yypjswzkutqfclur8",
               "withdraw_address": "terra1ucp369yry6n70qq3zaxyt85cnug75r7ln8l6se"
@@ -307,7 +307,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra13e8mwh2e7a4ckd8pxfr80u4k8gpsgqwvzzauqr",
               "withdraw_address": "terra14t0as0q6989sr4cn52gj0gwl8duxq54glcahqt"
@@ -395,7 +395,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1304lfjwqymam3hfqy2pzlc3qngyhv0tfls8q36",
               "withdraw_address": "terra13al75k3hhg3mqs2s02akr3q3tn6fyersfpc5kz"
@@ -483,7 +483,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1mv8khh0wvkkc84ds7r0my64wm2q8yyzm2sl3tw",
               "withdraw_address": "terra1d670jdka7uuqlylgnpypgtcwh5vlf3aungs3na"
@@ -571,7 +571,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1mv8khh0wvkkc84ds7r0my64wm2q8yyzm2sl3tw",
               "withdraw_address": "terra1d670jdka7uuqlylgnpypgtcwh5vlf3aungs3na"
@@ -659,7 +659,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1hr0990vl5f0ewsenkcmz33ndv2ff79mmu2pewc",
               "withdraw_address": "terra1za69yrjmmkjqrqswjjvhcmrfskm6tr5apzd7wk"
@@ -747,7 +747,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1p4h50ww8lsfcy2kgr64cetwt40d9zwrq6ypkx9",
               "withdraw_address": "terra1euzezvu28lm92x3tmdma7qmln47lj6z28zcl7m"
@@ -835,7 +835,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra19uyx68e9zqt4kw7mp2d0tfd8l7caxguemc9gd8",
               "withdraw_address": "terra1y5e4fvar02suf8x0px4nekf47q4qp08keyjyww"
@@ -923,7 +923,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1tevvlwn6ps7w2vckyc6wdw8vx5rw4qzmlsnqls",
               "withdraw_address": "terra1mgw3grxa8sqguj2kff4ukj5l6vq8wqe4zxp56a"
@@ -1011,7 +1011,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1c5aczrpm74wfwctrg8c67rl6zz5muwvlqtl8an",
               "withdraw_address": "terra1qtev0fahu9wlchswxrf6q7sdfjz3rpu074rn5a"
@@ -1099,7 +1099,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1x9r54kh0q0vg5nqnm7eem4dex5tgvka5k9yacg",
               "withdraw_address": "terra1jaenemfxxtm6uk7nnez4g0a0cfls9gwrunvdjr"
@@ -1187,7 +1187,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1j0x4m7u8t48dxda0zga7w6m0cvqkvgkkpk4umv",
               "withdraw_address": "terra1c757rgcnpmf24jmj3j0630k8vx23eqalda63n5"
@@ -1275,7 +1275,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1304lfjwqymam3hfqy2pzlc3qngyhv0tfls8q36",
               "withdraw_address": "terra13al75k3hhg3mqs2s02akr3q3tn6fyersfpc5kz"
@@ -1363,7 +1363,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1h5h5f42chy00pw28fye04zjrn86y5yhf44hsc6",
               "withdraw_address": "terra1vdsrv9zv0sga7044t8zujqdnpj9c84hdgz8lu9"
@@ -1451,7 +1451,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1506jnsnr62h2kxzv8s6srjafl0frqf7qepvpnp",
               "withdraw_address": "terra1vdsrv9zv0sga7044t8zujqdnpj9c84hdgz8lu9"
@@ -1539,7 +1539,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1tu6mzd38yx09r3yl8hjc44s8czsual0rklcmwt",
               "withdraw_address": "terra1vdsrv9zv0sga7044t8zujqdnpj9c84hdgz8lu9"
@@ -1627,7 +1627,7 @@
         "type": "core/StdTx",
         "value": {
           "msg": [{
-            "type": "distribution/MsgModifyWithdrawAddress",
+            "type": "cosmos-sdk/MsgModifyWithdrawAddress",
             "value": {
               "delegator_address": "terra1vgrxe7xcvmq4w2x24p7a0sz7ym4ncn9z98xe62",
               "withdraw_address": "terra1vdsrv9zv0sga7044t8zujqdnpj9c84hdgz8lu9"

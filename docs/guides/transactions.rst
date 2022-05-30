@@ -80,8 +80,8 @@ this behavior **per transaction**:
 
 .. note::
     By default, the estimated fee returned consists of a fee paid in every denom for which the
-    signing account hold a balance. For instance, if the signer has a balance of ``uusd`` and ``uluna``,
-    the fee reported will be both ``uusd`` and ``uluna``. 
+    signing account hold a balance. For instance, if the signer has a balance of ``uluna``,
+    the fee reported will be both ``uluna``. 
     
     Use the ``denoms`` argument to restrict the estimated fee to specific denoms.
 
@@ -96,9 +96,9 @@ this behavior **per transaction**:
             "1000000uluna" # send 1 luna
         )],
         memo="test transaction!",
-        gas_prices="0.015uluna,0.11ukrw", # optional
+        gas_prices="0.015uluna", # optional
         gas_adjustment="1.2", # optional
-        denoms=["ukrw"] # optional
+        denoms=["uluna"] # optional
     ))
 
 Signing transactions manually

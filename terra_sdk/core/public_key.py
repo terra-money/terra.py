@@ -13,8 +13,8 @@ from terra_proto.cosmos.crypto.secp256k1 import PubKey as SimplePubKey_pb
 
 from terra_sdk.util.json import JSONSerializable
 
-from .bech32 import get_bech
 from ..util.base import create_demux_unpack_any
+from .bech32 import get_bech
 
 BECH32_AMINO_PUBKEY_DATA_PREFIX_SECP256K1 = "eb5ae987" + "21"  # with fixed length 21
 BECH32_AMINO_PUBKEY_DATA_PREFIX_ED25519 = "1624de64" + "20"  # with fixed length 20
@@ -112,7 +112,8 @@ class PublicKey(JSONSerializable, ABC):
     @classmethod
     def unpack_any(cls, any_pb: Any_pb):
         unpack = create_demux_unpack_any(
-            [SimplePublicKey, ValConsPubKey, LegacyAminoMultisigPublicKey])
+            [SimplePublicKey, ValConsPubKey, LegacyAminoMultisigPublicKey]
+        )
         return unpack(any_pb)
 
     @abstractmethod
@@ -281,9 +282,7 @@ class LegacyAminoMultisigPublicKey(PublicKey):
     def from_data(cls, data: dict) -> LegacyAminoMultisigPublicKey:
         return cls(
             threshold=data["threshold"],
-            public_keys=[
-                PublicKey.from_data(pubkey) for pubkey in data["public_keys"]
-            ]
+            public_keys=[PublicKey.from_data(pubkey) for pubkey in data["public_keys"]],
         )
 
     @classmethod

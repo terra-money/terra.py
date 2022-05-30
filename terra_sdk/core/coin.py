@@ -19,7 +19,7 @@ class Coin(JSONSerializable):
     """
 
     denom: str = attr.ib()
-    """Coin's denomination, ex ``uusd``, ``uluna``, etc."""
+    """Coin's denomination, only ``uluna``."""
 
     amount: Numeric.Output = attr.ib(converter=Numeric.parse)  # type: ignore
     """Coin's amount -- can be a ``int`` or :class:`Dec`"""
@@ -85,11 +85,11 @@ class Coin(JSONSerializable):
     @classmethod
     def from_str(cls, string: str) -> Coin:
         """Creates a new :class:`Coin` from a coin-format string. Must match the format:
-        ``283923uusd`` (``int``-Coin) or ``23920.23020uusd`` (:class:`Dec`-Coin).
+        ``283923uluna`` (``int``-Coin) or ``23920.23020uluna`` (:class:`Dec`-Coin).
 
-        >>> int_coin = Coin.from_str("230920uusd")
+        >>> int_coin = Coin.from_str("230920uluna")
         >>> int_coin.denom
-        'uusd'
+        'uluna'
         >>> int_coin.amount
         230920
         >>> dec_coin = Coin.from_str("203922.223uluna")

@@ -40,7 +40,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1usws7c2c6cs7nuc8vma9qzaky5pkgvm2ujy8ny"
               }
@@ -97,7 +97,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1d3jscm77t4du8x0qczw6rkwemwwp4mlv98u9rk"
               }
@@ -154,7 +154,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1u40zfjrzvkqqxyksvwsrg9vp80p8a5zskumz3y"
               }
@@ -211,7 +211,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper12mcn4pj7d8yeff0xfedcthqe9gs3vwc2tn8sy2"
               }
@@ -268,7 +268,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper12jpzzmwthrljcvm48adncspxtchazkl8vah7u4"
               }
@@ -325,7 +325,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper13nyvljuj38s7h3w3w69xdrmmfzm7qwlfxk9emf"
               }
@@ -382,7 +382,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1pr6pwyjqjxvx0axaqt56a4g3wukacg2jd8n00l"
               }
@@ -439,7 +439,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1d4cfnc637k94hphegd7qv2rcgl50tqzc27a3h5"
               }
@@ -496,7 +496,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1e4maqhd9uptu0hepx34xt6hje930m6k8j34q6f"
               }
@@ -553,7 +553,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper18d4583vc6zex4tay9z59gj4llgsmnunxc5u606"
               }
@@ -610,7 +610,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1gk2jlzl2eh5w25kgz93ynqgrfrngrg6yxlpfjn"
               }
@@ -667,7 +667,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper199dxm2ydd5v5tl5ftqgughrurqz6z0nxa564r7"
               }
@@ -724,7 +724,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1fa2gmum9kl9ms73hnrhvg0rkk0s9jvqxpunyr3"
               }
@@ -781,7 +781,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper16esu0x30mrhhu46yz945h9m5qy9usqkapfkzrt"
               }
@@ -838,7 +838,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper19zgr0ztha9x6pjt4du80uvrx2tyuqc6desnnlh"
               }
@@ -895,7 +895,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper10ja74nnrfpxu6allycnk7y2hcy0njefjqkhjdd"
               }
@@ -952,7 +952,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper16d2keu3l8vy7utpuyuylp3um3tjwz8k6j7q2g5"
               }
@@ -1004,7 +1004,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1pfkp8qqha94vcahh5pll3hd8ujxu8j30xvlqmh"
               }
@@ -1061,7 +1061,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper18t8mtyvxlxf2gjh4x5r06gjfg0nk6gqs974uxh"
               }
@@ -1118,7 +1118,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper10lk5rrz3srq28ap6x68c9hs86zvvtpm0jkn5qh"
               }
@@ -1175,7 +1175,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1trpe7wpt2297qasylcgz7ruh09pds4vy0ftgnk"
               }
@@ -1232,7 +1232,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1trpe7wpt2297qasylcgz7ruh09pds4vy0ftgnk"
               }
@@ -1289,7 +1289,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1g6g0v23c6tv75ygk5za4s2ewwestdfj0k2cy2x"
               }
@@ -1346,7 +1346,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1lt73jjl7v2cx3d70hnh59ta0uujyyrkhd2ardz"
               }
@@ -1403,7 +1403,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1lt73jjl7v2cx3d70hnh59ta0uujyyrkhd2ardz"
               }
@@ -1460,7 +1460,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1suajquk09k9d0upnexlydhurc5t9uh4rn4k0wd"
               }
@@ -1517,7 +1517,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper13nyvljuj38s7h3w3w69xdrmmfzm7qwlfxk9emf"
               }
@@ -1574,7 +1574,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper165xv35n42lt75tdvcvddgz923hstu8x9fy9px7"
               }
@@ -1631,7 +1631,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper1062zkmnlqhcpwsryk5kjf345x6njzzksqk9ljl"
               }
@@ -1688,7 +1688,7 @@
         "value": {
           "msg": [
             {
-              "type": "slashing/MsgUnjail",
+              "type": "cosmos-sdk/MsgUnjail",
               "value": {
                 "address": "terravaloper17qy25m5v2j42ye880n3xk2exz5tedsfe4p8w3c"
               }

@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.7', '3.8', '3.9', '3.10']
-        poetry-version: ['1.1.10']
+        poetry-version: ['1.1.13']
         os: [ubuntu-18.04]
     runs-on: ${{ matrix.os }}
     steps:
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run image
-        uses: abatilo/actions-poetry@v2.1.3
+        uses: abatilo/actions-poetry@v2.1.4
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: poetry-check
@@ -29,4 +29,4 @@ jobs:
       - name: poetry-build
         run: poetry build
       - name: poetry-publish
-        run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish --no-interaction -vvv --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}

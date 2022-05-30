@@ -1,0 +1,30 @@
+[
+  {
+    "type": "cosmos-sdk/ContinuousVestingAccount",
+    "value": {
+      "base_vesting_account": {
+        "base_account": {
+          "address": "terra1upg95nlwkfkrq4hhjrn3k9s6ud0aqx36gwnlsn",
+          "public_key": null,
+          "account_number": "684082",
+          "sequence": "0"
+        },
+        "original_vesting": [
+          {
+            "denom": "uluna",
+            "amount": "5000000000000"
+          }
+        ],
+        "delegated_free": [],
+        "delegated_vesting": [
+          {
+            "denom": "uluna",
+            "amount": "1338029091449"
+          }
+        ],
+        "end_time": "0"
+      },
+      "start_time": "1652000000"
+    }
+  }
+]

@@ -16,7 +16,7 @@ async def with_sem(aw, sem):
 
 
 async def main():
-    terra = AsyncLCDClient(chain_id="bombay-12", url="https://bombay-lcd.terra.dev/")
+    terra = AsyncLCDClient(chain_id="pisco-1", url="https://pisco-lcd.terra.dev/")
     mk = MnemonicKey(
         mnemonic="index light average senior silent limit usual local involve delay update rack cause inmate wall render magnet common feature laundry exact casual resource hundred"
     )

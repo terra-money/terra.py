@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.crisis.v1beta1 import (
     MsgVerifyInvariant as MsgVerifyInvariant_pb,
 )
-from betterproto.lib.google.protobuf import Any as Any_pb
 
 from terra_sdk.core import AccAddress
 from terra_sdk.core.msg import Msg
@@ -25,7 +25,7 @@ class MsgVerifyInvariant(Msg):
         invariant_route: route to veriryf
     """
 
-    type_amino = "crisis/MsgVerifyInvariant"
+    type_amino = "cosmos-sdk/MsgVerifyInvariant"
     """"""
     type_url = "/cosmos.crisis.v1beta1.MsgVerifyInvariant"
     """"""

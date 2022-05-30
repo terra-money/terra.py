@@ -53,7 +53,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "PFC Pretty Floating Chairs",
@@ -130,7 +130,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "PFC",
@@ -207,7 +207,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "PFC-Purple Floating Chairs",
@@ -284,7 +284,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "Mosaic",
@@ -361,7 +361,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "block42",
@@ -438,7 +438,7 @@
           "value": {
             "msg": [
               {
-                "type": "staking/MsgEditValidator",
+                "type": "cosmos-sdk/MsgEditValidator",
                 "value": {
                   "description": {
                     "moniker": "Aura Stake",

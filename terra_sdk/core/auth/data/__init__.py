@@ -3,7 +3,9 @@ from terra_sdk.core.tx import TxInfo, TxLog, parse_tx_logs
 
 from .account import Account
 from .base_account import BaseAccount
-from .lazy_graded_vesting_account import LazyGradedVestingAccount
+from .continuous_vesting_account import ContinuousVestingAccount
+from .delayed_vesting_account import DelayedVestingAccount
+from .periodic_vesting_account import PeriodicVestingAccount
 
 __all__ = [
     "TxLog",
@@ -12,5 +14,7 @@ __all__ = [
     "parse_tx_logs",
     "Account",
     "BaseAccount",
-    "LazyGradedVestingAccount",
+    "ContinuousVestingAccount",
+    "DelayedVestingAccount",
+    "PeriodicVestingAccount",
 ]

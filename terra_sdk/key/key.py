@@ -206,7 +206,6 @@ class Key:
         Returns:
             Tx: ready-to-broadcast transaction object
         """
-
         signedTx = Tx(
             body=tx.body,
             auth_info=AuthInfo(signer_infos=[], fee=tx.auth_info.fee),

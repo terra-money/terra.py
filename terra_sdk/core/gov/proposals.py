@@ -21,7 +21,7 @@ class TextProposal(JSONSerializable):
         description: proposal description
     """
 
-    type_amino = "gov/TextProposal"
+    type_amino = "cosmos-sdk/TextProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.TextProposal"
     """"""
@@ -37,6 +37,13 @@ class TextProposal(JSONSerializable):
             "value": {"title": self.title, "description": self.description},
         }
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "title": self.title,
+            "description": self.description,
+        }
+
     @classmethod
     def from_data(cls, data: dict) -> TextProposal:
         return cls(title=data["title"], description=data["description"])
@@ -49,7 +56,4 @@ class TextProposal(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: TextProposal_pb):
-        return cls(
-            title=proto.title,
-            description=proto.description
-        )
+        return cls(title=proto.title, description=proto.description)

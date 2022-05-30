@@ -2,14 +2,10 @@ from terra_sdk.core.gov import MsgDeposit, MsgSubmitProposal
 
 
 def test_deserializes_msg_deposit_examples(load_msg_examples):
-    examples = load_msg_examples(MsgDeposit.type_url, "./MsgDeposit.data.json")
+    examples = load_msg_examples(MsgDeposit.type_amino, "./MsgDeposit.data.json")
     for example in examples:
-        assert MsgDeposit.from_data(example).to_data() == example
+        target = MsgDeposit.from_data(example["value"]).to_data()
 
-
-def test_deserializes_msg_submit_proposal_examples(load_msg_examples):
-    examples = load_msg_examples(
-        MsgSubmitProposal.type_url, "./MsgSubmitProposal.data.json"
-    )
-    for example in examples:
-        assert MsgSubmitProposal.from_data(example).to_data() == example
+        assert target["depositor"] == example["value"]["depositor"]
+        assert target["proposal_id"] == example["value"]["proposal_id"]
+        assert target["amount"] == example["value"]["amount"]

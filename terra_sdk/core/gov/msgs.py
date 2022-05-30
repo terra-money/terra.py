@@ -25,7 +25,7 @@ class MsgSubmitProposal(Msg):
         proposer (AccAddress): proposal submitter
     """
 
-    type_amino = "gov/MsgSubmitProposal"
+    type_amino = "cosmos-sdk/MsgSubmitProposal"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgSubmitProposal"
     """"""
@@ -53,7 +53,7 @@ class MsgSubmitProposal(Msg):
             "@type": self.type_url,
             "content": self.content.to_data(),
             "initial_deposit": self.initial_deposit.to_data(),
-            "proposer": self.proposer
+            "proposer": self.proposer,
         }
 
     @classmethod
@@ -77,6 +77,7 @@ class MsgSubmitProposal(Msg):
     @classmethod
     def from_proto(cls, proto: MsgSubmitProposal_pb) -> MsgSubmitProposal:
         from terra_sdk.util.parse_content import parse_content_unpack_any
+
         content = parse_content_unpack_any(proto.content)
         return cls(
             content=content,
@@ -95,7 +96,7 @@ class MsgDeposit(Msg):
         amount (Coins): amount to deposit
     """
 
-    type_amino = "gov/MsgDeposit"
+    type_amino = "cosmos-sdk/MsgDeposit"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgDeposit"
     """"""
@@ -160,7 +161,7 @@ class MsgVote(Msg):
         option (VoteOption): vote option (must be one of: :data:`MsgVote.ABSTAIN`, :data:`MsgVote.YES`, :data:`MsgVote.NO`, or :data:`MsgVote.NO_WITH_VETO`),
     """
 
-    type_amino = "gov/MsgVote"
+    type_amino = "cosmos-sdk/MsgVote"
     """"""
     type_url = "/cosmos.gov.v1beta1.MsgVote"
     """"""
@@ -227,7 +228,5 @@ class MsgVote(Msg):
     @classmethod
     def from_proto(cls, proto: MsgVote_pb) -> MsgVote:
         return cls(
-            proposal_id=proto.proposal_id,
-            voter=proto.voter,
-            option=proto.option
+            proposal_id=proto.proposal_id, voter=proto.voter, option=proto.option
         )

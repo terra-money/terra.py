@@ -10,8 +10,8 @@ from terra_sdk.util.contract import get_code_id
 
 def main():
     terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
-        chain_id="columbus-5",
+        url="https://pisco-lcd.terra.dev/",
+        chain_id="pisco-1",
     )
 
     result = terra.tx.tx_infos_by_height(None)

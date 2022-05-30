@@ -18,7 +18,7 @@ class MsgUnjail(Msg):
     Args:
         address: validator address to unjail"""
 
-    type_amino = "slashing/MsgUnjail"
+    type_amino = "cosmos-sdk/MsgUnjail"
     """"""
     type_url = "/cosmos.slashing.v1beta1.MsgUnjail"
     """"""

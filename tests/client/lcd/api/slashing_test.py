@@ -1,9 +1,10 @@
 from terra_sdk.client.lcd import LCDClient, PaginationOptions
 
 terra = LCDClient(
-    url="https://bombay-lcd.terra.dev/",
-    chain_id="bombay-12",
+    url="https://pisco-lcd.terra.dev/",
+    chain_id="pisco-1",
 )
+
 
 pagopt = PaginationOptions(limit=3, count_total=True, reverse=True)
 
@@ -20,7 +21,7 @@ def test_signing_infos_with_pagination():
 
 def test_signing_info():
     result = terra.slashing.signing_info(
-        "terravalcons1lcjwqqp8sk86laggdagvk2lez0v3helfztsarh"
+        "terravalcons1qp67nk6gwqvnh95rwytpfwatcjtuxx4rhdnz6k"
     )
     assert result is not None
 
