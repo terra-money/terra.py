@@ -212,7 +212,7 @@ class MsgExecuteContract(Msg):
             sender=data["sender"],
             contract=data["contract"],
             msg=parse_msg(data["msg"]),
-            coins=Coins.from_data(data["coins"]),
+            coins=Coins.from_data(data["funds"]),
         )
 
     def to_proto(self) -> MsgExecuteContract_pb:
