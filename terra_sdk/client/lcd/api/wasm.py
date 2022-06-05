@@ -57,7 +57,7 @@ class AsyncWasmAPI(BaseAsyncAPI):
         res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}")
         contract_info = res.get("contract_info")
         contract_address = res.get("address")
-        history_entries = self.contract_history(contract_address)
+        history_entries = await self.contract_history(contract_address)
         return {
             "code_id": Numeric.parse(contract_info["code_id"]),
             "address": contract_address,
