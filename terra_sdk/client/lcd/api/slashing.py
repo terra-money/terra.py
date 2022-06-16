@@ -13,18 +13,20 @@ from ..params import APIParams
 
 class AsyncSlashingAPI(BaseAsyncAPI):
     async def signing_info(
-        self, val_cons_pub_key: ValConsPubKey
+        self, val_cons_pub_key: ValConsPubKey, params: Optional[APIParams] = None
     ) -> Union[List[dict], dict]:
         """Fetches signing info for a validator consensus public key.
 
         Args:
             val_cons_pub_key (ValConsPubKey): validator consensus public key.
+            params (APIParams): optional parameters
 
         Returns:
             Union[List[dict], dict]: signing info
         """
         res = await self._c._get(
-            f"/cosmos/slashing/v1beta1/signing_infos/{val_cons_pub_key}"
+            f"/cosmos/slashing/v1beta1/signing_infos/{val_cons_pub_key}",
+            params
         )
         info = res["val_signing_info"]
         return {
@@ -42,7 +44,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
         """Fetches all signing info.
 
         Args:
-            params (APIParams, optional): additional params for the API like pagination
+            params (APIParams): optional parameters
 
         Returns:
             Union[List[dict], dict]: signing infos
@@ -62,13 +64,16 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             for info in infos
         ], res.get("pagination")
 
-    async def parameters(self) -> dict:
+    async def parameters(self, params: Optional[APIParams] = None) -> dict:
         """Fetches Slashing module parameters.
 
+        Args:
+            params (APIParams): optional parameters
+        
         Returns:
             dict: Slashing module parameters
         """
-        res = await self._c._get("/cosmos/slashing/v1beta1/params")
+        res = await self._c._get("/cosmos/slashing/v1beta1/params", params)
         params = res.get("params")
         return {
             "signed_blocks_window": Numeric.parse(params["signed_blocks_window"]),
@@ -81,7 +86,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
 
 class SlashingAPI(AsyncSlashingAPI):
     @sync_bind(AsyncSlashingAPI.signing_info)
-    def signing_info(self, val_cons_pub_key: ValConsPubKey) -> List[dict]:
+    def signing_info(self, val_cons_pub_key: ValConsPubKey, params: Optional[APIParams] = None) -> List[dict]:
         pass
 
     signing_info.__doc__ = AsyncSlashingAPI.signing_info.__doc__
@@ -95,7 +100,7 @@ class SlashingAPI(AsyncSlashingAPI):
     signing_infos.__doc__ = AsyncSlashingAPI.signing_infos.__doc__
 
     @sync_bind(AsyncSlashingAPI.parameters)
-    def parameters(self) -> dict:
+    def parameters(self, params: Optional[APIParams] = None) -> dict:
         pass
 
     parameters.__doc__ = AsyncSlashingAPI.parameters.__doc__
