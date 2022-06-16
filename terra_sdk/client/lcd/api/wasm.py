@@ -1,6 +1,8 @@
 import base64
 import json
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
+from ..params import APIParams
+from multidict import CIMultiDict
 
 from terra_sdk.core import Numeric
 from terra_sdk.core.wasm.data import AbsoluteTxPosition, HistoryEntry
@@ -11,16 +13,25 @@ __all__ = ["AsyncWasmAPI", "WasmAPI"]
 
 
 class AsyncWasmAPI(BaseAsyncAPI):
-    async def code_info(self, code_id: int) -> dict:
+    async def code_info(self, code_id: int,  params: Optional[APIParams] = None
+    ) -> dict:
         """Fetches information about an uploaded code.
 
         Args:
             code_id (int): code ID
+            params (APIParams): optional parameters
 
         Returns:
             dict: code information
         """
-        res = await self._c._get(f"/cosmwasm/wasm/v1/code/{code_id}")
+
+        actual_params = CIMultiDict()
+
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
+        res = await self._c._get(f"/cosmwasm/wasm/v1/code/{code_id}",actual_params)
         code_info = res.get("code_info")
         return {
             "code_id": Numeric.parse(code_info["code_id"]),
@@ -29,32 +40,48 @@ class AsyncWasmAPI(BaseAsyncAPI):
             "instantiate_permission": code_info["instantiate_permission"],
         }
 
-    async def contract_history(self, contract_address: str) -> List[HistoryEntry]:
+    async def contract_history(self, contract_address: str,  params: Optional[APIParams] = None
+    ) -> List[HistoryEntry]:
         """Fetches contract history.
 
         Args:
             contract_address (str): contract address
+            params (APIParams): optional parameters
 
         Returns:
             List[HistoryEntry]: contract histories
         """
+        actual_params = CIMultiDict()
+
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
 
         res = await self._c._get(
-            f"/cosmwasm/wasm/v1/contract/{contract_address}/history"
+            f"/cosmwasm/wasm/v1/contract/{contract_address}/history",
+            actual_params
         )
 
         return [HistoryEntry.from_data(entry) for entry in res["entries"]]
 
-    async def contract_info(self, contract_address: str) -> dict:
+    async def contract_info(self, contract_address: str,  params: Optional[APIParams] = None
+    ) -> dict:
         """Fetches information about an instantiated contract.
 
         Args:
             contract_address (str): contract address
+            params (APIParams): optional parameters
 
         Returns:
             dict: contract information
         """
-        res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}")
+        actual_params = CIMultiDict()
+
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
+        res = await self._c._get(f"/cosmwasm/wasm/v1/contract/{contract_address}", actual_params)
         contract_info = res.get("contract_info")
         contract_address = res.get("address")
         history_entries = self.contract_history(contract_address)
@@ -72,30 +99,49 @@ class AsyncWasmAPI(BaseAsyncAPI):
         }
 
     async def contract_query(
-        self, contract_address: str, query: Union[dict, str]
+        self, contract_address: str, query: Union[dict, str], params: Optional[APIParams] = None
     ) -> Any:
         """Runs a QueryMsg on a contract.
 
         Args:
             contract_address (str): contract address
             query (dict): QueryMsg to run
+            params (APIParams): optional parameters
 
         Returns:
             Any: results of query
         """
+
+        actual_params = CIMultiDict()
+
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
         query_msg = base64.b64encode(json.dumps(query).encode("utf-8")).decode("utf-8")
         res = await self._c._get(
-            f"/cosmwasm/wasm/v1/contract/{contract_address}/smart/{query_msg}"
+            f"/cosmwasm/wasm/v1/contract/{contract_address}/smart/{query_msg}",
+            actual_params
         )
         return res.get("data")
 
-    async def pinned_codes(self) -> dict:
+    async def pinned_codes(self, params: Optional[APIParams] = None) -> dict:
         """Fetches the Wasm module pinned codes.
+        Args:
+            params (APIParams): optional parameters
 
         Returns:
             dict: Wasm module pinned codes
         """
-        res = await self._c._get("/cosmwasm/wasm/v1/codes/pinned")
+
+        actual_params = CIMultiDict()
+
+        if params:
+            for p in params:
+                actual_params.add(p, params[p])
+
+
+        res = await self._c._get("/cosmwasm/wasm/v1/codes/pinned", actual_params)
         params = res.get("code_ids")
         return {
             "code_ids": params,
