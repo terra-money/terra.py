@@ -14,6 +14,7 @@ from terra_sdk.key.key import Key
 from terra_sdk.util.json import dict_to_data
 from terra_sdk.util.url import urljoin
 
+from .api.ante import AsyncAnteAPI, AnteAPI
 from .api.auth import AsyncAuthAPI, AuthAPI
 from .api.authz import AsyncAuthzAPI, AuthzAPI
 from .api.bank import AsyncBankAPI, BankAPI
@@ -70,6 +71,7 @@ class AsyncLCDClient:
         self.gas_prices = Coins(gas_prices) if gas_prices else default_price
         self.gas_adjustment = gas_adjustment if gas_adjustment else default_adjustment
 
+        self.ante = AsyncAnteAPI(self)
         self.auth = AsyncAuthAPI(self)
         self.bank = AsyncBankAPI(self)
         self.distribution = AsyncDistributionAPI(self)
@@ -195,6 +197,9 @@ class LCDClient(AsyncLCDClient):
     last_request_height: Optional[int]  # type: ignore
     """Height of response of last-made made LCD request."""
 
+    ante: AnteAPI
+    """:class:`AnteAPI<terra_sdk.client.lcd.api.ante.AnteAPI>`."""
+
     auth: AuthAPI
     """:class:`AuthAPI<terra_sdk.client.lcd.api.auth.AuthAPI>`."""
 
@@ -253,6 +258,7 @@ class LCDClient(AsyncLCDClient):
             loop=nest_asyncio.apply(get_event_loop()),
         )
 
+        self.ante = AnteAPI(self)
         self.auth = AuthAPI(self)
         self.bank = BankAPI(self)
         self.distribution = DistributionAPI(self)
