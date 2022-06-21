@@ -60,11 +60,11 @@ class BankAPI(AsyncBankAPI):
     balance.__doc__ = AsyncBankAPI.balance.__doc__
 
     @sync_bind(AsyncBankAPI.total)
-    def total(self) -> (Coins, dict):
+    def total(self, params: Optional[APIParams] = None) -> (Coins, dict):
         pass
 
     @sync_bind(AsyncBankAPI.spendable_balances)
-    def spendable_balances(self) -> (Coins, dict):
+    def spendable_balances(self, params: Optional[APIParams] = None) -> (Coins, dict):
         pass
 
     balance.__doc__ = AsyncBankAPI.balance.__doc__
