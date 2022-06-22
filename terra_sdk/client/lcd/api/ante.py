@@ -26,7 +26,7 @@ class AsyncAnteAPI(BaseAsyncAPI):
             params (APIParams): optional parameters
 
         Returns:
-            dict: Distribution module parameters
+            dict: Ante module parameters
         """
         res = await self._c._get("/terra/ante/v2/params", params)
         params = res.get("params")
