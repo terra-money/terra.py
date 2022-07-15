@@ -10,6 +10,12 @@ from .data import (
     parse_tx_logs,
 )
 
+from .msgs import (
+    MsgCreatePeriodicVestingAccount,
+    MsgCreateVestingAccount,
+    MsgDonateAllVestingTokens
+)
+
 __all__ = [
     "Account",
     "BaseAccount",
@@ -20,4 +26,7 @@ __all__ = [
     "TxInfo",
     "PublicKey",
     "parse_tx_logs",
+    "MsgCreatePeriodicVestingAccount",
+    "MsgCreateVestingAccount",
+    "MsgDonateAllVestingTokens"
 ]
