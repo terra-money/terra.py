@@ -62,6 +62,28 @@ class AsyncFeeGrantAPI(BaseAsyncAPI):
             "allowance": Allowance.from_data(res.get("allowance")),
         }
 
+    async def allowances_by_granter(
+        self,
+        granter: AccAddress,
+        params: Optional[APIParams] = None,
+    ) -> Allowance:
+        """all the grants given by an granter
+
+        Args:
+            granter (AccAddress): granter is the address of the user granting an allowance of their funds.
+            params (APIParams, optional): additional params for the API like pagination
+
+        Returns:
+            Allowance: granted allowance
+        """
+        res = await self._c._get(
+            f"cosmos/feegrant/v1beta1/issued/{granter}", params
+        )
+        res = res.get("allowance")
+        return {
+            "granter": res.get("granter"),
+            "allowance": Allowance.from_data(res.get("allowance")),
+        }
 
 class FeeGrantAPI(AsyncFeeGrantAPI):
     @sync_bind(AsyncFeeGrantAPI.allowances)
@@ -73,7 +95,13 @@ class FeeGrantAPI(AsyncFeeGrantAPI):
     allowances.__doc__ = AsyncFeeGrantAPI.allowances.__doc__
 
     @sync_bind(AsyncFeeGrantAPI.allowance)
-    def allowance(self) -> Allowance:
+    def allowance(self, granter: AccAddress, grantee: AccAddress, params: Optional[APIParams] = None) -> Allowance:
         pass
 
     allowance.__doc__ = AsyncFeeGrantAPI.allowance.__doc__
+
+    @sync_bind(AsyncFeeGrantAPI.allowance)
+    def allowances_by_granter(self, granter: AccAddress, params: Optional[APIParams] = None) -> Allowance:
+        pass
+
+    allowances_by_granter.__doc__ = AsyncFeeGrantAPI.allowances_by_granter.__doc__
