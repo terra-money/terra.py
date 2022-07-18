@@ -4,6 +4,7 @@ from .data import (
     ContinuousVestingAccount,
     DelayedVestingAccount,
     PeriodicVestingAccount,
+    Period,
     PublicKey,
     TxInfo,
     TxLog,
@@ -22,6 +23,7 @@ __all__ = [
     "ContinuousVestingAccount",
     "DelayedVestingAccount",
     "PeriodicVestingAccount",
+    "Period"
     "TxLog",
     "TxInfo",
     "PublicKey",

@@ -78,5 +78,5 @@ class MsgCreatePeriodicVestingAccount(Msg):
         proto.from_address = self.from_address
         proto.to_address = self.to_address
         proto.start_time = self.start_time
-        proto.vesting_periods = [vp.to_proto for vp in self.vesting_periods]
+        proto.vesting_periods = [vp.to_proto() for vp in self.vesting_periods]
         return proto
