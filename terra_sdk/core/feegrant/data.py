@@ -75,9 +75,8 @@ class BasicAllowance(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> BasicAllowance:
         sl = data.get("spend_limit")
-        exp = data.get("expiration")
         return cls(
-            spend_limit=Coins.from_data(data["spend_limit"]) if sl else None,
+            spend_limit=Coins.from_data(sl) if sl else None,
             expiration=data["expiration"],
         )
 
