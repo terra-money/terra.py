@@ -42,8 +42,6 @@ __all__ = [
     "SignerData",
 ]
 
-# just alias
-from terra_sdk.util.parse_msg import parse_proto
 
 SignMode = SignMode_pb
 

@@ -18,7 +18,7 @@ from terra_proto.cosmos.feegrant.v1beta1 import (
 )
 
 from terra_sdk.core import Coins
-from terra_sdk.util.base import create_demux_proto, create_demux_unpack_any
+from terra_sdk.util.base import create_demux_unpack_any
 from terra_sdk.util.converter import to_isoformat
 from terra_sdk.util.json import JSONSerializable
 
@@ -33,7 +33,7 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: Optional[datetime] = attr.ib(converter=parser.parse)
+    expiration: Optional[datetime] = attr.ib(converter=converters.optional(parser.parse))
 
     type_amino = "cosmos-sdk/BasicAllowance"
     """"""
@@ -69,16 +69,15 @@ class BasicAllowance(JSONSerializable):
         exp = data.get("expiration") or None
         return cls(
             spend_limit=Coins.from_amino(sl) if sl else None,
-            expiration=exp if exp else None,
+            expiration=exp,
         )
 
     @classmethod
     def from_data(cls, data: dict) -> BasicAllowance:
         sl = data.get("spend_limit")
-        exp = data.get("expiration")
         return cls(
             spend_limit=Coins.from_data(sl) if sl else None,
-            expiration=exp if exp else None,
+            expiration=data["expiration"],
         )
 
     def to_proto(self) -> BasicAllowance_pb:

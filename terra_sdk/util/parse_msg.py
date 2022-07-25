@@ -1,4 +1,9 @@
 # core msgs
+from terra_sdk.core.auth import(
+    MsgDonateAllVestingTokens,
+    MsgCreatePeriodicVestingAccount,
+    MsgCreateVestingAccount
+)
 from terra_sdk.core.authz import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
@@ -52,7 +57,11 @@ from terra_sdk.core.wasm import (
 )
 
 from .base import create_demux, create_demux_proto, create_demux_unpack_any
-
+auth_msgs = [
+    MsgCreateVestingAccount,
+    MsgCreatePeriodicVestingAccount,
+    MsgDonateAllVestingTokens
+]
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
     MsgFundCommunityPool,
@@ -108,6 +117,7 @@ crisis_msgs = [MsgVerifyInvariant]
 
 parse_msg = create_demux(
     [
+        *auth_msgs,
         *authz_msgs,
         *bank_msgs,
         *distribution_msgs,
@@ -124,6 +134,7 @@ parse_msg = create_demux(
 
 parse_proto = create_demux_proto(
     [
+        *auth_msgs,
         *authz_msgs,
         *bank_msgs,
         *distribution_msgs,
@@ -141,6 +152,7 @@ parse_proto = create_demux_proto(
 
 parse_unpack_any = create_demux_unpack_any(
     [
+        *auth_msgs,
         *authz_msgs,
         *bank_msgs,
         *distribution_msgs,
