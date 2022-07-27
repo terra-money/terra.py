@@ -238,6 +238,12 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         return int(Dec(gas_adjustment).mul(simulated.gas_info["gas_used"]))
 
+    async def compute_tax(self, tx: Tx) -> Coins:
+        res = await self._c._post(
+            "/terra/tx/v1beta1/compute_tax", {"tx_bytes": self.encode(tx)}
+        )
+        return Coins.from_data(res.get("tax_amount"))
+
     async def encode(self, tx: Tx) -> str:
         """Encode a Tx to base64 encoded proto string"""
         return base64.b64encode(bytes(tx.to_proto())).decode()
@@ -407,6 +413,12 @@ class TxAPI(AsyncTxAPI):
         pass
 
     estimate_gas.__doc__ = AsyncTxAPI.estimate_gas.__doc__
+
+    @sync_bind(AsyncTxAPI.compute_tax)
+    def compute_tax(self, tx: Tx) -> Coins:
+        pass
+
+    compute_tax.__doc__ = AsyncTxAPI.compute_tax.__doc__
 
     @sync_bind(AsyncTxAPI.encode)
     def encode(self, tx: Tx) -> str:
