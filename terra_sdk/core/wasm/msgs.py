@@ -34,9 +34,10 @@ __all__ = [
 
 
 def parse_msg(msg: Union[dict, str, bytes]) -> dict:
-    if type(msg) is dict:
+    try:
+        return json.loads(msg)
+    except:
         return msg
-    return json.loads(msg)
 
 
 @attr.s
