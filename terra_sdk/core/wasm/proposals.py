@@ -32,6 +32,7 @@ from terra_proto.cosmwasm.wasm.v1 import (
 from terra_sdk.core.bech32 import AccAddress
 from terra_sdk.core.coins import Coins
 from terra_sdk.core.wasm.data import AccessConfig, AccessConfigUpdate
+from terra_sdk.core.wasm.util import parse_msg
 from terra_sdk.util.json import JSONSerializable
 from terra_sdk.util.remove_none import remove_none
 
@@ -47,12 +48,6 @@ __all__ = [
     "UpdateAdminProposal",
     "UpdateInstantiateConfigProposal",
 ]
-
-
-def parse_msg(msg: Union[dict, str, bytes]) -> dict:
-    if type(msg) is dict:
-        return msg
-    return json.loads(msg)
 
 
 @attr.s

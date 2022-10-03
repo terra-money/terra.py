@@ -14,15 +14,10 @@ from terra_proto.cosmwasm.wasm.v1 import ContractCodeHistoryOperationType
 
 from terra_sdk.core.bech32 import AccAddress
 from terra_sdk.core.msg import Msg
+from terra_sdk.core.wasm.util import parse_msg
 from terra_sdk.util.json import JSONSerializable
 
 __all__ = ["AccessType", "AccessConfig", "AccessConfigUpdate", "AccessTypeParam"]
-
-
-def parse_msg(msg: Union[dict, str, bytes]) -> dict:
-    if type(msg) is dict:
-        return msg
-    return json.loads(msg)
 
 
 def convert_access_type_from_json(access_type: str) -> AccessType:
