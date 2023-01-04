@@ -108,3 +108,6 @@ ENV/
 
 # MacOS
 .DS_Store
+
+# VS Code
+terra.py.code-workspace
