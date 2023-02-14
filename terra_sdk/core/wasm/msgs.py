@@ -185,7 +185,7 @@ class MsgExecuteContract(Msg):
 
     type_amino = "wasm/MsgExecuteContract"
     """"""
-    type_url = "/cosmwasm.wasm.v1.MsgExecuteContract"
+    type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
     """"""
     prototype = MsgExecuteContract_pb
     """"""
