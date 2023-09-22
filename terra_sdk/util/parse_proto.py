@@ -1,4 +1,8 @@
-from terra_sdk.core.authz import GenericAuthorization, SendAuthorization,StakeAuthorization
+from terra_sdk.core.authz import (
+    GenericAuthorization,
+    SendAuthorization,
+    StakeAuthorization,
+)
 
 from .base import (
     create_demux,

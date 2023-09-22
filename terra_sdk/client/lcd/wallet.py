@@ -24,7 +24,10 @@ class AsyncWallet:
 
     async def account_number_and_sequence(self) -> dict:
         res = await self.lcd.auth.account_info(self.key.acc_address)
-        return {"account_number": res.get_account_number(), "sequence": res.get_sequence()}
+        return {
+            "account_number": res.get_account_number(),
+            "sequence": res.get_sequence(),
+        }
 
     async def create_tx(self, options: CreateTxOptions) -> Tx:
         sigOpt = [
@@ -82,7 +85,10 @@ class Wallet:
     def account_number_and_sequence(self) -> dict:
         """Fetches both account and sequence number associated with the Key."""
         res = self.lcd.auth.account_info(self.key.acc_address)
-        return {"account_number": res.get_account_number(), "sequence": res.get_sequence()}
+        return {
+            "account_number": res.get_account_number(),
+            "sequence": res.get_sequence(),
+        }
 
     def create_tx(self, options: CreateTxOptions) -> Tx:
         """Builds an unsigned transaction object. The ``Wallet`` will first

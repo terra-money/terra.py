@@ -5,5 +5,5 @@ from .msg_donate_all_vesting_tokens import MsgDonateAllVestingTokens
 __all__ = [
     "MsgCreatePeriodicVestingAccount",
     "MsgCreateVestingAccount",
-    "MsgDonateAllVestingTokens"
+    "MsgDonateAllVestingTokens",
 ]

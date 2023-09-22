@@ -83,9 +83,7 @@ class IdentifiedClientState(JSONSerializable):
 
     @classmethod
     def from_proto(cls, proto: IdentifiedClientState_pb) -> IdentifiedClientState:
-        return cls(
-            client_id=proto.client_id, client_state=proto.client_state.to_dict()
-        )
+        return cls(client_id=proto.client_id, client_state=proto.client_state.to_dict())
 
 
 @attr.s

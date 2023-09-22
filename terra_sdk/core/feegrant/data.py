@@ -33,7 +33,9 @@ class BasicAllowance(JSONSerializable):
     """
 
     spend_limit: Optional[Coins] = attr.ib(converter=converters.optional(Coins))
-    expiration: Optional[datetime] = attr.ib(converter=converters.optional(parser.parse))
+    expiration: Optional[datetime] = attr.ib(
+        converter=converters.optional(parser.parse)
+    )
 
     type_amino = "cosmos-sdk/BasicAllowance"
     """"""

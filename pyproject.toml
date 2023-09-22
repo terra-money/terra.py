@@ -11,7 +11,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10"
 ]
-description = "The Python SDK for Terra"
+description = "DEPRECATED Python SDK for Terra (check README for alternatives)"
 documentation = "https://terra-money.github.io/terra.py/index.html"
 homepage = "https://github.com/terra-money/terra.py"
 keywords = ["jigu", "blockchain", "terra", "defi", "crypto"]
@@ -19,7 +19,7 @@ license = "MIT"
 packages = [{ include = "terra_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra.py"
-version = "3.0.1"
+version = "4.0.0"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.8.1"
@@ -35,7 +35,7 @@ boltons = "^21.0.0"
 nest-asyncio = "^1.5.4"
 attrs = "^21.4.0"
 wrapt = "^1.13.3"
-terra-proto = "2.1.0"
+terra-proto = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 aioresponses = "^0.7.2"
