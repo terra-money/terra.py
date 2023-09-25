@@ -1,6 +1,5 @@
 from typing import Optional, Union
 
-from ..params import APIParams
 from terra_sdk.core import AccAddress
 from terra_sdk.core.auth import (
     Account,
@@ -10,6 +9,7 @@ from terra_sdk.core.auth import (
     PeriodicVestingAccount,
 )
 
+from ..params import APIParams
 from ._base import BaseAsyncAPI, sync_bind
 
 __all__ = ["AsyncAuthAPI", "AuthAPI"]

@@ -242,7 +242,9 @@ class AsyncGovAPI(BaseAsyncAPI):
 
 class GovAPI(AsyncGovAPI):
     @sync_bind(AsyncGovAPI.proposals)
-    def proposals(self, params: Optional[APIParams] = None) -> Tuple[List[Proposal], dict]:
+    def proposals(
+        self, params: Optional[APIParams] = None
+    ) -> Tuple[List[Proposal], dict]:
         pass
 
     proposals.__doc__ = AsyncGovAPI.proposals.__doc__

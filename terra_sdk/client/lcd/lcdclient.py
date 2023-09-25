@@ -145,7 +145,7 @@ class AsyncLCDClient:
         # raw: bool = False
     ):
 
-        actual_params : CIMultiDict = CIMultiDict()
+        actual_params: CIMultiDict = CIMultiDict()
 
         for event in events:
             if event[0] == "tx.height":

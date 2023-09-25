@@ -1,3 +1,11 @@
+# DEPRECATED 
+
+Terra SDK python library will not be maintained any further by TFL officialy. Alternative options to this library can be found here:
+
+- GoLang [Terra Core](https://github.com/terra-money/core) to interact with Terra's Blockchain throught the gRPC models,
+- JavaScript [@terra-money/terra.proto](https://www.npmjs.com/package/@terra-money/feather.js) for web frontend and node backend,
+- Rust [terra-proto-rs](https://crates.io/crates/terra-proto-rs) both for smart contracts and for external APIs.
+
 <br/>
 <br/>
 

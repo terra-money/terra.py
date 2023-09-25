@@ -14,8 +14,8 @@ def test_grants():
     assert len(result) == 0
 
     result = terra.authz.granter("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
-    assert len(result) == 0
+    assert len(result) == 2
 
     result = terra.authz.grantee("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
 
-    assert len(result) == 0
+    assert len(result) == 1

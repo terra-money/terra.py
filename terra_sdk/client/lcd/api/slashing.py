@@ -25,8 +25,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
             Union[List[dict], dict]: signing info
         """
         res = await self._c._get(
-            f"/cosmos/slashing/v1beta1/signing_infos/{val_cons_pub_key}",
-            params
+            f"/cosmos/slashing/v1beta1/signing_infos/{val_cons_pub_key}", params
         )
         info = res["val_signing_info"]
         return {
@@ -69,7 +68,7 @@ class AsyncSlashingAPI(BaseAsyncAPI):
 
         Args:
             params (APIParams): optional parameters
-        
+
         Returns:
             dict: Slashing module parameters
         """
@@ -86,7 +85,9 @@ class AsyncSlashingAPI(BaseAsyncAPI):
 
 class SlashingAPI(AsyncSlashingAPI):
     @sync_bind(AsyncSlashingAPI.signing_info)
-    def signing_info(self, val_cons_pub_key: ValConsPubKey, params: Optional[APIParams] = None) -> List[dict]:
+    def signing_info(
+        self, val_cons_pub_key: ValConsPubKey, params: Optional[APIParams] = None
+    ) -> List[dict]:
         pass
 
     signing_info.__doc__ = AsyncSlashingAPI.signing_info.__doc__

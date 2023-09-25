@@ -20,16 +20,18 @@ from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
 # import lcd_tx
 from terra_sdk.client.localterra import LocalTerra
 from terra_sdk.core import Coin, Coins
-from terra_sdk.core.bank import MsgSend
-from terra_sdk.core.tx import SignMode
-from terra_sdk.key.key import SignOptions
-from terra_sdk.key.mnemonic import MnemonicKey
 from terra_sdk.core.auth import (
     MsgCreatePeriodicVestingAccount,
     MsgCreateVestingAccount,
     MsgDonateAllVestingTokens,
-    Period
+    Period,
 )
+from terra_sdk.core.bank import MsgSend
+from terra_sdk.core.tx import SignMode
+from terra_sdk.key.key import SignOptions
+from terra_sdk.key.mnemonic import MnemonicKey
+
+
 def main():
     terra = LocalTerra()
 
@@ -50,41 +52,50 @@ def main():
         key_v.acc_address,
         Coins("2000uluna"),
         1659130372,
-        False
+        False,
     )
 
     cpva = MsgCreatePeriodicVestingAccount(
         "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
         key_pv.acc_address,
         1659130372,
-        [Period(100, Coins("1000uluna"))]
+        [Period(100, Coins("1000uluna"))],
     )
 
-    tx = wallet.create_and_sign_tx(CreateTxOptions(
-        msgs =[cva, cpva],
-    ))
+    tx = wallet.create_and_sign_tx(
+        CreateTxOptions(
+            msgs=[cva, cpva],
+        )
+    )
     result = terra.tx.broadcast(tx)
 
-    send1 = MsgSend("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v", key_v.acc_address, Coins("100000uluna"))
-    send2 = MsgSend("terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v", key_pv.acc_address, Coins("100000uluna"))
+    send1 = MsgSend(
+        "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        key_v.acc_address,
+        Coins("100000uluna"),
+    )
+    send2 = MsgSend(
+        "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        key_pv.acc_address,
+        Coins("100000uluna"),
+    )
 
-    tx = wallet.create_and_sign_tx(CreateTxOptions(
-        msgs =[send1, send2],
-        memo= "test from terra.py"
-    ))
+    tx = wallet.create_and_sign_tx(
+        CreateTxOptions(msgs=[send1, send2], memo="test from terra.py")
+    )
     result = terra.tx.broadcast(tx)
 
     print("send to vesting and periodic vesting account : ", result)
 
-    tx = wallet_v.create_and_sign_tx(CreateTxOptions(msgs=[
-        MsgDonateAllVestingTokens(key_v.acc_address)
-    ]))
+    tx = wallet_v.create_and_sign_tx(
+        CreateTxOptions(msgs=[MsgDonateAllVestingTokens(key_v.acc_address)])
+    )
     result = terra.tx.broadcast(tx)
-    
+
     print("donate all tokens in vesting account : ", result)
-    tx = wallet_pv.create_and_sign_tx(CreateTxOptions(msgs=[
-        MsgDonateAllVestingTokens(key_pv.acc_address)
-    ]))
+    tx = wallet_pv.create_and_sign_tx(
+        CreateTxOptions(msgs=[MsgDonateAllVestingTokens(key_pv.acc_address)])
+    )
     result = terra.tx.broadcast(tx)
     print("donate all tokens in periodic vesting account : ", result)
 
