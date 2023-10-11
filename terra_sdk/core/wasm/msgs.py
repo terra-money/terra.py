@@ -22,6 +22,7 @@ from terra_sdk.core import AccAddress, Coins
 from terra_sdk.core.msg import Msg
 from terra_sdk.core.wasm.data import AccessConfig, AccessTypeParam
 from terra_sdk.util.remove_none import remove_none
+from terra_sdk.core.wasm.util import parse_msg
 
 __all__ = [
     "MsgStoreCode",
@@ -31,12 +32,6 @@ __all__ = [
     "MsgUpdateAdmin",
     "MsgClearAdmin",
 ]
-
-
-def parse_msg(msg: Union[dict, str, bytes]) -> dict:
-    if type(msg) is dict:
-        return msg
-    return json.loads(msg)
 
 
 @attr.s
